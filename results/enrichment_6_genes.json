@@ -1,0 +1,2679 @@
+{
+  "clusters": [
+    {
+      "root_term": {
+        "go_id": "GO:1901987",
+        "name": "regulation of cell cycle phase transition",
+        "namespace": "biological_process",
+        "p_value": 9.119376380435156e-11,
+        "fdr": 7.996746811481778e-07,
+        "fold_enrichment": 46.85952380952381,
+        "study_count": 6,
+        "population_count": 420,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "BRCA2",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [
+        {
+          "go_id": "GO:1901991",
+          "name": "negative regulation of mitotic cell cycle phase transition",
+          "namespace": "biological_process",
+          "p_value": 1.1665567923386984e-10,
+          "fdr": 7.996746811481778e-07,
+          "fold_enrichment": 113.89467592592592,
+          "study_count": 5,
+          "population_count": 144,
+          "study_genes": [
+            "APC",
+            "BRCA1",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:2000134",
+          "name": "negative regulation of G1/S transition of mitotic cell cycle",
+          "namespace": "biological_process",
+          "p_value": 4.266149781999603e-10,
+          "fdr": 1.462222837780364e-06,
+          "fold_enrichment": 279.16312056737587,
+          "study_count": 4,
+          "population_count": 47,
+          "study_genes": [
+            "APC",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:1902807",
+          "name": "negative regulation of cell cycle G1/S phase transition",
+          "namespace": "biological_process",
+          "p_value": 5.975182996588132e-10,
+          "fdr": 1.5489953896392348e-06,
+          "fold_enrichment": 257.26797385620915,
+          "study_count": 4,
+          "population_count": 51,
+          "study_genes": [
+            "APC",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:1901988",
+          "name": "negative regulation of cell cycle phase transition",
+          "namespace": "biological_process",
+          "p_value": 6.778973258815032e-10,
+          "fdr": 1.5489953896392348e-06,
+          "fold_enrichment": 80.39624183006536,
+          "study_count": 5,
+          "population_count": 204,
+          "study_genes": [
+            "APC",
+            "BRCA1",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:1901990",
+          "name": "regulation of mitotic cell cycle phase transition",
+          "namespace": "biological_process",
+          "p_value": 5.74431356923565e-09,
+          "fdr": 7.754159511552772e-06,
+          "fold_enrichment": 52.5667735042735,
+          "study_count": 5,
+          "population_count": 312,
+          "study_genes": [
+            "APC",
+            "BRCA1",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:2000045",
+          "name": "regulation of G1/S transition of mitotic cell cycle",
+          "namespace": "biological_process",
+          "p_value": 4.076462291594657e-08,
+          "fdr": 3.992021286983053e-05,
+          "fold_enrichment": 91.11574074074073,
+          "study_count": 4,
+          "population_count": 144,
+          "study_genes": [
+            "APC",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:1902806",
+          "name": "regulation of cell cycle G1/S phase transition",
+          "namespace": "biological_process",
+          "p_value": 7.226356932293207e-08,
+          "fdr": 5.827844325984698e-05,
+          "fold_enrichment": 79.04016064257029,
+          "study_count": 4,
+          "population_count": 166,
+          "study_genes": [
+            "APC",
+            "PTEN",
+            "RB1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:0007093",
+          "name": "mitotic cell cycle checkpoint signaling",
+          "namespace": "biological_process",
+          "p_value": 3.356407358241471e-06,
+          "fdr": 0.0019636881641428195,
+          "fold_enrichment": 89.45909090909092,
+          "study_count": 3,
+          "population_count": 110,
+          "study_genes": [
+            "APC",
+            "BRCA1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:0000075",
+          "name": "cell cycle checkpoint signaling",
+          "namespace": "biological_process",
+          "p_value": 8.197259541590623e-06,
+          "fdr": 0.003493019654944388,
+          "fold_enrichment": 66.48986486486486,
+          "study_count": 3,
+          "population_count": 148,
+          "study_genes": [
+            "APC",
+            "BRCA1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:2000001",
+          "name": "regulation of DNA damage checkpoint",
+          "namespace": "biological_process",
+          "p_value": 1.7843648234633183e-05,
+          "fdr": 0.0061159104324205234,
+          "fold_enrichment": 298.1969696969697,
+          "study_count": 2,
+          "population_count": 22,
+          "study_genes": [
+            "BRCA1",
+            "BRCA2"
+          ]
+        },
+        {
+          "go_id": "GO:1901976",
+          "name": "regulation of cell cycle checkpoint",
+          "namespace": "biological_process",
+          "p_value": 0.00011419693549828747,
+          "fdr": 0.02699379285657795,
+          "fold_enrichment": 119.27878787878788,
+          "study_count": 2,
+          "population_count": 55,
+          "study_genes": [
+            "BRCA1",
+            "BRCA2"
+          ]
+        },
+        {
+          "go_id": "GO:0044773",
+          "name": "mitotic DNA damage checkpoint signaling",
+          "namespace": "biological_process",
+          "p_value": 0.00015484179411553512,
+          "fdr": 0.03317001558318729,
+          "fold_enrichment": 102.50520833333333,
+          "study_count": 2,
+          "population_count": 64,
+          "study_genes": [
+            "BRCA1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:0044774",
+          "name": "mitotic DNA integrity checkpoint signaling",
+          "namespace": "biological_process",
+          "p_value": 0.00017487013791734745,
+          "fdr": 0.03474593609922947,
+          "fold_enrichment": 96.47549019607843,
+          "study_count": 2,
+          "population_count": 68,
+          "study_genes": [
+            "BRCA1",
+            "TP53"
+          ]
+        },
+        {
+          "go_id": "GO:0000077",
+          "name": "DNA damage checkpoint signaling",
+          "namespace": "biological_process",
+          "p_value": 0.0003202921788878544,
+          "fdr": 0.04810520156068177,
+          "fold_enrichment": 71.30797101449275,
+          "study_count": 2,
+          "population_count": 92,
+          "study_genes": [
+            "BRCA1",
+            "TP53"
+          ]
+        }
+      ],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007094",
+              "go_name": "mitotic spindle assembly checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:1902807",
+              "go_name": "negative regulation of cell cycle G1/S phase transition",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IMP"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IBA"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0044818",
+              "go_name": "mitotic G2/M transition checkpoint",
+              "evidence_code": "NAS"
+            },
+            {
+              "go_id": "GO:2000001",
+              "go_name": "regulation of DNA damage checkpoint",
+              "evidence_code": "NAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000001",
+              "go_name": "regulation of DNA damage checkpoint",
+              "evidence_code": "NAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:1902807",
+              "go_name": "negative regulation of cell cycle G1/S phase transition",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0045842",
+              "go_name": "positive regulation of mitotic metaphase/anaphase transition",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IBA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:1902749",
+              "go_name": "regulation of cell cycle G2/M phase transition",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0031571",
+              "go_name": "mitotic G1 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:1901991",
+        "name": "negative regulation of mitotic cell cycle phase transition",
+        "namespace": "biological_process",
+        "p_value": 1.1665567923386984e-10,
+        "fdr": 7.996746811481778e-07,
+        "fold_enrichment": 113.89467592592592,
+        "study_count": 5,
+        "population_count": 144,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007094",
+              "go_name": "mitotic spindle assembly checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IMP"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IBA"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0044818",
+              "go_name": "mitotic G2/M transition checkpoint",
+              "evidence_code": "NAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IBA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031571",
+              "go_name": "mitotic G1 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0045930",
+        "name": "negative regulation of mitotic cell cycle",
+        "namespace": "biological_process",
+        "p_value": 4.2542111010796563e-10,
+        "fdr": 1.462222837780364e-06,
+        "fold_enrichment": 88.17652329749103,
+        "study_count": 5,
+        "population_count": 186,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007094",
+              "go_name": "mitotic spindle assembly checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IMP"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IBA"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0007095",
+              "go_name": "mitotic G2 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            },
+            {
+              "go_id": "GO:0044818",
+              "go_name": "mitotic G2/M transition checkpoint",
+              "evidence_code": "NAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IBA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031571",
+              "go_name": "mitotic G1 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:2000134",
+        "name": "negative regulation of G1/S transition of mitotic cell cycle",
+        "namespace": "biological_process",
+        "p_value": 4.266149781999603e-10,
+        "fdr": 1.462222837780364e-06,
+        "fold_enrichment": 279.16312056737587,
+        "study_count": 4,
+        "population_count": 47,
+        "study_genes": [
+          "APC",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IMP"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IBA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031571",
+              "go_name": "mitotic G1 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:1902807",
+        "name": "negative regulation of cell cycle G1/S phase transition",
+        "namespace": "biological_process",
+        "p_value": 5.975182996588132e-10,
+        "fdr": 1.5489953896392348e-06,
+        "fold_enrichment": 257.26797385620915,
+        "study_count": 4,
+        "population_count": 51,
+        "study_genes": [
+          "APC",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:1902807",
+              "go_name": "negative regulation of cell cycle G1/S phase transition",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IMP"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:1902807",
+              "go_name": "negative regulation of cell cycle G1/S phase transition",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:2000134",
+              "go_name": "negative regulation of G1/S transition of mitotic cell cycle",
+              "evidence_code": "IBA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031571",
+              "go_name": "mitotic G1 DNA damage checkpoint signaling",
+              "evidence_code": "IMP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0031625",
+        "name": "ubiquitin protein ligase binding",
+        "namespace": "molecular_function",
+        "p_value": 6.675016372518763e-07,
+        "fdr": 0.0022386924823895957,
+        "fold_enrichment": 45.40023068050749,
+        "study_count": 4,
+        "population_count": 289,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "EXP"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0044389",
+        "name": "ubiquitin-like protein ligase binding",
+        "namespace": "molecular_function",
+        "p_value": 8.721045899453042e-07,
+        "fdr": 0.0022386924823895957,
+        "fold_enrichment": 42.46170442286947,
+        "study_count": 4,
+        "population_count": 309,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "EXP"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0019899",
+        "name": "enzyme binding",
+        "namespace": "molecular_function",
+        "p_value": 1.437302645248256e-06,
+        "fdr": 0.0024597039269015153,
+        "fold_enrichment": 9.403248924988056,
+        "study_count": 6,
+        "population_count": 2093,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "BRCA2",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [
+        {
+          "go_id": "GO:0002020",
+          "name": "protease binding",
+          "namespace": "molecular_function",
+          "p_value": 6.788913141880837e-06,
+          "fdr": 0.008713570017604054,
+          "fold_enrichment": 70.79496402877699,
+          "study_count": 3,
+          "population_count": 139,
+          "study_genes": [
+            "BRCA2",
+            "PTEN",
+            "TP53"
+          ]
+        }
+      ],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0019901",
+              "go_name": "protein kinase binding",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0019901",
+              "go_name": "protein kinase binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0019899",
+              "go_name": "enzyme binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0070063",
+              "go_name": "RNA polymerase binding",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0002020",
+              "go_name": "protease binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0019899",
+              "go_name": "enzyme binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0019899",
+              "go_name": "enzyme binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:1990381",
+              "go_name": "ubiquitin-specific protease binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:1990381",
+              "go_name": "ubiquitin-specific protease binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0019899",
+              "go_name": "enzyme binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0019900",
+              "go_name": "kinase binding",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0002020",
+              "go_name": "protease binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0019899",
+              "go_name": "enzyme binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0030971",
+              "go_name": "receptor tyrosine kinase binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "EXP"
+            },
+            {
+              "go_id": "GO:0031625",
+              "go_name": "ubiquitin protein ligase binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0042826",
+              "go_name": "histone deacetylase binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:0051721",
+              "go_name": "protein phosphatase 2A binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0002020",
+        "name": "protease binding",
+        "namespace": "molecular_function",
+        "p_value": 6.788913141880837e-06,
+        "fdr": 0.008713570017604054,
+        "fold_enrichment": 70.79496402877699,
+        "study_count": 3,
+        "population_count": 139,
+        "study_genes": [
+          "BRCA2",
+          "PTEN",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0002020",
+              "go_name": "protease binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:1990381",
+              "go_name": "ubiquitin-specific protease binding",
+              "evidence_code": "IPI"
+            },
+            {
+              "go_id": "GO:1990381",
+              "go_name": "ubiquitin-specific protease binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0002020",
+              "go_name": "protease binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0097718",
+        "name": "disordered domain specific binding",
+        "namespace": "molecular_function",
+        "p_value": 2.5091088898300692e-05,
+        "fdr": 0.02576353008077515,
+        "fold_enrichment": 252.3205128205128,
+        "study_count": 2,
+        "population_count": 26,
+        "study_genes": [
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0097718",
+              "go_name": "disordered domain specific binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0097718",
+              "go_name": "disordered domain specific binding",
+              "evidence_code": "IPI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0016605",
+        "name": "PML body",
+        "namespace": "cellular_component",
+        "p_value": 3.265243637364014e-06,
+        "fdr": 0.006367225092859827,
+        "fold_enrichment": 90.27981651376147,
+        "study_count": 3,
+        "population_count": 109,
+        "study_genes": [
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0000800",
+        "name": "lateral element",
+        "namespace": "cellular_component",
+        "p_value": 8.118449491237672e-06,
+        "fdr": 0.00791548825395673,
+        "fold_enrichment": 437.3555555555555,
+        "study_count": 2,
+        "population_count": 15,
+        "study_genes": [
+          "BRCA1",
+          "BRCA2"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0000800",
+              "go_name": "lateral element",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0000800",
+              "go_name": "lateral element",
+              "evidence_code": "IDA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0016604",
+        "name": "nuclear body",
+        "namespace": "cellular_component",
+        "p_value": 3.7324976262059987e-05,
+        "fdr": 0.017846061328241788,
+        "fold_enrichment": 16.48324958123953,
+        "study_count": 4,
+        "population_count": 796,
+        "study_genes": [
+          "BRCA1",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016604",
+              "go_name": "nuclear body",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016604",
+              "go_name": "nuclear body",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0005654",
+        "name": "nucleoplasm",
+        "namespace": "cellular_component",
+        "p_value": 3.783038578566662e-05,
+        "fdr": 0.017846061328241788,
+        "fold_enrichment": 5.4548226164079825,
+        "study_count": 6,
+        "population_count": 3608,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "BRCA2",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            },
+            {
+              "go_id": "GO:0005654",
+              "go_name": "nucleoplasm",
+              "evidence_code": "TAS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "root_term": {
+        "go_id": "GO:0043232",
+        "name": "intracellular membraneless organelle",
+        "namespace": "cellular_component",
+        "p_value": 5.465383106563353e-05,
+        "fdr": 0.017846061328241788,
+        "fold_enrichment": 5.130604796663191,
+        "study_count": 6,
+        "population_count": 3836,
+        "study_genes": [
+          "APC",
+          "BRCA1",
+          "BRCA2",
+          "PTEN",
+          "RB1",
+          "TP53"
+        ]
+      },
+      "member_terms": [],
+      "contributing_genes": [
+        {
+          "gene_symbol": "APC",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0000776",
+              "go_name": "kinetochore",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005856",
+              "go_name": "cytoskeleton",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0015630",
+              "go_name": "microtubule cytoskeleton",
+              "evidence_code": "IEA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0000793",
+              "go_name": "condensed chromosome",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0000794",
+              "go_name": "condensed nuclear chromosome",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0001741",
+              "go_name": "XY body",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0005694",
+              "go_name": "chromosome",
+              "evidence_code": "ISS"
+            },
+            {
+              "go_id": "GO:0005694",
+              "go_name": "chromosome",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0005694",
+              "go_name": "chromosome",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0016604",
+              "go_name": "nuclear body",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "BRCA2",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005694",
+              "go_name": "chromosome",
+              "evidence_code": "IEA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "PTEN",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "RB1",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0005819",
+              "go_name": "spindle",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        },
+        {
+          "gene_symbol": "TP53",
+          "direct_annotations": [
+            {
+              "go_id": "GO:0016604",
+              "go_name": "nuclear body",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0005730",
+              "go_name": "nucleolus",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IEA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            },
+            {
+              "go_id": "GO:0016605",
+              "go_name": "PML body",
+              "evidence_code": "IDA"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "input_genes_count": 6,
+    "genes_with_annotations": 6,
+    "total_enriched_terms": 105,
+    "clusters_count": 15,
+    "fdr_threshold": 0.05,
+    "species": "human",
+    "timestamp": "2026-01-14T20:57:18.694988+00:00"
+  }
+}

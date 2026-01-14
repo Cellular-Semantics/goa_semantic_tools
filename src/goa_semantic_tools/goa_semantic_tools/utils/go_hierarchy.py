@@ -133,18 +133,21 @@ def cluster_by_top_n_roots(
 
 
 def get_cluster_contributing_genes(
-    cluster: dict[str, Any], gene_to_annotations: dict[str, list[dict[str, Any]]]
+    cluster: dict[str, Any], gene_to_annotations: dict[str, list[dict[str, Any]]], godag: GODag
 ) -> list[dict[str, Any]]:
     """
     Get contributing genes for a cluster with their direct annotations.
 
     For each gene in the cluster, find all direct GO annotations that are
-    either the root term or member terms of this cluster.
+    either the root term, member terms, or descendants of cluster terms.
+    This accounts for GO count propagation (genes annotated to children
+    count for parents in enrichment).
 
     Args:
         cluster: Cluster dictionary with 'root' and 'members' keys
         gene_to_annotations: Mapping from gene symbol to list of annotations
             (from build_gene_to_go_mapping)
+        godag: GO DAG object for checking term ancestry
 
     Returns:
         List of contributing gene dictionaries:
@@ -181,10 +184,23 @@ def get_cluster_contributing_genes(
             continue
 
         # Find annotations in this cluster
+        # Include exact matches OR annotations where the term is a child of cluster terms
         gene_annotations = gene_to_annotations[gene]
-        cluster_annotations = [
-            annot for annot in gene_annotations if annot["go_id"] in cluster_go_ids
-        ]
+        cluster_annotations = []
+
+        for annot in gene_annotations:
+            annot_go_id = annot["go_id"]
+
+            # Direct match: annotation is in cluster
+            if annot_go_id in cluster_go_ids:
+                cluster_annotations.append(annot)
+            # Propagated match: annotation is descendant of cluster term
+            elif annot_go_id in godag:
+                # Check if annotation is descendant of any cluster term
+                for cluster_go_id in cluster_go_ids:
+                    if is_descendant(annot_go_id, cluster_go_id, godag):
+                        cluster_annotations.append(annot)
+                        break  # Don't add same annotation multiple times
 
         if cluster_annotations:
             contributing_genes.append(

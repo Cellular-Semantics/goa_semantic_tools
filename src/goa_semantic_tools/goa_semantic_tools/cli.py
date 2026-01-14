@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from .services import run_go_enrichment
+from .services import generate_explanations, run_go_enrichment
 
 
 def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list[str]:
@@ -118,6 +118,20 @@ Examples:
         help="Analysis name for output files (default: auto-generated from gene count)",
     )
 
+    # Explanation options
+    parser.add_argument(
+        "--explain",
+        action="store_true",
+        default=False,
+        help="Generate LLM explanations (Phase 2). Requires API key (OPENAI_API_KEY or ANTHROPIC_API_KEY)",
+    )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="gpt-4o",
+        help="LLM model for explanations (default: gpt-4o). Examples: gpt-4o, gpt-4o-mini, claude-sonnet-4-20250514",
+    )
+
     args = parser.parse_args()
 
     try:
@@ -145,6 +159,11 @@ Examples:
         print(f"  Species: {args.species}")
         print(f"  Top-N roots: {args.top_n}")
         print(f"  FDR threshold: {args.fdr}")
+        if args.explain:
+            print(f"  Generate explanations: Yes")
+            print(f"  LLM model: {args.model}")
+        else:
+            print(f"  Generate explanations: No (use --explain to enable)")
 
         # Create output directory
         output_dir = Path(args.output)
@@ -167,13 +186,36 @@ Examples:
         else:
             output_name = f"enrichment_{len(genes)}_genes"
 
-        output_file = output_dir / f"{output_name}.json"
-
-        # Save results
-        with open(output_file, "w") as f:
+        # Save Phase 1 results
+        phase1_file = output_dir / f"{output_name}.json"
+        with open(phase1_file, "w") as f:
             json.dump(result, f, indent=2)
 
-        print(f"\n✓ Results saved to: {output_file.absolute()}")
+        print(f"\n✓ Phase 1 results saved to: {phase1_file.absolute()}")
+
+        # Phase 2: Generate explanations if requested
+        final_result = result
+        if args.explain:
+            print("\n" + "=" * 80)
+            try:
+                explanation_result = generate_explanations(
+                    enrichment_output=result, model=args.model, temperature=0.1, max_tokens=3000
+                )
+
+                # Save Phase 2 results
+                phase2_file = output_dir / f"{output_name}_with_explanations.json"
+                with open(phase2_file, "w") as f:
+                    json.dump(explanation_result, f, indent=2)
+
+                print(f"\n✓ Phase 2 results saved to: {phase2_file.absolute()}")
+                final_result = explanation_result
+
+            except Exception as e:
+                print(f"\n❌ Warning: Explanation generation failed: {e}", file=sys.stderr)
+                print(f"   Phase 1 results are still available in {phase1_file.name}")
+                # Continue with Phase 1 results only
+
+        print("=" * 80)
 
         # Print summary
         metadata = result["metadata"]
@@ -201,7 +243,12 @@ Examples:
                 print(f"     Member terms: {len(cluster['member_terms'])}")
 
         print("\n" + "=" * 80)
-        print(f"✓ Analysis complete! Results saved to {output_file.name}")
+        if args.explain and "explanations" in final_result:
+            print(f"✓ Analysis complete! Results saved:")
+            print(f"  Phase 1: {phase1_file.name}")
+            print(f"  Phase 2: {phase2_file.name}")
+        else:
+            print(f"✓ Analysis complete! Results saved to {phase1_file.name}")
         print("=" * 80)
 
         return 0

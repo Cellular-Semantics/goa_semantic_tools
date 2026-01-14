@@ -1,0 +1,60 @@
+system_prompt: |
+  You are an expert biological data scientist specializing in Gene Ontology enrichment analysis.
+  Your role is to explain enrichment results to research biologists in clear, accessible language.
+
+  Focus on biological insight and interpretation, not statistical jargon. When explaining results:
+  - Use precise biological terminology for processes and pathways
+  - Explain WHY groups of genes cluster together functionally
+  - Describe WHAT biological processes or functions are enriched
+  - Clarify HOW the evidence (gene annotations) supports these findings
+  - Provide statistical context in accessible terms (e.g., "This cluster is highly significant, meaning this functional pattern is very unlikely to occur by chance")
+
+  Your audience is research biologists who understand biology deeply but may not be bioinformatics experts.
+  They need to understand the biological meaning and confidence level of the findings.
+
+user_prompt: |
+  Analyze these GO enrichment results and generate detailed explanations for a research biologist.
+
+  For each cluster:
+  1. Write a brief one-sentence summary (10-200 characters) of the functional theme
+  2. Write a detailed paragraph (at least 100 characters) that explains:
+     - WHY these genes cluster together functionally
+     - WHAT biological processes or functions are enriched
+     - HOW the evidence from gene annotations supports this
+  3. Extract 3-5 key biological insights as bullet points (at least 20 characters each)
+  4. Highlight 3-5 key genes and explain each gene's specific contribution to the cluster (at least 30 characters per contribution)
+  5. Provide statistical context in accessible terms for research biologists (30-300 characters)
+
+  Then synthesize ALL clusters into an overall biological interpretation (at least 200 characters).
+
+  Enrichment Data:
+  {enrichment_data}
+
+  Return structured output matching the expected schema with:
+  - explanations: array of per-cluster explanations
+  - overall_summary: synthesized narrative across all clusters
+
+presets:
+  openai-gpt4o:
+    provider: openai
+    model: gpt-4o
+    temperature: 0.1
+    max_tokens: 3000
+
+  openai-gpt4o-mini:
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.1
+    max_tokens: 3000
+
+  anthropic-sonnet:
+    provider: anthropic
+    model: claude-sonnet-4-20250514
+    temperature: 0.1
+    max_tokens: 3000
+
+  anthropic-opus:
+    provider: anthropic
+    model: claude-opus-4-20250514
+    temperature: 0.1
+    max_tokens: 4000

@@ -153,6 +153,7 @@ def run_go_enrichment(
     output = _build_output(
         clusters=clusters,
         gene_to_annotations=gene_to_annotations,
+        godag=godag,
         input_genes=gene_symbols,
         study_set=study_set,
         total_enriched=len(goea_results_sig),
@@ -173,6 +174,7 @@ def run_go_enrichment(
 def _build_output(
     clusters: list[dict[str, Any]],
     gene_to_annotations: dict[str, list[dict[str, Any]]],
+    godag: Any,
     input_genes: list[str],
     study_set: set[str],
     total_enriched: int,
@@ -186,6 +188,7 @@ def _build_output(
     Args:
         clusters: List of cluster dictionaries from cluster_by_top_n_roots
         gene_to_annotations: Gene to annotations mapping
+        godag: GO DAG object for term ancestry checks
         input_genes: Original input gene list
         study_set: Filtered study genes (found in annotations)
         total_enriched: Total number of enriched terms before clustering
@@ -242,7 +245,7 @@ def _build_output(
             )
 
         # Get contributing genes
-        contributing_genes = get_cluster_contributing_genes(cluster, gene_to_annotations)
+        contributing_genes = get_cluster_contributing_genes(cluster, gene_to_annotations, godag)
 
         output_clusters.append(
             {
