@@ -1,0 +1,2 @@
+[console_scripts]
+go-enrichment = goa_semantic_tools.cli:main

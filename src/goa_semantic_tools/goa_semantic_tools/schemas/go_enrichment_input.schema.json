@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/go_enrichment_input.schema.json",
+  "title": "GO Enrichment Input",
+  "description": "Input parameters for hierarchical GO enrichment analysis",
+  "type": "object",
+  "properties": {
+    "gene_symbols": {
+      "type": "array",
+      "description": "List of gene symbols to analyze (e.g., ['TP53', 'BRCA1', 'BRCA2'])",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[A-Z0-9_-]+$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "species": {
+      "type": "string",
+      "description": "Species for gene annotations",
+      "enum": ["human", "mouse"],
+      "default": "human"
+    },
+    "top_n_roots": {
+      "type": "integer",
+      "description": "Number of top enriched terms to use as cluster roots per namespace",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 5
+    },
+    "fdr_threshold": {
+      "type": "number",
+      "description": "FDR significance threshold (Benjamini-Hochberg correction)",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "exclusiveMinimum": 0.0,
+      "default": 0.05
+    }
+  },
+  "required": ["gene_symbols"],
+  "additionalProperties": false
+}

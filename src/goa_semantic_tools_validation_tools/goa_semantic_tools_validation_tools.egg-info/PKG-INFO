@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: goa_semantic_tools-validation-tools
+Version: 0.1.0
+Summary: Validation and analysis tools for goa_semantic_tools
+Requires-Python: >=3.14
+Description-Content-Type: text/markdown
+Requires-Dist: goa_semantic_tools
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: seaborn>=0.12.0
+Requires-Dist: scikit-learn>=1.3.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+
+# goa_semantic_tools - Validation Tools
+
+**Status**: OPTIONAL
+
+Validation and analysis tools for comparing runs, computing metrics, and visualizing results.
+
+## Delete This Package If
+
+Your Ring 0 MVP doesn't need:
+- Workflow output comparison
+- Quality metrics (precision, recall, etc.)
+- Visualizations and analysis
+
+See `SCAFFOLD_GUIDE.md` for guidance.
+
+## Installation
+
+```bash
+pip install goa_semantic_tools-validation-tools
+```
+
+## Structure
+
+- **comparisons/** - Compare workflow outputs across runs
+- **metrics/** - Quality metrics (precision, recall, F1, etc.)
+- **visualizations/** - Plots, heatmaps, ROC curves
+
+## Usage
+
+This package imports schemas and models from the core package:
+
+```python
+from goa_semantic_tools.schemas import load_schema
+from goa_semantic_tools_validation_tools.metrics import calculate_f1
+from goa_semantic_tools_validation_tools.visualizations import plot_heatmap
+```
+
+## Development
+
+This package is part of a UV workspace. See repository root for development instructions.

@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/go_enrichment_output.schema.json",
+  "title": "GO Enrichment Output",
+  "description": "Hierarchical GO enrichment results with top-N roots clustering",
+  "type": "object",
+  "properties": {
+    "clusters": {
+      "type": "array",
+      "description": "Hierarchical clusters of enriched GO terms",
+      "items": {
+        "type": "object",
+        "properties": {
+          "root_term": {
+            "type": "object",
+            "description": "Most significant term serving as cluster root",
+            "properties": {
+              "go_id": {
+                "type": "string",
+                "pattern": "^GO:[0-9]{7}$",
+                "description": "GO term identifier"
+              },
+              "name": {
+                "type": "string",
+                "description": "GO term name"
+              },
+              "namespace": {
+                "type": "string",
+                "enum": ["biological_process", "cellular_component", "molecular_function"],
+                "description": "GO namespace"
+              },
+              "p_value": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "Uncorrected p-value from Fisher's exact test"
+              },
+              "fdr": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+                "description": "FDR-corrected p-value (Benjamini-Hochberg)"
+              },
+              "fold_enrichment": {
+                "type": "number",
+                "minimum": 0.0,
+                "description": "Fold enrichment: (study_count/study_total) / (pop_count/pop_total)"
+              },
+              "study_count": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of study genes annotated to this term"
+              },
+              "population_count": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of population genes annotated to this term"
+              },
+              "study_genes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of study gene symbols annotated to this term"
+              }
+            },
+            "required": ["go_id", "name", "namespace", "p_value", "fdr", "fold_enrichment", "study_count", "population_count", "study_genes"],
+            "additionalProperties": false
+          },
+          "member_terms": {
+            "type": "array",
+            "description": "Enriched descendant terms in the same namespace",
+            "items": {
+              "type": "object",
+              "properties": {
+                "go_id": {
+                  "type": "string",
+                  "pattern": "^GO:[0-9]{7}$"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "namespace": {
+                  "type": "string",
+                  "enum": ["biological_process", "cellular_component", "molecular_function"]
+                },
+                "p_value": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                },
+                "fdr": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                },
+                "fold_enrichment": {
+                  "type": "number",
+                  "minimum": 0.0
+                },
+                "study_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "population_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "study_genes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["go_id", "name", "namespace", "p_value", "fdr", "fold_enrichment", "study_count", "population_count", "study_genes"],
+              "additionalProperties": false
+            }
+          },
+          "contributing_genes": {
+            "type": "array",
+            "description": "Genes contributing to this cluster with their direct annotations",
+            "items": {
+              "type": "object",
+              "properties": {
+                "gene_symbol": {
+                  "type": "string",
+                  "description": "Gene symbol"
+                },
+                "direct_annotations": {
+                  "type": "array",
+                  "description": "Direct GO annotations for genes in this cluster",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "go_id": {
+                        "type": "string",
+                        "pattern": "^GO:[0-9]{7}$"
+                      },
+                      "go_name": {
+                        "type": "string"
+                      },
+                      "evidence_code": {
+                        "type": "string",
+                        "description": "Evidence code (e.g., IDA, IEA, TAS, IMP)"
+                      }
+                    },
+                    "required": ["go_id", "go_name", "evidence_code"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["gene_symbol", "direct_annotations"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["root_term", "member_terms", "contributing_genes"],
+        "additionalProperties": false
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Enrichment analysis metadata",
+      "properties": {
+        "input_genes_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of genes in input study set"
+        },
+        "genes_with_annotations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of study genes found in annotation database"
+        },
+        "total_enriched_terms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of significantly enriched GO terms (before clustering)"
+        },
+        "clusters_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clusters created"
+        },
+        "fdr_threshold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "FDR threshold used for significance"
+        },
+        "species": {
+          "type": "string",
+          "description": "Species analyzed"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Analysis timestamp (ISO 8601)"
+        }
+      },
+      "required": ["input_genes_count", "genes_with_annotations", "total_enriched_terms", "clusters_count", "fdr_threshold", "species", "timestamp"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["clusters", "metadata"],
+  "additionalProperties": false
+}
