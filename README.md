@@ -30,12 +30,40 @@ uv sync
 
 ### Usage
 
-Currently Python API only (CLI runner script coming in Phase 2):
+#### Command Line (Recommended for Quick Testing)
+
+```bash
+# Comma-separated gene list
+uv run go-enrichment --genes TP53,BRCA1,BRCA2,PTEN,RB1,APC --output results/
+
+# From a file (one gene per line, # for comments)
+uv run go-enrichment --genes-file genes.txt --output results/
+
+# With custom parameters
+uv run go-enrichment \
+  --genes TP53,BRCA1,BRCA2 \
+  --species mouse \
+  --top-n 10 \
+  --fdr 0.01 \
+  --output results/ \
+  --name my_analysis
+```
+
+**Available options:**
+- `--genes`: Comma-separated gene symbols
+- `--genes-file`: File with gene symbols (one per line)
+- `--output`, `-o`: Output directory (required)
+- `--species`: `human` or `mouse` (default: `human`)
+- `--top-n`: Number of cluster roots per namespace (default: `5`)
+- `--fdr`: FDR threshold (default: `0.05`)
+- `--name`: Custom name for output file (default: auto-generated)
+
+#### Python API
 
 ```python
 from goa_semantic_tools.services import run_go_enrichment
 
-# Run enrichment analysis on tumor suppressor genes
+# Run enrichment analysis
 result = run_go_enrichment(
     gene_symbols=["TP53", "BRCA1", "BRCA2", "PTEN", "RB1", "APC"],
     species="human",         # or "mouse"
@@ -191,11 +219,14 @@ Data is downloaded on first run and cached in `reference_data/` (gitignored).
 
 ## 🚧 Roadmap
 
-**Current Status**: Ring 0 Phase 1 - Hierarchical GO Enrichment ✅
+**Current Status**: Ring 0 Phase 1 Complete ✅
+- Hierarchical GO enrichment with top-N clustering
+- CLI runner (`go-enrichment` command)
+- Python API
+- Download-and-cache data strategy
 
-**Phase 2** (planned):
+**Phase 2** (next):
 - LLM-based natural language explanations of enrichment results
-- CLI runner script for command-line usage
 - Batch processing support
 
 **Ring 1** (after user validation):
