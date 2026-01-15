@@ -16,14 +16,11 @@ user_prompt: |
   Analyze these GO enrichment results and generate detailed explanations for a research biologist.
 
   For each cluster:
-  1. Write a brief one-sentence summary (10-200 characters) of the functional theme
+  1. Include the root term object as provided in the enrichment data (go_id, name, namespace, fdr, fold_enrichment, study_count, study_genes)
   2. Write a detailed paragraph (at least 100 characters) that explains:
      - WHY these genes cluster together functionally
      - WHAT biological processes or functions are enriched
      - HOW the evidence from gene annotations supports this
-  3. Extract 3-5 key biological insights as bullet points (at least 20 characters each)
-  4. Highlight 3-5 key genes and explain each gene's specific contribution to the cluster (at least 30 characters per contribution)
-  5. Provide statistical context in accessible terms for research biologists (30-300 characters)
 
   Then synthesize ALL clusters into an overall biological interpretation (at least 200 characters).
 
@@ -31,7 +28,7 @@ user_prompt: |
   {enrichment_data}
 
   Return structured output matching the expected schema with:
-  - explanations: array of per-cluster explanations
+  - explanations: array of per-cluster explanations, each with root_term and explanation
   - overall_summary: synthesized narrative across all clusters
 
 presets:

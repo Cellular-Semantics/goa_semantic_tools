@@ -212,6 +212,10 @@ Examples:
 
             except Exception as e:
                 print(f"\n❌ Warning: Explanation generation failed: {e}", file=sys.stderr)
+                # Debugging: surface full stack trace for LLM failures.
+                import traceback
+
+                traceback.print_exc()
                 print(f"   Phase 1 results are still available in {phase1_file.name}")
                 # Continue with Phase 1 results only
 
