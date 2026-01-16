@@ -206,14 +206,7 @@ def get_cluster_contributing_genes(
             contributing_genes.append(
                 {
                     "gene_symbol": gene,
-                    "direct_annotations": [
-                        {
-                            "go_id": annot["go_id"],
-                            "go_name": annot["go_name"],
-                            "evidence_code": annot["evidence_code"],
-                        }
-                        for annot in cluster_annotations
-                    ],
+                    "direct_annotations": cluster_annotations,
                 }
             )
 

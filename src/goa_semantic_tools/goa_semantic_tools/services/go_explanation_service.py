@@ -302,8 +302,11 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
 
             lines.append(f"  - {gene_symbol}:")
             for annot in annotations[:3]:  # Show top 3 annotations per gene
+                # Format evidence codes
+                evidence_codes = [ev["code"] for ev in annot.get("evidence", [])]
+                evidence_str = ", ".join(evidence_codes) if evidence_codes else "unknown"
                 lines.append(
-                    f"    - {annot['go_name']} ({annot['go_id']}), " f"evidence: {annot['evidence_code']}"
+                    f"    - {annot['go_name']} ({annot['go_id']}), " f"evidence: {evidence_str}"
                 )
             if len(annotations) > 3:
                 lines.append(f"    - ... and {len(annotations) - 3} more annotations")

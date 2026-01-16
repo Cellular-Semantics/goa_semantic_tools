@@ -11,7 +11,7 @@ from typing import Optional
 
 import yaml
 
-from .services import generate_explanations, generate_markdown_explanation, run_go_enrichment
+from .services import generate_markdown_explanation, run_go_enrichment
 
 
 def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list[str]:
@@ -75,10 +75,20 @@ def _print_dry_run(genes: list[str], args: any) -> None:
         print(f"First 10: {', '.join(genes[:10])}")
         print(f"Last 10: {', '.join(genes[-10:])}")
 
+    # Prepare output paths
+    base_output = Path(args.output)
+    if base_output.suffix:
+        base_output = base_output.with_suffix("")
+    enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
+    explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
+
     print(f"\nSpecies: {args.species}")
     print(f"Top-N roots per namespace: {args.top_n}")
     print(f"FDR threshold: {args.fdr}")
-    print(f"Output file: {args.output}")
+    print(f"\nOutput files:")
+    print(f"  Enrichment: {enrichment_path}")
+    if args.explain:
+        print(f"  Explanation: {explanation_path}")
 
     # Phase 1 plan
     print("\n" + "=" * 80)
@@ -95,11 +105,7 @@ def _print_dry_run(genes: list[str], args: any) -> None:
     print(f"5. Cluster enriched terms using top-{args.top_n} roots per namespace")
     print("6. Build hierarchical output with contributing genes")
 
-    if not args.explain:
-        print("\nOutput: Phase 1 enrichment data as JSON")
-        print(f"File: {args.output}")
-    else:
-        print("\nOutput: Phase 1 enrichment data (used as input to Phase 2)")
+    print(f"\nOutput: {enrichment_path}")
 
     # Phase 2 plan (if requested)
     if args.explain:
@@ -107,9 +113,9 @@ def _print_dry_run(genes: list[str], args: any) -> None:
         print("## PHASE 2: LLM EXPLANATION GENERATION")
         print("=" * 80)
         print(f"\nModel: {args.model}")
-        print(f"Output format: {args.format}")
+        print(f"Output format: Markdown")
         print(f"Temperature: 0.1")
-        print(f"Max tokens: 3000")
+        print(f"Max tokens: 16000")
 
         # Load and display prompt
         print("\n### Prompt Configuration")
@@ -129,37 +135,15 @@ def _print_dry_run(genes: list[str], args: any) -> None:
         except FileNotFoundError:
             print("(Prompt file not found)")
 
-        # Show schema if JSON format
-        if args.format == "json":
-            print("\n### Output Schema")
-            schema_path = (
-                Path(__file__).parent / "schemas" / "go_explanation_output.schema.json"
-            )
-            try:
-                with open(schema_path) as f:
-                    schema = json.load(f)
+        print("\n### Output Format")
+        print("Markdown report with:")
+        print("  - Per-cluster biological explanations")
+        print("  - GO IDs hyperlinked to GO ontology")
+        print("  - PMIDs hyperlinked to PubMed")
+        print("  - Key genes with evidence and citations")
+        print("  - Overall biological summary")
 
-                print("\nRequired fields:")
-                print(f"  - enrichment_data (object)")
-                print(f"  - explanations (array)")
-                print(f"  - overall_summary (string, min 200 chars)")
-                print(f"  - generation_metadata (object)")
-
-                print("\nPer-cluster explanation structure:")
-                for field in schema["properties"]["explanations"]["items"]["required"]:
-                    print(f"  - {field}")
-
-            except FileNotFoundError:
-                print("(Schema file not found)")
-        else:
-            print("\n### Output Format")
-            print("Markdown report with structured sections:")
-            print("  - Per-cluster analysis")
-            print("  - Key insights and genes")
-            print("  - Overall summary")
-
-        print(f"\nOutput: Explanation {args.format.upper()}")
-        print(f"File: {args.output}")
+        print(f"\nOutput: {explanation_path}")
 
     print("\n" + "=" * 80)
     print("DRY RUN COMPLETE - No analysis was executed")
@@ -201,7 +185,7 @@ Examples:
         "-o",
         type=str,
         required=True,
-        help="Output file path (e.g., results/my_analysis.json or results/report.md)",
+        help="Output base path (e.g., results/my_analysis). Extensions added automatically: _enrichment.json, _explanation.md",
     )
 
     # Optional parameters
@@ -237,13 +221,6 @@ Examples:
         type=str,
         default="gpt-4o",
         help="LLM model for explanations (default: gpt-4o). Examples: gpt-4o, gpt-4o-mini, claude-sonnet-4-20250514",
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        default="json",
-        choices=["json", "markdown"],
-        help="Output format for explanations (default: json). Only applies with --explain.",
     )
 
     # Utility options
@@ -291,14 +268,26 @@ Examples:
         if args.explain:
             print(f"  Generate explanations: Yes")
             print(f"  LLM model: {args.model}")
-            print(f"  Output format: {args.format}")
         else:
             print(f"  Generate explanations: No (use --explain to enable)")
 
-        # Prepare output file path
-        output_path = Path(args.output)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        print(f"\n✓ Output file: {output_path.absolute()}")
+        # Prepare output paths with auto-added extensions
+        base_output = Path(args.output)
+        # Remove any existing extension from base
+        if base_output.suffix:
+            base_output = base_output.with_suffix("")
+
+        # Create output directory
+        base_output.parent.mkdir(parents=True, exist_ok=True)
+
+        # Build output file paths
+        enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
+        explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
+
+        print(f"\n✓ Output files:")
+        print(f"  Enrichment: {enrichment_path.absolute()}")
+        if args.explain:
+            print(f"  Explanation: {explanation_path.absolute()}")
 
         # Run enrichment (Phase 1)
         print("\n" + "=" * 80)
@@ -310,31 +299,24 @@ Examples:
         )
         print("=" * 80)
 
-        # Phase 2: Generate explanations if requested
+        # Always save enrichment JSON (Phase 1)
+        with open(enrichment_path, "w") as f:
+            json.dump(result, f, indent=2)
+        print(f"\n✓ Enrichment data saved to: {enrichment_path.absolute()}")
+
+        # Phase 2: Generate markdown explanation if requested
         if args.explain:
             print("\n" + "=" * 80)
             try:
-                if args.format == "json":
-                    explanation_result = generate_explanations(
-                        enrichment_output=result, model=args.model, temperature=0.1, max_tokens=3000
-                    )
+                explanation_markdown = generate_markdown_explanation(
+                    enrichment_output=result, model=args.model, temperature=0.1, max_tokens=16000
+                )
 
-                    # Save JSON output
-                    with open(output_path, "w") as f:
-                        json.dump(explanation_result, f, indent=2)
+                # Save markdown output
+                with open(explanation_path, "w") as f:
+                    f.write(explanation_markdown)
 
-                    print(f"\n✓ Explanation results saved to: {output_path.absolute()}")
-
-                elif args.format == "markdown":
-                    explanation_markdown = generate_markdown_explanation(
-                        enrichment_output=result, model=args.model, temperature=0.1, max_tokens=3000
-                    )
-
-                    # Save markdown output
-                    with open(output_path, "w") as f:
-                        f.write(explanation_markdown)
-
-                    print(f"\n✓ Explanation results saved to: {output_path.absolute()}")
+                print(f"\n✓ Explanation saved to: {explanation_path.absolute()}")
 
             except Exception as e:
                 print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
@@ -342,13 +324,6 @@ Examples:
 
                 traceback.print_exc()
                 return 1
-
-        else:
-            # No explanations - save Phase 1 enrichment data as JSON
-            with open(output_path, "w") as f:
-                json.dump(result, f, indent=2)
-
-            print(f"\n✓ Enrichment results saved to: {output_path.absolute()}")
 
         print("=" * 80)
 
@@ -378,7 +353,10 @@ Examples:
                 print(f"     Member terms: {len(cluster['member_terms'])}")
 
         print("\n" + "=" * 80)
-        print(f"✓ Analysis complete! Results saved to {output_path.name}")
+        print(f"✓ Analysis complete!")
+        print(f"  Enrichment: {enrichment_path.name}")
+        if args.explain:
+            print(f"  Explanation: {explanation_path.name}")
         print("=" * 80)
 
         return 0
