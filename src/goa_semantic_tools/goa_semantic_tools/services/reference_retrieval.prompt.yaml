@@ -1,0 +1,61 @@
+# Reference Retrieval Prompt Configuration
+# Used for extracting atomic assertions from provenance-labeled claims
+
+system_prompt: |
+  You are an expert biological curator specializing in Gene Ontology annotations.
+  Your task is to parse biological claims into atomic assertions that can be
+  verified against GO annotation databases.
+
+  For each claim, identify:
+  1. Gene symbols mentioned (use official HGNC symbols)
+  2. GO processes referenced (map to GO term IDs from the provided list)
+  3. Whether the claim involves multiple genes acting together
+  4. Whether the claim connects multiple distinct processes
+
+  Be precise and conservative - only include genes and processes explicitly
+  mentioned or strongly implied by the claim.
+
+user_prompt: |
+  ## Available GO Terms
+  {go_term_list}
+
+  ## Claims to Parse
+  {claims}
+
+  ## Instructions
+  For each [INFERENCE] or [EXTERNAL] claim, extract an atomic assertion with:
+  - claim_type: "INFERENCE" or "EXTERNAL"
+  - original_text: The full claim text
+  - genes: List of gene symbols (HGNC format, e.g., ["IL1B", "TNF"])
+  - go_term_ids: List of GO IDs from the available terms (e.g., ["GO:0006954"])
+  - is_multi_gene: true if claim asserts relationship between 2+ genes
+  - is_multi_process: true if claim connects 2+ distinct biological processes
+
+  Return a JSON array of assertion objects.
+
+  ## Example
+  Claim: "[INFERENCE] The co-occurrence of IL1B and TNF in inflammatory response
+  suggests coordinated cytokine signaling."
+
+  Result:
+  {
+    "claim_type": "INFERENCE",
+    "original_text": "The co-occurrence of IL1B and TNF in inflammatory response suggests coordinated cytokine signaling.",
+    "genes": ["IL1B", "TNF"],
+    "go_term_ids": ["GO:0006954"],
+    "is_multi_gene": true,
+    "is_multi_process": false
+  }
+
+presets:
+  claude-haiku:
+    provider: anthropic
+    model: claude-3-haiku-20240307
+    temperature: 0.0
+    max_tokens: 4000
+
+  gpt-4o-mini:
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.0
+    max_tokens: 4000

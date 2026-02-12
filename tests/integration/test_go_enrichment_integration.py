@@ -3,14 +3,89 @@ Integration Tests for GO Enrichment Service
 
 Tests the full GO enrichment pipeline with real GOATOOLS and downloaded data.
 Requires GO ontology and GAF files (downloaded on first run).
+
+IMPORTANT: These tests use REAL API calls and data downloads.
+Use minimal gene sets to reduce cost and time.
 """
 import os
 
 import pytest
-from jsonschema import validate
 
-from goa_semantic_tools.schemas import load_schema
 from goa_semantic_tools.services import run_go_enrichment
+
+
+# =============================================================================
+# Minimal End-to-End Test (RECOMMENDED for CI/quick validation)
+# =============================================================================
+
+
+@pytest.mark.integration
+def test_minimal_enrichment_end_to_end() -> None:
+    """
+    Minimal end-to-end test with just 3 genes.
+
+    Uses TP53, BRCA1, BRCA2 - well-characterized genes that should show
+    enrichment for DNA repair and cell cycle terms.
+
+    This is the CHEAPEST integration test - use for quick validation.
+    """
+    # Minimal gene set - 3 genes
+    genes = ["TP53", "BRCA1", "BRCA2"]
+
+    result = run_go_enrichment(
+        gene_symbols=genes,
+        species="human",
+        fdr_threshold=0.05,
+        depth_range=(4, 7),
+        min_children=2,
+        max_genes=30,
+    )
+
+    # Validate structure
+    assert "enrichment_leaves" in result
+    assert "themes" in result
+    assert "hub_genes" in result
+    assert "metadata" in result
+
+    # Validate metadata
+    metadata = result["metadata"]
+    assert metadata["input_genes_count"] == 3
+    assert metadata["genes_with_annotations"] == 3  # All should be found
+    assert metadata["species"] == "human"
+    assert metadata["fdr_threshold"] == 0.05
+
+    # Should find some enrichment
+    assert metadata["total_enriched_terms"] > 0
+
+    # Validate enrichment_leaves structure
+    leaves = result["enrichment_leaves"]
+    if leaves:
+        first_leaf = leaves[0]
+        assert "go_id" in first_leaf
+        assert first_leaf["go_id"].startswith("GO:")
+        assert "name" in first_leaf
+        assert "fdr" in first_leaf
+        assert 0 <= first_leaf["fdr"] <= 0.05
+        assert "genes" in first_leaf
+        assert len(first_leaf["genes"]) > 0
+
+    # Validate themes structure
+    themes = result["themes"]
+    if themes:
+        first_theme = themes[0]
+        assert "anchor_term" in first_theme
+        assert "anchor_confidence" in first_theme
+        assert first_theme["anchor_term"]["go_id"].startswith("GO:")
+
+    print(f"\n✓ Minimal e2e test passed")
+    print(f"  - Enrichment leaves: {len(leaves)}")
+    print(f"  - Themes: {len(themes)}")
+    print(f"  - Hub genes: {len(result['hub_genes'])}")
+
+
+# =============================================================================
+# Standard Tests (more comprehensive, higher cost)
+# =============================================================================
 
 
 @pytest.mark.integration
@@ -18,131 +93,56 @@ def test_go_enrichment_with_tumor_suppressors() -> None:
     """
     Test GO enrichment with tumor suppressor genes.
 
-    Uses a well-characterized set of genes that should show strong enrichment
+    Uses a medium set of genes that should show strong enrichment
     for cell cycle, DNA repair, and apoptosis terms.
     """
-    # Well-characterized tumor suppressor genes
+    # Medium gene set - 5 genes
     tumor_suppressors = [
-        "TP53",  # Guardian of the genome
+        "TP53",   # Guardian of the genome
         "BRCA1",  # Breast cancer susceptibility
         "BRCA2",  # Breast cancer susceptibility
-        "PTEN",  # Phosphatase and tensin homolog
-        "RB1",  # Retinoblastoma
-        "APC",  # Adenomatous polyposis coli
-        "VHL",  # Von Hippel-Lindau
-        "CDKN2A",  # Cyclin-dependent kinase inhibitor 2A
-        "ATM",  # Ataxia telangiectasia mutated
-        "MLH1",  # MutL homolog 1
-        "MSH2",  # MutS homolog 2
-        "NF1",  # Neurofibromin 1
-        "TSC1",  # Tuberous sclerosis 1
-        "TSC2",  # Tuberous sclerosis 2
+        "ATM",    # Ataxia telangiectasia mutated
+        "CHEK2",  # Checkpoint kinase 2
     ]
 
-    # Run enrichment
     result = run_go_enrichment(
-        gene_symbols=tumor_suppressors, species="human", top_n_roots=5, fdr_threshold=0.05
+        gene_symbols=tumor_suppressors,
+        species="human",
+        fdr_threshold=0.05,
+        depth_range=(4, 7),
     )
 
-    # Validate against schema
-    output_schema = load_schema("go_enrichment_output.schema.json")
-    validate(instance=result, schema=output_schema)
-
-    # Check metadata
-    metadata = result["metadata"]
-    assert metadata["input_genes_count"] == len(tumor_suppressors)
-    assert metadata["genes_with_annotations"] == len(tumor_suppressors)  # All should be found
-    assert metadata["total_enriched_terms"] > 0, "Should find enriched terms for tumor suppressors"
-    assert metadata["clusters_count"] > 0, "Should create at least one cluster"
-    assert metadata["fdr_threshold"] == 0.05
-    assert metadata["species"] == "human"
-
-    # Check clusters exist
-    clusters = result["clusters"]
-    assert len(clusters) > 0, "Should have at least one cluster"
-
-    # Check first cluster structure
-    first_cluster = clusters[0]
-    assert "root_term" in first_cluster
-    assert "member_terms" in first_cluster
-    assert "contributing_genes" in first_cluster
-
-    # Validate root term
-    root = first_cluster["root_term"]
-    assert root["go_id"].startswith("GO:")
-    assert len(root["name"]) > 0
-    assert root["namespace"] in ["biological_process", "cellular_component", "molecular_function"]
-    assert 0 <= root["p_value"] <= 1
-    assert 0 <= root["fdr"] <= 0.05  # Below threshold
-    assert root["fold_enrichment"] > 1.0  # Should be enriched, not depleted
-    assert root["study_count"] > 0
-    assert root["population_count"] > 0
-    assert len(root["study_genes"]) > 0
-
-    # Validate contributing genes
-    contributing_genes = first_cluster["contributing_genes"]
-    assert len(contributing_genes) > 0, "Should have contributing genes"
-
-    first_gene = contributing_genes[0]
-    assert "gene_symbol" in first_gene
-    assert "direct_annotations" in first_gene
-    assert len(first_gene["direct_annotations"]) > 0
-
-    # Validate annotations
-    first_annot = first_gene["direct_annotations"][0]
-    assert first_annot["go_id"].startswith("GO:")
-    assert len(first_annot["go_name"]) > 0
-    assert len(first_annot["evidence_code"]) > 0
-
-    # Check expected enrichment categories (tumor suppressors should enrich these)
-    all_cluster_names = [c["root_term"]["name"].lower() for c in clusters]
-    all_cluster_text = " ".join(all_cluster_names)
-
-    # Should find cell cycle related terms
-    assert any(
-        keyword in all_cluster_text
-        for keyword in ["cell cycle", "proliferation", "mitotic", "division"]
-    ), "Should find cell cycle related enrichment"
-
-    print(f"\n✓ Found {len(clusters)} clusters")
-    print(f"✓ Total enriched terms: {metadata['total_enriched_terms']}")
-    print(f"✓ Top cluster: {first_cluster['root_term']['name']}")
-    print(f"  - FDR: {first_cluster['root_term']['fdr']:.2e}")
-    print(f"  - Fold enrichment: {first_cluster['root_term']['fold_enrichment']:.2f}x")
-    print(f"  - Contributing genes: {len(contributing_genes)}")
-
-
-@pytest.mark.integration
-def test_go_enrichment_with_no_enrichment() -> None:
-    """
-    Test GO enrichment with random genes that should not show enrichment.
-
-    Uses a small set of unrelated housekeeping genes that should not
-    cluster into functional categories.
-    """
-    # Random unrelated genes (housekeeping genes from different pathways)
-    random_genes = ["ACTB", "GAPDH", "TUBB"]  # Very few genes, unlikely to enrich
-
-    result = run_go_enrichment(
-        gene_symbols=random_genes, species="human", top_n_roots=5, fdr_threshold=0.05
-    )
-
-    # Validate against schema
-    output_schema = load_schema("go_enrichment_output.schema.json")
-    validate(instance=result, schema=output_schema)
-
-    # Should still return valid structure even if no enrichment
-    assert "clusters" in result
+    # Validate structure
+    assert "enrichment_leaves" in result
+    assert "themes" in result
+    assert "hub_genes" in result
     assert "metadata" in result
 
     metadata = result["metadata"]
-    assert metadata["input_genes_count"] == len(random_genes)
+    assert metadata["input_genes_count"] == len(tumor_suppressors)
+    assert metadata["genes_with_annotations"] == len(tumor_suppressors)
+    assert metadata["total_enriched_terms"] > 0
 
-    # May or may not find enrichment with such a small set
-    # Just verify structure is valid
-    print(f"\n✓ Random genes test completed")
-    print(f"  - Enriched terms: {metadata['total_enriched_terms']}")
-    print(f"  - Clusters: {metadata['clusters_count']}")
+    # Check themes exist and are valid
+    themes = result["themes"]
+    assert len(themes) > 0, "Should have at least one theme"
+
+    first_theme = themes[0]
+    anchor = first_theme["anchor_term"]
+    assert anchor["go_id"].startswith("GO:")
+    assert len(anchor["name"]) > 0
+    assert anchor["fdr"] <= 0.05
+
+    # Check hub genes (all 5 genes should appear in multiple themes)
+    hub_genes = result["hub_genes"]
+    assert len(hub_genes) > 0, "Should have hub genes"
+
+    print(f"\n✓ Tumor suppressors test passed")
+    print(f"  - Themes: {len(themes)}")
+    print(f"  - Hub genes: {len(hub_genes)}")
+    if hub_genes:
+        top_hub = list(hub_genes.keys())[0]
+        print(f"  - Top hub: {top_hub} ({hub_genes[top_hub]['theme_count']} themes)")
 
 
 @pytest.mark.integration
@@ -150,15 +150,11 @@ def test_go_enrichment_input_validation() -> None:
     """Test input validation for GO enrichment service."""
     # Empty gene list
     with pytest.raises(ValueError, match="gene_symbols cannot be empty"):
-        run_go_enrichment(gene_symbols=[], species="human")
+        run_go_enrichment(gene_symbols=[])
 
     # Invalid species
     with pytest.raises(ValueError, match="Unsupported species"):
         run_go_enrichment(gene_symbols=["TP53"], species="invalid")
-
-    # Invalid top_n_roots
-    with pytest.raises(ValueError, match="top_n_roots must be >= 1"):
-        run_go_enrichment(gene_symbols=["TP53"], top_n_roots=0)
 
     # Invalid FDR threshold
     with pytest.raises(ValueError, match="fdr_threshold must be between 0 and 1"):
@@ -173,51 +169,46 @@ def test_go_enrichment_with_missing_genes() -> None:
     # Mix of real genes and fake genes
     mixed_genes = ["TP53", "BRCA1", "FAKEGENE1", "FAKEGENE2", "BRCA2"]
 
-    result = run_go_enrichment(gene_symbols=mixed_genes, species="human", top_n_roots=5)
-
-    # Validate against schema
-    output_schema = load_schema("go_enrichment_output.schema.json")
-    validate(instance=result, schema=output_schema)
+    result = run_go_enrichment(
+        gene_symbols=mixed_genes,
+        species="human",
+        fdr_threshold=0.05,
+    )
 
     metadata = result["metadata"]
     assert metadata["input_genes_count"] == len(mixed_genes)
     assert metadata["genes_with_annotations"] == 3  # Only real genes found
-    assert metadata["total_enriched_terms"] >= 0  # May or may not enrich with 3 genes
 
-    print(f"\n✓ Mixed genes test completed")
+    print(f"\n✓ Mixed genes test passed")
     print(f"  - Input genes: {metadata['input_genes_count']}")
     print(f"  - Found genes: {metadata['genes_with_annotations']}")
 
 
 @pytest.mark.integration
-def test_go_enrichment_different_top_n() -> None:
-    """Test GO enrichment with different top_n_roots values."""
-    tumor_suppressors = ["TP53", "BRCA1", "BRCA2", "PTEN", "RB1"]
+def test_go_enrichment_with_no_enrichment() -> None:
+    """
+    Test GO enrichment with random genes that may not show enrichment.
 
-    # Test with top-3
-    result_top3 = run_go_enrichment(
-        gene_symbols=tumor_suppressors, species="human", top_n_roots=3, fdr_threshold=0.05
+    Uses a very small set of unrelated housekeeping genes.
+    """
+    # Very small set - may or may not enrich
+    random_genes = ["ACTB", "GAPDH"]
+
+    result = run_go_enrichment(
+        gene_symbols=random_genes,
+        species="human",
+        fdr_threshold=0.05,
     )
 
-    # Test with top-10
-    result_top10 = run_go_enrichment(
-        gene_symbols=tumor_suppressors, species="human", top_n_roots=10, fdr_threshold=0.05
-    )
+    # Should still return valid structure even if no enrichment
+    assert "enrichment_leaves" in result
+    assert "themes" in result
+    assert "hub_genes" in result
+    assert "metadata" in result
 
-    # Both should be valid
-    output_schema = load_schema("go_enrichment_output.schema.json")
-    validate(instance=result_top3, schema=output_schema)
-    validate(instance=result_top10, schema=output_schema)
+    metadata = result["metadata"]
+    assert metadata["input_genes_count"] == len(random_genes)
 
-    # top-10 should have same or more clusters (unless not enough enriched terms)
-    clusters_top3 = len(result_top3["clusters"])
-    clusters_top10 = len(result_top10["clusters"])
-
-    print(f"\n✓ Different top_n test completed")
-    print(f"  - Top-3 clusters: {clusters_top3}")
-    print(f"  - Top-10 clusters: {clusters_top10}")
-
-    # If there are enough enriched terms, top-10 should have more clusters
-    total_enriched = result_top3["metadata"]["total_enriched_terms"]
-    if total_enriched > 30:  # Enough terms for meaningful difference
-        assert clusters_top10 >= clusters_top3, "top-10 should create same or more clusters"
+    print(f"\n✓ Low enrichment test passed")
+    print(f"  - Enriched terms: {metadata['total_enriched_terms']}")
+    print(f"  - Themes: {metadata.get('themes_count', 0)}")

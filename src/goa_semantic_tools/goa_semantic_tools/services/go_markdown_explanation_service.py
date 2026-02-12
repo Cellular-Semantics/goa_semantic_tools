@@ -2,6 +2,7 @@
 GO Markdown Explanation Service
 
 LLM-based markdown report generation for GO enrichment results (Phase 2, markdown format).
+Generates provenance-labeled explanations with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY] tags.
 """
 import os
 import re
@@ -17,17 +18,20 @@ def generate_markdown_explanation(
     model: str = "gpt-4o",
     api_key: str | None = None,
     temperature: float = 0.1,
-    max_tokens: int = 3000,
+    max_tokens: int = 8000,
 ) -> str:
     """
-    Generate markdown report explaining GO enrichment results using LLM.
+    Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
 
-    This bypasses JSON schema validation entirely - the LLM generates
-    a markdown report directly. Uses the same structured prompt as the
-    JSON mode but asks for markdown output.
+    The LLM generates a markdown report with provenance tags:
+    - [DATA]: Direct observations from enrichment
+    - [GO-HIERARCHY]: Facts from GO parent-child structure
+    - [INFERENCE]: Logical deductions from co-annotation patterns
+    - [EXTERNAL]: Claims requiring literature support
 
     Args:
         enrichment_output: Phase 1 output (from run_go_enrichment)
+            Must contain: enrichment_leaves, themes, hub_genes, metadata
         model: LLM model identifier. Examples:
             - OpenAI: "gpt-4o", "gpt-4o-mini"
             - Anthropic: "claude-sonnet-4-20250514"
@@ -36,7 +40,7 @@ def generate_markdown_explanation(
         max_tokens: Maximum tokens for LLM response
 
     Returns:
-        Markdown-formatted explanation string
+        Markdown-formatted explanation string with provenance tags
 
     Raises:
         FileNotFoundError: If prompt file not found
@@ -55,12 +59,21 @@ def generate_markdown_explanation(
     if not enrichment_output:
         raise ValueError("enrichment_output cannot be empty")
 
-    if "clusters" not in enrichment_output or "metadata" not in enrichment_output:
-        raise ValueError("enrichment_output must have 'clusters' and 'metadata' keys")
+    if "metadata" not in enrichment_output:
+        raise ValueError("enrichment_output must have 'metadata' key")
 
-    clusters = enrichment_output["clusters"]
-    if not clusters:
-        # No clusters - return minimal explanation
+    # Check for new format (themes) or legacy format (clusters)
+    has_themes = "themes" in enrichment_output
+    has_leaves = "enrichment_leaves" in enrichment_output
+
+    if not has_themes and not has_leaves:
+        raise ValueError("enrichment_output must have 'themes' or 'enrichment_leaves' keys")
+
+    themes = enrichment_output.get("themes", [])
+    enrichment_leaves = enrichment_output.get("enrichment_leaves", [])
+
+    if not themes and not enrichment_leaves:
+        # No enrichment - return minimal explanation
         return _empty_markdown_explanation(enrichment_output, model)
 
     print("=" * 80)
@@ -80,7 +93,7 @@ def generate_markdown_explanation(
     print(f"  Model: {model}")
     print(f"  Temperature: {temperature}")
     print(f"  Max tokens: {max_tokens}")
-    print(f"  Output format: Markdown")
+    print(f"  Output format: Markdown with provenance tags")
 
     # Format enrichment data for LLM
     print("\n[2/3] Formatting enrichment data for LLM...")
@@ -88,9 +101,11 @@ def generate_markdown_explanation(
 
     # Modify user prompt to request markdown output
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
-    user_prompt += "\n\n**IMPORTANT**: Generate your response as a well-formatted Markdown document with clear sections, headers, and formatting. Do not return JSON."
+    user_prompt += "\n\n**IMPORTANT**: Generate your response as a well-formatted Markdown document with clear sections and provenance tags ([DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY]) on every claim. Do not return JSON."
 
-    print(f"  Clusters to explain: {len(clusters)}")
+    print(f"  Themes to explain: {len(themes)}")
+    print(f"  Enrichment leaves: {len(enrichment_leaves)}")
+    print(f"  Hub genes: {len(enrichment_output.get('hub_genes', {}))}")
     print(f"  Context size: {len(enrichment_context)} characters")
 
     # Call LLM WITHOUT schema enforcement
@@ -121,6 +136,9 @@ def generate_markdown_explanation(
         # Validate GO IDs and PMIDs to detect hallucinations
         _validate_citations(markdown_output, enrichment_output)
 
+        # Count provenance tags
+        _count_provenance_tags(markdown_output)
+
         print("\n" + "=" * 80)
         print(f"Markdown explanation generation complete!")
         print(f"  Output length: {len(markdown_output)} characters")
@@ -150,51 +168,41 @@ def _load_prompt(prompt_file: str) -> dict[str, Any]:
     if not prompt_path.exists():
         raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
 
-    return yaml.safe_load(prompt_path.read_text())
+    with open(prompt_path) as f:
+        return yaml.safe_load(f)
 
 
 def _get_api_key_for_model(model: str) -> str:
     """
-    Get appropriate API key from environment based on model.
+    Get appropriate API key for model.
 
     Args:
         model: Model identifier
 
     Returns:
-        API key from environment
+        API key string
 
     Raises:
-        ValueError: If API key not found in environment
+        ValueError: If required API key not found
     """
-    model_lower = model.lower()
-
-    if "gpt" in model_lower or "o1" in model_lower:
+    if model.startswith("gpt") or model.startswith("o1"):
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise ValueError("OPENAI_API_KEY environment variable required for OpenAI models")
+            raise ValueError("OPENAI_API_KEY not found in environment variables")
         return api_key
-
-    if "claude" in model_lower:
+    elif model.startswith("claude"):
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY environment variable required for Anthropic models")
+            raise ValueError("ANTHROPIC_API_KEY not found in environment variables")
         return api_key
-
-    if "gemini" in model_lower or "palm" in model_lower:
-        api_key = os.getenv("GOOGLE_API_KEY")
+    else:
+        # Try OpenAI first, then Anthropic
+        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            raise ValueError("GOOGLE_API_KEY environment variable required for Google models")
+            raise ValueError(
+                "No API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY environment variable."
+            )
         return api_key
-
-    # Default fallback - try common keys
-    api_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
-    if not api_key:
-        raise ValueError(
-            f"No API key found for model {model}. "
-            "Set OPENAI_API_KEY, ANTHROPIC_API_KEY, or GOOGLE_API_KEY"
-        )
-
-    return api_key
 
 
 def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
@@ -202,18 +210,21 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
     Format enrichment output as readable text for LLM.
 
     Converts structured JSON to natural text that explains:
-    - Study parameters and gene list
-    - Each cluster with root term, statistics, member terms, contributing genes
-    - Direct annotations showing evidence
+    - Study parameters
+    - Hub genes and their theme participation
+    - Hierarchical themes with anchor and specific terms
+    - Enrichment leaves (most specific terms)
 
     Args:
-        enrichment_output: Phase 1 enrichment output
+        enrichment_output: Phase 1 enrichment output (new format)
 
     Returns:
         Formatted string for LLM consumption
     """
     metadata = enrichment_output["metadata"]
-    clusters = enrichment_output["clusters"]
+    themes = enrichment_output.get("themes", [])
+    hub_genes = enrichment_output.get("hub_genes", {})
+    enrichment_leaves = enrichment_output.get("enrichment_leaves", [])
 
     # Build context string
     lines = []
@@ -225,90 +236,85 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
     lines.append(f"- Genes with annotations: {metadata['genes_with_annotations']}")
     lines.append(f"- Total enriched terms: {metadata['total_enriched_terms']}")
     lines.append(f"- FDR threshold: {metadata['fdr_threshold']}")
-    lines.append(f"- Clusters: {metadata['clusters_count']}")
+    lines.append(f"- Enrichment leaves: {metadata.get('enrichment_leaves_count', len(enrichment_leaves))}")
+    lines.append(f"- Themes: {metadata.get('themes_count', len(themes))}")
+    lines.append(f"- Hub genes: {metadata.get('hub_genes_count', len(hub_genes))}")
     lines.append("")
 
-    # Clusters
-    lines.append("# Enrichment Clusters")
-    lines.append("")
-
-    for i, cluster in enumerate(clusters):
-        root = cluster["root_term"]
-        members = cluster["member_terms"]
-        genes = cluster["contributing_genes"]
-
-        lines.append(f"## Cluster {i}: {root['name']}")
-        lines.append(f"- GO ID: {root['go_id']}")
-        lines.append(f"- Namespace: {root['namespace']}")
-        lines.append(f"- FDR: {root['fdr']:.2e}")
-        lines.append(f"- Fold enrichment: {root['fold_enrichment']:.2f}x")
-        lines.append(
-            f"- Study genes: {root['study_count']} / {metadata['genes_with_annotations']} "
-            f"({100 * root['study_count'] / metadata['genes_with_annotations']:.1f}%)"
-        )
-        lines.append(f"- Gene symbols: {', '.join(root['study_genes'])}")
+    # Hub genes (important for understanding cross-theme patterns)
+    if hub_genes:
+        lines.append("# Hub Genes (appearing in 3+ themes)")
+        lines.append("")
+        lines.append("These genes appear across multiple functional themes, suggesting they are biological coordinators:")
         lines.append("")
 
-        # Member terms
-        if members:
-            lines.append(f"### Member Terms ({len(members)} descendant terms)")
-
-            # Add statistical summary for member terms
-            if members:
-                fdr_values = [m['fdr'] for m in members]
-                fold_values = [m['fold_enrichment'] for m in members]
-                study_counts = [m['study_count'] for m in members]
-
-                lines.append(f"**Statistical Summary:**")
-                lines.append(f"  - FDR range: {min(fdr_values):.2e} to {max(fdr_values):.2e}")
-                lines.append(f"  - Fold enrichment range: {min(fold_values):.2f}x to {max(fold_values):.2f}x")
-                lines.append(f"  - Study count range: {min(study_counts)} to {max(study_counts)} genes")
-                lines.append("")
-
-            # Show top 5 member terms
-            lines.append("**Top member terms:**")
-            for member in members[:5]:  # Show top 5 members
-                lines.append(
-                    f"  - {member['name']} ({member['go_id']}): "
-                    f"FDR={member['fdr']:.2e}, "
-                    f"Fold={member['fold_enrichment']:.2f}x"
-                )
-            if len(members) > 5:
-                lines.append(f"  - ... and {len(members) - 5} more")
+        for gene, data in list(hub_genes.items())[:15]:  # Top 15 hub genes
+            theme_count = data.get("theme_count", 0)
+            theme_names = data.get("themes", [])[:5]  # Top 5 themes
+            lines.append(f"## {gene} ({theme_count} themes)")
+            lines.append(f"- Themes: {', '.join(theme_names)}")
+            if len(data.get("themes", [])) > 5:
+                lines.append(f"- ... and {len(data['themes']) - 5} more")
             lines.append("")
 
-        # Contributing genes with annotations
-        lines.append(f"### Contributing Genes ({len(genes)} genes)")
-        for gene_info in genes[:5]:  # Show top 5 genes
-            gene_symbol = gene_info["gene_symbol"]
-            annotations = gene_info["direct_annotations"]
-
-            lines.append(f"  - {gene_symbol}:")
-            for annot in annotations[:3]:  # Show top 3 annotations per gene
-                # Format evidence codes and references
-                evidence_items = []
-                for ev in annot.get("evidence", []):
-                    code = ev.get("code", "")
-                    refs = ev.get("references", [])
-                    # Filter for PMIDs only
-                    pmids = [ref for ref in refs if ref.startswith("PMID:")]
-                    if pmids:
-                        evidence_items.append(f"{code} ({', '.join(pmids[:2])})")
-                    else:
-                        evidence_items.append(code)
-
-                evidence_str = ", ".join(evidence_items) if evidence_items else "unknown"
-                lines.append(
-                    f"    - {annot['go_name']} ({annot['go_id']}), " f"evidence: {evidence_str}"
-                )
-            if len(annotations) > 3:
-                lines.append(f"    - ... and {len(annotations) - 3} more annotations")
-
-        if len(genes) > 5:
-            lines.append(f"  - ... and {len(genes) - 5} more genes")
-
-        lines.append("")
         lines.append("---")
+        lines.append("")
+
+    # Hierarchical themes
+    if themes:
+        lines.append("# Hierarchical Themes")
+        lines.append("")
+        lines.append("Each theme groups related GO terms under an anchor (intermediate-depth term):")
+        lines.append("")
+
+        for i, theme in enumerate(themes[:30]):  # Top 30 themes
+            anchor = theme.get("anchor_term", {})
+            specific_terms = theme.get("specific_terms", [])
+            confidence = theme.get("anchor_confidence", "")
+            all_genes = theme.get("all_genes", [])
+
+            lines.append(f"## Theme {i+1}: {anchor.get('name', 'Unknown')}")
+            lines.append(f"- GO ID: {anchor.get('go_id', '')}")
+            lines.append(f"- Namespace: {anchor.get('namespace', '')}")
+            lines.append(f"- FDR: {anchor.get('fdr', 0):.2e}")
+            lines.append(f"- Confidence: {confidence}")
+            lines.append(f"- Genes ({len(anchor.get('genes', []))}): {', '.join(sorted(anchor.get('genes', []))[:10])}")
+            if len(anchor.get('genes', [])) > 10:
+                lines.append(f"  ... and {len(anchor.get('genes', [])) - 10} more")
+            lines.append("")
+
+            # Specific terms (nested under anchor)
+            if specific_terms:
+                lines.append(f"### Specific Terms ({len(specific_terms)} nested)")
+                for specific in specific_terms[:5]:  # Top 5 specific terms
+                    lines.append(
+                        f"  - {specific.get('name', '')} ({specific.get('go_id', '')}): "
+                        f"FDR={specific.get('fdr', 0):.2e}, "
+                        f"{len(specific.get('genes', []))} genes"
+                    )
+                if len(specific_terms) > 5:
+                    lines.append(f"  - ... and {len(specific_terms) - 5} more")
+                lines.append("")
+
+            lines.append("---")
+            lines.append("")
+
+    # Enrichment leaves (most specific terms)
+    if enrichment_leaves:
+        lines.append("# Enrichment Leaves (Most Specific Terms)")
+        lines.append("")
+        lines.append("These are the most specific enriched terms (no enriched descendants):")
+        lines.append("")
+
+        for i, leaf in enumerate(enrichment_leaves[:20]):  # Top 20 leaves
+            lines.append(
+                f"- {leaf.get('name', '')} ({leaf.get('go_id', '')}): "
+                f"FDR={leaf.get('fdr', 0):.2e}, "
+                f"{len(leaf.get('genes', []))} genes"
+            )
+
+        if len(enrichment_leaves) > 20:
+            lines.append(f"- ... and {len(enrichment_leaves) - 20} more")
         lines.append("")
 
     return "\n".join(lines)
@@ -316,10 +322,10 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
 
 def _empty_markdown_explanation(enrichment_output: dict[str, Any], model: str) -> str:
     """
-    Build empty markdown explanation when no clusters to explain.
+    Build empty markdown explanation when no enrichment to explain.
 
     Args:
-        enrichment_output: Phase 1 enrichment output (with no clusters)
+        enrichment_output: Phase 1 enrichment output (with no themes)
         model: Model name for metadata
 
     Returns:
@@ -423,9 +429,9 @@ def _add_pmid_hyperlinks(markdown: str) -> str:
 
 def _validate_citations(markdown: str, enrichment_output: dict[str, Any]) -> None:
     """
-    Validate GO IDs and PMIDs in LLM output to detect hallucinations.
+    Validate GO IDs in LLM output to detect hallucinations.
 
-    Cross-checks all citations mentioned in the markdown against the
+    Cross-checks all GO IDs mentioned in the markdown against the
     enrichment input data. Prints warnings for any hallucinated citations.
 
     Args:
@@ -436,38 +442,23 @@ def _validate_citations(markdown: str, enrichment_output: dict[str, Any]) -> Non
     go_id_pattern = r"GO:\d{7}"
     output_go_ids = set(re.findall(go_id_pattern, markdown))
 
-    # Extract all PMIDs from markdown output
-    pmid_pattern = r"PMID:(\d+)"
-    output_pmids = set(re.findall(pmid_pattern, markdown))
-
     # Build set of valid GO IDs from enrichment input
     valid_go_ids = set()
-    valid_pmids = set()
 
-    for cluster in enrichment_output.get("clusters", []):
-        # Root term
-        root = cluster.get("root_term", {})
-        if root.get("go_id"):
-            valid_go_ids.add(root["go_id"])
+    # From themes
+    for theme in enrichment_output.get("themes", []):
+        anchor = theme.get("anchor_term", {})
+        if anchor.get("go_id"):
+            valid_go_ids.add(anchor["go_id"])
 
-        # Member terms
-        for member in cluster.get("member_terms", []):
-            if member.get("go_id"):
-                valid_go_ids.add(member["go_id"])
+        for specific in theme.get("specific_terms", []):
+            if specific.get("go_id"):
+                valid_go_ids.add(specific["go_id"])
 
-        # Contributing genes annotations
-        for gene_info in cluster.get("contributing_genes", []):
-            for annot in gene_info.get("direct_annotations", []):
-                if annot.get("go_id"):
-                    valid_go_ids.add(annot["go_id"])
-
-                # Extract PMIDs from references
-                for evidence in annot.get("evidence", []):
-                    for ref in evidence.get("references", []):
-                        # Reference format: "PMID:12345" or "GO_REF:..."
-                        if ref.startswith("PMID:"):
-                            pmid_number = ref.replace("PMID:", "")
-                            valid_pmids.add(pmid_number)
+    # From enrichment leaves
+    for leaf in enrichment_output.get("enrichment_leaves", []):
+        if leaf.get("go_id"):
+            valid_go_ids.add(leaf["go_id"])
 
     # Validate GO IDs
     if output_go_ids:
@@ -489,22 +480,28 @@ def _validate_citations(markdown: str, enrichment_output: dict[str, Any]) -> Non
     else:
         print("  ℹ GO ID validation: No GO IDs found in LLM output")
 
-    # Validate PMIDs
-    if output_pmids:
-        hallucinated_pmids = output_pmids - valid_pmids
-        if hallucinated_pmids:
-            print("\n" + "⚠" * 40)
-            print("WARNING: Potential PMID Hallucinations Detected")
-            print("⚠" * 40)
-            print(f"\nThe LLM output contains {len(hallucinated_pmids)} PMID(s) that were NOT in the input data:")
-            for pmid in sorted(hallucinated_pmids):
-                print(f"  - PMID:{pmid}")
-            print("\nThese may be:")
-            print("  1. Hallucinated by the LLM (incorrect)")
-            print("  2. Valid PMIDs from the LLM's training data (plausible but unverified)")
-            print("\nPlease verify these PMIDs manually if they support key claims.")
-            print("⚠" * 40 + "\n")
-        else:
-            print("  ✓ PMID validation: All PMIDs in output match input data")
+
+def _count_provenance_tags(markdown: str) -> None:
+    """
+    Count and report provenance tags in LLM output.
+
+    Args:
+        markdown: LLM-generated markdown
+    """
+    tags = {
+        "[DATA]": len(re.findall(r"\[DATA\]", markdown)),
+        "[INFERENCE]": len(re.findall(r"\[INFERENCE\]", markdown)),
+        "[EXTERNAL]": len(re.findall(r"\[EXTERNAL\]", markdown)),
+        "[GO-HIERARCHY]": len(re.findall(r"\[GO-HIERARCHY\]", markdown)),
+    }
+
+    total = sum(tags.values())
+
+    if total > 0:
+        print(f"  ✓ Provenance tags found: {total} total")
+        for tag, count in tags.items():
+            if count > 0:
+                print(f"    - {tag}: {count}")
     else:
-        print("  ℹ PMID validation: No PMIDs found in LLM output")
+        print("  ⚠ No provenance tags found in LLM output")
+        print("    The LLM should label claims with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY]")

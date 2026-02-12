@@ -1,0 +1,252 @@
+"""
+Unit Tests for GO Enrichment Service
+
+Tests the service layer functions with mocked dependencies.
+"""
+
+import pytest
+
+from goa_semantic_tools.services.go_enrichment_service import (
+    _build_output,
+    _empty_result,
+    _namespace_abbrev_to_full,
+    run_go_enrichment,
+)
+
+
+@pytest.mark.unit
+class TestNamespaceConversion:
+    """Tests for _namespace_abbrev_to_full function."""
+
+    def test_biological_process(self):
+        """BP should convert to biological_process."""
+        assert _namespace_abbrev_to_full("BP") == "biological_process"
+
+    def test_cellular_component(self):
+        """CC should convert to cellular_component."""
+        assert _namespace_abbrev_to_full("CC") == "cellular_component"
+
+    def test_molecular_function(self):
+        """MF should convert to molecular_function."""
+        assert _namespace_abbrev_to_full("MF") == "molecular_function"
+
+    def test_unknown_raises(self):
+        """Unknown abbreviation should raise ValueError."""
+        with pytest.raises(ValueError, match="Unknown namespace abbreviation"):
+            _namespace_abbrev_to_full("XX")
+
+
+@pytest.mark.unit
+class TestEmptyResult:
+    """Tests for _empty_result function."""
+
+    def test_returns_correct_structure(self):
+        """Should return dict with all required keys."""
+        result = _empty_result(
+            gene_symbols=["TP53", "BRCA1"],
+            species="human",
+            fdr_threshold=0.05,
+            depth_range=(4, 7),
+        )
+
+        assert "enrichment_leaves" in result
+        assert "themes" in result
+        assert "hub_genes" in result
+        assert "metadata" in result
+
+    def test_lists_are_empty(self):
+        """All list fields should be empty."""
+        result = _empty_result(
+            gene_symbols=["TP53"],
+            species="human",
+            fdr_threshold=0.05,
+            depth_range=(4, 7),
+        )
+
+        assert result["enrichment_leaves"] == []
+        assert result["themes"] == []
+        assert result["hub_genes"] == {}
+
+    def test_metadata_gene_count(self):
+        """Metadata should reflect input gene count."""
+        result = _empty_result(
+            gene_symbols=["TP53", "BRCA1", "BRCA2"],
+            species="human",
+            fdr_threshold=0.05,
+            depth_range=(4, 7),
+        )
+
+        assert result["metadata"]["input_genes_count"] == 3
+        assert result["metadata"]["genes_with_annotations"] == 0
+
+    def test_metadata_parameters(self):
+        """Metadata should include analysis parameters."""
+        result = _empty_result(
+            gene_symbols=["TP53"],
+            species="mouse",
+            fdr_threshold=0.01,
+            depth_range=(3, 8),
+        )
+
+        assert result["metadata"]["species"] == "mouse"
+        assert result["metadata"]["fdr_threshold"] == 0.01
+        assert result["metadata"]["depth_range"] == [3, 8]
+
+    def test_metadata_has_timestamp(self):
+        """Metadata should include timestamp."""
+        result = _empty_result(
+            gene_symbols=["TP53"],
+            species="human",
+            fdr_threshold=0.05,
+            depth_range=(4, 7),
+        )
+
+        assert "timestamp" in result["metadata"]
+        assert len(result["metadata"]["timestamp"]) > 10  # ISO format
+
+
+@pytest.mark.unit
+class TestBuildOutput:
+    """Tests for _build_output function."""
+
+    def test_returns_correct_structure(self):
+        """Should return dict with all required keys."""
+        result = _build_output(
+            enrichment_leaves=[],
+            themes=[],
+            hub_genes={},
+            input_genes=["TP53"],
+            study_set={"TP53"},
+            total_enriched=5,
+            fdr_threshold=0.05,
+            species="human",
+            depth_range=(4, 7),
+        )
+
+        assert "enrichment_leaves" in result
+        assert "themes" in result
+        assert "hub_genes" in result
+        assert "metadata" in result
+
+    def test_passes_through_data(self):
+        """Should pass through enrichment_leaves, themes, hub_genes."""
+        leaves = [{"go_id": "GO:0006281", "name": "DNA repair"}]
+        themes = [{"anchor_term": {"go_id": "GO:0006915"}}]
+        hub = {"TP53": {"theme_count": 3}}
+
+        result = _build_output(
+            enrichment_leaves=leaves,
+            themes=themes,
+            hub_genes=hub,
+            input_genes=["TP53"],
+            study_set={"TP53"},
+            total_enriched=5,
+            fdr_threshold=0.05,
+            species="human",
+            depth_range=(4, 7),
+        )
+
+        assert result["enrichment_leaves"] == leaves
+        assert result["themes"] == themes
+        assert result["hub_genes"] == hub
+
+    def test_metadata_counts(self):
+        """Metadata should have correct counts."""
+        leaves = [{"go_id": "GO:0001"}, {"go_id": "GO:0002"}]
+        themes = [
+            {"n_specific_terms": 3},
+            {"n_specific_terms": 0},
+            {"n_specific_terms": 2},
+        ]
+        hub = {"TP53": {}, "BRCA1": {}}
+
+        result = _build_output(
+            enrichment_leaves=leaves,
+            themes=themes,
+            hub_genes=hub,
+            input_genes=["TP53", "BRCA1", "BRCA2"],
+            study_set={"TP53", "BRCA1"},
+            total_enriched=10,
+            fdr_threshold=0.05,
+            species="human",
+            depth_range=(4, 7),
+        )
+
+        assert result["metadata"]["input_genes_count"] == 3
+        assert result["metadata"]["genes_with_annotations"] == 2
+        assert result["metadata"]["enrichment_leaves_count"] == 2
+        assert result["metadata"]["themes_count"] == 3
+        assert result["metadata"]["themes_with_children"] == 2  # 2 themes have n_specific_terms > 0
+        assert result["metadata"]["hub_genes_count"] == 2
+        assert result["metadata"]["total_enriched_terms"] == 10
+
+
+@pytest.mark.unit
+class TestRunGoEnrichmentValidation:
+    """Tests for run_go_enrichment input validation (without full execution)."""
+
+    def test_empty_genes_raises(self):
+        """Empty gene list should raise before any processing."""
+        with pytest.raises(ValueError, match="gene_symbols cannot be empty"):
+            run_go_enrichment(gene_symbols=[])
+
+    def test_invalid_species_raises(self):
+        """Invalid species should raise before any processing."""
+        with pytest.raises(ValueError, match="Unsupported species"):
+            run_go_enrichment(gene_symbols=["TP53"], species="fish")
+
+    def test_human_species_accepted(self):
+        """Human should be a valid species (validation passes, may fail later)."""
+        # This will fail at data loading, but validation should pass
+        # We're just testing that 'human' doesn't raise at validation
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], species="human")
+        except ValueError as e:
+            # Should not be a species validation error
+            assert "species" not in str(e).lower()
+        except Exception:
+            # Other errors are fine - we're just testing validation
+            pass
+
+    def test_mouse_species_accepted(self):
+        """Mouse should be a valid species."""
+        try:
+            run_go_enrichment(gene_symbols=["Tp53"], species="mouse")
+        except ValueError as e:
+            assert "species" not in str(e).lower()
+        except Exception:
+            pass
+
+    def test_fdr_zero_raises(self):
+        """FDR of 0 should raise ValueError (must be > 0)."""
+        with pytest.raises(ValueError, match="fdr_threshold must be between 0 and 1"):
+            run_go_enrichment(gene_symbols=["TP53"], fdr_threshold=0.0)
+
+    def test_fdr_negative_raises(self):
+        """Negative FDR should raise ValueError."""
+        with pytest.raises(ValueError, match="fdr_threshold must be between 0 and 1"):
+            run_go_enrichment(gene_symbols=["TP53"], fdr_threshold=-0.1)
+
+    def test_fdr_above_one_raises(self):
+        """FDR above 1 should raise ValueError."""
+        with pytest.raises(ValueError, match="fdr_threshold must be between 0 and 1"):
+            run_go_enrichment(gene_symbols=["TP53"], fdr_threshold=1.5)
+
+    def test_fdr_one_accepted(self):
+        """FDR of 1 should be accepted."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], fdr_threshold=1.0)
+        except ValueError as e:
+            assert "fdr" not in str(e).lower()
+        except Exception:
+            pass
+
+    def test_single_gene_accepted(self):
+        """Single gene should pass validation."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"])
+        except ValueError as e:
+            # Should not be a gene count validation error
+            assert "empty" not in str(e).lower()
+        except Exception:
+            pass

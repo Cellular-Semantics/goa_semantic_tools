@@ -12,6 +12,15 @@ from typing import Optional
 import yaml
 
 from .services import generate_markdown_explanation, run_go_enrichment
+from .services.reference_retrieval_service import (
+    AtomicAssertion,
+    extract_claims,
+    extract_genes_from_text,
+    find_references_for_assertion,
+    format_references_needing_artl_mcp,
+    inject_references,
+)
+from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
 
 def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list[str]:
@@ -83,7 +92,9 @@ def _print_dry_run(genes: list[str], args: any) -> None:
     explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
 
     print(f"\nSpecies: {args.species}")
-    print(f"Top-N roots per namespace: {args.top_n}")
+    print(f"Depth range: {args.depth_min}-{args.depth_max}")
+    print(f"Min children: {args.min_children}")
+    print(f"Max genes: {args.max_genes}")
     print(f"FDR threshold: {args.fdr}")
     print(f"\nOutput files:")
     print(f"  Enrichment: {enrichment_path}")
@@ -102,8 +113,12 @@ def _print_dry_run(genes: list[str], args: any) -> None:
     print("   - Fisher's exact test with FDR correction")
     print("   - Propagate counts up GO hierarchy")
     print(f"   - Filter by FDR < {args.fdr}")
-    print(f"5. Cluster enriched terms using top-{args.top_n} roots per namespace")
-    print("6. Build hierarchical output with contributing genes")
+    print("5. Compute enrichment leaves (most specific terms)")
+    print(f"   - Filter terms with >{args.max_genes} genes")
+    print("6. Build hierarchical themes using depth-anchors algorithm")
+    print(f"   - Anchor candidates: GO depth {args.depth_min}-{args.depth_max}")
+    print(f"   - Require ≥{args.min_children} enriched descendants")
+    print("7. Identify hub genes (appearing in 3+ themes)")
 
     print(f"\nOutput: {enrichment_path}")
 
@@ -145,9 +160,215 @@ def _print_dry_run(genes: list[str], args: any) -> None:
 
         print(f"\nOutput: {explanation_path}")
 
+    # Phase 3 plan (if references requested)
+    if args.add_references:
+        print("\n" + "=" * 80)
+        print("## PHASE 3: REFERENCE RETRIEVAL")
+        print("=" * 80)
+        print("\nSteps that would be executed:")
+        print("1. Load GAF annotations with PMIDs")
+        print("2. Build reference index (gene -> GO -> PMIDs)")
+        print("3. Extract [INFERENCE] and [EXTERNAL] claims from explanation")
+        print("4. For each claim, look up supporting PMIDs from GO annotations")
+        print("5. Inject references into explanation markdown")
+        print("\nReference lookup strategy by complexity:")
+        print("  - Simple (1 gene, 1 process): Direct GAF lookup")
+        print("  - Multi-gene: Find PMIDs annotating multiple genes")
+        print("  - Multi-process: Find PMIDs annotating gene to multiple processes")
+        print("  - Complex: Flag for manual review (would need artl-mcp)")
+
     print("\n" + "=" * 80)
     print("DRY RUN COMPLETE - No analysis was executed")
     print("=" * 80)
+
+
+def _add_references_to_explanation(
+    explanation_markdown: str,
+    enrichment_output: dict,
+    species: str = "human",
+    output_path: Path | None = None,
+) -> str:
+    """
+    Add literature references to explanation markdown.
+
+    Uses a two-tier approach:
+    1. Programmatic lookup via GO annotations (GAF)
+    2. Export unresolved assertions for artl-mcp processing
+
+    Args:
+        explanation_markdown: Generated explanation markdown
+        enrichment_output: Enrichment results (for extracting GO terms and genes)
+        species: Species for GAF lookup
+        output_path: Optional base path for exporting artl-mcp queries
+
+    Returns:
+        Explanation markdown with appended references section
+    """
+    from .utils.data_downloader import ensure_gaf_data, ensure_go_data
+    from .utils.go_data_loader import load_go_data
+
+    print("\n[1/5] Loading reference data...")
+
+    # Load GO and GAF data
+    go_obo_path = ensure_go_data()
+    gaf_path = ensure_gaf_data(species=species)
+    godag = load_go_data(go_obo_path)
+
+    # Build mappings from enrichment data
+    all_genes: set[str] = set()
+    all_go_ids: set[str] = set()
+    go_name_to_id: dict[str, str] = {}  # Map GO term names to IDs
+    go_id_to_genes: dict[str, set[str]] = {}  # Map GO ID to genes
+
+    # From enrichment leaves
+    for leaf in enrichment_output.get("enrichment_leaves", []):
+        genes = leaf.get("genes", [])
+        go_id = leaf.get("go_id", "")
+        go_name = leaf.get("name", "")
+        all_genes.update(genes)
+        if go_id:
+            all_go_ids.add(go_id)
+            go_name_to_id[go_name.lower()] = go_id
+            go_id_to_genes[go_id] = set(genes)
+
+    # From themes
+    for theme in enrichment_output.get("themes", []):
+        anchor = theme.get("anchor_term", {})
+        genes = anchor.get("genes", [])
+        go_id = anchor.get("go_id", "")
+        go_name = anchor.get("name", "")
+        all_genes.update(genes)
+        if go_id:
+            all_go_ids.add(go_id)
+            go_name_to_id[go_name.lower()] = go_id
+            go_id_to_genes[go_id] = set(genes)
+
+        for specific in theme.get("specific_terms", []):
+            genes = specific.get("genes", [])
+            go_id = specific.get("go_id", "")
+            go_name = specific.get("name", "")
+            all_genes.update(genes)
+            if go_id:
+                all_go_ids.add(go_id)
+                go_name_to_id[go_name.lower()] = go_id
+                go_id_to_genes[go_id] = set(genes)
+
+    print(f"  Found {len(all_genes)} genes, {len(all_go_ids)} GO terms")
+
+    print("\n[2/5] Building reference index from GAF...")
+    ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
+    print(f"  Indexed {len(ref_index.get('pmid_gene_gos', {}))} unique PMIDs")
+
+    print("\n[3/5] Computing GO term descendants...")
+    descendants_closure = get_descendants_closure(all_go_ids, godag)
+
+    print("\n[4/5] Extracting claims and mapping to GO terms...")
+    claims = extract_claims(explanation_markdown)
+
+    inference_claims = claims.get("INFERENCE", [])
+    external_claims = claims.get("EXTERNAL", [])
+
+    print(f"  Found {len(inference_claims)} [INFERENCE] claims")
+    print(f"  Found {len(external_claims)} [EXTERNAL] claims")
+
+    # Build assertions with smart GO term mapping
+    assertion_refs: list[tuple[AtomicAssertion, list]] = []
+    needs_artl_mcp: list[AtomicAssertion] = []
+
+    def _map_claim_to_go_ids(claim_text: str) -> list[str]:
+        """Map claim text to relevant GO term IDs based on term name matches."""
+        claim_lower = claim_text.lower()
+        matched_ids = []
+
+        # Check if any GO term names appear in the claim
+        for name, go_id in go_name_to_id.items():
+            # Match if GO term name (or significant portion) appears in claim
+            if len(name) > 10 and name in claim_lower:
+                matched_ids.append(go_id)
+            elif any(word in claim_lower for word in name.split() if len(word) > 5):
+                matched_ids.append(go_id)
+
+        return matched_ids[:3] if matched_ids else []  # Limit to 3
+
+    for claim_type, claim_list in [("INFERENCE", inference_claims), ("EXTERNAL", external_claims)]:
+        for claim_text in claim_list:
+            # Extract genes from claim text
+            genes = extract_genes_from_text(claim_text, known_genes=all_genes)
+
+            if not genes:
+                continue
+
+            # Map claim to specific GO terms (not all GO terms!)
+            go_ids = _map_claim_to_go_ids(claim_text)
+
+            # Determine complexity based on actual matches, not all terms
+            is_multi_gene = len(genes) > 1
+            is_multi_process = len(go_ids) > 1
+
+            assertion = AtomicAssertion(
+                claim_type=claim_type,
+                original_text=claim_text,
+                genes=genes[:5],  # Limit to 5 genes
+                go_term_ids=go_ids if go_ids else list(all_go_ids)[:1],  # Fallback to first GO term
+                is_multi_gene=is_multi_gene,
+                is_multi_process=is_multi_process,
+            )
+
+            refs = find_references_for_assertion(
+                assertion, ref_index, descendants_closure, max_refs=3
+            )
+
+            if refs:
+                assertion_refs.append((assertion, refs))
+            else:
+                needs_artl_mcp.append(assertion)
+
+    print(f"\n  References found for {len(assertion_refs)} assertions")
+    print(f"  Assertions needing artl-mcp: {len(needs_artl_mcp)}")
+
+    print("\n[5/5] Injecting references and exporting unresolved...")
+
+    # Inject references into markdown
+    if assertion_refs:
+        explanation_markdown = inject_references(explanation_markdown, assertion_refs)
+        print(f"  ✓ Injected {len(assertion_refs)} reference blocks")
+
+    # Export unresolved assertions for artl-mcp
+    if needs_artl_mcp and output_path:
+        artl_queries = format_references_needing_artl_mcp(needs_artl_mcp)
+        artl_path = output_path.parent / f"{output_path.name}_artl_queries.json"
+        with open(artl_path, "w") as f:
+            json.dump(artl_queries, f, indent=2)
+        print(f"  ✓ Exported {len(needs_artl_mcp)} queries to: {artl_path.name}")
+
+        # Add note to markdown about unresolved assertions
+        if needs_artl_mcp:
+            lines = [
+                explanation_markdown,
+                "",
+                "---",
+                "",
+                "## Assertions Needing Literature Search",
+                "",
+                f"The following {len(needs_artl_mcp)} assertions could not be resolved via GO annotations.",
+                "Use `artl-mcp` tools to find supporting references:",
+                "",
+            ]
+            for i, assertion in enumerate(needs_artl_mcp[:10], 1):
+                genes_str = ", ".join(assertion.genes[:3])
+                lines.append(f"{i}. **[{assertion.claim_type}]** ({genes_str})")
+                preview = assertion.original_text[:80]
+                if len(assertion.original_text) > 80:
+                    preview += "..."
+                lines.append(f"   {preview}")
+                lines.append("")
+
+            if len(needs_artl_mcp) > 10:
+                lines.append(f"... and {len(needs_artl_mcp) - 10} more (see `_artl_queries.json`)")
+
+            explanation_markdown = "\n".join(lines)
+
+    return explanation_markdown
 
 
 def main() -> int:
@@ -164,7 +385,10 @@ Examples:
   %(prog)s --genes-file genes.txt --output results/
 
   # With custom parameters
-  %(prog)s --genes TP53,BRCA1 --species mouse --top-n 10 --fdr 0.01 --output results/
+  %(prog)s --genes TP53,BRCA1 --species mouse --fdr 0.01 --output results/
+
+  # With explanation
+  %(prog)s --genes TP53,BRCA1,BRCA2 --output results/ --explain
         """,
     )
 
@@ -197,16 +421,36 @@ Examples:
         help="Species for gene annotations (default: human)",
     )
     parser.add_argument(
-        "--top-n",
-        type=int,
-        default=5,
-        help="Number of top enriched terms to use as cluster roots per namespace (default: 5)",
-    )
-    parser.add_argument(
         "--fdr",
         type=float,
         default=0.05,
         help="FDR significance threshold (default: 0.05)",
+    )
+
+    # Depth-anchor options
+    parser.add_argument(
+        "--depth-min",
+        type=int,
+        default=4,
+        help="Min GO depth for anchor terms (default: 4)",
+    )
+    parser.add_argument(
+        "--depth-max",
+        type=int,
+        default=7,
+        help="Max GO depth for anchor terms (default: 7)",
+    )
+    parser.add_argument(
+        "--min-children",
+        type=int,
+        default=2,
+        help="Min enriched children to qualify as anchor (default: 2)",
+    )
+    parser.add_argument(
+        "--max-genes",
+        type=int,
+        default=30,
+        help="Filter terms with > max-genes (default: 30)",
     )
 
     # Explanation options
@@ -221,6 +465,14 @@ Examples:
         type=str,
         default="gpt-4o",
         help="LLM model for explanations (default: gpt-4o). Examples: gpt-4o, gpt-4o-mini, claude-sonnet-4-20250514",
+    )
+
+    # Reference options
+    parser.add_argument(
+        "--add-references",
+        action="store_true",
+        default=False,
+        help="Add literature references to explanation. Uses GO annotations for programmatic lookup.",
     )
 
     # Utility options
@@ -241,9 +493,6 @@ Examples:
         if args.fdr <= 0 or args.fdr > 1:
             raise ValueError("FDR threshold must be between 0 and 1")
 
-        if args.top_n < 1:
-            raise ValueError("top-n must be >= 1")
-
         # Handle dry-run mode
         if args.dry_run:
             _print_dry_run(genes, args)
@@ -263,7 +512,9 @@ Examples:
 
         print(f"\n✓ Parameters:")
         print(f"  Species: {args.species}")
-        print(f"  Top-N roots: {args.top_n}")
+        print(f"  Depth range: {args.depth_min}-{args.depth_max}")
+        print(f"  Min children: {args.min_children}")
+        print(f"  Max genes: {args.max_genes}")
         print(f"  FDR threshold: {args.fdr}")
         if args.explain:
             print(f"  Generate explanations: Yes")
@@ -294,8 +545,10 @@ Examples:
         result = run_go_enrichment(
             gene_symbols=genes,
             species=args.species,
-            top_n_roots=args.top_n,
             fdr_threshold=args.fdr,
+            depth_range=(args.depth_min, args.depth_max),
+            min_children=args.min_children,
+            max_genes=args.max_genes,
         )
         print("=" * 80)
 
@@ -311,6 +564,25 @@ Examples:
                 explanation_markdown = generate_markdown_explanation(
                     enrichment_output=result, model=args.model, temperature=0.1, max_tokens=16000
                 )
+
+                # Phase 3: Add references if requested
+                if args.add_references:
+                    print("\n" + "=" * 80)
+                    print("Reference Retrieval - Phase 3")
+                    print("=" * 80)
+
+                    try:
+                        explanation_markdown = _add_references_to_explanation(
+                            explanation_markdown=explanation_markdown,
+                            enrichment_output=result,
+                            species=args.species,
+                            output_path=base_output,
+                        )
+                    except Exception as e:
+                        print(f"\n⚠ Warning: Reference retrieval failed: {e}")
+                        print("  Continuing without references...")
+                        import traceback
+                        traceback.print_exc()
 
                 # Save markdown output
                 with open(explanation_path, "w") as f:
@@ -329,7 +601,6 @@ Examples:
 
         # Print summary
         metadata = result["metadata"]
-        clusters = result["clusters"]
 
         print("\n" + "=" * 80)
         print("Summary")
@@ -337,20 +608,39 @@ Examples:
         print(f"  Input genes: {metadata['input_genes_count']}")
         print(f"  Found in annotations: {metadata['genes_with_annotations']}")
         print(f"  Total enriched terms: {metadata['total_enriched_terms']}")
-        print(f"  Clusters created: {metadata['clusters_count']}")
 
-        if clusters:
-            print(f"\nTop 3 Clusters:")
-            for i, cluster in enumerate(clusters[:3], 1):
-                root = cluster["root_term"]
-                print(f"\n  {i}. {root['name']}")
-                print(f"     Namespace: {root['namespace']}")
-                print(f"     FDR: {root['fdr']:.2e}")
-                print(f"     Fold enrichment: {root['fold_enrichment']:.2f}x")
-                print(
-                    f"     Study genes: {root['study_count']} / {metadata['input_genes_count']}"
-                )
-                print(f"     Member terms: {len(cluster['member_terms'])}")
+        enrichment_leaves = result.get("enrichment_leaves", [])
+        themes = result.get("themes", [])
+        hub_genes = result.get("hub_genes", {})
+
+        print(f"  Enrichment leaves: {len(enrichment_leaves)}")
+        print(f"  Themes created: {metadata.get('themes_count', len(themes))}")
+        print(f"  Hub genes: {len(hub_genes)}")
+
+        if enrichment_leaves:
+            print(f"\nTop 3 Enrichment Leaves:")
+            for i, leaf in enumerate(enrichment_leaves[:3], 1):
+                print(f"\n  {i}. {leaf['name']}")
+                print(f"     GO ID: {leaf['go_id']} (depth {leaf['depth']})")
+                print(f"     FDR: {leaf['fdr']:.2e}")
+                print(f"     Genes: {len(leaf['genes'])}")
+
+        if themes:
+            print(f"\nTop 3 Themes:")
+            for i, theme in enumerate(themes[:3], 1):
+                anchor = theme["anchor_term"]
+                n_specific = theme.get("n_specific_terms", 0)
+                print(f"\n  {i}. [{theme['anchor_confidence']}] {anchor['name']}")
+                print(f"     GO ID: {anchor['go_id']} (depth {anchor['depth']})")
+                print(f"     FDR: {anchor['fdr']:.2e}")
+                print(f"     Genes: {len(anchor['genes'])}")
+                if n_specific > 0:
+                    print(f"     Specific terms: {n_specific}")
+
+        if hub_genes:
+            print(f"\nTop Hub Genes:")
+            for gene, data in list(hub_genes.items())[:5]:
+                print(f"  - {gene}: {data['theme_count']} themes")
 
         print("\n" + "=" * 80)
         print(f"✓ Analysis complete!")

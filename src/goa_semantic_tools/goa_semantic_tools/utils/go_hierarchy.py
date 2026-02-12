@@ -1,12 +1,61 @@
 """
 GO Hierarchy Utility
 
-Implements top-N roots hierarchical clustering algorithm for GO enrichment results.
+Implements depth-based anchor hierarchical clustering algorithm for GO enrichment results.
 """
 from collections import defaultdict
+from dataclasses import dataclass, field
 from typing import Any
 
 from goatools.obo_parser import GODag
+
+
+# =============================================================================
+# Data Classes for Depth-Anchor Algorithm
+# =============================================================================
+
+
+@dataclass
+class EnrichedTerm:
+    """Represents an enriched GO term with statistics and depth information."""
+
+    go_id: str
+    name: str
+    namespace: str
+    fdr: float
+    fold_enrichment: float
+    genes: frozenset = field(default_factory=frozenset)
+    depth: int = 0
+
+    def __hash__(self):
+        return hash(self.go_id)
+
+    def __eq__(self, other):
+        if not isinstance(other, EnrichedTerm):
+            return False
+        return self.go_id == other.go_id
+
+
+@dataclass
+class HierarchicalTheme:
+    """A hierarchical theme with anchor term and nested specific terms."""
+
+    anchor_term: EnrichedTerm
+    specific_terms: list[EnrichedTerm]
+    anchor_confidence: str  # "FDR<0.01", "FDR<0.05", "FDR<0.10"
+
+    @property
+    def all_genes(self) -> set:
+        """Get all genes across anchor and specific terms."""
+        genes = set(self.anchor_term.genes)
+        for specific in self.specific_terms:
+            genes.update(specific.genes)
+        return genes
+
+
+# =============================================================================
+# Hierarchy Navigation Functions
+# =============================================================================
 
 
 def is_descendant(term_id: str, potential_ancestor_id: str, godag: GODag) -> bool:
@@ -30,184 +79,412 @@ def is_descendant(term_id: str, potential_ancestor_id: str, godag: GODag) -> boo
         >>> is_descendant("GO:0008150", "GO:0006915", godag)  # root -> apoptosis
         False
     """
-    # Validate inputs
     if term_id not in godag or potential_ancestor_id not in godag:
         return False
 
-    # A term is not its own descendant
     if term_id == potential_ancestor_id:
         return False
 
-    # Get all parents (ancestors) of term_id
     all_parents = godag[term_id].get_all_parents()
-
-    # Check if potential_ancestor_id is in the ancestry
     return potential_ancestor_id in all_parents
 
 
-def cluster_by_top_n_roots(
-    enriched_terms: list[Any], godag: GODag, top_n: int = 5
-) -> list[dict[str, Any]]:
+def get_all_descendants(go_id: str, godag: GODag) -> set[str]:
     """
-    Cluster enriched GO terms using top-N roots algorithm.
+    Get all descendants of a GO term using is_a and part_of relationships.
+
+    Args:
+        go_id: GO term identifier
+        godag: GO DAG object
+
+    Returns:
+        Set of GO IDs that are descendants of the given term
+    """
+    if go_id not in godag:
+        return set()
+
+    term = godag[go_id]
+    descendants = set()
+    to_visit = list(term.children)
+
+    while to_visit:
+        child = to_visit.pop()
+        if child.id not in descendants:
+            descendants.add(child.id)
+            to_visit.extend(child.children)
+
+    # Check part_of reverse relationships
+    for term_id, dag_term in godag.items():
+        if hasattr(dag_term, "relationship") and dag_term.relationship:
+            for rel_type, rel_terms in dag_term.relationship.items():
+                if rel_type == "part_of":
+                    for rel_term in rel_terms:
+                        if rel_term.id == go_id and term_id not in descendants:
+                            descendants.add(term_id)
+
+    return descendants
+
+
+# =============================================================================
+# Depth-Anchor Theme Building Functions
+# =============================================================================
+
+
+def find_leaves(
+    all_terms: dict[str, EnrichedTerm], godag: GODag, fdr_threshold: float
+) -> set[str]:
+    """
+    Find enrichment leaves at FDR threshold.
+
+    A leaf is an enriched term that has no enriched descendants.
+
+    Args:
+        all_terms: Dictionary of GO ID to EnrichedTerm
+        godag: GO DAG object
+        fdr_threshold: FDR threshold for significance
+
+    Returns:
+        Set of GO IDs that are leaves (no enriched descendants)
+    """
+    passing_ids = {go_id for go_id, term in all_terms.items() if term.fdr < fdr_threshold}
+
+    leaves = set()
+    for go_id in passing_ids:
+        if go_id not in godag:
+            continue
+        descendants = get_all_descendants(go_id, godag)
+        enriched_descendants = passing_ids & descendants
+        if len(enriched_descendants) == 0:
+            leaves.add(go_id)
+
+    return leaves
+
+
+def merge_identical_gene_sets(
+    term_ids: set[str], terms: dict[str, EnrichedTerm]
+) -> set[str]:
+    """
+    Merge terms with identical gene sets, keeping the one with best FDR.
+
+    Args:
+        term_ids: Set of GO IDs to consider
+        terms: Dictionary mapping GO ID to EnrichedTerm
+
+    Returns:
+        Set of GO IDs after merging duplicates
+    """
+    gene_set_to_terms: dict[frozenset, list[str]] = defaultdict(list)
+    for go_id in term_ids:
+        if go_id in terms:
+            gene_key = terms[go_id].genes
+            gene_set_to_terms[gene_key].append(go_id)
+
+    merged = set()
+    for gene_set, group in gene_set_to_terms.items():
+        if len(group) == 1:
+            merged.add(group[0])
+        else:
+            # Keep term with best FDR, then highest fold enrichment
+            best = min(group, key=lambda x: (terms[x].fdr, -terms[x].fold_enrichment))
+            merged.add(best)
+
+    return merged
+
+
+def compute_enrichment_leaves(
+    terms: dict[str, EnrichedTerm],
+    godag: GODag,
+    fdr_threshold: float = 0.05,
+    max_genes: int = 30,
+) -> list[EnrichedTerm]:
+    """
+    Compute ALL enrichment leaves FIRST before building themes.
+
+    Enrichment leaves are the most specific enriched terms - those with no
+    enriched descendants at the given FDR threshold. After finding leaves,
+    identical gene sets are merged (keeping best FDR).
+
+    This is the foundational layer that captures the complete picture of
+    specific enriched processes. Themes are built on top of these leaves.
+
+    Args:
+        terms: Dictionary mapping GO ID to EnrichedTerm
+        godag: GO DAG object
+        fdr_threshold: FDR threshold for significance
+        max_genes: Filter out overly general terms (> max_genes)
+
+    Returns:
+        List of EnrichedTerm objects that are leaves, sorted by FDR
+    """
+    # Filter overly general terms
+    filtered_terms = {k: v for k, v in terms.items() if len(v.genes) <= max_genes}
+
+    # Find leaves (no enriched descendants)
+    leaf_ids = find_leaves(filtered_terms, godag, fdr_threshold)
+
+    # Merge identical gene sets (keep best FDR)
+    merged_ids = merge_identical_gene_sets(leaf_ids, filtered_terms)
+
+    # Build list of leaf terms
+    leaves = [filtered_terms[go_id] for go_id in merged_ids if go_id in filtered_terms]
+
+    # Sort by FDR
+    leaves.sort(key=lambda x: x.fdr)
+
+    return leaves
+
+
+def enriched_terms_to_dict(terms: list[EnrichedTerm]) -> list[dict]:
+    """
+    Convert EnrichedTerm objects to JSON-serializable dictionaries.
+
+    Args:
+        terms: List of EnrichedTerm objects
+
+    Returns:
+        List of dictionaries suitable for JSON serialization
+    """
+    return [
+        {
+            "go_id": t.go_id,
+            "name": t.name,
+            "namespace": t.namespace,
+            "fdr": t.fdr,
+            "fold_enrichment": t.fold_enrichment,
+            "genes": sorted(t.genes),
+            "depth": t.depth,
+        }
+        for t in terms
+    ]
+
+
+def _determine_confidence(fdr: float) -> str:
+    """Determine confidence level based on FDR."""
+    if fdr < 0.01:
+        return "FDR<0.01"
+    elif fdr < 0.05:
+        return "FDR<0.05"
+    else:
+        return "FDR<0.10"
+
+
+def build_depth_anchor_themes(
+    terms: dict[str, EnrichedTerm],
+    godag: GODag,
+    depth_range: tuple[int, int] = (4, 7),
+    min_children: int = 2,
+    max_genes: int = 30,
+    fdr_threshold: float = 0.10,
+) -> list[HierarchicalTheme]:
+    """
+    Build hierarchical themes using depth-based non-leaf anchors.
 
     Algorithm:
-    1. Sort enriched terms by FDR (most significant first)
-    2. Separate terms by namespace (BP, CC, MF)
-    3. Select top-N terms from each namespace as cluster roots
-    4. For each root, find all enriched terms that are descendants
-    5. Avoid double-assignment (each term belongs to at most one cluster)
-    6. Return clusters with root and member terms
+    1. Filter terms by max_genes
+    2. Find all enriched terms at intermediate depths with ≥min_children
+    3. These become anchors; their enriched descendants become children
+    4. Enforce no-overlap: each term assigned to at most one anchor
+       (prefer more specific anchor = higher depth)
+    5. Remaining leaves become standalone themes
 
     Args:
-        enriched_terms: List of GOEnrichmentRecord objects (must have .p_fdr_bh, .GO, .NS)
+        terms: Dictionary mapping GO ID to EnrichedTerm
         godag: GO DAG object
-        top_n: Number of cluster roots to select per namespace (default: 5)
+        depth_range: Tuple of (min_depth, max_depth) for anchor candidates
+        min_children: Minimum enriched descendants to qualify as anchor
+        max_genes: Filter out overly general terms (> max_genes)
+        fdr_threshold: FDR threshold for significance
 
     Returns:
-        List of cluster dictionaries:
-        [
-            {
-                'root': GOEnrichmentRecord (cluster root term),
-                'members': [GOEnrichmentRecord, ...] (descendant terms)
-            },
-            ...
-        ]
-
-    Example:
-        >>> clusters = cluster_by_top_n_roots(sig_results, godag, top_n=5)
-        >>> for cluster in clusters:
-        ...     print(f"Root: {cluster['root'].name}")
-        ...     print(f"  Members: {len(cluster['members'])}")
+        List of HierarchicalTheme objects sorted by anchor FDR
     """
-    # Sort by FDR (most significant first)
-    sorted_terms = sorted(enriched_terms, key=lambda x: x.p_fdr_bh)
+    # Filter overly general terms
+    terms = {k: v for k, v in terms.items() if len(v.genes) <= max_genes}
 
-    # Group by namespace
-    ns_terms: dict[str, list[Any]] = defaultdict(list)
-    for term in sorted_terms:
-        ns_terms[term.NS].append(term)
+    enriched_ids = set(terms.keys())
 
-    # Select top-N roots from each namespace
-    all_roots: list[Any] = []
-    for ns, terms in ns_terms.items():
-        n_for_ns = min(top_n, len(terms))  # Don't exceed available terms
-        all_roots.extend(terms[:n_for_ns])
+    # Find anchor candidates: intermediate depth with ≥min_children enriched descendants
+    anchor_candidates = []
 
-    # Build clusters
-    clusters: list[dict[str, Any]] = []
-    used_terms: set[str] = set()  # Track assigned terms by GO ID
-
-    for root in all_roots:
-        root_id = root.GO
-        root_ns = root.NS
-
-        # Find descendant members
-        members: list[Any] = []
-
-        for term in sorted_terms:
-            # Skip if same as root
-            if term.GO == root_id:
-                continue
-
-            # Only same namespace
-            if term.NS != root_ns:
-                continue
-
-            # Skip if already assigned
-            if term.GO in used_terms:
-                continue
-
-            # Check if descendant
-            if is_descendant(term.GO, root_id, godag):
-                members.append(term)
-                used_terms.add(term.GO)
-
-        # Mark root as used
-        used_terms.add(root_id)
-
-        # Create cluster
-        clusters.append({"root": root, "members": members})
-
-    return clusters
-
-
-def get_cluster_contributing_genes(
-    cluster: dict[str, Any], gene_to_annotations: dict[str, list[dict[str, Any]]], godag: GODag
-) -> list[dict[str, Any]]:
-    """
-    Get contributing genes for a cluster with their direct annotations.
-
-    For each gene in the cluster, find all direct GO annotations that are
-    either the root term, member terms, or descendants of cluster terms.
-    This accounts for GO count propagation (genes annotated to children
-    count for parents in enrichment).
-
-    Args:
-        cluster: Cluster dictionary with 'root' and 'members' keys
-        gene_to_annotations: Mapping from gene symbol to list of annotations
-            (from build_gene_to_go_mapping)
-        godag: GO DAG object for checking term ancestry
-
-    Returns:
-        List of contributing gene dictionaries:
-        [
-            {
-                'gene_symbol': 'TP53',
-                'direct_annotations': [
-                    {
-                        'go_id': 'GO:0008285',
-                        'go_name': 'negative regulation of...',
-                        'evidence_code': 'IDA'
-                    },
-                    ...
-                ]
-            },
-            ...
-        ]
-    """
-    # Get all GO IDs in this cluster
-    cluster_go_ids = {cluster["root"].GO}
-    for member in cluster["members"]:
-        cluster_go_ids.add(member.GO)
-
-    # Get all genes mentioned in cluster (root + members)
-    cluster_genes = set(cluster["root"].study_items)
-    for member in cluster["members"]:
-        cluster_genes.update(member.study_items)
-
-    # Build contributing genes list
-    contributing_genes: list[dict[str, Any]] = []
-
-    for gene in sorted(cluster_genes):
-        if gene not in gene_to_annotations:
+    for go_id, term in terms.items():
+        if go_id not in godag:
             continue
 
-        # Find annotations in this cluster
-        # Include exact matches OR annotations where the term is a child of cluster terms
-        gene_annotations = gene_to_annotations[gene]
-        cluster_annotations = []
+        # Check depth range
+        if not (depth_range[0] <= term.depth <= depth_range[1]):
+            continue
 
-        for annot in gene_annotations:
-            annot_go_id = annot["go_id"]
+        # Count enriched descendants
+        descendants = get_all_descendants(go_id, godag)
+        enriched_descendants = descendants & enriched_ids
 
-            # Direct match: annotation is in cluster
-            if annot_go_id in cluster_go_ids:
-                cluster_annotations.append(annot)
-            # Propagated match: annotation is descendant of cluster term
-            elif annot_go_id in godag:
-                # Check if annotation is descendant of any cluster term
-                for cluster_go_id in cluster_go_ids:
-                    if is_descendant(annot_go_id, cluster_go_id, godag):
-                        cluster_annotations.append(annot)
-                        break  # Don't add same annotation multiple times
-
-        if cluster_annotations:
-            contributing_genes.append(
+        if len(enriched_descendants) >= min_children:
+            anchor_candidates.append(
                 {
-                    "gene_symbol": gene,
-                    "direct_annotations": cluster_annotations,
+                    "go_id": go_id,
+                    "term": term,
+                    "depth": term.depth,
+                    "n_enriched_children": len(enriched_descendants),
+                    "enriched_children": enriched_descendants,
                 }
             )
 
-    return contributing_genes
+    # Sort by depth (prefer more specific = higher depth) then by FDR
+    anchor_candidates.sort(key=lambda x: (-x["depth"], x["term"].fdr))
+
+    # Assign children to anchors (no overlap - each child assigned to first anchor)
+    assigned: set[str] = set()
+    themes: list[HierarchicalTheme] = []
+
+    for candidate in anchor_candidates:
+        anchor_id = candidate["go_id"]
+
+        if anchor_id in assigned:
+            continue
+
+        # Collect unassigned enriched descendants
+        children = []
+        for child_id in candidate["enriched_children"]:
+            if child_id in assigned:
+                continue
+            if child_id == anchor_id:
+                continue
+            if child_id in terms:
+                children.append(terms[child_id])
+
+        if len(children) >= min_children:
+            anchor_term = candidate["term"]
+            children.sort(key=lambda x: x.fdr)
+
+            theme = HierarchicalTheme(
+                anchor_term=anchor_term,
+                specific_terms=children,
+                anchor_confidence=_determine_confidence(anchor_term.fdr),
+            )
+            themes.append(theme)
+
+            # Mark anchor and children as assigned
+            assigned.add(anchor_id)
+            for child in children:
+                assigned.add(child.go_id)
+
+    # Find leaves for unassigned terms
+    leaves = find_leaves(terms, godag, fdr_threshold)
+    leaves = merge_identical_gene_sets(leaves, terms)
+
+    # Add unassigned leaves as standalone themes
+    for leaf_id in leaves:
+        if leaf_id not in assigned and leaf_id in terms:
+            leaf_term = terms[leaf_id]
+
+            theme = HierarchicalTheme(
+                anchor_term=leaf_term,
+                specific_terms=[],
+                anchor_confidence=_determine_confidence(leaf_term.fdr),
+            )
+            themes.append(theme)
+
+    # Sort by anchor FDR
+    themes.sort(key=lambda x: x.anchor_term.fdr)
+
+    return themes
+
+
+def themes_to_dict(themes: list[HierarchicalTheme]) -> list[dict]:
+    """
+    Convert themes to JSON-serializable dictionaries.
+
+    Args:
+        themes: List of HierarchicalTheme objects
+
+    Returns:
+        List of dictionaries suitable for JSON serialization
+    """
+    result = []
+    for theme in themes:
+        anchor = theme.anchor_term
+        theme_dict = {
+            "anchor_term": {
+                "go_id": anchor.go_id,
+                "name": anchor.name,
+                "namespace": anchor.namespace,
+                "fdr": anchor.fdr,
+                "fold_enrichment": anchor.fold_enrichment,
+                "genes": sorted(anchor.genes),
+                "depth": anchor.depth,
+            },
+            "anchor_confidence": theme.anchor_confidence,
+            "specific_terms": [
+                {
+                    "go_id": s.go_id,
+                    "name": s.name,
+                    "namespace": s.namespace,
+                    "fdr": s.fdr,
+                    "fold_enrichment": s.fold_enrichment,
+                    "genes": sorted(s.genes),
+                    "depth": s.depth,
+                }
+                for s in theme.specific_terms
+            ],
+            "n_specific_terms": len(theme.specific_terms),
+            "all_genes": sorted(theme.all_genes),
+        }
+        result.append(theme_dict)
+
+    return result
+
+
+# =============================================================================
+# Hub Gene Analysis
+# =============================================================================
+
+
+def compute_hub_genes(themes: list[dict], min_themes: int = 3) -> dict:
+    """
+    Find genes appearing in multiple themes.
+
+    Hub genes are those that participate in multiple biological themes,
+    suggesting they may be key regulators or connectors.
+
+    Args:
+        themes: List of theme dictionaries (from themes_to_dict)
+        min_themes: Minimum number of themes to qualify as hub
+
+    Returns:
+        Dictionary mapping gene symbol to hub information:
+        {gene: {'theme_count': N, 'themes': [theme_names], 'go_terms': [go_ids]}}
+    """
+    gene_themes: dict[str, dict] = defaultdict(lambda: {"themes": [], "go_terms": set()})
+
+    for theme in themes:
+        anchor = theme["anchor_term"]
+        anchor_genes = set(anchor["genes"])
+
+        # Include specific term genes
+        all_genes = anchor_genes.copy()
+        for specific in theme.get("specific_terms", []):
+            all_genes.update(specific["genes"])
+
+        theme_name = anchor["name"]
+        theme_go_ids = {anchor["go_id"]}
+        for specific in theme.get("specific_terms", []):
+            theme_go_ids.add(specific["go_id"])
+
+        for gene in all_genes:
+            gene_themes[gene]["themes"].append(theme_name)
+            gene_themes[gene]["go_terms"].update(theme_go_ids)
+
+    # Filter to hub genes
+    hub_genes = {}
+    for gene, data in gene_themes.items():
+        if len(data["themes"]) >= min_themes:
+            hub_genes[gene] = {
+                "theme_count": len(data["themes"]),
+                "themes": data["themes"][:10],  # Top 10
+                "go_terms": list(data["go_terms"]),
+            }
+
+    # Sort by theme count
+    return dict(sorted(hub_genes.items(), key=lambda x: x[1]["theme_count"], reverse=True))
+
+
