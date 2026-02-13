@@ -154,6 +154,8 @@ def build_gene_to_go_mapping(
         gene = assoc.DB_Symbol
         go_id = assoc.GO_ID
         evidence = assoc.Evidence_Code
+        # GAF column 6: references (e.g., "PMID:12345|PMID:67890")
+        references_raw = getattr(assoc, "DB_Reference", "")
 
         if go_id not in godag:
             continue
@@ -161,13 +163,100 @@ def build_gene_to_go_mapping(
         if gene not in gene_to_annotations:
             gene_to_annotations[gene] = []
 
+        # Parse references - handle both string and set formats
+        references = []
+        if references_raw:
+            if isinstance(references_raw, set):
+                # GOATOOLS returns DB_Reference as a set
+                references = [ref.strip() for ref in references_raw if ref and ref.strip()]
+            elif isinstance(references_raw, str):
+                # Handle pipe-separated string format
+                references = [ref.strip() for ref in references_raw.split("|") if ref.strip()]
+
         gene_to_annotations[gene].append(
             {
                 "go_id": go_id,
                 "go_name": godag[go_id].name,
                 "evidence_code": evidence,
                 "namespace": godag[go_id].namespace,
+                "references": references,
             }
         )
 
-    return gene_to_annotations
+    # Collapse annotations by GO term to eliminate redundancy
+    return _collapse_annotations_by_go_term(gene_to_annotations)
+
+
+def _collapse_annotations_by_go_term(
+    gene_to_annotations: dict[str, list[dict[str, Any]]]
+) -> dict[str, list[dict[str, Any]]]:
+    """
+    Collapse redundant annotations by grouping evidence codes for each GO term.
+
+    Converts:
+      [{go_id: "GO:123", evidence_code: "IDA", references: ["PMID:1"]},
+       {go_id: "GO:123", evidence_code: "IMP", references: ["PMID:2"]},
+       {go_id: "GO:123", evidence_code: "IMP", references: ["PMID:3"]}]
+
+    To:
+      [{go_id: "GO:123",
+        go_name: "...",
+        namespace: "...",
+        evidence: [
+          {code: "IDA", references: ["PMID:1"]},
+          {code: "IMP", references: ["PMID:2", "PMID:3"]}
+        ]}]
+
+    Args:
+        gene_to_annotations: Raw annotations with duplicates
+
+    Returns:
+        Collapsed annotations grouped by GO term
+    """
+    collapsed = {}
+
+    for gene, annotations in gene_to_annotations.items():
+        # Group by GO term
+        go_term_map: dict[str, dict[str, Any]] = {}
+
+        for annot in annotations:
+            go_id = annot["go_id"]
+
+            if go_id not in go_term_map:
+                go_term_map[go_id] = {
+                    "go_id": go_id,
+                    "go_name": annot["go_name"],
+                    "namespace": annot["namespace"],
+                    "evidence": {},  # Will map evidence_code -> set of references
+                }
+
+            # Add this evidence code and references
+            evidence_code = annot["evidence_code"]
+            if evidence_code not in go_term_map[go_id]["evidence"]:
+                go_term_map[go_id]["evidence"][evidence_code] = set()
+
+            # Add references to this evidence code
+            for ref in annot["references"]:
+                go_term_map[go_id]["evidence"][evidence_code].add(ref)
+
+        # Convert to final format
+        collapsed_annotations = []
+        for go_data in go_term_map.values():
+            # Convert evidence dict to list format
+            evidence_list = [
+                {"code": code, "references": sorted(refs)}
+                for code, refs in sorted(go_data["evidence"].items())
+            ]
+
+            collapsed_annotations.append(
+                {
+                    "go_id": go_data["go_id"],
+                    "go_name": go_data["go_name"],
+                    "namespace": go_data["namespace"],
+                    "evidence": evidence_list,
+                }
+            )
+
+        collapsed[gene] = collapsed_annotations
+
+    return collapsed

@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/go_explanation_output.schema.json",
+  "title": "GO Enrichment with Explanations",
+  "description": "GO enrichment results combined with LLM-generated natural language explanations",
+  "type": "object",
+  "properties": {
+    "enrichment_data": {
+      "type": "object",
+      "description": "Original hierarchical enrichment results from Phase 1",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "Hierarchical clusters of enriched GO terms"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Enrichment analysis metadata",
+          "additionalProperties": false
+        }
+      },
+      "required": ["clusters", "metadata"],
+      "additionalProperties": false
+    },
+    "explanations": {
+      "type": "array",
+      "description": "Natural language explanations for each cluster",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cluster_index": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Index of cluster in enrichment_data.clusters array"
+          },
+          "cluster_name": {
+            "type": "string",
+            "description": "Name of the root term for easy reference"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200,
+            "description": "Brief one-sentence summary of the cluster's biological theme"
+          },
+          "detailed_explanation": {
+            "type": "string",
+            "minLength": 100,
+            "description": "Detailed paragraph explaining WHY genes cluster, WHAT processes are enriched, and HOW evidence supports this. Includes confidence/significance context for research biologists."
+          },
+          "key_insights": {
+            "type": "array",
+            "description": "Key biological insights (3-5 bullet points)",
+            "items": {
+              "type": "string",
+              "minLength": 20
+            },
+            "minItems": 2,
+            "maxItems": 5
+          },
+          "key_genes": {
+            "type": "array",
+            "description": "Highlighted genes with their specific contributions (3-5 genes)",
+            "items": {
+              "type": "object",
+              "properties": {
+                "gene_symbol": {
+                  "type": "string",
+                  "description": "Gene symbol"
+                },
+                "contribution": {
+                  "type": "string",
+                  "minLength": 30,
+                  "description": "Brief explanation of this gene's role in the cluster"
+                }
+              },
+              "required": ["gene_symbol", "contribution"],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 5
+          },
+          "statistical_context": {
+            "type": "string",
+            "description": "Brief explanation of statistical significance in accessible terms",
+            "minLength": 30,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "cluster_index",
+          "cluster_name",
+          "summary",
+          "detailed_explanation",
+          "key_insights",
+          "key_genes",
+          "statistical_context"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overall_summary": {
+      "type": "string",
+      "minLength": 200,
+      "description": "Overall interpretation synthesizing all clusters into a coherent biological narrative"
+    },
+    "generation_metadata": {
+      "type": "object",
+      "description": "Metadata about explanation generation",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "LLM model used for generation"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When explanations were generated"
+        },
+        "clusters_explained": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of clusters that received explanations"
+        }
+      },
+      "required": ["model", "timestamp", "clusters_explained"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["enrichment_data", "explanations", "overall_summary", "generation_metadata"],
+  "additionalProperties": false
+}

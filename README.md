@@ -47,6 +47,14 @@ uv run go-enrichment \
   --fdr 0.01 \
   --output results/ \
   --name my_analysis
+
+# With LLM explanations (Phase 2)
+# Requires OPENAI_API_KEY or ANTHROPIC_API_KEY in environment
+uv run go-enrichment \
+  --genes TP53,BRCA1,BRCA2,PTEN,RB1,APC \
+  --output results/ \
+  --explain \
+  --model gpt-4o
 ```
 
 **Available options:**
@@ -57,8 +65,14 @@ uv run go-enrichment \
 - `--top-n`: Number of cluster roots per namespace (default: `5`)
 - `--fdr`: FDR threshold (default: `0.05`)
 - `--name`: Custom name for output file (default: auto-generated)
+- `--explain`: Generate LLM explanations (Phase 2, requires API key)
+- `--model`: LLM model for explanations (default: `gpt-4o`)
+  - Supported: `gpt-4o`, `gpt-4o-mini`, `claude-sonnet-4-20250514`
+  - **Not supported**: `gpt-4` (old model, no structured output)
 
 #### Python API
+
+**Phase 1: GO Enrichment Analysis**
 
 ```python
 from goa_semantic_tools.services import run_go_enrichment
@@ -82,6 +96,39 @@ print(f"  FDR: {cluster['root_term']['fdr']:.2e}")
 print(f"  Fold enrichment: {cluster['root_term']['fold_enrichment']:.2f}x")
 print(f"  Study genes: {cluster['root_term']['study_genes']}")
 print(f"  Member terms: {len(cluster['member_terms'])}")
+```
+
+**Phase 2: LLM-Generated Explanations**
+
+```python
+from goa_semantic_tools.services import run_go_enrichment, generate_explanations
+
+# Phase 1: Run enrichment
+enrichment_result = run_go_enrichment(
+    gene_symbols=["TP53", "BRCA1", "BRCA2", "PTEN", "RB1", "APC"],
+    species="human"
+)
+
+# Phase 2: Generate natural language explanations
+# Requires OPENAI_API_KEY or ANTHROPIC_API_KEY in environment
+explanation_result = generate_explanations(
+    enrichment_output=enrichment_result,
+    model="gpt-4o",          # or "gpt-4o-mini", "claude-sonnet-4-20250514"
+    temperature=0.1,
+    max_tokens=3000
+)
+
+# Access explanations
+for explanation in explanation_result['explanations']:
+    print(f"\nCluster: {explanation['cluster_name']}")
+    print(f"Summary: {explanation['summary']}")
+    print(f"\nDetailed Explanation:\n{explanation['detailed_explanation']}")
+    print(f"\nKey Insights:")
+    for insight in explanation['key_insights']:
+        print(f"  • {insight}")
+
+# Overall summary synthesizing all clusters
+print(f"\nOverall Summary:\n{explanation_result['overall_summary']}")
 ```
 
 ### Example Output
@@ -184,22 +231,27 @@ uv run pytest
 ```
 src/goa_semantic_tools/goa_semantic_tools/
 ├── services/
-│   └── go_enrichment_service.py    # Main enrichment pipeline
+│   ├── go_enrichment_service.py     # Phase 1: Enrichment pipeline
+│   ├── go_explanation_service.py    # Phase 2: LLM explanations
+│   └── go_explanation.prompt.yaml   # Explanation prompt template
 ├── utils/
 │   ├── data_downloader.py           # Download & cache GO/GAF data
 │   ├── go_data_loader.py            # Load data with GOATOOLS
 │   └── go_hierarchy.py              # Top-N clustering algorithm
 └── schemas/
     ├── go_enrichment_input.schema.json
-    └── go_enrichment_output.schema.json
+    ├── go_enrichment_output.schema.json
+    └── go_explanation_output.schema.json
 ```
 
 ### Dependencies
 
 - **Python 3.14+**
 - **GOATOOLS**: GO enrichment analysis
+- **cellsem-llm-client**: LLM client for structured output generation
 - **requests**: Data downloads
 - **jsonschema**: Schema validation
+- **pydantic**: Data validation and modeling
 
 All managed via `uv` - see `pyproject.toml`.
 
@@ -219,18 +271,27 @@ Data is downloaded on first run and cached in `reference_data/` (gitignored).
 
 ## 🚧 Roadmap
 
-**Current Status**: Ring 0 Phase 1 Complete ✅
+**Current Status**: Ring 0 Complete ✅
+
+**Phase 1** (Complete):
 - Hierarchical GO enrichment with top-N clustering
 - CLI runner (`go-enrichment` command)
-- Python API
+- Python API (`run_go_enrichment`)
 - Download-and-cache data strategy
 
-**Phase 2** (next):
+**Phase 2** (Complete):
 - LLM-based natural language explanations of enrichment results
+- Research biologist-focused explanations (WHY/WHAT/HOW)
+- Python API (`generate_explanations`)
+- CLI integration (`--explain` flag)
+
+**Next Steps** (Awaiting User Feedback):
 - Batch processing support
+- Integration tests with real LLM calls
 
 **Ring 1** (after user validation):
 - GO term definitions in explanations
+- Technical bioinformatician explanations (optional mode)
 - DeepSearch integration for experimental context
 - RAG with literature references
 - Graph visualizations

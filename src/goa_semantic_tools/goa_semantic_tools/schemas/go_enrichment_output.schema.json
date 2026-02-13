@@ -129,7 +129,7 @@
                 },
                 "direct_annotations": {
                   "type": "array",
-                  "description": "Direct GO annotations for genes in this cluster",
+                  "description": "Direct GO annotations for genes in this cluster (collapsed by GO term)",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -140,12 +140,34 @@
                       "go_name": {
                         "type": "string"
                       },
-                      "evidence_code": {
+                      "namespace": {
                         "type": "string",
-                        "description": "Evidence code (e.g., IDA, IEA, TAS, IMP)"
+                        "enum": ["biological_process", "cellular_component", "molecular_function"]
+                      },
+                      "evidence": {
+                        "type": "array",
+                        "description": "Evidence codes with associated references",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string",
+                              "description": "Evidence code (e.g., IDA, IEA, TAS, IMP, IBA)"
+                            },
+                            "references": {
+                              "type": "array",
+                              "description": "References supporting this evidence (e.g., PMID:12345)",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": ["code", "references"],
+                          "additionalProperties": false
+                        }
                       }
                     },
-                    "required": ["go_id", "go_name", "evidence_code"],
+                    "required": ["go_id", "go_name", "namespace", "evidence"],
                     "additionalProperties": false
                   }
                 }

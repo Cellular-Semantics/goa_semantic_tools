@@ -15,6 +15,7 @@ dev-dependencies = [
     "sphinx-autodoc-typehints>=1.25.0",
     "myst-parser>=2.0.0",
     "pre-commit>=3.7.0",
+    "ipython>=9.10.0",
 ]
 
 [tool.pytest.ini_options]
@@ -46,4 +47,13 @@ warn_unused_ignores = true
 source = [
     "src/goa_semantic_tools",
     "src/goa_semantic_tools_validation_tools",
+]
+omit = [
+    # Unused scaffold code (from template, not used in Ring 0)
+    "*/agents/*",
+    "*/graphs/*",
+    "*/schemas/*",
+    "*/validation/*",
+    # Legacy service (replaced by go_markdown_explanation_service)
+    "*/services/go_explanation_service.py",
 ]

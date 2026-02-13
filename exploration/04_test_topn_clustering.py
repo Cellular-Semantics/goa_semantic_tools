@@ -9,7 +9,6 @@ from goatools.obo_parser import GODag
 from goatools.anno.gaf_reader import GafReader
 from goatools.goea.go_enrichment_ns import GOEnrichmentStudyNS
 from collections import defaultdict
-
 # Paths
 GO_OBO_PATH = Path(__file__).parent.parent / "reference_data" / "go-basic.obo"
 GAF_PATH = Path(__file__).parent.parent / "reference_data" / "goa_human.gaf"
