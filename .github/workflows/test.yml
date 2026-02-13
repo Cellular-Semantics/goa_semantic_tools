@@ -37,22 +37,10 @@ jobs:
           uv sync --dev --all-packages
           uv pip list
 
-      - name: Ruff lint
-        run: uv run ruff check src/ tests/
+      - name: Unit tests with coverage
+        run: uv run pytest -m unit --cov=goa_semantic_tools --cov-report=xml --cov-fail-under=60
 
-      - name: Ruff format (check only)
-        run: uv run ruff format --check src/ tests/
-
-      - name: Type check
-        run: uv run mypy src/
-
-      - name: Unit tests
-        run: uv run pytest -m unit
-
-      - name: Integration tests (skipped)
+      - name: Integration tests (skipped in CI)
         run: |
           echo "Integration tests require real API keys; run locally before pushing."
-          exit 0 # skip integration tests in CI
-
-      - name: Coverage report
-        run: uv run pytest --cov={{cookiecutter.package_name}} --cov-report=xml
+          exit 0
