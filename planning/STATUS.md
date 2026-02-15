@@ -1,9 +1,13 @@
 # NeeGOA Semantic Tools - Development Status
 
-**Date**: 2026-02-10
-**Branch**: ring0_phase2_agentic_explanation
+**Date**: 2026-02-15
+**Branch**: ring1_artl_mcp_references (current), main (Ring 0 shipped)
 
-## Current State: Ring 0 Phase 2.5
+## Current State: Ring 1 — artl-mcp Literature Reference Integration
+
+Ring 0 shipped (depth-anchor enrichment + LLM explanation + GAF reference injection). Now integrating artl-mcp for resolving complex/[EXTERNAL] assertions that GAF annotations can't cover.
+
+## Historical: Ring 0 Algorithm Development
 
 ### Problem Solved
 Original top-N clustering selected overly general terms (e.g., "membrane" with 107 genes) and created hierarchical redundancy (4 vascular terms reporting same 8-14 genes).
@@ -660,9 +664,115 @@ Claims must be parsed into atomic assertions with:
 - [x] Final testing round complete
 
 **Implementation (MVP):**
-- [ ] Review existing code structure
-- [ ] Read SCAFFOLD_GUIDE.md for implementation patterns
-- [ ] Create implementation plan
-- [ ] Implement reference retrieval pipeline
-- [ ] Achieve 60% test coverage (CONSTRAINT)
-- [ ] Add to CLI as `--add-references` flag
+- [x] Review existing code structure
+- [x] Read SCAFFOLD_GUIDE.md for implementation patterns
+- [x] Create implementation plan
+- [x] Implement reference retrieval pipeline
+- [x] Achieve 60% test coverage (CONSTRAINT)
+- [x] Add to CLI as `--add-references` flag
+
+---
+
+## artl-mcp via cellsem-llm-client [2026-02-15]
+
+### Context
+
+Ring 0 Phase 3 exports unresolved assertions (complex multi-gene/multi-process claims and [EXTERNAL] claims without GO annotation support) to `*_artl_queries.json`. These need literature search via Europe PMC to find supporting references. The `cellsem-llm-client` library now has `MCPToolSource` which can connect to MCP servers and expose their tools to LLM agents.
+
+**Branch**: `ring1_artl_mcp_references`
+**Exploration script**: `exploration/11_artl_mcp_via_llm.py`
+
+### Architecture: LLM-Driven Tool Use
+
+```
+MCPToolSource("uvx artl-mcp")     cellsem-llm-client
+        │                              │
+        │  stdio transport             │  LiteLLMAgent
+        │  discovers 6 tools           │  query_unified(tools=...)
+        ↓                              ↓
+┌─────────────────┐            ┌──────────────────┐
+│ artl-mcp server │◄──────────►│ LLM (gpt-4o-mini)│
+│ (Europe PMC)    │  tool calls│                  │
+│                 │  & results │                  │
+└─────────────────┘            └──────────────────┘
+```
+
+Key pattern:
+```python
+from cellsem_llm_client import LiteLLMAgent, MCPToolSource
+
+with MCPToolSource("uvx artl-mcp") as source:
+    agent = LiteLLMAgent(model="gpt-4o-mini", api_key=key, max_tokens=2000)
+    result = agent.query_unified(
+        message=user_prompt,
+        system_message=system_prompt,
+        tools=source.tools,
+        max_turns=8,
+    )
+```
+
+### Test Results (exploration/11_artl_mcp_via_llm.py)
+
+Four progressive tests, all passing:
+
+| Step | What | LLM? | Result |
+|------|------|------|--------|
+| 1 | MCPToolSource discovers artl-mcp tools | No | 6 tools found via stdio |
+| 2 | Direct tool call (search_europepmc_papers) | No | Papers returned correctly |
+| 3 | LLM agent + tools: single assertion | Yes | 3 refs found, $0.003 |
+| 4 | Batch from real artl_queries.json (2 assertions) | Yes | Both resolved, $0.007 total |
+
+### Step 3 Detail: Single Assertion
+
+**Input**: "ATM and BRCA1 cooperate in DNA damage response, with ATM phosphorylating BRCA1 to activate homologous recombination repair."
+
+**Output** (gpt-4o-mini, 1 search tool call):
+- PMID:41183146 - ATM-TGS1-BRCA1 axis in pancreatic cancer
+- PMID:41597237 - Daxx-dependent HR repair via ATM/ATR phosphorylation
+- PMID:41243967 - GSK3B and BRCA1-independent PARP inhibitor sensitivity
+
+**Cost**: $0.0026 (14k input + 480 output tokens)
+
+### Step 4 Detail: Batch from Real Queries
+
+Used `results/ref_test_artl_queries.json` (P53/DNA damage gene set, 14 assertions exported from Phase 3).
+
+**Assertion 1**: "Co-occurrence of ATM, BRCA1, BRCA2, TP53 suggests robust regulatory network"
+- Europe PMC returned 503 on first query, LLM retried with simpler terms
+- Found references including review on hereditary cancer syndromes
+- Cost: $0.0056
+
+**Assertion 2**: "ATM and BRCA1 in DNA repair and apoptosis under oxidative challenge"
+- Found refs on obesity-induced oxidative stress + DNA damage response
+- Cost: $0.0015
+
+### Key Findings
+
+1. **MCPToolSource works with stdio**: `"uvx artl-mcp"` connects cleanly, discovers all 6 tools
+2. **Tool loop handles errors**: When Europe PMC returns 503, LLM retries with different queries
+3. **Cost is low**: ~$0.003-0.006 per assertion with gpt-4o-mini
+4. **max_turns=8 needed**: Complex assertions trigger multiple search/validate cycles
+5. **Pydantic warnings are cosmetic**: LiteLLM emits serialization warnings, don't affect results
+6. **Session lifecycle clean**: Context manager handles MCP server startup/shutdown
+
+### Observations for Production Integration
+
+**What works well**:
+- LLM autonomously picks good search terms from assertion text
+- LLM uses get_europepmc_paper_by_id to validate candidates before returning
+- JSON output format is consistent and parseable
+
+**What needs design work**:
+- Currently one MCPToolSource per batch = one artl-mcp server process per batch; should reuse across assertions
+- No tiered validation yet (abstract → full text → section read) — LLM just searches and returns
+- Need to decide: let LLM validate relevance (current) vs programmatic abstract grep (cheaper, more reproducible)
+- Cost projection: 14 assertions × $0.004 = ~$0.06 per analysis — acceptable
+
+### Next Steps
+
+- [ ] Decide validation approach: LLM-judged vs programmatic abstract grep vs hybrid
+- [ ] Implement production service wrapping MCPToolSource + LiteLLMAgent
+- [ ] Single MCPToolSource session for all assertions in a batch
+- [ ] Add to CLI pipeline: after Phase 3 GAF lookup, run artl-mcp for unresolved
+- [ ] Integration test with real API
+- [ ] Update ROADMAP.md with revised Ring 1 scope
