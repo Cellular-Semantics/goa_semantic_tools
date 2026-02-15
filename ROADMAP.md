@@ -1,168 +1,203 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-02-10
+**Last Updated**: 2026-02-15
 
-## Current Status
+## What This Tool Does
 
-**Ring 0 Phase 1** (Complete): GO enrichment with top-N clustering
-**Ring 0 Phase 2** (Complete): LLM-based explanations
-**Ring 0 Phase 2.5** (In Progress): Improved clustering algorithm
+GO enrichment analysis produces long lists of statistically significant terms with heavy redundancy (parent-child overlaps, near-identical gene sets). GOA Semantic Tools reduces this to a structured set of biological themes with LLM-generated provenance-labeled explanations and literature-backed references.
 
----
-
-## Ring 0 Phase 2.5: Leaf-First Clustering
-
-### Problem with Top-N Roots
-The original algorithm selects top-N most significant terms as cluster roots, but this creates:
-- **Hierarchical redundancy**: Parent and children both selected (e.g., 4 vascular terms for same 8-14 genes)
-- **Overly general terms**: "membrane" (107 genes) provides little insight
-- **Context window bloat**: Redundant clusters waste tokens in LLM explanations
-
-### Solution: Leaf-First Clustering
-Instead of top-down (most significant), go bottom-up (most specific):
-
-1. **Find enrichment leaves**: Terms with no enriched descendants
-2. **Merge identical gene sets**: Collapse redundant siblings
-3. **Check parent contribution**: Only include parent if adds >20% new genes
-4. **Filter general terms**: Skip terms with >50 genes or >200% parent addition
-5. **Two-threshold approach**: FDR 0.05 (high confidence) + FDR 0.10 (moderate)
-
-### Results (Astrocytoma test case)
-- **Before**: 12 clusters, 4 redundant vascular, general CC terms
-- **After**: 15 themes, distinct biology, no redundancy
-- **New discoveries**: Amyloid regulation, cAMP signaling at relaxed FDR
-
-### Implementation Status
-- [x] Prototype in `exploration/05_leaf_first_clustering.py`
-- [ ] Integrate into main `go_hierarchy.py`
-- [ ] Update CLI to use new algorithm
-- [ ] Update explanation service for new format
+**Pipeline**: Gene list → ORA enrichment → Leaf-first theme extraction → Depth-anchor hierarchy → LLM explanation → Reference injection
 
 ---
 
-## Future Enhancements (Ring 1+)
+## Ring 0: Shipped
 
-### 1. Annotation Depth Classification
-Distinguish enrichment types based on where genes are annotated:
+### Phase 1: GO Enrichment with Hierarchical Clustering
 
-- **Specific enrichment**: Genes annotated directly to leaf term (e.g., BBB transport - 8 genes all directly annotated)
-- **Category enrichment**: Genes annotated to general term, specific subtype unknown (e.g., cell adhesion - 17/23 directly annotated to parent)
+- ORA via GOATOOLS against GO BP namespace
+- Automatic download/caching of GO OBO and GAF annotation files
+- CLI runner (`goa-semantic-tools`) with `--genes` / `--genes-file` input
+- JSON + Markdown output
 
-This affects interpretation confidence and suggests where literature mining could help.
+### Phase 2: LLM-Based Explanations
 
-### 2. Literature Mining for Missing Themes
+- Provenance-labeled biological summaries via OpenAI-compatible LLMs
+- Tag system: `[DATA]`, `[INFERENCE]`, `[EXTERNAL]`, `[GO-HIERARCHY]`
+- Hub gene identification (genes appearing across 3+ themes)
+- Markdown report generation with `--explain` flag
+- Dry-run mode (`--dry-run`) to preview prompts without LLM calls
 
-When we have "category enrichment" (genes at general level), mine literature to find common themes not captured in GO:
+### Phase 3: Bottom-Up Depth-Anchor Algorithm + Reference Retrieval
 
-#### 2a. Direct Annotation References
-- Extract PMIDs from gene annotations
-- Identify papers that annotate multiple genes to same term
-- Look for shared themes/mechanisms in those papers
-- **Easier**: Data already available in GAF
+Replaced the original top-N roots approach entirely.
 
-#### 2b. Broader Literature Search
-- Use DeepSearch/Perplexity to find connections
-- Search for co-occurrence in abstracts/full text
-- **Harder**: Requires external API, potential hallucination
+**Enrichment algorithm** (`go_hierarchy.py`):
+1. Compute enrichment leaves (most specific enriched terms with no enriched descendants)
+2. Build hierarchical themes using depth-anchor selection (depth 4-7, min 2 children, max 30 genes)
+3. Group specific terms under anchors; standalone leaves kept as flat themes
+4. Uses both `is_a` and `part_of` relationships
 
-### 3. Cross-Namespace Co-annotation
+**Reference retrieval** (`reference_retrieval_service.py`, `reference_index.py`):
+- Builds gene→GO→PMID index from GAF annotations
+- Extracts atomic assertions from LLM explanations (parses `[INFERENCE]` and `[EXTERNAL]` claims)
+- Programmatic PMID lookup for simple/multi-gene claims
+- Exports unresolved assertions to `*_artl_queries.json` for artl-mcp literature search
+- Injects verified PMIDs into final markdown output
+- CLI: `--add-references` flag
 
-Strengthen biological interpretation by combining evidence across namespaces:
+**Test coverage**: 60% (Ring 0 standard), 68 unit tests across 9 files.
 
-#### 3a. BP Co-annotation
-- If genes share BP annotation from same reference → strong functional link
-- Could reveal sub-themes within "category enrichment" cases
-- Example: 5 genes annotated to "cell adhesion" from PMID:X might share specific mechanism
+**Benchmark results** (MSigDB Hallmark sets, v1 leaf-first):
 
-#### 3b. CC Co-annotation
-- Genes in same cellular location + same BP = stronger evidence
-- Example: "plasma membrane" + "cell adhesion" from same paper
-
-#### 3c. Reference Co-occurrence Analysis
-- Build graph: genes connected if annotated from same paper
-- Cluster to find functionally coherent sub-groups
-- Especially useful for broad categories
-
-### 4. Evidence Aggregation
-
-For enrichment leaves, aggregate evidence from child annotations:
-- If gene is annotated to non-significant child term, pull up the PMID
-- Show "evidence from more specific annotations" in reports
-- Helps explain WHY the enrichment exists
-
-### 5. Semantic Similarity Clustering
-
-Alternative/complement to hierarchy-based clustering:
-- Use GO term semantic similarity (IC-based) OR use embedding based similarity.
-- Cluster terms by meaning, not just hierarchy
-- Could help in sparse GO branches where IC heuristics fail
-
-### 6. Improved LLM Explanations
-
-Update explanation service for leaf-first output:
-- Show core genes vs additional genes at broader level
-- Flag "category enrichment" vs "specific enrichment"
-- Include literature references from annotations
-- Add confidence indicators
+| Gene Set | Enriched Terms | Themes | Reduction |
+|----------|---------------|--------|-----------|
+| Apoptosis | 56 | 21 | 63% |
+| DNA Repair | 201 | 51 | 75% |
+| Hypoxia | 29 | 7 | 76% |
+| Inflammatory | 264 | 106 | 60% |
+| OxPhos | 17 | 8 | 53% |
+| P53 | 47 | 21 | 55% |
 
 ---
 
-## Technical Debt / Improvements
+## Ring 1: Planned (Pending User Feedback)
 
-- [ ] Add population counts to theme output (for fold enrichment transparency)
-- [ ] Cache GO DAG loading (currently ~1s each run)
-- [ ] Add integration tests for leaf-first clustering
-- [ ] Schema updates for new theme structure
+### 1. Exploratory Sub-Threshold Term Discovery
+
+Surface GO annotation structure beneath FDR significance thresholds. For each enriched theme anchor, enumerate child GO terms with gene overlap that didn't reach significance. Rank by overlap proportion, show top 5 per parent. Flagged with `[EXPLORATORY]` provenance tag. Opt-in via `--exploratory` CLI flag.
+
+Plan: [`planning/exploratory_sub_threshold_terms.md`](planning/exploratory_sub_threshold_terms.md)
+
+### 2. Tiered Reference Validation
+
+Full implementation of the tiered validation strategy explored in `exploration/10_reference_retrieval.py`:
+- Tier 1: Abstract scan (cheap, fast)
+- Tier 2: Full text + keyword grep
+- Tier 3: Section-targeted read (Results > Conclusions > Intro)
+- Early stopping on first adequate reference
+- Graceful degradation for unsupported claims
+
+### 3. Wikipedia Fallback for Textbook Knowledge
+
+For well-established mechanisms (e.g., "IL-1B induces fever via PGE2") where no single paper states the claim explicitly. Use Wikipedia API to find cited PMIDs, then validate those PMIDs support the claim.
+
+### 4. Annotation Depth Classification
+
+Distinguish **specific enrichment** (genes annotated directly to leaf term) from **category enrichment** (genes annotated to general parent). Affects interpretation confidence and identifies where literature mining would add most value.
+
+### 5. Cross-Namespace Co-annotation
+
+Strengthen biological interpretation by combining evidence across GO namespaces:
+- BP co-annotation from same reference → strong functional link
+- CC co-annotation → subcellular context
+- Reference co-occurrence graphs for functionally coherent sub-groups
+
+---
+
+## Ring 2: Speculative
+
+### Semantic Similarity Clustering
+Use GO term IC-based or embedding-based similarity as alternative/complement to hierarchy-based clustering. May help in sparse GO branches.
+
+### Multi-Ontology Support
+The architecture after flat enriched terms is ontology-agnostic if abstracted to: term→parent/child, term→genes, gene→annotation refs. Could extend to HPO, Disease Ontology, Reactome.
+
+### Evidence Aggregation from Child Annotations
+For enrichment leaves, pull PMIDs from non-significant child term annotations to explain WHY enrichment exists at the parent level.
+
+---
+
+## Technical Debt
+
+- [ ] Add population counts to theme output (fold enrichment transparency)
+- [ ] Cache GO DAG loading (currently ~1s per run)
+- [ ] Schema updates for HierarchicalTheme structure (JSON schema → Pydantic)
+- [ ] Benchmark depth-anchor algorithm (Option C) across all hallmark sets
 - [ ] Consider IC calculation for term specificity metrics
+- [ ] Additional test cases: rare disease genes (sparse GO), small gene sets (<20 genes)
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ INPUT: Gene list + GO OBO + GAF annotations             │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ ENRICHMENT (go_enrichment_service.py)                   │
+│ ORA via GOATOOLS → flat enriched terms with FDR + genes │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ HIERARCHY (go_hierarchy.py)                             │
+│ Enrichment leaves → depth-anchor grouping → hub genes   │
+│ Uses is_a + part_of edges                               │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ LLM EXPLANATION (go_markdown_explanation_service.py)     │
+│ Provenance-labeled summary: [DATA] [INFERENCE]          │
+│ [EXTERNAL] [GO-HIERARCHY]                               │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ REFERENCE INJECTION (reference_retrieval_service.py)    │
+│ Parse claims → GAF PMID lookup → artl-mcp escalation    │
+│ → inject [Refs: PMID:xxx] into markdown                 │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ OUTPUT: Markdown report + JSON themes + artl queries     │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Related Work
+
+Methods addressing GO enrichment redundancy:
+- **topGO elim/weight** - Removes genes from parent terms if child is significant
+- **REVIGO** - Semantic similarity clustering of GO terms
+- **evoGO** (2025) - Bottom-up redundancy minimization, 30% reduction, 96% TP recovery
+
+Our approach differs by producing explicit hierarchical theme structures with provenance-labeled LLM explanations and programmatic reference injection.
 
 ---
 
 ## Test Cases
 
-### Astrocytoma Cluster 0 (200 genes)
-Primary test case for algorithm development:
-- Shows vascular hierarchy redundancy
-- Has "category enrichment" example (cell adhesion)
-- Has "specific enrichment" example (BBB transport)
-- Brain-relevant terms (amyloid, cAMP)
-
-### Benchmark Test Sets (MSigDB Hallmark)
+### MSigDB Hallmark Benchmark Sets
 
 Located in `input_data/benchmark_sets/test_lists/`:
 
-**Positive controls** (should show expected enrichment):
-- `hallmark_apoptosis.txt` - 161 genes
-- `hallmark_dna_repair.txt` - 150 genes
-- `hallmark_hypoxia.txt` - 200 genes
-- `hallmark_inflammatory_response.txt` - 200 genes
-- `hallmark_p53_pathway.txt` - 200 genes
-- `hallmark_oxidative_phosphorylation.txt` - 200 genes
+**Positive controls**: `hallmark_apoptosis.txt` (161 genes), `hallmark_dna_repair.txt` (150), `hallmark_hypoxia.txt` (200), `hallmark_inflammatory_response.txt` (200), `hallmark_p53_pathway.txt` (200), `hallmark_oxidative_phosphorylation.txt` (200)
 
-**Negative controls** (random, should show minimal enrichment):
-- `random_50_genes.txt`, `random_100_genes.txt`, `random_200_genes.txt`
+**Negative controls**: `random_50_genes.txt`, `random_100_genes.txt`, `random_200_genes.txt`
 
-**Raw data** in `input_data/benchmark_sets/`:
-- `hallmark_gene_sets.gmt` - All 50 MSigDB hallmark sets
-- `gobp_gene_sets.gmt` - 7,608 GO BP gene sets from MSigDB
+### Exploration Scripts
 
-### Additional Test Cases Needed
-- [ ] Rare disease genes (sparse GO coverage)
-- [ ] Small gene set (<20 genes)
+| Script | Purpose |
+|--------|---------|
+| `exploration/05_leaf_first_clustering.py` | v1: Leaf-first algorithm prototype |
+| `exploration/06_benchmark_leaf_first.py` | Benchmark runner |
+| `exploration/07_hierarchical_themes.py` | v2: Two-pass hierarchical |
+| `exploration/08_multi_threshold_hierarchy.py` | v3 Option B: Multi-threshold |
+| `exploration/09_depth_anchors.py` | v3 Option C: Depth-based anchors (best) |
+| `exploration/10_reference_retrieval.py` | Reference retrieval workflow |
 
 ---
 
-## Related Work / Comparison
+## Key Files
 
-Methods addressing GO enrichment redundancy:
-- **topGO elim/weight** - Removes genes from parent terms if child is significant
-- **REVIGO** - Semantic similarity clustering of GO terms
-- **evoGO** (2025 preprint) - Redundancy minimization approach
-
----
-
-## References
-
-- `exploration/05_leaf_first_clustering.py` - Prototype implementation
-- `results/leaf_first_themes.json` - Example output
-- `results/fdr01_enrichment.json` - Test data (FDR 0.10)
-- `GOATOOLS_FINDINGS.md` - GOATOOLS API documentation
+| File | Role |
+|------|------|
+| `cli.py` | CLI entry point (`goa-semantic-tools`) |
+| `services/go_enrichment_service.py` | ORA enrichment via GOATOOLS |
+| `services/go_markdown_explanation_service.py` | LLM explanation generation |
+| `services/reference_retrieval_service.py` | Claim extraction + PMID injection |
+| `utils/go_hierarchy.py` | Leaf-first + depth-anchor theme building |
+| `utils/reference_index.py` | GAF gene→GO→PMID index |
+| `services/go_explanation.prompt.yaml` | LLM explanation prompt |
+| `services/reference_retrieval.prompt.yaml` | Assertion extraction prompt |
