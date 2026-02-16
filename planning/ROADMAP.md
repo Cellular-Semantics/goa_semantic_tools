@@ -45,7 +45,7 @@ Replaced the original top-N roots approach entirely.
 - Injects verified PMIDs into final markdown output
 - CLI: `--add-references` flag
 
-**Test coverage**: 60% (Ring 0 standard), 68 unit tests across 9 files.
+**Test coverage**: 60% (Ring 0 standard), 204 unit tests across 12 files.
 
 **Benchmark results** (MSigDB Hallmark sets, v1 leaf-first):
 
@@ -60,15 +60,36 @@ Replaced the original top-N roots approach entirely.
 
 ---
 
-## Ring 1: Planned (Pending User Feedback)
+## Ring 1: In Progress
 
-### 1. Exploratory Sub-Threshold Term Discovery
+### 1a. artl-mcp Literature Search — DONE
+
+Integrated Europe PMC literature search for assertions that GAF-based lookup cannot resolve (complex and [EXTERNAL] claims). Uses `cellsem-llm-client` MCPToolSource + LiteLLMAgent (~$0.003-0.006/assertion).
+
+- `artl_literature_service.py` — single MCPToolSource session for batch, graceful degradation
+- `--no-literature-search` CLI flag (opt-out; `--add-references` includes literature search by default)
+- 25 unit tests (mocked), 1 integration test (real API)
+
+### 1b. Output Quality Tuning — NEXT
+
+The current explanation+references pipeline works end-to-end but produces output that is less detailed than the exploration script prototypes. Before adding any new features, tune the output structure to match the quality bar set by exploration outputs:
+
+- **More detailed per-theme explanations** — expand gene-level discussion within each theme (which genes, what roles, how they interact)
+- **Integrated gene details** — weave gene function descriptions into the narrative rather than just listing gene names
+- **Inline validated references** — place `[PMID:xxx]` citations directly next to the claims they support, not just in a separate references section at the bottom
+- **Benchmark against exploration outputs** — compare `results/hm_inflam_explanation.md` against exploration script outputs to identify specific gaps
+
+This is prompt engineering + output post-processing work, not new service code.
+
+### Future Ring 1 (after 1b)
+
+### 2. Exploratory Sub-Threshold Term Discovery
 
 Surface GO annotation structure beneath FDR significance thresholds. For each enriched theme anchor, enumerate child GO terms with gene overlap that didn't reach significance. Rank by overlap proportion, show top 5 per parent. Flagged with `[EXPLORATORY]` provenance tag. Opt-in via `--exploratory` CLI flag.
 
 Plan: [`planning/exploratory_sub_threshold_terms.md`](planning/exploratory_sub_threshold_terms.md)
 
-### 2. Tiered Reference Validation
+### 3. Tiered Reference Validation
 
 Full implementation of the tiered validation strategy explored in `exploration/10_reference_retrieval.py`:
 - Tier 1: Abstract scan (cheap, fast)
@@ -77,15 +98,15 @@ Full implementation of the tiered validation strategy explored in `exploration/1
 - Early stopping on first adequate reference
 - Graceful degradation for unsupported claims
 
-### 3. Wikipedia Fallback for Textbook Knowledge
+### 4. Wikipedia Fallback for Textbook Knowledge
 
 For well-established mechanisms (e.g., "IL-1B induces fever via PGE2") where no single paper states the claim explicitly. Use Wikipedia API to find cited PMIDs, then validate those PMIDs support the claim.
 
-### 4. Annotation Depth Classification
+### 5. Annotation Depth Classification
 
 Distinguish **specific enrichment** (genes annotated directly to leaf term) from **category enrichment** (genes annotated to general parent). Affects interpretation confidence and identifies where literature mining would add most value.
 
-### 5. Cross-Namespace Co-annotation
+### 6. Cross-Namespace Co-annotation
 
 Strengthen biological interpretation by combining evidence across GO namespaces:
 - BP co-annotation from same reference → strong functional link
@@ -186,6 +207,7 @@ Located in `input_data/benchmark_sets/test_lists/`:
 | `exploration/08_multi_threshold_hierarchy.py` | v3 Option B: Multi-threshold |
 | `exploration/09_depth_anchors.py` | v3 Option C: Depth-based anchors (best) |
 | `exploration/10_reference_retrieval.py` | Reference retrieval workflow |
+| `exploration/11_artl_mcp_via_llm.py` | artl-mcp literature search proof-of-concept |
 
 ---
 
@@ -199,5 +221,7 @@ Located in `input_data/benchmark_sets/test_lists/`:
 | `services/reference_retrieval_service.py` | Claim extraction + PMID injection |
 | `utils/go_hierarchy.py` | Leaf-first + depth-anchor theme building |
 | `utils/reference_index.py` | GAF gene→GO→PMID index |
+| `services/artl_literature_service.py` | Europe PMC literature search via artl-mcp |
 | `services/go_explanation.prompt.yaml` | LLM explanation prompt |
 | `services/reference_retrieval.prompt.yaml` | Assertion extraction prompt |
+| `services/artl_literature_search.prompt.yaml` | Literature search agent prompt |
