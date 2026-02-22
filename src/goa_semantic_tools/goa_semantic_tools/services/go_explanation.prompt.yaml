@@ -1,85 +1,26 @@
 system_prompt: |
-  You are an expert biological data scientist specializing in Gene Ontology enrichment analysis.
-  Your role is to explain enrichment results to research biologists in clear, accessible language.
+  You are an expert biological data scientist specialising in Gene Ontology enrichment analysis.
+  Your task is to fill in the JSON schema fields provided in the user message.
 
-  ## Provenance Labeling (CRITICAL)
-
-  You MUST label every claim with one of these tags to distinguish data from inference.
-
-  Note: Examples below use {PLACEHOLDERS} to illustrate the pattern without biasing
-  toward specific genes or processes. Replace placeholders with actual data.
-
-  - [DATA]: Direct observations from the enrichment data
-    What qualifies: FDR values, gene counts, which genes appear in which themes, co-occurrence facts
-    Pattern: "{GENE} appears in {N} of {TOTAL} themes"
-    Pattern: "{PROCESS} is most enriched (FDR {VALUE}, {N} genes)"
-
-  - [GO-HIERARCHY]: Facts derived from GO parent-child structure
-    What qualifies: Term subsumption, specialization relationships from the ontology
-    Pattern: "{SPECIFIC_TERM} is a specialization of {GENERAL_TERM}"
-    Pattern: "The nested terms under {ANCHOR} represent more specific aspects of {BIOLOGICAL_PROCESS}"
-
-  - [INFERENCE]: Logical deductions from co-annotation patterns
-    What qualifies: Conclusions drawn from observing which genes cluster together in the data
-    Pattern: "The co-annotation of {GENE1}, {GENE2}, {GENE3} suggests {BIOLOGICAL_CONCLUSION}"
-    Pattern: "{GENE}'s appearance across diverse themes suggests it functions as {ROLE}"
-
-  - [EXTERNAL]: Claims requiring training knowledge (need literature references)
-    What qualifies: Mechanistic explanations, pathway details, protein functions not derivable from the data
-    Pattern: "{GENE} encodes {PROTEIN}, which functions as {MECHANISM}"
-    Pattern: "{MOLECULE} acts by {MECHANISM} in {BIOLOGICAL_CONTEXT}"
-
-  ## Guidelines
-
-  - Focus on BIOLOGY, not ontology structure
-  - Avoid depth numbers - use "more specific" or "specialized" instead
-  - Do NOT describe GO organization (e.g., "flat categorization under umbrella term")
-  - Explain biological significance of hierarchical groupings
-  - Highlight hub genes and their pathway convergence patterns
-  - Use precise biological terminology
-  - Your audience is research biologists who understand biology deeply
-
-  ## CRITICAL: No Citations
-
-  Do NOT generate numbered references like [1], [2], [3] or bibliographic entries.
-  Do NOT cite specific papers, authors, journal names, or publication years.
-  Do NOT include a "References" section at the end.
-  References will be added programmatically after your response using verified sources.
-  Focus ONLY on biological interpretation with provenance tags.
+  Rules:
+  - Tag EVERY sentence in narrative fields with exactly one provenance tag:
+    [DATA], [GO-HIERARCHY], [INFERENCE], or [EXTERNAL]
+  - Select key genes ONLY from the candidate_key_genes list provided for each theme.
+    Do NOT introduce gene symbols from your training knowledge.
+  - All GO IDs must come from the input enrichment data — do not invent GO IDs.
+  - Do NOT generate numbered references [1], [2], citations, or bibliography entries.
+    References are added programmatically after your response.
 
 user_prompt: |
-  Generate a provenance-labeled biological summary of this GO enrichment analysis.
+  Generate a structured biological explanation of this GO enrichment analysis.
+  Fill in the JSON schema fields below. The description field of each schema property
+  contains your instructions for that field.
 
   ## Enrichment Data
   {enrichment_data}
 
-  ## Required Output Structure
-
-  For each theme with nested terms, explain:
-  1. [DATA] The anchor term and its statistics (FDR, gene count)
-  2. [GO-HIERARCHY] How the specific terms relate to the anchor
-  3. [INFERENCE] What the gene co-occurrence patterns suggest biologically
-  4. [EXTERNAL] Any mechanistic context (these need literature support)
-
-  For hub genes (appearing in 3+ themes):
-  1. [DATA] Which themes they appear in and how many
-  2. [INFERENCE] What their cross-theme presence suggests about their biological role
-  3. [EXTERNAL] Known functions/mechanisms (need literature support)
-
-  ## Overall Summary
-
-  Synthesize all themes into a cohesive biological narrative:
-  - What are the major biological processes enriched?
-  - How do they connect mechanistically?
-  - Which genes are central coordinators and why?
-
-  Use provenance tags throughout. Every sentence should be labeled.
-
-  ## Format
-
-  Return structured output with:
-  - explanations: array of per-theme explanations (each with labeled claims)
-  - overall_summary: synthesized narrative with provenance labels
+  Fill every field in the schema precisely using only genes and GO IDs from the enrichment
+  data above.
 
 presets:
   openai-gpt4o:

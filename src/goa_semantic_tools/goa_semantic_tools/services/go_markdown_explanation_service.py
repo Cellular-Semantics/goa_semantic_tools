@@ -4,6 +4,7 @@ GO Markdown Explanation Service
 LLM-based markdown report generation for GO enrichment results (Phase 2, markdown format).
 Generates provenance-labeled explanations with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY] tags.
 """
+import json
 import os
 import re
 from pathlib import Path
@@ -81,7 +82,7 @@ def generate_markdown_explanation(
     print("=" * 80)
 
     # Load prompt configuration
-    print("\n[1/3] Loading prompt configuration...")
+    print("\n[1/4] Loading prompt configuration...")
     prompt_config = _load_prompt("go_explanation.prompt.yaml")
     system_prompt = prompt_config["system_prompt"]
     user_prompt_template = prompt_config["user_prompt"]
@@ -93,29 +94,34 @@ def generate_markdown_explanation(
     print(f"  Model: {model}")
     print(f"  Temperature: {temperature}")
     print(f"  Max tokens: {max_tokens}")
-    print(f"  Output format: Markdown with provenance tags")
+    print(f"  Output format: Structured JSON → programmatic markdown render")
 
-    # Format enrichment data for LLM
-    print("\n[2/3] Formatting enrichment data for LLM...")
+    # Format enrichment data for LLM (includes ranked gene candidates per theme)
+    print("\n[2/4] Formatting enrichment data for LLM...")
     enrichment_context = _format_enrichment_for_llm(enrichment_output)
-
-    # Modify user prompt to request markdown output
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
-    user_prompt += "\n\n**IMPORTANT**: Generate your response as a well-formatted Markdown document with clear sections and provenance tags ([DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY]) on every claim. Do not return JSON."
 
     print(f"  Themes to explain: {len(themes)}")
     print(f"  Enrichment leaves: {len(enrichment_leaves)}")
     print(f"  Hub genes: {len(enrichment_output.get('hub_genes', {}))}")
     print(f"  Context size: {len(enrichment_context)} characters")
 
-    # Call LLM WITHOUT schema enforcement
-    print("\n[3/3] Calling LLM for markdown generation...")
+    # Load JSON schema for structured output (schema-first: source of truth)
+    # NOTE: requires cellsem_llm_client._generate_model_from_schema to support
+    # nested arrays of objects. Tracked in planning/STATUS.md (BLOCKED section).
+    schema_path = Path(__file__).parent.parent / "schemas" / "enrichment_explanation.schema.json"
+    with open(schema_path) as f:
+        schema = json.load(f)
+
+    # Call LLM with schema enforcement
+    print("\n[3/4] Calling LLM for structured explanation generation...")
     agent = LiteLLMAgent(model=model, api_key=api_key, max_tokens=max_tokens)
 
     try:
         result = agent.query_unified(
             message=user_prompt,
             system_message=system_prompt,
+            schema=schema,
             track_usage=True,
         )
 
@@ -126,29 +132,36 @@ def generate_markdown_explanation(
             if result.usage.estimated_cost_usd:
                 print(f"  Estimated cost: ${result.usage.estimated_cost_usd:.4f} USD")
 
-        markdown_output = result.text or ""
-
-        print("\n[Post-processing]")
-        # Add hyperlinks to GO IDs and PMIDs
-        markdown_output = _add_go_term_hyperlinks(markdown_output, enrichment_output)
-        markdown_output = _add_pmid_hyperlinks(markdown_output)
-
-        # Validate GO IDs and PMIDs to detect hallucinations
-        _validate_citations(markdown_output, enrichment_output)
-
-        # Count provenance tags
-        _count_provenance_tags(markdown_output)
-
-        print("\n" + "=" * 80)
-        print(f"Markdown explanation generation complete!")
-        print(f"  Output length: {len(markdown_output)} characters")
-        print("=" * 80)
-
-        return markdown_output
-
     except Exception as e:
         print(f"  ❌ LLM call failed: {e}")
         raise
+
+    if result.model is None:
+        raise RuntimeError("LLM response validation failed — no model instance returned")
+
+    explanation = result.model.model_dump()
+
+    # Validate post-generation (warn on violations, do not crash)
+    print("\n[4/4] Validating and rendering...")
+    warnings = validate_explanation_json(explanation, enrichment_output)
+    for w in warnings:
+        print(f"  ⚠ {w}")
+
+    # Render structured JSON → markdown programmatically
+    markdown_output = render_explanation_to_markdown(explanation, enrichment_output)
+
+    # Add hyperlinks for any bare GO IDs remaining in narrative text
+    markdown_output = _add_go_term_hyperlinks(markdown_output, enrichment_output)
+
+    # Count provenance tags
+    _count_provenance_tags(markdown_output)
+
+    print("\n" + "=" * 80)
+    print(f"Markdown explanation generation complete!")
+    print(f"  Output length: {len(markdown_output)} characters")
+    print("=" * 80)
+
+    return markdown_output
 
 
 def _load_prompt(prompt_file: str) -> dict[str, Any]:
@@ -271,12 +284,12 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
             anchor = theme.get("anchor_term", {})
             specific_terms = theme.get("specific_terms", [])
             confidence = theme.get("anchor_confidence", "")
-            all_genes = theme.get("all_genes", [])
 
             lines.append(f"## Theme {i+1}: {anchor.get('name', 'Unknown')}")
             lines.append(f"- GO ID: {anchor.get('go_id', '')}")
             lines.append(f"- Namespace: {anchor.get('namespace', '')}")
             lines.append(f"- FDR: {anchor.get('fdr', 0):.2e}")
+            lines.append(f"- Fold enrichment: {anchor.get('fold_enrichment', 0):.1f}x")
             lines.append(f"- Confidence: {confidence}")
             lines.append(f"- Genes ({len(anchor.get('genes', []))}): {', '.join(sorted(anchor.get('genes', []))[:10])}")
             if len(anchor.get('genes', [])) > 10:
@@ -290,10 +303,27 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
                     lines.append(
                         f"  - {specific.get('name', '')} ({specific.get('go_id', '')}): "
                         f"FDR={specific.get('fdr', 0):.2e}, "
-                        f"{len(specific.get('genes', []))} genes"
+                        f"{len(specific.get('genes', []))} genes: "
+                        f"{', '.join(sorted(specific.get('genes', []))[:8])}"
                     )
                 if len(specific_terms) > 5:
                     lines.append(f"  - ... and {len(specific_terms) - 5} more")
+                lines.append("")
+
+            # Ranked candidate key genes
+            ranked = rank_genes_for_theme(theme, hub_genes)
+            if ranked:
+                lines.append(f"### Candidate Key Genes (ranked by theme-specificity, select 2-5):")
+                for rank_num, entry in enumerate(ranked, 1):
+                    specific_label = (
+                        f"in {entry['in_specific_terms']} specific term(s)"
+                        if entry["in_specific_terms"] > 0
+                        else "anchor-only"
+                    )
+                    lines.append(
+                        f"  {rank_num}. {entry['gene']}  "
+                        f"[{specific_label}, appears in {entry['n_themes']} theme(s), score: {entry['score']:.2f}]"
+                    )
                 lines.append("")
 
             lines.append("---")
@@ -505,3 +535,233 @@ def _count_provenance_tags(markdown: str) -> None:
     else:
         print("  ⚠ No provenance tags found in LLM output")
         print("    The LLM should label claims with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY]")
+
+
+# =============================================================================
+# New public functions (Ring 1b output quality)
+# =============================================================================
+
+
+def rank_genes_for_theme(
+    theme: dict[str, Any],
+    hub_genes: dict[str, Any],
+    top_n: int = 8,
+) -> list[dict[str, Any]]:
+    """
+    Rank genes within a theme by theme-intrinsic signals only.
+
+    Scoring:
+        score = (in_specific_terms * 2.0) + (1.0 / n_themes)
+
+    Genes in more specific (leaf) terms score higher; genes exclusive to this
+    theme score higher than hub genes that appear everywhere.
+
+    Args:
+        theme: Single theme dict from enrichment output
+        hub_genes: hub_genes dict from enrichment output (gene → {theme_count, ...})
+        top_n: Maximum number of candidates to return (default 8)
+
+    Returns:
+        List of dicts with keys: gene, in_specific_terms, n_themes, score
+        Sorted by descending score, capped at top_n.
+    """
+    anchor_genes = set(theme.get("anchor_term", {}).get("genes", []))
+    specific_terms = theme.get("specific_terms", [])
+
+    # Collect all genes in this theme
+    all_genes: set[str] = set(anchor_genes)
+    for s in specific_terms:
+        all_genes.update(s.get("genes", []))
+
+    scored = []
+    for gene in all_genes:
+        in_specific = sum(1 for s in specific_terms if gene in s.get("genes", []))
+        n_themes = hub_genes[gene]["theme_count"] if gene in hub_genes else 1
+        score = (in_specific * 2.0) + (1.0 / n_themes)
+        scored.append({
+            "gene": gene,
+            "in_specific_terms": in_specific,
+            "n_themes": n_themes,
+            "score": score,
+        })
+
+    scored.sort(key=lambda x: -x["score"])
+    return scored[:top_n]
+
+
+def validate_explanation_json(
+    explanation: dict[str, Any],
+    enrichment_output: dict[str, Any],
+) -> list[str]:
+    """
+    Post-generation validation of LLM-produced explanation JSON.
+
+    Checks that genes and GO IDs in key_genes and key_insights actually appear
+    in the corresponding enrichment theme. Logs warnings; does NOT crash.
+
+    Args:
+        explanation: Structured explanation dict (from LLM via model.model_dump())
+        enrichment_output: Phase 1 enrichment output
+
+    Returns:
+        List of warning strings (empty if no violations found)
+    """
+    warnings: list[str] = []
+    enrichment_themes = enrichment_output.get("themes", [])
+
+    for exp_theme in explanation.get("themes", []):
+        idx = exp_theme.get("theme_index", -1)
+        if not isinstance(idx, int) or idx < 0 or idx >= len(enrichment_themes):
+            continue
+
+        enrichment_theme = enrichment_themes[idx]
+
+        # Build valid gene set for this theme
+        valid_genes: set[str] = set(enrichment_theme["anchor_term"].get("genes", []))
+        for s in enrichment_theme.get("specific_terms", []):
+            valid_genes.update(s.get("genes", []))
+
+        # Build valid GO ID set for this theme
+        valid_go_ids: set[str] = {enrichment_theme["anchor_term"].get("go_id", "")}
+        for s in enrichment_theme.get("specific_terms", []):
+            go_id = s.get("go_id", "")
+            if go_id:
+                valid_go_ids.add(go_id)
+        valid_go_ids.discard("")
+
+        # Validate key_genes
+        for kg in exp_theme.get("key_genes", []):
+            gene = kg.get("gene", "")
+            if gene and gene not in valid_genes:
+                warnings.append(f"Theme {idx}: gene '{gene}' not found in theme gene list")
+
+            go_id = kg.get("go_id", "")
+            if go_id and go_id not in valid_go_ids:
+                warnings.append(f"Theme {idx}: GO ID '{go_id}' not found in theme GO IDs")
+
+        # Validate key_insights GO IDs
+        for ki in exp_theme.get("key_insights", []):
+            go_id = ki.get("go_id", "")
+            if go_id and go_id not in valid_go_ids:
+                warnings.append(f"Theme {idx}: insight GO ID '{go_id}' not found in theme GO IDs")
+
+    return warnings
+
+
+def render_explanation_to_markdown(
+    explanation: dict[str, Any],
+    enrichment_output: dict[str, Any],
+) -> str:
+    """
+    Programmatically render a structured explanation dict to markdown.
+
+    No LLM involvement — all structure (headers, hyperlinks, [REF:GENE] markers)
+    is added deterministically. GO IDs are converted to hyperlinks by this function.
+
+    Args:
+        explanation: Structured explanation dict (from LLM via model.model_dump())
+        enrichment_output: Phase 1 enrichment output (for theme metadata)
+
+    Returns:
+        Markdown string ready for display
+    """
+    enrichment_themes = enrichment_output.get("themes", [])
+    metadata = enrichment_output.get("metadata", {})
+    lines: list[str] = []
+
+    # Document title
+    species = metadata.get("species", "")
+    title_suffix = f" — {species}" if species else ""
+    lines.append(f"# GO Enrichment Analysis Report{title_suffix}\n")
+    lines.append("")
+
+    # Per-theme sections
+    for exp_theme in explanation.get("themes", []):
+        idx = exp_theme.get("theme_index", -1)
+        if not isinstance(idx, int) or idx < 0 or idx >= len(enrichment_themes):
+            continue
+
+        enrichment_theme = enrichment_themes[idx]
+        anchor = enrichment_theme.get("anchor_term", {})
+        anchor_name = anchor.get("name", "Unknown")
+        anchor_go_id = anchor.get("go_id", "")
+
+        # Section header
+        lines.append(f"### Theme {idx + 1}: {anchor_name}\n")
+
+        # Summary line with linked GO ID
+        go_link = _go_id_to_link(anchor_go_id)
+        lines.append(f"**Summary:** {anchor_name} ({go_link})\n")
+        lines.append("")
+
+        # Narrative (free prose from LLM — provenance tags are inside)
+        narrative = exp_theme.get("narrative", "")
+        if narrative:
+            lines.append(f"{narrative}\n")
+            lines.append("")
+
+        # Key Insights
+        key_insights = exp_theme.get("key_insights", [])
+        if key_insights:
+            lines.append("**Key Insights:**\n")
+            for ki in key_insights:
+                insight = ki.get("insight", "")
+                go_id = ki.get("go_id", "")
+                go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
+                lines.append(f"- {insight}{go_link}\n")
+            lines.append("")
+
+        # Key Genes
+        key_genes = exp_theme.get("key_genes", [])
+        if key_genes:
+            lines.append("**Key Genes:**\n")
+            for kg in key_genes:
+                gene = kg.get("gene", "")
+                go_id = kg.get("go_id", "")
+                desc = kg.get("description", "")
+                claim_type = kg.get("claim_type", "INFERENCE")
+                go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
+                ref_marker = f" [REF:{gene}]" if gene else ""
+                lines.append(f"- **{gene}**: [{claim_type}] {desc}{go_link}{ref_marker}\n")
+            lines.append("")
+
+        # Statistical context
+        stat_ctx = exp_theme.get("statistical_context", "")
+        if stat_ctx:
+            lines.append(f"**Statistical Context:** {stat_ctx}\n")
+            lines.append("")
+
+        lines.append("---\n")
+        lines.append("")
+
+    # Hub genes section
+    hub_genes_exp = explanation.get("hub_genes", [])
+    if hub_genes_exp:
+        lines.append("## Hub Genes\n")
+        lines.append("")
+        for hg in hub_genes_exp:
+            gene = hg.get("gene", "")
+            narrative = hg.get("narrative", "")
+            claim_type = hg.get("claim_type", "INFERENCE")
+            lines.append(f"- **{gene}**: [{claim_type}] {narrative}\n")
+        lines.append("")
+
+    # Overall summary
+    overall = explanation.get("overall_summary", [])
+    if overall:
+        lines.append("## Overall Summary\n")
+        lines.append("")
+        for para in overall:
+            lines.append(f"{para}\n")
+            lines.append("")
+
+    return "".join(lines)
+
+
+def _go_id_to_link(go_id: str) -> str:
+    """Convert a bare GO ID to a markdown hyperlink."""
+    if not go_id:
+        return ""
+    purl_id = go_id.replace(":", "_")
+    purl = f"http://purl.obolibrary.org/obo/{purl_id}"
+    return f"[{go_id}]({purl})"

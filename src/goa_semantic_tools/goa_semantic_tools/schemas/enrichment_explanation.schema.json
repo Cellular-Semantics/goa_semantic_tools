@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/enrichment_explanation.schema.json",
+  "title": "Enrichment Explanation (themes format)",
+  "description": "LLM-generated structured explanation of GO enrichment output in depth-anchor themes format. Fill every field strictly from the input enrichment data provided — do not introduce gene symbols or GO IDs that are not present in the input.",
+  "type": "object",
+  "properties": {
+    "themes": {
+      "type": "array",
+      "description": "One explanation object per theme in the input, in the same order as the input themes array.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "theme_index": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "0-based index matching the position of this theme in the input themes array."
+          },
+          "narrative": {
+            "type": "string",
+            "minLength": 80,
+            "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data."
+          },
+          "key_insights": {
+            "type": "array",
+            "description": "2-4 key biological insights about this theme. Each insight must reference a specific GO term from this theme's input data.",
+            "minItems": 2,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "insight": {
+                  "type": "string",
+                  "minLength": 20,
+                  "description": "One specific biological insight. Be concrete — reference gene names or processes from the input data."
+                },
+                "go_id": {
+                  "type": "string",
+                  "pattern": "^GO:\\d{7}$",
+                  "description": "The GO term ID most relevant to this insight. MUST be one of the GO IDs present in this theme's input data (anchor or specific terms)."
+                }
+              },
+              "required": ["insight", "go_id"],
+              "additionalProperties": false
+            }
+          },
+          "key_genes": {
+            "type": "array",
+            "description": "2-5 key genes for this theme. You MUST select only from the candidate_key_genes list provided in the input for this theme — do not introduce genes from external knowledge.",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "properties": {
+                "gene": {
+                  "type": "string",
+                  "description": "Gene symbol. MUST appear in the candidate_key_genes list for this theme."
+                },
+                "go_id": {
+                  "type": "string",
+                  "pattern": "^GO:\\d{7}$",
+                  "description": "The specific GO term in this theme that most directly involves this gene. MUST be from this theme's input data."
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 20,
+                  "maxLength": 200,
+                  "description": "One sentence explaining this gene's role in the context of this theme. If claim_type is EXTERNAL, this may draw on known biology; if INFERENCE, it should be grounded in the enrichment evidence."
+                },
+                "claim_type": {
+                  "type": "string",
+                  "enum": ["EXTERNAL", "INFERENCE"],
+                  "description": "EXTERNAL if the gene description relies on prior biological knowledge; INFERENCE if it is derived from the enrichment data alone."
+                }
+              },
+              "required": ["gene", "go_id", "description", "claim_type"],
+              "additionalProperties": false
+            }
+          },
+          "statistical_context": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 300,
+            "description": "One sentence summarising the statistical evidence for this theme: include the anchor term FDR, fold enrichment, and gene count. Use the numbers directly from the input — do not round or approximate."
+          }
+        },
+        "required": ["theme_index", "narrative", "key_insights", "key_genes", "statistical_context"],
+        "additionalProperties": false
+      }
+    },
+    "hub_genes": {
+      "type": "array",
+      "description": "Explanations for hub genes — genes that appear across 3 or more themes. Only include genes that are listed as hub_genes in the input data.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "gene": {
+            "type": "string",
+            "description": "Gene symbol. MUST be a gene listed in the input hub_genes section."
+          },
+          "narrative": {
+            "type": "string",
+            "minLength": 30,
+            "maxLength": 300,
+            "description": "1-2 sentences explaining why this gene appears across multiple themes and what that cross-theme role implies biologically."
+          },
+          "claim_type": {
+            "type": "string",
+            "enum": ["EXTERNAL", "INFERENCE"],
+            "description": "EXTERNAL if the narrative relies on prior biological knowledge; INFERENCE if derived from the enrichment patterns alone."
+          }
+        },
+        "required": ["gene", "narrative", "claim_type"],
+        "additionalProperties": false
+      }
+    },
+    "overall_summary": {
+      "type": "array",
+      "description": "3-4 paragraph overall biological narrative synthesising all themes into a coherent story. Each element of this array is one paragraph (a string). Do not include sub-headings — write continuous prose. The final paragraph should address any limitations or caveats.",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 50
+      }
+    }
+  },
+  "required": ["themes", "hub_genes", "overall_summary"],
+  "additionalProperties": false
+}

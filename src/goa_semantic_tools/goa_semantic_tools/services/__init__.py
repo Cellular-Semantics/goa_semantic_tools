@@ -13,6 +13,7 @@ from .reference_retrieval_service import (
     find_references_for_assertion,
     format_references_needing_artl_mcp,
     inject_references,
+    inject_references_inline,
 )
 
 __all__ = [
@@ -26,4 +27,5 @@ __all__ = [
     "find_references_for_assertion",
     "format_references_needing_artl_mcp",
     "inject_references",
+    "inject_references_inline",
 ]

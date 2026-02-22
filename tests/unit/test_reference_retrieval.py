@@ -15,6 +15,7 @@ from goa_semantic_tools.services.reference_retrieval_service import (
     find_references_for_assertion,
     format_references_needing_artl_mcp,
     inject_references,
+    inject_references_inline,
 )
 
 
@@ -586,3 +587,150 @@ class TestFormatReferencesNeedingArtlMcp:
         assert "GENE3" in query
         # But all genes in the genes list
         assert len(queries[0]["genes"]) == 5
+
+
+# =============================================================================
+# Test inject_references_inline Function
+# =============================================================================
+
+
+def _make_ref(pmid: str, genes: list[str]) -> tuple[AtomicAssertion, list[ReferenceMatch]]:
+    """Helper: build a (AtomicAssertion, [ReferenceMatch]) tuple."""
+    assertion = AtomicAssertion(
+        claim_type="EXTERNAL",
+        original_text=f"{genes[0]} is involved in a biological process.",
+        genes=genes,
+        go_term_ids=["GO:0006915"],
+        is_multi_gene=False,
+        is_multi_process=False,
+    )
+    ref = ReferenceMatch(
+        pmid=pmid,
+        genes_covered=genes,
+        go_terms_covered=["GO:0006915"],
+        match_type="exact",
+    )
+    return assertion, [ref]
+
+
+@pytest.mark.unit
+class TestInjectReferencesInline:
+    """Tests for inject_references_inline function."""
+
+    def test_replaces_marker_with_pmid_link(self):
+        """[REF:GENE] marker is replaced by an inline PMID hyperlink."""
+        text = "**TP53**: Important tumour suppressor. [REF:TP53]"
+        assertion, refs = _make_ref("12345678", ["TP53"])
+
+        result = inject_references_inline(text, [(assertion, refs)])
+
+        assert "[REF:TP53]" not in result
+        assert "PMID:12345678" in result
+        assert "pubmed.ncbi.nlm.nih.gov/12345678" in result
+
+    def test_removes_marker_when_no_pmids_for_gene(self):
+        """If no PMIDs are found for a gene, the [REF:GENE] marker is silently removed."""
+        text = "**UNKNOWN**: Some gene. [REF:UNKNOWN]"
+
+        result = inject_references_inline(text, [])
+
+        assert "[REF:UNKNOWN]" not in result
+        # Original description text should still be present
+        assert "Some gene." in result
+
+    def test_caps_at_three_pmids(self):
+        """At most 3 PMIDs are injected for any single gene marker."""
+        text = "**TP53**: Important gene. [REF:TP53]"
+
+        assertion = AtomicAssertion(
+            claim_type="EXTERNAL",
+            original_text="TP53 in apoptosis",
+            genes=["TP53"],
+            go_term_ids=["GO:0006915"],
+            is_multi_gene=False,
+            is_multi_process=False,
+        )
+        refs = [
+            ReferenceMatch(pmid=str(i), genes_covered=["TP53"], go_terms_covered=["GO:0006915"], match_type="exact")
+            for i in range(1, 6)  # 5 PMIDs
+        ]
+
+        result = inject_references_inline(text, [(assertion, refs)])
+
+        # Count how many PMID: occurrences appear
+        pmid_count = result.count("PMID:")
+        assert pmid_count <= 3
+
+    def test_empty_assertion_refs_removes_all_markers(self):
+        """With empty assertion_refs, all [REF:*] markers are stripped."""
+        text = "**BRCA1**: [REF:BRCA1] **IL6**: Something else. [REF:IL6]"
+
+        result = inject_references_inline(text, [])
+
+        assert "[REF:" not in result
+        assert "BRCA1" in result
+        assert "IL6" in result
+
+    def test_multiple_genes_each_get_own_pmids(self):
+        """Two different [REF:GENE] markers each resolve to their own PMIDs."""
+        text = "**TP53**: desc1. [REF:TP53] **BRCA1**: desc2. [REF:BRCA1]"
+
+        _, tp53_refs = _make_ref("11111111", ["TP53"])
+        _, brca1_refs = _make_ref("22222222", ["BRCA1"])
+
+        tp53_assertion = AtomicAssertion(
+            claim_type="EXTERNAL",
+            original_text="TP53 in apoptosis",
+            genes=["TP53"],
+            go_term_ids=["GO:0006915"],
+            is_multi_gene=False,
+            is_multi_process=False,
+        )
+        brca1_assertion = AtomicAssertion(
+            claim_type="EXTERNAL",
+            original_text="BRCA1 in DNA repair",
+            genes=["BRCA1"],
+            go_term_ids=["GO:0006915"],
+            is_multi_gene=False,
+            is_multi_process=False,
+        )
+
+        result = inject_references_inline(
+            text, [(tp53_assertion, tp53_refs), (brca1_assertion, brca1_refs)]
+        )
+
+        assert "PMID:11111111" in result
+        assert "PMID:22222222" in result
+        assert "[REF:" not in result
+
+    def test_deduplicates_pmids_for_same_gene(self):
+        """If the same PMID appears in multiple assertions for the same gene, it appears once."""
+        text = "**TP53**: desc. [REF:TP53]"
+
+        assertion1 = AtomicAssertion(
+            claim_type="EXTERNAL",
+            original_text="TP53 in apoptosis",
+            genes=["TP53"],
+            go_term_ids=["GO:0006915"],
+            is_multi_gene=False,
+            is_multi_process=False,
+        )
+        assertion2 = AtomicAssertion(
+            claim_type="INFERENCE",
+            original_text="TP53 in cell cycle",
+            genes=["TP53"],
+            go_term_ids=["GO:0007050"],
+            is_multi_gene=False,
+            is_multi_process=False,
+        )
+        dup_ref = ReferenceMatch(
+            pmid="99999999",
+            genes_covered=["TP53"],
+            go_terms_covered=["GO:0006915"],
+            match_type="exact",
+        )
+
+        result = inject_references_inline(text, [(assertion1, [dup_ref]), (assertion2, [dup_ref])])
+
+        # PMID should appear exactly once
+        assert result.count("PMID:99999999") == 1

@@ -18,7 +18,7 @@ from .services.reference_retrieval_service import (
     extract_genes_from_text,
     find_references_for_assertion,
     format_references_needing_artl_mcp,
-    inject_references,
+    inject_references_inline,
 )
 from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
@@ -358,7 +358,7 @@ def _add_references_to_explanation(
 
     # Inject references into markdown
     if assertion_refs:
-        explanation_markdown = inject_references(explanation_markdown, assertion_refs)
+        explanation_markdown = inject_references_inline(explanation_markdown, assertion_refs)
         print(f"  ✓ Injected {len(assertion_refs)} reference blocks")
 
     # Export unresolved assertions for artl-mcp
