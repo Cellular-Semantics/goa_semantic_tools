@@ -1,0 +1,1443 @@
+[
+  {
+    "assertion": "**Key Insights:**\n- CD14 is a receptor that recognizes bacterial components like lipopolysaccharides, pivotal for initiating immune responses in this theme. ([[GO:0071222](http://purl.obolibrary.org/obo/GO_0071222)](http://purl.obolibrary.org/obo/GO_0071222))\n- NOD2 plays a crucial role in recognizing bacterial peptidoglycan, triggering subsequent immune responses. ([[GO:0071224](http://purl.obolibrary.org/obo/GO_0071224)](http://purl.obolibrary.org/obo/GO_0071224))\n**Key Genes:**\n- **CD14**:",
+    "suggested_query": "CD14 NOD2 CD14 **Key Insights:**\n- CD14 is a receptor that recogn",
+    "genes": [
+      "CD14",
+      "NOD2",
+      "CD14"
+    ],
+    "go_terms": [
+      "GO:0007259",
+      "GO:0007189",
+      "GO:0098586"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD14 is critical for recognizing bacterial lipopolysaccharides, driving the cellular response to bacterial origins. ([[GO:0071222](http://purl.obolibrary.org/obo/GO_0071222)](http://purl.obolibrary.org/obo/GO_0071222)) [REF:CD14]\n- **NOD2**:",
+    "suggested_query": "CD14 CD14 NOD2 CD14 is critical for recognizing bacterial lipopol",
+    "genes": [
+      "CD14",
+      "CD14",
+      "NOD2"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "NOD2 recognizes bacterial peptidoglycan, activating immune response pathways. ([[GO:0071224](http://purl.obolibrary.org/obo/GO_0071224)](http://purl.obolibrary.org/obo/GO_0071224)) [REF:NOD2]\n- **RELA**:",
+    "suggested_query": "NOD2 NOD2 RELA NOD2 recognizes bacterial peptidoglycan, activatin",
+    "genes": [
+      "NOD2",
+      "NOD2",
+      "RELA"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0007259",
+      "GO:0007189"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "RELA is a component of NF-kappaB signaling involved in responses to bacterial components like lipoteichoic acid. ([[GO:0071223](http://purl.obolibrary.org/obo/GO_0071223)](http://purl.obolibrary.org/obo/GO_0071223)) [REF:RELA]\n**Statistical Context:** With an FDR of 1.60e-26, this theme shows a fold enrichment of 0.2x across 30 genes.\n---\n### Theme 2: regulation of leukocyte migration\n**Summary:** regulation of leukocyte migration ([[GO:0002685](http://purl.obolibrary.org/obo/GO_0002685)](http://purl.obolibrary.org/obo/GO_0002685))\nThe 'regulation of leukocyte migration' theme focuses on the control of movement of white blood cells, crucial for immune surveillance and response.",
+    "suggested_query": "RELA RELA RELA is a component of NF-kappaB signaling involve",
+    "genes": [
+      "RELA",
+      "RELA"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- CHST2 is associated with regulating cellular extravasation, influencing leukocyte movement into tissues. ([[GO:0002691](http://purl.obolibrary.org/obo/GO_0002691)](http://purl.obolibrary.org/obo/GO_0002691))\n- PTGER4 is known for its role in the negative regulation of leukocyte migration, affecting immune cell distribution during inflammation. ([[GO:0002686](http://purl.obolibrary.org/obo/GO_0002686)](http://purl.obolibrary.org/obo/GO_0002686))\n**Key Genes:**\n- **TNFAIP6**:",
+    "suggested_query": "CHST2 PTGER4 TNFAIP6 **Key Insights:**\n- CHST2 is associated with regul",
+    "genes": [
+      "CHST2",
+      "PTGER4",
+      "TNFAIP6"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "TNFAIP6 regulates neutrophil migration, playing roles in immune responses and inflammation control. ([[GO:1902622](http://purl.obolibrary.org/obo/GO_1902622)](http://purl.obolibrary.org/obo/GO_1902622)) [REF:TNFAIP6]\n- **PTGER4**:",
+    "suggested_query": "TNFAIP6 TNFAIP6 PTGER4 TNFAIP6 regulates neutrophil migration, playing ro",
+    "genes": [
+      "TNFAIP6",
+      "TNFAIP6",
+      "PTGER4"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "PTGER4 modulates the extravasation of leukocytes ensuring proper immune surveillance and response. ([[GO:0002691](http://purl.obolibrary.org/obo/GO_0002691)](http://purl.obolibrary.org/obo/GO_0002691)) [REF:PTGER4]\n- **CHST2**:",
+    "suggested_query": "PTGER4 PTGER4 CHST2 PTGER4 modulates the extravasation of leukocytes e",
+    "genes": [
+      "PTGER4",
+      "PTGER4",
+      "CHST2"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CHST2 aids in cellular extravasation, essential for immune cell recruitment to sites of need. ([[GO:0002691](http://purl.obolibrary.org/obo/GO_0002691)](http://purl.obolibrary.org/obo/GO_0002691)) [REF:CHST2]\n**Statistical Context:** This theme has an FDR of 2.34e-20 with a 0.1x fold enrichment, encompassing 27 genes.\n---\n### Theme 3: positive regulation of cell-cell adhesion\n**Summary:** positive regulation of cell-cell adhesion ([[GO:0022409](http://purl.obolibrary.org/obo/GO_0022409)](http://purl.obolibrary.org/obo/GO_0022409))\nThe theme of 'positive regulation of cell-cell adhesion' involves processes that enhance the connectivity between cells, vital for maintaining tissue integrity and facilitating communication.",
+    "suggested_query": "CHST2 CHST2 CHST2 aids in cellular extravasation, essential fo",
+    "genes": [
+      "CHST2",
+      "CHST2"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- IL6 plays a pivotal role in the positive regulation of homotypic cell-cell adhesion, underlying its importance in inflammatory settings. ([[GO:0034112](http://purl.obolibrary.org/obo/GO_0034112)](http://purl.obolibrary.org/obo/GO_0034112))\n- IL1B's involvement in enhancing heterotypic cell-cell adhesion is critical during inflammation and tissue repair. ([[GO:0034116](http://purl.obolibrary.org/obo/GO_0034116)](http://purl.obolibrary.org/obo/GO_0034116))\n**Key Genes:**\n- **IL6**:",
+    "suggested_query": "IL6 IL1B IL6 **Key Insights:**\n- IL6 plays a pivotal role in th",
+    "genes": [
+      "IL6",
+      "IL1B",
+      "IL6"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL6 is integral in promoting homotypic cell-cell adhesion, thereby enhancing cellular interaction during immune responses. ([[GO:0034112](http://purl.obolibrary.org/obo/GO_0034112)](http://purl.obolibrary.org/obo/GO_0034112)) [REF:IL6]\n- **IL1B**:",
+    "suggested_query": "IL6 IL6 IL1B IL6 is integral in promoting homotypic cell-cell a",
+    "genes": [
+      "IL6",
+      "IL6",
+      "IL1B"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL1B facilitates heterotypic cell-cell adhesion, supporting the immune response during inflammation. ([[GO:0034116](http://purl.obolibrary.org/obo/GO_0034116)](http://purl.obolibrary.org/obo/GO_0034116)) [REF:IL1B]\n- **IL10**:",
+    "suggested_query": "IL1B IL1B IL10 IL1B facilitates heterotypic cell-cell adhesion, s",
+    "genes": [
+      "IL1B",
+      "IL1B",
+      "IL10"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL10 aids in encouraging heterotypic cell-cell adhesion, significant for modulating immune interactions. ([[GO:0034116](http://purl.obolibrary.org/obo/GO_0034116)](http://purl.obolibrary.org/obo/GO_0034116)) [REF:IL10]\n**Statistical Context:** With a 2.85e-18 FDR and 0.1x fold enrichment, this theme includes 29 genes.\n---\n### Theme 4: leukocyte migration\n**Summary:** leukocyte migration ([[GO:0050900](http://purl.obolibrary.org/obo/GO_0050900)](http://purl.obolibrary.org/obo/GO_0050900))\nThe theme 'leukocyte migration' covers processes involving the movement of white blood cells, pivotal for immune response coordination and surveillance.",
+    "suggested_query": "IL10 IL10 IL10 aids in encouraging heterotypic cell-cell adh",
+    "genes": [
+      "IL10",
+      "IL10"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:2000110"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- CCL5 influences leukocyte migration involved in inflammatory responses, highlighting its role in immune cell recruitment during inflammation. ([[GO:0002523](http://purl.obolibrary.org/obo/GO_0002523)](http://purl.obolibrary.org/obo/GO_0002523))\n- CCR7 impacts myeloid leukocyte migration, crucial for innate immune responses and pathogen clearance. ([[GO:0097529](http://purl.obolibrary.org/obo/GO_0097529)](http://purl.obolibrary.org/obo/GO_0097529))\n**Key Genes:**\n- **CCR7**:",
+    "suggested_query": "CCL5 CCR7 CCR7 **Key Insights:**\n- CCL5 influences leukocyte migr",
+    "genes": [
+      "CCL5",
+      "CCR7",
+      "CCR7"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCR7 is vital for directing myeloid leukocyte migration, supporting innate immune functions. ([[GO:0097529](http://purl.obolibrary.org/obo/GO_0097529)](http://purl.obolibrary.org/obo/GO_0097529)) [REF:CCR7]\n- **CCL5**:",
+    "suggested_query": "CCR7 CCR7 CCL5 CCR7 is vital for directing myeloid leukocyte migr",
+    "genes": [
+      "CCR7",
+      "CCR7",
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:1904141"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 contributes to leukocyte migration during inflammation by modulating immune cell recruitment. ([[GO:0002523](http://purl.obolibrary.org/obo/GO_0002523)](http://purl.obolibrary.org/obo/GO_0002523)) [REF:CCL5]\n- **CX3CL1**:",
+    "suggested_query": "CCL5 CCL5 CX3CL1 CCL5 contributes to leukocyte migration during inf",
+    "genes": [
+      "CCL5",
+      "CCL5",
+      "CX3CL1"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:1904141"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CX3CL1 is involved in leukocyte migration during inflammation, aiding in immune cell positioning. ([[GO:0002523](http://purl.obolibrary.org/obo/GO_0002523)](http://purl.obolibrary.org/obo/GO_0002523)) [REF:CX3CL1]\n**Statistical Context:** The theme has an FDR of 2.10e-17, a 0.1x fold enrichment, and involves 24 genes.\n---\n### Theme 5: positive regulation of leukocyte migration\n**Summary:** positive regulation of leukocyte migration ([[GO:0002687](http://purl.obolibrary.org/obo/GO_0002687)](http://purl.obolibrary.org/obo/GO_0002687))\nThe theme 'positive regulation of leukocyte migration' specifically delves into mechanisms enhancing the movement of immune cells, critical during immune responses.",
+    "suggested_query": "CX3CL1 CX3CL1 CX3CL1 is involved in leukocyte migration during i",
+    "genes": [
+      "CX3CL1",
+      "CX3CL1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- C3AR1 is significantly implicated in positive regulation of mononuclear cell migration, crucial for immune surveillance. ([[GO:0071677](http://purl.obolibrary.org/obo/GO_0071677)](http://purl.obolibrary.org/obo/GO_0071677))\n- CCL5's role in promoting leukocyte chemotaxis highlights its importance in orchestrating immune cell distribution during infections. ([[GO:0002690](http://purl.obolibrary.org/obo/GO_0002690)](http://purl.obolibrary.org/obo/GO_0002690))\n**Key Genes:**\n- **CCL5**:",
+    "suggested_query": "C3AR1 CCL5 CCL5 **Key Insights:**\n- C3AR1 is significantly implica",
+    "genes": [
+      "C3AR1",
+      "CCL5",
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 plays a significant role in promoting leukocyte migration, vital for efficient immune response deployment. ([[GO:0071677](http://purl.obolibrary.org/obo/GO_0071677)](http://purl.obolibrary.org/obo/GO_0071677)) [REF:CCL5]\n- **C3AR1**:",
+    "suggested_query": "CCL5 CCL5 C3AR1 CCL5 plays a significant role in promoting leukocy",
+    "genes": [
+      "CCL5",
+      "CCL5",
+      "C3AR1"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "C3AR1 supports mononuclear cell migration, essential for immune reactions and surveillance. ([[GO:0071677](http://purl.obolibrary.org/obo/GO_0071677)](http://purl.obolibrary.org/obo/GO_0071677)) [REF:C3AR1]\n- **CSF1**:",
+    "suggested_query": "C3AR1 C3AR1 CSF1 C3AR1 supports mononuclear cell migration, essenti",
+    "genes": [
+      "C3AR1",
+      "C3AR1",
+      "CSF1"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:1904141"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CSF1 is crucial for macrophage migration, aiding in tissue infiltration during immune responses. ([[GO:1905523](http://purl.obolibrary.org/obo/GO_1905523)](http://purl.obolibrary.org/obo/GO_1905523)) [REF:CSF1]\n**Statistical Context:** This theme's FDR is 6.74e-17 with a 0.2x fold enrichment across 21 genes.\n---\n### Theme 6: positive regulation of inflammatory response\n**Summary:** positive regulation of inflammatory response ([[GO:0050729](http://purl.obolibrary.org/obo/GO_0050729)](http://purl.obolibrary.org/obo/GO_0050729))\nThe 'positive regulation of inflammatory response' theme highlights gene processes that amplify inflammatory signaling, vital for controlling infection and tissue repair.",
+    "suggested_query": "CSF1 CSF1 CSF1 is crucial for macrophage migration, aiding i",
+    "genes": [
+      "CSF1",
+      "CSF1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- IL1B is involved in the positive regulation of acute inflammatory responses, facilitating rapid immune activation. ([[GO:0002675](http://purl.obolibrary.org/obo/GO_0002675)](http://purl.obolibrary.org/obo/GO_0002675))\n- IL18 contributes to the amplification of neuroinflammatory responses, revealing its dual role in CNS-related inflammation. ([[GO:0150078](http://purl.obolibrary.org/obo/GO_0150078)](http://purl.obolibrary.org/obo/GO_0150078))\n**Key Genes:**\n- **IL1B**:",
+    "suggested_query": "IL1B IL18 IL1B **Key Insights:**\n- IL1B is involved in the positi",
+    "genes": [
+      "IL1B",
+      "IL18",
+      "IL1B"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL1B enhances acute inflammation, crucial for immediate immune response. ([[GO:0002675](http://purl.obolibrary.org/obo/GO_0002675)](http://purl.obolibrary.org/obo/GO_0002675)) [REF:IL1B]\n- **IL18**:",
+    "suggested_query": "IL1B IL1B IL18 IL1B enhances acute inflammation, crucial for imme",
+    "genes": [
+      "IL1B",
+      "IL1B",
+      "IL18"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL18 plays a role in regulating neuroinflammation, important for CNS immune responses. ([[GO:0150078](http://purl.obolibrary.org/obo/GO_0150078)](http://purl.obolibrary.org/obo/GO_0150078)) [REF:IL18]\n- **IL6**:",
+    "suggested_query": "IL18 IL18 IL6 IL18 plays a role in regulating neuroinflammation,",
+    "genes": [
+      "IL18",
+      "IL18",
+      "IL6"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL6 impacts neuroinflammatory processes, underscoring its neuron-immune interactions. ([[GO:0150078](http://purl.obolibrary.org/obo/GO_0150078)](http://purl.obolibrary.org/obo/GO_0150078)) [REF:IL6]\n**Statistical Context:** This theme's FDR is 7.02e-17, with a 0.1x fold enrichment across 22 genes.\n---\n### Theme 7: cytokine receptor activity\n**Summary:** cytokine receptor activity ([[GO:0004896](http://purl.obolibrary.org/obo/GO_0004896)](http://purl.obolibrary.org/obo/GO_0004896))\nThe 'cytokine receptor activity' theme encompasses functions of receptors specific to cytokines, crucial in immune signaling and response modulation.",
+    "suggested_query": "IL6 IL6 IL6 impacts neuroinflammatory processes, underscor",
+    "genes": [
+      "IL6",
+      "IL6"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- IL15RA functions as part of interleukin-15 receptor activity, critical for T-cell signaling and immune homeostasis. ([[GO:0042010](http://purl.obolibrary.org/obo/GO_0042010)](http://purl.obolibrary.org/obo/GO_0042010))\n- CCRL2 is implicated in chemokine receptor activity, essential for immune cell signaling and migration. ([[GO:0004950](http://purl.obolibrary.org/obo/GO_0004950)](http://purl.obolibrary.org/obo/GO_0004950))\n**Key Genes:**\n- **IL15RA**:",
+    "suggested_query": "IL15RA CCRL2 IL15RA **Key Insights:**\n- IL15RA functions as part of in",
+    "genes": [
+      "IL15RA",
+      "CCRL2",
+      "IL15RA"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL15RA mediates interleukin-15 receptor activities, pivotal for T cell responses. ([[GO:0042010](http://purl.obolibrary.org/obo/GO_0042010)](http://purl.obolibrary.org/obo/GO_0042010)) [REF:IL15RA]\n- **CCRL2**:",
+    "suggested_query": "IL15RA IL15RA CCRL2 IL15RA mediates interleukin-15 receptor activities",
+    "genes": [
+      "IL15RA",
+      "IL15RA",
+      "CCRL2"
+    ],
+    "go_terms": [
+      "GO:0007259",
+      "GO:0007189",
+      "GO:0098586"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCRL2 is involved in chemokine receptor activities, key for immune cell migration. ([[GO:0004950](http://purl.obolibrary.org/obo/GO_0004950)](http://purl.obolibrary.org/obo/GO_0004950)) [REF:CCRL2]\n- **CXCR6**:",
+    "suggested_query": "CCRL2 CCRL2 CXCR6 CCRL2 is involved in chemokine receptor activities",
+    "genes": [
+      "CCRL2",
+      "CCRL2",
+      "CXCR6"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0007259",
+      "GO:0007189"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CXCR6 facilitates chemokine receptor activity, impacting immune cell positioning. ([[GO:0004950](http://purl.obolibrary.org/obo/GO_0004950)](http://purl.obolibrary.org/obo/GO_0004950)) [REF:CXCR6]\n**Statistical Context:** The theme has an FDR of 2.10e-16, a 0.2x fold enrichment, involving 19 genes.\n---\n### Theme 8: regulation of leukocyte proliferation\n**Summary:** regulation of leukocyte proliferation ([[GO:0070663](http://purl.obolibrary.org/obo/GO_0070663)](http://purl.obolibrary.org/obo/GO_0070663))\nIn the theme 'regulation of leukocyte proliferation', processes that modulate the division and expansion of leukocytes are highlighted.",
+    "suggested_query": "CXCR6 CXCR6 CXCR6 facilitates chemokine receptor activity, imp",
+    "genes": [
+      "CXCR6",
+      "CXCR6"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0008009"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- CD70 plays a pivotal role in the positive regulation of leukocyte proliferation, signifying its influence on immune cell numbers during responses. ([[GO:0070665](http://purl.obolibrary.org/obo/GO_0070665)](http://purl.obolibrary.org/obo/GO_0070665))\n- CSF1 orchestrates mononuclear cell proliferation, integral for immune system maintenance and response. ([[GO:0032944](http://purl.obolibrary.org/obo/GO_0032944)](http://purl.obolibrary.org/obo/GO_0032944))\n**Key Genes:**\n- **CD70**:",
+    "suggested_query": "CD70 CSF1 CD70 **Key Insights:**\n- CD70 plays a pivotal role in t",
+    "genes": [
+      "CD70",
+      "CSF1",
+      "CD70"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD70 is important for leukocyte proliferation, influencing immune system dynamics. ([[GO:0070665](http://purl.obolibrary.org/obo/GO_0070665)](http://purl.obolibrary.org/obo/GO_0070665)) [REF:CD70]\n- **CSF1**:",
+    "suggested_query": "CD70 CD70 CSF1 CD70 is important for leukocyte proliferation, inf",
+    "genes": [
+      "CD70",
+      "CD70",
+      "CSF1"
+    ],
+    "go_terms": [
+      "GO:0048661",
+      "GO:0042100",
+      "GO:0042104"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CSF1 regulates the growth of mononuclear cells, contributing to immune system robustness. ([[GO:0032944](http://purl.obolibrary.org/obo/GO_0032944)](http://purl.obolibrary.org/obo/GO_0032944)) [REF:CSF1]\n- **EBI3**:",
+    "suggested_query": "CSF1 CSF1 EBI3 CSF1 regulates the growth of mononuclear cells, co",
+    "genes": [
+      "CSF1",
+      "CSF1",
+      "EBI3"
+    ],
+    "go_terms": [
+      "GO:0010575",
+      "GO:0030949",
+      "GO:0008083"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "EBI3 enhances mononuclear cell proliferation, aiding in immune responses. ([[GO:0032946](http://purl.obolibrary.org/obo/GO_0032946)](http://purl.obolibrary.org/obo/GO_0032946)) [REF:EBI3]\n**Statistical Context:** This theme involves an FDR of 5.65e-16 and a 0.1x fold enrichment across 24 genes.\n---\n### Theme 9: positive regulation of phosphate metabolic process\n**Summary:** positive regulation of phosphate metabolic process ([[GO:0045937](http://purl.obolibrary.org/obo/GO_0045937)](http://purl.obolibrary.org/obo/GO_0045937))\nThe 'positive regulation of phosphate metabolic process' theme involves processes that enhance the metabolism of phosphate-containing compounds, critical for energy transfer and cell signaling.",
+    "suggested_query": "EBI3 EBI3 EBI3 enhances mononuclear cell proliferation, aidi",
+    "genes": [
+      "EBI3",
+      "EBI3"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- TNFSF15 is involved in various phosphorylation regulation processes, influencing cellular signaling. ([[GO:0010562](http://purl.obolibrary.org/obo/GO_0010562)](http://purl.obolibrary.org/obo/GO_0010562))\n- IL10 is pivotal in enhancing protein phosphorylation, integral for cellular signaling and responses. ([[GO:0042327](http://purl.obolibrary.org/obo/GO_0042327)](http://purl.obolibrary.org/obo/GO_0042327))\n**Key Genes:**\n- **TNFSF15**:",
+    "suggested_query": "TNFSF15 IL10 TNFSF15 **Key Insights:**\n- TNFSF15 is involved in various",
+    "genes": [
+      "TNFSF15",
+      "IL10",
+      "TNFSF15"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "TNFSF15 enhances phosphorus metabolic processes, influencing cell energy dynamics. ([[GO:0010562](http://purl.obolibrary.org/obo/GO_0010562)](http://purl.obolibrary.org/obo/GO_0010562)) [REF:TNFSF15]\n- **ABI1**:",
+    "suggested_query": "TNFSF15 TNFSF15 ABI1 TNFSF15 enhances phosphorus metabolic processes, i",
+    "genes": [
+      "TNFSF15",
+      "TNFSF15",
+      "ABI1"
+    ],
+    "go_terms": [
+      "GO:2000110",
+      "GO:0045821",
+      "GO:0016070"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "ABI1 promotes protein phosphorylation, crucial for regulating cell signaling pathways. ([[GO:0042327](http://purl.obolibrary.org/obo/GO_0042327)](http://purl.obolibrary.org/obo/GO_0042327)) [REF:ABI1]\n- **SLC4A4**:",
+    "suggested_query": "ABI1 ABI1 SLC4A4 ABI1 promotes protein phosphorylation, crucial for",
+    "genes": [
+      "ABI1",
+      "ABI1",
+      "SLC4A4"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "SLC4A4 impacts phosphorus metabolism, necessary for cellular regulatory processes. ([[GO:0042327](http://purl.obolibrary.org/obo/GO_0042327)](http://purl.obolibrary.org/obo/GO_0042327)) [REF:SLC4A4]\n**Statistical Context:** This theme has an FDR of 6.14e-16, with a 0.1x fold enrichment across 27 genes.\n---\n### Theme 10: positive regulation of leukocyte cell-cell adhesion\n**Summary:** positive regulation of leukocyte cell-cell adhesion ([[GO:1903039](http://purl.obolibrary.org/obo/GO_1903039)](http://purl.obolibrary.org/obo/GO_1903039))\nThe theme 'positive regulation of leukocyte cell-cell adhesion' highlights processes promoting adhesion among immune cells, critical for their communication and interactions within tissues.",
+    "suggested_query": "SLC4A4 SLC4A4 SLC4A4 impacts phosphorus metabolism, necessary fo",
+    "genes": [
+      "SLC4A4",
+      "SLC4A4"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "**Key Insights:**\n- IL12B enhances T cell activation processes, critical for adaptive immune functions. ([[GO:1903039](http://purl.obolibrary.org/obo/GO_1903039)](http://purl.obolibrary.org/obo/GO_1903039))\n- SELE's involvement in leukocyte adhesion to vascular endothelial cells emphasizes its role in immune system interactions and trafficking. ([[GO:1904996](http://purl.obolibrary.org/obo/GO_1904996)](http://purl.obolibrary.org/obo/GO_1904996))\n**Key Genes:**\n- **IL18**:",
+    "suggested_query": "IL12B SELE IL18 **Key Insights:**\n- IL12B enhances T cell activati",
+    "genes": [
+      "IL12B",
+      "SELE",
+      "IL18"
+    ],
+    "go_terms": [
+      "GO:0010575",
+      "GO:2000110",
+      "GO:0030168"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL18 significantly enhances leukocyte adhesion, facilitating immune interactions. ([[GO:1903039](http://purl.obolibrary.org/obo/GO_1903039)](http://purl.obolibrary.org/obo/GO_1903039)) [REF:IL18]\n- **IL12B**:",
+    "suggested_query": "IL18 IL18 IL12B IL18 significantly enhances leukocyte adhesion, fa",
+    "genes": [
+      "IL18",
+      "IL18",
+      "IL12B"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:0034112"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL12B promotes T cell proliferation and activation, important for adaptive immunity. ([[GO:0042104](http://purl.obolibrary.org/obo/GO_0042104)](http://purl.obolibrary.org/obo/GO_0042104)) [REF:IL12B]\n- **CD55**:",
+    "suggested_query": "IL12B IL12B CD55 IL12B promotes T cell proliferation and activation",
+    "genes": [
+      "IL12B",
+      "IL12B",
+      "CD55"
+    ],
+    "go_terms": [
+      "GO:0048661",
+      "GO:0042100",
+      "GO:0042104"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD55 plays a role in leukocyte proliferation, key for sustaining immune responses. ([[GO:0042102](http://purl.obolibrary.org/obo/GO_0042102)](http://purl.obolibrary.org/obo/GO_0042102)) [REF:CD55]\n**Statistical Context:** With an FDR of 6.60e-16, this theme shows a 0.1x fold enrichment across 25 genes.\n---\n### Theme 11: positive regulation of lymphocyte activation\n**Summary:** positive regulation of lymphocyte activation ([[GO:0051251](http://purl.obolibrary.org/obo/GO_0051251)](http://purl.obolibrary.org/obo/GO_0051251))\nThe 'positive regulation of lymphocyte activation' theme refers to processes enhancing lymphocyte activation, crucial for effective adaptive immune responses.",
+    "suggested_query": "CD55 CD55 CD55 plays a role in leukocyte proliferation, key ",
+    "genes": [
+      "CD55",
+      "CD55"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL18 enhances lymphocyte activation, critical for swift immune responses. ([[GO:0050671](http://purl.obolibrary.org/obo/GO_0050671)](http://purl.obolibrary.org/obo/GO_0050671)) [REF:IL18]\n- **IL12B**:",
+    "suggested_query": "IL18 IL18 IL12B IL18 enhances lymphocyte activation, critical for ",
+    "genes": [
+      "IL18",
+      "IL18",
+      "IL12B"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL12B promotes lymphocyte proliferation, supporting immune system robustness. ([[GO:0050671](http://purl.obolibrary.org/obo/GO_0050671)](http://purl.obolibrary.org/obo/GO_0050671)) [REF:IL12B]\n- **AXL**:",
+    "suggested_query": "IL12B IL12B AXL IL12B promotes lymphocyte proliferation, supportin",
+    "genes": [
+      "IL12B",
+      "IL12B",
+      "AXL"
+    ],
+    "go_terms": [
+      "GO:0048661",
+      "GO:0042100",
+      "GO:0042104"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "AXL aids in lymphocyte differentiation, ensuring immune system adaptability. ([[GO:0045621](http://purl.obolibrary.org/obo/GO_0045621)](http://purl.obolibrary.org/obo/GO_0045621)) [REF:AXL]\n**Statistical Context:** This theme has an FDR of 1.90e-15 with a 0.1x fold enrichment, involving 26 genes.\n---\n### Theme 12: external side of plasma membrane\n**Summary:** external side of plasma membrane ([[GO:0009897](http://purl.obolibrary.org/obo/GO_0009897)](http://purl.obolibrary.org/obo/GO_0009897))\nThe 'external side of plasma membrane' theme involves genes located or acting at the cell surface, crucial for cell signaling and interactions.",
+    "suggested_query": "AXL AXL AXL aids in lymphocyte differentiation, ensuring i",
+    "genes": [
+      "AXL",
+      "AXL"
+    ],
+    "go_terms": [
+      "GO:0009897",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD14 is a membrane-bound receptor crucial for recognizing bacterial components and initiating immune responses. ([[GO:0009897](http://purl.obolibrary.org/obo/GO_0009897)](http://purl.obolibrary.org/obo/GO_0009897)) [REF:CD14]\n- **CSF3R**:",
+    "suggested_query": "CD14 CD14 CSF3R CD14 is a membrane-bound receptor crucial for reco",
+    "genes": [
+      "CD14",
+      "CD14",
+      "CSF3R"
+    ],
+    "go_terms": [
+      "GO:0009897",
+      "GO:0007259",
+      "GO:0007189"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CSF3R acts at the cell exterior to mediate signaling in immune responses. ([[GO:0009897](http://purl.obolibrary.org/obo/GO_0009897)](http://purl.obolibrary.org/obo/GO_0009897)) [REF:CSF3R]\n**Statistical Context:** The FDR for this cellular component is 6.54e-15 with a 0.1x fold enrichment across 29 genes.\n---\n### Theme 13: positive regulation of cytosolic calcium ion concentration\n**Summary:** positive regulation of cytosolic calcium ion concentration ([[GO:0007204](http://purl.obolibrary.org/obo/GO_0007204)](http://purl.obolibrary.org/obo/GO_0007204))\nThe theme 'positive regulation of cytosolic calcium ion concentration' encompasses processes that increase calcium levels in the cell, a key signaling event.",
+    "suggested_query": "CSF3R CSF3R CSF3R acts at the cell exterior to mediate signali",
+    "genes": [
+      "CSF3R",
+      "CSF3R"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "BDKRB1 modulates cytosolic calcium levels, impacting inflammation and cellular responses. ([[GO:0007204](http://purl.obolibrary.org/obo/GO_0007204)](http://purl.obolibrary.org/obo/GO_0007204)) [REF:BDKRB1]\n- **CMKLR1**:",
+    "suggested_query": "BDKRB1 BDKRB1 CMKLR1 BDKRB1 modulates cytosolic calcium levels, impacti",
+    "genes": [
+      "BDKRB1",
+      "BDKRB1",
+      "CMKLR1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0051281",
+      "GO:0098586"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CMKLR1 influences calcium ion concentration, essential for cellular signal transduction. ([[GO:0007204](http://purl.obolibrary.org/obo/GO_0007204)](http://purl.obolibrary.org/obo/GO_0007204)) [REF:CMKLR1]\n**Statistical Context:** This theme\u2019s FDR is 1.26e-14, with a 0.1x fold enrichment, involving 20 genes.\n---\n### Theme 14: regulation of lymphocyte proliferation\n**Summary:** regulation of lymphocyte proliferation ([[GO:0050670](http://purl.obolibrary.org/obo/GO_0050670)](http://purl.obolibrary.org/obo/GO_0050670))\nThe theme 'regulation of lymphocyte proliferation' involves gene activities modulating the growth and expansion of lymphocytes, essential for adaptive immunity.",
+    "suggested_query": "CMKLR1 CMKLR1 CMKLR1 influences calcium ion concentration, essen",
+    "genes": [
+      "CMKLR1",
+      "CMKLR1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "EBI3 is integral in regulating T cell proliferation, ensuring adaptive immune competency. ([[GO:0042129](http://purl.obolibrary.org/obo/GO_0042129)](http://purl.obolibrary.org/obo/GO_0042129)) [REF:EBI3]\n- **IL12B**:",
+    "suggested_query": "EBI3 EBI3 IL12B EBI3 is integral in regulating T cell proliferatio",
+    "genes": [
+      "EBI3",
+      "EBI3",
+      "IL12B"
+    ],
+    "go_terms": [
+      "GO:0048661",
+      "GO:0042100",
+      "GO:0042104"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL12B modulates lymphocyte proliferation, essential for maintaining adaptive immune responses. ([[GO:0042129](http://purl.obolibrary.org/obo/GO_0042129)](http://purl.obolibrary.org/obo/GO_0042129)) [REF:IL12B]\n**Statistical Context:** The FDR for this theme is 7.67e-14 with a 0.1x fold enrichment across 21 genes.\n---\n### Theme 15: leukocyte chemotaxis\n**Summary:** leukocyte chemotaxis ([[GO:0030595](http://purl.obolibrary.org/obo/GO_0030595)](http://purl.obolibrary.org/obo/GO_0030595))\nThe 'leukocyte chemotaxis' theme focuses on processes guiding leukocyte movement in response to chemotactic signals, essential for immune system effectiveness.",
+    "suggested_query": "IL12B IL12B IL12B modulates lymphocyte proliferation, essentia",
+    "genes": [
+      "IL12B",
+      "IL12B"
+    ],
+    "go_terms": [
+      "GO:0043123",
+      "GO:1901224",
+      "GO:0051897"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 directs leukocyte chemotaxis, aiding in immune cell recruitment during inflammation. ([[GO:0002407](http://purl.obolibrary.org/obo/GO_0002407)](http://purl.obolibrary.org/obo/GO_0002407)) [REF:CCL5]\n- **CCR7**:",
+    "suggested_query": "CCL5 CCL5 CCR7 CCL5 directs leukocyte chemotaxis, aiding in immun",
+    "genes": [
+      "CCL5",
+      "CCL5",
+      "CCR7"
+    ],
+    "go_terms": [
+      "GO:0010759",
+      "GO:0048245",
+      "GO:0090023"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCR7 facilitates leukocyte chemotaxis, crucial for immune surveillance and response. ([[GO:0030595](http://purl.obolibrary.org/obo/GO_0030595)](http://purl.obolibrary.org/obo/GO_0030595)) [REF:CCR7]\n**Statistical Context:** This theme consists of an FDR of 7.67e-14, with a 0.1x fold enrichment across 18 genes.\n---\n### Theme 16: immune response-activating signaling pathway\n**Summary:** immune response-activating signaling pathway ([[GO:0002757](http://purl.obolibrary.org/obo/GO_0002757)](http://purl.obolibrary.org/obo/GO_0002757))\nThe 'immune response-activating signaling pathway' theme focuses on pathways that initiate immune responses, primarily through receptor-mediated signaling.",
+    "suggested_query": "CCR7 CCR7 CCR7 facilitates leukocyte chemotaxis, crucial for",
+    "genes": [
+      "CCR7",
+      "CCR7"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "RELA participates in immune signaling pathways, central for mediating immune activation. ([[GO:0002429](http://purl.obolibrary.org/obo/GO_0002429)](http://purl.obolibrary.org/obo/GO_0002429)) [REF:RELA]\n- **IRAK2**:",
+    "suggested_query": "RELA RELA IRAK2 RELA participates in immune signaling pathways, ce",
+    "genes": [
+      "RELA",
+      "RELA",
+      "IRAK2"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IRAK2 supports signaling pathway activation, crucial for immune defense initiation. ([[GO:0002758](http://purl.obolibrary.org/obo/GO_0002758)](http://purl.obolibrary.org/obo/GO_0002758)) [REF:IRAK2]\n**Statistical Context:** This theme\u2019s FDR is 1.61e-13, with a 0.1x fold enrichment across 25 genes.\n---\n### Theme 17: adenylate cyclase-modulating G protein-coupled receptor signaling pathway\n**Summary:** adenylate cyclase-modulating G protein-coupled receptor signaling pathway ([[GO:0007188](http://purl.obolibrary.org/obo/GO_0007188)](http://purl.obolibrary.org/obo/GO_0007188))\nThe theme 'adenylate cyclase-modulating G protein-coupled receptor signaling pathway' involves GPCR pathways that affect cAMP levels, a second messenger in many cellular processes.",
+    "suggested_query": "IRAK2 IRAK2 IRAK2 supports signaling pathway activation, cruci",
+    "genes": [
+      "IRAK2",
+      "IRAK2"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "LPAR1 influences adenylate cyclase activity, impacting multiple signaling pathways. ([[GO:0007189](http://purl.obolibrary.org/obo/GO_0007189)](http://purl.obolibrary.org/obo/GO_0007189)) [REF:LPAR1]\n- **GNAI3**:",
+    "suggested_query": "LPAR1 LPAR1 GNAI3 LPAR1 influences adenylate cyclase activity, impac",
+    "genes": [
+      "LPAR1",
+      "LPAR1",
+      "GNAI3"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "GNAI3 interacts with GPCR to modulate adenylate cyclase, regulating cellular responses. ([[GO:0007193](http://purl.obolibrary.org/obo/GO_0007193)](http://purl.obolibrary.org/obo/GO_0007193)) [REF:GNAI3]\n**Statistical Context:** This theme has an FDR of 3.74e-13, with a 0.1x fold enrichment across 23 genes.\n---\n### Theme 18: chemokine-mediated signaling pathway\n**Summary:** chemokine-mediated signaling pathway ([[GO:0070098](http://purl.obolibrary.org/obo/GO_0070098)](http://purl.obolibrary.org/obo/GO_0070098))\nIn the 'chemokine-mediated signaling pathway' theme, processes influenced by chemokines in directing immunologic responses are emphasized.",
+    "suggested_query": "GNAI3 GNAI3 GNAI3 interacts with GPCR to modulate adenylate cy",
+    "genes": [
+      "GNAI3",
+      "GNAI3"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CX3CL1 facilitates immune cell signaling pathways, aiding in precise immune responses. ([[GO:0070098](http://purl.obolibrary.org/obo/GO_0070098)](http://purl.obolibrary.org/obo/GO_0070098)) [REF:CX3CL1]\n- **CCL5**:",
+    "suggested_query": "CX3CL1 CX3CL1 CCL5 CX3CL1 facilitates immune cell signaling pathways,",
+    "genes": [
+      "CX3CL1",
+      "CX3CL1",
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 plays a role in chemokine-mediated pathways, crucial for directing immune responses. ([[GO:0070098](http://purl.obolibrary.org/obo/GO_0070098)](http://purl.obolibrary.org/obo/GO_0070098)) [REF:CCL5]\n**Statistical Context:** This theme's FDR is 6.33e-13, with a 0.2x fold enrichment across 15 genes.\n---\n### Theme 19: regulation of T cell activation\n**Summary:** regulation of T cell activation ([[GO:0050863](http://purl.obolibrary.org/obo/GO_0050863)](http://purl.obolibrary.org/obo/GO_0050863))\nThe 'regulation of T cell activation' theme describes processes that modulate the activation of T cells, essential for adaptive immunity and pathogen defense.",
+    "suggested_query": "CCL5 CCL5 CCL5 plays a role in chemokine-mediated pathways, ",
+    "genes": [
+      "CCL5",
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0008009"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD69 modulates T cell activation, crucial for tuning immune responses. ([[GO:0046634](http://purl.obolibrary.org/obo/GO_0046634)](http://purl.obolibrary.org/obo/GO_0046634)) [REF:CD69]\n- **NLRP3**:",
+    "suggested_query": "CD69 CD69 NLRP3 CD69 modulates T cell activation, crucial for tuni",
+    "genes": [
+      "CD69",
+      "CD69",
+      "NLRP3"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "NLRP3 regulates T cell activation, a central process for immune response management. ([[GO:0046634](http://purl.obolibrary.org/obo/GO_0046634)](http://purl.obolibrary.org/obo/GO_0046634)) [REF:NLRP3]\n**Statistical Context:** The FDR for this theme is 9.99e-13 with a 0.1x fold enrichment across 25 genes.\n---\n### Theme 20: regulation of mononuclear cell migration\n**Summary:** regulation of mononuclear cell migration ([[GO:0071675](http://purl.obolibrary.org/obo/GO_0071675)](http://purl.obolibrary.org/obo/GO_0071675))\nThe 'regulation of mononuclear cell migration' theme encompasses processes controlling the movement of mononuclear cells, important for immune surveillance and response.",
+    "suggested_query": "NLRP3 NLRP3 NLRP3 regulates T cell activation, a central proce",
+    "genes": [
+      "NLRP3",
+      "NLRP3"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 regulates mononuclear migration, essential for adaptive immune responses. ([[GO:1905521](http://purl.obolibrary.org/obo/GO_1905521)](http://purl.obolibrary.org/obo/GO_1905521)) [REF:CCL5]\n- **CSF1**:",
+    "suggested_query": "CCL5 CCL5 CSF1 CCL5 regulates mononuclear migration, essential fo",
+    "genes": [
+      "CCL5",
+      "CCL5",
+      "CSF1"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CSF1 modulates macrophage movement, supporting immune responses and surveillance. ([[GO:0010758](http://purl.obolibrary.org/obo/GO_0010758)](http://purl.obolibrary.org/obo/GO_0010758)) [REF:CSF1]\n**Statistical Context:** This theme's FDR is 1.46e-12, with a 0.1x fold enrichment across 17 genes.\n---\n### Theme 21: regulation of vasculature development\n**Summary:** regulation of vasculature development ([[GO:1901342](http://purl.obolibrary.org/obo/GO_1901342)](http://purl.obolibrary.org/obo/GO_1901342))\nThe 'regulation of vasculature development' theme involves processes that guide vascular formation and modification, essential for tissue growth and repair.",
+    "suggested_query": "CSF1 CSF1 CSF1 modulates macrophage movement, supporting imm",
+    "genes": [
+      "CSF1",
+      "CSF1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "ITGB8 regulates key steps in angiogenesis, necessary for vascular system integrity. ([[GO:0045766](http://purl.obolibrary.org/obo/GO_0045766)](http://purl.obolibrary.org/obo/GO_0045766)) [REF:ITGB8]\n- **C3AR1**:",
+    "suggested_query": "ITGB8 ITGB8 C3AR1 ITGB8 regulates key steps in angiogenesis, necessa",
+    "genes": [
+      "ITGB8",
+      "ITGB8",
+      "C3AR1"
+    ],
+    "go_terms": [
+      "GO:0045766",
+      "GO:0010575",
+      "GO:0030949"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "C3AR1 modulates vascular development, influencing tissue growth responses. ([[GO:0045765](http://purl.obolibrary.org/obo/GO_0045765)](http://purl.obolibrary.org/obo/GO_0045765)) [REF:C3AR1]\n**Statistical Context:** This theme shows an FDR of 1.59e-12 with a 0.1x fold enrichment across 23 genes.\n---\n### Theme 22: regulation of phosphorus metabolic process\n**Summary:** regulation of phosphorus metabolic process ([[GO:0051174](http://purl.obolibrary.org/obo/GO_0051174)](http://purl.obolibrary.org/obo/GO_0051174))\nWithin 'regulation of phosphorus metabolic process', processes that impact phosphorus metabolism and signaling pathways are explored.",
+    "suggested_query": "C3AR1 C3AR1 C3AR1 modulates vascular development, influencing ",
+    "genes": [
+      "C3AR1",
+      "C3AR1"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "PIK3R5 influences phosphorus metabolic pathways, crucial for cellular signaling. ([[GO:0042325](http://purl.obolibrary.org/obo/GO_0042325)](http://purl.obolibrary.org/obo/GO_0042325)) [REF:PIK3R5]\n- **ABI1**:",
+    "suggested_query": "PIK3R5 PIK3R5 ABI1 PIK3R5 influences phosphorus metabolic pathways, c",
+    "genes": [
+      "PIK3R5",
+      "PIK3R5",
+      "ABI1"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "ABI1 regulating phosphate metabolism impacts cell signalling pathways. ([[GO:0042325](http://purl.obolibrary.org/obo/GO_0042325)](http://purl.obolibrary.org/obo/GO_0042325)) [REF:ABI1]\n**Statistical Context:** This theme has an FDR of 4.21e-12, involving a 0.1x fold enrichment across 30 genes.\n---\n### Theme 23: chemokine receptor binding\n**Summary:** chemokine receptor binding ([[GO:0042379](http://purl.obolibrary.org/obo/GO_0042379)](http://purl.obolibrary.org/obo/GO_0042379))\nThe 'chemokine receptor binding' theme centers on interactions between chemokines and their receptors, key for immune signaling and cell positioning.",
+    "suggested_query": "ABI1 ABI1 ABI1 regulating phosphate metabolism impacts cell ",
+    "genes": [
+      "ABI1",
+      "ABI1"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0070098",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL5 interacts extensively with chemokine receptors, aiding in immune cell navigation. ([[GO:0008009](http://purl.obolibrary.org/obo/GO_0008009)](http://purl.obolibrary.org/obo/GO_0008009)) [REF:CCL5]\n- **CCL7**:",
+    "suggested_query": "CCL5 CCL5 CCL7 CCL5 interacts extensively with chemokine receptor",
+    "genes": [
+      "CCL5",
+      "CCL5",
+      "CCL7"
+    ],
+    "go_terms": [
+      "GO:0008009",
+      "GO:0007259",
+      "GO:0007189"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CCL7 binds with chemokine receptors to modulate immune cell responses. ([[GO:0048020](http://purl.obolibrary.org/obo/GO_0048020)](http://purl.obolibrary.org/obo/GO_0048020)) [REF:CCL7]\n**Statistical Context:** This theme's FDR is 4.53e-12 with a 0.2x fold enrichment, covering 14 genes.\n---\n### Theme 24: positive regulation of canonical NF-kappaB signal transduction\n**Summary:** positive regulation of canonical NF-kappaB signal transduction ([[GO:0043123](http://purl.obolibrary.org/obo/GO_0043123)](http://purl.obolibrary.org/obo/GO_0043123))\nThe 'positive regulation of canonical NF-kappaB signal transduction' theme includes pathways enhancing NF-kappaB signaling, pivotal for controlling immunity and inflammation.",
+    "suggested_query": "CCL7 CCL7 CCL7 binds with chemokine receptors to modulate im",
+    "genes": [
+      "CCL7",
+      "CCL7"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0008009"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL1B enhances NF-kappaB signaling, affecting immune and inflammatory responses. ([[GO:0043123](http://purl.obolibrary.org/obo/GO_0043123)](http://purl.obolibrary.org/obo/GO_0043123)) [REF:IL1B]\n- **IRAK2**:",
+    "suggested_query": "IL1B IL1B IRAK2 IL1B enhances NF-kappaB signaling, affecting immun",
+    "genes": [
+      "IL1B",
+      "IL1B",
+      "IRAK2"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IRAK2 supports NF-kappaB pathway activation, key for mediating immune functions. ([[GO:0043123](http://purl.obolibrary.org/obo/GO_0043123)](http://purl.obolibrary.org/obo/GO_0043123)) [REF:IRAK2]\n**Statistical Context:** The theme has an FDR of 1.57e-11, with a 0.1x fold enrichment across 20 genes.\n---\n### Theme 25: regulation of hemopoiesis\n**Summary:** regulation of hemopoiesis ([[GO:1903706](http://purl.obolibrary.org/obo/GO_1903706)](http://purl.obolibrary.org/obo/GO_1903706))\nThe theme 'regulation of hemopoiesis' involves controlling blood cell formation, essential for maintaining the body's ability to produce all blood cells.",
+    "suggested_query": "IRAK2 IRAK2 IRAK2 supports NF-kappaB pathway activation, key f",
+    "genes": [
+      "IRAK2",
+      "IRAK2"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "TNFAIP6 aids in the positive regulation of hemopoiesis, crucial for adequate blood cell production. ([[GO:1903708](http://purl.obolibrary.org/obo/GO_1903708)](http://purl.obolibrary.org/obo/GO_1903708)) [REF:TNFAIP6]\n- **CD69**:",
+    "suggested_query": "TNFAIP6 TNFAIP6 CD69 TNFAIP6 aids in the positive regulation of hemopoi",
+    "genes": [
+      "TNFAIP6",
+      "TNFAIP6",
+      "CD69"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD69 affects negative regulation of hemopoiesis, balancing blood cell production. ([[GO:1903707](http://purl.obolibrary.org/obo/GO_1903707)](http://purl.obolibrary.org/obo/GO_1903707)) [REF:CD69]\n**Statistical Context:** This theme's FDR is 2.59e-11, with a 0.1x fold enrichment across 24 genes.\n---\n### Theme 26: regulation of leukocyte chemotaxis\n**Summary:** regulation of leukocyte chemotaxis ([[GO:0002688](http://purl.obolibrary.org/obo/GO_0002688)](http://purl.obolibrary.org/obo/GO_0002688))\nThe 'regulation of leukocyte chemotaxis' theme focuses on processes controlling leukocyte movement, affecting immune response routing.",
+    "suggested_query": "CD69 CD69 CD69 affects negative regulation of hemopoiesis, b",
+    "genes": [
+      "CD69",
+      "CD69"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "TNFAIP6 regulates leukocyte chemotaxis, guiding cell responses to inflammation. ([[GO:0071622](http://purl.obolibrary.org/obo/GO_0071622)](http://purl.obolibrary.org/obo/GO_0071622)) [REF:TNFAIP6]\n- **C5AR1**:",
+    "suggested_query": "TNFAIP6 TNFAIP6 C5AR1 TNFAIP6 regulates leukocyte chemotaxis, guiding ce",
+    "genes": [
+      "TNFAIP6",
+      "TNFAIP6",
+      "C5AR1"
+    ],
+    "go_terms": [
+      "GO:0010759",
+      "GO:0048245",
+      "GO:0098586"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "C5AR1 modulates granulocyte chemotaxis, essential for targeting infection sites. ([[GO:0071622](http://purl.obolibrary.org/obo/GO_0071622)](http://purl.obolibrary.org/obo/GO_0071622)) [REF:C5AR1]\n- **CXCL8**:",
+    "suggested_query": "C5AR1 C5AR1 CXCL8 C5AR1 modulates granulocyte chemotaxis, essential ",
+    "genes": [
+      "C5AR1",
+      "C5AR1",
+      "CXCL8"
+    ],
+    "go_terms": [
+      "GO:0010759",
+      "GO:0048245",
+      "GO:0090023"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CXCL8 influences granulocyte chemotaxis, aiding rapid immune responses. ([[GO:0071622](http://purl.obolibrary.org/obo/GO_0071622)](http://purl.obolibrary.org/obo/GO_0071622)) [REF:CXCL8]\n**Statistical Context:** This theme displays an FDR of 3.72e-11 and a 0.1x fold enrichment across 15 genes.\n---\n### Theme 27: cell surface receptor signaling pathway via JAK-STAT\n**Summary:** cell surface receptor signaling pathway via JAK-STAT ([[GO:0007259](http://purl.obolibrary.org/obo/GO_0007259)](http://purl.obolibrary.org/obo/GO_0007259))\nThe 'cell surface receptor signaling pathway via JAK-STAT' theme describes pathways activated at cell surfaces, particularly through JAK-STAT, impacting varied immune processes.",
+    "suggested_query": "CXCL8 CXCL8 CXCL8 influences granulocyte chemotaxis, aiding ra",
+    "genes": [
+      "CXCL8",
+      "CXCL8"
+    ],
+    "go_terms": [
+      "GO:0070098",
+      "GO:0043123",
+      "GO:0007259"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL2RB mediates JAK-STAT signaling, critical for immune response regulation. ([[GO:0007259](http://purl.obolibrary.org/obo/GO_0007259)](http://purl.obolibrary.org/obo/GO_0007259)) [REF:IL2RB]\n- **EBI3**:",
+    "suggested_query": "IL2RB IL2RB EBI3 IL2RB mediates JAK-STAT signaling, critical for im",
+    "genes": [
+      "IL2RB",
+      "IL2RB",
+      "EBI3"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "EBI3 regulates JAK-STAT pathways, impacting immune signaling. ([[GO:0007259](http://purl.obolibrary.org/obo/GO_0007259)](http://purl.obolibrary.org/obo/GO_0007259)) [REF:EBI3]\n**Statistical Context:** This theme has an FDR of 4.28e-11, with a 0.2x fold enrichment across 13 genes.\n---\n### Theme 28: regulation of adaptive immune response\n**Summary:** regulation of adaptive immune response ([[GO:0002819](http://purl.obolibrary.org/obo/GO_0002819)](http://purl.obolibrary.org/obo/GO_0002819))\nIn the 'regulation of adaptive immune response' theme, processes that modulate the body's adaptive immunity are explored, crucial for targeting pathogens specifically.",
+    "suggested_query": "EBI3 EBI3 EBI3 regulates JAK-STAT pathways, impacting immune",
+    "genes": [
+      "EBI3",
+      "EBI3"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "SLAMF1 enhances adaptive immune responses, guiding specific pathogen defense. ([[GO:0002821](http://purl.obolibrary.org/obo/GO_0002821)](http://purl.obolibrary.org/obo/GO_0002821)) [REF:SLAMF1]\n- **IL18**:",
+    "suggested_query": "SLAMF1 SLAMF1 IL18 SLAMF1 enhances adaptive immune responses, guiding",
+    "genes": [
+      "SLAMF1",
+      "SLAMF1",
+      "IL18"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL18 influences adaptive immune regulation, modulating response strength and duration. ([[GO:0002820](http://purl.obolibrary.org/obo/GO_0002820)](http://purl.obolibrary.org/obo/GO_0002820)) [REF:IL18]\n**Statistical Context:** The theme features an FDR of 6.58e-11 with a 0.1x fold enrichment across 18 genes.\n---\n### Theme 29: mononuclear cell differentiation\n**Summary:** mononuclear cell differentiation ([[GO:1903131](http://purl.obolibrary.org/obo/GO_1903131)](http://purl.obolibrary.org/obo/GO_1903131))\nThe 'mononuclear cell differentiation' theme involves processes leading to the formation of specialized mononuclear cells, vital for various immune functions.",
+    "suggested_query": "IL18 IL18 IL18 influences adaptive immune regulation, modula",
+    "genes": [
+      "IL18",
+      "IL18"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "AXL contributes to lymphocyte differentiation, affecting immune response capabilities. ([[GO:0030098](http://purl.obolibrary.org/obo/GO_0030098)](http://purl.obolibrary.org/obo/GO_0030098)) [REF:AXL]\n- **CSF3**:",
+    "suggested_query": "AXL AXL CSF3 AXL contributes to lymphocyte differentiation, aff",
+    "genes": [
+      "AXL",
+      "AXL",
+      "CSF3"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CSF3 guides macrophage differentiation, crucial for mounting targeted immune responses. ([[GO:0030225](http://purl.obolibrary.org/obo/GO_0030225)](http://purl.obolibrary.org/obo/GO_0030225)) [REF:CSF3]\n**Statistical Context:** This theme's FDR is 6.63e-11, with a 0.1x fold enrichment across 20 genes.\n---\n### Theme 30: regulation of leukocyte mediated immunity\n**Summary:** regulation of leukocyte mediated immunity ([[GO:0002703](http://purl.obolibrary.org/obo/GO_0002703)](http://purl.obolibrary.org/obo/GO_0002703))\nThe 'regulation of leukocyte mediated immunity' theme focuses on controlling immune responses mediated by leukocytes, essential for effective pathogen defense and tolerance.",
+    "suggested_query": "CSF3 CSF3 CSF3 guides macrophage differentiation, crucial fo",
+    "genes": [
+      "CSF3",
+      "CSF3"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0043123"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "IL18R1 participates in regulating lymphocyte responses, crucial for appropriate immune activation. ([[GO:0002706](http://purl.obolibrary.org/obo/GO_0002706)](http://purl.obolibrary.org/obo/GO_0002706)) [REF:IL18R1]\n- **CD55**:",
+    "suggested_query": "IL18R1 IL18R1 CD55 IL18R1 participates in regulating lymphocyte respo",
+    "genes": [
+      "IL18R1",
+      "IL18R1",
+      "CD55"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "CD55 aids in regulating leukocyte-mediated responses, enhancing immune effectiveness. ([[GO:0002705](http://purl.obolibrary.org/obo/GO_0002705)](http://purl.obolibrary.org/obo/GO_0002705)) [REF:CD55]\n**Statistical Context:** The FDR for this theme is 6.67e-11 with a 0.1x fold enrichment across 19 genes.\n---\n## Hub Genes\n- **IL6**:",
+    "suggested_query": "CD55 CD55 IL6 CD55 aids in regulating leukocyte-mediated respons",
+    "genes": [
+      "CD55",
+      "CD55",
+      "IL6"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "complex"
+  },
+  {
+    "assertion": "- **IL1B**:",
+    "suggested_query": "IL1B - **IL1B**:",
+    "genes": [
+      "IL1B"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "- **EDN1**:",
+    "suggested_query": "EDN1 - **EDN1**:",
+    "genes": [
+      "EDN1"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "EDN1 is implicated in immune cell migration and chemotaxis, indicating its role in guiding leukocytes to inflammation sites across themes.",
+    "suggested_query": "EDN1 EDN1 is implicated in immune cell migration and ch",
+    "genes": [
+      "EDN1"
+    ],
+    "go_terms": [
+      "GO:0010759",
+      "GO:0048245",
+      "GO:0090023"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **LYN**:",
+    "suggested_query": "LYN - **LYN**:",
+    "genes": [
+      "LYN"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "- **IL10**:",
+    "suggested_query": "IL10 - **IL10**:",
+    "genes": [
+      "IL10"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "IL10's consistent presence across themes underlines its anti-inflammatory influence, balancing immune responses.",
+    "suggested_query": "IL10 IL10's consistent presence across themes underline",
+    "genes": [
+      "IL10"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **CCL5**:",
+    "suggested_query": "CCL5 - **CCL5**:",
+    "genes": [
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "CCL5's recurrent role suggests its involvement in leukocyte trafficking and positioning, crucial for immune surveillance.",
+    "suggested_query": "CCL5 CCL5's recurrent role suggests its involvement in ",
+    "genes": [
+      "CCL5"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:0002762"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **ITGB3**:",
+    "suggested_query": "ITGB3 - **ITGB3**:",
+    "genes": [
+      "ITGB3"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "ITGB3 features prominently in themes related to cell adhesion and migration, implying its role in coordinating immune cell interactions.",
+    "suggested_query": "ITGB3 ITGB3 features prominently in themes related to ce",
+    "genes": [
+      "ITGB3"
+    ],
+    "go_terms": [
+      "GO:0061844",
+      "GO:0140367",
+      "GO:1904141"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **CX3CL1**:",
+    "suggested_query": "CX3CL1 - **CX3CL1**:",
+    "genes": [
+      "CX3CL1"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "- **IL12B**:",
+    "suggested_query": "IL12B - **IL12B**:",
+    "genes": [
+      "IL12B"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "- **CCR7**:",
+    "suggested_query": "CCR7 - **CCR7**:",
+    "genes": [
+      "CCR7"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "CCR7's involvement across themes pertains to its role in directing immune cell traffic, essential for organized immune responses.",
+    "suggested_query": "CCR7 CCR7's involvement across themes pertains to its r",
+    "genes": [
+      "CCR7"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **IL18**:",
+    "suggested_query": "IL18 - **IL18**:",
+    "genes": [
+      "IL18"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "NOD2's ubiquitous theme presence highlights its pivotal role in recognizing bacterial patterns, crucial for early immune response.",
+    "suggested_query": "NOD2 NOD2's ubiquitous theme presence highlights its pi",
+    "genes": [
+      "NOD2"
+    ],
+    "go_terms": [
+      "GO:0098586",
+      "GO:0002675",
+      "GO:0071466"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "- **TLR2**:",
+    "suggested_query": "TLR2 - **TLR2**:",
+    "genes": [
+      "TLR2"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "- **CCL2**:",
+    "suggested_query": "CCL2 - **CCL2**:",
+    "genes": [
+      "CCL2"
+    ],
+    "go_terms": [
+      "GO:0007249"
+    ],
+    "complexity": "simple"
+  },
+  {
+    "assertion": "CCL2's consistent presence in themes signals its involvement in chemotaxis and inflammation progression.",
+    "suggested_query": "CCL2 CCL2's consistent presence in themes signals its i",
+    "genes": [
+      "CCL2"
+    ],
+    "go_terms": [
+      "GO:0043123",
+      "GO:1901224",
+      "GO:0051897"
+    ],
+    "complexity": "multi_process"
+  },
+  {
+    "assertion": "## Overall Summary\nThe gene ontology enrichment analysis reveals a compelling overview of the intricate network linking various biological processes related to immune response. Key themes like cellular responses to bacterial molecules and regulation of leukocyte migration highlight processes integral to pathogen defense and immune surveillance. The involvement of genes such as CD14, which recognize bacterial components, underscores the elaborate signaling pathways necessary for mounting an effective immune response.\nFurthermore, consistent appearances of hub genes like IL6, IL1B, and CCL5 across multiple themes underscore their pivotal roles in facilitating broad-spectrum immune functions and inflammatory processes. IL6, for instance, is implicated in processes from chemotaxis to cell adhesion, highlighting its versatility in immune modulation. Meanwhile, CCL5's linkage to leukocyte migration further emphasizes its role in directing immune cells to critical sites of action.\nThe analysis extends beyond immune-specific themes, intersecting with broader cellular mechanisms like phosphorylation and metabolic processes. This intersection indicates that immune responses are deeply intertwined with overall cellular health and metabolism, integrating signals from various pathways to sustain body homeostasis during immune challenges.\nNevertheless, this extensive enrichment analysis must be interpreted with caution, given the complexity of gene function overlapping across themes, which may pose challenges in precisely delineating individual gene contributions. The biological interpretations drawn here rely heavily on inferred relationships based on enrichment patterns and may require further experimental validation to confirm specific gene roles within these pathways.",
+    "suggested_query": "CD14 IL6 IL1B ## Overall Summary\nThe gene ontology enrichment an",
+    "genes": [
+      "CD14",
+      "IL6",
+      "IL1B",
+      "CCL5",
+      "IL6"
+    ],
+    "go_terms": [
+      "GO:0007204",
+      "GO:0045766",
+      "GO:0070098"
+    ],
+    "complexity": "complex"
+  }
+]

@@ -371,15 +371,20 @@ def _add_references_to_explanation(
 
         # Add note to markdown about unresolved assertions
         if needs_artl_mcp:
+            search_note = (
+                "via GO annotations or automated literature search"
+                if not no_literature_search
+                else "via GO annotations (literature search was skipped; rerun without --no-literature-search)"
+            )
             lines = [
                 explanation_markdown,
                 "",
                 "---",
                 "",
-                "## Assertions Needing Literature Search",
+                "## Unresolved Assertions",
                 "",
-                f"The following {len(needs_artl_mcp)} assertions could not be resolved via GO annotations.",
-                "Use `artl-mcp` tools to find supporting references:",
+                f"The following {len(needs_artl_mcp)} assertions could not be resolved {search_note}.",
+                "They have been exported to `_artl_queries.json` for manual review:",
                 "",
             ]
             for i, assertion in enumerate(needs_artl_mcp[:10], 1):

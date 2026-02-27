@@ -1,6 +1,6 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-02-15
+**Last Updated**: 2026-02-24
 
 ## What This Tool Does
 
@@ -70,18 +70,63 @@ Integrated Europe PMC literature search for assertions that GAF-based lookup can
 - `--no-literature-search` CLI flag (opt-out; `--add-references` includes literature search by default)
 - 25 unit tests (mocked), 1 integration test (real API)
 
-### 1b. Output Quality Tuning — NEXT
+### 1b. Output Quality Tuning — DONE
 
-The current explanation+references pipeline works end-to-end but produces output that is less detailed than the exploration script prototypes. Before adding any new features, tune the output structure to match the quality bar set by exploration outputs:
+JSON intermediate architecture: LLM fills structured `EnrichmentExplanation` JSON (schema-enforced) → programmatic markdown render → inline reference injection. Key additions:
 
-- **More detailed per-theme explanations** — expand gene-level discussion within each theme (which genes, what roles, how they interact)
-- **Integrated gene details** — weave gene function descriptions into the narrative rather than just listing gene names
-- **Inline validated references** — place `[PMID:xxx]` citations directly next to the claims they support, not just in a separate references section at the bottom
-- **Benchmark against exploration outputs** — compare `results/hm_inflam_explanation.md` against exploration script outputs to identify specific gaps
+- `rank_genes_for_theme()` — data-driven gene selection, avoids fame bias (RELA/IL6 always winning)
+- `validate_explanation_json()` — post-generation check: hallucinated genes/GO IDs caught and warned
+- `render_explanation_to_markdown()` — deterministic renderer places `[REF:GENE]` markers
+- `inject_references_inline()` — replaces markers with inline PMIDs (capped at 3, deduplicated)
 
-This is prompt engineering + output post-processing work, not new service code.
+**Known issue: ~100 unresolved assertions per run.** The post-hoc pipeline extracts `[INFERENCE]`/`[EXTERNAL]` tagged narrative sentences, does GAF+artl-mcp lookup, but ~100 remain unresolvable. Root cause is the architecture: LLM generates claims from latent knowledge first, then we search for papers to support them — the tail end has claims that are too vague, too general, or slightly mismatched with what literature indexing can find. See Ring 1c below.
 
 ### Future Ring 1 (after 1b)
+
+### 1c. Paper-Grounded Narrative Generation
+
+**Problem**: The current pipeline generates narrative from latent knowledge, then post-hoc searches for papers to support it. This produces ~100 unresolved assertions per run — claims the LLM made that no paper explicitly confirms.
+
+**Root cause**: The post-hoc direction is fundamentally harder than the pre-hoc direction. Finding a paper that matches a vague LLM-generated claim is harder than having the LLM write a claim based on a paper it has in context.
+
+**Proposed architectural shift**: Fetch papers *before* the LLM explanation call, and provide them as grounding context. The LLM then cites papers it is actually summarising rather than making claims that need retrospective validation.
+
+Three possible approaches:
+
+#### Option A: RAG per theme (pre-fetch, then generate)
+
+```text
+For each theme:
+  1. artl-mcp: search for papers on ranked key genes + anchor GO term name
+  2. Pass top 3-5 paper abstracts as context to LLM
+  3. LLM generates narrative with inline citations (e.g., "as shown in [1]")
+  4. Map citation numbers back to PMIDs in post-processing
+```
+
+Advantages: eliminates the unresolved assertion problem; LLM narrative is grounded.
+Disadvantages: artl-mcp cost moves from ~$0.06/run (post-hoc, only unresolved) to ~cost × n_themes upfront; slower.
+
+#### Option B: Reuse key-gene PMIDs for narrative claims (cheaper fix)
+
+```text
+After artl-mcp runs for key genes, build gene→PMIDs map.
+For narrative sentences containing gene symbols, automatically attach
+the same PMIDs already found for that gene's key-gene entry.
+```
+
+Advantages: zero extra artl-mcp cost; reuses work already done.
+Disadvantages: PMID is about the gene broadly, not specifically about the claim sentence. Acceptable for `[EXTERNAL]` single-gene claims; less appropriate for multi-gene `[INFERENCE]` claims.
+
+#### Option C: Tighter claim extraction (cheapest fix)
+
+```text
+Current extract_claims() parses every [INFERENCE]/[EXTERNAL] sentence as a claim.
+Many produce no usable assertions (no gene match, or gene match too vague).
+Filter: only create assertions where ≥1 gene from the enrichment gene set is mentioned.
+This would reduce 102 → maybe 20-30 genuinely meaningful unresolved claims.
+```
+
+Recommendation: Implement Option C first (filter low-signal claims), then evaluate whether Option B suffices or Option A is needed. Option A is the architecturally correct long-term solution but carries runtime and cost implications worth validating with users first.
 
 ### 2. Exploratory Sub-Threshold Term Discovery
 
