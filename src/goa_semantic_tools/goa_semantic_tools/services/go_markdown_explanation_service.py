@@ -4,98 +4,29 @@ GO Markdown Explanation Service
 LLM-based markdown report generation for GO enrichment results (Phase 2, markdown format).
 Generates provenance-labeled explanations with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY] tags.
 """
+import json
 import os
 import re
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any
 
 import yaml
 from cellsem_llm_client.agents.agent_connection import LiteLLMAgent
-from pydantic import BaseModel, Field
-
+from cellsem_llm_client.schema.manager import SchemaManager
 
 # =============================================================================
-# Pydantic output models for structured LLM output
-#
-# Passed directly to agent.query_unified(schema=...) so that Pydantic generates
-# the JSON schema with proper nested type annotations.  cellsem_llm_client's
-# built-in JSON-schema-to-Pydantic converter can't handle nested arrays of
-# objects, so we supply the models ourselves.
+# EnrichmentExplanation: schema-first model generated from JSON schema.
+# Source of truth: schemas/enrichment_explanation.schema.json
+# Fixed in cellsem_llm_client v2.1.1 — SchemaManager now handles nested arrays
+# of objects correctly via recursive _json_type_to_python_type.
 # =============================================================================
-
-
-class _KeyInsight(BaseModel):
-    insight: str = Field(
-        description="One specific biological insight referencing concrete genes or processes from this theme's input data."
-    )
-    go_id: str = Field(
-        description="The GO term ID most relevant to this insight. MUST be from this theme's input data (anchor or specific terms). Format: GO:XXXXXXX"
-    )
-
-
-class _KeyGene(BaseModel):
-    gene: str = Field(
-        description="Gene symbol. MUST appear in the candidate_key_genes list for this theme."
-    )
-    go_id: str = Field(
-        description="The specific GO term in this theme that most directly involves this gene. MUST be from this theme's input data. Format: GO:XXXXXXX"
-    )
-    description: str = Field(
-        description="One sentence explaining this gene's role in the context of this theme."
-    )
-    claim_type: Literal["EXTERNAL", "INFERENCE"] = Field(
-        description="EXTERNAL if the gene description relies on prior biological knowledge; INFERENCE if derived from the enrichment data alone."
-    )
-
-
-class _ThemeExplanation(BaseModel):
-    theme_index: int = Field(
-        description="0-based index matching the position of this theme in the input themes array."
-    )
-    narrative: str = Field(
-        description="2-3 sentence biological narrative. Tag EVERY sentence with [DATA], [GO-HIERARCHY], [INFERENCE], or [EXTERNAL]. Use only genes and GO terms from this theme's input data."
-    )
-    key_insights: list[_KeyInsight] = Field(
-        description="2-4 key biological insights. Each must reference a specific GO term from this theme's input data.",
-        min_length=2,
-        max_length=4,
-    )
-    key_genes: list[_KeyGene] = Field(
-        description="2-5 key genes selected ONLY from the candidate_key_genes list provided for this theme.",
-        min_length=2,
-        max_length=5,
-    )
-    statistical_context: str = Field(
-        description="One sentence summarising the FDR, fold enrichment, and gene count using numbers directly from the input."
-    )
-
-
-class _HubGeneExplanation(BaseModel):
-    gene: str = Field(
-        description="Gene symbol from the input hub_genes section."
-    )
-    narrative: str = Field(
-        description="1-2 sentences explaining why this gene appears across multiple themes and what that cross-theme role implies biologically."
-    )
-    claim_type: Literal["EXTERNAL", "INFERENCE"] = Field(
-        description="EXTERNAL if the narrative relies on prior biological knowledge; INFERENCE if derived from the enrichment patterns alone."
-    )
-
-
-class EnrichmentExplanation(BaseModel):
-    """Structured explanation of GO enrichment output (themes format)."""
-
-    themes: list[_ThemeExplanation] = Field(
-        description="One explanation per theme in the input, in the same order as the input themes array."
-    )
-    hub_genes: list[_HubGeneExplanation] = Field(
-        description="Explanations for hub genes. Only include genes listed as hub_genes in the input data."
-    )
-    overall_summary: list[str] = Field(
-        description="3-4 paragraph overall biological narrative as a list of strings (one paragraph per element). No sub-headings, continuous prose. Final paragraph should address limitations or caveats.",
-        min_length=3,
-        max_length=4,
-    )
+_schema_manager = SchemaManager()
+_EXPLANATION_SCHEMA_PATH = (
+    Path(__file__).parent.parent / "schemas" / "enrichment_explanation.schema.json"
+)
+EnrichmentExplanation = _schema_manager.get_pydantic_model(
+    json.loads(_EXPLANATION_SCHEMA_PATH.read_text())
+)
 
 
 def generate_markdown_explanation(
