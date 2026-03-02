@@ -389,6 +389,47 @@ def inject_references(
     return "\n".join(lines)
 
 
+def inject_references_inline(
+    summary_text: str,
+    assertion_refs: list[tuple[AtomicAssertion, list[ReferenceMatch]]],
+) -> str:
+    """
+    Replace [REF:GENE] markers in summary_text with inline PMID hyperlinks.
+
+    Builds a gene → deduplicated PMIDs mapping (capped at 3 per gene), then
+    replaces every ``[REF:GENE]`` marker with the corresponding inline links.
+    Markers for genes with no PMIDs are silently removed.
+
+    Args:
+        summary_text: Markdown text containing ``[REF:GENE]`` markers placed
+            by :func:`render_explanation_to_markdown`.
+        assertion_refs: List of ``(AtomicAssertion, [ReferenceMatch])`` tuples
+            from the reference lookup pipeline.
+
+    Returns:
+        Markdown text with ``[REF:GENE]`` markers replaced by inline PMIDs.
+    """
+    # Build gene → ordered-deduplicated PMIDs (capped at 3)
+    gene_pmids: dict[str, list[str]] = defaultdict(list)
+    for assertion, refs in assertion_refs:
+        for ref in refs:
+            for gene in ref.genes_covered:
+                if ref.pmid not in gene_pmids[gene]:
+                    gene_pmids[gene].append(ref.pmid)
+
+    def _replace_marker(match: re.Match) -> str:
+        gene = match.group(1)
+        pmids = gene_pmids.get(gene, [])[:3]  # cap at 3
+        if not pmids:
+            return ""
+        links = ", ".join(
+            f"[PMID:{pmid}](https://pubmed.ncbi.nlm.nih.gov/{pmid}/)" for pmid in pmids
+        )
+        return f"({links})"
+
+    return re.sub(r"\[REF:([A-Za-z0-9_\-]+)\]", _replace_marker, summary_text)
+
+
 def format_references_needing_artl_mcp(
     assertions: list[AtomicAssertion],
 ) -> list[dict[str, Any]]:

@@ -148,8 +148,24 @@ prompt_config = load_prompt("my_agent.prompt.yaml")
 **STOP after Ring 0. Share with users. Get feedback.**
 
 ### Ring 1 Scope (After User Validation)
-<!-- Features to consider after Ring 0 feedback -->
-- [ ] TBD based on user feedback
+
+**Ring 0 shipped.** Now adding user-requested enhancements.
+
+**Ring 1a: artl-mcp Literature Search Integration**
+- [x] `artl_literature_service.py` — resolve complex/EXTERNAL assertions via Europe PMC
+- [x] Uses `cellsem-llm-client` MCPToolSource + LiteLLMAgent (~$0.003-0.006/assertion)
+- [x] `--no-literature-search` CLI flag (opt-out; `--add-references` gets literature search by default)
+- [x] Graceful degradation: MCP failure → return empty refs, no crash
+- [x] Integration test with real artl-mcp + real LLM
+
+**Development rules for Ring 1:**
+- ✅ **TDD mandatory** — write tests FIRST, verify they fail, then implement
+- ✅ **Global coverage threshold**: 60% (unchanged from Ring 0)
+- ✅ **New module coverage**: 80% per-file minimum
+  - Check: `uv run pytest tests/unit/test_X.py --cov=module_path --cov-report=term-missing --cov-fail-under=80`
+- ✅ **Integration tests required** for artl-mcp (real API)
+- ✅ **Unit tests must mock** MCPToolSource and LiteLLMAgent
+- ❌ **ruff/mypy enforcement deferred** until stabilization round
 
 ### Architecture Vision
 <!-- Document your core architectural decisions -->

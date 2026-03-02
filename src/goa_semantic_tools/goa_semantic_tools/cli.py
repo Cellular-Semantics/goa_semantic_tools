@@ -18,7 +18,7 @@ from .services.reference_retrieval_service import (
     extract_genes_from_text,
     find_references_for_assertion,
     format_references_needing_artl_mcp,
-    inject_references,
+    inject_references_inline,
 )
 from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
@@ -187,6 +187,7 @@ def _add_references_to_explanation(
     enrichment_output: dict,
     species: str = "human",
     output_path: Path | None = None,
+    no_literature_search: bool = False,
 ) -> str:
     """
     Add literature references to explanation markdown.
@@ -326,11 +327,38 @@ def _add_references_to_explanation(
     print(f"\n  References found for {len(assertion_refs)} assertions")
     print(f"  Assertions needing artl-mcp: {len(needs_artl_mcp)}")
 
+    # Resolve via artl-mcp literature search (unless opted out)
+    if needs_artl_mcp and not no_literature_search:
+        print(f"\n[4b/5] Resolving {len(needs_artl_mcp)} assertions via artl-mcp...")
+        try:
+            from .services.artl_literature_service import resolve_assertions_via_literature
+
+            literature_results = resolve_assertions_via_literature(
+                needs_artl_mcp,
+                max_refs_per_assertion=3,
+            )
+
+            # Move resolved assertions to assertion_refs, keep unresolved
+            still_unresolved = []
+            for assertion, refs in literature_results:
+                if refs:
+                    assertion_refs.append((assertion, refs))
+                else:
+                    still_unresolved.append(assertion)
+
+            resolved_count = len(needs_artl_mcp) - len(still_unresolved)
+            print(f"  ✓ Resolved {resolved_count}/{len(needs_artl_mcp)} via literature search")
+            needs_artl_mcp = still_unresolved
+
+        except Exception as e:
+            print(f"  ⚠ Literature search failed: {e}")
+            print("  Continuing with GAF-only references...")
+
     print("\n[5/5] Injecting references and exporting unresolved...")
 
     # Inject references into markdown
     if assertion_refs:
-        explanation_markdown = inject_references(explanation_markdown, assertion_refs)
+        explanation_markdown = inject_references_inline(explanation_markdown, assertion_refs)
         print(f"  ✓ Injected {len(assertion_refs)} reference blocks")
 
     # Export unresolved assertions for artl-mcp
@@ -343,15 +371,20 @@ def _add_references_to_explanation(
 
         # Add note to markdown about unresolved assertions
         if needs_artl_mcp:
+            search_note = (
+                "via GO annotations or automated literature search"
+                if not no_literature_search
+                else "via GO annotations (literature search was skipped; rerun without --no-literature-search)"
+            )
             lines = [
                 explanation_markdown,
                 "",
                 "---",
                 "",
-                "## Assertions Needing Literature Search",
+                "## Unresolved Assertions",
                 "",
-                f"The following {len(needs_artl_mcp)} assertions could not be resolved via GO annotations.",
-                "Use `artl-mcp` tools to find supporting references:",
+                f"The following {len(needs_artl_mcp)} assertions could not be resolved {search_note}.",
+                "They have been exported to `_artl_queries.json` for manual review:",
                 "",
             ]
             for i, assertion in enumerate(needs_artl_mcp[:10], 1):
@@ -472,7 +505,13 @@ Examples:
         "--add-references",
         action="store_true",
         default=False,
-        help="Add literature references to explanation. Uses GO annotations for programmatic lookup.",
+        help="Add literature references to explanation. Uses GO annotations for programmatic lookup, plus artl-mcp literature search for unresolved assertions.",
+    )
+    parser.add_argument(
+        "--no-literature-search",
+        action="store_true",
+        default=False,
+        help="Disable artl-mcp literature search (only use GAF-based lookup). Unresolved assertions are exported to *_artl_queries.json.",
     )
 
     # Utility options
@@ -577,6 +616,7 @@ Examples:
                             enrichment_output=result,
                             species=args.species,
                             output_path=base_output,
+                            no_literature_search=args.no_literature_search,
                         )
                     except Exception as e:
                         print(f"\n⚠ Warning: Reference retrieval failed: {e}")

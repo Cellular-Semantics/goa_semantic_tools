@@ -1,6 +1,6 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-02-15
+**Last Updated**: 2026-02-24
 
 ## What This Tool Does
 
@@ -45,7 +45,7 @@ Replaced the original top-N roots approach entirely.
 - Injects verified PMIDs into final markdown output
 - CLI: `--add-references` flag
 
-**Test coverage**: 60% (Ring 0 standard), 68 unit tests across 9 files.
+**Test coverage**: 60% (Ring 0 standard), 204 unit tests across 12 files.
 
 **Benchmark results** (MSigDB Hallmark sets, v1 leaf-first):
 
@@ -60,15 +60,81 @@ Replaced the original top-N roots approach entirely.
 
 ---
 
-## Ring 1: Planned (Pending User Feedback)
+## Ring 1: In Progress
 
-### 1. Exploratory Sub-Threshold Term Discovery
+### 1a. artl-mcp Literature Search — DONE
+
+Integrated Europe PMC literature search for assertions that GAF-based lookup cannot resolve (complex and [EXTERNAL] claims). Uses `cellsem-llm-client` MCPToolSource + LiteLLMAgent (~$0.003-0.006/assertion).
+
+- `artl_literature_service.py` — single MCPToolSource session for batch, graceful degradation
+- `--no-literature-search` CLI flag (opt-out; `--add-references` includes literature search by default)
+- 25 unit tests (mocked), 1 integration test (real API)
+
+### 1b. Output Quality Tuning — DONE
+
+JSON intermediate architecture: LLM fills structured `EnrichmentExplanation` JSON (schema-enforced) → programmatic markdown render → inline reference injection. Key additions:
+
+- `rank_genes_for_theme()` — data-driven gene selection, avoids fame bias (RELA/IL6 always winning)
+- `validate_explanation_json()` — post-generation check: hallucinated genes/GO IDs caught and warned
+- `render_explanation_to_markdown()` — deterministic renderer places `[REF:GENE]` markers
+- `inject_references_inline()` — replaces markers with inline PMIDs (capped at 3, deduplicated)
+
+**Known issue: ~100 unresolved assertions per run.** The post-hoc pipeline extracts `[INFERENCE]`/`[EXTERNAL]` tagged narrative sentences, does GAF+artl-mcp lookup, but ~100 remain unresolvable. Root cause is the architecture: LLM generates claims from latent knowledge first, then we search for papers to support them — the tail end has claims that are too vague, too general, or slightly mismatched with what literature indexing can find. See Ring 1c below.
+
+### Future Ring 1 (after 1b)
+
+### 1c. Paper-Grounded Narrative Generation
+
+**Problem**: The current pipeline generates narrative from latent knowledge, then post-hoc searches for papers to support it. This produces ~100 unresolved assertions per run — claims the LLM made that no paper explicitly confirms.
+
+**Root cause**: The post-hoc direction is fundamentally harder than the pre-hoc direction. Finding a paper that matches a vague LLM-generated claim is harder than having the LLM write a claim based on a paper it has in context.
+
+**Proposed architectural shift**: Fetch papers *before* the LLM explanation call, and provide them as grounding context. The LLM then cites papers it is actually summarising rather than making claims that need retrospective validation.
+
+Three possible approaches:
+
+#### Option A: RAG per theme (pre-fetch, then generate)
+
+```text
+For each theme:
+  1. artl-mcp: search for papers on ranked key genes + anchor GO term name
+  2. Pass top 3-5 paper abstracts as context to LLM
+  3. LLM generates narrative with inline citations (e.g., "as shown in [1]")
+  4. Map citation numbers back to PMIDs in post-processing
+```
+
+Advantages: eliminates the unresolved assertion problem; LLM narrative is grounded.
+Disadvantages: artl-mcp cost moves from ~$0.06/run (post-hoc, only unresolved) to ~cost × n_themes upfront; slower.
+
+#### Option B: Reuse key-gene PMIDs for narrative claims (cheaper fix)
+
+```text
+After artl-mcp runs for key genes, build gene→PMIDs map.
+For narrative sentences containing gene symbols, automatically attach
+the same PMIDs already found for that gene's key-gene entry.
+```
+
+Advantages: zero extra artl-mcp cost; reuses work already done.
+Disadvantages: PMID is about the gene broadly, not specifically about the claim sentence. Acceptable for `[EXTERNAL]` single-gene claims; less appropriate for multi-gene `[INFERENCE]` claims.
+
+#### Option C: Tighter claim extraction (cheapest fix)
+
+```text
+Current extract_claims() parses every [INFERENCE]/[EXTERNAL] sentence as a claim.
+Many produce no usable assertions (no gene match, or gene match too vague).
+Filter: only create assertions where ≥1 gene from the enrichment gene set is mentioned.
+This would reduce 102 → maybe 20-30 genuinely meaningful unresolved claims.
+```
+
+Recommendation: Implement Option C first (filter low-signal claims), then evaluate whether Option B suffices or Option A is needed. Option A is the architecturally correct long-term solution but carries runtime and cost implications worth validating with users first.
+
+### 2. Exploratory Sub-Threshold Term Discovery
 
 Surface GO annotation structure beneath FDR significance thresholds. For each enriched theme anchor, enumerate child GO terms with gene overlap that didn't reach significance. Rank by overlap proportion, show top 5 per parent. Flagged with `[EXPLORATORY]` provenance tag. Opt-in via `--exploratory` CLI flag.
 
 Plan: [`planning/exploratory_sub_threshold_terms.md`](planning/exploratory_sub_threshold_terms.md)
 
-### 2. Tiered Reference Validation
+### 3. Tiered Reference Validation
 
 Full implementation of the tiered validation strategy explored in `exploration/10_reference_retrieval.py`:
 - Tier 1: Abstract scan (cheap, fast)
@@ -77,15 +143,15 @@ Full implementation of the tiered validation strategy explored in `exploration/1
 - Early stopping on first adequate reference
 - Graceful degradation for unsupported claims
 
-### 3. Wikipedia Fallback for Textbook Knowledge
+### 4. Wikipedia Fallback for Textbook Knowledge
 
 For well-established mechanisms (e.g., "IL-1B induces fever via PGE2") where no single paper states the claim explicitly. Use Wikipedia API to find cited PMIDs, then validate those PMIDs support the claim.
 
-### 4. Annotation Depth Classification
+### 5. Annotation Depth Classification
 
 Distinguish **specific enrichment** (genes annotated directly to leaf term) from **category enrichment** (genes annotated to general parent). Affects interpretation confidence and identifies where literature mining would add most value.
 
-### 5. Cross-Namespace Co-annotation
+### 6. Cross-Namespace Co-annotation
 
 Strengthen biological interpretation by combining evidence across GO namespaces:
 - BP co-annotation from same reference → strong functional link
@@ -186,6 +252,7 @@ Located in `input_data/benchmark_sets/test_lists/`:
 | `exploration/08_multi_threshold_hierarchy.py` | v3 Option B: Multi-threshold |
 | `exploration/09_depth_anchors.py` | v3 Option C: Depth-based anchors (best) |
 | `exploration/10_reference_retrieval.py` | Reference retrieval workflow |
+| `exploration/11_artl_mcp_via_llm.py` | artl-mcp literature search proof-of-concept |
 
 ---
 
@@ -199,5 +266,7 @@ Located in `input_data/benchmark_sets/test_lists/`:
 | `services/reference_retrieval_service.py` | Claim extraction + PMID injection |
 | `utils/go_hierarchy.py` | Leaf-first + depth-anchor theme building |
 | `utils/reference_index.py` | GAF gene→GO→PMID index |
+| `services/artl_literature_service.py` | Europe PMC literature search via artl-mcp |
 | `services/go_explanation.prompt.yaml` | LLM explanation prompt |
 | `services/reference_retrieval.prompt.yaml` | Assertion extraction prompt |
+| `services/artl_literature_search.prompt.yaml` | Literature search agent prompt |
