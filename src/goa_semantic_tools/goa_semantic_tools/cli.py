@@ -160,22 +160,18 @@ def _print_dry_run(genes: list[str], args: any) -> None:
 
         print(f"\nOutput: {explanation_path}")
 
-    # Phase 3 plan (if references requested)
-    if args.add_references:
+    # Phase 1b plan (if references + explain requested)
+    if args.add_references and args.explain and not args.no_literature_search:
         print("\n" + "=" * 80)
-        print("## PHASE 3: REFERENCE RETRIEVAL")
+        print("## PHASE 1b: LITERATURE PRE-FETCH (lit-first)")
         print("=" * 80)
         print("\nSteps that would be executed:")
-        print("1. Load GAF annotations with PMIDs")
-        print("2. Build reference index (gene -> GO -> PMIDs)")
-        print("3. Extract [INFERENCE] and [EXTERNAL] claims from explanation")
-        print("4. For each claim, look up supporting PMIDs from GO annotations")
-        print("5. Inject references into explanation markdown")
-        print("\nReference lookup strategy by complexity:")
-        print("  - Simple (1 gene, 1 process): Direct GAF lookup")
-        print("  - Multi-gene: Find PMIDs annotating multiple genes")
-        print("  - Multi-process: Find PMIDs annotating gene to multiple processes")
-        print("  - Complex: Flag for manual review (would need artl-mcp)")
+        print("1. Open artl-mcp (Europe PMC) session")
+        print("2. For each theme: query top-ranked genes + anchor GO term name")
+        print("3. Fetch paper abstracts (up to 10 per theme)")
+        print("4. Inject abstracts into theme context for Phase 2 LLM call")
+        print("\nThe LLM will cite papers inline (PMID:xxxxx) rather than from")
+        print("latent knowledge, eliminating unresolved assertions.")
 
     print("\n" + "=" * 80)
     print("DRY RUN COMPLETE - No analysis was executed")
@@ -497,7 +493,13 @@ Examples:
         "--model",
         type=str,
         default="gpt-4o",
-        help="LLM model for explanations (default: gpt-4o). Examples: gpt-4o, gpt-4o-mini, claude-sonnet-4-20250514",
+        help="LLM model for explanations (default: gpt-4o). Examples: gpt-4o, gpt-4o-mini, gpt-5, claude-sonnet-4-20250514",
+    )
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=None,
+        help="Override LLM output token limit (default: model-specific; gpt-5=32000, all others=16000).",
     )
 
     # Reference options
@@ -512,6 +514,15 @@ Examples:
         action="store_true",
         default=False,
         help="Disable artl-mcp literature search (only use GAF-based lookup). Unresolved assertions are exported to *_artl_queries.json.",
+    )
+
+    parser.add_argument(
+        "--namespace",
+        nargs="+",
+        choices=["BP", "MF", "CC"],
+        default=None,
+        metavar="NS",
+        help="GO namespace(s) to include: BP (biological_process), MF (molecular_function), CC (cellular_component). Default: all three. Example: --namespace BP",
     )
 
     # Utility options
@@ -588,6 +599,7 @@ Examples:
             depth_range=(args.depth_min, args.depth_max),
             min_children=args.min_children,
             max_genes=args.max_genes,
+            namespaces=args.namespace,
         )
         print("=" * 80)
 
@@ -596,33 +608,80 @@ Examples:
             json.dump(result, f, indent=2)
         print(f"\n✓ Enrichment data saved to: {enrichment_path.absolute()}")
 
+        # Phase 1b: Build reference index + fetch hub gene abstracts
+        gaf_pmids = None
+        hub_gene_abstracts = None
+        if args.explain and args.add_references:
+            themes = result.get("themes", [])
+            hub_genes_data = result.get("hub_genes", {})
+
+            print("\n" + "=" * 80)
+            print("Reference Pre-fetch - Phase 1b")
+            print("=" * 80)
+
+            # Always: GAF-curated PMIDs per theme (no API calls, uses cached GAF data)
+            if themes:
+                try:
+                    from .services.reference_retrieval_service import get_gaf_pmids_for_themes
+                    from .utils.reference_index import load_gaf_with_pmids
+                    from .utils.data_downloader import ensure_gaf_data
+                    from .utils.go_data_loader import load_go_data
+
+                    print(f"\nBuilding GAF reference index for {len(themes)} theme(s)...")
+                    gaf_path = ensure_gaf_data(species=args.species)
+                    from .utils.data_downloader import ensure_go_data
+                    go_path = ensure_go_data()
+                    godag = load_go_data(go_path)
+
+                    all_genes: set[str] = set()
+                    for t in themes:
+                        all_genes.update(t.get("anchor_term", {}).get("genes", []))
+                        for st in t.get("specific_terms", []):
+                            all_genes.update(st.get("genes", []))
+
+                    ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
+                    gaf_pmids = get_gaf_pmids_for_themes(themes, ref_index)
+                    themes_with_pmids = sum(1 for v in gaf_pmids.values() if v)
+                    total_pmids = sum(len(v) for v in gaf_pmids.values())
+                    print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
+
+                    # Save GAF PMIDs as sidecar JSON for interactive skill use
+                    gaf_pmids_path = base_output.parent / f"{base_output.name}_gaf_pmids.json"
+                    # Serialise with string keys (JSON requires string keys)
+                    with open(gaf_pmids_path, "w") as f:
+                        json.dump({str(k): v for k, v in gaf_pmids.items()}, f, indent=2)
+                    print(f"✓ GAF PMIDs saved to: {gaf_pmids_path.name}")
+                except Exception as e:
+                    print(f"\n⚠ GAF reference index failed: {e}")
+                    print("  Continuing without GAF citations...")
+
+            # Optional: Europe PMC search for top hub genes
+            if hub_genes_data and not args.no_literature_search:
+                n_hub = len(hub_genes_data)
+                print(f"\nFetching Europe PMC abstracts for top hub genes (up to 20 of {n_hub})...")
+                try:
+                    from .services.artl_literature_service import fetch_abstracts_for_hub_genes
+                    hub_gene_abstracts = fetch_abstracts_for_hub_genes(
+                        hub_genes_data, max_hub_genes=20
+                    )
+                    genes_with_papers = sum(1 for v in hub_gene_abstracts.values() if v)
+                    print(f"✓ Fetched abstracts for {genes_with_papers}/{min(n_hub, 20)} hub genes")
+                except Exception as e:
+                    print(f"\n⚠ Hub gene abstract fetch failed: {e}")
+                    print("  Continuing without hub gene abstracts...")
+
         # Phase 2: Generate markdown explanation if requested
         if args.explain:
             print("\n" + "=" * 80)
             try:
                 explanation_markdown = generate_markdown_explanation(
-                    enrichment_output=result, model=args.model, temperature=0.1, max_tokens=16000
+                    enrichment_output=result,
+                    model=args.model,
+                    temperature=0.1,
+                    max_tokens=args.max_tokens,  # None → auto-derived per model
+                    gaf_pmids=gaf_pmids,
+                    hub_gene_abstracts=hub_gene_abstracts,
                 )
-
-                # Phase 3: Add references if requested
-                if args.add_references:
-                    print("\n" + "=" * 80)
-                    print("Reference Retrieval - Phase 3")
-                    print("=" * 80)
-
-                    try:
-                        explanation_markdown = _add_references_to_explanation(
-                            explanation_markdown=explanation_markdown,
-                            enrichment_output=result,
-                            species=args.species,
-                            output_path=base_output,
-                            no_literature_search=args.no_literature_search,
-                        )
-                    except Exception as e:
-                        print(f"\n⚠ Warning: Reference retrieval failed: {e}")
-                        print("  Continuing without references...")
-                        import traceback
-                        traceback.print_exc()
 
                 # Save markdown output
                 with open(explanation_path, "w") as f:

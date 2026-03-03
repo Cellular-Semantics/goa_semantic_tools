@@ -6,9 +6,9 @@
 [![Python 3.14+](https://img.shields.io/badge/python-3.14+-blue.svg)](https://www.python.org/downloads/)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-**Hierarchical GO enrichment analysis with depth-anchor clustering, provenance-labeled LLM explanations, and literature-backed references**
+**Hierarchical GO enrichment analysis with depth-anchor clustering, provenance-labeled LLM explanations, and literature-grounded references**
 
-GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using a bottom-up depth-anchor algorithm, then generates provenance-labeled explanations with programmatic reference injection from GO annotations.
+GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using a bottom-up depth-anchor algorithm, then generates provenance-labeled explanations grounded in real paper abstracts fetched from Europe PMC before the LLM call.
 
 ## Quick Start
 
@@ -35,8 +35,11 @@ uv run go-enrichment --genes-file genes.txt -o results/my_analysis
 # With LLM explanation (requires OPENAI_API_KEY or ANTHROPIC_API_KEY)
 uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain
 
-# With LLM explanation + literature references from GO annotations
+# With LLM explanation + literature references (pre-fetches Europe PMC abstracts before LLM call)
 uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --add-references
+
+# With references but without Europe PMC literature search (GAF annotations only)
+uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --add-references --no-literature-search
 
 # Preview what would run without executing
 uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --dry-run
@@ -44,8 +47,7 @@ uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --d
 
 Output files are auto-named from the base path:
 - `*_enrichment.json` - Structured enrichment results (themes, leaves, hub genes)
-- `*_explanation.md` - Provenance-labeled biological summary (if `--explain`)
-- `*_artl_queries.json` - Unresolved assertions for literature search (if `--add-references`)
+- `*_explanation.md` - Provenance-labeled biological summary with inline citations (if `--explain`)
 
 ### CLI Options
 
@@ -61,8 +63,10 @@ Output files are auto-named from the base path:
 | `--min-children` | `2` | Min enriched descendants to qualify as anchor |
 | `--max-genes` | `30` | Filter overly general terms |
 | `--explain` | off | Generate LLM explanation |
-| `--model` | `gpt-4o` | LLM model (`gpt-4o`, `gpt-4o-mini`, `claude-sonnet-4-20250514`) |
-| `--add-references` | off | Inject literature references (requires `--explain`) |
+| `--model` | `gpt-4o` | LLM model (`gpt-4o`, `gpt-4o-mini`, `gpt-5`, `claude-sonnet-4-20250514`) |
+| `--max-tokens` | model default | Override LLM output token limit (gpt-5 defaults to 32000; others 16000) |
+| `--add-references` | off | Pre-fetch Europe PMC abstracts and inject inline citations (requires `--explain`) |
+| `--no-literature-search` | off | Skip Europe PMC pre-fetch (use with `--add-references`) |
 | `--dry-run` | off | Preview analysis plan without executing |
 
 ## How It Works
@@ -81,23 +85,21 @@ Instead of selecting top-N most significant terms (which creates redundancy), th
 
 Typical reduction: 50-75% fewer terms while preserving the biological signal.
 
-### 3. LLM Explanation (Phase 2)
+### 3. Literature Pre-fetch + LLM Explanation (Phases 1b + 2)
 
-Generates a provenance-labeled biological summary distinguishing claim sources:
+When `--add-references` is used, paper abstracts are fetched from Europe PMC **before** the LLM call:
+
+1. **Phase 1b**: For each theme, search Europe PMC (via artl-mcp) using top-ranked genes + anchor GO term name. All returned abstracts are injected into the theme context.
+2. **Phase 2**: The LLM generates a provenance-labeled biological summary with inline citations (e.g. `PMID:10383454`) for claims grounded in the provided papers.
+
+Provenance tags distinguish claim sources:
 
 - **[DATA]**: Direct observations from enrichment (FDR values, gene counts, co-occurrence)
 - **[INFERENCE]**: Logical deductions from co-annotation patterns
-- **[EXTERNAL]**: Claims requiring training knowledge (need literature support)
+- **[EXTERNAL]**: Claims about known biology, cited from pre-fetched papers where available
 - **[GO-HIERARCHY]**: Facts derived from GO parent-child structure
 
-### 4. Reference Injection (Phase 3)
-
-Post-LLM programmatic step (no references passed to the LLM):
-
-1. Parse `[INFERENCE]` and `[EXTERNAL]` claims from the explanation
-2. Look up supporting PMIDs from GO annotation (GAF) data
-3. Inject `[Refs: PMID:xxx]` into the markdown
-4. Export unresolved assertions to JSON for manual or artl-mcp literature search
+This lit-first approach eliminates the unresolved assertion problem: the LLM cites papers it has actually read rather than making claims that require retrospective validation.
 
 ## Python API
 
@@ -119,12 +121,19 @@ print(f"Enrichment leaves: {len(result['enrichment_leaves'])}")
 print(f"Themes: {len(result['themes'])}")
 print(f"Hub genes: {list(result['hub_genes'].keys())}")
 
+# Phase 1b: Pre-fetch literature abstracts (optional, requires artl-mcp)
+from goa_semantic_tools.services import fetch_abstracts_for_themes
+paper_abstracts = fetch_abstracts_for_themes(
+    themes=result["themes"],
+    hub_genes=result["hub_genes"],
+)
+
 # Phase 2: LLM explanation (requires API key in environment)
+# max_tokens defaults to 16000; gpt-5 automatically gets 32000
 markdown = generate_markdown_explanation(
     enrichment_output=result,
     model="gpt-4o",
-    temperature=0.1,
-    max_tokens=16000,
+    paper_abstracts=paper_abstracts,  # LLM cites inline from provided abstracts
 )
 ```
 
@@ -157,9 +166,11 @@ src/goa_semantic_tools/goa_semantic_tools/
 ├── cli.py                                    # CLI entry point (go-enrichment)
 ├── services/
 │   ├── go_enrichment_service.py              # ORA enrichment via GOATOOLS
-│   ├── go_markdown_explanation_service.py    # LLM explanation generation
+│   ├── go_markdown_explanation_service.py    # LLM explanation (lit-first)
 │   ├── go_explanation.prompt.yaml            # Explanation prompt template
-│   ├── reference_retrieval_service.py        # Claim extraction + PMID injection
+│   ├── artl_literature_service.py            # Europe PMC abstract pre-fetch
+│   ├── artl_literature_search.prompt.yaml    # Literature search prompt
+│   ├── reference_retrieval_service.py        # Claim extraction + PMID utilities
 │   └── reference_retrieval.prompt.yaml       # Assertion extraction prompt
 ├── utils/
 │   ├── data_downloader.py                    # Download & cache GO/GAF data
@@ -169,7 +180,7 @@ src/goa_semantic_tools/goa_semantic_tools/
 └── schemas/
     ├── go_enrichment_input.schema.json
     ├── go_enrichment_output.schema.json
-    └── go_explanation_output.schema.json
+    └── enrichment_explanation.schema.json
 ```
 
 ### Dependencies

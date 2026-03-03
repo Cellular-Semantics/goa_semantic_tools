@@ -250,3 +250,64 @@ class TestRunGoEnrichmentValidation:
             assert "empty" not in str(e).lower()
         except Exception:
             pass
+
+
+@pytest.mark.unit
+class TestNamespaceFiltering:
+    """Tests for the namespaces parameter of run_go_enrichment."""
+
+    def test_invalid_namespace_raises(self):
+        """Invalid namespace code raises ValueError."""
+        with pytest.raises(ValueError, match="Invalid namespace"):
+            run_go_enrichment(gene_symbols=["TP53"], namespaces=["XX"])
+
+    def test_invalid_namespace_message_contains_valid_codes(self):
+        """Error message lists valid namespace codes."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], namespaces=["INVALID"])
+        except ValueError as e:
+            msg = str(e)
+            assert "BP" in msg or "MF" in msg or "CC" in msg
+
+    def test_none_namespaces_passes_validation(self):
+        """None (default) namespaces does not raise ValueError for namespace."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], namespaces=None)
+        except ValueError as e:
+            assert "namespace" not in str(e).lower()
+        except Exception:
+            pass
+
+    def test_bp_only_namespace_passes_validation(self):
+        """['BP'] passes namespace validation."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], namespaces=["BP"])
+        except ValueError as e:
+            assert "namespace" not in str(e).lower()
+        except Exception:
+            pass
+
+    def test_namespace_map_contains_all_three(self):
+        """NAMESPACE_MAP has BP, MF, CC keys."""
+        from goa_semantic_tools.services.go_enrichment_service import NAMESPACE_MAP
+
+        assert "BP" in NAMESPACE_MAP
+        assert "MF" in NAMESPACE_MAP
+        assert "CC" in NAMESPACE_MAP
+
+    def test_namespace_map_values_are_full_names(self):
+        """NAMESPACE_MAP values are full namespace names."""
+        from goa_semantic_tools.services.go_enrichment_service import NAMESPACE_MAP
+
+        assert NAMESPACE_MAP["BP"] == "biological_process"
+        assert NAMESPACE_MAP["MF"] == "molecular_function"
+        assert NAMESPACE_MAP["CC"] == "cellular_component"
+
+    def test_case_insensitive_namespace(self):
+        """Namespace codes are case-insensitive (bp accepted like BP)."""
+        try:
+            run_go_enrichment(gene_symbols=["TP53"], namespaces=["bp"])
+        except ValueError as e:
+            assert "namespace" not in str(e).lower()
+        except Exception:
+            pass

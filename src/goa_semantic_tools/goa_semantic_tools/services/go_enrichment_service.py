@@ -20,6 +20,15 @@ from ..utils.go_hierarchy import (
 )
 
 
+NAMESPACE_MAP: dict[str, str] = {
+    "BP": "biological_process",
+    "MF": "molecular_function",
+    "CC": "cellular_component",
+}
+
+_ALL_NAMESPACES = list(NAMESPACE_MAP.values())
+
+
 def run_go_enrichment(
     gene_symbols: list[str],
     species: str = "human",
@@ -27,6 +36,7 @@ def run_go_enrichment(
     depth_range: tuple[int, int] = (4, 7),
     min_children: int = 2,
     max_genes: int = 30,
+    namespaces: list[str] | None = None,
 ) -> dict[str, Any]:
     """
     Run hierarchical GO enrichment analysis with depth-anchor clustering.
@@ -46,6 +56,9 @@ def run_go_enrichment(
         depth_range: GO depth range for anchor candidates
         min_children: Minimum enriched descendants to qualify as anchor
         max_genes: Filter overly general terms with > max_genes
+        namespaces: GO namespace codes to include, e.g. ["BP"] or ["BP", "MF"].
+            Valid values: "BP" (biological_process), "MF" (molecular_function),
+            "CC" (cellular_component). Default (None) = all three namespaces.
 
     Returns:
         Dictionary with enrichment results:
@@ -79,6 +92,15 @@ def run_go_enrichment(
 
     if not 0 < fdr_threshold <= 1:
         raise ValueError("fdr_threshold must be between 0 and 1")
+
+    if namespaces is not None:
+        invalid = [n for n in namespaces if n.upper() not in NAMESPACE_MAP]
+        if invalid:
+            raise ValueError(f"Invalid namespace(s): {invalid}. Valid: {list(NAMESPACE_MAP.keys())}")
+
+    ns_to_run = (
+        [NAMESPACE_MAP[n.upper()] for n in namespaces] if namespaces else _ALL_NAMESPACES
+    )
 
     print("=" * 80)
     print("GO Enrichment Analysis")
@@ -147,7 +169,7 @@ def run_go_enrichment(
 
     # Compute leaves FIRST - the complete set of most specific terms
     all_leaves = []
-    for namespace in ["biological_process", "cellular_component", "molecular_function"]:
+    for namespace in ns_to_run:
         ns_terms = {k: v for k, v in enriched_terms.items() if v.namespace == namespace}
         if ns_terms:
             ns_leaves = compute_enrichment_leaves(
@@ -161,7 +183,7 @@ def run_go_enrichment(
 
     # Build themes ON TOP of leaves (hierarchical grouping)
     all_themes = []
-    for namespace in ["biological_process", "cellular_component", "molecular_function"]:
+    for namespace in ns_to_run:
         ns_terms = {k: v for k, v in enriched_terms.items() if v.namespace == namespace}
         if ns_terms:
             themes = build_depth_anchor_themes(

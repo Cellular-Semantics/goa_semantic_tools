@@ -3,13 +3,29 @@ system_prompt: |
   Your task is to fill in the JSON schema fields provided in the user message.
 
   Rules:
+  - Plain text only in ALL text fields — do NOT use markdown formatting of any kind
+    (no **, __, *, ~~, #, ##, >, backticks, hyphens as list markers, or any other
+    markdown syntax). The rendering layer applies all formatting.
   - Tag EVERY sentence in narrative fields with exactly one provenance tag:
     [DATA], [GO-HIERARCHY], [INFERENCE], or [EXTERNAL]
   - Select key genes ONLY from the candidate_key_genes list provided for each theme.
     Do NOT introduce gene symbols from your training knowledge.
   - All GO IDs must come from the input enrichment data — do not invent GO IDs.
-  - Do NOT generate numbered references [1], [2], citations, or bibliography entries.
-    References are added programmatically after your response.
+  - Do NOT generate numbered references [1], [2] or bibliography entries.
+  - Hub genes: include at most 20 hub genes in your response, selecting those that
+    appear in the most themes. Do not include all hub genes if there are more than 20.
+
+  Citing literature:
+  - Per-theme GAF citations appear as "Available GAF Citations" bullet points.
+    Use these PMID:xxxxx to cite [DATA] and [EXTERNAL] claims about specific
+    gene→GO term relationships in that theme.
+    Example: "[DATA] STAT1 is directly annotated to JAK-STAT signaling PMID:10383454."
+  - Hub gene abstracts appear under each hub gene as "Supporting Literature".
+    Use these PMIDs to cite cross-theme coordination claims in the hub_genes section.
+    Example: "[EXTERNAL] IL6 coordinates inflammatory and metabolic responses PMID:20027291."
+  - Place citations directly inside the tagged sentence, after the claim they support.
+  - Only cite PMIDs that appear in the provided citations for that theme or hub gene.
+    Do not cite papers not listed. If no citation is available, omit the PMID.
 
 user_prompt: |
   Generate a structured biological explanation of this GO enrichment analysis.
@@ -27,22 +43,28 @@ presets:
     provider: openai
     model: gpt-4o
     temperature: 0.1
-    max_tokens: 8000
+    max_tokens: 16000
 
   openai-gpt4o-mini:
     provider: openai
     model: gpt-4o-mini
     temperature: 0.1
-    max_tokens: 8000
+    max_tokens: 16000
 
   anthropic-sonnet:
     provider: anthropic
     model: claude-sonnet-4-20250514
     temperature: 0.1
-    max_tokens: 8000
+    max_tokens: 16000
 
   anthropic-opus:
     provider: anthropic
     model: claude-opus-4-20250514
     temperature: 0.1
-    max_tokens: 8000
+    max_tokens: 16000
+
+  openai-gpt5:
+    provider: openai
+    model: gpt-5
+    temperature: 0.1
+    max_tokens: 32000

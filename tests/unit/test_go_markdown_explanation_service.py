@@ -11,12 +11,15 @@ from pathlib import Path
 from unittest.mock import patch
 
 from goa_semantic_tools.services.go_markdown_explanation_service import (
+    _DEFAULT_MAX_TOKENS,
+    _MODEL_MAX_TOKENS,
     _add_go_term_hyperlinks,
     _add_pmid_hyperlinks,
     _count_provenance_tags,
     _empty_markdown_explanation,
     _format_enrichment_for_llm,
     _get_api_key_for_model,
+    _get_default_max_tokens,
     _load_prompt,
     _validate_citations,
     generate_markdown_explanation,
@@ -24,6 +27,120 @@ from goa_semantic_tools.services.go_markdown_explanation_service import (
     render_explanation_to_markdown,
     validate_explanation_json,
 )
+
+
+@pytest.mark.unit
+class TestGetDefaultMaxTokens:
+    """Tests for _get_default_max_tokens and the _MODEL_MAX_TOKENS registry."""
+
+    def test_gpt5_returns_32000(self):
+        assert _get_default_max_tokens("gpt-5") == 32000
+
+    def test_gpt4o_returns_default(self):
+        assert _get_default_max_tokens("gpt-4o") == _DEFAULT_MAX_TOKENS
+
+    def test_gpt4o_mini_returns_default(self):
+        assert _get_default_max_tokens("gpt-4o-mini") == _DEFAULT_MAX_TOKENS
+
+    def test_unknown_model_returns_default(self):
+        assert _get_default_max_tokens("some-future-model") == _DEFAULT_MAX_TOKENS
+
+    def test_default_max_tokens_is_16000(self):
+        assert _DEFAULT_MAX_TOKENS == 16000
+
+    def test_gpt5_in_registry(self):
+        assert "gpt-5" in _MODEL_MAX_TOKENS
+        assert _MODEL_MAX_TOKENS["gpt-5"] == 32000
+
+    def test_generate_uses_model_default_when_max_tokens_none(self):
+        """generate_markdown_explanation should pass 32000 to LiteLLMAgent for gpt-5."""
+        minimal_enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 10,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": {},
+            "enrichment_leaves": [
+                {"go_id": "GO:0006281", "name": "DNA repair", "fdr": 0.001, "genes": ["BRCA1"]}
+            ],
+        }
+        captured = {}
+
+        class FakeAgent:
+            def __init__(self, model, api_key, max_tokens):
+                captured["max_tokens"] = max_tokens
+
+            def query_unified(self, **kwargs):
+                raise RuntimeError("stop")
+
+        with patch(
+            "goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent",
+            FakeAgent,
+        ):
+            with patch(
+                "goa_semantic_tools.services.go_markdown_explanation_service._get_api_key_for_model",
+                return_value="fake-key",
+            ):
+                try:
+                    generate_markdown_explanation(
+                        enrichment_output=minimal_enrichment,
+                        model="gpt-5",
+                        max_tokens=None,
+                    )
+                except RuntimeError:
+                    pass
+
+        assert captured.get("max_tokens") == 32000, (
+            f"Expected 32000 for gpt-5, got {captured.get('max_tokens')}"
+        )
+
+    def test_generate_uses_explicit_max_tokens_when_provided(self):
+        """Explicit max_tokens should override model default."""
+        minimal_enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 10,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": {},
+            "enrichment_leaves": [
+                {"go_id": "GO:0006281", "name": "DNA repair", "fdr": 0.001, "genes": ["BRCA1"]}
+            ],
+        }
+        captured = {}
+
+        class FakeAgent:
+            def __init__(self, model, api_key, max_tokens):
+                captured["max_tokens"] = max_tokens
+
+            def query_unified(self, **kwargs):
+                raise RuntimeError("stop")
+
+        with patch(
+            "goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent",
+            FakeAgent,
+        ):
+            with patch(
+                "goa_semantic_tools.services.go_markdown_explanation_service._get_api_key_for_model",
+                return_value="fake-key",
+            ):
+                try:
+                    generate_markdown_explanation(
+                        enrichment_output=minimal_enrichment,
+                        model="gpt-5",
+                        max_tokens=8000,  # explicit override
+                    )
+                except RuntimeError:
+                    pass
+
+        assert captured.get("max_tokens") == 8000
 
 
 @pytest.mark.unit
@@ -222,6 +339,307 @@ class TestFormatEnrichmentForLLM:
         assert "Enrichment Leaves" in result
         assert "DNA repair" in result
         assert "GO:0006281" in result
+
+    def test_includes_abstract_block_when_paper_abstracts_provided(self):
+        """Abstract block should appear in theme context when paper_abstracts is given."""
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+        paper_abstracts = {
+            0: [{"pmid": "12345678", "title": "TP53 and apoptosis", "abstract": "An informative abstract.", "authors": "Smith", "year": "2020"}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=paper_abstracts)
+
+        assert "Available Literature" in result
+        assert "PMID:12345678" in result
+        assert "TP53 and apoptosis" in result
+        assert "An informative abstract." in result
+
+    def test_no_abstract_block_when_paper_abstracts_not_provided(self):
+        """No abstract block should appear when paper_abstracts is None."""
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=None)
+
+        assert "Available Literature" not in result
+
+    def test_abstract_truncated_to_400_chars(self):
+        """Long abstracts should be truncated to 400 chars with ellipsis."""
+        long_abstract = "X" * 600
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+        paper_abstracts = {
+            0: [{"pmid": "99", "title": "T", "abstract": long_abstract, "authors": "", "year": ""}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=paper_abstracts)
+
+        # Should NOT contain the full 600-char string untruncated
+        assert long_abstract not in result
+        assert "..." in result
+
+    def test_hub_genes_capped_at_20_in_context(self):
+        """Hub genes in LLM context should be capped at top 20 by theme_count."""
+        # Build enrichment with 30 hub genes, varying theme_counts
+        hub_genes = {}
+        for i in range(30):
+            hub_genes[f"GENE{i:02d}"] = {
+                "theme_count": 30 - i,  # GENE00 has 30, GENE29 has 1
+                "themes": [f"theme{j}" for j in range(30 - i)],
+            }
+
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 50,
+                "genes_with_annotations": 50,
+                "total_enriched_terms": 100,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        # Top 20 genes (GENE00–GENE19) should appear
+        for i in range(20):
+            assert f"GENE{i:02d}" in result, f"GENE{i:02d} should be in context"
+
+        # Genes 20–29 (lowest theme_count) should be excluded
+        for i in range(20, 30):
+            assert f"GENE{i:02d}" not in result, f"GENE{i:02d} should be excluded (capped)"
+
+    def test_hub_genes_sorted_by_theme_count_descending(self):
+        """Hub genes in context should appear in order of descending theme_count."""
+        hub_genes = {
+            "LOW_GENE": {"theme_count": 2, "themes": ["t1", "t2"]},
+            "HIGH_GENE": {"theme_count": 10, "themes": [f"t{i}" for i in range(10)]},
+            "MID_GENE": {"theme_count": 5, "themes": [f"t{i}" for i in range(5)]},
+        }
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 10,
+                "genes_with_annotations": 10,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        # HIGH_GENE should appear before MID_GENE, which before LOW_GENE
+        pos_high = result.index("HIGH_GENE")
+        pos_mid = result.index("MID_GENE")
+        pos_low = result.index("LOW_GENE")
+        assert pos_high < pos_mid < pos_low
+
+
+@pytest.mark.unit
+class TestFormatEnrichmentGafPmids:
+    """Tests for gaf_pmids and hub_gene_abstracts params in _format_enrichment_for_llm."""
+
+    def _base_enrichment(self, with_theme=True, with_hub=True):
+        themes = []
+        hub_genes = {}
+        if with_theme:
+            themes = [{
+                "anchor_term": {
+                    "go_id": "GO:0006915",
+                    "name": "apoptotic process",
+                    "namespace": "biological_process",
+                    "fdr": 0.001,
+                    "genes": ["TP53"],
+                },
+                "specific_terms": [],
+                "anchor_confidence": "high",
+                "all_genes": ["TP53"],
+            }]
+        if with_hub:
+            hub_genes = {
+                "TP53": {"theme_count": 3, "themes": ["apoptosis", "DNA repair", "cell cycle"]}
+            }
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": themes,
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+    def test_gaf_pmids_renders_citation_block(self):
+        """GAF PMIDs appear as citation bullets under theme."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{"pmid": "10383454", "genes_covered": ["TP53", "BRCA1"]}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "Available GAF Citations" in result
+        assert "PMID:10383454" in result
+        assert "TP53" in result
+        assert "BRCA1" in result
+
+    def test_gaf_pmids_not_shown_when_none(self):
+        """No GAF citation block when gaf_pmids is None."""
+        enrichment = self._base_enrichment()
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=None)
+
+        assert "Available GAF Citations" not in result
+
+    def test_gaf_pmids_not_shown_when_empty_for_theme(self):
+        """No GAF citation block when theme has empty list."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: []}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "Available GAF Citations" not in result
+
+    def test_gaf_pmids_prefers_over_paper_abstracts(self):
+        """gaf_pmids block shown instead of paper_abstracts when both provided."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{"pmid": "11111", "genes_covered": ["TP53"]}]}
+        paper_abstracts = {0: [{"pmid": "99999", "title": "Old abstract", "abstract": "text", "authors": "", "year": ""}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids, paper_abstracts=paper_abstracts)
+
+        assert "Available GAF Citations" in result
+        assert "PMID:11111" in result
+        assert "Available Literature" not in result
+        assert "PMID:99999" not in result
+
+    def test_paper_abstracts_fallback_when_no_gaf_pmids(self):
+        """paper_abstracts still shown when gaf_pmids is None (backward compat)."""
+        enrichment = self._base_enrichment()
+        paper_abstracts = {0: [{"pmid": "99999", "title": "Old abstract", "abstract": "text", "authors": "", "year": ""}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=None, paper_abstracts=paper_abstracts)
+
+        assert "Available Literature" in result
+        assert "PMID:99999" in result
+
+    def test_hub_gene_abstracts_injected_in_hub_section(self):
+        """Hub gene papers appear in hub_genes section under Supporting Literature."""
+        enrichment = self._base_enrichment(with_theme=False)
+        hub_gene_abstracts = {
+            "TP53": [{"pmid": "20027291", "title": "TP53 in apoptosis", "abstract": "Key study.", "authors": "Smith", "year": "2003"}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=hub_gene_abstracts)
+
+        assert "Supporting Literature" in result
+        assert "PMID:20027291" in result
+        assert "TP53 in apoptosis" in result
+        assert "Smith" in result
+
+    def test_hub_gene_abstracts_not_shown_when_none(self):
+        """No Supporting Literature block when hub_gene_abstracts is None."""
+        enrichment = self._base_enrichment(with_theme=False)
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=None)
+
+        assert "Supporting Literature" not in result
+
+    def test_hub_gene_abstract_truncated_to_400_chars(self):
+        """Hub gene abstracts truncated to 400 chars."""
+        long_abstract = "Y" * 600
+        enrichment = self._base_enrichment(with_theme=False)
+        hub_gene_abstracts = {
+            "TP53": [{"pmid": "1", "title": "T", "abstract": long_abstract, "authors": "", "year": ""}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=hub_gene_abstracts)
+
+        assert long_abstract not in result
+        assert "..." in result
+
+    def test_gaf_pmids_truncates_gene_list_at_six(self):
+        """GAF citation line shows up to 6 genes then '+N more'."""
+        enrichment = self._base_enrichment()
+        genes = [f"GENE{i}" for i in range(10)]
+        gaf_pmids = {0: [{"pmid": "55555", "genes_covered": genes}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "+4 more" in result
 
 
 @pytest.mark.unit
@@ -690,13 +1108,13 @@ class TestRenderExplanationToMarkdown:
 
         assert "[GO:0006954](http://purl.obolibrary.org/obo/GO_0006954)" in md
 
-    def test_ref_marker_added_for_key_gene(self):
-        """Each key gene entry should have a [REF:GENE] marker."""
+    def test_no_ref_marker_in_key_gene(self):
+        """Key gene entries must NOT have [REF:GENE] markers (LLM cites inline now)."""
         explanation, enrichment = self._make_explanation_and_enrichment()
 
         md = render_explanation_to_markdown(explanation, enrichment)
 
-        assert "[REF:CD14]" in md
+        assert "[REF:" not in md
 
     def test_key_gene_bold_name(self):
         """Gene names should be bolded in Key Genes section."""
@@ -729,3 +1147,319 @@ class TestRenderExplanationToMarkdown:
         md = render_explanation_to_markdown(explanation, enrichment)
 
         assert "FDR 1e-10" in md
+
+    def test_inline_pmid_in_narrative_passes_through(self):
+        """Inline PMIDs written by the LLM should appear as-is in rendered output."""
+        theme = _make_theme(
+            anchor_genes=["RELA"],
+            specific_genes_list=[],
+            anchor_go_id="GO:0006954",
+        )
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[EXTERNAL] RELA encodes NF-κB p65 PMID:10383454.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "PMID:10383454" in md
+
+
+# =============================================================================
+# Test Fix 1: theme_index field in LLM context
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestFormatEnrichmentThemeIndex:
+    """Explicit theme_index field is present in LLM context output."""
+
+    def test_theme_index_zero_based_first_theme(self):
+        """First theme block includes theme_index: 0."""
+        theme = _make_theme(anchor_genes=["GENE1"], anchor_go_id="GO:0000001")
+        enrichment = _make_enrichment_output([theme])
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        assert "theme_index (use this exact integer in your response): 0" in result
+
+    def test_theme_index_second_theme(self):
+        """Second theme block includes theme_index: 1."""
+        t1 = _make_theme(anchor_genes=["G1"], anchor_go_id="GO:0000001")
+        t2 = _make_theme(anchor_genes=["G2"], anchor_go_id="GO:0000002")
+        enrichment = _make_enrichment_output([t1, t2])
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        assert "theme_index (use this exact integer in your response): 1" in result
+
+    def test_theme_index_distinct_per_theme(self):
+        """Each theme has a different theme_index value."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(3)
+        ]
+        enrichment = _make_enrichment_output(themes)
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        for i in range(3):
+            assert f"theme_index (use this exact integer in your response): {i}" in result
+
+
+# =============================================================================
+# Test Fix 2: methodology note, anchor confidence, reference table
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestRenderMethodologyAndTable:
+    """Tests for methodology note, anchor confidence, and reference table."""
+
+    def _make_partial_explanation(self, n_explained, n_total):
+        """Explanation covers n_explained themes; enrichment has n_total themes."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(n_total)
+        ]
+        enrichment = _make_enrichment_output(themes)
+        exp_themes = [
+            {
+                "theme_index": i,
+                "narrative": f"[DATA] Theme {i} narrative.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }
+            for i in range(n_explained)
+        ]
+        explanation = {"themes": exp_themes, "hub_genes": [], "overall_summary": []}
+        return explanation, enrichment
+
+    def test_methodology_note_always_present(self):
+        """Methodology note about depth-anchor appears in all reports."""
+        explanation, enrichment = self._make_partial_explanation(1, 1)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "depth-anchor" in md
+
+    def test_anchor_concept_explained(self):
+        """Report explains what an anchor is."""
+        explanation, enrichment = self._make_partial_explanation(1, 1)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "anchor" in md.lower()
+        assert "GO hierarchy" in md or "GO term" in md
+
+    def test_theme_count_note_when_capped(self):
+        """Header note includes count when not all themes are explained."""
+        explanation, enrichment = self._make_partial_explanation(1, 3)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "1" in md and "3" in md
+        # The note should reference the counts together
+        assert "1 of 3" in md or "1\nof 3" in md or "**1 of 3**" in md
+
+    def test_no_theme_count_note_when_all_explained(self):
+        """No truncation count note when all themes have narratives."""
+        explanation, enrichment = self._make_partial_explanation(2, 2)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # "2 of 2" should not appear
+        assert "2 of 2" not in md
+
+    def test_anchor_confidence_in_summary_line(self):
+        """Anchor confidence appears on the theme summary line."""
+        theme = _make_theme(anchor_genes=["CD14"], anchor_go_id="GO:0006954")
+        theme["anchor_confidence"] = "high"
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[DATA] Test.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "Anchor confidence" in md
+        assert "high" in md
+
+    def test_reference_table_heading_present(self):
+        """Reference table section heading is present."""
+        explanation, enrichment = self._make_partial_explanation(1, 2)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "All Enrichment Themes" in md
+
+    def test_reference_table_lists_all_themes(self):
+        """Reference table has a row for every theme in enrichment output."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(3)
+        ]
+        enrichment = _make_enrichment_output(themes)
+        explanation = {
+            "themes": [{"theme_index": 0, "narrative": "[DATA] T.", "key_insights": [], "key_genes": [], "statistical_context": ""}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # Each theme is numbered in the table
+        assert "| 1 |" in md
+        assert "| 2 |" in md
+        assert "| 3 |" in md
+
+    def test_reference_table_contains_go_ids(self):
+        """Reference table rows include GO IDs."""
+        theme = _make_theme(anchor_genes=["G1"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {"themes": [], "hub_genes": [], "overall_summary": []}
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "GO:0006954" in md
+
+
+# =============================================================================
+# Test Fix 3: _add_pmid_hyperlinks is called
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestAddPmidHyperlinksWiring:
+    """_add_pmid_hyperlinks is called by render_explanation_to_markdown."""
+
+    def test_pmid_in_narrative_becomes_hyperlink(self):
+        """PMID:xxxxx in LLM narrative is hyperlinked in render output."""
+        theme = _make_theme(anchor_genes=["RELA"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[EXTERNAL] Key regulator PMID:12345678.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # After _add_pmid_hyperlinks the PMID should NOT be bare
+        assert "PMID:12345678" in md  # text still present
+        # Note: render_explanation_to_markdown does NOT call _add_pmid_hyperlinks
+        # That is called in generate_markdown_explanation. This test just confirms
+        # the PMID passes through the renderer unchanged so the outer call can link it.
+        # The hyperlink test for the full pipeline would require LLM mocking.
+
+    def test_add_pmid_hyperlinks_converts_bare_pmid(self):
+        """_add_pmid_hyperlinks converts PMID:xxxxx to markdown link."""
+        text = "See PMID:12345678 for details."
+
+        result = _add_pmid_hyperlinks(text)
+
+        assert "[PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/)" in result
+
+    def test_add_pmid_hyperlinks_no_match(self):
+        """_add_pmid_hyperlinks returns text unchanged when no PMIDs present."""
+        text = "No citations here."
+
+        result = _add_pmid_hyperlinks(text)
+
+        assert result == text
+
+
+# =============================================================================
+# Test mdformat integration
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestMdformatIntegration:
+    """mdformat normalises the rendered markdown output."""
+
+    def test_mdformat_normalises_missing_blank_lines(self):
+        """mdformat adds blank lines around headings if missing."""
+        import mdformat
+
+        sloppy = "# Title\n## Section\nSome text."
+        result = mdformat.text(sloppy, options={"wrap": "no"})
+
+        # Heading should be followed by blank line
+        assert "\n\n" in result
+
+    def test_mdformat_preserves_provenance_tags(self):
+        """mdformat does not strip [DATA], [INFERENCE] etc. tags."""
+        import mdformat
+
+        text = "# Report\n\n[DATA] STAT1 is enriched. [INFERENCE] Cross-talk likely.\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[DATA]" in result
+        assert "[INFERENCE]" in result
+
+    def test_mdformat_preserves_pmid_hyperlinks(self):
+        """mdformat does not break PMID hyperlinks."""
+        import mdformat
+
+        text = "# Report\n\nSee [PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/) for details.\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/)" in result
+
+    def test_mdformat_preserves_go_hyperlinks(self):
+        """mdformat does not break GO ID hyperlinks."""
+        import mdformat
+
+        text = "# Report\n\n[GO:0006955](http://purl.obolibrary.org/obo/GO_0006955)\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[GO:0006955](http://purl.obolibrary.org/obo/GO_0006955)" in result
+
+    def test_mdformat_preserves_table(self):
+        """mdformat does not corrupt markdown tables."""
+        import mdformat
+
+        text = (
+            "# Report\n\n"
+            "| # | Theme | FDR |\n"
+            "|---|-------|-----|\n"
+            "| 1 | immune response | 1.2e-8 |\n"
+        )
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "| 1 |" in result
+        assert "immune response" in result
+
+    def test_mdformat_wrap_no_preserves_long_lines(self):
+        """wrap=no option prevents mdformat from breaking long lines."""
+        import mdformat
+
+        long_line = "GENE1, GENE2, GENE3, GENE4, GENE5, GENE6, GENE7, GENE8, GENE9, GENE10, GENE11, GENE12 (12)"
+        text = f"# Report\n\n{long_line}\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert long_line in result

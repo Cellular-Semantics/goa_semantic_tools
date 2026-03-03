@@ -10,6 +10,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+import mdformat
 import yaml
 from cellsem_llm_client.agents.agent_connection import LiteLLMAgent
 from cellsem_llm_client.schema.manager import SchemaManager
@@ -28,13 +29,28 @@ EnrichmentExplanation = _schema_manager.get_pydantic_model(
     json.loads(_EXPLANATION_SCHEMA_PATH.read_text())
 )
 
+# Per-model output token defaults.  Add new models here as their ceilings become known.
+_MODEL_MAX_TOKENS: dict[str, int] = {
+    "gpt-5": 32000,
+    # gpt-4o / gpt-4o-mini ceiling is 16,384 — covered by _DEFAULT_MAX_TOKENS
+}
+_DEFAULT_MAX_TOKENS = 16000
+
+
+def _get_default_max_tokens(model: str) -> int:
+    """Return a sensible max_tokens default for the given model name."""
+    return _MODEL_MAX_TOKENS.get(model, _DEFAULT_MAX_TOKENS)
+
 
 def generate_markdown_explanation(
     enrichment_output: dict[str, Any],
     model: str = "gpt-4o",
     api_key: str | None = None,
     temperature: float = 0.1,
-    max_tokens: int = 8000,
+    max_tokens: int | None = None,  # None → auto-derived per model via _get_default_max_tokens
+    paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
 ) -> str:
     """
     Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
@@ -54,6 +70,13 @@ def generate_markdown_explanation(
         api_key: API key for LLM provider (if None, uses env vars)
         temperature: LLM temperature (default: 0.1 for consistency)
         max_tokens: Maximum tokens for LLM response
+        paper_abstracts: Deprecated. Optional dict mapping theme index to list of
+            paper dicts. Use gaf_pmids + hub_gene_abstracts instead.
+        gaf_pmids: Optional dict mapping theme index to list of curated GAF PMID
+            dicts ({pmid, genes_covered}). Injected per theme as citation anchors.
+        hub_gene_abstracts: Optional dict mapping gene symbol to list of paper
+            dicts ({pmid, title, abstract, authors, year}). Injected into hub gene
+            section so LLM can ground cross-theme coordination claims.
 
     Returns:
         Markdown-formatted explanation string with provenance tags
@@ -71,6 +94,10 @@ def generate_markdown_explanation(
         ... )
         >>> print(markdown)
     """
+    # Resolve max_tokens: explicit value takes precedence; otherwise derive from model
+    if max_tokens is None:
+        max_tokens = _get_default_max_tokens(model)
+
     # Validate input
     if not enrichment_output:
         raise ValueError("enrichment_output cannot be empty")
@@ -113,7 +140,12 @@ def generate_markdown_explanation(
 
     # Format enrichment data for LLM (includes ranked gene candidates per theme)
     print("\n[2/4] Formatting enrichment data for LLM...")
-    enrichment_context = _format_enrichment_for_llm(enrichment_output)
+    enrichment_context = _format_enrichment_for_llm(
+        enrichment_output,
+        paper_abstracts=paper_abstracts,
+        gaf_pmids=gaf_pmids,
+        hub_gene_abstracts=hub_gene_abstracts,
+    )
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
 
     print(f"  Themes to explain: {len(themes)}")
@@ -162,6 +194,13 @@ def generate_markdown_explanation(
 
     # Add hyperlinks for any bare GO IDs remaining in narrative text
     markdown_output = _add_go_term_hyperlinks(markdown_output, enrichment_output)
+
+    # Add hyperlinks to inline PMID citations
+    markdown_output = _add_pmid_hyperlinks(markdown_output)
+
+    # Normalise markdown formatting (blank lines, spacing, thematic breaks)
+    # wrap_width=0 disables line-wrapping so long gene lists / table cells are preserved
+    markdown_output = mdformat.text(markdown_output, options={"wrap": "no"})
 
     # Count provenance tags
     _count_provenance_tags(markdown_output)
@@ -228,18 +267,28 @@ def _get_api_key_for_model(model: str) -> str:
         return api_key
 
 
-def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
+def _format_enrichment_for_llm(
+    enrichment_output: dict[str, Any],
+    paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
+) -> str:
     """
     Format enrichment output as readable text for LLM.
 
     Converts structured JSON to natural text that explains:
     - Study parameters
-    - Hub genes and their theme participation
+    - Hub genes and their theme participation (with abstracts if hub_gene_abstracts provided)
     - Hierarchical themes with anchor and specific terms
     - Enrichment leaves (most specific terms)
 
     Args:
         enrichment_output: Phase 1 enrichment output (new format)
+        paper_abstracts: Deprecated. Theme-level paper abstracts (lit-first).
+        gaf_pmids: Optional dict mapping theme index to curated GAF PMIDs
+            [{pmid, genes_covered}]. Injected as citation anchors per theme.
+        hub_gene_abstracts: Optional dict mapping gene → paper dicts with abstracts.
+            Injected under each hub gene in the hub genes section.
 
     Returns:
         Formatted string for LLM consumption
@@ -271,13 +320,38 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
         lines.append("These genes appear across multiple functional themes, suggesting they are biological coordinators:")
         lines.append("")
 
-        for gene, data in list(hub_genes.items())[:15]:  # Top 15 hub genes
+        hub_genes_sorted = sorted(
+            hub_genes.items(), key=lambda x: x[1].get("theme_count", 0), reverse=True
+        )[:20]  # Top 20 hub genes by theme_count — matches schema maxItems cap
+        for gene, data in hub_genes_sorted:
             theme_count = data.get("theme_count", 0)
             theme_names = data.get("themes", [])[:5]  # Top 5 themes
             lines.append(f"## {gene} ({theme_count} themes)")
             lines.append(f"- Themes: {', '.join(theme_names)}")
             if len(data.get("themes", [])) > 5:
                 lines.append(f"- ... and {len(data['themes']) - 5} more")
+
+            # Inject hub gene abstracts if available
+            if hub_gene_abstracts and gene in hub_gene_abstracts and hub_gene_abstracts[gene]:
+                lines.append("### Supporting Literature (cite as PMID:xxxxx for cross-theme claims):")
+                for paper in hub_gene_abstracts[gene]:
+                    pmid = paper.get("pmid", "")
+                    title = paper.get("title", "No title")
+                    authors = paper.get("authors", "")
+                    year = paper.get("year", "")
+                    abstract = paper.get("abstract", "")
+                    author_year = (
+                        f"{authors} ({year})" if authors and year else authors or year
+                    )
+                    header = f"[PMID:{pmid}] {title}"
+                    if author_year:
+                        header += f" — {author_year}"
+                    lines.append(header)
+                    if abstract:
+                        preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
+                        lines.append(f"Abstract: {preview}")
+                lines.append("")
+
             lines.append("")
 
         lines.append("---")
@@ -296,6 +370,7 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
             confidence = theme.get("anchor_confidence", "")
 
             lines.append(f"## Theme {i+1}: {anchor.get('name', 'Unknown')}")
+            lines.append(f"- theme_index (use this exact integer in your response): {i}")
             lines.append(f"- GO ID: {anchor.get('go_id', '')}")
             lines.append(f"- Namespace: {anchor.get('namespace', '')}")
             lines.append(f"- FDR: {anchor.get('fdr', 0):.2e}")
@@ -334,6 +409,42 @@ def _format_enrichment_for_llm(enrichment_output: dict[str, Any]) -> str:
                         f"  {rank_num}. {entry['gene']}  "
                         f"[{specific_label}, appears in {entry['n_themes']} theme(s), score: {entry['score']:.2f}]"
                     )
+                lines.append("")
+
+            # GAF-curated citations per theme (preferred)
+            if gaf_pmids and i in gaf_pmids and gaf_pmids[i]:
+                lines.append("### Available GAF Citations (cite as PMID:xxxxx for gene→GO annotations):")
+                for entry in gaf_pmids[i]:
+                    pmid = entry.get("pmid", "")
+                    genes_covered = entry.get("genes_covered", [])
+                    genes_str = ", ".join(genes_covered[:6])
+                    if len(genes_covered) > 6:
+                        genes_str += f" +{len(genes_covered) - 6} more"
+                    lines.append(f"- PMID:{pmid} (covers: {genes_str})")
+                lines.append("")
+
+            # Fallback: full abstracts from deprecated paper_abstracts param
+            elif paper_abstracts and i in paper_abstracts and paper_abstracts[i]:
+                lines.append("### Available Literature (cite inline as PMID:xxxxx where relevant):")
+                for paper in paper_abstracts[i]:
+                    pmid = paper.get("pmid", "")
+                    title = paper.get("title", "No title")
+                    authors = paper.get("authors", "")
+                    year = paper.get("year", "")
+                    abstract = paper.get("abstract", "")
+
+                    author_year = (
+                        f"{authors} ({year})" if authors and year
+                        else authors or year
+                    )
+                    header = f"[PMID:{pmid}] {title}"
+                    if author_year:
+                        header += f" — {author_year}"
+                    lines.append(header)
+                    if abstract:
+                        preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
+                        lines.append(f"Abstract: {preview}")
+                    lines.append("")
                 lines.append("")
 
             lines.append("---")
@@ -683,7 +794,29 @@ def render_explanation_to_markdown(
     species = metadata.get("species", "")
     title_suffix = f" — {species}" if species else ""
     lines.append(f"# GO Enrichment Analysis Report{title_suffix}\n")
-    lines.append("")
+    lines.append("\n")
+
+    # Methodology note
+    n_explained = sum(
+        1 for t in explanation.get("themes", [])
+        if isinstance(t.get("theme_index"), int)
+        and 0 <= t["theme_index"] < len(enrichment_themes)
+    )
+    n_total = len(enrichment_themes)
+    theme_count_note = (
+        f" This report provides detailed narrative for the top "
+        f"**{n_explained} of {n_total} themes**, ranked by FDR ascending."
+        f" A complete reference table of all themes follows at the end."
+        if n_explained < n_total else ""
+    )
+    lines.append(
+        f"> **Methods note:** Enrichment themes are built using a depth-anchor algorithm. "
+        f"Each theme is headed by an **anchor** — an intermediate GO term (depth 4–7 in "
+        f"the GO hierarchy) chosen to best group the enriched leaf terms beneath it. "
+        f"Anchor confidence (high/medium/low) reflects how tightly the leaf terms cluster "
+        f"under the anchor.{theme_count_note}\n"
+    )
+    lines.append("\n")
 
     # Per-theme sections
     for exp_theme in explanation.get("themes", []):
@@ -698,72 +831,117 @@ def render_explanation_to_markdown(
 
         # Section header
         lines.append(f"### Theme {idx + 1}: {anchor_name}\n")
+        lines.append("\n")
 
-        # Summary line with linked GO ID
+        # Summary line with linked GO ID and anchor confidence
         go_link = _go_id_to_link(anchor_go_id)
-        lines.append(f"**Summary:** {anchor_name} ({go_link})\n")
-        lines.append("")
+        confidence = enrichment_theme.get("anchor_confidence", "")
+        confidence_str = f"  · Anchor confidence: **{confidence}**" if confidence else ""
+        lines.append(f"**Summary:** {anchor_name} ({go_link}){confidence_str}\n")
+        lines.append("\n")
 
         # Narrative (free prose from LLM — provenance tags are inside)
         narrative = exp_theme.get("narrative", "")
         if narrative:
             lines.append(f"{narrative}\n")
-            lines.append("")
+            lines.append("\n")
 
         # Key Insights
         key_insights = exp_theme.get("key_insights", [])
         if key_insights:
-            lines.append("**Key Insights:**\n")
+            lines.append("#### Key Insights\n")
+            lines.append("\n")
             for ki in key_insights:
                 insight = ki.get("insight", "")
                 go_id = ki.get("go_id", "")
                 go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
                 lines.append(f"- {insight}{go_link}\n")
-            lines.append("")
+            lines.append("\n")
 
         # Key Genes
         key_genes = exp_theme.get("key_genes", [])
         if key_genes:
-            lines.append("**Key Genes:**\n")
+            lines.append("#### Key Genes\n")
+            lines.append("\n")
             for kg in key_genes:
                 gene = kg.get("gene", "")
                 go_id = kg.get("go_id", "")
                 desc = kg.get("description", "")
                 claim_type = kg.get("claim_type", "INFERENCE")
                 go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
-                ref_marker = f" [REF:{gene}]" if gene else ""
-                lines.append(f"- **{gene}**: [{claim_type}] {desc}{go_link}{ref_marker}\n")
-            lines.append("")
+                lines.append(f"- **{gene}**: [{claim_type}] {desc}{go_link}\n")
+            lines.append("\n")
 
         # Statistical context
         stat_ctx = exp_theme.get("statistical_context", "")
         if stat_ctx:
-            lines.append(f"**Statistical Context:** {stat_ctx}\n")
-            lines.append("")
+            lines.append("#### Statistical Context\n")
+            lines.append("\n")
+            lines.append(f"{stat_ctx}\n")
+            lines.append("\n")
 
         lines.append("---\n")
-        lines.append("")
+        lines.append("\n")
 
     # Hub genes section
     hub_genes_exp = explanation.get("hub_genes", [])
     if hub_genes_exp:
         lines.append("## Hub Genes\n")
-        lines.append("")
+        lines.append("\n")
         for hg in hub_genes_exp:
             gene = hg.get("gene", "")
             narrative = hg.get("narrative", "")
             claim_type = hg.get("claim_type", "INFERENCE")
             lines.append(f"- **{gene}**: [{claim_type}] {narrative}\n")
-        lines.append("")
+        lines.append("\n")
 
     # Overall summary
     overall = explanation.get("overall_summary", [])
     if overall:
         lines.append("## Overall Summary\n")
-        lines.append("")
+        lines.append("\n")
         for para in overall:
             lines.append(f"{para}\n")
-            lines.append("")
+            lines.append("\n")
+
+    # Full theme reference table (all themes, including uncovered ones)
+    if enrichment_themes:
+        _NS_ABBREV = {
+            "biological_process": "BP",
+            "molecular_function": "MF",
+            "cellular_component": "CC",
+        }
+        cap_note = (
+            f"Top {n_explained} have narrative summaries above. "
+            if n_explained < n_total
+            else ""
+        )
+        lines.append("---\n")
+        lines.append("\n")
+        lines.append("## All Enrichment Themes (Reference)\n")
+        lines.append("\n")
+        lines.append(
+            f"_{n_total} themes ranked by FDR (most significant first). "
+            f"{cap_note}_\n"
+        )
+        lines.append("\n")
+        lines.append("| # | Theme | GO ID | NS | FDR | Genes |\n")
+        lines.append("|---|-------|-------|----|-----|-------|\n")
+        for i, theme in enumerate(enrichment_themes):
+            anchor = theme.get("anchor_term", {})
+            name = anchor.get("name", "Unknown")
+            go_id = anchor.get("go_id", "")
+            ns_full = anchor.get("namespace", "")
+            ns = _NS_ABBREV.get(ns_full, ns_full[:2].upper() if ns_full else "?")
+            fdr = anchor.get("fdr", 0)
+            genes = sorted(anchor.get("genes", []))
+            gene_preview = ", ".join(genes[:5])
+            if len(genes) > 5:
+                gene_preview += f", … ({len(genes)})"
+            elif genes:
+                gene_preview += f" ({len(genes)})"
+            lines.append(f"| {i + 1} | {name} | {go_id} | {ns} | {fdr:.2e} | {gene_preview} |\n")
+        lines.append("\n")
 
     return "".join(lines)
 

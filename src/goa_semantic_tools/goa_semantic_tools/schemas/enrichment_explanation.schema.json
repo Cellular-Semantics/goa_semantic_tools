@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/enrichment_explanation.schema.json",
   "title": "Enrichment Explanation (themes format)",
-  "description": "LLM-generated structured explanation of GO enrichment output in depth-anchor themes format. Fill every field strictly from the input enrichment data provided — do not introduce gene symbols or GO IDs that are not present in the input.",
+  "description": "LLM-generated structured explanation of GO enrichment output in depth-anchor themes format. Fill every field strictly from the input enrichment data provided — do not introduce gene symbols or GO IDs that are not present in the input. IMPORTANT: All text fields must contain plain text only — do not use markdown syntax (no **, __, *, #, backticks, or any other markdown formatting). The rendering layer will apply all formatting.",
   "type": "object",
   "properties": {
     "themes": {
@@ -19,7 +19,7 @@
           "narrative": {
             "type": "string",
             "minLength": 80,
-            "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data."
+            "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Plain text only — no markdown formatting. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data."
           },
           "key_insights": {
             "type": "array",
@@ -32,7 +32,7 @@
                 "insight": {
                   "type": "string",
                   "minLength": 20,
-                  "description": "One specific biological insight. Be concrete — reference gene names or processes from the input data."
+                  "description": "One specific biological insight. Plain text only — no markdown formatting. Be concrete — reference gene names or processes from the input data."
                 },
                 "go_id": {
                   "type": "string",
@@ -65,7 +65,7 @@
                   "type": "string",
                   "minLength": 20,
                   "maxLength": 200,
-                  "description": "One sentence explaining this gene's role in the context of this theme. If claim_type is EXTERNAL, this may draw on known biology; if INFERENCE, it should be grounded in the enrichment evidence."
+                  "description": "One sentence explaining this gene's role in the context of this theme. Plain text only — no markdown formatting. If claim_type is EXTERNAL, this may draw on known biology; if INFERENCE, it should be grounded in the enrichment evidence."
                 },
                 "claim_type": {
                   "type": "string",
@@ -81,7 +81,7 @@
             "type": "string",
             "minLength": 20,
             "maxLength": 300,
-            "description": "One sentence summarising the statistical evidence for this theme: include the anchor term FDR, fold enrichment, and gene count. Use the numbers directly from the input — do not round or approximate."
+            "description": "One sentence summarising the statistical evidence for this theme: include the anchor term FDR, fold enrichment, and gene count. Plain text only — no markdown formatting. Use the numbers directly from the input — do not round or approximate."
           }
         },
         "required": ["theme_index", "narrative", "key_insights", "key_genes", "statistical_context"],
@@ -90,7 +90,8 @@
     },
     "hub_genes": {
       "type": "array",
-      "description": "Explanations for hub genes — genes that appear across 3 or more themes. Only include genes that are listed as hub_genes in the input data.",
+      "maxItems": 20,
+      "description": "Explanations for up to 20 hub genes — prioritise those appearing in the most themes. Only include genes that are listed as hub_genes in the input data.",
       "items": {
         "type": "object",
         "properties": {
@@ -102,7 +103,7 @@
             "type": "string",
             "minLength": 30,
             "maxLength": 300,
-            "description": "1-2 sentences explaining why this gene appears across multiple themes and what that cross-theme role implies biologically."
+            "description": "1-2 sentences explaining why this gene appears across multiple themes and what that cross-theme role implies biologically. Plain text only — no markdown formatting."
           },
           "claim_type": {
             "type": "string",
@@ -116,7 +117,7 @@
     },
     "overall_summary": {
       "type": "array",
-      "description": "3-4 paragraph overall biological narrative synthesising all themes into a coherent story. Each element of this array is one paragraph (a string). Do not include sub-headings — write continuous prose. The final paragraph should address any limitations or caveats.",
+      "description": "3-4 paragraph overall biological narrative synthesising all themes into a coherent story. Each element of this array is one paragraph (a plain text string — no markdown formatting). Do not include sub-headings — write continuous prose. The final paragraph should address any limitations or caveats.",
       "minItems": 3,
       "maxItems": 4,
       "items": {

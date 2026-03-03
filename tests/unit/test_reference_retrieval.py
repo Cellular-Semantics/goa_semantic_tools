@@ -734,3 +734,96 @@ class TestInjectReferencesInline:
 
         # PMID should appear exactly once
         assert result.count("PMID:99999999") == 1
+
+
+# =============================================================================
+# Test get_gaf_pmids_for_themes
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestGetGafPmidsForThemes:
+    """Tests for get_gaf_pmids_for_themes."""
+
+    def _make_ref_index(self, gene_go_pmids):
+        """Build minimal ref_index dict."""
+        pmid_gene_gos = {}
+        for gene, go_pmids in gene_go_pmids.items():
+            for go_id, pmids in go_pmids.items():
+                for pmid in pmids:
+                    pmid_gene_gos.setdefault(pmid, {}).setdefault(gene, set()).add(go_id)
+        return {
+            "gene_go_pmids": gene_go_pmids,
+            "pmid_gene_gos": pmid_gene_gos,
+            "go_term_names": {},
+        }
+
+    def test_returns_dict_keyed_by_theme_index(self):
+        """Returns dict with integer keys matching theme indices."""
+        from goa_semantic_tools.services.reference_retrieval_service import get_gaf_pmids_for_themes
+
+        themes = [
+            {"anchor_term": {"go_id": "GO:0001", "genes": ["GENE1"]}, "specific_terms": []},
+            {"anchor_term": {"go_id": "GO:0002", "genes": ["GENE2"]}, "specific_terms": []},
+        ]
+        ref_index = self._make_ref_index({
+            "GENE1": {"GO:0001": {"11111"}},
+            "GENE2": {"GO:0002": {"22222"}},
+        })
+
+        result = get_gaf_pmids_for_themes(themes, ref_index)
+
+        assert set(result.keys()) == {0, 1}
+        assert any(r["pmid"] == "11111" for r in result[0])
+        assert any(r["pmid"] == "22222" for r in result[1])
+
+    def test_collects_genes_from_anchor_and_specific_terms(self):
+        """PMIDs from both anchor and specific_terms genes are collected."""
+        from goa_semantic_tools.services.reference_retrieval_service import get_gaf_pmids_for_themes
+
+        themes = [{
+            "anchor_term": {"go_id": "GO:0001", "genes": ["GENE_A"]},
+            "specific_terms": [
+                {"go_id": "GO:0002", "genes": ["GENE_B"]},
+            ],
+        }]
+        ref_index = self._make_ref_index({
+            "GENE_A": {"GO:0001": {"11111"}},
+            "GENE_B": {"GO:0002": {"22222"}},
+        })
+
+        result = get_gaf_pmids_for_themes(themes, ref_index)
+
+        pmids = {r["pmid"] for r in result[0]}
+        assert "11111" in pmids
+        assert "22222" in pmids
+
+    def test_top_n_capped(self):
+        """Returns at most top_n PMIDs per theme."""
+        from goa_semantic_tools.services.reference_retrieval_service import get_gaf_pmids_for_themes
+
+        genes = {f"GENE{i}": {"GO:0001": {str(10000000 + i)}} for i in range(10)}
+        themes = [{"anchor_term": {"go_id": "GO:0001", "genes": list(genes.keys())}, "specific_terms": []}]
+        ref_index = self._make_ref_index(genes)
+
+        result = get_gaf_pmids_for_themes(themes, ref_index, top_n=3)
+
+        assert len(result[0]) <= 3
+
+    def test_empty_themes_returns_empty_dict(self):
+        """Empty themes list returns empty dict."""
+        from goa_semantic_tools.services.reference_retrieval_service import get_gaf_pmids_for_themes
+
+        result = get_gaf_pmids_for_themes([], ref_index={})
+        assert result == {}
+
+    def test_theme_with_no_gaf_pmids_gets_empty_list(self):
+        """Theme whose genes have no GAF annotations gets empty list."""
+        from goa_semantic_tools.services.reference_retrieval_service import get_gaf_pmids_for_themes
+
+        themes = [{"anchor_term": {"go_id": "GO:9999", "genes": ["UNKNOWN"]}, "specific_terms": []}]
+        ref_index = self._make_ref_index({})
+
+        result = get_gaf_pmids_for_themes(themes, ref_index)
+
+        assert result[0] == []
