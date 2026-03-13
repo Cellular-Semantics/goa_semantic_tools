@@ -541,3 +541,128 @@ def _parse_search_results(raw: str) -> list[dict[str, Any]]:
             })
 
     return papers
+
+
+def _parse_paper_by_id_result(raw: str) -> dict[str, Any] | None:
+    """Parse raw JSON returned by get_europepmc_paper_by_id into a paper dict.
+
+    Args:
+        raw: Raw string (JSON) from the MCP tool handler
+
+    Returns:
+        Paper dict with keys: pmid, title, abstract, authors, year.
+        Returns None if raw is empty, unparseable, or missing pmid+content.
+    """
+    if not raw:
+        return None
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    # Response may be wrapped: {"result": {...}} or bare paper dict
+    paper = data.get("result", data)
+    if not isinstance(paper, dict):
+        return None
+
+    pmid = str(paper.get("pmid") or paper.get("id") or "").strip()
+    title = paper.get("title", "")
+    abstract = paper.get("abstractText", paper.get("abstract", ""))
+
+    authors_data = paper.get("authorList", {})
+    if isinstance(authors_data, dict):
+        author_list = authors_data.get("author", [])
+    elif isinstance(authors_data, list):
+        author_list = authors_data
+    else:
+        author_list = []
+
+    surnames = [
+        a.get("lastName", "")
+        for a in author_list[:3]
+        if isinstance(a, dict) and a.get("lastName")
+    ]
+    authors = ", ".join(surnames)
+    if len(author_list) > 3:
+        authors += " et al."
+
+    year = str(paper.get("pubYear", "")).strip()
+
+    if pmid and (title or abstract):
+        return {"pmid": pmid, "title": title, "abstract": abstract, "authors": authors, "year": year}
+    return None
+
+
+def fetch_abstracts_for_gaf_pmids(
+    gaf_pmids: dict[int, list[dict[str, Any]]],
+    mcp_command: str = "uvx artl-mcp",
+) -> dict[int, list[dict[str, Any]]]:
+    """Fetch paper abstracts for GAF-curated PMIDs via Europe PMC.
+
+    Deduplicates PMIDs across themes (each PMID fetched once via
+    get_europepmc_paper_by_id), then maps results back to theme indices.
+
+    Args:
+        gaf_pmids: {theme_index: [{pmid, genes_covered}, ...]} from
+            get_gaf_pmids_for_themes()
+        mcp_command: artl-mcp server command
+
+    Returns:
+        {theme_index: [{pmid, title, abstract, authors, year}, ...]}
+        Same shape as paper_abstracts from fetch_abstracts_for_themes().
+        Only entries where an abstract was successfully fetched are included.
+    """
+    if not gaf_pmids:
+        return {}
+
+    _ensure_imports()
+
+    # Collect unique PMIDs across all themes
+    pmid_to_themes: dict[str, list[int]] = {}
+    for theme_idx, entries in gaf_pmids.items():
+        for entry in entries:
+            pmid = entry.get("pmid", "")
+            if pmid:
+                pmid_to_themes.setdefault(pmid, []).append(theme_idx)
+
+    unique_pmids = list(pmid_to_themes)
+    if not unique_pmids:
+        return {i: [] for i in gaf_pmids}
+
+    pmid_to_paper: dict[str, dict[str, Any]] = {}
+    try:
+        with MCPToolSource(mcp_command) as source:
+            fetch_tool = next(
+                (t for t in source.tools if t.name == "get_europepmc_paper_by_id"),
+                None,
+            )
+            if fetch_tool is None:
+                print("  ⚠ get_europepmc_paper_by_id not found in artl-mcp")
+                return {i: [] for i in gaf_pmids}
+
+            print(f"  Fetching {len(unique_pmids)} unique GAF PMIDs from Europe PMC...")
+            for pmid in unique_pmids:
+                try:
+                    raw = fetch_tool.handler({"identifier": pmid})
+                    paper = _parse_paper_by_id_result(raw or "")
+                    if paper:
+                        pmid_to_paper[pmid] = paper
+                except Exception as e:
+                    print(f"    ⚠ Failed for PMID {pmid}: {e}")
+
+    except Exception as e:
+        print(f"  ⚠ MCP session failed: {e}")
+        return {i: [] for i in gaf_pmids}
+
+    print(f"  ✓ Fetched {len(pmid_to_paper)}/{len(unique_pmids)} GAF PMID abstracts")
+
+    # Map back to theme indices preserving entry order
+    results: dict[int, list[dict[str, Any]]] = {}
+    for theme_idx, entries in gaf_pmids.items():
+        results[theme_idx] = [
+            pmid_to_paper[e["pmid"]]
+            for e in entries
+            if e.get("pmid") in pmid_to_paper
+        ]
+    return results

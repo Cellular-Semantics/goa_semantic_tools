@@ -861,3 +861,212 @@ class TestFetchAbstractsForHubGenes:
 
         assert result["IL6"] == []
         assert len(result["TNF"]) > 0
+
+
+# =============================================================================
+# _parse_paper_by_id_result
+# =============================================================================
+
+@pytest.mark.unit
+class TestParsePaperByIdResult:
+    """Tests for _parse_paper_by_id_result."""
+
+    def _paper_json(self, pmid="12345678", title="Test Title", abstract="Test abstract.",
+                    authors=None, year="2020", wrapped=False):
+        import json
+        paper = {
+            "pmid": pmid,
+            "title": title,
+            "abstractText": abstract,
+            "authorList": {"author": authors or [{"lastName": "Smith"}, {"lastName": "Jones"}]},
+            "pubYear": year,
+        }
+        obj = {"result": paper} if wrapped else paper
+        return json.dumps(obj)
+
+    def test_parses_bare_paper_dict(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(self._paper_json())
+        assert result is not None
+        assert result["pmid"] == "12345678"
+        assert result["title"] == "Test Title"
+        assert result["abstract"] == "Test abstract."
+        assert result["year"] == "2020"
+
+    def test_parses_wrapped_result_dict(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(self._paper_json(wrapped=True))
+        assert result is not None
+        assert result["pmid"] == "12345678"
+
+    def test_extracts_authors_up_to_three(self):
+        import json
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        paper = {
+            "pmid": "99",
+            "title": "T",
+            "authorList": {"author": [
+                {"lastName": "A"}, {"lastName": "B"}, {"lastName": "C"}, {"lastName": "D"}
+            ]},
+        }
+        result = _parse_paper_by_id_result(json.dumps(paper))
+        assert result is not None
+        assert "A, B, C et al." == result["authors"]
+
+    def test_returns_none_on_empty_string(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        assert _parse_paper_by_id_result("") is None
+
+    def test_returns_none_on_invalid_json(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        assert _parse_paper_by_id_result("not json {") is None
+
+    def test_returns_none_when_no_pmid_and_no_content(self):
+        import json
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(json.dumps({"pubYear": "2020"}))
+        assert result is None
+
+
+# =============================================================================
+# fetch_abstracts_for_gaf_pmids
+# =============================================================================
+
+@pytest.mark.unit
+class TestFetchAbstractsForGafPmids:
+    """Tests for fetch_abstracts_for_gaf_pmids."""
+
+    def _paper_json(self, pmid):
+        import json
+        return json.dumps({"pmid": pmid, "title": f"Paper {pmid}", "abstractText": f"Abstract {pmid}."})
+
+    def _make_mock_source(self, pmid_to_json: dict):
+        """Build mock MCPToolSource; handler returns per-PMID JSON by identifier arg."""
+        mock_tool = MagicMock()
+        mock_tool.name = "get_europepmc_paper_by_id"
+
+        def handler_side_effect(args):
+            identifier = args.get("identifier", "")
+            return pmid_to_json.get(identifier, "")
+
+        mock_tool.handler.side_effect = handler_side_effect
+
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        return mock_ctx, mock_tool
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_empty_input_returns_empty_dict(self, mock_mcp_cls):
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids({})
+        assert result == {}
+        mock_mcp_cls.assert_not_called()
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_deduplicates_pmids_across_themes(self, mock_mcp_cls):
+        """PMID appearing in 2 themes → only 1 handler call."""
+        shared_pmid = "11111111"
+        mock_ctx, mock_tool = self._make_mock_source({shared_pmid: self._paper_json(shared_pmid)})
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": shared_pmid, "genes_covered": ["GENE1"]}],
+            1: [{"pmid": shared_pmid, "genes_covered": ["GENE2"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        # Handler should be called exactly once despite 2 themes using the same PMID
+        assert mock_tool.handler.call_count == 1
+        # Both themes should have the paper
+        assert len(result[0]) == 1
+        assert len(result[1]) == 1
+        assert result[0][0]["pmid"] == shared_pmid
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_maps_papers_back_to_correct_themes(self, mock_mcp_cls):
+        """Each theme gets only the papers from its own PMIDs."""
+        pmid_a, pmid_b = "22222222", "33333333"
+        mock_ctx, _ = self._make_mock_source({
+            pmid_a: self._paper_json(pmid_a),
+            pmid_b: self._paper_json(pmid_b),
+        })
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": pmid_a, "genes_covered": ["A"]}],
+            1: [{"pmid": pmid_b, "genes_covered": ["B"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result[0][0]["pmid"] == pmid_a
+        assert result[1][0]["pmid"] == pmid_b
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_tool_not_found_returns_empty_lists(self, mock_mcp_cls):
+        """If get_europepmc_paper_by_id tool absent → all themes get empty lists."""
+        mock_source = MagicMock()
+        mock_source.tools = []  # no tools
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {0: [{"pmid": "44444444", "genes_covered": ["X"]}]}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result == {0: []}
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_session_failure(self, mock_mcp_cls):
+        """Session-level MCP failure → all themes get empty lists, no crash."""
+        mock_mcp_cls.side_effect = Exception("MCP connection refused")
+
+        gaf_pmids = {0: [{"pmid": "55555555", "genes_covered": ["X"]}]}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result == {0: []}
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_per_pmid_failure(self, mock_mcp_cls):
+        """Per-PMID failure → that PMID excluded, other themes still populated."""
+        pmid_ok, pmid_fail = "66666666", "77777777"
+
+        mock_tool = MagicMock()
+        mock_tool.name = "get_europepmc_paper_by_id"
+
+        def handler_side_effect(args):
+            if args.get("identifier") == pmid_fail:
+                raise RuntimeError("Timeout")
+            return self._paper_json(pmid_ok)
+
+        mock_tool.handler.side_effect = handler_side_effect
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": pmid_ok, "genes_covered": ["A"]}],
+            1: [{"pmid": pmid_fail, "genes_covered": ["B"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert len(result[0]) == 1
+        assert result[0][0]["pmid"] == pmid_ok
+        assert result[1] == []  # failed PMID → empty

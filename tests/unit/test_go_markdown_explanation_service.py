@@ -643,6 +643,101 @@ class TestFormatEnrichmentGafPmids:
 
 
 @pytest.mark.unit
+class TestFormatEnrichmentGafAbstracts:
+    """Tests for gaf_abstracts parameter in _format_enrichment_for_llm."""
+
+    def _base_enrichment(self, with_theme=True):
+        theme = {
+            "anchor_term": {
+                "go_id": "GO:0006915",
+                "name": "apoptotic process",
+                "namespace": "biological_process",
+                "fdr": 0.001,
+                "genes": ["TP53"],
+            },
+            "specific_terms": [],
+            "anchor_confidence": "high",
+        }
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [theme] if with_theme else [],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+
+    def _gaf_pmids(self):
+        return {0: [{"pmid": "12345678", "genes_covered": ["TP53", "BRCA1"]}]}
+
+    def _gaf_abstracts(self):
+        return {0: [{
+            "pmid": "12345678",
+            "title": "TP53 and apoptosis",
+            "abstract": "A detailed abstract about TP53.",
+            "authors": "Smith, Jones",
+            "year": "2020",
+        }]}
+
+    def test_gaf_abstracts_shows_full_abstract(self):
+        """When gaf_abstracts provided, abstract text should appear in context."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        assert "A detailed abstract about TP53." in result
+        assert "TP53 and apoptosis" in result
+        assert "PMID:12345678" in result
+
+    def test_gaf_abstracts_includes_genes_covered_note(self):
+        """Abstract block should include Covers: gene line from gaf_pmids."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        assert "Covers:" in result
+        assert "TP53" in result
+        assert "BRCA1" in result
+
+    def test_gaf_abstracts_fallback_to_pmid_only_when_none(self):
+        """When gaf_abstracts=None, original PMID-only format should be used."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=None,
+        )
+        # PMID anchor present
+        assert "PMID:12345678" in result
+        # No abstract text
+        assert "A detailed abstract about TP53." not in result
+        # Covers: not present (old format uses 'covers:' lowercase inline)
+        assert "Covers:" not in result
+
+    def test_gaf_abstracts_fallback_when_theme_not_in_gaf_abstracts(self):
+        """When theme_index missing from gaf_abstracts, PMID-only fallback."""
+        enrichment = self._base_enrichment()
+        # gaf_abstracts for theme 99 (not theme 0)
+        gaf_abstracts_wrong_theme = {99: [{"pmid": "12345678", "title": "T", "abstract": "A", "authors": "", "year": ""}]}
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=gaf_abstracts_wrong_theme,
+        )
+        assert "PMID:12345678" in result
+        # no abstract text
+        assert "Abstract: A" not in result
+
+
+@pytest.mark.unit
 class TestEmptyMarkdownExplanation:
     """Tests for _empty_markdown_explanation function."""
 

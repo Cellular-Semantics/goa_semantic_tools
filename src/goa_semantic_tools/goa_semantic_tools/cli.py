@@ -610,6 +610,7 @@ Examples:
 
         # Phase 1b: Build reference index + fetch hub gene abstracts
         gaf_pmids = None
+        gaf_abstracts = None
         hub_gene_abstracts = None
         if args.explain and args.add_references:
             themes = result.get("themes", [])
@@ -655,6 +656,16 @@ Examples:
                     print(f"\n⚠ GAF reference index failed: {e}")
                     print("  Continuing without GAF citations...")
 
+            # Optional: fetch abstracts for GAF PMIDs via Europe PMC
+            if gaf_pmids and not args.no_literature_search:
+                print(f"\nFetching abstracts for GAF PMIDs via Europe PMC...")
+                try:
+                    from .services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+                    gaf_abstracts = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+                except Exception as e:
+                    print(f"\n⚠ GAF PMID abstract fetch failed: {e}")
+                    print("  Continuing without GAF abstracts (PMID anchors still available)...")
+
             # Optional: Europe PMC search for top hub genes
             if hub_genes_data and not args.no_literature_search:
                 n_hub = len(hub_genes_data)
@@ -680,6 +691,7 @@ Examples:
                     temperature=0.1,
                     max_tokens=args.max_tokens,  # None → auto-derived per model
                     gaf_pmids=gaf_pmids,
+                    gaf_abstracts=gaf_abstracts,
                     hub_gene_abstracts=hub_gene_abstracts,
                 )
 

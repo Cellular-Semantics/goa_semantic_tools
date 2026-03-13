@@ -50,6 +50,7 @@ def generate_markdown_explanation(
     max_tokens: int | None = None,  # None → auto-derived per model via _get_default_max_tokens
     paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
 ) -> str:
     """
@@ -144,6 +145,7 @@ def generate_markdown_explanation(
         enrichment_output,
         paper_abstracts=paper_abstracts,
         gaf_pmids=gaf_pmids,
+        gaf_abstracts=gaf_abstracts,
         hub_gene_abstracts=hub_gene_abstracts,
     )
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
@@ -271,6 +273,7 @@ def _format_enrichment_for_llm(
     enrichment_output: dict[str, Any],
     paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
 ) -> str:
     """
@@ -411,16 +414,50 @@ def _format_enrichment_for_llm(
                     )
                 lines.append("")
 
-            # GAF-curated citations per theme (preferred)
+            # GAF-curated citations per theme (preferred, highest confidence)
             if gaf_pmids and i in gaf_pmids and gaf_pmids[i]:
-                lines.append("### Available GAF Citations (cite as PMID:xxxxx for gene→GO annotations):")
-                for entry in gaf_pmids[i]:
-                    pmid = entry.get("pmid", "")
-                    genes_covered = entry.get("genes_covered", [])
-                    genes_str = ", ".join(genes_covered[:6])
-                    if len(genes_covered) > 6:
-                        genes_str += f" +{len(genes_covered) - 6} more"
-                    lines.append(f"- PMID:{pmid} (covers: {genes_str})")
+                lines.append("### Available GAF Citations (curated gene→GO annotations):")
+                lines.append("Use these PMIDs in [DATA] and [EXTERNAL] tags for gene→GO claims:")
+
+                # pmid → genes_covered lookup for enriched annotation display
+                gaf_genes = {
+                    e.get("pmid", ""): e.get("genes_covered", []) for e in gaf_pmids[i]
+                }
+
+                has_abstracts = bool(gaf_abstracts and i in gaf_abstracts and gaf_abstracts[i])
+                if has_abstracts:
+                    for paper in gaf_abstracts[i]:  # type: ignore[index]
+                        pmid = paper.get("pmid", "")
+                        title = paper.get("title", "")
+                        abstract = paper.get("abstract", "")
+                        authors = paper.get("authors", "")
+                        year = paper.get("year", "")
+                        genes = gaf_genes.get(pmid, [])
+                        author_year = (
+                            f"{authors} ({year})" if authors and year else authors or year
+                        )
+                        header = f"[PMID:{pmid}] {title}"
+                        if author_year:
+                            header += f" — {author_year}"
+                        lines.append(header)
+                        if genes:
+                            genes_str = ", ".join(genes[:6])
+                            if len(genes) > 6:
+                                genes_str += f" +{len(genes) - 6} more"
+                            lines.append(f"Covers: {genes_str}")
+                        if abstract:
+                            preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
+                            lines.append(f"Abstract: {preview}")
+                        lines.append("")
+                else:
+                    # Fallback: PMID + genes_covered only (no API calls needed)
+                    for entry in gaf_pmids[i]:
+                        pmid = entry.get("pmid", "")
+                        genes = entry.get("genes_covered", [])
+                        genes_str = ", ".join(genes[:6])
+                        if len(genes) > 6:
+                            genes_str += f" +{len(genes) - 6} more"
+                        lines.append(f"- PMID:{pmid} (covers: {genes_str})")
                 lines.append("")
 
             # Fallback: full abstracts from deprecated paper_abstracts param
