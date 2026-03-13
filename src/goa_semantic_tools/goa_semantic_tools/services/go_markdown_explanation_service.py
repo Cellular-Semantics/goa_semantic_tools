@@ -187,12 +187,22 @@ def generate_markdown_explanation(
 
     # Validate post-generation (warn on violations, do not crash)
     print("\n[4/4] Validating and rendering...")
-    warnings = validate_explanation_json(explanation, enrichment_output)
-    for w in warnings:
+    validation_warnings = validate_explanation_json(explanation, enrichment_output)
+    for w in validation_warnings:
         print(f"  ⚠ {w}")
 
+    # Build per-theme set of flagged theme indices (those with content mismatches)
+    flagged_themes: set[int] = set()
+    for w in validation_warnings:
+        # Warning format: "Theme {idx}: ..."
+        m = re.match(r"Theme (\d+):", w)
+        if m:
+            flagged_themes.add(int(m.group(1)))
+    if flagged_themes:
+        print(f"  ⚠ {len(flagged_themes)} theme(s) with content mismatches will use data-only rendering: {sorted(flagged_themes)}")
+
     # Render structured JSON → markdown programmatically
-    markdown_output = render_explanation_to_markdown(explanation, enrichment_output)
+    markdown_output = render_explanation_to_markdown(explanation, enrichment_output, flagged_themes=flagged_themes)
 
     # Add hyperlinks for any bare GO IDs remaining in narrative text
     markdown_output = _add_go_term_hyperlinks(markdown_output, enrichment_output)
@@ -809,6 +819,7 @@ def validate_explanation_json(
 def render_explanation_to_markdown(
     explanation: dict[str, Any],
     enrichment_output: dict[str, Any],
+    flagged_themes: set[int] | None = None,
 ) -> str:
     """
     Programmatically render a structured explanation dict to markdown.
@@ -819,10 +830,15 @@ def render_explanation_to_markdown(
     Args:
         explanation: Structured explanation dict (from LLM via model.model_dump())
         enrichment_output: Phase 1 enrichment output (for theme metadata)
+        flagged_themes: Set of theme indices that failed content validation.
+            These themes are rendered as data-only stubs (anchor name, FDR, genes)
+            rather than using the potentially-incorrect LLM narrative.
 
     Returns:
         Markdown string ready for display
     """
+    if flagged_themes is None:
+        flagged_themes = set()
     enrichment_themes = enrichment_output.get("themes", [])
     metadata = enrichment_output.get("metadata", {})
     lines: list[str] = []
@@ -866,7 +882,7 @@ def render_explanation_to_markdown(
         anchor_name = anchor.get("name", "Unknown")
         anchor_go_id = anchor.get("go_id", "")
 
-        # Section header
+        # Section header (always uses trusted enrichment data, not LLM)
         lines.append(f"### Theme {idx + 1}: {anchor_name}\n")
         lines.append("\n")
 
@@ -877,45 +893,57 @@ def render_explanation_to_markdown(
         lines.append(f"**Summary:** {anchor_name} ({go_link}){confidence_str}\n")
         lines.append("\n")
 
-        # Narrative (free prose from LLM — provenance tags are inside)
-        narrative = exp_theme.get("narrative", "")
-        if narrative:
-            lines.append(f"{narrative}\n")
+        if idx in flagged_themes:
+            # Data-only stub: LLM content failed validation for this theme
+            fdr = anchor.get("fdr", 0)
+            genes = sorted(anchor.get("genes", []))
+            gene_str = ", ".join(genes[:15])
+            if len(genes) > 15:
+                gene_str += f" … (+{len(genes) - 15} more)"
+            lines.append(f"> ⚠ Content validation failed for this theme — showing data only.\n")
             lines.append("\n")
+            lines.append(f"**FDR**: {fdr:.2e} · **Genes ({len(genes)})**: {gene_str}\n")
+            lines.append("\n")
+        else:
+            # Narrative (free prose from LLM — provenance tags are inside)
+            narrative = exp_theme.get("narrative", "")
+            if narrative:
+                lines.append(f"{narrative}\n")
+                lines.append("\n")
 
-        # Key Insights
-        key_insights = exp_theme.get("key_insights", [])
-        if key_insights:
-            lines.append("#### Key Insights\n")
-            lines.append("\n")
-            for ki in key_insights:
-                insight = ki.get("insight", "")
-                go_id = ki.get("go_id", "")
-                go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
-                lines.append(f"- {insight}{go_link}\n")
-            lines.append("\n")
+            # Key Insights
+            key_insights = exp_theme.get("key_insights", [])
+            if key_insights:
+                lines.append("#### Key Insights\n")
+                lines.append("\n")
+                for ki in key_insights:
+                    insight = ki.get("insight", "")
+                    go_id = ki.get("go_id", "")
+                    go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
+                    lines.append(f"- {insight}{go_link}\n")
+                lines.append("\n")
 
-        # Key Genes
-        key_genes = exp_theme.get("key_genes", [])
-        if key_genes:
-            lines.append("#### Key Genes\n")
-            lines.append("\n")
-            for kg in key_genes:
-                gene = kg.get("gene", "")
-                go_id = kg.get("go_id", "")
-                desc = kg.get("description", "")
-                claim_type = kg.get("claim_type", "INFERENCE")
-                go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
-                lines.append(f"- **{gene}**: [{claim_type}] {desc}{go_link}\n")
-            lines.append("\n")
+            # Key Genes
+            key_genes = exp_theme.get("key_genes", [])
+            if key_genes:
+                lines.append("#### Key Genes\n")
+                lines.append("\n")
+                for kg in key_genes:
+                    gene = kg.get("gene", "")
+                    go_id = kg.get("go_id", "")
+                    desc = kg.get("description", "")
+                    claim_type = kg.get("claim_type", "INFERENCE")
+                    go_link = f" ({_go_id_to_link(go_id)})" if go_id else ""
+                    lines.append(f"- **{gene}**: [{claim_type}] {desc}{go_link}\n")
+                lines.append("\n")
 
-        # Statistical context
-        stat_ctx = exp_theme.get("statistical_context", "")
-        if stat_ctx:
-            lines.append("#### Statistical Context\n")
-            lines.append("\n")
-            lines.append(f"{stat_ctx}\n")
-            lines.append("\n")
+            # Statistical context
+            stat_ctx = exp_theme.get("statistical_context", "")
+            if stat_ctx:
+                lines.append("#### Statistical Context\n")
+                lines.append("\n")
+                lines.append(f"{stat_ctx}\n")
+                lines.append("\n")
 
         lines.append("---\n")
         lines.append("\n")

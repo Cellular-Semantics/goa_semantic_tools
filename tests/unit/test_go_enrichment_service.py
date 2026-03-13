@@ -311,3 +311,80 @@ class TestNamespaceFiltering:
             assert "namespace" not in str(e).lower()
         except Exception:
             pass
+
+
+@pytest.mark.unit
+class TestFoldEnrichmentFormula:
+    """Tests for fold enrichment calculation in _convert_to_enriched_terms."""
+
+    def _make_mock_goea_result(self, ratio_in_study, ratio_in_pop, go_id="GO:0006954", name="inflammatory response"):
+        """Create a minimal mock GOATOOLS OEA result object."""
+        from unittest.mock import MagicMock
+        result = MagicMock()
+        result.GO = go_id
+        result.name = name
+        result.NS = "BP"
+        result.p_fdr_bh = 1e-5
+        result.ratio_in_study = ratio_in_study
+        result.ratio_in_pop = ratio_in_pop
+        result.study_items = frozenset(["GENE1", "GENE2"])
+        return result
+
+    def _make_mock_godag(self, go_id="GO:0006954"):
+        from unittest.mock import MagicMock
+        term = MagicMock()
+        term.depth = 5
+        godag = {go_id: term}
+        return godag
+
+    def test_fold_enrichment_uses_rates_not_raw_counts(self):
+        """Fold enrichment should be (study_n/study_total)/(pop_n/pop_total)."""
+        from goa_semantic_tools.services.go_enrichment_service import _convert_to_enriched_terms
+
+        # 10 study hits out of 100 study genes
+        # 100 pop hits out of 10000 pop genes
+        # Correct: (10/100) / (100/10000) = 0.1 / 0.01 = 10.0x
+        # Wrong (old): 10 / 100 = 0.1x
+        result = self._make_mock_goea_result(
+            ratio_in_study=(10, 100),
+            ratio_in_pop=(100, 10000),
+        )
+        godag = self._make_mock_godag()
+
+        terms = _convert_to_enriched_terms([result], godag)
+
+        assert "GO:0006954" in terms
+        fold = terms["GO:0006954"].fold_enrichment
+        assert abs(fold - 10.0) < 0.01, f"Expected ~10.0x, got {fold}"
+
+    def test_fold_enrichment_depleted_term_below_one(self):
+        """A depleted term should have fold enrichment < 1."""
+        from goa_semantic_tools.services.go_enrichment_service import _convert_to_enriched_terms
+
+        # 5 study hits out of 100, 1000 pop hits out of 10000
+        # (5/100) / (1000/10000) = 0.05 / 0.1 = 0.5x
+        result = self._make_mock_goea_result(
+            ratio_in_study=(5, 100),
+            ratio_in_pop=(1000, 10000),
+        )
+        godag = self._make_mock_godag()
+
+        terms = _convert_to_enriched_terms([result], godag)
+
+        fold = terms["GO:0006954"].fold_enrichment
+        assert fold < 1.0, f"Expected depleted (fold < 1), got {fold}"
+        assert abs(fold - 0.5) < 0.01, f"Expected ~0.5x, got {fold}"
+
+    def test_fold_enrichment_zero_pop_count_returns_zero(self):
+        """Zero pop_total should return 0 (avoid division by zero)."""
+        from goa_semantic_tools.services.go_enrichment_service import _convert_to_enriched_terms
+
+        result = self._make_mock_goea_result(
+            ratio_in_study=(5, 100),
+            ratio_in_pop=(0, 0),
+        )
+        godag = self._make_mock_godag()
+
+        terms = _convert_to_enriched_terms([result], godag)
+
+        assert terms["GO:0006954"].fold_enrichment == 0.0

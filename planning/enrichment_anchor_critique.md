@@ -287,7 +287,74 @@ Ran `exploration/13b_mrcea_all_paths.py` (min_ic=3.0, min_leaves=2) on three MSi
 
 ---
 
-## 12. Priority-ordered next steps
+## 12. Cross-dataset validation on real experimental data (2026-03-13)
+
+Ran the full pipeline (enrichment + LLM explanation, gpt-4o-mini, no literature search) on:
+
+**Himes et al. 2014** — dexamethasone-treated airway smooth muscle cells, 314 DEGs (GSE52778, PMID: 24926665).
+Files in `input_data/experimental/himes2014_airway/`. Published DAVID clusters in `david_enrichment_clusters.md`.
+
+### Enrichment characteristics (confirms dataset-dependence)
+
+| Metric | hm_inflam (Hallmark) | Himes airway (experimental) |
+|---|---|---|
+| Input genes | 200 | 314 |
+| Total enriched terms | 1042 | 80 |
+| Enrichment leaves | 253 | 24 |
+| Themes | 223 | 24 |
+| Terms/gene | 5.2 | 0.25 |
+| Gene coverage (top N themes) | 69% at N=30 | **100% at N=24** |
+
+The compression problem is entirely absent with real experimental data. 0.25 terms/gene is typical for bulk RNA-seq DEGs; 5.2 is a synthetic-set artifact.
+
+### Biological concordance with published DAVID clusters
+
+5/6 major DAVID clusters recovered in the top 16 themes:
+
+| DAVID cluster | Score | Our theme | Rank |
+|---|---|---|---|
+| ECM / glycoprotein | 4.72 | extracellular matrix | 2 |
+| Vasculature development | 3.38 | branching in blood vessel morphogenesis | 9 |
+| Response to nutrient | 3.13 | response to nutrient | 18 |
+| Hormone/glucocorticoid response | 3.02 | cellular response to hormone stimulus | **1** |
+| Rhythmic process / circadian | 2.42 | (absorbed into Theme 1, not distinct) | — |
+| Cell migration / locomotion | 2.28 | negative regulation of locomotion | 3 |
+
+The circadian signal (PER1, FKBP5) is the one gap — it's biologically real (glucocorticoid regulation of clock genes) but not called out as a distinct theme. This may be acceptable given that the glucocorticoid response connection is correct.
+
+### Bugs discovered during testing
+
+Two bugs identified from this run (both fixed — see Section 13):
+
+1. **Fold enrichment formula wrong**: stored as `study_count / pop_count` (0.07x) rather than the correct `(study_count/study_total) / (pop_count/pop_total)` (~4.6x). This affects all output reports.
+
+2. **Theme content mismatch for sparse late themes**: gpt-4o-mini confused the content of themes 12–15 (all sparse, 1–4 genes). The validator detected it (wrong genes/GO IDs logged as warnings) but the renderer still emitted the bad LLM narrative. Fixed by making the renderer fall back to data-only stub for themes with validation failures.
+
+---
+
+## 13. Bug fixes (2026-03-13)
+
+### Bug A: Fold enrichment calculation
+
+**File**: `services/go_enrichment_service.py`, function `_build_enriched_terms()`
+
+**Was**: `fold = result.ratio_in_study[0] / result.ratio_in_pop[0]`
+— this computes `study_count / pop_count`, e.g. 22/327 = 0.067x
+
+**Fixed**: `fold = (study_n / study_total) / (pop_n / pop_total) if pop_n > 0 else 0`
+— correct ORA fold enrichment formula, e.g. (22/288) / (327/19681) = 4.6x
+
+### Bug B: Theme content mismatch
+
+**File**: `services/go_markdown_explanation_service.py`, function `render_explanation_to_markdown()`
+
+**Was**: Renderer used LLM narrative/key_genes/key_insights for all themes regardless of validation warnings.
+
+**Fixed**: Validation warnings are now passed into the renderer. Any theme where `validate_explanation_json` found mismatched genes or GO IDs gets a data-only stub (anchor name, FDR, gene count, gene list) rather than the wrong LLM text. The stub is clearly flagged with `> ⚠ Content validation failed — data-only rendering` so reports remain usable but honest.
+
+---
+
+## 14. Priority-ordered next steps
 
 1. ~~**Test on non-immune gene set**~~ — done; see Section 11. MRCEA-B validated across all three datasets.
 2. **Implement post-hoc merge (v3) in production** — add a `post_hoc_regulatory_merge(themes, godag)` step at the end of `build_depth_anchor_themes` in `go_hierarchy.py`; the `post_hoc_merge` function in `exploration/12_regulates_anchor.py` is the reference implementation

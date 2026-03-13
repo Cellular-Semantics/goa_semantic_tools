@@ -1,6 +1,6 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-03-03
+**Last Updated**: 2026-03-13
 
 ## What This Tool Does
 
@@ -165,12 +165,18 @@ Strengthen biological interpretation by combining evidence across GO namespaces:
 
 ---
 
-## Ring 2: Speculative
+## Ring 2: Post-Ring-1 Features
 
 ### Semantic Similarity Clustering
 Use GO term IC-based or embedding-based similarity as alternative/complement to hierarchy-based clustering. May help in sparse GO branches.
 
 See: [Enrichment Anchor Critique](enrichment_anchor_critique.md) for analysis of current compression failure, comparison with REVIGO/rrvgo semantic similarity measures, and the `regulates`-extended anchor proposal.
+
+### Multi-Axis Narrative Structure
+
+Organise themes into 3–5 LLM-defined biological axes (e.g. "immune regulation", "metabolism", "ECM remodelling"), each with a tree-structured narrative. Two-phase: Phase A (axis identification, ~4–6k tokens) → Phase B (per-axis narrative, existing pipeline). Deferred until MRCEA-B theme quality is improved — axis identification over 153 cleaner themes will produce better results than over 224 semi-redundant depth-anchor themes.
+
+See: [Enrichment Anchor Critique §10](enrichment_anchor_critique.md) for context efficiency analysis and design notes.
 
 ### Multi-Ontology Support
 The architecture after flat enriched terms is ontology-agnostic if abstracted to: term→parent/child, term→genes, gene→annotation refs. Could extend to HPO, Disease Ontology, Reactome.
@@ -182,12 +188,37 @@ For enrichment leaves, pull PMIDs from non-significant child term annotations to
 
 ## Technical Debt
 
+- [x] **Fold enrichment formula** — was computing `study_count/pop_count` instead of `(study_count/study_total)/(pop_count/pop_total)`. Fixed 2026-03-13 in `go_enrichment_service.py`. See [Enrichment Anchor Critique §13](enrichment_anchor_critique.md).
+- [x] **Theme content mismatch** — LLM narrative rendered even when validator detected wrong genes/GO IDs (late sparse themes). Fixed 2026-03-13: renderer falls back to data-only stub for flagged themes. See [Enrichment Anchor Critique §13](enrichment_anchor_critique.md).
 - [ ] Add population counts to theme output (fold enrichment transparency)
 - [ ] Cache GO DAG loading (currently ~1s per run)
 - [ ] Schema updates for HierarchicalTheme structure (JSON schema → Pydantic)
 - [ ] Benchmark depth-anchor algorithm (Option C) across all hallmark sets
 - [ ] Consider IC calculation for term specificity metrics (see [Enrichment Anchor Critique](enrichment_anchor_critique.md) — depth is a poor IC proxy in dense annotation branches)
+- [ ] Gene symbol normalisation — 26/314 Himes genes not found in GOA (outdated HGNC: CTGF→CCN2, CYR61→CCN1, WARS→WARS1 etc.). Pre-processing step needed.
 - [ ] Additional test cases: rare disease genes (sparse GO), small gene sets (<20 genes)
+
+---
+
+## Ring 3: Validation Tooling
+
+### `goa_semantic_tools_validation_tools` — Flesh Out
+
+The validation package skeleton exists but is largely empty. Needs to be developed to support systematic quality assessment as the pipeline evolves.
+
+**Planned components:**
+
+| Component | Description |
+|-----------|-------------|
+| `comparisons/theme_concordance.py` | Compare pipeline themes against published GO clusters (DAVID/clusterProfiler); compute recall/precision per cluster |
+| `comparisons/run_diff.py` | Diff two enrichment JSON outputs (e.g. depth-anchor vs MRCEA-B) on same gene list |
+| `metrics/compression_metrics.py` | L/T ratio, coverage at N themes, standalone fraction, hub gene concentration |
+| `metrics/narrative_quality.py` | Count `[DATA]` vs `[EXTERNAL]` vs unfilled placeholders; citation density |
+| `visualizations/theme_coverage.py` | Gene coverage curve as function of top-N themes |
+
+**Reference datasets for regression tests**: Experimental sets in `input_data/experimental/` with published GO analysis. Each test checks that key biological themes are recovered and that specific genes appear in expected theme positions.
+
+**Priority**: Implement after Ring 1 is fully stable and MRCEA-B is in production. Validation tooling is needed to confidently compare algorithm variants.
 
 ---
 
@@ -256,6 +287,18 @@ Located in `input_data/benchmark_sets/test_lists/`:
 **Positive controls**: `hallmark_apoptosis.txt` (161 genes), `hallmark_dna_repair.txt` (150), `hallmark_hypoxia.txt` (200), `hallmark_inflammatory_response.txt` (200), `hallmark_p53_pathway.txt` (200), `hallmark_oxidative_phosphorylation.txt` (200)
 
 **Negative controls**: `random_50_genes.txt`, `random_100_genes.txt`, `random_200_genes.txt`
+
+**Caveat**: Hallmark sets are synthetic (curated for GO-density) — ~5× more enriched terms/gene than typical experimental data. Not representative of real-world use.
+
+### Experimental Benchmark Sets
+
+Located in `test_data/experimental/` (git-tracked; small committed files). Real bulk RNA-seq datasets with published GO analysis for quality comparison.
+
+| Study | File | Genes | Published analysis | Key biology |
+|-------|------|-------|--------------------|-------------|
+| Himes et al. 2014 (PMID:24926665) | `test_data/experimental/himes2014_airway/himes2014_dex_airway_DEGs.txt` | 314 | DAVID clusters (Supplement 4) | Glucocorticoid response, ECM, cell migration |
+
+**Intended future use**: Reference datasets for `goa_semantic_tools_validation_tools` regression tests (narrative quality, theme concordance with published clusters). See Ring 3 below.
 
 ### Exploration Scripts
 

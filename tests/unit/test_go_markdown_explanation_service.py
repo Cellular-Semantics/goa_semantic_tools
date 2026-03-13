@@ -1558,3 +1558,108 @@ class TestMdformatIntegration:
         result = mdformat.text(text, options={"wrap": "no"})
 
         assert long_line in result
+
+
+@pytest.mark.unit
+class TestFlaggedThemesRendering:
+    """Tests for flagged_themes parameter in render_explanation_to_markdown."""
+
+    def _make_explanation_and_enrichment(self, theme_index=0):
+        theme = _make_theme(
+            anchor_genes=["CD14", "IL6", "TNF"],
+            anchor_go_id="GO:0006954",
+        )
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": theme_index,
+                "narrative": "WRONG_NARRATIVE should not appear.",
+                "key_insights": [
+                    {"insight": "WRONG_INSIGHT should not appear.", "go_id": "GO:9999999"},
+                ],
+                "key_genes": [
+                    {"gene": "FAKE_GENE", "go_id": "GO:9999999", "description": "Wrong description.", "claim_type": "EXTERNAL"},
+                ],
+                "statistical_context": "Wrong statistical context.",
+            }],
+            "hub_genes": [],
+            "overall_summary": ["Overall summary."],
+        }
+        return explanation, enrichment
+
+    def test_flagged_theme_omits_llm_narrative(self):
+        """Flagged theme should not include the (wrong) LLM narrative."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "WRONG_NARRATIVE" not in md
+
+    def test_flagged_theme_shows_validation_warning_indicator(self):
+        """Flagged theme should have a content validation warning in output."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "Content validation failed" in md or "validation failed" in md.lower()
+
+    def test_flagged_theme_still_shows_anchor_name(self):
+        """Flagged theme should still show the anchor name from trusted enrichment data."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "inflammatory response" in md
+
+    def test_flagged_theme_does_not_include_fake_gene(self):
+        """Fake gene from LLM should not appear in flagged theme output."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "FAKE_GENE" not in md
+
+    def test_unflagged_theme_includes_llm_narrative(self):
+        """Non-flagged themes should still render the LLM narrative normally."""
+        theme = _make_theme(anchor_genes=["CD14", "IL6"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "EXPECTED_NARRATIVE is here.",
+                "key_insights": [],
+                "key_genes": [
+                    {"gene": "CD14", "go_id": "GO:0006954", "description": "A real gene.", "claim_type": "DATA"},
+                ],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes=set())
+
+        assert "EXPECTED_NARRATIVE" in md
+
+    def test_empty_flagged_themes_behaves_same_as_no_flagged_themes(self):
+        """Passing empty set should behave identically to passing None."""
+        theme = _make_theme(anchor_genes=["CD14"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[DATA] Narrative text.",
+                "key_insights": [],
+                "key_genes": [
+                    {"gene": "CD14", "go_id": "GO:0006954", "description": "Desc.", "claim_type": "DATA"},
+                ],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md_none = render_explanation_to_markdown(explanation, enrichment, flagged_themes=None)
+        md_empty = render_explanation_to_markdown(explanation, enrichment, flagged_themes=set())
+
+        assert md_none == md_empty

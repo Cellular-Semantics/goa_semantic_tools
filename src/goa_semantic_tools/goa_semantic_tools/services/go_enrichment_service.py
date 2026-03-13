@@ -363,8 +363,13 @@ def _convert_to_enriched_terms(goea_results: list[Any], godag: Any) -> dict[str,
         go_id = result.GO
         depth = godag[go_id].depth if go_id in godag else 0
 
-        # Calculate fold enrichment
-        fold = result.ratio_in_study[0] / result.ratio_in_pop[0] if result.ratio_in_pop[0] > 0 else 0
+        # Calculate fold enrichment: (study_count/study_total) / (pop_count/pop_total)
+        # ratio_in_study and ratio_in_pop are (count, total) tuples from GOATOOLS
+        study_n, study_total = result.ratio_in_study
+        pop_n, pop_total = result.ratio_in_pop
+        study_rate = study_n / study_total if study_total > 0 else 0
+        pop_rate = pop_n / pop_total if pop_total > 0 else 0
+        fold = study_rate / pop_rate if pop_rate > 0 else 0
 
         terms[go_id] = EnrichedTerm(
             go_id=go_id,
