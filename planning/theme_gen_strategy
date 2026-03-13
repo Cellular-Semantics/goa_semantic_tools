@@ -1,0 +1,43 @@
+> So - for enrichment purposes (enriched leaves generation) we want to stick with is_a and part_of, but for anchors (themes) regulates would be fine because it groups related parts of the same story.
+
+
+This is a really clean insight and it's architecturally sound. Let me work through the implications.
+
+Why the split makes sense
+Leaves (is_a + part_of only — keep as-is):
+Leaves represent the most specific enriched terms in the ontological hierarchy. The leaf computation is asking "what is the finest-grained biological specificity present in this data?" regulates shouldn't participate here because "regulation of leukocyte migration" is not a more specific kind of "leukocyte migration" — it's a control relationship. Including it would blur what the leaf layer means.
+
+Anchors (is_a + part_of + regulates):
+The anchor layer is asking "what is the best grouping node for telling a coherent biological story?" Here regulates is exactly right, because:
+
+"leukocyte migration" + "regulation of leukocyte migration" + "positive regulation of leukocyte migration" are all facets of the same biological story
+The process term becomes the natural anchor; the regulatory variants become its specific sub-themes
+This is precisely what an explanation consumer wants: "these genes drive leukocyte migration, and these genes modulate that migration"
+What changes in the code
+In go_hierarchy.py, get_all_descendants already has an explicit reverse-scan for part_of:
+
+
+# Check part_of reverse relationships
+for term_id, dag_term in godag.items():
+    if hasattr(dag_term, "relationship") and dag_term.relationship:
+        for rel_type, rel_terms in dag_term.relationship.items():
+            if rel_type == "part_of":   # ← extend to regulates here
+Extending this to also collect regulates, positively_regulates, and negatively_regulates is the minimal change. The process anchor (e.g., "leukocyte migration") would then absorb all enriched terms that declare they regulate it.
+
+One subtlety to resolve
+The assignment priority in build_depth_anchor_themes currently prefers the more specific anchor (higher depth). With regulates added, there's a new conflict: "positive regulation of leukocyte migration" is both:
+
+An is_a child of "regulation of leukocyte migration" (so it might be absorbed there)
+A regulates child of "leukocyte migration" (so it might be absorbed there)
+The resolution that produces the most useful narratives is probably: is_a/part_of grouping takes priority over regulates grouping. So "positive regulation" stays under "regulation of leukocyte migration" if that anchor exists — but the whole "regulation of leukocyte migration" subtree then gets absorbed under "leukocyte migration" as a regulates-linked child. This gives a two-level structure:
+
+
+Theme: leukocyte migration
+  ├── [is_a] myeloid leukocyte migration
+  ├── [is_a] mononuclear cell migration  
+  ├── [is_a] dendritic cell migration
+  ├── [regulates] regulation of leukocyte migration
+  │     ├── [is_a] positive regulation of leukocyte migration
+  │     └── [is_a] regulation of neutrophil migration
+  └── [regulates] negative regulation of leukocyte migration
+That's 3-4 current themes → 1 coherent theme, without losing the regulatory narrative. Worth a Ring 2 experiment once you've validated the simpler fixes first.
