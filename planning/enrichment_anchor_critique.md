@@ -223,10 +223,51 @@ The other ~106 regulatory themes have no matching process theme anchor (the proc
 
 ---
 
-## 10. Priority-ordered next steps
+## 10. The narrative clarity problem — DAG vs tree
+
+The underlying tension in explanation generation is structural: the enrichment result is a DAG (genes appear in multiple themes, themes have overlapping gene sets), but a useful explanation is a tree (each biological story told once, cleanly, without repetition).
+
+The current pipeline masks this tension by assigning each leaf to exactly one primary theme. This is necessary for non-redundant output but causes information loss: a gene like IL18 that genuinely operates in inflammasome assembly, IL-1 cytokine signalling, and adaptive immune activation gets forced into one narrative and appears incidentally in others.
+
+### Multi-axis narrative structure
+
+A more faithful approach is to organise themes into **3–5 major biological axes**, each with its own tree-structured narrative. Each axis is a coherent biological story (e.g. "innate immune activation", "lymphocyte recruitment and adhesion", "cytokine-mediated paracrine signalling") and genes appear in multiple axes where warranted. The axes partition the explanation rather than the genes.
+
+This is analogous to reviewing enteric neurons: one section covers classification by morphology, another by function, another by molecular profile — each section has its own clean tree, and the same neuron types appear in multiple sections without redundancy because each section asks a different question.
+
+### LLM-defined axes (preferred)
+
+The biological axis boundaries are not obvious from the GO DAG topology — they require biological judgment. The LLM is better placed to identify these than any fixed clustering algorithm. Proposed two-phase approach:
+
+**Phase A — axis identification** (lightweight, low token budget):
+- Give LLM a compact theme summary: anchor name + top 3 genes + IC score, one line per theme (~25 tokens/theme × 150 themes ≈ 3750 tokens)
+- Prompt: "Group these themes into 3–5 major biological axes. For each axis, name it and list the theme IDs that belong to it."
+- Output: axis assignments only (no narrative yet)
+
+**Phase B — per-axis narrative** (existing explanation pipeline, run per axis):
+- For each axis, pass the full theme JSON for themes in that axis only
+- Generate axis narrative as now, but with explicit framing ("This axis covers...")
+- Hub genes that appear across axes are flagged in an introduction section
+
+**Context efficiency**: Phase A costs ~4–6k tokens. Phase B is the existing per-theme pipeline cost, unchanged. The axis identification overhead is small relative to the narrative generation.
+
+**Open question**: What compact representation is sufficient for axis identification? Options in order of increasing richness:
+1. Anchor name + top 3 genes (minimal, ~25 tokens/theme)
+2. Anchor name + IC + top 5 genes + FDR (still compact, ~40 tokens/theme)
+3. Anchor name + top 3 GO IDs with definitions (adds ontological context, ~80 tokens/theme)
+4. Full theme JSON (complete but saturating — ~500 tokens/theme × 150 = 75k tokens)
+
+Option 2 is probably sufficient; option 3 worth testing if axis assignments are poor. Option 4 is not viable for axis identification.
+
+**Status**: Ring 2 feature. Defer until MRCEA-B theme quality is improved — axis identification over 153 semantically cleaner themes will produce better results than over 224 semi-redundant depth-anchor themes.
+
+---
+
+## 11. Priority-ordered next steps
 
 1. **Test on non-immune gene set** — run against `hallmark_oxidative_phosphorylation.txt` or `hallmark_dna_repair.txt` to quantify how much bloat is dataset-specific vs. algorithmic
 2. **Implement post-hoc merge (v3) in production** — add a `post_hoc_regulatory_merge(themes, godag)` step at the end of `build_depth_anchor_themes` in `go_hierarchy.py`; the `post_hoc_merge` function in `exploration/12_regulates_anchor.py` is the reference implementation
 3. **Raise `min_children` to 3–4** — reduces the standalone theme flood (51 themes with ≤3 genes currently)
 4. **IC-based anchor selection** — replace `depth_range=(4,7)` with IC range to avoid selecting overly general anchors in dense branches
 5. **Semantic similarity post-filter on anchors** — catch residual cross-branch redundancy after the above; Wang or SimRel, or embedding-based for the "regulation of X" family
+6. **Multi-axis narrative** (Ring 2) — LLM-defined biological axes in two phases; see Section 10 above
