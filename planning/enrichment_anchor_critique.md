@@ -263,9 +263,33 @@ Option 2 is probably sufficient; option 3 worth testing if axis assignments are 
 
 ---
 
-## 11. Priority-ordered next steps
+## 11. Cross-dataset validation of MRCEA-B (2026-03-13)
 
-1. **Test on non-immune gene set** — run against `hallmark_oxidative_phosphorylation.txt` or `hallmark_dna_repair.txt` to quantify how much bloat is dataset-specific vs. algorithmic
+Ran `exploration/13b_mrcea_all_paths.py` (min_ic=3.0, min_leaves=2) on three MSigDB Hallmark gene sets:
+
+| Gene set | Leaves | Baseline L/T | MRCEA-B L/T | Improvement |
+|---|---|---|---|---|
+| Hallmark inflammatory (200 genes) | 253 | 1.13 (224 themes) | 1.65 (153 themes) | +46% |
+| Hallmark DNA repair (150 genes) | 70 | 1.25 (56 themes) | 2.19 (32 themes) | +75% |
+| Hallmark OxPhos (200 genes) | 59 | 1.04 (57 themes) | 1.48 (40 themes) | +43% |
+
+**Conclusions:**
+
+1. **The compression problem is dataset-independent.** OxPhos baseline: 1.04 L/T — essentially no grouping at all from depth-anchor. This is the worst-case scenario for a gene set where all biology concentrates in specific mitochondrial subprocesses.
+
+2. **MRCEA-B improves every dataset.** The gain is largest for DNA repair (well-connected GO topology around nucleotide-excision repair, DSB repair, DNA replication) and smallest for OxPhos (mitochondrial biology fragments into isolated specific terms with few GO neighbours).
+
+3. **Residual standalones reflect real biology, not algorithm failure.** OxPhos standalones include carnitine shuttle, heme A biosynthesis, calcium import into mitochondrion, individual ETC complex assembly — genuinely distinct processes. Absorption via full GO DAG finds 0/13 stranded leaves absorbable (vs 13/50 for immune), confirming that the OxPhos biological isolation is structural.
+
+4. **Secondary membership is sparse on all datasets.** 3/59 leaves for OxPhos, consistent with immune (20/253). The mitochondrial hub genes (DLD, OGDH) appear as cross-theme bridges at the protein-complex level, not at the process level — the GO structure correctly separates these.
+
+**Decision**: MRCEA-B is a consistent improvement. Implement as production replacement for depth-anchor. Proceed to Ring 2 implementation planning.
+
+---
+
+## 12. Priority-ordered next steps
+
+1. ~~**Test on non-immune gene set**~~ — done; see Section 11. MRCEA-B validated across all three datasets.
 2. **Implement post-hoc merge (v3) in production** — add a `post_hoc_regulatory_merge(themes, godag)` step at the end of `build_depth_anchor_themes` in `go_hierarchy.py`; the `post_hoc_merge` function in `exploration/12_regulates_anchor.py` is the reference implementation
 3. **Raise `min_children` to 3–4** — reduces the standalone theme flood (51 themes with ≤3 genes currently)
 4. **IC-based anchor selection** — replace `depth_range=(4,7)` with IC range to avoid selecting overly general anchors in dense branches

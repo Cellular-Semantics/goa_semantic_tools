@@ -466,6 +466,8 @@ def main() -> None:
                         help="Minimum IC for anchor candidates (default: 3.0)")
     parser.add_argument("--min-leaves", type=int, default=2,
                         help="Minimum leaves per anchor theme (default: 2)")
+    parser.add_argument("--gene-file", type=Path, default=GENE_LIST_PATH,
+                        help="Path to gene list file (default: hallmark_inflammatory_response.txt)")
     args = parser.parse_args()
 
     print(f"\n{'='*60}")
@@ -475,8 +477,9 @@ def main() -> None:
 
     # ── 1. Data loading ──────────────────────────────────────────────────────
     t0 = time.time()
-    genes = [g.strip() for g in GENE_LIST_PATH.read_text().splitlines() if g.strip()]
-    print(f"Gene list: {len(genes)} genes from {GENE_LIST_PATH.name}")
+    gene_file = args.gene_file
+    genes = [g.strip() for g in gene_file.read_text().splitlines() if g.strip() and not g.startswith("#")]
+    print(f"Gene list: {len(genes)} genes from {gene_file.name}")
 
     go_obo_path = ensure_go_data()
     gaf_path = ensure_gaf_data(species="human")
