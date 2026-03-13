@@ -13,6 +13,8 @@ build/
 docs/_build/
 reference_data/
 input_data
+!input_data/benchmark_sets/
+!input_data/benchmark_sets/**
 
 .idea
 results/
