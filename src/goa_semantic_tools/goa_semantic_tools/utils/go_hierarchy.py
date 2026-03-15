@@ -1,9 +1,12 @@
 """
 GO Hierarchy Utility
 
-Implements depth-based anchor hierarchical clustering algorithm for GO enrichment results.
+Implements hierarchical GO enrichment clustering algorithms:
+  - Depth-anchor (legacy): fixed-depth scanning for anchor selection
+  - MRCEA-B (default): IC-based bottom-up all-paths BFS
 """
-from collections import defaultdict
+import math
+from collections import defaultdict, deque
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -431,6 +434,269 @@ def themes_to_dict(themes: list[HierarchicalTheme]) -> list[dict]:
         }
         result.append(theme_dict)
 
+    return result
+
+
+# =============================================================================
+# MRCEA-B Algorithm (IC-based bottom-up all-paths BFS)
+# =============================================================================
+
+_REG_RELS = frozenset({"regulates", "positively_regulates", "negatively_regulates"})
+
+
+def compute_ic(gene_to_terms: dict[str, set[str]], godag: GODag) -> dict[str, float]:
+    """Compute Resnik IC for all GO terms from GAF gene-to-term annotations.
+
+    Propagates annotation counts upward through is_a parents so each term
+    accumulates all genes annotated to itself or any descendant.
+
+    Args:
+        gene_to_terms: Maps gene symbol → set of directly annotated GO IDs
+            (one namespace only, as returned by ns2assoc[namespace])
+        godag: GO DAG object
+
+    Returns:
+        Dictionary mapping GO ID → IC value (-log2 of annotation frequency)
+    """
+    total_genes = len(gene_to_terms)
+    if total_genes == 0:
+        return {}
+
+    term_genes: dict[str, set[str]] = defaultdict(set)
+    for gene, go_ids in gene_to_terms.items():
+        for go_id in go_ids:
+            term_genes[go_id].add(gene)
+            if go_id in godag:
+                for ancestor in godag[go_id].get_all_parents():
+                    term_genes[ancestor].add(gene)
+
+    return {
+        go_id: -math.log2(len(genes) / total_genes)
+        for go_id, genes in term_genes.items()
+        if genes
+    }
+
+
+def _get_enriched_parents(
+    go_id: str,
+    godag: GODag,
+    enriched_ids: set[str],
+    include_regulates: bool,
+) -> set[str]:
+    """Return enriched direct parents via is_a, part_of, and optionally regulates."""
+    if go_id not in godag:
+        return set()
+    term = godag[go_id]
+    parents: set[str] = set()
+
+    for p in term.parents:
+        if p.id in enriched_ids:
+            parents.add(p.id)
+
+    if hasattr(term, "relationship") and term.relationship:
+        for rel_type, rel_terms in term.relationship.items():
+            if rel_type == "part_of" or (include_regulates and rel_type in _REG_RELS):
+                for rt in rel_terms:
+                    if rt.id in enriched_ids:
+                        parents.add(rt.id)
+
+    return parents
+
+
+def _get_ancestor_set_all_paths(
+    leaf_id: str,
+    godag: GODag,
+    enriched_ids: set[str],
+    ic: dict[str, float],
+    min_ic: float,
+) -> set[str]:
+    """BFS upward through ALL enriched parents from a leaf.
+
+    First step from leaf: is_a + part_of only (Option B — avoids regulatory
+    edges confusing leaf identity). Subsequent steps also follow regulates edges.
+    Nodes with IC < min_ic are excluded from the ancestor set but their enriched
+    parents are still explored to avoid missing valid ancestors across low-IC gaps.
+
+    Args:
+        leaf_id: Starting leaf GO ID
+        godag: GO DAG object
+        enriched_ids: Set of all enriched GO IDs at the current FDR threshold
+        ic: Precomputed IC values per GO ID
+        min_ic: Minimum IC for a term to qualify as a candidate anchor
+
+    Returns:
+        Set of enriched GO IDs above min_ic reachable from the leaf
+    """
+    ancestors: set[str] = set()
+    visited: set[str] = {leaf_id}
+
+    first_parents = _get_enriched_parents(leaf_id, godag, enriched_ids, include_regulates=False)
+    queue: deque[str] = deque()
+    for p in first_parents:
+        if p not in visited:
+            visited.add(p)
+            queue.append(p)
+
+    while queue:
+        current = queue.popleft()
+        if ic.get(current, 0.0) >= min_ic:
+            ancestors.add(current)
+            for p in _get_enriched_parents(current, godag, enriched_ids, include_regulates=True):
+                if p not in visited:
+                    visited.add(p)
+                    queue.append(p)
+        else:
+            # Low-IC node: still explore its parents in case higher-IC ancestors exist
+            for p in _get_enriched_parents(current, godag, enriched_ids, include_regulates=True):
+                if p not in visited and ic.get(p, 0.0) >= min_ic:
+                    visited.add(p)
+                    queue.append(p)
+
+    return ancestors
+
+
+def _select_anchors_greedy(
+    leaf_ids: set[str],
+    leaf_ancestors: dict[str, set[str]],
+    ic: dict[str, float],
+    min_leaves: int,
+) -> tuple[list[tuple[str, set[str]]], list[str]]:
+    """Greedy anchor selection maximising IC × n_uncovered_leaves.
+
+    Args:
+        leaf_ids: All leaf GO IDs
+        leaf_ancestors: Maps leaf_id → set of enriched ancestor IDs above min_ic
+        ic: IC values per GO ID
+        min_leaves: Minimum leaves required to form a theme
+
+    Returns:
+        themes: List of (anchor_id, primary_leaf_set) tuples
+        standalones: Leaf IDs with no primary anchor
+    """
+    anchor_to_leaves: dict[str, set[str]] = defaultdict(set)
+    for lid, ancestors in leaf_ancestors.items():
+        for anc in ancestors:
+            anchor_to_leaves[anc].add(lid)
+
+    unassigned = set(leaf_ids)
+    used_anchors: set[str] = set()
+    themes: list[tuple[str, set[str]]] = []
+
+    while True:
+        best_anchor = None
+        best_score = -1.0
+        best_covered: set[str] = set()
+
+        for anchor_id, all_leaves in anchor_to_leaves.items():
+            if anchor_id in used_anchors:
+                continue
+            available = all_leaves & unassigned
+            if len(available) < min_leaves:
+                continue
+            score = ic.get(anchor_id, 0.0) * len(available)
+            if score > best_score:
+                best_score = score
+                best_anchor = anchor_id
+                best_covered = available
+
+        if best_anchor is None:
+            break
+
+        themes.append((best_anchor, best_covered))
+        used_anchors.add(best_anchor)
+        unassigned -= best_covered
+
+    return themes, list(unassigned)
+
+
+def build_mrcea_b_themes(
+    terms: dict[str, EnrichedTerm],
+    godag: GODag,
+    gene_to_terms: dict[str, set[str]],
+    min_ic: float = 3.0,
+    min_leaves: int = 2,
+    max_genes: int = 30,
+    fdr_threshold: float = 0.05,
+) -> list[HierarchicalTheme]:
+    """Build hierarchical themes using MRCEA-B (IC-based all-paths BFS).
+
+    Algorithm:
+    1. Filter overly general terms (> max_genes)
+    2. Compute enrichment leaves (most specific enriched terms)
+    3. Compute Resnik IC from GAF annotations
+    4. For each leaf, BFS upward through all enriched parents to collect
+       candidate ancestors above min_ic
+    5. Greedy anchor selection: maximise IC × n_uncovered_leaves per round
+    6. Remaining leaves become standalone themes
+
+    Args:
+        terms: Dictionary mapping GO ID to EnrichedTerm (significant at fdr_threshold)
+        godag: GO DAG object
+        gene_to_terms: Gene-to-GO mapping for this namespace (from ns2assoc[namespace])
+        min_ic: Minimum IC for anchor candidates (default 3.0)
+        min_leaves: Minimum leaves required to form a multi-leaf theme (default 2)
+        max_genes: Filter terms with more than max_genes annotated genes (default 30)
+        fdr_threshold: FDR threshold used to define leaves (default 0.05)
+
+    Returns:
+        List of HierarchicalTheme objects sorted by anchor FDR
+    """
+    # Filter overly general terms
+    filtered = {k: v for k, v in terms.items() if len(v.genes) <= max_genes}
+    enriched_ids = set(filtered.keys())
+
+    if not enriched_ids:
+        return []
+
+    # Compute leaves (most specific enriched terms)
+    leaf_terms = compute_enrichment_leaves(filtered, godag, fdr_threshold=fdr_threshold, max_genes=max_genes)
+    leaf_ids = {t.go_id for t in leaf_terms}
+
+    if not leaf_ids:
+        return []
+
+    # Compute IC
+    ic = compute_ic(gene_to_terms, godag)
+
+    # Build ancestor sets for each leaf (upward BFS)
+    leaf_ancestors: dict[str, set[str]] = {
+        lid: _get_ancestor_set_all_paths(lid, godag, enriched_ids, ic, min_ic)
+        for lid in leaf_ids
+    }
+
+    # Greedy anchor selection
+    themes_raw, standalones = _select_anchors_greedy(leaf_ids, leaf_ancestors, ic, min_leaves)
+
+    # Build HierarchicalTheme objects
+    result: list[HierarchicalTheme] = []
+
+    for anchor_id, primary_leaf_ids in themes_raw:
+        if anchor_id not in filtered:
+            continue
+        anchor_term = filtered[anchor_id]
+        leaf_term_list = sorted(
+            [filtered[lid] for lid in primary_leaf_ids if lid in filtered],
+            key=lambda t: t.fdr,
+        )
+        result.append(HierarchicalTheme(
+            anchor_term=anchor_term,
+            specific_terms=leaf_term_list,
+            anchor_confidence=_determine_confidence(anchor_term.fdr),
+        ))
+
+    # Standalone leaves (no primary anchor)
+    for lid in standalones:
+        if lid not in filtered:
+            continue
+        leaf_term = filtered[lid]
+        result.append(HierarchicalTheme(
+            anchor_term=leaf_term,
+            specific_terms=[],
+            anchor_confidence=_determine_confidence(leaf_term.fdr),
+        ))
+
+    # Sort by anchor FDR
+    result.sort(key=lambda t: t.anchor_term.fdr)
     return result
 
 

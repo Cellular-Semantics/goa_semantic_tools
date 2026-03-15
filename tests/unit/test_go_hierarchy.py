@@ -13,9 +13,14 @@ from goa_semantic_tools.utils.go_hierarchy import (
     EnrichedTerm,
     HierarchicalTheme,
     _determine_confidence,
+    _get_ancestor_set_all_paths,
+    _get_enriched_parents,
+    _select_anchors_greedy,
     build_depth_anchor_themes,
+    build_mrcea_b_themes,
     compute_enrichment_leaves,
     compute_hub_genes,
+    compute_ic,
     enriched_terms_to_dict,
     find_leaves,
     get_all_descendants,
@@ -40,6 +45,12 @@ class MockGOTerm:
         self.children = children or []
         self.relationship = {}
         self._all_parents: set[str] = set()
+        self._parent_terms: list = []  # List of MockGOTerm objects (direct parents)
+
+    @property
+    def parents(self):
+        """Return direct parent term objects (mirrors goatools Term.parents)."""
+        return self._parent_terms
 
     def get_all_parents(self) -> set[str]:
         return self._all_parents
@@ -73,6 +84,13 @@ def create_mock_godag() -> dict:
     stress.children = [inflammatory]
     inflammatory.children = [immune, lps]
     immune.children = [immune_sys]
+
+    # Set up direct parent term references (for .parents property used by MRCEA-B)
+    stress._parent_terms = [root]
+    inflammatory._parent_terms = [stress]
+    immune._parent_terms = [inflammatory]
+    immune_sys._parent_terms = [immune]
+    lps._parent_terms = [inflammatory]
 
     # Set up ancestry
     stress.set_parents({"GO:0008150"})
@@ -921,3 +939,302 @@ class TestEnrichedTermsToDict:
         result = enriched_terms_to_dict(terms)
 
         assert result[0]["genes"] == ["ALPHA", "BETA", "ZEBRA"]
+
+
+# =============================================================================
+# Test MRCEA-B Algorithm Functions
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestComputeIC:
+    """Tests for compute_ic function."""
+
+    def test_basic_ic_computation(self):
+        """IC is higher for rarer terms (fewer annotated genes)."""
+        godag = create_mock_godag()
+        # GO:0006955 (immune response) has genes A, B
+        # GO:0071222 (cellular response to LPS) has genes C only
+        # GO:0006954 (inflammatory response, parent) has all 3 via propagation
+        gene_to_terms = {
+            "GeneA": {"GO:0006955"},
+            "GeneB": {"GO:0006955"},
+            "GeneC": {"GO:0071222"},
+        }
+
+        ic = compute_ic(gene_to_terms, godag)
+
+        # All terms annotated to GO:0006955 are also annotated to GO:0006954 (ancestor)
+        # so GO:0006954 should have lower IC than GO:0006955
+        assert "GO:0006955" in ic
+        assert "GO:0006954" in ic
+        assert ic["GO:0006954"] < ic["GO:0006955"]
+
+    def test_empty_annotations(self):
+        """Returns empty dict for empty gene-to-terms mapping."""
+        godag = create_mock_godag()
+        ic = compute_ic({}, godag)
+        assert ic == {}
+
+    def test_all_terms_have_nonnegative_ic(self):
+        """IC values are non-negative."""
+        godag = create_mock_godag()
+        gene_to_terms = {
+            "GeneA": {"GO:0006954"},
+            "GeneB": {"GO:0006955"},
+        }
+        ic = compute_ic(gene_to_terms, godag)
+        for go_id, value in ic.items():
+            assert value >= 0.0, f"{go_id} has negative IC {value}"
+
+    def test_most_general_term_lowest_ic(self):
+        """The root term (all genes annotated) should have the lowest IC (~0)."""
+        godag = create_mock_godag()
+        # Annotate every gene directly to root → p=1 → IC=0
+        gene_to_terms = {
+            "GeneA": {"GO:0008150"},
+        }
+        ic = compute_ic(gene_to_terms, godag)
+        assert ic.get("GO:0008150", 0.0) == pytest.approx(0.0)
+
+
+@pytest.mark.unit
+class TestGetEnrichedParents:
+    """Tests for _get_enriched_parents function."""
+
+    def test_returns_is_a_parents(self):
+        """Returns direct is_a parents that are enriched."""
+        godag = create_mock_godag()
+        enriched_ids = {"GO:0006954", "GO:0006955"}
+        parents = _get_enriched_parents("GO:0006955", godag, enriched_ids, include_regulates=False)
+        assert "GO:0006954" in parents
+
+    def test_filters_non_enriched_parents(self):
+        """Does not return parents not in enriched_ids."""
+        godag = create_mock_godag()
+        enriched_ids = {"GO:0006955"}  # Only immune response enriched; parent not included
+        parents = _get_enriched_parents("GO:0006955", godag, enriched_ids, include_regulates=False)
+        assert "GO:0006954" not in parents
+
+    def test_missing_term_returns_empty(self):
+        """Returns empty set for term not in godag."""
+        godag = create_mock_godag()
+        parents = _get_enriched_parents("GO:9999999", godag, {"GO:0006954"}, include_regulates=False)
+        assert parents == set()
+
+    def test_include_regulates_edges(self):
+        """Returns regulatory relationship parents when include_regulates=True."""
+        godag = create_mock_godag()
+
+        # Add a regulates relationship to the mock term
+        term = godag["GO:0006955"]
+        reg_target = godag["GO:0006954"]
+        term.relationship = {"regulates": [reg_target]}
+
+        enriched_ids = {"GO:0006954", "GO:0006955"}
+        parents_with_reg = _get_enriched_parents(
+            "GO:0006955", godag, enriched_ids, include_regulates=True
+        )
+        # Should include both is_a parent and regulates target
+        assert "GO:0006954" in parents_with_reg
+
+
+@pytest.mark.unit
+class TestGetAncestorSetAllPaths:
+    """Tests for _get_ancestor_set_all_paths function."""
+
+    def test_finds_high_ic_ancestor(self):
+        """Returns enriched ancestors above min_ic threshold."""
+        godag = create_mock_godag()
+        gene_to_terms = {"GeneA": {"GO:0002376"}, "GeneB": {"GO:0071222"}}
+        ic = compute_ic(gene_to_terms, godag)
+
+        enriched_ids = {"GO:0006954", "GO:0006955", "GO:0002376"}
+        ancestors = _get_ancestor_set_all_paths(
+            "GO:0002376", godag, enriched_ids, ic, min_ic=0.0
+        )
+        # Both GO:0006954 and GO:0006955 should be reachable from GO:0002376
+        assert "GO:0006955" in ancestors
+
+    def test_excludes_low_ic_terms(self):
+        """Excludes ancestors with IC below min_ic threshold."""
+        godag = create_mock_godag()
+        gene_to_terms = {"GeneA": {"GO:0006954"}}  # Root terms get IC ~0
+        ic = compute_ic(gene_to_terms, godag)
+
+        # Root has IC 0; set min_ic very high so nothing qualifies
+        enriched_ids = {"GO:0006950", "GO:0006954"}
+        ancestors = _get_ancestor_set_all_paths(
+            "GO:0006954", godag, enriched_ids, ic, min_ic=99.0
+        )
+        assert len(ancestors) == 0
+
+    def test_leaf_not_in_ancestors(self):
+        """The leaf itself is not included in its ancestor set."""
+        godag = create_mock_godag()
+        gene_to_terms = {"GeneA": {"GO:0002376"}, "GeneB": {"GO:0006955"}}
+        ic = compute_ic(gene_to_terms, godag)
+
+        enriched_ids = {"GO:0006955", "GO:0002376"}
+        ancestors = _get_ancestor_set_all_paths(
+            "GO:0002376", godag, enriched_ids, ic, min_ic=0.0
+        )
+        assert "GO:0002376" not in ancestors
+
+
+@pytest.mark.unit
+class TestSelectAnchorsGreedy:
+    """Tests for _select_anchors_greedy function."""
+
+    def test_groups_leaves_under_shared_ancestor(self):
+        """Leaves sharing a high-IC ancestor are grouped together."""
+        leaf_ids = {"L1", "L2"}
+        leaf_ancestors = {"L1": {"A1"}, "L2": {"A1"}}
+        ic = {"A1": 5.0}
+
+        themes, standalones = _select_anchors_greedy(leaf_ids, leaf_ancestors, ic, min_leaves=2)
+
+        assert len(themes) == 1
+        assert themes[0][0] == "A1"
+        assert themes[0][1] == {"L1", "L2"}
+        assert standalones == []
+
+    def test_min_leaves_threshold(self):
+        """Anchors with fewer leaves than min_leaves are not selected."""
+        leaf_ids = {"L1"}
+        leaf_ancestors = {"L1": {"A1"}}
+        ic = {"A1": 5.0}
+
+        themes, standalones = _select_anchors_greedy(leaf_ids, leaf_ancestors, ic, min_leaves=2)
+
+        assert len(themes) == 0
+        assert "L1" in standalones
+
+    def test_prefers_higher_ic_anchor(self):
+        """When two anchors cover the same leaves, the higher-IC one is preferred."""
+        leaf_ids = {"L1", "L2"}
+        leaf_ancestors = {"L1": {"A_low", "A_high"}, "L2": {"A_low", "A_high"}}
+        ic = {"A_low": 2.0, "A_high": 7.0}
+
+        themes, standalones = _select_anchors_greedy(leaf_ids, leaf_ancestors, ic, min_leaves=2)
+
+        assert len(themes) == 1
+        assert themes[0][0] == "A_high"
+
+    def test_no_shared_ancestors_all_standalone(self):
+        """Leaves with no shared ancestors are all standalone."""
+        leaf_ids = {"L1", "L2"}
+        leaf_ancestors = {"L1": {"A1"}, "L2": {"A2"}}
+        ic = {"A1": 5.0, "A2": 5.0}
+
+        themes, standalones = _select_anchors_greedy(leaf_ids, leaf_ancestors, ic, min_leaves=2)
+
+        assert len(themes) == 0
+        assert set(standalones) == {"L1", "L2"}
+
+
+@pytest.mark.unit
+class TestBuildMrceaBThemes:
+    """Tests for build_mrcea_b_themes function."""
+
+    def test_returns_hierarchical_themes(self):
+        """Returns a list of HierarchicalTheme objects."""
+        godag = create_mock_godag()
+
+        # Use leaf terms and a common ancestor
+        terms = {
+            "GO:0006954": EnrichedTerm(
+                "GO:0006954", "inflammatory response", "biological_process",
+                0.001, 5.0, frozenset(["GeneA", "GeneB"]), depth=2
+            ),
+            "GO:0006955": EnrichedTerm(
+                "GO:0006955", "immune response", "biological_process",
+                0.005, 4.0, frozenset(["GeneA"]), depth=3
+            ),
+            "GO:0071222": EnrichedTerm(
+                "GO:0071222", "cellular response to LPS", "biological_process",
+                0.01, 3.0, frozenset(["GeneB"]), depth=3
+            ),
+        }
+        gene_to_terms = {"GeneA": {"GO:0006955"}, "GeneB": {"GO:0071222"}}
+
+        themes = build_mrcea_b_themes(
+            terms, godag, gene_to_terms, min_ic=0.0, min_leaves=2
+        )
+
+        assert isinstance(themes, list)
+        assert all(isinstance(t, HierarchicalTheme) for t in themes)
+
+    def test_sorted_by_anchor_fdr(self):
+        """Themes are sorted by anchor term FDR (lowest first)."""
+        godag = create_mock_godag()
+
+        terms = {
+            "GO:0006955": EnrichedTerm(
+                "GO:0006955", "immune response", "biological_process",
+                0.05, 2.0, frozenset(["GeneA"]), depth=3
+            ),
+            "GO:0071222": EnrichedTerm(
+                "GO:0071222", "cellular response to LPS", "biological_process",
+                0.001, 4.0, frozenset(["GeneB"]), depth=3
+            ),
+        }
+        gene_to_terms = {"GeneA": {"GO:0006955"}, "GeneB": {"GO:0071222"}}
+
+        themes = build_mrcea_b_themes(
+            terms, godag, gene_to_terms, min_ic=0.0, min_leaves=2
+        )
+
+        if len(themes) >= 2:
+            assert themes[0].anchor_term.fdr <= themes[1].anchor_term.fdr
+
+    def test_empty_terms_returns_empty(self):
+        """Returns empty list when no terms provided."""
+        godag = create_mock_godag()
+        themes = build_mrcea_b_themes({}, godag, {}, min_ic=3.0, min_leaves=2)
+        assert themes == []
+
+    def test_max_genes_filters_general_terms(self):
+        """Terms exceeding max_genes are excluded from theme building."""
+        godag = create_mock_godag()
+
+        terms = {
+            "GO:0006954": EnrichedTerm(
+                "GO:0006954", "inflammatory response", "biological_process",
+                0.001, 5.0, frozenset([f"G{i}" for i in range(40)]), depth=2  # 40 genes
+            ),
+            "GO:0071222": EnrichedTerm(
+                "GO:0071222", "cellular response to LPS", "biological_process",
+                0.01, 3.0, frozenset(["GeneA", "GeneB"]), depth=3
+            ),
+        }
+        gene_to_terms = {"GeneA": {"GO:0071222"}, "GeneB": {"GO:0071222"}}
+
+        themes = build_mrcea_b_themes(
+            terms, godag, gene_to_terms, min_ic=0.0, min_leaves=2, max_genes=30
+        )
+
+        # GO:0006954 should be filtered; GO:0071222 should appear as standalone
+        for t in themes:
+            assert t.anchor_term.go_id != "GO:0006954"
+
+    def test_standalone_leaves_have_no_specific_terms(self):
+        """Leaves that cannot be grouped appear as themes with no specific_terms."""
+        godag = create_mock_godag()
+
+        # Single leaf with no shared ancestor — should become standalone
+        terms = {
+            "GO:0071222": EnrichedTerm(
+                "GO:0071222", "cellular response to LPS", "biological_process",
+                0.01, 3.0, frozenset(["GeneA"]), depth=3
+            ),
+        }
+        gene_to_terms = {"GeneA": {"GO:0071222"}}
+
+        themes = build_mrcea_b_themes(
+            terms, godag, gene_to_terms, min_ic=0.0, min_leaves=2
+        )
+
+        assert len(themes) == 1
+        assert themes[0].anchor_term.go_id == "GO:0071222"
+        assert themes[0].specific_terms == []

@@ -148,9 +148,20 @@ MRCEA-B provides meaningful compression (1.44 L/T) consistent with Hallmark resu
 | Metric | Value |
 |---|---|
 | Terms/gene | 3.10 |
-| Enrichment leaves | 232 |
-| Themes | 207 |
+| Enrichment leaves (main pipeline) | 232 |
+| Themes (main pipeline) | 207 |
 | Top-30 gene coverage | 85% (126/149) |
+
+**Theme algorithm results (exploration scripts; 154 leaves at script FDR threshold):**
+
+| Algorithm | Themes | Standalone | L/T | Groups formed |
+|---|---|---|---|---|
+| Production (depth-anchor 4–7) | 137 | 61 | 1.12 | 76 |
+| MRCEA-A (highest-IC path) | 98 | 78 | **1.57** | 20 |
+| MRCEA-B (all-paths BFS) | 85 | 65 | **1.81** | 69 |
+
+Note: MRCEA-A standalone count increases despite better compression because it creates fewer but larger groups.
+MRCEA-B achieves the best overall compression (1.81 L/T), consistent with Hallmark results.
 
 Top GO themes: *actin cytoskeleton organization* (FDR 1.3e-19), *lamellipodium*, *cell-cell junction*, *positive regulation of locomotion*
 
@@ -165,9 +176,19 @@ Published Reactome (Supplement 3): Signaling by RTKs, Rho GTPase cycle, FCGR pha
 | Metric | Value |
 |---|---|
 | Terms/gene | 2.18 |
-| Enrichment leaves | 147 |
-| Themes | 139 |
+| Enrichment leaves (main pipeline) | 147 |
+| Themes (main pipeline) | 139 |
 | Top-30 gene coverage | 80% (118/148) |
+
+**Theme algorithm results (exploration scripts; 81 leaves at script FDR threshold):**
+
+| Algorithm | Themes | Standalone | L/T | Groups formed |
+|---|---|---|---|---|
+| Production (depth-anchor 4–7) | 80 | 39 | 1.01 | 41 |
+| MRCEA-A (highest-IC path) | 54 | 40 | **1.50** | 14 |
+| MRCEA-B (all-paths BFS) | 51 | 38 | **1.59** | 30 |
+
+Note: Production provides almost no compression (L/T 1.01 ≈ 1 theme per leaf). Both MRCEA variants achieve meaningful grouping (~50% more compression), with MRCEA-B slightly better.
 
 Top GO themes: *proteasome complex* (FDR 3.1e-42), *mitotic cell cycle phase transition*, *proteasome storage granule*, *regulation of cell cycle G1/S phase transition*, *cyclin-dependent protein kinase holoenzyme complex*
 
@@ -201,15 +222,17 @@ Published Reactome (Supplement 4): Cell Cycle / Mitotic, Cell Cycle Checkpoints,
 
 ## Cross-dataset summary
 
-| Dataset | Type | Terms/gene | Leaves | L/T (prod) | L/T (MRCEA-B) | Genes lost at top-30 |
-|---|---|---|---|---|---|---|
-| Himes 2014 airway | Real, sparse | 0.28 | 22 | 1.00 | 1.00 | 0 (all 24 fit) |
-| NAFLD C_1 RTK/Rho | Real, coherent community | 3.10 | 232 | — | — | 15% |
-| NAFLD C_3 cell cycle | Real, coherent community | 2.18 | 147 | — | — | 20% |
-| Hoang 2019 NAFLD (full) | **Real, mixed signal** | 3.23 | 477 | 1.14 | **1.44** | **54%** |
-| hm_inflam (synthetic) | Synthetic | 5.22 | 50 | 1.00 | 1.46 | 23% |
-| Kaizer 2007 T1D | Real | — | — | — | — | — |
-| Labadorf 2015 HD | Real | — | — | — | — | — |
+| Dataset | Type | Terms/gene | Leaves | L/T (prod) | L/T (MRCEA-A) | L/T (MRCEA-B) | Genes lost at top-30 |
+|---|---|---|---|---|---|---|---|
+| Himes 2014 airway | Real, sparse | 0.28 | 22 | 1.00 | 1.00 | 1.00 | 0 (all 24 fit) |
+| NAFLD C_1 RTK/Rho | Real, coherent community | 3.10 | 154† | 1.12 | 1.57 | **1.81** | 15% |
+| NAFLD C_3 cell cycle | Real, coherent community | 2.18 | 81† | 1.01 | 1.50 | **1.59** | 20% |
+| Hoang 2019 NAFLD (full) | **Real, mixed signal** | 3.23 | 477 | 1.14 | 1.33 | **1.44** | **54%** |
+| hm_inflam (synthetic) | Synthetic | 5.22 | 50 | 1.00 | — | 1.46 | 23% |
+| Kaizer 2007 T1D | Real | — | — | — | — | — | — |
+| Labadorf 2015 HD | Real | — | — | — | — | — | — |
+
+† C_1 and C_3 leaf counts are from the exploration scripts (which apply slightly stricter filtering than the main pipeline). Main pipeline leaf counts: C_1=232, C_3=147. L/T ratios within each script run are internally consistent.
 
 ---
 
@@ -223,14 +246,20 @@ Published Reactome (Supplement 4): Cell Cycle / Mitotic, Cell Cycle Checkpoints,
    NAFLD (3.23) generates 582 themes. The 30-theme cap is appropriate for sparse datasets
    but severely inadequate for dense disease transcriptomics.
 
-3. **MRCEA-B provides consistent compression when density is sufficient** — L/T 1.44 for
-   NAFLD (477 leaves, 332 with ancestors) vs 1.00 for Himes (22 leaves, 9 with ancestors).
-   The improvement scales with the fraction of leaves that have shared enriched ancestors.
+3. **MRCEA-B provides consistent, meaningful compression on real coherent communities** —
+   L/T 1.81 for NAFLD C_1 (154 leaves), 1.59 for C_3 (81 leaves), 1.44 for NAFLD full
+   (477 leaves). Production barely compresses C_3 at all (L/T 1.01). MRCEA-A gives
+   intermediate gains (1.57 / 1.50 for C_1 / C_3). The improvement scales with the
+   fraction of leaves that have shared enriched ancestors.
 
-4. **Coverage-driven theme selection is needed** — FDR-rank cutoff silently drops
+4. **MRCEA gives no gain for sparse data** — Himes (22 leaves, 13 topologically isolated)
+   stays at L/T 1.00 for all algorithms. This is expected and correct: the algorithm
+   cannot group what the DAG doesn't connect.
+
+5. **Coverage-driven theme selection is needed** — FDR-rank cutoff silently drops
    highly significant biology. For dense datasets, need coverage-aware selection
    (see planning/enrichment_anchor_critique.md, Section 12).
 
-5. **More real data needed** — Labadorf HD (5480 DEGs) would likely be even more extreme
+6. **More real data needed** — Labadorf HD (5480 DEGs) would likely be even more extreme
    than NAFLD. Two datasets sampled so far span the sparse–dense range; need 1–2 more
    to establish typical distribution.

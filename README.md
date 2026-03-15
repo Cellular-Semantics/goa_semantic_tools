@@ -6,9 +6,9 @@
 [![Python 3.14+](https://img.shields.io/badge/python-3.14+-blue.svg)](https://www.python.org/downloads/)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-**Hierarchical GO enrichment analysis with depth-anchor clustering, provenance-labeled LLM explanations, and literature-grounded references**
+**Hierarchical GO enrichment analysis with IC-based theme grouping, provenance-labeled LLM explanations, and literature-grounded references**
 
-GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using a bottom-up depth-anchor algorithm, then generates provenance-labeled explanations grounded in real paper abstracts fetched from Europe PMC before the LLM call.
+GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using MRCEA-B, a bottom-up information-content algorithm, then generates provenance-labeled explanations grounded in real paper abstracts fetched from Europe PMC before the LLM call.
 
 ## Quick Start
 
@@ -58,9 +58,8 @@ Output files are auto-named from the base path:
 | `-o`, `--output` | *(required)* | Output base path |
 | `--species` | `human` | `human` or `mouse` |
 | `--fdr` | `0.05` | FDR significance threshold |
-| `--depth-min` | `4` | Min GO depth for anchor terms |
-| `--depth-max` | `7` | Max GO depth for anchor terms |
-| `--min-children` | `2` | Min enriched descendants to qualify as anchor |
+| `--min-ic` | `3.0` | Minimum information content for anchor terms |
+| `--min-leaves` | `2` | Min enriched leaves to qualify as anchor |
 | `--max-genes` | `30` | Filter overly general terms |
 | `--explain` | off | Generate LLM explanation |
 | `--model` | `gpt-4o` | LLM model (`gpt-4o`, `gpt-4o-mini`, `gpt-5`, `claude-sonnet-4-20250514`) |
@@ -75,44 +74,52 @@ Output files are auto-named from the base path:
 
 Runs over-representation analysis (ORA) via GOATOOLS with Fisher's exact test and BH-corrected FDR. Downloads and caches GO ontology and GAF annotations automatically.
 
-### 2. Leaf-First Theme Building (Phase 1)
+### 2. Leaf-First Theme Building via MRCEA-B (Phase 1)
 
-Instead of selecting top-N most significant terms (which creates redundancy), the algorithm works bottom-up:
+Instead of selecting top-N most significant terms (which creates redundancy), the algorithm works bottom-up using **MRCEA-B** (Most Recent Common Enriched Ancestor, all-paths BFS):
 
-1. **Enrichment leaves**: Find the most specific enriched terms (no enriched descendants)
-2. **Depth-anchor grouping**: Select intermediate-depth terms (depth 4-7) with 2+ enriched descendants as anchors, group specific terms beneath them
-3. **Hub gene identification**: Flag genes appearing in 3+ themes as biological coordinators
+1. **Enrichment leaves**: Find the most specific enriched terms (no enriched descendants in the enriched set)
+2. **IC computation**: Calculate Resnik information content for all enriched terms from GAF annotations (higher IC = more specific)
+3. **All-paths BFS**: For each leaf, traverse upward through all enriched parents simultaneously (using is_a + part_of edges from leaves; regulates edges at higher levels)
+4. **Greedy anchor selection**: Iteratively pick the ancestor that maximises IC × number of uncovered leaves; leaves sharing no qualifying ancestor become standalone themes
+5. **Hub gene identification**: Flag genes appearing in 3+ themes as biological coordinators
 
-Typical reduction: 50-75% fewer terms while preserving the biological signal.
+Typical reduction: 50–75% fewer terms while preserving the biological signal. On coherent gene communities (e.g. RTK/Rho signalling), MRCEA-B achieves ~1.8× compression vs the prior depth-anchor approach.
 
 ### 3. Literature Pre-fetch + LLM Explanation (Phases 1b + 2)
 
-When `--add-references` is used, paper abstracts are fetched from Europe PMC **before** the LLM call:
+When `--add-references` is used, paper abstracts are injected into the LLM context **before** the LLM call (lit-first approach):
 
-1. **Phase 1b**: For each theme, search Europe PMC (via artl-mcp) using top-ranked genes + anchor GO term name. All returned abstracts are injected into the theme context.
-2. **Phase 2**: The LLM generates a provenance-labeled biological summary with inline citations (e.g. `PMID:10383454`) for claims grounded in the provided papers.
+**Phase 1b** (three steps, all before the LLM):
+1. **GAF citation lookup** (no API): For each theme, find curated PMIDs from the GO Annotation File — these are the original experimental papers that established each gene→GO term relationship. Highest-confidence citations.
+2. **GAF abstract fetch** (Europe PMC): Retrieve title + abstract for each GAF PMID to give the LLM the actual evidence text.
+3. **Hub gene search** (Europe PMC): For each hub gene (top 20 by theme count), search `"{gene} {top_theme_name}"` to find supporting literature for cross-theme coordination claims.
+
+**Phase 2**: The LLM generates a provenance-labeled biological summary. Citations appear inline (e.g. `PMID:10383454`) within the tagged sentence they support.
 
 Provenance tags distinguish claim sources:
 
-- **[DATA]**: Direct observations from enrichment (FDR values, gene counts, co-occurrence)
-- **[INFERENCE]**: Logical deductions from co-annotation patterns
-- **[EXTERNAL]**: Claims about known biology, cited from pre-fetched papers where available
-- **[GO-HIERARCHY]**: Facts derived from GO parent-child structure
+| Tag | Meaning |
+|-----|---------|
+| **[DATA]** | Direct observations from enrichment (FDR values, gene counts, co-occurrence) |
+| **[INFERENCE]** | Logical deductions from co-annotation patterns — e.g. two terms sharing genes implies a coordinating function |
+| **[EXTERNAL]** | Claims cited from pre-fetched paper abstracts |
+| **[GO-HIERARCHY]** | Facts derived from GO parent-child structure |
 
-This lit-first approach eliminates the unresolved assertion problem: the LLM cites papers it has actually read rather than making claims that require retrospective validation.
+This lit-first approach eliminates the unresolved-assertion problem: the LLM cites papers it has actually read rather than making claims that require retrospective validation.
 
 ## Python API
 
 ```python
 from goa_semantic_tools.services import run_go_enrichment, generate_markdown_explanation
 
-# Phase 1: Enrichment + theme building
+# Phase 1: Enrichment + theme building (MRCEA-B)
 result = run_go_enrichment(
     gene_symbols=["TP53", "BRCA1", "BRCA2", "PTEN", "RB1", "APC"],
     species="human",
     fdr_threshold=0.05,
-    depth_range=(4, 7),
-    min_children=2,
+    min_ic=3.0,      # minimum Resnik IC for anchor terms
+    min_leaves=2,    # min enriched leaves to form a group
     max_genes=30,
 )
 
@@ -121,19 +128,12 @@ print(f"Enrichment leaves: {len(result['enrichment_leaves'])}")
 print(f"Themes: {len(result['themes'])}")
 print(f"Hub genes: {list(result['hub_genes'].keys())}")
 
-# Phase 1b: Pre-fetch literature abstracts (optional, requires artl-mcp)
-from goa_semantic_tools.services import fetch_abstracts_for_themes
-paper_abstracts = fetch_abstracts_for_themes(
-    themes=result["themes"],
-    hub_genes=result["hub_genes"],
-)
-
 # Phase 2: LLM explanation (requires API key in environment)
-# max_tokens defaults to 16000; gpt-5 automatically gets 32000
+# Use the CLI (--explain --add-references) for the full lit-first pipeline.
+# For programmatic use without literature pre-fetch:
 markdown = generate_markdown_explanation(
     enrichment_output=result,
     model="gpt-4o",
-    paper_abstracts=paper_abstracts,  # LLM cites inline from provided abstracts
 )
 ```
 
@@ -175,7 +175,7 @@ src/goa_semantic_tools/goa_semantic_tools/
 ├── utils/
 │   ├── data_downloader.py                    # Download & cache GO/GAF data
 │   ├── go_data_loader.py                     # Load data with GOATOOLS
-│   ├── go_hierarchy.py                       # Leaf-first + depth-anchor algorithm
+│   ├── go_hierarchy.py                       # Leaf-first + MRCEA-B IC-based grouping
 │   └── reference_index.py                    # GAF gene→GO→PMID index
 └── schemas/
     ├── go_enrichment_input.schema.json

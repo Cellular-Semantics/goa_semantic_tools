@@ -12,7 +12,7 @@ from ..utils.data_downloader import ensure_gaf_data, ensure_go_data
 from ..utils.go_data_loader import load_gene_annotations, load_go_data
 from ..utils.go_hierarchy import (
     EnrichedTerm,
-    build_depth_anchor_themes,
+    build_mrcea_b_themes,
     compute_enrichment_leaves,
     compute_hub_genes,
     enriched_terms_to_dict,
@@ -33,28 +33,28 @@ def run_go_enrichment(
     gene_symbols: list[str],
     species: str = "human",
     fdr_threshold: float = 0.05,
-    depth_range: tuple[int, int] = (4, 7),
-    min_children: int = 2,
+    min_ic: float = 3.0,
+    min_leaves: int = 2,
     max_genes: int = 30,
     namespaces: list[str] | None = None,
 ) -> dict[str, Any]:
     """
-    Run hierarchical GO enrichment analysis with depth-anchor clustering.
+    Run hierarchical GO enrichment analysis with MRCEA-B clustering.
 
     This is the main entry point for GO enrichment. It:
     1. Downloads and caches GO/GAF data if needed
     2. Loads GO ontology and gene annotations
     3. Runs enrichment analysis with GOATOOLS
     4. Computes enrichment leaves (most specific terms) FIRST
-    5. Builds hierarchical themes on top of leaves
+    5. Builds hierarchical themes using MRCEA-B (IC-based all-paths BFS)
     6. Returns structured results
 
     Args:
         gene_symbols: List of gene symbols to analyze (e.g., ["TP53", "BRCA1"])
         species: Species for annotations ("human" or "mouse")
         fdr_threshold: FDR significance threshold (Benjamini-Hochberg correction)
-        depth_range: GO depth range for anchor candidates
-        min_children: Minimum enriched descendants to qualify as anchor
+        min_ic: Minimum Information Content for anchor candidates (default 3.0)
+        min_leaves: Minimum leaves required to form a multi-leaf theme (default 2)
         max_genes: Filter overly general terms with > max_genes
         namespaces: GO namespace codes to include, e.g. ["BP"] or ["BP", "MF"].
             Valid values: "BP" (biological_process), "MF" (molecular_function),
@@ -137,7 +137,7 @@ def run_go_enrichment(
 
     if not study_set:
         # No genes found - return empty result
-        return _empty_result(gene_symbols, species, fdr_threshold, depth_range)
+        return _empty_result(gene_symbols, species, fdr_threshold, min_ic, min_leaves)
 
     # Step 4: Run enrichment analysis
     print("\n[4/6] Running GO enrichment analysis...")
@@ -159,7 +159,7 @@ def run_go_enrichment(
 
     if not goea_results_sig:
         # No enrichment found
-        return _empty_result(gene_symbols, species, fdr_threshold, depth_range)
+        return _empty_result(gene_symbols, species, fdr_threshold, min_ic, min_leaves)
 
     # Convert GOATOOLS results to EnrichedTerm format
     enriched_terms = _convert_to_enriched_terms(goea_results_sig, godag)
@@ -181,16 +181,17 @@ def run_go_enrichment(
     all_leaves.sort(key=lambda x: x.fdr)
     print(f"  Enrichment leaves: {len(all_leaves)} (most specific terms)")
 
-    # Build themes ON TOP of leaves (hierarchical grouping)
+    # Build themes ON TOP of leaves using MRCEA-B
     all_themes = []
     for namespace in ns_to_run:
         ns_terms = {k: v for k, v in enriched_terms.items() if v.namespace == namespace}
         if ns_terms:
-            themes = build_depth_anchor_themes(
+            themes = build_mrcea_b_themes(
                 ns_terms,
                 godag,
-                depth_range=depth_range,
-                min_children=min_children,
+                gene_to_terms=ns2assoc.get(namespace, {}),
+                min_ic=min_ic,
+                min_leaves=min_leaves,
                 max_genes=max_genes,
                 fdr_threshold=fdr_threshold,
             )
@@ -222,7 +223,8 @@ def run_go_enrichment(
         total_enriched=len(goea_results_sig),
         fdr_threshold=fdr_threshold,
         species=species,
-        depth_range=depth_range,
+        min_ic=min_ic,
+        min_leaves=min_leaves,
     )
 
     print("\n" + "=" * 80)
@@ -245,7 +247,8 @@ def _build_output(
     total_enriched: int,
     fdr_threshold: float,
     species: str,
-    depth_range: tuple[int, int],
+    min_ic: float,
+    min_leaves: int,
 ) -> dict[str, Any]:
     """
     Build output structure for enrichment results.
@@ -259,7 +262,8 @@ def _build_output(
         total_enriched: Total enriched terms
         fdr_threshold: FDR threshold used
         species: Species analyzed
-        depth_range: Depth range for anchors
+        min_ic: Minimum IC for MRCEA-B anchor candidates
+        min_leaves: Minimum leaves for MRCEA-B theme formation
 
     Returns:
         Dictionary with enrichment_leaves, themes, hub_genes, and metadata
@@ -274,7 +278,8 @@ def _build_output(
         "hub_genes_count": len(hub_genes),
         "fdr_threshold": fdr_threshold,
         "species": species,
-        "depth_range": list(depth_range),
+        "min_ic": min_ic,
+        "min_leaves": min_leaves,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -287,7 +292,11 @@ def _build_output(
 
 
 def _empty_result(
-    gene_symbols: list[str], species: str, fdr_threshold: float, depth_range: tuple[int, int]
+    gene_symbols: list[str],
+    species: str,
+    fdr_threshold: float,
+    min_ic: float,
+    min_leaves: int,
 ) -> dict[str, Any]:
     """
     Build empty result when no enrichment is found.
@@ -296,7 +305,8 @@ def _empty_result(
         gene_symbols: Input gene symbols
         species: Species analyzed
         fdr_threshold: FDR threshold used
-        depth_range: Depth range for anchors
+        min_ic: Minimum IC for MRCEA-B anchor candidates
+        min_leaves: Minimum leaves for MRCEA-B theme formation
 
     Returns:
         Empty result matching schema
@@ -315,7 +325,8 @@ def _empty_result(
             "hub_genes_count": 0,
             "fdr_threshold": fdr_threshold,
             "species": species,
-            "depth_range": list(depth_range),
+            "min_ic": min_ic,
+            "min_leaves": min_leaves,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         },
     }

@@ -863,9 +863,9 @@ def render_explanation_to_markdown(
         if n_explained < n_total else ""
     )
     lines.append(
-        f"> **Methods note:** Enrichment themes are built using a depth-anchor algorithm. "
-        f"Each theme is headed by an **anchor** — an intermediate GO term (depth 4–7 in "
-        f"the GO hierarchy) chosen to best group the enriched leaf terms beneath it. "
+        f"> **Methods note:** Enrichment themes are built using MRCEA-B (Most Recent Common Enriched Ancestor, all-paths BFS). "
+        f"Each theme is headed by an **anchor** — an enriched GO term selected by maximising information content (IC) × uncovered leaves, "
+        f"chosen bottom-up from all enrichment leaves simultaneously via a greedy algorithm. "
         f"Anchor confidence (high/medium/low) reflects how tightly the leaf terms cluster "
         f"under the anchor.{theme_count_note}\n"
     )

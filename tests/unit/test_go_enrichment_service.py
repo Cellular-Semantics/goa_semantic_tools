@@ -46,7 +46,8 @@ class TestEmptyResult:
             gene_symbols=["TP53", "BRCA1"],
             species="human",
             fdr_threshold=0.05,
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert "enrichment_leaves" in result
@@ -60,7 +61,8 @@ class TestEmptyResult:
             gene_symbols=["TP53"],
             species="human",
             fdr_threshold=0.05,
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert result["enrichment_leaves"] == []
@@ -73,7 +75,8 @@ class TestEmptyResult:
             gene_symbols=["TP53", "BRCA1", "BRCA2"],
             species="human",
             fdr_threshold=0.05,
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert result["metadata"]["input_genes_count"] == 3
@@ -85,12 +88,14 @@ class TestEmptyResult:
             gene_symbols=["TP53"],
             species="mouse",
             fdr_threshold=0.01,
-            depth_range=(3, 8),
+            min_ic=4.0,
+            min_leaves=3,
         )
 
         assert result["metadata"]["species"] == "mouse"
         assert result["metadata"]["fdr_threshold"] == 0.01
-        assert result["metadata"]["depth_range"] == [3, 8]
+        assert result["metadata"]["min_ic"] == 4.0
+        assert result["metadata"]["min_leaves"] == 3
 
     def test_metadata_has_timestamp(self):
         """Metadata should include timestamp."""
@@ -98,7 +103,8 @@ class TestEmptyResult:
             gene_symbols=["TP53"],
             species="human",
             fdr_threshold=0.05,
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert "timestamp" in result["metadata"]
@@ -120,7 +126,8 @@ class TestBuildOutput:
             total_enriched=5,
             fdr_threshold=0.05,
             species="human",
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert "enrichment_leaves" in result
@@ -143,7 +150,8 @@ class TestBuildOutput:
             total_enriched=5,
             fdr_threshold=0.05,
             species="human",
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert result["enrichment_leaves"] == leaves
@@ -169,7 +177,8 @@ class TestBuildOutput:
             total_enriched=10,
             fdr_threshold=0.05,
             species="human",
-            depth_range=(4, 7),
+            min_ic=3.0,
+            min_leaves=2,
         )
 
         assert result["metadata"]["input_genes_count"] == 3

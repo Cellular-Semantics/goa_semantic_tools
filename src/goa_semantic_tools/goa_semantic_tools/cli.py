@@ -92,8 +92,8 @@ def _print_dry_run(genes: list[str], args: any) -> None:
     explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
 
     print(f"\nSpecies: {args.species}")
-    print(f"Depth range: {args.depth_min}-{args.depth_max}")
-    print(f"Min children: {args.min_children}")
+    print(f"Min IC: {args.min_ic}")
+    print(f"Min leaves: {args.min_leaves}")
     print(f"Max genes: {args.max_genes}")
     print(f"FDR threshold: {args.fdr}")
     print(f"\nOutput files:")
@@ -115,9 +115,9 @@ def _print_dry_run(genes: list[str], args: any) -> None:
     print(f"   - Filter by FDR < {args.fdr}")
     print("5. Compute enrichment leaves (most specific terms)")
     print(f"   - Filter terms with >{args.max_genes} genes")
-    print("6. Build hierarchical themes using depth-anchors algorithm")
-    print(f"   - Anchor candidates: GO depth {args.depth_min}-{args.depth_max}")
-    print(f"   - Require ≥{args.min_children} enriched descendants")
+    print("6. Build hierarchical themes using MRCEA-B algorithm")
+    print(f"   - Anchor candidates: IC ≥ {args.min_ic}")
+    print(f"   - Require ≥{args.min_leaves} enriched leaves per theme")
     print("7. Identify hub genes (appearing in 3+ themes)")
 
     print(f"\nOutput: {enrichment_path}")
@@ -456,24 +456,18 @@ Examples:
         help="FDR significance threshold (default: 0.05)",
     )
 
-    # Depth-anchor options
+    # MRCEA-B options
     parser.add_argument(
-        "--depth-min",
-        type=int,
-        default=4,
-        help="Min GO depth for anchor terms (default: 4)",
+        "--min-ic",
+        type=float,
+        default=3.0,
+        help="Minimum Information Content for anchor candidates (default: 3.0)",
     )
     parser.add_argument(
-        "--depth-max",
-        type=int,
-        default=7,
-        help="Max GO depth for anchor terms (default: 7)",
-    )
-    parser.add_argument(
-        "--min-children",
+        "--min-leaves",
         type=int,
         default=2,
-        help="Min enriched children to qualify as anchor (default: 2)",
+        help="Min leaves required to form a multi-leaf theme (default: 2)",
     )
     parser.add_argument(
         "--max-genes",
@@ -562,8 +556,8 @@ Examples:
 
         print(f"\n✓ Parameters:")
         print(f"  Species: {args.species}")
-        print(f"  Depth range: {args.depth_min}-{args.depth_max}")
-        print(f"  Min children: {args.min_children}")
+        print(f"  Min IC: {args.min_ic}")
+        print(f"  Min leaves: {args.min_leaves}")
         print(f"  Max genes: {args.max_genes}")
         print(f"  FDR threshold: {args.fdr}")
         if args.explain:
@@ -596,8 +590,8 @@ Examples:
             gene_symbols=genes,
             species=args.species,
             fdr_threshold=args.fdr,
-            depth_range=(args.depth_min, args.depth_max),
-            min_children=args.min_children,
+            min_ic=args.min_ic,
+            min_leaves=args.min_leaves,
             max_genes=args.max_genes,
             namespaces=args.namespace,
         )
