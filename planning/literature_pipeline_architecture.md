@@ -184,9 +184,9 @@ snippet may not cover both processes. Options:
 
 ### Near-term (this branch)
 
-- [ ] **Cross-theme PMID surfacing for hub genes**: When a GAF PMID appears in
-  2+ themes for the same gene, surface it in the hub gene section with the
-  theme-linking context. Use as ASTA snippet query too.
+- [x] **Cross-theme PMID surfacing for hub genes** (d426f4f): `_build_cross_theme_index()`
+  finds GAF PMIDs spanning 2+ themes for the same gene. Injected into hub gene
+  LLM context as "Cross-theme GAF Evidence". Himes: 9 genes with cross-theme PMIDs.
 
 - [ ] **PMID hallucination check**: At minimum, format check (≤8 digits) +
   grounding check (PMID must be in provided literature context).
