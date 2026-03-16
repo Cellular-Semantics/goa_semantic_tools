@@ -524,7 +524,12 @@ def get_gaf_pmids_for_themes(
             min_genes=1,
         )
         results[i] = [
-            {"pmid": r["pmid"], "genes_covered": r["genes_covered"]}
+            {
+                "pmid": r["pmid"],
+                "genes_covered": r["genes_covered"],
+                "go_terms": r.get("go_terms", []),
+                "gene_go_map": r.get("gene_go_map", {}),
+            }
             for r in pmid_records[:top_n]
         ]
 

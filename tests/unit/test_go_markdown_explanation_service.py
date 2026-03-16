@@ -695,20 +695,37 @@ class TestFormatEnrichmentGafAbstracts:
         assert "TP53 and apoptosis" in result
         assert "PMID:12345678" in result
 
-    def test_gaf_abstracts_includes_genes_covered_note(self):
-        """Abstract block should include Covers: gene line from gaf_pmids."""
+    def test_gaf_abstracts_includes_gene_annotations(self):
+        """Abstract block should include gene annotation info from gaf_pmids."""
         enrichment = self._base_enrichment()
         result = _format_enrichment_for_llm(
             enrichment,
             gaf_pmids=self._gaf_pmids(),
             gaf_abstracts=self._gaf_abstracts(),
         )
-        assert "Covers:" in result
+        # Falls back to Covers: when no gene_go_named present
+        assert "Covers:" in result or "Annotates:" in result
         assert "TP53" in result
         assert "BRCA1" in result
 
+    def test_gaf_abstracts_shows_annotated_go_terms(self):
+        """When gene_go_named is present, should show Annotates: gene→term."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{
+            "pmid": "12345678",
+            "genes_covered": ["TP53"],
+            "gene_go_named": {"TP53": ["apoptotic process [GO:0006915]"]},
+        }]}
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        assert "Annotates:" in result
+        assert "TP53→apoptotic process [GO:0006915]" in result
+
     def test_gaf_abstracts_fallback_to_pmid_only_when_none(self):
-        """When gaf_abstracts=None, original PMID-only format should be used."""
+        """When gaf_abstracts=None, PMID + gene annotations format should be used."""
         enrichment = self._base_enrichment()
         result = _format_enrichment_for_llm(
             enrichment,
@@ -719,8 +736,8 @@ class TestFormatEnrichmentGafAbstracts:
         assert "PMID:12345678" in result
         # No abstract text
         assert "A detailed abstract about TP53." not in result
-        # Covers: not present (old format uses 'covers:' lowercase inline)
-        assert "Covers:" not in result
+        # Gene annotation info present (Covers fallback or Annotates with GO terms)
+        assert "TP53" in result
 
     def test_gaf_abstracts_fallback_when_theme_not_in_gaf_abstracts(self):
         """When theme_index missing from gaf_abstracts, PMID-only fallback."""

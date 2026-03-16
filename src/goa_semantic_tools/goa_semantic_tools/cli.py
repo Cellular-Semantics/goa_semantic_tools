@@ -343,9 +343,31 @@ def _run_phase1b(
             gaf_pmids = get_gaf_pmids_for_themes(
                 themes, ref_index, descendants_closure=descendants_closure
             )
+
+            # Resolve GO IDs to names so LLM context shows gene→term_name
+            for _theme_entries in gaf_pmids.values():
+                for entry in _theme_entries:
+                    gene_go_map = entry.get("gene_go_map", {})
+                    named_map: dict[str, list[str]] = {}
+                    for gene, go_ids_list in gene_go_map.items():
+                        names = []
+                        for gid in go_ids_list:
+                            term = godag.get(gid)
+                            names.append(f"{term.name} [{gid}]" if term else gid)
+                        named_map[gene] = names
+                    entry["gene_go_named"] = named_map
+
             themes_with_pmids = sum(1 for v in gaf_pmids.values() if v)
             total_pmids = sum(len(v) for v in gaf_pmids.values())
+            n_coannot = sum(
+                1
+                for entries in gaf_pmids.values()
+                for e in entries
+                if len(e.get("genes_covered", [])) >= 2
+            )
             print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
+            if n_coannot:
+                print(f"  ({n_coannot} co-annotation PMIDs covering 2+ genes)")
 
             # Save GAF PMIDs as sidecar JSON for interactive skill use
             gaf_pmids_path = base_output.parent / f"{base_output.name}_gaf_pmids.json"

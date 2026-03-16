@@ -277,6 +277,7 @@ def find_pmids_covering_genes(
                     "pmid": pmid,
                     "genes_covered": list(gene_terms.keys()),
                     "go_terms": list(set().union(*gene_terms.values())),
+                    "gene_go_map": {g: sorted(gos) for g, gos in gene_terms.items()},
                 }
             )
 

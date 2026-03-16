@@ -52,6 +52,8 @@ def generate_markdown_explanation(
     gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
     gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
+    snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_snippets: dict[str, list[dict[str, Any]]] | None = None,
 ) -> str:
     """
     Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
@@ -78,6 +80,10 @@ def generate_markdown_explanation(
         hub_gene_abstracts: Optional dict mapping gene symbol to list of paper
             dicts ({pmid, title, abstract, authors, year}). Injected into hub gene
             section so LLM can ground cross-theme coordination claims.
+        snippet_evidence: Optional dict mapping theme index to ASTA snippet dicts.
+            Preferred over gaf_abstracts when available (body-text evidence).
+        hub_gene_snippets: Optional dict mapping gene symbol to ASTA snippet dicts.
+            Preferred over hub_gene_abstracts when available.
 
     Returns:
         Markdown-formatted explanation string with provenance tags
@@ -147,6 +153,8 @@ def generate_markdown_explanation(
         gaf_pmids=gaf_pmids,
         gaf_abstracts=gaf_abstracts,
         hub_gene_abstracts=hub_gene_abstracts,
+        snippet_evidence=snippet_evidence,
+        hub_gene_snippets=hub_gene_snippets,
     )
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
 
@@ -279,19 +287,57 @@ def _get_api_key_for_model(model: str) -> str:
         return api_key
 
 
+def _format_gene_go_annotations(entry: dict[str, Any]) -> str:
+    """Format a GAF PMID entry's gene→GO annotations for LLM context.
+
+    Uses gene_go_named (resolved names) if available, falls back to
+    gene_go_map (raw GO IDs), then genes_covered (no GO info).
+
+    Examples:
+        "Annotates: FOXO3→negative regulation of apoptotic process [GO:0043066], KANK1→cell migration [GO:0016477]"
+        "Annotates: FOXO3→GO:0043066, KANK1→GO:0016477"
+        "Covers: FOXO3, KANK1"
+    """
+    gene_go_named = entry.get("gene_go_named", {})
+    gene_go_map = entry.get("gene_go_map", {})
+    genes_covered = entry.get("genes_covered", [])
+
+    if gene_go_named:
+        parts = []
+        for gene, term_names in sorted(gene_go_named.items()):
+            for name in term_names:
+                parts.append(f"{gene}→{name}")
+        return f"Annotates: {', '.join(parts)}"
+
+    if gene_go_map:
+        parts = []
+        for gene, go_ids in sorted(gene_go_map.items()):
+            for gid in go_ids:
+                parts.append(f"{gene}→{gid}")
+        return f"Annotates: {', '.join(parts)}"
+
+    # Fallback: no GO term info
+    genes_str = ", ".join(genes_covered[:6])
+    if len(genes_covered) > 6:
+        genes_str += f" +{len(genes_covered) - 6} more"
+    return f"Covers: {genes_str}"
+
+
 def _format_enrichment_for_llm(
     enrichment_output: dict[str, Any],
     paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
     gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
+    snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_snippets: dict[str, list[dict[str, Any]]] | None = None,
 ) -> str:
     """
     Format enrichment output as readable text for LLM.
 
     Converts structured JSON to natural text that explains:
     - Study parameters
-    - Hub genes and their theme participation (with abstracts if hub_gene_abstracts provided)
+    - Hub genes and their theme participation (with abstracts/snippets)
     - Hierarchical themes with anchor and specific terms
     - Enrichment leaves (most specific terms)
 
@@ -300,8 +346,13 @@ def _format_enrichment_for_llm(
         paper_abstracts: Deprecated. Theme-level paper abstracts (lit-first).
         gaf_pmids: Optional dict mapping theme index to curated GAF PMIDs
             [{pmid, genes_covered}]. Injected as citation anchors per theme.
+        gaf_abstracts: Optional dict mapping theme index to paper dicts with abstracts.
         hub_gene_abstracts: Optional dict mapping gene → paper dicts with abstracts.
             Injected under each hub gene in the hub genes section.
+        snippet_evidence: Optional dict mapping theme index to ASTA snippet dicts.
+            Preferred over gaf_abstracts (body-text evidence is more specific).
+        hub_gene_snippets: Optional dict mapping gene → ASTA snippet dicts.
+            Preferred over hub_gene_abstracts.
 
     Returns:
         Formatted string for LLM consumption
@@ -344,10 +395,29 @@ def _format_enrichment_for_llm(
             if len(data.get("themes", [])) > 5:
                 lines.append(f"- ... and {len(data['themes']) - 5} more")
 
-            # Inject hub gene abstracts if available
-            if hub_gene_abstracts and gene in hub_gene_abstracts and hub_gene_abstracts[gene]:
+            # Inject hub gene snippets (preferred) or abstracts
+            has_hub_snippets = bool(hub_gene_snippets and gene in hub_gene_snippets and hub_gene_snippets[gene])
+            has_hub_abstracts = bool(hub_gene_abstracts and gene in hub_gene_abstracts and hub_gene_abstracts[gene])
+
+            if has_hub_snippets:
+                lines.append("### Supporting Evidence Snippets (full-text passages, cite PMID:xxxxx):")
+                for snippet in hub_gene_snippets[gene]:  # type: ignore[index]
+                    pmid = snippet.get("pmid", "")
+                    title = snippet.get("title", "")
+                    authors = snippet.get("authors", "")
+                    snippet_text = snippet.get("snippet_text", "")
+                    pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+                    header = f"[{pmid_label}] {title}"
+                    if authors:
+                        header += f" — {authors}"
+                    lines.append(header)
+                    if snippet_text:
+                        preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                        lines.append(f"Evidence: {preview}")
+                    lines.append("")
+            elif has_hub_abstracts:
                 lines.append("### Supporting Literature (cite as PMID:xxxxx for cross-theme claims):")
-                for paper in hub_gene_abstracts[gene]:
+                for paper in hub_gene_abstracts[gene]:  # type: ignore[index]
                     pmid = paper.get("pmid", "")
                     title = paper.get("title", "No title")
                     authors = paper.get("authors", "")
@@ -424,14 +494,36 @@ def _format_enrichment_for_llm(
                     )
                 lines.append("")
 
+            # ASTA snippet evidence per theme (preferred over abstracts)
+            has_snippets = bool(snippet_evidence and i in snippet_evidence and snippet_evidence[i])
+            if has_snippets:
+                lines.append("### Available Evidence Snippets (full-text passages, prefer these for citations):")
+                lines.append("These are body-text passages from papers with specific experimental evidence.")
+                lines.append("Cite the PMID inline: '[EXTERNAL] FOXO3 suppresses migration PMID:19188590.'")
+                for snippet in snippet_evidence[i]:  # type: ignore[index]
+                    pmid = snippet.get("pmid", "")
+                    title = snippet.get("title", "")
+                    authors = snippet.get("authors", "")
+                    snippet_text = snippet.get("snippet_text", "")
+                    pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+                    header = f"[{pmid_label}] {title}"
+                    if authors:
+                        header += f" — {authors}"
+                    lines.append(header)
+                    if snippet_text:
+                        preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                        lines.append(f"Evidence: {preview}")
+                    lines.append("")
+                lines.append("")
+
             # GAF-curated citations per theme (preferred, highest confidence)
             if gaf_pmids and i in gaf_pmids and gaf_pmids[i]:
                 lines.append("### Available GAF Citations (curated gene→GO annotations):")
                 lines.append("Use these PMIDs in [DATA] and [EXTERNAL] tags for gene→GO claims:")
 
-                # pmid → genes_covered lookup for enriched annotation display
-                gaf_genes = {
-                    e.get("pmid", ""): e.get("genes_covered", []) for e in gaf_pmids[i]
+                # Build per-PMID lookup from gaf_pmids entries
+                gaf_entry_by_pmid: dict[str, dict[str, Any]] = {
+                    e.get("pmid", ""): e for e in gaf_pmids[i]
                 }
 
                 has_abstracts = bool(gaf_abstracts and i in gaf_abstracts and gaf_abstracts[i])
@@ -442,7 +534,6 @@ def _format_enrichment_for_llm(
                         abstract = paper.get("abstract", "")
                         authors = paper.get("authors", "")
                         year = paper.get("year", "")
-                        genes = gaf_genes.get(pmid, [])
                         author_year = (
                             f"{authors} ({year})" if authors and year else authors or year
                         )
@@ -450,24 +541,17 @@ def _format_enrichment_for_llm(
                         if author_year:
                             header += f" — {author_year}"
                         lines.append(header)
-                        if genes:
-                            genes_str = ", ".join(genes[:6])
-                            if len(genes) > 6:
-                                genes_str += f" +{len(genes) - 6} more"
-                            lines.append(f"Covers: {genes_str}")
+                        lines.append(_format_gene_go_annotations(gaf_entry_by_pmid.get(pmid, {})))
                         if abstract:
                             preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
                             lines.append(f"Abstract: {preview}")
                         lines.append("")
                 else:
-                    # Fallback: PMID + genes_covered only (no API calls needed)
+                    # Fallback: PMID + gene→GO annotations only (no API calls needed)
                     for entry in gaf_pmids[i]:
                         pmid = entry.get("pmid", "")
-                        genes = entry.get("genes_covered", [])
-                        genes_str = ", ".join(genes[:6])
-                        if len(genes) > 6:
-                            genes_str += f" +{len(genes) - 6} more"
-                        lines.append(f"- PMID:{pmid} (covers: {genes_str})")
+                        lines.append(f"- PMID:{pmid}")
+                        lines.append(f"  {_format_gene_go_annotations(entry)}")
                 lines.append("")
 
             # Fallback: full abstracts from deprecated paper_abstracts param
