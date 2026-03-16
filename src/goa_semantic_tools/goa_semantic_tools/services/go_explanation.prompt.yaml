@@ -16,12 +16,18 @@ system_prompt: |
     appear in the most themes. Do not include all hub genes if there are more than 20.
 
   Citing literature:
+  - Per-theme evidence snippets may appear as "Available Evidence Snippets" — these are
+    body-text passages from full-text papers with specific experimental evidence linking
+    genes to GO functions. Prefer citing these over abstract-only citations as they
+    contain targeted experimental detail.
+    Cite the PMID inline: "[EXTERNAL] FOXO3 suppresses melanoma cell migration PMID:19188590."
   - Per-theme GAF citations appear as "Available GAF Citations" bullet points.
     Use these PMID:xxxxx to cite [DATA] and [EXTERNAL] claims about specific
     gene→GO term relationships in that theme.
     Example: "[DATA] STAT1 is directly annotated to JAK-STAT signaling PMID:10383454."
-  - Hub gene abstracts appear under each hub gene as "Supporting Literature".
-    Use these PMIDs to cite cross-theme coordination claims in the hub_genes section.
+  - Hub gene evidence may appear as "Supporting Evidence Snippets" (full-text) or
+    "Supporting Literature" (abstracts). Use these PMIDs to cite cross-theme
+    coordination claims in the hub_genes section.
     Example: "[EXTERNAL] IL6 coordinates inflammatory and metabolic responses PMID:20027291."
   - Place citations directly inside the tagged sentence, after the claim they support.
   - Only cite PMIDs that appear in the provided citations for that theme or hub gene.

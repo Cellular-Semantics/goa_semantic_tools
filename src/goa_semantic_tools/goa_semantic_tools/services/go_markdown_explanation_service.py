@@ -323,6 +323,68 @@ def _format_gene_go_annotations(entry: dict[str, Any]) -> str:
     return f"Covers: {genes_str}"
 
 
+def _build_cross_theme_index(
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None,
+    themes: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]]:
+    """Build per-gene index of GAF PMIDs that span 2+ themes.
+
+    Returns:
+        {gene: [{pmid, themes: [{index, name}], annotations: [{go_term_named}]}]}
+        Only includes genes where at least one PMID spans 2+ themes.
+    """
+    if not gaf_pmids:
+        return {}
+
+    # pmid → {gene → {theme_idx → [go_term_named]}}
+    pmid_gene_themes: dict[str, dict[str, dict[int, list[str]]]] = {}
+
+    for theme_idx, entries in gaf_pmids.items():
+        for entry in entries:
+            pmid = entry.get("pmid", "")
+            if not pmid:
+                continue
+            gene_go_named = entry.get("gene_go_named", {})
+            genes_covered = entry.get("genes_covered", [])
+
+            for gene in genes_covered:
+                if pmid not in pmid_gene_themes:
+                    pmid_gene_themes[pmid] = {}
+                if gene not in pmid_gene_themes[pmid]:
+                    pmid_gene_themes[pmid][gene] = {}
+                terms = gene_go_named.get(gene, [])
+                pmid_gene_themes[pmid][gene][theme_idx] = terms
+
+    # Collect per-gene cross-theme PMIDs
+    result: dict[str, list[dict[str, Any]]] = {}
+    for pmid, gene_data in pmid_gene_themes.items():
+        for gene, theme_map in gene_data.items():
+            if len(theme_map) < 2:
+                continue
+            if gene not in result:
+                result[gene] = []
+            theme_info = []
+            all_annotations = []
+            for tidx in sorted(theme_map.keys()):
+                tname = ""
+                if isinstance(tidx, int) and tidx < len(themes):
+                    tname = themes[tidx].get("anchor_term", {}).get("name", "")
+                theme_info.append({"index": tidx, "name": tname})
+                for term_name in theme_map[tidx]:
+                    all_annotations.append(f"{tname}: {term_name}")
+            result[gene].append({
+                "pmid": pmid,
+                "themes": theme_info,
+                "annotations": all_annotations,
+            })
+
+    # Sort each gene's entries by number of themes spanned (desc)
+    for gene in result:
+        result[gene].sort(key=lambda x: len(x["themes"]), reverse=True)
+
+    return result
+
+
 def _format_enrichment_for_llm(
     enrichment_output: dict[str, Any],
     paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
@@ -376,6 +438,9 @@ def _format_enrichment_for_llm(
     lines.append(f"- Themes: {metadata.get('themes_count', len(themes))}")
     lines.append(f"- Hub genes: {metadata.get('hub_genes_count', len(hub_genes))}")
     lines.append("")
+
+    # Build cross-theme PMID index for hub gene evidence
+    cross_theme_index = _build_cross_theme_index(gaf_pmids, themes)
 
     # Hub genes (important for understanding cross-theme patterns)
     if hub_genes:
@@ -433,6 +498,18 @@ def _format_enrichment_for_llm(
                     if abstract:
                         preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
                         lines.append(f"Abstract: {preview}")
+                lines.append("")
+
+            # Cross-theme GAF evidence (same gene annotated across themes)
+            if gene in cross_theme_index:
+                cross_entries = cross_theme_index[gene][:3]  # Top 3
+                lines.append("### Cross-theme GAF Evidence (this gene links these themes via curated annotations):")
+                for ct in cross_entries:
+                    ct_pmid = ct["pmid"]
+                    ct_themes = [t["name"] for t in ct["themes"] if t["name"]]
+                    lines.append(f"[PMID:{ct_pmid}] Links {len(ct['themes'])} themes: {', '.join(ct_themes)}")
+                    for ann in ct["annotations"]:
+                        lines.append(f"  - {ann}")
                 lines.append("")
 
             lines.append("")
