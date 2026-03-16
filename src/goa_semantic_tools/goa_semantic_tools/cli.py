@@ -2,25 +2,26 @@
 CLI Runner for GO Enrichment Analysis
 
 Simple command-line interface for running hierarchical GO enrichment.
+
+Pipeline phases:
+  Phase 1:  genes → enrichment             → _enrichment.json
+  Phase 1b: enrichment → literature        → _literature.json
+  Phase 2:  enrichment + literature → LLM  → _explanation.md
+
+By default the full pipeline runs. Use --stop-after to exit early,
+or --enrichment-json / --literature-json to resume from intermediates.
 """
 import argparse
 import json
+import os
 import sys
+import warnings
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import yaml
 
 from .services import generate_markdown_explanation, run_go_enrichment
-from .services.reference_retrieval_service import (
-    AtomicAssertion,
-    extract_claims,
-    extract_genes_from_text,
-    find_references_for_assertion,
-    format_references_needing_artl_mcp,
-    inject_references_inline,
-)
-from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
 
 def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list[str]:
@@ -65,371 +66,481 @@ def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list
     raise ValueError("Unreachable: should have gene list by now")
 
 
-def _print_dry_run(genes: list[str], args: any) -> None:
-    """
-    Print dry-run information to stdout without executing analysis.
+def _load_and_validate_json(path: Path, required_key: str, label: str) -> dict:
+    """Load a JSON file and validate it contains the required key."""
+    if not path.exists():
+        raise ValueError(f"{label} file not found: {path}")
+    with open(path) as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError(f"{label} must be a JSON object, got {type(data).__name__}")
+    if required_key not in data:
+        raise ValueError(f"{label} missing required key '{required_key}'")
+    return data
 
-    Shows what would be executed including inputs, prompts, and schemas.
+
+def _determine_input_mode(args: argparse.Namespace) -> str:
+    """Determine which pipeline phase to start from based on input args.
+
+    Returns one of: 'genes', 'enrichment', 'literature'
     """
+    if args.literature_json:
+        return "literature"
+    if args.enrichment_json:
+        return "enrichment"
+    return "genes"
+
+
+def _warn_ignored_params(args: argparse.Namespace, input_mode: str) -> None:
+    """Warn about enrichment params that are ignored when resuming."""
+    if input_mode == "genes":
+        return
+    enrichment_params = {
+        "species": "human",
+        "fdr": 0.05,
+        "min_ic": 3.0,
+        "min_leaves": 2,
+        "max_genes": 30,
+        "namespace": None,
+    }
+    changed = []
+    for param, default in enrichment_params.items():
+        if getattr(args, param, default) != default:
+            changed.append(f"--{param.replace('_', '-')}")
+    if changed:
+        warnings.warn(
+            f"Enrichment parameters {', '.join(changed)} are ignored when resuming from "
+            f"{'enrichment' if input_mode == 'enrichment' else 'literature'} JSON.",
+            stacklevel=2,
+        )
+
+
+def _save_literature_json(
+    base_output: Path,
+    enrichment_source: str,
+    gaf_pmids: dict | None,
+    gaf_abstracts: dict | None,
+    hub_gene_abstracts: dict | None,
+    snippet_evidence: dict | None,
+    hub_gene_snippets: dict | None,
+) -> Path:
+    """Save all Phase 1b literature evidence as a single sidecar JSON."""
+    literature_data: dict[str, Any] = {
+        "enrichment_source": str(enrichment_source),
+        "gaf_pmids": {str(k): v for k, v in (gaf_pmids or {}).items()},
+        "gaf_abstracts": {str(k): v for k, v in (gaf_abstracts or {}).items()},
+        "hub_gene_abstracts": hub_gene_abstracts or {},
+        "snippet_evidence": {str(k): v for k, v in (snippet_evidence or {}).items()},
+        "hub_gene_snippets": hub_gene_snippets or {},
+    }
+    lit_path = base_output.parent / f"{base_output.name}_literature.json"
+    with open(lit_path, "w") as f:
+        json.dump(literature_data, f, indent=2)
+    return lit_path
+
+
+def _load_literature_json(path: Path) -> dict[str, Any]:
+    """Load literature JSON and return its evidence dicts with proper key types."""
+    data = _load_and_validate_json(path, "enrichment_source", "Literature JSON")
+
+    def _int_keys(d: dict | None) -> dict:
+        if not d:
+            return {}
+        return {int(k): v for k, v in d.items()}
+
+    return {
+        "enrichment_source": data["enrichment_source"],
+        "gaf_pmids": _int_keys(data.get("gaf_pmids")),
+        "gaf_abstracts": _int_keys(data.get("gaf_abstracts")),
+        "hub_gene_abstracts": data.get("hub_gene_abstracts") or {},
+        "snippet_evidence": _int_keys(data.get("snippet_evidence")),
+        "hub_gene_snippets": data.get("hub_gene_snippets") or {},
+    }
+
+
+def _print_dry_run(genes: list[str] | None, args: any, input_mode: str) -> None:
+    """Print dry-run information to stdout without executing analysis."""
     print("=" * 80)
     print("GO Enrichment Analysis - DRY RUN")
     print("=" * 80)
 
     # Input configuration
-    print("\n## INPUT CONFIGURATION")
-    print(f"Gene count: {len(genes)}")
-    if len(genes) <= 20:
-        print(f"Genes: {', '.join(genes)}")
-    else:
-        print(f"First 10: {', '.join(genes[:10])}")
-        print(f"Last 10: {', '.join(genes[-10:])}")
+    print(f"\n## INPUT MODE: {input_mode}")
+    if input_mode == "genes" and genes:
+        print(f"Gene count: {len(genes)}")
+        if len(genes) <= 20:
+            print(f"Genes: {', '.join(genes)}")
+        else:
+            print(f"First 10: {', '.join(genes[:10])}")
+            print(f"Last 10: {', '.join(genes[-10:])}")
+    elif input_mode == "enrichment":
+        print(f"Resuming from: {args.enrichment_json}")
+    elif input_mode == "literature":
+        print(f"Resuming from: {args.literature_json}")
 
     # Prepare output paths
     base_output = Path(args.output)
     if base_output.suffix:
         base_output = base_output.with_suffix("")
     enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
+    literature_path = base_output.parent / f"{base_output.name}_literature.json"
     explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
 
-    print(f"\nSpecies: {args.species}")
-    print(f"Min IC: {args.min_ic}")
-    print(f"Min leaves: {args.min_leaves}")
-    print(f"Max genes: {args.max_genes}")
-    print(f"FDR threshold: {args.fdr}")
+    stop_after = getattr(args, "stop_after", None)
+
+    if input_mode == "genes":
+        print(f"\nSpecies: {args.species}")
+        print(f"Min IC: {args.min_ic}")
+        print(f"Min leaves: {args.min_leaves}")
+        print(f"Max genes: {args.max_genes}")
+        print(f"FDR threshold: {args.fdr}")
+
     print(f"\nOutput files:")
-    print(f"  Enrichment: {enrichment_path}")
-    if args.explain:
+    if input_mode == "genes":
+        print(f"  Enrichment: {enrichment_path}")
+    if stop_after != "enrichment":
+        print(f"  Literature: {literature_path}")
+    if stop_after is None:
         print(f"  Explanation: {explanation_path}")
 
     # Phase 1 plan
-    print("\n" + "=" * 80)
-    print("## PHASE 1: GO ENRICHMENT ANALYSIS")
-    print("=" * 80)
-    print("\nSteps that would be executed:")
-    print("1. Download/cache GO ontology (if needed)")
-    print("2. Download/cache GAF gene annotations (if needed)")
-    print("3. Load GO DAG and gene annotations")
-    print("4. Run GOATOOLS enrichment analysis")
-    print("   - Fisher's exact test with FDR correction")
-    print("   - Propagate counts up GO hierarchy")
-    print(f"   - Filter by FDR < {args.fdr}")
-    print("5. Compute enrichment leaves (most specific terms)")
-    print(f"   - Filter terms with >{args.max_genes} genes")
-    print("6. Build hierarchical themes using MRCEA-B algorithm")
-    print(f"   - Anchor candidates: IC ≥ {args.min_ic}")
-    print(f"   - Require ≥{args.min_leaves} enriched leaves per theme")
-    print("7. Identify hub genes (appearing in 3+ themes)")
-
-    print(f"\nOutput: {enrichment_path}")
-
-    # Phase 2 plan (if requested)
-    if args.explain:
+    if input_mode == "genes":
         print("\n" + "=" * 80)
-        print("## PHASE 2: LLM EXPLANATION GENERATION")
-        print("=" * 80)
-        print(f"\nModel: {args.model}")
-        print(f"Output format: Markdown")
-        print(f"Temperature: 0.1")
-        print(f"Max tokens: 16000")
-
-        # Load and display prompt
-        print("\n### Prompt Configuration")
-        prompt_path = Path(__file__).parent / "services" / "go_explanation.prompt.yaml"
-        try:
-            with open(prompt_path) as f:
-                prompt_config = yaml.safe_load(f)
-
-            print("\nSystem Prompt:")
-            print("-" * 80)
-            print(prompt_config["system_prompt"])
-
-            print("\nUser Prompt Template:")
-            print("-" * 80)
-            print(prompt_config["user_prompt"])
-
-        except FileNotFoundError:
-            print("(Prompt file not found)")
-
-        print("\n### Output Format")
-        print("Markdown report with:")
-        print("  - Per-cluster biological explanations")
-        print("  - GO IDs hyperlinked to GO ontology")
-        print("  - PMIDs hyperlinked to PubMed")
-        print("  - Key genes with evidence and citations")
-        print("  - Overall biological summary")
-
-        print(f"\nOutput: {explanation_path}")
-
-    # Phase 1b plan (if references + explain requested)
-    if args.add_references and args.explain and not args.no_literature_search:
-        print("\n" + "=" * 80)
-        print("## PHASE 1b: LITERATURE PRE-FETCH (lit-first)")
+        print("## PHASE 1: GO ENRICHMENT ANALYSIS")
         print("=" * 80)
         print("\nSteps that would be executed:")
-        print("1. Open artl-mcp (Europe PMC) session")
-        print("2. For each theme: query top-ranked genes + anchor GO term name")
-        print("3. Fetch paper abstracts (up to 10 per theme)")
-        print("4. Inject abstracts into theme context for Phase 2 LLM call")
-        print("\nThe LLM will cite papers inline (PMID:xxxxx) rather than from")
-        print("latent knowledge, eliminating unresolved assertions.")
+        print("1. Download/cache GO ontology (if needed)")
+        print("2. Download/cache GAF gene annotations (if needed)")
+        print("3. Load GO DAG and gene annotations")
+        print("4. Run GOATOOLS enrichment analysis")
+        print("   - Fisher's exact test with FDR correction")
+        print("   - Propagate counts up GO hierarchy")
+        print(f"   - Filter by FDR < {args.fdr}")
+        print("5. Compute enrichment leaves (most specific terms)")
+        print(f"   - Filter terms with >{args.max_genes} genes")
+        print("6. Build hierarchical themes using MRCEA-B algorithm")
+        print(f"   - Anchor candidates: IC ≥ {args.min_ic}")
+        print(f"   - Require ≥{args.min_leaves} enriched leaves per theme")
+        print("7. Identify hub genes (appearing in 3+ themes)")
+        print(f"\nOutput: {enrichment_path}")
+
+    if stop_after == "enrichment":
+        print("\n--stop-after enrichment: pipeline stops here")
+    else:
+        # Phase 1b plan
+        if input_mode in ("genes", "enrichment") and not args.no_literature_search:
+            print("\n" + "=" * 80)
+            print("## PHASE 1b: LITERATURE PRE-FETCH")
+            print("=" * 80)
+            print("\nSteps that would be executed:")
+            print("1. Build GAF reference index for themes")
+            print("2. ASTA snippet search (if ASTA_API_KEY set)")
+            print("3. Europe PMC abstract fetch for GAF PMIDs")
+            print("4. Europe PMC abstract fetch for hub genes")
+            print(f"\nOutput: {literature_path}")
+
+        if stop_after == "literature":
+            print("\n--stop-after literature: pipeline stops here")
+        else:
+            # Phase 2 plan
+            print("\n" + "=" * 80)
+            print("## PHASE 2: LLM EXPLANATION GENERATION")
+            print("=" * 80)
+            print(f"\nModel: {args.model}")
+            print(f"Output format: Markdown")
+            print(f"Temperature: 0.1")
+
+            # Load and display prompt
+            print("\n### Prompt Configuration")
+            prompt_path = Path(__file__).parent / "services" / "go_explanation.prompt.yaml"
+            try:
+                with open(prompt_path) as f:
+                    prompt_config = yaml.safe_load(f)
+                print("\nSystem Prompt:")
+                print("-" * 80)
+                print(prompt_config["system_prompt"])
+                print("\nUser Prompt Template:")
+                print("-" * 80)
+                print(prompt_config["user_prompt"])
+            except FileNotFoundError:
+                print("(Prompt file not found)")
+
+            print(f"\nOutput: {explanation_path}")
 
     print("\n" + "=" * 80)
     print("DRY RUN COMPLETE - No analysis was executed")
     print("=" * 80)
 
 
-def _add_references_to_explanation(
-    explanation_markdown: str,
+def _run_phase1(args: argparse.Namespace, genes: list[str], enrichment_path: Path) -> dict:
+    """Run Phase 1: GO enrichment analysis."""
+    print("\n" + "=" * 80)
+    result = run_go_enrichment(
+        gene_symbols=genes,
+        species=args.species,
+        fdr_threshold=args.fdr,
+        min_ic=args.min_ic,
+        min_leaves=args.min_leaves,
+        max_genes=args.max_genes,
+        namespaces=args.namespace,
+    )
+    print("=" * 80)
+
+    with open(enrichment_path, "w") as f:
+        json.dump(result, f, indent=2)
+    print(f"\n✓ Enrichment data saved to: {enrichment_path.absolute()}")
+    return result
+
+
+def _run_phase1b(
     enrichment_output: dict,
-    species: str = "human",
-    output_path: Path | None = None,
-    no_literature_search: bool = False,
-) -> str:
-    """
-    Add literature references to explanation markdown.
+    args: argparse.Namespace,
+    base_output: Path,
+    enrichment_path: Path,
+) -> tuple[dict | None, dict | None, dict | None, dict | None, dict | None]:
+    """Run Phase 1b: Literature pre-fetch. Returns (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets)."""
+    themes = enrichment_output.get("themes", [])
+    hub_genes_data = enrichment_output.get("hub_genes", {})
 
-    Uses a two-tier approach:
-    1. Programmatic lookup via GO annotations (GAF)
-    2. Export unresolved assertions for artl-mcp processing
+    gaf_pmids = None
+    gaf_abstracts = None
+    hub_gene_abstracts = None
+    snippet_evidence = None
+    hub_gene_snippets = None
 
-    Args:
-        explanation_markdown: Generated explanation markdown
-        enrichment_output: Enrichment results (for extracting GO terms and genes)
-        species: Species for GAF lookup
-        output_path: Optional base path for exporting artl-mcp queries
+    print("\n" + "=" * 80)
+    print("Reference Pre-fetch - Phase 1b")
+    print("=" * 80)
 
-    Returns:
-        Explanation markdown with appended references section
-    """
-    from .utils.data_downloader import ensure_gaf_data, ensure_go_data
-    from .utils.go_data_loader import load_go_data
-
-    print("\n[1/5] Loading reference data...")
-
-    # Load GO and GAF data
-    go_obo_path = ensure_go_data()
-    gaf_path = ensure_gaf_data(species=species)
-    godag = load_go_data(go_obo_path)
-
-    # Build mappings from enrichment data
-    all_genes: set[str] = set()
-    all_go_ids: set[str] = set()
-    go_name_to_id: dict[str, str] = {}  # Map GO term names to IDs
-    go_id_to_genes: dict[str, set[str]] = {}  # Map GO ID to genes
-
-    # From enrichment leaves
-    for leaf in enrichment_output.get("enrichment_leaves", []):
-        genes = leaf.get("genes", [])
-        go_id = leaf.get("go_id", "")
-        go_name = leaf.get("name", "")
-        all_genes.update(genes)
-        if go_id:
-            all_go_ids.add(go_id)
-            go_name_to_id[go_name.lower()] = go_id
-            go_id_to_genes[go_id] = set(genes)
-
-    # From themes
-    for theme in enrichment_output.get("themes", []):
-        anchor = theme.get("anchor_term", {})
-        genes = anchor.get("genes", [])
-        go_id = anchor.get("go_id", "")
-        go_name = anchor.get("name", "")
-        all_genes.update(genes)
-        if go_id:
-            all_go_ids.add(go_id)
-            go_name_to_id[go_name.lower()] = go_id
-            go_id_to_genes[go_id] = set(genes)
-
-        for specific in theme.get("specific_terms", []):
-            genes = specific.get("genes", [])
-            go_id = specific.get("go_id", "")
-            go_name = specific.get("name", "")
-            all_genes.update(genes)
-            if go_id:
-                all_go_ids.add(go_id)
-                go_name_to_id[go_name.lower()] = go_id
-                go_id_to_genes[go_id] = set(genes)
-
-    print(f"  Found {len(all_genes)} genes, {len(all_go_ids)} GO terms")
-
-    print("\n[2/5] Building reference index from GAF...")
-    ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
-    print(f"  Indexed {len(ref_index.get('pmid_gene_gos', {}))} unique PMIDs")
-
-    print("\n[3/5] Computing GO term descendants...")
-    descendants_closure = get_descendants_closure(all_go_ids, godag)
-
-    print("\n[4/5] Extracting claims and mapping to GO terms...")
-    claims = extract_claims(explanation_markdown)
-
-    inference_claims = claims.get("INFERENCE", [])
-    external_claims = claims.get("EXTERNAL", [])
-
-    print(f"  Found {len(inference_claims)} [INFERENCE] claims")
-    print(f"  Found {len(external_claims)} [EXTERNAL] claims")
-
-    # Build assertions with smart GO term mapping
-    assertion_refs: list[tuple[AtomicAssertion, list]] = []
-    needs_artl_mcp: list[AtomicAssertion] = []
-
-    def _map_claim_to_go_ids(claim_text: str) -> list[str]:
-        """Map claim text to relevant GO term IDs based on term name matches."""
-        claim_lower = claim_text.lower()
-        matched_ids = []
-
-        # Check if any GO term names appear in the claim
-        for name, go_id in go_name_to_id.items():
-            # Match if GO term name (or significant portion) appears in claim
-            if len(name) > 10 and name in claim_lower:
-                matched_ids.append(go_id)
-            elif any(word in claim_lower for word in name.split() if len(word) > 5):
-                matched_ids.append(go_id)
-
-        return matched_ids[:3] if matched_ids else []  # Limit to 3
-
-    for claim_type, claim_list in [("INFERENCE", inference_claims), ("EXTERNAL", external_claims)]:
-        for claim_text in claim_list:
-            # Extract genes from claim text
-            genes = extract_genes_from_text(claim_text, known_genes=all_genes)
-
-            if not genes:
-                continue
-
-            # Map claim to specific GO terms (not all GO terms!)
-            go_ids = _map_claim_to_go_ids(claim_text)
-
-            # Determine complexity based on actual matches, not all terms
-            is_multi_gene = len(genes) > 1
-            is_multi_process = len(go_ids) > 1
-
-            assertion = AtomicAssertion(
-                claim_type=claim_type,
-                original_text=claim_text,
-                genes=genes[:5],  # Limit to 5 genes
-                go_term_ids=go_ids if go_ids else list(all_go_ids)[:1],  # Fallback to first GO term
-                is_multi_gene=is_multi_gene,
-                is_multi_process=is_multi_process,
-            )
-
-            refs = find_references_for_assertion(
-                assertion, ref_index, descendants_closure, max_refs=3
-            )
-
-            if refs:
-                assertion_refs.append((assertion, refs))
-            else:
-                needs_artl_mcp.append(assertion)
-
-    print(f"\n  References found for {len(assertion_refs)} assertions")
-    print(f"  Assertions needing artl-mcp: {len(needs_artl_mcp)}")
-
-    # Resolve via artl-mcp literature search (unless opted out)
-    if needs_artl_mcp and not no_literature_search:
-        print(f"\n[4b/5] Resolving {len(needs_artl_mcp)} assertions via artl-mcp...")
+    # Always: GAF-curated PMIDs per theme
+    if themes:
         try:
-            from .services.artl_literature_service import resolve_assertions_via_literature
+            from .services.reference_retrieval_service import get_gaf_pmids_for_themes
+            from .utils.data_downloader import ensure_gaf_data, ensure_go_data
+            from .utils.go_data_loader import load_go_data
+            from .utils.reference_index import load_gaf_with_pmids
 
-            literature_results = resolve_assertions_via_literature(
-                needs_artl_mcp,
-                max_refs_per_assertion=3,
-            )
+            print(f"\nBuilding GAF reference index for {len(themes)} theme(s)...")
+            gaf_path = ensure_gaf_data(species=args.species)
+            go_path = ensure_go_data()
+            godag = load_go_data(go_path)
 
-            # Move resolved assertions to assertion_refs, keep unresolved
-            still_unresolved = []
-            for assertion, refs in literature_results:
-                if refs:
-                    assertion_refs.append((assertion, refs))
-                else:
-                    still_unresolved.append(assertion)
+            all_genes: set[str] = set()
+            for t in themes:
+                all_genes.update(t.get("anchor_term", {}).get("genes", []))
+                for st in t.get("specific_terms", []):
+                    all_genes.update(st.get("genes", []))
 
-            resolved_count = len(needs_artl_mcp) - len(still_unresolved)
-            print(f"  ✓ Resolved {resolved_count}/{len(needs_artl_mcp)} via literature search")
-            needs_artl_mcp = still_unresolved
+            ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
+            gaf_pmids = get_gaf_pmids_for_themes(themes, ref_index)
+            themes_with_pmids = sum(1 for v in gaf_pmids.values() if v)
+            total_pmids = sum(len(v) for v in gaf_pmids.values())
+            print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
 
+            # Save GAF PMIDs as sidecar JSON for interactive skill use
+            gaf_pmids_path = base_output.parent / f"{base_output.name}_gaf_pmids.json"
+            with open(gaf_pmids_path, "w") as f:
+                json.dump({str(k): v for k, v in gaf_pmids.items()}, f, indent=2)
+            print(f"✓ GAF PMIDs saved to: {gaf_pmids_path.name}")
         except Exception as e:
-            print(f"  ⚠ Literature search failed: {e}")
-            print("  Continuing with GAF-only references...")
+            print(f"\n⚠ GAF reference index failed: {e}")
+            print("  Continuing without GAF citations...")
 
-    print("\n[5/5] Injecting references and exporting unresolved...")
+    if not args.no_literature_search:
+        # ASTA snippet search (preferred when API key available)
+        asta_api_key = os.getenv("ASTA_API_KEY")
+        if asta_api_key:
+            print("\nUsing ASTA (Semantic Scholar) for full-text snippet search...")
+            try:
+                from .services.asta_literature_service import (
+                    fetch_snippets_for_gaf_pmids,
+                    fetch_snippets_for_hub_genes,
+                )
 
-    # Inject references into markdown
-    if assertion_refs:
-        explanation_markdown = inject_references_inline(explanation_markdown, assertion_refs)
-        print(f"  ✓ Injected {len(assertion_refs)} reference blocks")
+                if gaf_pmids:
+                    snippet_evidence = fetch_snippets_for_gaf_pmids(
+                        gaf_pmids, themes, asta_api_key
+                    )
+                    themes_with_snippets = sum(1 for v in snippet_evidence.values() if v)
+                    total_snippets = sum(len(v) for v in snippet_evidence.values())
+                    print(f"✓ Found {total_snippets} snippets across {themes_with_snippets}/{len(themes)} themes")
 
-    # Export unresolved assertions for artl-mcp
-    if needs_artl_mcp and output_path:
-        artl_queries = format_references_needing_artl_mcp(needs_artl_mcp)
-        artl_path = output_path.parent / f"{output_path.name}_artl_queries.json"
-        with open(artl_path, "w") as f:
-            json.dump(artl_queries, f, indent=2)
-        print(f"  ✓ Exported {len(needs_artl_mcp)} queries to: {artl_path.name}")
+                if hub_genes_data:
+                    hub_gene_snippets = fetch_snippets_for_hub_genes(
+                        hub_genes_data, themes, asta_api_key
+                    )
+                    genes_with_snippets = sum(1 for v in hub_gene_snippets.values() if v)
+                    print(f"✓ Found snippets for {genes_with_snippets}/{min(len(hub_genes_data), 20)} hub genes")
 
-        # Add note to markdown about unresolved assertions
-        if needs_artl_mcp:
-            search_note = (
-                "via GO annotations or automated literature search"
-                if not no_literature_search
-                else "via GO annotations (literature search was skipped; rerun without --no-literature-search)"
-            )
-            lines = [
-                explanation_markdown,
-                "",
-                "---",
-                "",
-                "## Unresolved Assertions",
-                "",
-                f"The following {len(needs_artl_mcp)} assertions could not be resolved {search_note}.",
-                "They have been exported to `_artl_queries.json` for manual review:",
-                "",
-            ]
-            for i, assertion in enumerate(needs_artl_mcp[:10], 1):
-                genes_str = ", ".join(assertion.genes[:3])
-                lines.append(f"{i}. **[{assertion.claim_type}]** ({genes_str})")
-                preview = assertion.original_text[:80]
-                if len(assertion.original_text) > 80:
-                    preview += "..."
-                lines.append(f"   {preview}")
-                lines.append("")
+            except Exception as e:
+                print(f"⚠ ASTA search failed: {e}")
+                print("  Falling back to Europe PMC abstracts...")
+        else:
+            print("\nNote: Set ASTA_API_KEY for richer full-text snippet evidence.")
 
-            if len(needs_artl_mcp) > 10:
-                lines.append(f"... and {len(needs_artl_mcp) - 10} more (see `_artl_queries.json`)")
+        # Fetch abstracts for GAF PMIDs via Europe PMC
+        if gaf_pmids:
+            print(f"\nFetching abstracts for GAF PMIDs via Europe PMC...")
+            try:
+                from .services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+                gaf_abstracts = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+            except Exception as e:
+                print(f"\n⚠ GAF PMID abstract fetch failed: {e}")
+                print("  Continuing without GAF abstracts (PMID anchors still available)...")
 
-            explanation_markdown = "\n".join(lines)
+        # Europe PMC search for top hub genes
+        if hub_genes_data:
+            n_hub = len(hub_genes_data)
+            print(f"\nFetching Europe PMC abstracts for top hub genes (up to 20 of {n_hub})...")
+            try:
+                from .services.artl_literature_service import fetch_abstracts_for_hub_genes
+                hub_gene_abstracts = fetch_abstracts_for_hub_genes(
+                    hub_genes_data, max_hub_genes=20
+                )
+                genes_with_papers = sum(1 for v in hub_gene_abstracts.values() if v)
+                print(f"✓ Fetched abstracts for {genes_with_papers}/{min(n_hub, 20)} hub genes")
+            except Exception as e:
+                print(f"\n⚠ Hub gene abstract fetch failed: {e}")
+                print("  Continuing without hub gene abstracts...")
 
+    # Save literature evidence
+    lit_path = _save_literature_json(
+        base_output,
+        str(enrichment_path),
+        gaf_pmids,
+        gaf_abstracts,
+        hub_gene_abstracts,
+        snippet_evidence,
+        hub_gene_snippets,
+    )
+    print(f"\n✓ Literature evidence saved to: {lit_path.name}")
+
+    return gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets
+
+
+def _run_phase2(
+    enrichment_output: dict,
+    args: argparse.Namespace,
+    explanation_path: Path,
+    gaf_pmids: dict | None,
+    gaf_abstracts: dict | None,
+    hub_gene_abstracts: dict | None,
+    snippet_evidence: dict | None,
+    hub_gene_snippets: dict | None,
+) -> str:
+    """Run Phase 2: LLM explanation generation."""
+    print("\n" + "=" * 80)
+    explanation_markdown = generate_markdown_explanation(
+        enrichment_output=enrichment_output,
+        model=args.model,
+        temperature=0.1,
+        max_tokens=args.max_tokens,
+        gaf_pmids=gaf_pmids,
+        gaf_abstracts=gaf_abstracts,
+        hub_gene_abstracts=hub_gene_abstracts,
+        snippet_evidence=snippet_evidence,
+        hub_gene_snippets=hub_gene_snippets,
+    )
+
+    with open(explanation_path, "w") as f:
+        f.write(explanation_markdown)
+    print(f"\n✓ Explanation saved to: {explanation_path.absolute()}")
     return explanation_markdown
+
+
+def _print_summary(result: dict) -> None:
+    """Print enrichment summary."""
+    metadata = result["metadata"]
+
+    print("\n" + "=" * 80)
+    print("Summary")
+    print("=" * 80)
+    print(f"  Input genes: {metadata['input_genes_count']}")
+    print(f"  Found in annotations: {metadata['genes_with_annotations']}")
+    print(f"  Total enriched terms: {metadata['total_enriched_terms']}")
+
+    enrichment_leaves = result.get("enrichment_leaves", [])
+    themes = result.get("themes", [])
+    hub_genes = result.get("hub_genes", {})
+
+    print(f"  Enrichment leaves: {len(enrichment_leaves)}")
+    print(f"  Themes created: {metadata.get('themes_count', len(themes))}")
+    print(f"  Hub genes: {len(hub_genes)}")
+
+    if enrichment_leaves:
+        print(f"\nTop 3 Enrichment Leaves:")
+        for i, leaf in enumerate(enrichment_leaves[:3], 1):
+            print(f"\n  {i}. {leaf['name']}")
+            print(f"     GO ID: {leaf['go_id']} (depth {leaf['depth']})")
+            print(f"     FDR: {leaf['fdr']:.2e}")
+            print(f"     Genes: {len(leaf['genes'])}")
+
+    if themes:
+        print(f"\nTop 3 Themes:")
+        for i, theme in enumerate(themes[:3], 1):
+            anchor = theme["anchor_term"]
+            n_specific = theme.get("n_specific_terms", 0)
+            print(f"\n  {i}. [{theme['anchor_confidence']}] {anchor['name']}")
+            print(f"     GO ID: {anchor['go_id']} (depth {anchor['depth']})")
+            print(f"     FDR: {anchor['fdr']:.2e}")
+            print(f"     Genes: {len(anchor['genes'])}")
+            if n_specific > 0:
+                print(f"     Specific terms: {n_specific}")
+
+    if hub_genes:
+        print(f"\nTop Hub Genes:")
+        for gene, data in list(hub_genes.items())[:5]:
+            print(f"  - {gene}: {data['theme_count']} themes")
 
 
 def main() -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="Run hierarchical GO enrichment analysis",
+        description="Run hierarchical GO enrichment analysis with literature-grounded explanations.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
+Pipeline phases:
+  Phase 1:  genes → enrichment             (saved as *_enrichment.json)
+  Phase 1b: enrichment → literature        (saved as *_literature.json)
+  Phase 2:  enrichment + literature → LLM  (saved as *_explanation.md)
+
 Examples:
-  # Comma-separated genes
-  %(prog)s --genes TP53,BRCA1,BRCA2 --output results/
+  # Full pipeline (enrichment → literature → explanation)
+  %(prog)s --genes-file genes.txt -o results/my_analysis
 
-  # From file
-  %(prog)s --genes-file genes.txt --output results/
+  # Stop after enrichment only (no API keys needed)
+  %(prog)s --genes-file genes.txt -o results/my_analysis --stop-after enrichment
 
-  # With custom parameters
-  %(prog)s --genes TP53,BRCA1 --species mouse --fdr 0.01 --output results/
+  # Stop after literature fetch (no LLM call)
+  %(prog)s --genes-file genes.txt -o results/my_analysis --stop-after literature
 
-  # With explanation
-  %(prog)s --genes TP53,BRCA1,BRCA2 --output results/ --explain
+  # Resume from enrichment JSON (runs Phase 1b + 2)
+  %(prog)s --enrichment-json results/my_analysis_enrichment.json -o results/my_analysis
+
+  # Resume from literature JSON (runs Phase 2 only)
+  %(prog)s --literature-json results/my_analysis_literature.json -o results/my_analysis
         """,
     )
 
-    # Gene input (mutually exclusive)
-    gene_group = parser.add_mutually_exclusive_group(required=True)
-    gene_group.add_argument(
+    # Input (mutually exclusive)
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument(
         "--genes", type=str, help="Comma-separated gene symbols (e.g., TP53,BRCA1,BRCA2)"
     )
-    gene_group.add_argument(
+    input_group.add_argument(
         "--genes-file",
         type=str,
         help="Path to file with gene symbols (one per line, # for comments)",
+    )
+    input_group.add_argument(
+        "--enrichment-json",
+        type=str,
+        help="Resume from enrichment JSON (skips Phase 1, runs Phase 1b + 2)",
+    )
+    input_group.add_argument(
+        "--literature-json",
+        type=str,
+        help="Resume from literature JSON (skips Phase 1 + 1b, runs Phase 2 only)",
     )
 
     # Required output
@@ -438,10 +549,25 @@ Examples:
         "-o",
         type=str,
         required=True,
-        help="Output base path (e.g., results/my_analysis). Extensions added automatically: _enrichment.json, _explanation.md",
+        help="Output base path (e.g., results/my_analysis). Extensions added automatically.",
     )
 
-    # Optional parameters
+    # Pipeline control
+    parser.add_argument(
+        "--stop-after",
+        type=str,
+        choices=["enrichment", "literature"],
+        default=None,
+        help="Stop after the specified phase instead of running the full pipeline.",
+    )
+    parser.add_argument(
+        "--no-literature-search",
+        action="store_true",
+        default=False,
+        help="Skip external literature APIs (Europe PMC, ASTA). GAF PMIDs still used.",
+    )
+
+    # Enrichment parameters
     parser.add_argument(
         "--species",
         type=str,
@@ -455,8 +581,6 @@ Examples:
         default=0.05,
         help="FDR significance threshold (default: 0.05)",
     )
-
-    # MRCEA-B options
     parser.add_argument(
         "--min-ic",
         type=float,
@@ -475,14 +599,16 @@ Examples:
         default=30,
         help="Filter terms with > max-genes (default: 30)",
     )
-
-    # Explanation options
     parser.add_argument(
-        "--explain",
-        action="store_true",
-        default=False,
-        help="Generate LLM explanations (Phase 2). Requires API key (OPENAI_API_KEY or ANTHROPIC_API_KEY)",
+        "--namespace",
+        nargs="+",
+        choices=["BP", "MF", "CC"],
+        default=None,
+        metavar="NS",
+        help="GO namespace(s) to include: BP, MF, CC. Default: all three.",
     )
+
+    # LLM parameters
     parser.add_argument(
         "--model",
         type=str,
@@ -496,50 +622,55 @@ Examples:
         help="Override LLM output token limit (default: model-specific; gpt-5=32000, all others=16000).",
     )
 
-    # Reference options
-    parser.add_argument(
-        "--add-references",
-        action="store_true",
-        default=False,
-        help="Add literature references to explanation. Uses GO annotations for programmatic lookup, plus artl-mcp literature search for unresolved assertions.",
-    )
-    parser.add_argument(
-        "--no-literature-search",
-        action="store_true",
-        default=False,
-        help="Disable artl-mcp literature search (only use GAF-based lookup). Unresolved assertions are exported to *_artl_queries.json.",
-    )
-
-    parser.add_argument(
-        "--namespace",
-        nargs="+",
-        choices=["BP", "MF", "CC"],
-        default=None,
-        metavar="NS",
-        help="GO namespace(s) to include: BP (biological_process), MF (molecular_function), CC (cellular_component). Default: all three. Example: --namespace BP",
-    )
-
-    # Utility options
+    # Utility
     parser.add_argument(
         "--dry-run",
         action="store_true",
         default=False,
-        help="Print analysis plan without executing. Shows inputs, prompts, and schemas.",
+        help="Print analysis plan without executing.",
     )
 
     args = parser.parse_args()
 
     try:
-        # Parse gene list
-        genes = parse_gene_list(args.genes, args.genes_file)
+        input_mode = _determine_input_mode(args)
+
+        # Parse genes (only needed for gene-based input)
+        genes: list[str] | None = None
+        if input_mode == "genes":
+            genes = parse_gene_list(args.genes, args.genes_file)
 
         # Validate parameters
-        if args.fdr <= 0 or args.fdr > 1:
-            raise ValueError("FDR threshold must be between 0 and 1")
+        if input_mode == "genes":
+            if args.fdr <= 0 or args.fdr > 1:
+                raise ValueError("FDR threshold must be between 0 and 1")
+
+        # Warn about ignored enrichment params when resuming
+        _warn_ignored_params(args, input_mode)
+
+        # Warn about --model being ignored with --stop-after enrichment/literature
+        if args.stop_after in ("enrichment", "literature") and args.model != "gpt-4o":
+            warnings.warn(
+                f"--model {args.model} is ignored when using --stop-after {args.stop_after} "
+                "(no LLM explanation generated).",
+                stacklevel=1,
+            )
+
+        # Warn about incompatible --stop-after with resume inputs
+        if args.stop_after == "enrichment" and input_mode in ("enrichment", "literature"):
+            raise ValueError(
+                f"--stop-after enrichment is incompatible with --{input_mode}-json "
+                "(enrichment already done)"
+            )
+        if args.stop_after == "literature" and input_mode == "literature":
+            raise ValueError(
+                "--stop-after literature is incompatible with --literature-json "
+                "(literature already done)"
+            )
 
         # Handle dry-run mode
         if args.dry_run:
-            _print_dry_run(genes, args)
+            _print_dry_run(genes, args, input_mode)
             return 0
 
         # Normal execution mode
@@ -547,211 +678,111 @@ Examples:
         print("GO Enrichment Analysis - CLI Runner")
         print("=" * 80)
 
-        print(f"\n✓ Parsed {len(genes)} gene symbols")
-        if len(genes) <= 20:
-            print(f"  Genes: {', '.join(genes)}")
-        else:
-            print(f"  First 10: {', '.join(genes[:10])}...")
-            print(f"  Last 10: {', '.join(genes[-10:])}...")
-
-        print(f"\n✓ Parameters:")
-        print(f"  Species: {args.species}")
-        print(f"  Min IC: {args.min_ic}")
-        print(f"  Min leaves: {args.min_leaves}")
-        print(f"  Max genes: {args.max_genes}")
-        print(f"  FDR threshold: {args.fdr}")
-        if args.explain:
-            print(f"  Generate explanations: Yes")
-            print(f"  LLM model: {args.model}")
-        else:
-            print(f"  Generate explanations: No (use --explain to enable)")
-
-        # Prepare output paths with auto-added extensions
+        # Prepare output paths
         base_output = Path(args.output)
-        # Remove any existing extension from base
         if base_output.suffix:
             base_output = base_output.with_suffix("")
-
-        # Create output directory
         base_output.parent.mkdir(parents=True, exist_ok=True)
 
-        # Build output file paths
         enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
         explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
 
-        print(f"\n✓ Output files:")
-        print(f"  Enrichment: {enrichment_path.absolute()}")
-        if args.explain:
-            print(f"  Explanation: {explanation_path.absolute()}")
+        # --- Phase 1: Enrichment ---
+        if input_mode == "genes":
+            assert genes is not None
+            print(f"\n✓ Parsed {len(genes)} gene symbols")
+            if len(genes) <= 20:
+                print(f"  Genes: {', '.join(genes)}")
+            else:
+                print(f"  First 10: {', '.join(genes[:10])}...")
+                print(f"  Last 10: {', '.join(genes[-10:])}...")
 
-        # Run enrichment (Phase 1)
-        print("\n" + "=" * 80)
-        result = run_go_enrichment(
-            gene_symbols=genes,
-            species=args.species,
-            fdr_threshold=args.fdr,
-            min_ic=args.min_ic,
-            min_leaves=args.min_leaves,
-            max_genes=args.max_genes,
-            namespaces=args.namespace,
-        )
-        print("=" * 80)
+            print(f"\n✓ Parameters:")
+            print(f"  Species: {args.species}")
+            print(f"  Min IC: {args.min_ic}")
+            print(f"  Min leaves: {args.min_leaves}")
+            print(f"  Max genes: {args.max_genes}")
+            print(f"  FDR threshold: {args.fdr}")
 
-        # Always save enrichment JSON (Phase 1)
-        with open(enrichment_path, "w") as f:
-            json.dump(result, f, indent=2)
-        print(f"\n✓ Enrichment data saved to: {enrichment_path.absolute()}")
+            enrichment_output = _run_phase1(args, genes, enrichment_path)
+        elif input_mode == "enrichment":
+            enrichment_path = Path(args.enrichment_json)
+            enrichment_output = _load_and_validate_json(
+                enrichment_path, "themes", "Enrichment JSON"
+            )
+            n_themes = len(enrichment_output.get("themes", []))
+            print(f"\n✓ Loaded enrichment from: {enrichment_path}")
+            print(f"  Themes: {n_themes}")
+        else:
+            # literature mode — load enrichment from the path recorded in literature JSON
+            lit_path = Path(args.literature_json)
+            lit_data = _load_literature_json(lit_path)
+            enrichment_source = lit_data["enrichment_source"]
+            enrichment_path = Path(enrichment_source)
+            enrichment_output = _load_and_validate_json(
+                enrichment_path, "themes", "Enrichment JSON (referenced by literature JSON)"
+            )
+            print(f"\n✓ Loaded literature from: {lit_path}")
+            print(f"  Enrichment source: {enrichment_path}")
 
-        # Phase 1b: Build reference index + fetch hub gene abstracts
-        gaf_pmids = None
-        gaf_abstracts = None
-        hub_gene_abstracts = None
-        if args.explain and args.add_references:
-            themes = result.get("themes", [])
-            hub_genes_data = result.get("hub_genes", {})
-
+        if args.stop_after == "enrichment":
+            _print_summary(enrichment_output)
             print("\n" + "=" * 80)
-            print("Reference Pre-fetch - Phase 1b")
+            print(f"✓ Stopped after enrichment (--stop-after enrichment)")
+            print(f"  Enrichment: {enrichment_path.name}")
             print("=" * 80)
+            return 0
 
-            # Always: GAF-curated PMIDs per theme (no API calls, uses cached GAF data)
-            if themes:
-                try:
-                    from .services.reference_retrieval_service import get_gaf_pmids_for_themes
-                    from .utils.reference_index import load_gaf_with_pmids
-                    from .utils.data_downloader import ensure_gaf_data
-                    from .utils.go_data_loader import load_go_data
+        # --- Phase 1b: Literature pre-fetch ---
+        if input_mode == "literature":
+            # Already loaded above
+            gaf_pmids = lit_data["gaf_pmids"] or None
+            gaf_abstracts = lit_data["gaf_abstracts"] or None
+            hub_gene_abstracts = lit_data["hub_gene_abstracts"] or None
+            snippet_evidence = lit_data["snippet_evidence"] or None
+            hub_gene_snippets = lit_data["hub_gene_snippets"] or None
+        else:
+            gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets = (
+                _run_phase1b(enrichment_output, args, base_output, enrichment_path)
+            )
 
-                    print(f"\nBuilding GAF reference index for {len(themes)} theme(s)...")
-                    gaf_path = ensure_gaf_data(species=args.species)
-                    from .utils.data_downloader import ensure_go_data
-                    go_path = ensure_go_data()
-                    godag = load_go_data(go_path)
-
-                    all_genes: set[str] = set()
-                    for t in themes:
-                        all_genes.update(t.get("anchor_term", {}).get("genes", []))
-                        for st in t.get("specific_terms", []):
-                            all_genes.update(st.get("genes", []))
-
-                    ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
-                    gaf_pmids = get_gaf_pmids_for_themes(themes, ref_index)
-                    themes_with_pmids = sum(1 for v in gaf_pmids.values() if v)
-                    total_pmids = sum(len(v) for v in gaf_pmids.values())
-                    print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
-
-                    # Save GAF PMIDs as sidecar JSON for interactive skill use
-                    gaf_pmids_path = base_output.parent / f"{base_output.name}_gaf_pmids.json"
-                    # Serialise with string keys (JSON requires string keys)
-                    with open(gaf_pmids_path, "w") as f:
-                        json.dump({str(k): v for k, v in gaf_pmids.items()}, f, indent=2)
-                    print(f"✓ GAF PMIDs saved to: {gaf_pmids_path.name}")
-                except Exception as e:
-                    print(f"\n⚠ GAF reference index failed: {e}")
-                    print("  Continuing without GAF citations...")
-
-            # Optional: fetch abstracts for GAF PMIDs via Europe PMC
-            if gaf_pmids and not args.no_literature_search:
-                print(f"\nFetching abstracts for GAF PMIDs via Europe PMC...")
-                try:
-                    from .services.artl_literature_service import fetch_abstracts_for_gaf_pmids
-                    gaf_abstracts = fetch_abstracts_for_gaf_pmids(gaf_pmids)
-                except Exception as e:
-                    print(f"\n⚠ GAF PMID abstract fetch failed: {e}")
-                    print("  Continuing without GAF abstracts (PMID anchors still available)...")
-
-            # Optional: Europe PMC search for top hub genes
-            if hub_genes_data and not args.no_literature_search:
-                n_hub = len(hub_genes_data)
-                print(f"\nFetching Europe PMC abstracts for top hub genes (up to 20 of {n_hub})...")
-                try:
-                    from .services.artl_literature_service import fetch_abstracts_for_hub_genes
-                    hub_gene_abstracts = fetch_abstracts_for_hub_genes(
-                        hub_genes_data, max_hub_genes=20
-                    )
-                    genes_with_papers = sum(1 for v in hub_gene_abstracts.values() if v)
-                    print(f"✓ Fetched abstracts for {genes_with_papers}/{min(n_hub, 20)} hub genes")
-                except Exception as e:
-                    print(f"\n⚠ Hub gene abstract fetch failed: {e}")
-                    print("  Continuing without hub gene abstracts...")
-
-        # Phase 2: Generate markdown explanation if requested
-        if args.explain:
+        if args.stop_after == "literature":
+            _print_summary(enrichment_output)
             print("\n" + "=" * 80)
-            try:
-                explanation_markdown = generate_markdown_explanation(
-                    enrichment_output=result,
-                    model=args.model,
-                    temperature=0.1,
-                    max_tokens=args.max_tokens,  # None → auto-derived per model
-                    gaf_pmids=gaf_pmids,
-                    gaf_abstracts=gaf_abstracts,
-                    hub_gene_abstracts=hub_gene_abstracts,
-                )
+            print(f"✓ Stopped after literature fetch (--stop-after literature)")
+            print(f"  Enrichment: {enrichment_path.name}")
+            lit_path = base_output.parent / f"{base_output.name}_literature.json"
+            print(f"  Literature: {lit_path.name}")
+            print("=" * 80)
+            return 0
 
-                # Save markdown output
-                with open(explanation_path, "w") as f:
-                    f.write(explanation_markdown)
-
-                print(f"\n✓ Explanation saved to: {explanation_path.absolute()}")
-
-            except Exception as e:
-                print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
-                import traceback
-
-                traceback.print_exc()
-                return 1
+        # --- Phase 2: LLM explanation ---
+        try:
+            _run_phase2(
+                enrichment_output,
+                args,
+                explanation_path,
+                gaf_pmids,
+                gaf_abstracts,
+                hub_gene_abstracts,
+                snippet_evidence,
+                hub_gene_snippets,
+            )
+        except Exception as e:
+            print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            return 1
 
         print("=" * 80)
 
         # Print summary
-        metadata = result["metadata"]
-
-        print("\n" + "=" * 80)
-        print("Summary")
-        print("=" * 80)
-        print(f"  Input genes: {metadata['input_genes_count']}")
-        print(f"  Found in annotations: {metadata['genes_with_annotations']}")
-        print(f"  Total enriched terms: {metadata['total_enriched_terms']}")
-
-        enrichment_leaves = result.get("enrichment_leaves", [])
-        themes = result.get("themes", [])
-        hub_genes = result.get("hub_genes", {})
-
-        print(f"  Enrichment leaves: {len(enrichment_leaves)}")
-        print(f"  Themes created: {metadata.get('themes_count', len(themes))}")
-        print(f"  Hub genes: {len(hub_genes)}")
-
-        if enrichment_leaves:
-            print(f"\nTop 3 Enrichment Leaves:")
-            for i, leaf in enumerate(enrichment_leaves[:3], 1):
-                print(f"\n  {i}. {leaf['name']}")
-                print(f"     GO ID: {leaf['go_id']} (depth {leaf['depth']})")
-                print(f"     FDR: {leaf['fdr']:.2e}")
-                print(f"     Genes: {len(leaf['genes'])}")
-
-        if themes:
-            print(f"\nTop 3 Themes:")
-            for i, theme in enumerate(themes[:3], 1):
-                anchor = theme["anchor_term"]
-                n_specific = theme.get("n_specific_terms", 0)
-                print(f"\n  {i}. [{theme['anchor_confidence']}] {anchor['name']}")
-                print(f"     GO ID: {anchor['go_id']} (depth {anchor['depth']})")
-                print(f"     FDR: {anchor['fdr']:.2e}")
-                print(f"     Genes: {len(anchor['genes'])}")
-                if n_specific > 0:
-                    print(f"     Specific terms: {n_specific}")
-
-        if hub_genes:
-            print(f"\nTop Hub Genes:")
-            for gene, data in list(hub_genes.items())[:5]:
-                print(f"  - {gene}: {data['theme_count']} themes")
+        _print_summary(enrichment_output)
 
         print("\n" + "=" * 80)
         print(f"✓ Analysis complete!")
         print(f"  Enrichment: {enrichment_path.name}")
-        if args.explain:
-            print(f"  Explanation: {explanation_path.name}")
+        print(f"  Explanation: {explanation_path.name}")
         print("=" * 80)
 
         return 0
@@ -765,7 +796,6 @@ Examples:
     except Exception as e:
         print(f"\n❌ Unexpected error: {e}", file=sys.stderr)
         import traceback
-
         traceback.print_exc()
         return 1
 
