@@ -471,6 +471,7 @@ def get_gaf_pmids_for_themes(
     themes: list[dict[str, Any]],
     ref_index: dict[str, Any],
     top_n: int = 5,
+    descendants_closure: dict[str, set[str]] | None = None,
 ) -> dict[int, list[dict[str, Any]]]:
     """Get curated GAF PMIDs for each theme using the reference index.
 
@@ -482,6 +483,9 @@ def get_gaf_pmids_for_themes(
         themes: List of theme dicts from enrichment output (themes key)
         ref_index: Reference index from load_gaf_with_pmids()
         top_n: Maximum number of PMIDs to return per theme
+        descendants_closure: Optional pre-computed GO term descendant closure.
+            When provided, GAF annotations to descendant terms also match,
+            dramatically increasing PMID coverage for higher-level anchors.
 
     Returns:
         Dict mapping theme index to list of PMID dicts:
@@ -514,7 +518,11 @@ def get_gaf_pmids_for_themes(
             results[i] = []
             continue
 
-        pmid_records = find_pmids_covering_genes(genes, go_ids, ref_index, min_genes=1)
+        pmid_records = find_pmids_covering_genes(
+            genes, go_ids, ref_index,
+            descendants_closure=descendants_closure,
+            min_genes=1,
+        )
         results[i] = [
             {"pmid": r["pmid"], "genes_covered": r["genes_covered"]}
             for r in pmid_records[:top_n]

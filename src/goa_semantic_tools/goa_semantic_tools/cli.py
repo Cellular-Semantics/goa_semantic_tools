@@ -318,7 +318,7 @@ def _run_phase1b(
             from .services.reference_retrieval_service import get_gaf_pmids_for_themes
             from .utils.data_downloader import ensure_gaf_data, ensure_go_data
             from .utils.go_data_loader import load_go_data
-            from .utils.reference_index import load_gaf_with_pmids
+            from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
             print(f"\nBuilding GAF reference index for {len(themes)} theme(s)...")
             gaf_path = ensure_gaf_data(species=args.species)
@@ -326,13 +326,23 @@ def _run_phase1b(
             godag = load_go_data(go_path)
 
             all_genes: set[str] = set()
+            all_go_ids: set[str] = set()
             for t in themes:
                 all_genes.update(t.get("anchor_term", {}).get("genes", []))
+                anchor_go = t.get("anchor_term", {}).get("go_id", "")
+                if anchor_go:
+                    all_go_ids.add(anchor_go)
                 for st in t.get("specific_terms", []):
                     all_genes.update(st.get("genes", []))
+                    st_go = st.get("go_id", "")
+                    if st_go:
+                        all_go_ids.add(st_go)
 
             ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
-            gaf_pmids = get_gaf_pmids_for_themes(themes, ref_index)
+            descendants_closure = get_descendants_closure(all_go_ids, godag)
+            gaf_pmids = get_gaf_pmids_for_themes(
+                themes, ref_index, descendants_closure=descendants_closure
+            )
             themes_with_pmids = sum(1 for v in gaf_pmids.values() if v)
             total_pmids = sum(len(v) for v in gaf_pmids.values())
             print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
