@@ -15,6 +15,19 @@ system_prompt: |
   - Hub genes: include at most 20 hub genes in your response, selecting those that
     appear in the most themes. Do not include all hub genes if there are more than 20.
 
+  Quality guidelines:
+  - Do NOT merely restate GO term names or annotations. Explain the biological MECHANISM.
+    BAD: "ABC is involved in regulating receptor signaling pathways."
+    GOOD: "ABC antagonises ligand-mediated TGF-beta signaling, limiting downstream
+    Smad2/3 phosphorylation and thereby modulating receptor sensitivity PMID:1269767."
+  - Gene Evidence Narratives (when present) are pre-analysed mechanistic summaries from
+    focused per-gene analysis. Incorporate them into your theme and hub gene narratives
+    rather than restating raw data or GO annotation names.
+  - For [INFERENCE] statements (no PMID citation): these draw on latent biological
+    knowledge. Use your latent knowledge to document any known connection, but do
+    NOT fabricate a mechanism if you have no knowledge of one.
+  - Focus on HOW genes act, not just WHAT they are annotated to.
+
   Citing literature:
   - Per-theme evidence snippets may appear as "Available Evidence Snippets" — these are
     body-text passages from full-text papers with specific experimental evidence linking

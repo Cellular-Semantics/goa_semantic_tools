@@ -19,7 +19,7 @@
           "narrative": {
             "type": "string",
             "minLength": 80,
-            "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Plain text only — no markdown formatting. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data."
+            "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Plain text only — no markdown formatting. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data. Do NOT merely restate GO term names — explain the biological mechanism. BAD: 'ABC is involved in regulating receptor signaling pathways.' GOOD: 'ABC antagonises ligand-mediated TGF-beta signaling, limiting downstream Smad2/3 phosphorylation PMID:1269767.'"
           },
           "key_insights": {
             "type": "array",
@@ -65,12 +65,12 @@
                   "type": "string",
                   "minLength": 20,
                   "maxLength": 200,
-                  "description": "One sentence explaining this gene's role in the context of this theme. Plain text only — no markdown formatting. If claim_type is EXTERNAL, this may draw on known biology; if INFERENCE, it should be grounded in the enrichment evidence."
+                  "description": "One sentence explaining this gene's MECHANISTIC role in the context of this theme. Plain text only — no markdown formatting. Do NOT merely restate the GO annotation — explain HOW the gene acts. BAD: 'ABC is involved in cell migration.' GOOD: 'ABC suppresses cell migration via PI3K/AKT-mediated focal adhesion disassembly PMID:19188590.' If a Gene Evidence Narrative is available for this gene, incorporate its mechanistic insight."
                 },
                 "claim_type": {
                   "type": "string",
                   "enum": ["EXTERNAL", "INFERENCE"],
-                  "description": "EXTERNAL if the gene description relies on prior biological knowledge; INFERENCE if it is derived from the enrichment data alone."
+                  "description": "EXTERNAL if the sentence cites a PMID from the provided literature; INFERENCE if no PMID is cited and the claim draws on latent biological knowledge."
                 }
               },
               "required": ["gene", "go_id", "description", "claim_type"],
@@ -103,12 +103,12 @@
             "type": "string",
             "minLength": 30,
             "maxLength": 300,
-            "description": "1-2 sentences explaining why this gene appears across multiple themes and what that cross-theme role implies biologically. Plain text only — no markdown formatting."
+            "description": "1-2 sentences explaining the MECHANISTIC basis for this gene appearing across multiple themes. Plain text only — no markdown formatting. Do NOT merely list the themes — explain HOW the gene's molecular function connects them. If a Mechanistic Narrative is available for this gene, incorporate its insight. BAD: 'ABC appears in migration and signaling themes.' GOOD: 'ABC coordinates migration and signaling via its dual kinase/scaffold role, phosphorylating downstream targets in both pathways PMID:20027291.'"
           },
           "claim_type": {
             "type": "string",
             "enum": ["EXTERNAL", "INFERENCE"],
-            "description": "EXTERNAL if the narrative relies on prior biological knowledge; INFERENCE if derived from the enrichment patterns alone."
+            "description": "EXTERNAL if the narrative cites a PMID from the provided literature; INFERENCE if no PMID is cited and the claim draws on latent biological knowledge."
           }
         },
         "required": ["gene", "narrative", "claim_type"],
