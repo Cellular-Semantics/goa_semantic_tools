@@ -54,6 +54,9 @@ def generate_markdown_explanation(
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
     snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
+    cross_theme_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    gene_narratives: dict[str, Any] | None = None,
 ) -> str:
     """
     Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
@@ -155,6 +158,9 @@ def generate_markdown_explanation(
         hub_gene_abstracts=hub_gene_abstracts,
         snippet_evidence=snippet_evidence,
         hub_gene_snippets=hub_gene_snippets,
+        co_annotation_snippets=co_annotation_snippets,
+        cross_theme_snippets=cross_theme_snippets,
+        gene_narratives=gene_narratives,
     )
     user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
 
@@ -393,6 +399,9 @@ def _format_enrichment_for_llm(
     hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
     snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
     hub_gene_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
+    cross_theme_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    gene_narratives: dict[str, Any] | None = None,
 ) -> str:
     """
     Format enrichment output as readable text for LLM.
@@ -512,6 +521,31 @@ def _format_enrichment_for_llm(
                         lines.append(f"  - {ann}")
                 lines.append("")
 
+            # Cross-theme evidence snippets (full-text linking evidence)
+            if cross_theme_snippets and gene in cross_theme_snippets and cross_theme_snippets[gene]:
+                lines.append("### Cross-theme Evidence Snippets (full-text linking evidence):")
+                for snippet in cross_theme_snippets[gene]:
+                    pmid = snippet.get("pmid", "")
+                    title = snippet.get("title", "")
+                    authors = snippet.get("authors", "")
+                    snippet_text = snippet.get("snippet_text", "")
+                    pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+                    header = f"[{pmid_label}] {title}"
+                    if authors:
+                        header += f" — {authors}"
+                    lines.append(header)
+                    if snippet_text:
+                        preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                        lines.append(f"Evidence: {preview}")
+                    lines.append("")
+
+            # Pre-digested mechanistic narrative (from Phase 1c subagent)
+            hub_narratives = (gene_narratives or {}).get("hub_genes", {})
+            if gene in hub_narratives:
+                lines.append("### Mechanistic Narrative (from focused evidence analysis):")
+                lines.append(hub_narratives[gene])
+                lines.append("")
+
             lines.append("")
 
         lines.append("---")
@@ -591,6 +625,52 @@ def _format_enrichment_for_llm(
                         preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
                         lines.append(f"Evidence: {preview}")
                     lines.append("")
+                lines.append("")
+
+            # Within-theme co-annotation evidence (gene linked to 2+ GO processes)
+            has_co_annot = bool(co_annotation_snippets and i in co_annotation_snippets and co_annotation_snippets[i])
+            if has_co_annot:
+                lines.append("### Co-Annotation Evidence (gene linked to multiple GO processes in this theme):")
+                lines.append("These snippets describe how a gene connects different biological processes within this theme.")
+                for gene, gene_snippets in co_annotation_snippets[i].items():  # type: ignore[index]
+                    if not gene_snippets:
+                        continue
+                    # Show which GO terms this gene co-annotates
+                    co_terms = []
+                    if gaf_pmids and i in gaf_pmids:
+                        for entry in gaf_pmids[i]:
+                            gene_go_named = entry.get("gene_go_named", {})
+                            if gene in gene_go_named and len(gene_go_named[gene]) >= 2:
+                                co_terms = [t.split(" [GO:")[0] for t in gene_go_named[gene][:3]]
+                                break
+                    if co_terms:
+                        lines.append(f"**{gene}** annotated to: {', '.join(co_terms)}")
+                    else:
+                        lines.append(f"**{gene}** (multi-process co-annotation)")
+                    for snippet in gene_snippets:
+                        pmid = snippet.get("pmid", "")
+                        title = snippet.get("title", "")
+                        authors = snippet.get("authors", "")
+                        snippet_text = snippet.get("snippet_text", "")
+                        pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+                        header = f"[{pmid_label}] {title}"
+                        if authors:
+                            header += f" — {authors}"
+                        lines.append(header)
+                        if snippet_text:
+                            preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                            lines.append(f"Evidence: {preview}")
+                        lines.append("")
+                lines.append("")
+
+            # Pre-digested gene narratives for this theme (from Phase 1c subagent)
+            theme_gene_narrs = (gene_narratives or {}).get("theme_genes", {}).get(i, {})
+            co_annot_narrs = (gene_narratives or {}).get("co_annotations", {}).get(i, {})
+            all_theme_narrs = {**theme_gene_narrs, **co_annot_narrs}
+            if all_theme_narrs:
+                lines.append("### Gene Evidence Narratives (mechanistic summaries from focused analysis):")
+                for gene_name, narr in all_theme_narrs.items():
+                    lines.append(f"- **{gene_name}**: {narr}")
                 lines.append("")
 
             # GAF-curated citations per theme (preferred, highest confidence)
@@ -1129,6 +1209,12 @@ def render_explanation_to_markdown(
         for para in overall:
             lines.append(f"{para}\n")
             lines.append("\n")
+
+    # Inference disclaimer
+    lines.append("> **Note:** Statements tagged \\[INFERENCE\\] without PMID citations are based on the LLM's "
+                 "latent biological knowledge and have not been independently verified against the literature. "
+                 "These should be treated as hypotheses requiring validation.\n")
+    lines.append("\n")
 
     # Full theme reference table (all themes, including uncovered ones)
     if enrichment_themes:
