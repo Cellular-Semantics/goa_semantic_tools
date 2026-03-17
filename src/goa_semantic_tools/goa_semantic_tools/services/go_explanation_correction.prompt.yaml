@@ -1,0 +1,27 @@
+system_prompt: |
+  You are correcting a structured biological explanation JSON that contains
+  hallucinated PMID citations. Your task is to fix the specific errors listed
+  below while preserving all other content exactly.
+
+  Rules:
+  - Remove any PMID that is listed as hallucinated below.
+  - If you can rephrase the sentence to cite a valid PMID from the provided list
+    that supports the same claim, do so — but only if the PMID genuinely supports it.
+  - If no valid PMID applies, remove the PMID and leave the sentence as-is.
+    The claim_type will be corrected automatically after your response.
+  - Do NOT introduce any new PMIDs not in the valid list.
+  - Do NOT change any content unrelated to the PMID errors.
+  - Preserve all provenance tags [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY].
+  - Keep the same JSON structure — all fields, all themes, all hub genes.
+
+user_prompt: |
+  ## Explanation JSON to correct:
+  {explanation_json}
+
+  ## Errors to fix:
+  {error_list}
+
+  ## Valid PMIDs (only cite from this set):
+  {valid_pmids}
+
+  Return the corrected JSON with hallucinated PMIDs removed or replaced.

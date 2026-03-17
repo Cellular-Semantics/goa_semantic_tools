@@ -57,6 +57,7 @@ def generate_markdown_explanation(
     co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
     cross_theme_snippets: dict[str, list[dict[str, Any]]] | None = None,
     gene_narratives: dict[str, Any] | None = None,
+    max_correction_retries: int = 2,
 ) -> str:
     """
     Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
@@ -201,9 +202,89 @@ def generate_markdown_explanation(
 
     # Validate post-generation (warn on violations, do not crash)
     print("\n[4/4] Validating and rendering...")
+
+    # Build PMID whitelist from all literature context
+    pmid_whitelist = build_pmid_whitelist(
+        gaf_pmids=gaf_pmids,
+        gaf_abstracts=gaf_abstracts,
+        hub_gene_abstracts=hub_gene_abstracts,
+        snippet_evidence=snippet_evidence,
+        hub_gene_snippets=hub_gene_snippets,
+        co_annotation_snippets=co_annotation_snippets,
+        cross_theme_snippets=cross_theme_snippets,
+        paper_abstracts=paper_abstracts,
+        gene_narratives=gene_narratives,
+    )
+    if pmid_whitelist:
+        print(f"  PMID whitelist: {len(pmid_whitelist)} unique PMIDs from literature context")
+
+    # Deterministic claim_type correction (always, free)
+    claim_corrections = correct_claim_types(explanation, pmid_whitelist)
+    for c in claim_corrections:
+        print(f"  ✓ claim_type corrected: {c}")
+
+    # Gene/GO validation (existing)
     validation_warnings = validate_explanation_json(explanation, enrichment_output)
     for w in validation_warnings:
         print(f"  ⚠ {w}")
+
+    # PMID validation
+    pmid_warnings, hallucinated_by_loc = validate_pmids_in_explanation(
+        explanation, pmid_whitelist
+    )
+    for w in pmid_warnings:
+        print(f"  ⚠ {w}")
+    validation_warnings.extend(pmid_warnings)
+
+    # LLM correction loop (bounded)
+    retries = 0
+    total_correction_cost = 0.0
+    while hallucinated_by_loc and retries < max_correction_retries:
+        retries += 1
+        n_bad = sum(len(v) for v in hallucinated_by_loc.values())
+        print(f"\n  Correction attempt {retries}/{max_correction_retries} "
+              f"({n_bad} hallucinated PMID(s))...")
+        try:
+            sys_p, usr_p = _build_correction_prompt(
+                explanation, pmid_warnings, pmid_whitelist
+            )
+            correction_result = agent.query_unified(
+                message=usr_p,
+                system_message=sys_p,
+                schema=EnrichmentExplanation,
+                track_usage=True,
+            )
+            if correction_result.model is not None:
+                explanation = correction_result.model.model_dump()
+                if correction_result.usage and correction_result.usage.estimated_cost_usd:
+                    total_correction_cost += correction_result.usage.estimated_cost_usd
+                # Re-apply deterministic corrections and re-validate
+                correct_claim_types(explanation, pmid_whitelist)
+                pmid_warnings, hallucinated_by_loc = validate_pmids_in_explanation(
+                    explanation, pmid_whitelist
+                )
+                if hallucinated_by_loc:
+                    n_remaining = sum(len(v) for v in hallucinated_by_loc.values())
+                    print(f"  {n_remaining} hallucinated PMID(s) remain after correction")
+                else:
+                    print(f"  ✓ All PMIDs now grounded")
+            else:
+                print(f"  Correction attempt {retries} failed (no model returned)")
+                break
+        except Exception as e:
+            print(f"  Correction attempt {retries} failed: {e}")
+            break
+
+    if total_correction_cost > 0:
+        print(f"  Correction loop cost: ${total_correction_cost:.4f} USD")
+
+    # Final strip of any remaining hallucinated PMIDs
+    if hallucinated_by_loc:
+        stripped = strip_hallucinated_pmids(explanation, hallucinated_by_loc)
+        if stripped:
+            print(f"  ⚠ Stripped {stripped} unresolvable hallucinated PMID(s) from output")
+            # Re-check claim_types after stripping
+            correct_claim_types(explanation, pmid_whitelist)
 
     # Build per-theme set of flagged theme indices (those with content mismatches)
     flagged_themes: set[int] = set()
@@ -1256,6 +1337,280 @@ def render_explanation_to_markdown(
         lines.append("\n")
 
     return "".join(lines)
+
+
+# =============================================================================
+# PMID validation, claim_type correction, and stripping
+# =============================================================================
+
+_PMID_RE = re.compile(r"PMID:(\d+)")
+
+
+def build_pmid_whitelist(
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_abstracts: dict[str, list[dict[str, Any]]] | None = None,
+    snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
+    hub_gene_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
+    cross_theme_snippets: dict[str, list[dict[str, Any]]] | None = None,
+    paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    gene_narratives: dict[str, Any] | None = None,
+) -> set[str]:
+    """Collect all PMIDs from literature context sources into a whitelist.
+
+    Returns:
+        Set of PMID strings (digits only, e.g. {"12345678"}).
+    """
+    pmids: set[str] = set()
+
+    def _collect_from_list_of_dicts(data: dict | None) -> None:
+        """Extract pmid from dict[key, list[{pmid: ...}]]."""
+        if not data:
+            return
+        for entries in data.values():
+            if isinstance(entries, list):
+                for entry in entries:
+                    p = entry.get("pmid", "") if isinstance(entry, dict) else ""
+                    if p:
+                        pmids.add(str(p))
+
+    _collect_from_list_of_dicts(gaf_pmids)
+    _collect_from_list_of_dicts(gaf_abstracts)
+    _collect_from_list_of_dicts(hub_gene_abstracts)
+    _collect_from_list_of_dicts(snippet_evidence)
+    _collect_from_list_of_dicts(hub_gene_snippets)
+    _collect_from_list_of_dicts(cross_theme_snippets)
+    _collect_from_list_of_dicts(paper_abstracts)
+
+    # co_annotation_snippets: dict[int, dict[str, list[{pmid: ...}]]]
+    if co_annotation_snippets:
+        for theme_genes in co_annotation_snippets.values():
+            if isinstance(theme_genes, dict):
+                for gene_entries in theme_genes.values():
+                    if isinstance(gene_entries, list):
+                        for entry in gene_entries:
+                            p = entry.get("pmid", "") if isinstance(entry, dict) else ""
+                            if p:
+                                pmids.add(str(p))
+
+    # gene_narratives: extract PMIDs from narrative text via regex
+    if gene_narratives:
+        for section in ("hub_genes", "theme_genes", "co_annotations"):
+            section_data = gene_narratives.get(section, {})
+            if isinstance(section_data, dict):
+                for value in section_data.values():
+                    if isinstance(value, str):
+                        for m in _PMID_RE.finditer(value):
+                            pmids.add(m.group(1))
+                    elif isinstance(value, dict):
+                        # theme_genes: {theme_idx: {gene: narrative}}
+                        for narr in value.values():
+                            if isinstance(narr, str):
+                                for m in _PMID_RE.finditer(narr):
+                                    pmids.add(m.group(1))
+
+    return pmids
+
+
+def validate_pmids_in_explanation(
+    explanation: dict[str, Any],
+    pmid_whitelist: set[str],
+) -> tuple[list[str], dict[str, set[str]]]:
+    """Validate PMIDs in explanation JSON against the literature whitelist.
+
+    Returns:
+        Tuple of (warnings list, hallucinated_by_location dict).
+        hallucinated_by_location maps location keys to sets of bad PMID strings.
+    """
+    warnings: list[str] = []
+    hallucinated: dict[str, set[str]] = {}
+
+    def _check_text(text: str, location: str, context_label: str) -> None:
+        for m in _PMID_RE.finditer(text):
+            pmid = m.group(1)
+            if len(pmid) >= 9:
+                warnings.append(
+                    f"{context_label}: PMID:{pmid} has invalid format "
+                    f"(9+ digits, likely hallucinated)"
+                )
+                hallucinated.setdefault(location, set()).add(pmid)
+            elif pmid not in pmid_whitelist:
+                warnings.append(
+                    f"{context_label}: PMID:{pmid} not in provided literature context"
+                )
+                hallucinated.setdefault(location, set()).add(pmid)
+
+    # Theme narratives and key_genes
+    for theme in explanation.get("themes", []):
+        idx = theme.get("theme_index", 0)
+        narrative = theme.get("narrative", "")
+        if narrative:
+            _check_text(narrative, f"theme_{idx}_narrative", f"Theme {idx} narrative")
+
+        for kg in theme.get("key_genes", []):
+            gene = kg.get("gene", "unknown")
+            desc = kg.get("description", "")
+            if desc:
+                _check_text(desc, f"theme_{idx}_key_gene_{gene}",
+                            f"Theme {idx} key_gene '{gene}'")
+
+    # Hub genes
+    for hg in explanation.get("hub_genes", []):
+        gene = hg.get("gene", "unknown")
+        narr = hg.get("narrative", "")
+        if narr:
+            _check_text(narr, f"hub_gene_{gene}", f"Hub gene '{gene}'")
+
+    # Overall summary
+    for i, para in enumerate(explanation.get("overall_summary", [])):
+        if para:
+            _check_text(para, f"overall_summary_{i}", f"Overall summary paragraph {i}")
+
+    return warnings, hallucinated
+
+
+def correct_claim_types(
+    explanation: dict[str, Any],
+    pmid_whitelist: set[str],
+) -> list[str]:
+    """Correct claim_type based on PMID presence. Mutates explanation in place.
+
+    EXTERNAL = cites a whitelisted PMID; INFERENCE = no whitelisted PMID.
+
+    Returns:
+        List of correction messages for logging.
+    """
+    corrections: list[str] = []
+
+    for theme in explanation.get("themes", []):
+        idx = theme.get("theme_index", 0)
+        for kg in theme.get("key_genes", []):
+            gene = kg.get("gene", "unknown")
+            desc = kg.get("description", "")
+            cited_pmids = set(_PMID_RE.findall(desc))
+            has_whitelisted = bool(cited_pmids & pmid_whitelist)
+            expected = "EXTERNAL" if has_whitelisted else "INFERENCE"
+            current = kg.get("claim_type", "INFERENCE")
+            if current != expected:
+                kg["claim_type"] = expected
+                corrections.append(
+                    f"Theme {idx} key_gene '{gene}': {current} -> {expected}"
+                )
+
+    for hg in explanation.get("hub_genes", []):
+        gene = hg.get("gene", "unknown")
+        narr = hg.get("narrative", "")
+        cited_pmids = set(_PMID_RE.findall(narr))
+        has_whitelisted = bool(cited_pmids & pmid_whitelist)
+        expected = "EXTERNAL" if has_whitelisted else "INFERENCE"
+        current = hg.get("claim_type", "INFERENCE")
+        if current != expected:
+            hg["claim_type"] = expected
+            corrections.append(
+                f"Hub gene '{gene}': {current} -> {expected}"
+            )
+
+    return corrections
+
+
+def strip_hallucinated_pmids(
+    explanation: dict[str, Any],
+    hallucinated_by_location: dict[str, set[str]],
+) -> int:
+    """Remove hallucinated PMIDs from explanation text fields. Mutates in place.
+
+    Returns:
+        Count of PMIDs stripped.
+    """
+    if not hallucinated_by_location:
+        return 0
+
+    count = 0
+
+    def _strip_from_text(text: str, bad_pmids: set[str]) -> tuple[str, int]:
+        n = 0
+        for pmid in bad_pmids:
+            pattern = re.compile(rf"\s*PMID:{re.escape(pmid)}")
+            text, subs = pattern.subn("", text)
+            n += subs
+        # Clean double spaces
+        text = re.sub(r"  +", " ", text)
+        return text.strip(), n
+
+    for theme in explanation.get("themes", []):
+        idx = theme.get("theme_index", 0)
+
+        loc_key = f"theme_{idx}_narrative"
+        if loc_key in hallucinated_by_location:
+            theme["narrative"], n = _strip_from_text(
+                theme.get("narrative", ""), hallucinated_by_location[loc_key]
+            )
+            count += n
+
+        for kg in theme.get("key_genes", []):
+            gene = kg.get("gene", "unknown")
+            loc_key = f"theme_{idx}_key_gene_{gene}"
+            if loc_key in hallucinated_by_location:
+                kg["description"], n = _strip_from_text(
+                    kg.get("description", ""), hallucinated_by_location[loc_key]
+                )
+                count += n
+
+    for hg in explanation.get("hub_genes", []):
+        gene = hg.get("gene", "unknown")
+        loc_key = f"hub_gene_{gene}"
+        if loc_key in hallucinated_by_location:
+            hg["narrative"], n = _strip_from_text(
+                hg.get("narrative", ""), hallucinated_by_location[loc_key]
+            )
+            count += n
+
+    for i, para in enumerate(explanation.get("overall_summary", [])):
+        loc_key = f"overall_summary_{i}"
+        if loc_key in hallucinated_by_location:
+            explanation["overall_summary"][i], n = _strip_from_text(
+                para, hallucinated_by_location[loc_key]
+            )
+            count += n
+
+    return count
+
+
+def _build_correction_prompt(
+    explanation: dict[str, Any],
+    pmid_warnings: list[str],
+    pmid_whitelist: set[str],
+) -> tuple[str, str]:
+    """Build a focused correction prompt for hallucinated PMIDs.
+
+    Returns:
+        Tuple of (system_prompt, user_prompt).
+    """
+    prompt_config = _load_prompt("go_explanation_correction.prompt.yaml")
+    system_prompt = prompt_config["system_prompt"]
+    user_prompt_template = prompt_config["user_prompt"]
+
+    # Compact JSON (saves tokens)
+    explanation_json = json.dumps(explanation, separators=(",", ":"))
+
+    # Error list
+    error_list = "\n".join(f"- {w}" for w in pmid_warnings)
+
+    # Valid PMIDs (cap at 200 to keep prompt small)
+    sorted_pmids = sorted(pmid_whitelist)
+    if len(sorted_pmids) > 200:
+        valid_pmids = ", ".join(sorted_pmids[:200]) + f" ... ({len(sorted_pmids)} total)"
+    else:
+        valid_pmids = ", ".join(sorted_pmids) if sorted_pmids else "(none)"
+
+    user_prompt = user_prompt_template.format(
+        explanation_json=explanation_json,
+        error_list=error_list,
+        valid_pmids=valid_pmids,
+    )
+
+    return system_prompt, user_prompt
 
 
 def _go_id_to_link(go_id: str) -> str:

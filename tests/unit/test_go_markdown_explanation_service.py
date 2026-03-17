@@ -15,6 +15,7 @@ from goa_semantic_tools.services.go_markdown_explanation_service import (
     _MODEL_MAX_TOKENS,
     _add_go_term_hyperlinks,
     _add_pmid_hyperlinks,
+    _build_correction_prompt,
     _count_provenance_tags,
     _empty_markdown_explanation,
     _format_enrichment_for_llm,
@@ -22,10 +23,14 @@ from goa_semantic_tools.services.go_markdown_explanation_service import (
     _get_default_max_tokens,
     _load_prompt,
     _validate_citations,
+    build_pmid_whitelist,
+    correct_claim_types,
     generate_markdown_explanation,
     rank_genes_for_theme,
     render_explanation_to_markdown,
+    strip_hallucinated_pmids,
     validate_explanation_json,
+    validate_pmids_in_explanation,
 )
 
 
@@ -1680,3 +1685,491 @@ class TestFlaggedThemesRendering:
         md_empty = render_explanation_to_markdown(explanation, enrichment, flagged_themes=set())
 
         assert md_none == md_empty
+
+
+# =============================================================================
+# PMID Validation, claim_type Correction, and Stripping
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestBuildPmidWhitelist:
+    """Tests for build_pmid_whitelist — collects PMIDs from all literature sources."""
+
+    def test_empty_sources_returns_empty_set(self):
+        assert build_pmid_whitelist() == set()
+
+    def test_all_none_returns_empty_set(self):
+        result = build_pmid_whitelist(
+            gaf_pmids=None, gaf_abstracts=None, snippet_evidence=None,
+            hub_gene_snippets=None, hub_gene_abstracts=None,
+            co_annotation_snippets=None, cross_theme_snippets=None,
+            paper_abstracts=None, gene_narratives=None,
+        )
+        assert result == set()
+
+    def test_gaf_pmids_collected(self):
+        gaf = {0: [{"pmid": "12345678", "genes_covered": ["G1"]}]}
+        assert build_pmid_whitelist(gaf_pmids=gaf) == {"12345678"}
+
+    def test_gaf_abstracts_collected(self):
+        abstracts = {0: [{"pmid": "11111111", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(gaf_abstracts=abstracts) == {"11111111"}
+
+    def test_snippet_evidence_collected(self):
+        snippets = {0: [{"pmid": "22222222", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(snippet_evidence=snippets) == {"22222222"}
+
+    def test_hub_gene_snippets_collected(self):
+        hgs = {"TP53": [{"pmid": "33333333", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(hub_gene_snippets=hgs) == {"33333333"}
+
+    def test_hub_gene_abstracts_collected(self):
+        hga = {"BRCA1": [{"pmid": "44444444", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(hub_gene_abstracts=hga) == {"44444444"}
+
+    def test_co_annotation_snippets_collected(self):
+        co = {0: {"TP53": [{"pmid": "55555555", "snippet_text": "...", "title": "T"}]}}
+        assert build_pmid_whitelist(co_annotation_snippets=co) == {"55555555"}
+
+    def test_cross_theme_snippets_collected(self):
+        ct = {"TP53": [{"pmid": "66666666", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(cross_theme_snippets=ct) == {"66666666"}
+
+    def test_paper_abstracts_collected(self):
+        pa = {0: [{"pmid": "77777777", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(paper_abstracts=pa) == {"77777777"}
+
+    def test_gene_narratives_pmids_extracted(self):
+        narr = {
+            "hub_genes": {"TP53": "TP53 does X PMID:88888888 and Y PMID:99999999."},
+            "theme_genes": {0: {"BRCA1": "BRCA1 acts via Z PMID:11112222."}},
+            "co_annotations": {},
+        }
+        result = build_pmid_whitelist(gene_narratives=narr)
+        assert result == {"88888888", "99999999", "11112222"}
+
+    def test_deduplicates_across_sources(self):
+        gaf = {0: [{"pmid": "12345678"}]}
+        snippets = {0: [{"pmid": "12345678", "snippet_text": "...", "title": "T"}]}
+        result = build_pmid_whitelist(gaf_pmids=gaf, snippet_evidence=snippets)
+        assert result == {"12345678"}
+
+    def test_empty_pmid_strings_ignored(self):
+        gaf = {0: [{"pmid": ""}, {"pmid": "12345678"}]}
+        assert build_pmid_whitelist(gaf_pmids=gaf) == {"12345678"}
+
+
+@pytest.mark.unit
+class TestValidatePmidsInExplanation:
+    """Tests for validate_pmids_in_explanation — format + grounding checks."""
+
+    def _make_explanation(self, theme_narrative="", key_gene_desc="",
+                          hub_gene_narrative="", overall_summary=None):
+        return {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": theme_narrative,
+                "key_insights": [{"insight": "Test.", "go_id": "GO:0000001"}],
+                "key_genes": [{
+                    "gene": "TP53", "go_id": "GO:0000001",
+                    "description": key_gene_desc, "claim_type": "INFERENCE",
+                }] if key_gene_desc else [],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [{
+                "gene": "BRCA1",
+                "narrative": hub_gene_narrative,
+                "claim_type": "INFERENCE",
+            }] if hub_gene_narrative else [],
+            "overall_summary": overall_summary or ["Summary paragraph."],
+        }
+
+    def test_no_pmids_returns_no_warnings(self):
+        exp = self._make_explanation(theme_narrative="No citations here.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert warnings == []
+        assert hallucinated == {}
+
+    def test_valid_pmid_returns_no_warnings(self):
+        exp = self._make_explanation(theme_narrative="See PMID:12345678.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert warnings == []
+        assert hallucinated == {}
+
+    def test_nine_digit_pmid_flagged_as_invalid_format(self):
+        exp = self._make_explanation(theme_narrative="See PMID:123456789.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, set())
+        assert len(warnings) == 1
+        assert "invalid format" in warnings[0].lower() or "9+" in warnings[0]
+        assert any("123456789" in pmids for pmids in hallucinated.values())
+
+    def test_ungrounded_pmid_flagged(self):
+        exp = self._make_explanation(theme_narrative="See PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+        assert any("99999999" in pmids for pmids in hallucinated.values())
+
+    def test_hallucinated_pmid_in_key_gene_flagged(self):
+        exp = self._make_explanation(key_gene_desc="Gene does X PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_hallucinated_pmid_in_hub_gene_flagged(self):
+        exp = self._make_explanation(hub_gene_narrative="BRCA1 does X PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_hallucinated_pmid_in_overall_summary_flagged(self):
+        exp = self._make_explanation(overall_summary=["Summary PMID:99999999."])
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_mixed_valid_and_invalid(self):
+        exp = self._make_explanation(
+            theme_narrative="See PMID:12345678 and PMID:99999999."
+        )
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+        assert "12345678" not in str(warnings)
+
+
+@pytest.mark.unit
+class TestCorrectClaimTypes:
+    """Tests for correct_claim_types — deterministic claim_type fix."""
+
+    def test_key_gene_with_whitelisted_pmid_becomes_external(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:12345678.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "EXTERNAL"
+        assert len(corrections) >= 1
+
+    def test_key_gene_without_pmid_becomes_inference(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X.", "claim_type": "EXTERNAL"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "INFERENCE"
+        assert len(corrections) >= 1
+
+    def test_hub_gene_with_whitelisted_pmid_becomes_external(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [
+                {"gene": "BRCA1", "narrative": "Does X PMID:12345678.",
+                 "claim_type": "INFERENCE"},
+            ],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["hub_genes"][0]["claim_type"] == "EXTERNAL"
+
+    def test_hub_gene_without_pmid_becomes_inference(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [
+                {"gene": "BRCA1", "narrative": "Does X.",
+                 "claim_type": "EXTERNAL"},
+            ],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["hub_genes"][0]["claim_type"] == "INFERENCE"
+
+    def test_already_correct_returns_empty(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:12345678.", "claim_type": "EXTERNAL"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert corrections == []
+
+    def test_ungrounded_pmid_does_not_trigger_external(self):
+        """A PMID not in the whitelist should not make claim_type EXTERNAL."""
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:99999999.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "INFERENCE"
+
+
+@pytest.mark.unit
+class TestStripHallucinatedPmids:
+    """Tests for strip_hallucinated_pmids — remove bad PMIDs from text."""
+
+    def test_strips_pmid_from_key_gene_description(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:99999999.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_key_gene_TP53": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["themes"][0]["key_genes"][0]["description"]
+
+    def test_strips_pmid_from_hub_gene_narrative(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [{"gene": "BRCA1", "narrative": "Does X PMID:99999999.",
+                           "claim_type": "INFERENCE"}],
+            "overall_summary": [],
+        }
+        hallucinated = {"hub_gene_BRCA1": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["hub_genes"][0]["narrative"]
+
+    def test_strips_pmid_from_theme_narrative(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "See PMID:99999999.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_narrative": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["themes"][0]["narrative"]
+
+    def test_cleans_double_spaces(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "See PMID:99999999 for details.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_narrative": {"99999999"}}
+        strip_hallucinated_pmids(exp, hallucinated)
+        assert "  " not in exp["themes"][0]["narrative"]
+
+    def test_no_hallucinated_pmids_no_change(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "No PMIDs.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        count = strip_hallucinated_pmids(exp, {})
+        assert count == 0
+
+    def test_strips_from_overall_summary(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [],
+            "overall_summary": ["Summary PMID:99999999 text."],
+        }
+        hallucinated = {"overall_summary_0": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["overall_summary"][0]
+
+
+@pytest.mark.unit
+class TestBuildCorrectionPrompt:
+    """Tests for _build_correction_prompt."""
+
+    def test_includes_error_list(self):
+        exp = {"themes": [], "hub_genes": [], "overall_summary": []}
+        warnings = ["Hub gene 'TP53': PMID:99999999 not in provided literature context"]
+        sys_p, usr_p = _build_correction_prompt(exp, warnings, {"12345678"})
+        assert "99999999" in usr_p
+        assert "12345678" in usr_p
+
+    def test_includes_explanation_json(self):
+        exp = {"themes": [{"theme_index": 0}], "hub_genes": [], "overall_summary": []}
+        sys_p, usr_p = _build_correction_prompt(exp, ["error"], {"12345678"})
+        assert "theme_index" in usr_p
+
+    def test_system_prompt_has_correction_rules(self):
+        exp = {"themes": [], "hub_genes": [], "overall_summary": []}
+        sys_p, usr_p = _build_correction_prompt(exp, ["error"], set())
+        assert "hallucinated" in sys_p.lower() or "remove" in sys_p.lower()
+
+
+@pytest.mark.unit
+class TestCorrectionLoopIntegration:
+    """Tests for the PMID correction loop in generate_markdown_explanation.
+
+    These test the integrated flow by mocking the LLM agent.
+    """
+
+    def _make_valid_explanation_dict(self, hub_narrative="Does X.", hub_claim="INFERENCE"):
+        """Build a minimal valid explanation dict."""
+        return {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "This theme describes cell migration regulation. "
+                             "[DATA] Genes cluster under GO:0030336.",
+                "key_insights": [{
+                    "insight": "Cell migration is regulated by multiple pathways.",
+                    "go_id": "GO:0030336",
+                }],
+                "key_genes": [{
+                    "gene": "TP53",
+                    "go_id": "GO:0030336",
+                    "description": "TP53 regulates cell migration through p21-mediated "
+                                   "cytoskeletal remodeling.",
+                    "claim_type": "INFERENCE",
+                }],
+                "statistical_context": "FDR 1e-5, fold enrichment 4.0x.",
+            }],
+            "hub_genes": [{
+                "gene": "BRCA1",
+                "narrative": hub_narrative,
+                "claim_type": hub_claim,
+            }],
+            "overall_summary": [
+                "This analysis reveals cell migration regulation patterns.",
+                "The enrichment captures genuine biological signal.",
+                "Limitations include possible annotation bias in GO.",
+            ],
+        }
+
+    def _make_enrichment_output(self):
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 2,
+                "genes_with_annotations": 2,
+                "total_enriched_terms": 1,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [{
+                "anchor_term": {
+                    "go_id": "GO:0030336",
+                    "name": "negative regulation of cell migration",
+                    "genes": ["TP53", "BRCA1"],
+                },
+                "specific_terms": [],
+            }],
+            "hub_genes": {"BRCA1": {"themes": ["negative regulation of cell migration"], "theme_count": 1}},
+        }
+
+    def test_correction_loop_skipped_when_no_hallucination(self):
+        """No correction calls if all PMIDs are grounded."""
+        explanation = self._make_valid_explanation_dict()
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self):
+                self.model = type("M", (), {"model_dump": lambda s: explanation})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                return FakeResult()
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=2,
+                )
+        # Only 1 call (the main LLM call), no correction calls
+        assert call_count["n"] == 1
+
+    def test_correction_loop_disabled_when_zero(self):
+        """max_correction_retries=0 skips the loop even with hallucinated PMIDs."""
+        explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X PMID:99999999."
+        )
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self):
+                self.model = type("M", (), {"model_dump": lambda s: explanation})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                return FakeResult()
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                md = generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=0,
+                )
+        # Only 1 call, and hallucinated PMID should be stripped
+        assert call_count["n"] == 1
+        assert "PMID:99999999" not in md
+
+    def test_correction_loop_retries_and_fixes(self):
+        """Correction loop calls LLM again and gets a fixed response."""
+        bad_explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X PMID:99999999."
+        )
+        good_explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X."
+        )
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self, exp):
+                self.model = type("M", (), {"model_dump": lambda s: exp})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                if call_count["n"] == 1:
+                    return FakeResult(bad_explanation)
+                else:
+                    return FakeResult(good_explanation)
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                md = generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=2,
+                )
+        # 2 calls: initial + 1 correction
+        assert call_count["n"] == 2
+        assert "PMID:99999999" not in md
