@@ -40,9 +40,32 @@ For **each theme**, compute ranked candidate key genes to use both as search key
 
 ---
 
-### Step 2 — Fetch hub gene abstracts (single parallel burst)
+### Step 2 — Fetch literature evidence (single parallel burst)
 
-Issue **all** hub gene searches simultaneously in a single response:
+Issue **all** searches simultaneously in a single response. If the ASTA (Semantic Scholar) MCP server is available, use snippet_search for richer evidence. Otherwise, fall back to Europe PMC abstracts.
+
+**2a — ASTA snippet search (preferred, if `mcp__Asta__snippet_search` is available):**
+
+Per theme (with GAF PMIDs from sidecar):
+```
+mcp__Asta__snippet_search(
+  query: "{anchor_term.name}"
+  paper_ids: "PMID:{pmid1},PMID:{pmid2},PMID:{pmid3}"
+  limit: 3
+)
+```
+
+Per hub gene (top 20 by `theme_count`, unscoped discovery):
+```
+mcp__Asta__snippet_search(
+  query: "{gene_symbol} {gene_data.themes[0]}"
+  limit: 3
+)
+```
+
+All calls in parallel (single response turn). Store snippet results keyed by theme index / gene symbol.
+
+**2b — Europe PMC fallback (if ASTA not available):**
 
 **Per hub gene** (top 20 by `theme_count`):
 ```
@@ -98,6 +121,11 @@ Using only the data in scope (theme i's enrichment fields + the fetched abstract
 ### Candidate Key Genes (select key_genes ONLY from this list):
   1. {gene}  [in {n} specific term(s), {n_themes} theme(s), score: {score:.2f}]
   ...
+
+### Available Evidence Snippets (from ASTA, prefer these for citations):
+  [only if ASTA snippet_search returned results for this theme:]
+  [PMID:{pmid}] {title} — {authors}
+  Evidence: {snippet_text, first 600 chars}...
 
 ### Available GAF Literature (cite as PMID:xxxxx):
   [only if gaf_pmids fetched above; include for each fetched paper:]
@@ -168,7 +196,7 @@ Apply the CRITICAL RULES below, then render to markdown and write the output fil
 
 4. **hub_genes**: Only include genes listed in the input `hub_genes` dict.
 
-5. **Citations**: Only cite PMIDs that appear in the fetched GAF literature (for themes) or the Europe PMC search results (for hub genes). GAF PMIDs support `[DATA]`/`[EXTERNAL]` claims about specific gene→GO annotations; hub gene PMIDs support broader `[EXTERNAL]` claims about cross-theme coordination. Place inline after the claim: `[EXTERNAL] IL6 coordinates inflammation PMID:20027291.` Do NOT create `[1]`, `[2]` numbered references or a bibliography.
+5. **Citations**: Only cite PMIDs that appear in the fetched evidence (ASTA snippets, GAF literature, or Europe PMC search results). Prefer citing PMIDs from evidence snippets (body-text passages with specific experimental detail) over abstract-only citations. GAF PMIDs support `[DATA]`/`[EXTERNAL]` claims about specific gene→GO annotations; hub gene PMIDs support broader `[EXTERNAL]` claims about cross-theme coordination. Place inline after the claim: `[EXTERNAL] IL6 coordinates inflammation PMID:20027291.` Do NOT create `[1]`, `[2]` numbered references or a bibliography.
 
 6. **overall_summary**: Array of 3–4 strings (paragraphs). Each paragraph ≥50 chars. Last paragraph must address limitations or caveats. No subheadings — continuous prose.
 

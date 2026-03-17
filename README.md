@@ -8,7 +8,7 @@
 
 **Hierarchical GO enrichment analysis with IC-based theme grouping, provenance-labeled LLM explanations, and literature-grounded references**
 
-GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using MRCEA-B, a bottom-up information-content algorithm, then generates provenance-labeled explanations grounded in real paper abstracts fetched from Europe PMC before the LLM call.
+GO enrichment analysis typically produces hundreds of statistically significant terms with heavy redundancy from parent-child overlaps. GOA Semantic Tools reduces these to a structured set of biological themes using MRCEA-B, a bottom-up information-content algorithm, then generates provenance-labeled explanations grounded in curated GAF citations and full-text evidence from ASTA (Semantic Scholar) and Europe PMC.
 
 ## Quick Start
 
@@ -26,47 +26,83 @@ uv sync
 ### Usage
 
 ```bash
-# Basic enrichment analysis
-uv run go-enrichment --genes TP53,BRCA1,BRCA2,PTEN,RB1,APC -o results/my_analysis
-
-# From a gene list file (one gene per line, # for comments)
+# Full pipeline: enrichment → literature → per-gene narratives → LLM explanation
+# Requires OPENAI_API_KEY or ANTHROPIC_API_KEY
 uv run go-enrichment --genes-file genes.txt -o results/my_analysis
 
-# With LLM explanation (requires OPENAI_API_KEY or ANTHROPIC_API_KEY)
-uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain
+# Enrichment only (no API keys needed)
+uv run go-enrichment --genes-file genes.txt -o results/my_analysis --stop-after enrichment
 
-# With LLM explanation + literature references (pre-fetches Europe PMC abstracts before LLM call)
-uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --add-references
+# Stop after literature fetch (no LLM call)
+uv run go-enrichment --genes-file genes.txt -o results/my_analysis --stop-after literature
 
-# With references but without Europe PMC literature search (GAF annotations only)
-uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --add-references --no-literature-search
+# Enable external literature search (Europe PMC for hub genes, unscoped ASTA widening)
+uv run go-enrichment --genes-file genes.txt -o results/my_analysis --literature-search
+
+# Resume from enrichment JSON (runs Phase 1b + 1c + 2)
+uv run go-enrichment --enrichment-json results/my_analysis_enrichment.json -o results/my_analysis
+
+# Resume from literature JSON (runs Phase 1c + 2 only)
+uv run go-enrichment --literature-json results/my_analysis_literature.json -o results/my_analysis
 
 # Preview what would run without executing
-uv run go-enrichment --genes-file genes.txt -o results/my_analysis --explain --dry-run
+uv run go-enrichment --genes-file genes.txt -o results/my_analysis --dry-run
+
+# Comma-separated genes directly
+uv run go-enrichment --genes TP53,BRCA1,BRCA2,PTEN,RB1,APC -o results/my_analysis
 ```
 
 Output files are auto-named from the base path:
 - `*_enrichment.json` - Structured enrichment results (themes, leaves, hub genes)
-- `*_explanation.md` - Provenance-labeled biological summary with inline citations (if `--explain`)
+- `*_literature.json` - Pre-fetched literature evidence (GAF PMIDs, snippets, abstracts)
+- `*_explanation.md` - Provenance-labeled biological summary with inline citations
+- `*_gaf_pmids.json` - Curated GAF citation index (for interactive use)
 
 ### CLI Options
 
+**Input** (mutually exclusive, one required):
+
+| Option | Description |
+|--------|-------------|
+| `--genes` | Comma-separated gene symbols |
+| `--genes-file` | File with gene symbols (one per line, `#` for comments) |
+| `--enrichment-json` | Resume from enrichment JSON (skips Phase 1) |
+| `--literature-json` | Resume from literature JSON (skips Phase 1 + 1b) |
+
+**Pipeline control:**
+
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--genes` | | Comma-separated gene symbols |
-| `--genes-file` | | File with gene symbols (one per line) |
-| `-o`, `--output` | *(required)* | Output base path |
+| `-o`, `--output` | *(required)* | Output base path (extensions added automatically) |
+| `--stop-after` | *(run all)* | `enrichment` or `literature` — stop after specified phase |
+| `--literature-search` | off | Enable external literature search (Europe PMC hub gene abstracts, unscoped ASTA widening). Results are non-deterministic. |
+| `--dry-run` | off | Preview analysis plan without executing |
+
+**Enrichment parameters:**
+
+| Option | Default | Description |
+|--------|---------|-------------|
 | `--species` | `human` | `human` or `mouse` |
 | `--fdr` | `0.05` | FDR significance threshold |
 | `--min-ic` | `3.0` | Minimum information content for anchor terms |
 | `--min-leaves` | `2` | Min enriched leaves to qualify as anchor |
 | `--max-genes` | `30` | Filter overly general terms |
-| `--explain` | off | Generate LLM explanation |
+| `--namespace` | all | GO namespace(s): `BP`, `MF`, `CC` |
+
+**LLM parameters:**
+
+| Option | Default | Description |
+|--------|---------|-------------|
 | `--model` | `gpt-4o` | LLM model (`gpt-4o`, `gpt-4o-mini`, `gpt-5`, `claude-sonnet-4-20250514`) |
-| `--max-tokens` | model default | Override LLM output token limit (gpt-5 defaults to 32000; others 16000) |
-| `--add-references` | off | Pre-fetch Europe PMC abstracts and inject inline citations (requires `--explain`) |
-| `--no-literature-search` | off | Skip Europe PMC pre-fetch (use with `--add-references`) |
-| `--dry-run` | off | Preview analysis plan without executing |
+| `--max-tokens` | model default | Override LLM output token limit (gpt-5: 32000, others: 16000) |
+
+### Environment Variables
+
+| Variable | Required for | Description |
+|----------|-------------|-------------|
+| `OPENAI_API_KEY` | OpenAI models | API key for gpt-4o, gpt-4o-mini, gpt-5 |
+| `ANTHROPIC_API_KEY` | Anthropic models | API key for Claude models |
+| `ASTA_API_KEY` | ASTA snippets | Semantic Scholar API key for full-text snippet search (optional but recommended) |
 
 ## How It Works
 
@@ -86,27 +122,38 @@ Instead of selecting top-N most significant terms (which creates redundancy), th
 
 Typical reduction: 50–75% fewer terms while preserving the biological signal. On coherent gene communities (e.g. RTK/Rho signalling), MRCEA-B achieves ~1.8× compression vs the prior depth-anchor approach.
 
-### 3. Literature Pre-fetch + LLM Explanation (Phases 1b + 2)
+### 3. Literature Pre-fetch (Phase 1b)
 
-When `--add-references` is used, paper abstracts are injected into the LLM context **before** the LLM call (lit-first approach):
+All evidence is gathered **before** the LLM call (lit-first approach):
 
-**Phase 1b** (three steps, all before the LLM):
-1. **GAF citation lookup** (no API): For each theme, find curated PMIDs from the GO Annotation File — these are the original experimental papers that established each gene→GO term relationship. Highest-confidence citations.
-2. **GAF abstract fetch** (Europe PMC): Retrieve title + abstract for each GAF PMID to give the LLM the actual evidence text.
-3. **Hub gene search** (Europe PMC): For each hub gene (top 20 by theme count), search `"{gene} {top_theme_name}"` to find supporting literature for cross-theme coordination claims.
+1. **GAF citation lookup** (no API): For each theme, find curated PMIDs from the GO Annotation File — the original experimental papers establishing each gene→GO term relationship. Also builds a cross-theme index for genes annotated across multiple themes.
+2. **ASTA snippet search** (Semantic Scholar, requires `ASTA_API_KEY`): Full-text snippet search scoped to GAF PMIDs, within-theme co-annotations, and cross-theme co-annotations. Provides body-text evidence passages rather than just abstracts.
+3. **GAF abstract fetch** (Europe PMC): Retrieve title + abstract for each GAF PMID.
+4. **Hub gene + cross-theme PMID snippets** (with `--literature-search`): Unscoped ASTA and Europe PMC searches for hub genes and cross-theme GAF PMIDs.
 
-**Phase 2**: The LLM generates a provenance-labeled biological summary. Citations appear inline (e.g. `PMID:10383454`) within the tagged sentence they support.
+### 4. Per-Gene Evidence Narratives (Phase 1c)
+
+Each gene gets a focused, cheap LLM call (gpt-4o-mini, ~$0.001/gene) with **only its own evidence** — snippets, GAF annotations, abstracts. The output is a 1-2 sentence mechanistic narrative with inline PMID citations. This solves the problem of the synthesiser ignoring evidence buried in a ~90K character context blob.
+
+Three categories run in parallel:
+- **Hub gene narratives**: Gene + cross-theme evidence + snippets
+- **Per-theme key gene narratives**: Gene + theme-specific evidence
+- **Co-annotation narratives**: Gene + the GO terms it bridges
+
+### 5. LLM Explanation (Phase 2)
+
+The synthesiser LLM receives pre-digested gene narratives instead of raw snippet dumps, enabling it to incorporate evidence it would otherwise overlook. It generates a structured JSON explanation that is programmatically rendered to markdown.
 
 Provenance tags distinguish claim sources:
 
 | Tag | Meaning |
 |-----|---------|
 | **[DATA]** | Direct observations from enrichment (FDR values, gene counts, co-occurrence) |
-| **[INFERENCE]** | Logical deductions from co-annotation patterns — e.g. two terms sharing genes implies a coordinating function |
-| **[EXTERNAL]** | Claims cited from pre-fetched paper abstracts |
+| **[INFERENCE]** | Logical deductions from co-annotation patterns (verified against literature where possible) |
+| **[EXTERNAL]** | Claims cited from pre-fetched paper abstracts or snippets |
 | **[GO-HIERARCHY]** | Facts derived from GO parent-child structure |
 
-This lit-first approach eliminates the unresolved-assertion problem: the LLM cites papers it has actually read rather than making claims that require retrospective validation.
+Statements tagged [INFERENCE] without PMID citations are flagged with a disclaimer in the output as hypotheses requiring validation.
 
 ## Python API
 
@@ -166,11 +213,13 @@ src/goa_semantic_tools/goa_semantic_tools/
 ├── cli.py                                    # CLI entry point (go-enrichment)
 ├── services/
 │   ├── go_enrichment_service.py              # ORA enrichment via GOATOOLS
-│   ├── go_markdown_explanation_service.py    # LLM explanation (lit-first)
-│   ├── go_explanation.prompt.yaml            # Explanation prompt template
+│   ├── go_markdown_explanation_service.py    # LLM explanation + markdown render
+│   ├── go_explanation.prompt.yaml            # Synthesiser prompt template
+│   ├── evidence_narrative_service.py         # Per-gene subagent narratives (Phase 1c)
+│   ├── evidence_narrative.prompt.yaml        # Subagent prompt template
+│   ├── asta_literature_service.py            # ASTA (Semantic Scholar) snippet search
 │   ├── artl_literature_service.py            # Europe PMC abstract pre-fetch
-│   ├── artl_literature_search.prompt.yaml    # Literature search prompt
-│   ├── reference_retrieval_service.py        # Claim extraction + PMID utilities
+│   ├── reference_retrieval_service.py        # GAF PMID lookup + claim extraction
 │   └── reference_retrieval.prompt.yaml       # Assertion extraction prompt
 ├── utils/
 │   ├── data_downloader.py                    # Download & cache GO/GAF data
