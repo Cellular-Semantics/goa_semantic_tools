@@ -1357,12 +1357,12 @@ class TestRenderMethodologyAndTable:
         return explanation, enrichment
 
     def test_methodology_note_always_present(self):
-        """Methodology note about depth-anchor appears in all reports."""
+        """Methodology note about MRCEA-B appears in all reports."""
         explanation, enrichment = self._make_partial_explanation(1, 1)
 
         md = render_explanation_to_markdown(explanation, enrichment)
 
-        assert "depth-anchor" in md
+        assert "MRCEA-B" in md
 
     def test_anchor_concept_explained(self):
         """Report explains what an anchor is."""
