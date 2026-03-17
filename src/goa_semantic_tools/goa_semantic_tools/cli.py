@@ -123,6 +123,9 @@ def _save_literature_json(
     hub_gene_abstracts: dict | None,
     snippet_evidence: dict | None,
     hub_gene_snippets: dict | None,
+    co_annotation_snippets: dict | None = None,
+    cross_theme_snippets: dict | None = None,
+    cross_theme_gaf_snippets: dict | None = None,
 ) -> Path:
     """Save all Phase 1b literature evidence as a single sidecar JSON."""
     literature_data: dict[str, Any] = {
@@ -132,6 +135,9 @@ def _save_literature_json(
         "hub_gene_abstracts": hub_gene_abstracts or {},
         "snippet_evidence": {str(k): v for k, v in (snippet_evidence or {}).items()},
         "hub_gene_snippets": hub_gene_snippets or {},
+        "co_annotation_snippets": {str(k): v for k, v in (co_annotation_snippets or {}).items()},
+        "cross_theme_snippets": cross_theme_snippets or {},
+        "cross_theme_gaf_snippets": cross_theme_gaf_snippets or {},
     }
     lit_path = base_output.parent / f"{base_output.name}_literature.json"
     with open(lit_path, "w") as f:
@@ -148,6 +154,12 @@ def _load_literature_json(path: Path) -> dict[str, Any]:
             return {}
         return {int(k): v for k, v in d.items()}
 
+    def _int_keys_nested(d: dict | None) -> dict:
+        """Convert outer keys to int; inner values are dicts (gene→snippets)."""
+        if not d:
+            return {}
+        return {int(k): v for k, v in d.items()}
+
     return {
         "enrichment_source": data["enrichment_source"],
         "gaf_pmids": _int_keys(data.get("gaf_pmids")),
@@ -155,6 +167,9 @@ def _load_literature_json(path: Path) -> dict[str, Any]:
         "hub_gene_abstracts": data.get("hub_gene_abstracts") or {},
         "snippet_evidence": _int_keys(data.get("snippet_evidence")),
         "hub_gene_snippets": data.get("hub_gene_snippets") or {},
+        "co_annotation_snippets": _int_keys_nested(data.get("co_annotation_snippets")),
+        "cross_theme_snippets": data.get("cross_theme_snippets") or {},
+        "cross_theme_gaf_snippets": data.get("cross_theme_gaf_snippets") or {},
     }
 
 
@@ -228,7 +243,7 @@ def _print_dry_run(genes: list[str] | None, args: any, input_mode: str) -> None:
         print("\n--stop-after enrichment: pipeline stops here")
     else:
         # Phase 1b plan
-        if input_mode in ("genes", "enrichment") and not args.no_literature_search:
+        if input_mode in ("genes", "enrichment"):
             print("\n" + "=" * 80)
             print("## PHASE 1b: LITERATURE PRE-FETCH")
             print("=" * 80)
@@ -297,8 +312,13 @@ def _run_phase1b(
     args: argparse.Namespace,
     base_output: Path,
     enrichment_path: Path,
-) -> tuple[dict | None, dict | None, dict | None, dict | None, dict | None]:
-    """Run Phase 1b: Literature pre-fetch. Returns (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets)."""
+) -> tuple[dict | None, dict | None, dict | None, dict | None, dict | None, dict | None, dict | None, dict | None]:
+    """Run Phase 1b: Literature pre-fetch.
+
+    Returns (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence,
+             hub_gene_snippets, co_annotation_snippets, cross_theme_snippets,
+             cross_theme_gaf_snippets).
+    """
     themes = enrichment_output.get("themes", [])
     hub_genes_data = enrichment_output.get("hub_genes", {})
 
@@ -307,6 +327,9 @@ def _run_phase1b(
     hub_gene_abstracts = None
     snippet_evidence = None
     hub_gene_snippets = None
+    co_annotation_snippets = None
+    cross_theme_snippets = None
+    cross_theme_gaf_snippets = None
 
     print("\n" + "=" * 80)
     print("Reference Pre-fetch - Phase 1b")
@@ -378,62 +401,116 @@ def _run_phase1b(
             print(f"\n⚠ GAF reference index failed: {e}")
             print("  Continuing without GAF citations...")
 
-    if not args.no_literature_search:
-        # ASTA snippet search (preferred when API key available)
-        asta_api_key = os.getenv("ASTA_API_KEY")
-        if asta_api_key:
-            print("\nUsing ASTA (Semantic Scholar) for full-text snippet search...")
-            try:
-                from .services.asta_literature_service import (
-                    fetch_snippets_for_gaf_pmids,
-                    fetch_snippets_for_hub_genes,
+    # Determine literature search scope based on --literature-search flag
+    # Always: GAF-scoped ASTA snippets, scoped co-annotations, GAF abstracts
+    # --literature-search only: unscoped widening, hub gene ASTA, hub gene Europe PMC
+    lit_search = getattr(args, "literature_search", False)
+
+    if lit_search:
+        print("\n⚠ Literature search enabled — external search results are non-deterministic and paper quality varies")
+
+    # Deprecation warning for --no-literature-search
+    if getattr(args, "no_literature_search", False):
+        warnings.warn(
+            "--no-literature-search is deprecated and ignored. "
+            "External literature APIs now require --literature-search to enable.",
+            DeprecationWarning,
+            stacklevel=1,
+        )
+
+    # ASTA snippet search (preferred when API key available)
+    asta_api_key = os.getenv("ASTA_API_KEY")
+    if asta_api_key:
+        print("\nUsing ASTA (Semantic Scholar) for full-text snippet search...")
+        try:
+            from .services.asta_literature_service import (
+                fetch_snippets_for_co_annotations,
+                fetch_snippets_for_cross_theme_co_annotations,
+                fetch_snippets_for_cross_theme_pmids,
+                fetch_snippets_for_gaf_pmids,
+                fetch_snippets_for_hub_genes,
+            )
+            from .services.go_markdown_explanation_service import _build_cross_theme_index
+
+            # Always: GAF-scoped snippet search
+            if gaf_pmids:
+                snippet_evidence = fetch_snippets_for_gaf_pmids(
+                    gaf_pmids, themes, asta_api_key
                 )
+                themes_with_snippets = sum(1 for v in snippet_evidence.values() if v)
+                total_snippets = sum(len(v) for v in snippet_evidence.values())
+                print(f"✓ Found {total_snippets} snippets across {themes_with_snippets}/{len(themes)} themes")
 
-                if gaf_pmids:
-                    snippet_evidence = fetch_snippets_for_gaf_pmids(
-                        gaf_pmids, themes, asta_api_key
-                    )
-                    themes_with_snippets = sum(1 for v in snippet_evidence.values() if v)
-                    total_snippets = sum(len(v) for v in snippet_evidence.values())
-                    print(f"✓ Found {total_snippets} snippets across {themes_with_snippets}/{len(themes)} themes")
-
-                if hub_genes_data:
-                    hub_gene_snippets = fetch_snippets_for_hub_genes(
-                        hub_genes_data, themes, asta_api_key
-                    )
-                    genes_with_snippets = sum(1 for v in hub_gene_snippets.values() if v)
-                    print(f"✓ Found snippets for {genes_with_snippets}/{min(len(hub_genes_data), 20)} hub genes")
-
-            except Exception as e:
-                print(f"⚠ ASTA search failed: {e}")
-                print("  Falling back to Europe PMC abstracts...")
-        else:
-            print("\nNote: Set ASTA_API_KEY for richer full-text snippet evidence.")
-
-        # Fetch abstracts for GAF PMIDs via Europe PMC
-        if gaf_pmids:
-            print(f"\nFetching abstracts for GAF PMIDs via Europe PMC...")
-            try:
-                from .services.artl_literature_service import fetch_abstracts_for_gaf_pmids
-                gaf_abstracts = fetch_abstracts_for_gaf_pmids(gaf_pmids)
-            except Exception as e:
-                print(f"\n⚠ GAF PMID abstract fetch failed: {e}")
-                print("  Continuing without GAF abstracts (PMID anchors still available)...")
-
-        # Europe PMC search for top hub genes
-        if hub_genes_data:
-            n_hub = len(hub_genes_data)
-            print(f"\nFetching Europe PMC abstracts for top hub genes (up to 20 of {n_hub})...")
-            try:
-                from .services.artl_literature_service import fetch_abstracts_for_hub_genes
-                hub_gene_abstracts = fetch_abstracts_for_hub_genes(
-                    hub_genes_data, max_hub_genes=20
+            # --literature-search only: hub gene unscoped ASTA
+            if hub_genes_data and lit_search:
+                hub_gene_snippets = fetch_snippets_for_hub_genes(
+                    hub_genes_data, themes, asta_api_key
                 )
-                genes_with_papers = sum(1 for v in hub_gene_abstracts.values() if v)
-                print(f"✓ Fetched abstracts for {genes_with_papers}/{min(n_hub, 20)} hub genes")
-            except Exception as e:
-                print(f"\n⚠ Hub gene abstract fetch failed: {e}")
-                print("  Continuing without hub gene abstracts...")
+                genes_with_snippets = sum(1 for v in hub_gene_snippets.values() if v)
+                print(f"✓ Found snippets for {genes_with_snippets}/{min(len(hub_genes_data), 20)} hub genes")
+
+            # Always: scoped co-annotation queries; widening only with --literature-search
+            if gaf_pmids:
+                print("\nSearching for co-annotation evidence...")
+                co_annotation_snippets = fetch_snippets_for_co_annotations(
+                    gaf_pmids, themes, asta_api_key,
+                    widen_on_miss=lit_search,
+                    snippet_evidence=snippet_evidence,
+                )
+                n_co = sum(
+                    len(snippets)
+                    for gene_snips in (co_annotation_snippets or {}).values()
+                    for snippets in gene_snips.values()
+                )
+                print(f"✓ Found {n_co} within-theme co-annotation snippet(s)")
+
+                cross_theme_index = _build_cross_theme_index(gaf_pmids, themes)
+                if cross_theme_index:
+                    cross_theme_snippets = fetch_snippets_for_cross_theme_co_annotations(
+                        cross_theme_index, asta_api_key,
+                        widen_on_miss=lit_search,
+                    )
+                    n_ct = sum(len(v) for v in (cross_theme_snippets or {}).values())
+                    print(f"✓ Found {n_ct} cross-theme co-annotation snippet(s)")
+
+                    # Fetch snippets scoped to cross-theme GAF PMIDs
+                    print("\nFetching snippets for cross-theme GAF PMIDs...")
+                    cross_theme_gaf_snippets = fetch_snippets_for_cross_theme_pmids(
+                        cross_theme_index, asta_api_key,
+                    )
+                    n_ctg = sum(len(v) for v in (cross_theme_gaf_snippets or {}).values())
+                    print(f"✓ Found {n_ctg} cross-theme GAF PMID snippet(s)")
+
+        except Exception as e:
+            print(f"⚠ ASTA search failed: {e}")
+            print("  Falling back to Europe PMC abstracts...")
+    else:
+        print("\nNote: Set ASTA_API_KEY for richer full-text snippet evidence.")
+
+    # Always: Fetch abstracts for GAF PMIDs via Europe PMC
+    if gaf_pmids:
+        print(f"\nFetching abstracts for GAF PMIDs via Europe PMC...")
+        try:
+            from .services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+            gaf_abstracts = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+        except Exception as e:
+            print(f"\n⚠ GAF PMID abstract fetch failed: {e}")
+            print("  Continuing without GAF abstracts (PMID anchors still available)...")
+
+    # --literature-search only: Europe PMC search for top hub genes
+    if hub_genes_data and lit_search:
+        n_hub = len(hub_genes_data)
+        print(f"\nFetching Europe PMC abstracts for top hub genes (up to 20 of {n_hub})...")
+        try:
+            from .services.artl_literature_service import fetch_abstracts_for_hub_genes
+            hub_gene_abstracts = fetch_abstracts_for_hub_genes(
+                hub_genes_data, max_hub_genes=20
+            )
+            genes_with_papers = sum(1 for v in hub_gene_abstracts.values() if v)
+            print(f"✓ Fetched abstracts for {genes_with_papers}/{min(n_hub, 20)} hub genes")
+        except Exception as e:
+            print(f"\n⚠ Hub gene abstract fetch failed: {e}")
+            print("  Continuing without hub gene abstracts...")
 
     # Save literature evidence
     lit_path = _save_literature_json(
@@ -444,10 +521,87 @@ def _run_phase1b(
         hub_gene_abstracts,
         snippet_evidence,
         hub_gene_snippets,
+        co_annotation_snippets,
+        cross_theme_snippets,
+        cross_theme_gaf_snippets,
     )
     print(f"\n✓ Literature evidence saved to: {lit_path.name}")
 
-    return gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets
+    return gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets, co_annotation_snippets, cross_theme_snippets, cross_theme_gaf_snippets
+
+
+def _run_phase1c(
+    enrichment_output: dict,
+    args: argparse.Namespace,
+    gaf_pmids: dict | None,
+    gaf_abstracts: dict | None,
+    hub_gene_abstracts: dict | None,
+    snippet_evidence: dict | None,
+    hub_gene_snippets: dict | None,
+    co_annotation_snippets: dict | None = None,
+    cross_theme_snippets: dict | None = None,
+    cross_theme_gaf_snippets: dict | None = None,
+) -> dict | None:
+    """Run Phase 1c: Per-gene evidence narrative generation.
+
+    Each gene gets a focused LLM call with its evidence, producing a
+    1-2 sentence mechanistic narrative. These replace raw snippets in the
+    synthesiser context.
+
+    Returns:
+        Gene narratives dict or None if no evidence available.
+    """
+    # Check if there's any evidence to narrate
+    has_evidence = any([
+        snippet_evidence,
+        hub_gene_snippets,
+        co_annotation_snippets,
+        cross_theme_snippets,
+        cross_theme_gaf_snippets,
+        gaf_pmids,
+    ])
+    if not has_evidence:
+        return None
+
+    print("\n" + "=" * 80)
+    print("Per-Gene Evidence Narratives - Phase 1c")
+    print("=" * 80)
+
+    try:
+        from .services.evidence_narrative_service import generate_gene_narratives
+
+        # Use gpt-4o-mini for cost-effective subagent calls
+        narrative_model = "gpt-4o-mini"
+        print(f"  Model: {narrative_model} (cost-optimised subagent)")
+
+        gene_narratives = generate_gene_narratives(
+            enrichment_output=enrichment_output,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=gaf_abstracts,
+            snippet_evidence=snippet_evidence,
+            hub_gene_snippets=hub_gene_snippets,
+            hub_gene_abstracts=hub_gene_abstracts,
+            co_annotation_snippets=co_annotation_snippets,
+            cross_theme_snippets=cross_theme_snippets,
+            cross_theme_gaf_snippets=cross_theme_gaf_snippets,
+            model=narrative_model,
+        )
+
+        usage = gene_narratives.get("usage", {})
+        if usage.get("n_calls", 0) > 0:
+            print(f"\n✓ Phase 1c complete: {usage['n_calls']} narrative(s) generated")
+            if usage.get("total_cost", 0) > 0:
+                print(f"  Phase 1c cost: ${usage['total_cost']:.4f} USD")
+        else:
+            print("\n  No narratives generated (no genes matched)")
+            return None
+
+        return gene_narratives
+
+    except Exception as e:
+        print(f"\n⚠ Phase 1c failed: {e}")
+        print("  Continuing without gene narratives...")
+        return None
 
 
 def _run_phase2(
@@ -459,6 +613,9 @@ def _run_phase2(
     hub_gene_abstracts: dict | None,
     snippet_evidence: dict | None,
     hub_gene_snippets: dict | None,
+    co_annotation_snippets: dict | None = None,
+    cross_theme_snippets: dict | None = None,
+    gene_narratives: dict | None = None,
 ) -> str:
     """Run Phase 2: LLM explanation generation."""
     print("\n" + "=" * 80)
@@ -472,6 +629,9 @@ def _run_phase2(
         hub_gene_abstracts=hub_gene_abstracts,
         snippet_evidence=snippet_evidence,
         hub_gene_snippets=hub_gene_snippets,
+        co_annotation_snippets=co_annotation_snippets,
+        cross_theme_snippets=cross_theme_snippets,
+        gene_narratives=gene_narratives,
     )
 
     with open(explanation_path, "w") as f:
@@ -593,10 +753,17 @@ Examples:
         help="Stop after the specified phase instead of running the full pipeline.",
     )
     parser.add_argument(
+        "--literature-search",
+        action="store_true",
+        default=False,
+        help="Enable external literature search (Europe PMC abstracts for hub genes, "
+        "unscoped ASTA widening, hub gene ASTA). Results are non-deterministic.",
+    )
+    parser.add_argument(
         "--no-literature-search",
         action="store_true",
         default=False,
-        help="Skip external literature APIs (Europe PMC, ASTA). GAF PMIDs still used.",
+        help="(Deprecated) Use --literature-search instead. This flag is ignored.",
     )
 
     # Enrichment parameters
@@ -773,8 +940,13 @@ Examples:
             hub_gene_abstracts = lit_data["hub_gene_abstracts"] or None
             snippet_evidence = lit_data["snippet_evidence"] or None
             hub_gene_snippets = lit_data["hub_gene_snippets"] or None
+            co_annotation_snippets = lit_data.get("co_annotation_snippets") or None
+            cross_theme_snippets = lit_data.get("cross_theme_snippets") or None
+            cross_theme_gaf_snippets = lit_data.get("cross_theme_gaf_snippets") or None
         else:
-            gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence, hub_gene_snippets = (
+            (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence,
+             hub_gene_snippets, co_annotation_snippets, cross_theme_snippets,
+             cross_theme_gaf_snippets) = (
                 _run_phase1b(enrichment_output, args, base_output, enrichment_path)
             )
 
@@ -788,6 +960,15 @@ Examples:
             print("=" * 80)
             return 0
 
+        # --- Phase 1c: Per-gene evidence narratives ---
+        gene_narratives = _run_phase1c(
+            enrichment_output, args,
+            gaf_pmids, gaf_abstracts, hub_gene_abstracts,
+            snippet_evidence, hub_gene_snippets,
+            co_annotation_snippets, cross_theme_snippets,
+            cross_theme_gaf_snippets,
+        )
+
         # --- Phase 2: LLM explanation ---
         try:
             _run_phase2(
@@ -799,6 +980,9 @@ Examples:
                 hub_gene_abstracts,
                 snippet_evidence,
                 hub_gene_snippets,
+                co_annotation_snippets,
+                cross_theme_snippets,
+                gene_narratives,
             )
         except Exception as e:
             print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
