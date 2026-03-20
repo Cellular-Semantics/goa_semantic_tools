@@ -14,6 +14,11 @@ system_prompt: |
   - Do NOT generate numbered references [1], [2] or bibliography entries.
   - Hub genes: include at most 20 hub genes in your response, selecting those that
     appear in the most themes. Do not include all hub genes if there are more than 20.
+  - COVERAGE REQUIREMENT: You MUST output exactly one themes array entry for EVERY
+    theme in the input. Do NOT skip, combine, or abbreviate any theme. Even if themes
+    are biologically similar, each must receive its own narrative and key_insights.
+    The number of entries in your output themes array must exactly match the number
+    of themes in the input.
 
   Quality guidelines:
   - Do NOT merely restate GO term names or annotations. Explain the biological MECHANISM.
@@ -55,7 +60,7 @@ user_prompt: |
   {enrichment_data}
 
   Fill every field in the schema precisely using only genes and GO IDs from the enrichment
-  data above.
+  data above. Your themes array MUST contain exactly one entry per theme — do not skip any.
 
 presets:
   openai-gpt4o:

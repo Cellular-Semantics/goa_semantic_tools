@@ -296,6 +296,22 @@ def generate_markdown_explanation(
     if flagged_themes:
         print(f"  ⚠ {len(flagged_themes)} theme(s) with content mismatches will use data-only rendering: {sorted(flagged_themes)}")
 
+    # Warn if LLM skipped themes — add missing ones to flagged_themes for data-only stubs
+    n_input_themes = len(enrichment_output.get("themes", []))
+    covered_indices = {
+        t["theme_index"]
+        for t in explanation.get("themes", [])
+        if isinstance(t.get("theme_index"), int)
+    }
+    missing_indices = set(range(n_input_themes)) - covered_indices
+    if missing_indices:
+        print(
+            f"  ⚠ LLM only covered {len(covered_indices)}/{n_input_themes} themes"
+            f" — {len(missing_indices)} theme(s) will use data-only stubs: {sorted(missing_indices)[:10]}"
+            + ("..." if len(missing_indices) > 10 else "")
+        )
+        flagged_themes.update(missing_indices)
+
     # Render structured JSON → markdown programmatically
     markdown_output = render_explanation_to_markdown(explanation, enrichment_output, flagged_themes=flagged_themes)
 
@@ -1193,13 +1209,22 @@ def render_explanation_to_markdown(
     )
     lines.append("\n")
 
-    # Per-theme sections
-    for exp_theme in explanation.get("themes", []):
-        idx = exp_theme.get("theme_index", -1)
-        if not isinstance(idx, int) or idx < 0 or idx >= len(enrichment_themes):
+    # Build a lookup from theme_index → LLM explanation dict
+    exp_theme_by_idx: dict[int, dict] = {
+        t["theme_index"]: t
+        for t in explanation.get("themes", [])
+        if isinstance(t.get("theme_index"), int)
+        and 0 <= t["theme_index"] < len(enrichment_themes)
+    }
+
+    # Per-theme sections — iterate all enrichment themes in order so flagged
+    # (missing) themes also get data-only stubs rendered
+    for idx, enrichment_theme in enumerate(enrichment_themes):
+        # Skip themes that are neither covered by LLM nor flagged
+        if idx not in exp_theme_by_idx and idx not in flagged_themes:
             continue
 
-        enrichment_theme = enrichment_themes[idx]
+        exp_theme = exp_theme_by_idx.get(idx, {})
         anchor = enrichment_theme.get("anchor_term", {})
         anchor_name = anchor.get("name", "Unknown")
         anchor_go_id = anchor.get("go_id", "")
@@ -1216,13 +1241,18 @@ def render_explanation_to_markdown(
         lines.append("\n")
 
         if idx in flagged_themes:
-            # Data-only stub: LLM content failed validation for this theme
+            # Data-only stub: LLM content failed validation or was not generated
             fdr = anchor.get("fdr", 0)
             genes = sorted(anchor.get("genes", []))
             gene_str = ", ".join(genes[:15])
             if len(genes) > 15:
                 gene_str += f" … (+{len(genes) - 15} more)"
-            lines.append(f"> ⚠ Content validation failed for this theme — showing data only.\n")
+            stub_reason = (
+                "Not covered by LLM narrative — showing data only."
+                if idx not in exp_theme_by_idx
+                else "Content validation failed for this theme — showing data only."
+            )
+            lines.append(f"> ⚠ {stub_reason}\n")
             lines.append("\n")
             lines.append(f"**FDR**: {fdr:.2e} · **Genes ({len(genes)})**: {gene_str}\n")
             lines.append("\n")

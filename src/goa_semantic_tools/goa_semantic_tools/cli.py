@@ -319,8 +319,14 @@ def _run_phase1b(
              hub_gene_snippets, co_annotation_snippets, cross_theme_snippets,
              cross_theme_gaf_snippets).
     """
-    themes = enrichment_output.get("themes", [])
+    all_themes = enrichment_output.get("themes", [])
     hub_genes_data = enrichment_output.get("hub_genes", {})
+
+    # Cap themes for literature fetch + explanation
+    max_explained = getattr(args, "max_explained_themes", None) or len(all_themes)
+    themes = all_themes[:max_explained]
+    if len(all_themes) > max_explained:
+        print(f"\n⚠ Capping literature search to first {max_explained} of {len(all_themes)} themes")
 
     gaf_pmids = None
     gaf_abstracts = None
@@ -335,22 +341,22 @@ def _run_phase1b(
     print("Reference Pre-fetch - Phase 1b")
     print("=" * 80)
 
-    # Always: GAF-curated PMIDs per theme
-    if themes:
+    # Always: GAF-curated PMIDs per theme (runs on ALL themes, not capped)
+    if all_themes:
         try:
             from .services.reference_retrieval_service import get_gaf_pmids_for_themes
             from .utils.data_downloader import ensure_gaf_data, ensure_go_data
             from .utils.go_data_loader import load_go_data
             from .utils.reference_index import get_descendants_closure, load_gaf_with_pmids
 
-            print(f"\nBuilding GAF reference index for {len(themes)} theme(s)...")
+            print(f"\nBuilding GAF reference index for {len(all_themes)} theme(s)...")
             gaf_path = ensure_gaf_data(species=args.species)
             go_path = ensure_go_data()
             godag = load_go_data(go_path)
 
             all_genes: set[str] = set()
             all_go_ids: set[str] = set()
-            for t in themes:
+            for t in all_themes:
                 all_genes.update(t.get("anchor_term", {}).get("genes", []))
                 anchor_go = t.get("anchor_term", {}).get("go_id", "")
                 if anchor_go:
@@ -364,7 +370,7 @@ def _run_phase1b(
             ref_index = load_gaf_with_pmids(gaf_path, godag, genes_of_interest=all_genes)
             descendants_closure = get_descendants_closure(all_go_ids, godag)
             gaf_pmids = get_gaf_pmids_for_themes(
-                themes, ref_index, descendants_closure=descendants_closure
+                all_themes, ref_index, descendants_closure=descendants_closure
             )
 
             # Resolve GO IDs to names so LLM context shows gene→term_name
@@ -388,7 +394,7 @@ def _run_phase1b(
                 for e in entries
                 if len(e.get("genes_covered", [])) >= 2
             )
-            print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(themes)} themes")
+            print(f"✓ Found {total_pmids} GAF PMIDs across {themes_with_pmids}/{len(all_themes)} themes")
             if n_coannot:
                 print(f"  ({n_coannot} co-annotation PMIDs covering 2+ genes)")
 
@@ -400,6 +406,10 @@ def _run_phase1b(
         except Exception as e:
             print(f"\n⚠ GAF reference index failed: {e}")
             print("  Continuing without GAF citations...")
+
+    # Filter gaf_pmids to explained themes only (sidecar already saved with all themes)
+    if gaf_pmids and len(all_themes) > max_explained:
+        gaf_pmids = {k: v for k, v in gaf_pmids.items() if k < max_explained}
 
     # Determine literature search scope based on --literature-search flag
     # Always: GAF-scoped ASTA snippets, scoped co-annotations, GAF abstracts
@@ -823,6 +833,13 @@ Examples:
 
     # Utility
     parser.add_argument(
+        "--max-explained-themes",
+        type=int,
+        default=30,
+        help="Max themes to fetch literature for and explain with LLM (default: 30). "
+        "GAF PMID lookup still runs on all themes for the reference table.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         default=False,
@@ -960,9 +977,17 @@ Examples:
             print("=" * 80)
             return 0
 
+        # Trim themes for Phase 1c + Phase 2 (gaf_pmids already filtered in phase1b)
+        max_explained = getattr(args, "max_explained_themes", None)
+        all_themes_count = len(enrichment_output.get("themes", []))
+        if max_explained and max_explained < all_themes_count:
+            explained_output = {**enrichment_output, "themes": enrichment_output["themes"][:max_explained]}
+        else:
+            explained_output = enrichment_output
+
         # --- Phase 1c: Per-gene evidence narratives ---
         gene_narratives = _run_phase1c(
-            enrichment_output, args,
+            explained_output, args,
             gaf_pmids, gaf_abstracts, hub_gene_abstracts,
             snippet_evidence, hub_gene_snippets,
             co_annotation_snippets, cross_theme_snippets,
@@ -972,7 +997,7 @@ Examples:
         # --- Phase 2: LLM explanation ---
         try:
             _run_phase2(
-                enrichment_output,
+                explained_output,
                 args,
                 explanation_path,
                 gaf_pmids,
