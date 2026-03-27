@@ -22,6 +22,7 @@ from typing import Any, Optional
 import yaml
 
 from .services import generate_markdown_explanation, run_go_enrichment
+from .services.go_markdown_explanation_service import write_themes_csv
 
 
 def parse_gene_list(genes_arg: Optional[str], genes_file: Optional[str]) -> list[str]:
@@ -200,6 +201,7 @@ def _print_dry_run(genes: list[str] | None, args: any, input_mode: str) -> None:
     enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
     literature_path = base_output.parent / f"{base_output.name}_literature.json"
     explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
+    csv_path = base_output.parent / f"{base_output.name}_themes.csv"
 
     stop_after = getattr(args, "stop_after", None)
 
@@ -626,8 +628,10 @@ def _run_phase2(
     co_annotation_snippets: dict | None = None,
     cross_theme_snippets: dict | None = None,
     gene_narratives: dict | None = None,
+    csv_path: Path | None = None,
 ) -> str:
     """Run Phase 2: LLM explanation generation."""
+    csv_filename = csv_path.name if csv_path is not None else None
     print("\n" + "=" * 80)
     explanation_markdown = generate_markdown_explanation(
         enrichment_output=enrichment_output,
@@ -642,11 +646,17 @@ def _run_phase2(
         co_annotation_snippets=co_annotation_snippets,
         cross_theme_snippets=cross_theme_snippets,
         gene_narratives=gene_narratives,
+        csv_filename=csv_filename,
     )
 
     with open(explanation_path, "w") as f:
         f.write(explanation_markdown)
     print(f"\n✓ Explanation saved to: {explanation_path.absolute()}")
+
+    if csv_path is not None:
+        write_themes_csv(enrichment_output, csv_path)
+        print(f"✓ Themes CSV saved to:  {csv_path.absolute()}")
+
     return explanation_markdown
 
 
@@ -902,6 +912,7 @@ Examples:
 
         enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
         explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
+        csv_path = base_output.parent / f"{base_output.name}_themes.csv"
 
         # --- Phase 1: Enrichment ---
         if input_mode == "genes":
@@ -1008,6 +1019,7 @@ Examples:
                 co_annotation_snippets,
                 cross_theme_snippets,
                 gene_narratives,
+                csv_path=csv_path,
             )
         except Exception as e:
             print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)

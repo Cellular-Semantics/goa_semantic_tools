@@ -1419,16 +1419,16 @@ class TestRenderMethodologyAndTable:
         assert "Anchor confidence" in md
         assert "high" in md
 
-    def test_reference_table_heading_present(self):
-        """Reference table section heading is present."""
+    def test_theme_index_heading_present(self):
+        """Theme Index section heading is present at the top of the report."""
         explanation, enrichment = self._make_partial_explanation(1, 2)
 
         md = render_explanation_to_markdown(explanation, enrichment)
 
-        assert "All Enrichment Themes" in md
+        assert "## Theme Index" in md
 
-    def test_reference_table_lists_all_themes(self):
-        """Reference table has a row for every theme in enrichment output."""
+    def test_theme_index_lists_all_themes(self):
+        """Theme Index has a row for every theme in enrichment output."""
         themes = [
             _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
             for i in range(3)
@@ -1442,13 +1442,14 @@ class TestRenderMethodologyAndTable:
 
         md = render_explanation_to_markdown(explanation, enrichment)
 
-        # Each theme is numbered in the table
-        assert "| 1 |" in md
-        assert "| 2 |" in md
-        assert "| 3 |" in md
+        # Theme Index table appears before theme sections; all 3 themes are listed
+        idx_start = md.index("## Theme Index")
+        theme_section = md[idx_start:]
+        assert "GO:0000001" in theme_section
+        assert "GO:0000002" in theme_section
 
-    def test_reference_table_contains_go_ids(self):
-        """Reference table rows include GO IDs."""
+    def test_theme_index_contains_go_ids(self):
+        """Theme Index rows include linked GO IDs."""
         theme = _make_theme(anchor_genes=["G1"], anchor_go_id="GO:0006954")
         enrichment = _make_enrichment_output([theme])
         explanation = {"themes": [], "hub_genes": [], "overall_summary": []}

@@ -4,13 +4,13 @@ GO Markdown Explanation Service
 LLM-based markdown report generation for GO enrichment results (Phase 2, markdown format).
 Generates provenance-labeled explanations with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY] tags.
 """
+import csv
 import json
 import os
 import re
 from pathlib import Path
 from typing import Any
 
-import mdformat
 import yaml
 from cellsem_llm_client.agents.agent_connection import LiteLLMAgent
 from cellsem_llm_client.schema.manager import SchemaManager
@@ -58,6 +58,7 @@ def generate_markdown_explanation(
     cross_theme_snippets: dict[str, list[dict[str, Any]]] | None = None,
     gene_narratives: dict[str, Any] | None = None,
     max_correction_retries: int = 2,
+    csv_filename: str | None = None,
 ) -> str:
     """
     Generate provenance-labeled markdown report explaining GO enrichment results using LLM.
@@ -313,17 +314,13 @@ def generate_markdown_explanation(
         flagged_themes.update(missing_indices)
 
     # Render structured JSON → markdown programmatically
-    markdown_output = render_explanation_to_markdown(explanation, enrichment_output, flagged_themes=flagged_themes)
+    markdown_output = render_explanation_to_markdown(explanation, enrichment_output, flagged_themes=flagged_themes, csv_filename=csv_filename)
 
     # Add hyperlinks for any bare GO IDs remaining in narrative text
     markdown_output = _add_go_term_hyperlinks(markdown_output, enrichment_output)
 
     # Add hyperlinks to inline PMID citations
     markdown_output = _add_pmid_hyperlinks(markdown_output)
-
-    # Normalise markdown formatting (blank lines, spacing, thematic breaks)
-    # wrap_width=0 disables line-wrapping so long gene lists / table cells are preserved
-    markdown_output = mdformat.text(markdown_output, options={"wrap": "no"})
 
     # Count provenance tags
     _count_provenance_tags(markdown_output)
@@ -914,9 +911,9 @@ def _add_go_term_hyperlinks(markdown: str, enrichment_output: dict[str, Any]) ->
         purl = f"http://purl.obolibrary.org/obo/{go_purl_id}"
         return f"[{go_id}]({purl})"
 
-    # Find all GO IDs and replace with hyperlinks
+    # Find bare GO IDs (not already inside a markdown link like [GO:...])
     original = markdown
-    markdown = re.sub(r"GO:\d{7}", replace_go_id, markdown)
+    markdown = re.sub(r"(?<!\[)GO:\d{7}", replace_go_id, markdown)
 
     # Count replacements
     hyperlinks_added = markdown.count("[GO:") - original.count("[GO:")
@@ -1154,10 +1151,54 @@ def validate_explanation_json(
     return warnings
 
 
+def write_themes_csv(enrichment_output: dict[str, Any], csv_path: Path) -> None:
+    """Write a CSV file with all enrichment themes and their full gene lists.
+
+    Args:
+        enrichment_output: Phase 1 enrichment output containing themes.
+        csv_path: Destination path for the CSV file.
+    """
+    _NS_ABBREV = {
+        "biological_process": "BP",
+        "molecular_function": "MF",
+        "cellular_component": "CC",
+    }
+    enrichment_themes = enrichment_output.get("themes", [])
+    with open(csv_path, "w", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow([
+            "theme_number", "theme_name", "go_id", "namespace",
+            "fdr", "fold_enrichment", "anchor_confidence", "n_genes", "genes",
+        ])
+        for i, theme in enumerate(enrichment_themes):
+            anchor = theme.get("anchor_term", {})
+            name = anchor.get("name", "Unknown")
+            go_id = anchor.get("go_id", "")
+            ns_full = anchor.get("namespace", "")
+            ns = _NS_ABBREV.get(ns_full, ns_full[:2].upper() if ns_full else "?")
+            fdr = anchor.get("fdr", 0)
+            fold_enrichment = anchor.get("fold_enrichment", "")
+            conf = theme.get("anchor_confidence", "")
+            all_genes = sorted(theme.get("all_genes", anchor.get("genes", [])))
+            writer.writerow([
+                i + 1, name, go_id, ns, f"{fdr:.2e}", fold_enrichment,
+                conf, len(all_genes), ";".join(all_genes),
+            ])
+
+
+def _header_to_anchor(header_text: str) -> str:
+    """Convert a markdown header string to a GFM anchor fragment."""
+    text = header_text.lower()
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"\s+", "-", text.strip())
+    return f"#{text}"
+
+
 def render_explanation_to_markdown(
     explanation: dict[str, Any],
     enrichment_output: dict[str, Any],
     flagged_themes: set[int] | None = None,
+    csv_filename: str | None = None,
 ) -> str:
     """
     Programmatically render a structured explanation dict to markdown.
@@ -1197,7 +1238,7 @@ def render_explanation_to_markdown(
     theme_count_note = (
         f" This report provides detailed narrative for the top "
         f"**{n_explained} of {n_total} themes**, ranked by FDR ascending."
-        f" A complete reference table of all themes follows at the end."
+        f" All themes are listed in the Theme Index below."
         if n_explained < n_total else ""
     )
     lines.append(
@@ -1216,6 +1257,39 @@ def render_explanation_to_markdown(
         if isinstance(t.get("theme_index"), int)
         and 0 <= t["theme_index"] < len(enrichment_themes)
     }
+
+    # Theme index table (all themes, linking to their sections)
+    _NS_ABBREV = {
+        "biological_process": "BP",
+        "molecular_function": "MF",
+        "cellular_component": "CC",
+    }
+    if enrichment_themes:
+        lines.append("## Theme Index\n")
+        lines.append("\n")
+        if csv_filename:
+            lines.append(f"Full gene listings: [{csv_filename}]({csv_filename})\n")
+            lines.append("\n")
+        lines.append("| # | Theme | NS | FDR | Genes | Confidence |\n")
+        lines.append("|---|-------|----|-----|-------|------------|\n")
+        for i, et in enumerate(enrichment_themes):
+            anc = et.get("anchor_term", {})
+            t_name = anc.get("name", "Unknown")
+            t_go_id = anc.get("go_id", "")
+            ns_full = anc.get("namespace", "")
+            ns = _NS_ABBREV.get(ns_full, ns_full[:2].upper() if ns_full else "?")
+            fdr = anc.get("fdr", 0)
+            n_genes = len(et.get("all_genes", anc.get("genes", [])))
+            conf = et.get("anchor_confidence", "")
+            anchor_link = _header_to_anchor(f"Theme {i + 1} {t_name}")
+            go_link = _go_id_to_link(t_go_id)
+            lines.append(
+                f"| [{i + 1}]({anchor_link}) | [{t_name}]({anchor_link}) {go_link}"
+                f" | {ns} | {fdr:.2e} | {n_genes} | {conf} |\n"
+            )
+        lines.append("\n")
+        lines.append("---\n")
+        lines.append("\n")
 
     # Per-theme sections — iterate all enrichment themes in order so flagged
     # (missing) themes also get data-only stubs rendered
@@ -1326,45 +1400,6 @@ def render_explanation_to_markdown(
                  "latent biological knowledge and have not been independently verified against the literature. "
                  "These should be treated as hypotheses requiring validation.\n")
     lines.append("\n")
-
-    # Full theme reference table (all themes, including uncovered ones)
-    if enrichment_themes:
-        _NS_ABBREV = {
-            "biological_process": "BP",
-            "molecular_function": "MF",
-            "cellular_component": "CC",
-        }
-        cap_note = (
-            f"Top {n_explained} have narrative summaries above. "
-            if n_explained < n_total
-            else ""
-        )
-        lines.append("---\n")
-        lines.append("\n")
-        lines.append("## All Enrichment Themes (Reference)\n")
-        lines.append("\n")
-        lines.append(
-            f"_{n_total} themes ranked by FDR (most significant first). "
-            f"{cap_note}_\n"
-        )
-        lines.append("\n")
-        lines.append("| # | Theme | GO ID | NS | FDR | Genes |\n")
-        lines.append("|---|-------|-------|----|-----|-------|\n")
-        for i, theme in enumerate(enrichment_themes):
-            anchor = theme.get("anchor_term", {})
-            name = anchor.get("name", "Unknown")
-            go_id = anchor.get("go_id", "")
-            ns_full = anchor.get("namespace", "")
-            ns = _NS_ABBREV.get(ns_full, ns_full[:2].upper() if ns_full else "?")
-            fdr = anchor.get("fdr", 0)
-            genes = sorted(anchor.get("genes", []))
-            gene_preview = ", ".join(genes[:5])
-            if len(genes) > 5:
-                gene_preview += f", … ({len(genes)})"
-            elif genes:
-                gene_preview += f" ({len(genes)})"
-            lines.append(f"| {i + 1} | {name} | {go_id} | {ns} | {fdr:.2e} | {gene_preview} |\n")
-        lines.append("\n")
 
     return "".join(lines)
 
