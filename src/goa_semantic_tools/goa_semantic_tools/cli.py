@@ -12,10 +12,13 @@ By default the full pipeline runs. Use --stop-after to exit early,
 or --enrichment-json / --literature-json to resume from intermediates.
 """
 import argparse
+import copy
+import csv as _csv
 import json
 import os
 import sys
 import warnings
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
@@ -705,6 +708,302 @@ def _print_summary(result: dict) -> None:
             print(f"  - {gene}: {data['theme_count']} themes")
 
 
+def _parse_project_csv(csv_path: Path) -> list[dict]:
+    """Parse a project CSV and return a list of row dicts.
+
+    Required columns: ``name``, ``genes`` (comma-separated gene symbols).
+    Optional columns: ``species``, ``description`` (any others are preserved).
+
+    Raises:
+        FileNotFoundError: If *csv_path* does not exist.
+        ValueError: If required columns are missing or the file is empty.
+    """
+    if not csv_path.exists():
+        raise FileNotFoundError(f"Project CSV not found: {csv_path}")
+    with open(csv_path, newline="") as fh:
+        reader = _csv.DictReader(fh)
+        rows = list(reader)
+    if not rows:
+        raise ValueError(f"Project CSV is empty: {csv_path}")
+    headers = set(rows[0].keys())
+    for col in ("name", "genes"):
+        if col not in headers:
+            raise ValueError(
+                f"Project CSV missing required column '{col}' — found: {sorted(headers)}"
+            )
+    return rows
+
+
+def _run_pipeline(
+    args: argparse.Namespace,
+    input_mode: str,
+    genes: list[str] | None,
+    base_output: Path,
+) -> None:
+    """Execute the analysis pipeline from the given starting point.
+
+    Handles all three input modes (genes / enrichment / literature), respects
+    ``args.stop_after``, and prints progress to stdout.  Raises on error so
+    callers can handle failures independently (e.g. batch mode continues after
+    a single list failure).
+
+    Args:
+        args: Parsed CLI namespace (may be a per-row copy with overrides).
+        input_mode: One of ``"genes"``, ``"enrichment"``, ``"literature"``.
+        genes: Gene symbols — required when *input_mode* is ``"genes"``.
+        base_output: Base output path stem (parent dir is created if needed).
+            All output files are written as ``{base_output.name}_{suffix}``.
+    """
+    base_output.parent.mkdir(parents=True, exist_ok=True)
+
+    enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
+    explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
+    csv_path = base_output.parent / f"{base_output.name}_themes.csv"
+
+    print("=" * 80)
+    print("GO Enrichment Analysis - CLI Runner")
+    print("=" * 80)
+
+    # --- Phase 1: Enrichment ---
+    if input_mode == "genes":
+        assert genes is not None
+        print(f"\n✓ Parsed {len(genes)} gene symbols")
+        if len(genes) <= 20:
+            print(f"  Genes: {', '.join(genes)}")
+        else:
+            print(f"  First 10: {', '.join(genes[:10])}...")
+            print(f"  Last 10: {', '.join(genes[-10:])}...")
+
+        print(f"\n✓ Parameters:")
+        print(f"  Species: {args.species}")
+        print(f"  Min IC: {args.min_ic}")
+        print(f"  Min leaves: {args.min_leaves}")
+        print(f"  Max genes: {args.max_genes}")
+        print(f"  FDR threshold: {args.fdr}")
+
+        enrichment_output = _run_phase1(args, genes, enrichment_path)
+    elif input_mode == "enrichment":
+        enrichment_path = Path(args.enrichment_json)
+        enrichment_output = _load_and_validate_json(
+            enrichment_path, "themes", "Enrichment JSON"
+        )
+        n_themes = len(enrichment_output.get("themes", []))
+        print(f"\n✓ Loaded enrichment from: {enrichment_path}")
+        print(f"  Themes: {n_themes}")
+    else:
+        # literature mode — load enrichment from the path recorded in literature JSON
+        lit_path = Path(args.literature_json)
+        lit_data = _load_literature_json(lit_path)
+        enrichment_source = lit_data["enrichment_source"]
+        enrichment_path = Path(enrichment_source)
+        enrichment_output = _load_and_validate_json(
+            enrichment_path, "themes", "Enrichment JSON (referenced by literature JSON)"
+        )
+        print(f"\n✓ Loaded literature from: {lit_path}")
+        print(f"  Enrichment source: {enrichment_path}")
+
+    if args.stop_after == "enrichment":
+        _print_summary(enrichment_output)
+        print("\n" + "=" * 80)
+        print(f"✓ Stopped after enrichment (--stop-after enrichment)")
+        print(f"  Enrichment: {enrichment_path.name}")
+        print("=" * 80)
+        return
+
+    # --- Phase 1b: Literature pre-fetch ---
+    if input_mode == "literature":
+        gaf_pmids = lit_data["gaf_pmids"] or None
+        gaf_abstracts = lit_data["gaf_abstracts"] or None
+        hub_gene_abstracts = lit_data["hub_gene_abstracts"] or None
+        snippet_evidence = lit_data["snippet_evidence"] or None
+        hub_gene_snippets = lit_data["hub_gene_snippets"] or None
+        co_annotation_snippets = lit_data.get("co_annotation_snippets") or None
+        cross_theme_snippets = lit_data.get("cross_theme_snippets") or None
+        cross_theme_gaf_snippets = lit_data.get("cross_theme_gaf_snippets") or None
+    else:
+        (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence,
+         hub_gene_snippets, co_annotation_snippets, cross_theme_snippets,
+         cross_theme_gaf_snippets) = (
+            _run_phase1b(enrichment_output, args, base_output, enrichment_path)
+        )
+
+    if args.stop_after == "literature":
+        _print_summary(enrichment_output)
+        print("\n" + "=" * 80)
+        print(f"✓ Stopped after literature fetch (--stop-after literature)")
+        print(f"  Enrichment: {enrichment_path.name}")
+        lit_path_out = base_output.parent / f"{base_output.name}_literature.json"
+        print(f"  Literature: {lit_path_out.name}")
+        print("=" * 80)
+        return
+
+    # Trim themes for Phase 1c + Phase 2 (gaf_pmids already filtered in phase1b)
+    max_explained = getattr(args, "max_explained_themes", None)
+    all_themes_count = len(enrichment_output.get("themes", []))
+    if max_explained and max_explained < all_themes_count:
+        explained_output = {**enrichment_output, "themes": enrichment_output["themes"][:max_explained]}
+    else:
+        explained_output = enrichment_output
+
+    # --- Phase 1c: Per-gene evidence narratives ---
+    gene_narratives = _run_phase1c(
+        explained_output, args,
+        gaf_pmids, gaf_abstracts, hub_gene_abstracts,
+        snippet_evidence, hub_gene_snippets,
+        co_annotation_snippets, cross_theme_snippets,
+        cross_theme_gaf_snippets,
+    )
+
+    # --- Phase 2: LLM explanation ---
+    try:
+        _run_phase2(
+            explained_output,
+            args,
+            explanation_path,
+            gaf_pmids,
+            gaf_abstracts,
+            hub_gene_abstracts,
+            snippet_evidence,
+            hub_gene_snippets,
+            co_annotation_snippets,
+            cross_theme_snippets,
+            gene_narratives,
+            csv_path=csv_path,
+        )
+    except Exception as e:
+        print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        raise
+
+    print("=" * 80)
+    _print_summary(enrichment_output)
+    print("\n" + "=" * 80)
+    print(f"✓ Analysis complete!")
+    print(f"  Enrichment: {enrichment_path.name}")
+    print(f"  Explanation: {explanation_path.name}")
+    print("=" * 80)
+
+
+def _run_batch(args: argparse.Namespace) -> int:
+    """Run batch mode: process all gene lists defined in the project CSV.
+
+    For each row the full pipeline (or up to ``args.stop_after``) is run.
+    A single failure does not abort the batch — remaining lists are processed
+    and the final return code is 1 if any list failed, 0 otherwise.
+
+    Results are written under::
+
+        results/{project_name}/{name}/{datestamp}/{name}_*.{ext}
+
+    A ``batch_run.json`` manifest is appended to ``results/{project_name}/``.
+    """
+    csv_path = Path(args.project)
+    rows = _parse_project_csv(csv_path)
+
+    project_name = csv_path.stem
+    datestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    results_dir = Path("results") / project_name
+    n_total = len(rows)
+
+    print("=" * 80)
+    print(f"Batch Mode — Project: {project_name}")
+    print(f"  {n_total} gene list(s) | {datestamp}")
+    print(f"  Model: {args.model} | Stop after: {args.stop_after or 'full pipeline'}")
+    print("=" * 80)
+
+    # --- Dry-run: print plan only ---
+    if args.dry_run:
+        for i, row in enumerate(rows, 1):
+            name = row["name"]
+            genes = [g.strip() for g in row["genes"].split(",") if g.strip()]
+            species = row.get("species") or args.species
+            base_output = results_dir / name / datestamp / name
+            print(f"\n[{i}/{n_total}] {name}")
+            print(f"  Genes: {len(genes)} | Species: {species}")
+            print(f"  Output: {base_output.parent}/")
+        return 0
+
+    run_results: list[dict] = []
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    for i, row in enumerate(rows, 1):
+        name = row["name"].strip()
+        raw_genes = row.get("genes", "")
+        genes = [g.strip() for g in raw_genes.split(",") if g.strip()]
+        species = (row.get("species") or "").strip() or args.species
+
+        print(f"\n{'=' * 80}")
+        print(f"[{i}/{n_total}] {name} — {len(genes)} genes (species: {species})")
+        print("=" * 80)
+
+        if not genes:
+            print(f"  ⚠ Skipping: empty gene list", file=sys.stderr)
+            run_results.append({"name": name, "n_genes": 0, "status": "skipped",
+                                 "error": "empty gene list"})
+            continue
+
+        base_output = results_dir / name / datestamp / name
+        args_row = copy.copy(args)
+        args_row.species = species
+
+        try:
+            _run_pipeline(args_row, "genes", genes, base_output)
+            run_results.append({
+                "name": name,
+                "n_genes": len(genes),
+                "status": "ok",
+                "path": str(base_output.parent),
+            })
+        except Exception as e:
+            print(f"\n❌ [{name}] Failed: {e}", file=sys.stderr)
+            run_results.append({
+                "name": name,
+                "n_genes": len(genes),
+                "status": "error",
+                "error": str(e),
+            })
+
+    # --- Write / append manifest ---
+    manifest_path = results_dir / "batch_run.json"
+    manifest_entry: dict[str, Any] = {
+        "datestamp": datestamp,
+        "project_csv": str(csv_path),
+        "model": args.model,
+        "stop_after": args.stop_after,
+        "rows": run_results,
+    }
+    existing: list = []
+    if manifest_path.exists():
+        try:
+            with open(manifest_path) as fh:
+                existing = json.load(fh)
+        except Exception:
+            existing = []
+    existing.append(manifest_entry)
+    with open(manifest_path, "w") as fh:
+        json.dump(existing, fh, indent=2)
+    print(f"\n✓ Manifest saved: {manifest_path}")
+
+    # --- Print batch summary ---
+    n_ok = sum(1 for r in run_results if r["status"] == "ok")
+    n_failed = sum(1 for r in run_results if r["status"] == "error")
+    n_skipped = sum(1 for r in run_results if r["status"] == "skipped")
+    print("\n" + "=" * 80)
+    parts = [f"{n_ok}/{n_total} succeeded"]
+    if n_failed:
+        parts.append(f"{n_failed} failed")
+    if n_skipped:
+        parts.append(f"{n_skipped} skipped")
+    print("Batch complete: " + ", ".join(parts))
+    for r in run_results:
+        if r["status"] == "error":
+            print(f"  ✗ {r['name']}: {r.get('error', 'unknown error')}")
+    print("=" * 80)
+
+    return 0 if n_failed == 0 else 1
+
+
 def main() -> int:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -734,8 +1033,8 @@ Examples:
         """,
     )
 
-    # Input (mutually exclusive)
-    input_group = parser.add_mutually_exclusive_group(required=True)
+    # Input (mutually exclusive — required=False to allow --project batch mode)
+    input_group = parser.add_mutually_exclusive_group(required=False)
     input_group.add_argument(
         "--genes", type=str, help="Comma-separated gene symbols (e.g., TP53,BRCA1,BRCA2)"
     )
@@ -754,14 +1053,25 @@ Examples:
         type=str,
         help="Resume from literature JSON (skips Phase 1 + 1b, runs Phase 2 only)",
     )
+    input_group.add_argument(
+        "--project",
+        type=str,
+        metavar="CSV",
+        help="Path to project CSV for batch mode. Processes all gene lists in the CSV. "
+             "Project name = CSV filename stem. "
+             "Results saved under results/{project_name}/{name}/{datestamp}/. "
+             "Cannot be combined with --output.",
+    )
 
-    # Required output
+    # Output (required for single-run; derived automatically in batch mode)
     parser.add_argument(
         "--output",
         "-o",
         type=str,
-        required=True,
-        help="Output base path (e.g., results/my_analysis). Extensions added automatically.",
+        required=False,
+        default=None,
+        help="Output base path (e.g., results/my_analysis). Extensions added automatically. "
+             "Not used with --project.",
     )
 
     # Pipeline control
@@ -858,7 +1168,33 @@ Examples:
 
     args = parser.parse_args()
 
+    # --- Batch mode ---
+    if args.project:
+        if args.output:
+            parser.error("--project and --output are mutually exclusive")
+        try:
+            return _run_batch(args)
+        except (ValueError, FileNotFoundError) as e:
+            print(f"\n❌ Error: {e}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"\n❌ Unexpected error: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            return 1
+
+    # --- Single-run mode ---
     try:
+        # Require --output for single-run
+        if not args.output:
+            parser.error("--output / -o is required (or use --project for batch mode)")
+
+        # Require an input source
+        if not any([args.genes, args.genes_file, args.enrichment_json, args.literature_json]):
+            parser.error(
+                "one of --genes, --genes-file, --enrichment-json, --literature-json is required"
+            )
+
         input_mode = _determine_input_mode(args)
 
         # Parse genes (only needed for gene-based input)
@@ -899,145 +1235,11 @@ Examples:
             _print_dry_run(genes, args, input_mode)
             return 0
 
-        # Normal execution mode
-        print("=" * 80)
-        print("GO Enrichment Analysis - CLI Runner")
-        print("=" * 80)
-
-        # Prepare output paths
         base_output = Path(args.output)
         if base_output.suffix:
             base_output = base_output.with_suffix("")
-        base_output.parent.mkdir(parents=True, exist_ok=True)
 
-        enrichment_path = base_output.parent / f"{base_output.name}_enrichment.json"
-        explanation_path = base_output.parent / f"{base_output.name}_explanation.md"
-        csv_path = base_output.parent / f"{base_output.name}_themes.csv"
-
-        # --- Phase 1: Enrichment ---
-        if input_mode == "genes":
-            assert genes is not None
-            print(f"\n✓ Parsed {len(genes)} gene symbols")
-            if len(genes) <= 20:
-                print(f"  Genes: {', '.join(genes)}")
-            else:
-                print(f"  First 10: {', '.join(genes[:10])}...")
-                print(f"  Last 10: {', '.join(genes[-10:])}...")
-
-            print(f"\n✓ Parameters:")
-            print(f"  Species: {args.species}")
-            print(f"  Min IC: {args.min_ic}")
-            print(f"  Min leaves: {args.min_leaves}")
-            print(f"  Max genes: {args.max_genes}")
-            print(f"  FDR threshold: {args.fdr}")
-
-            enrichment_output = _run_phase1(args, genes, enrichment_path)
-        elif input_mode == "enrichment":
-            enrichment_path = Path(args.enrichment_json)
-            enrichment_output = _load_and_validate_json(
-                enrichment_path, "themes", "Enrichment JSON"
-            )
-            n_themes = len(enrichment_output.get("themes", []))
-            print(f"\n✓ Loaded enrichment from: {enrichment_path}")
-            print(f"  Themes: {n_themes}")
-        else:
-            # literature mode — load enrichment from the path recorded in literature JSON
-            lit_path = Path(args.literature_json)
-            lit_data = _load_literature_json(lit_path)
-            enrichment_source = lit_data["enrichment_source"]
-            enrichment_path = Path(enrichment_source)
-            enrichment_output = _load_and_validate_json(
-                enrichment_path, "themes", "Enrichment JSON (referenced by literature JSON)"
-            )
-            print(f"\n✓ Loaded literature from: {lit_path}")
-            print(f"  Enrichment source: {enrichment_path}")
-
-        if args.stop_after == "enrichment":
-            _print_summary(enrichment_output)
-            print("\n" + "=" * 80)
-            print(f"✓ Stopped after enrichment (--stop-after enrichment)")
-            print(f"  Enrichment: {enrichment_path.name}")
-            print("=" * 80)
-            return 0
-
-        # --- Phase 1b: Literature pre-fetch ---
-        if input_mode == "literature":
-            # Already loaded above
-            gaf_pmids = lit_data["gaf_pmids"] or None
-            gaf_abstracts = lit_data["gaf_abstracts"] or None
-            hub_gene_abstracts = lit_data["hub_gene_abstracts"] or None
-            snippet_evidence = lit_data["snippet_evidence"] or None
-            hub_gene_snippets = lit_data["hub_gene_snippets"] or None
-            co_annotation_snippets = lit_data.get("co_annotation_snippets") or None
-            cross_theme_snippets = lit_data.get("cross_theme_snippets") or None
-            cross_theme_gaf_snippets = lit_data.get("cross_theme_gaf_snippets") or None
-        else:
-            (gaf_pmids, gaf_abstracts, hub_gene_abstracts, snippet_evidence,
-             hub_gene_snippets, co_annotation_snippets, cross_theme_snippets,
-             cross_theme_gaf_snippets) = (
-                _run_phase1b(enrichment_output, args, base_output, enrichment_path)
-            )
-
-        if args.stop_after == "literature":
-            _print_summary(enrichment_output)
-            print("\n" + "=" * 80)
-            print(f"✓ Stopped after literature fetch (--stop-after literature)")
-            print(f"  Enrichment: {enrichment_path.name}")
-            lit_path = base_output.parent / f"{base_output.name}_literature.json"
-            print(f"  Literature: {lit_path.name}")
-            print("=" * 80)
-            return 0
-
-        # Trim themes for Phase 1c + Phase 2 (gaf_pmids already filtered in phase1b)
-        max_explained = getattr(args, "max_explained_themes", None)
-        all_themes_count = len(enrichment_output.get("themes", []))
-        if max_explained and max_explained < all_themes_count:
-            explained_output = {**enrichment_output, "themes": enrichment_output["themes"][:max_explained]}
-        else:
-            explained_output = enrichment_output
-
-        # --- Phase 1c: Per-gene evidence narratives ---
-        gene_narratives = _run_phase1c(
-            explained_output, args,
-            gaf_pmids, gaf_abstracts, hub_gene_abstracts,
-            snippet_evidence, hub_gene_snippets,
-            co_annotation_snippets, cross_theme_snippets,
-            cross_theme_gaf_snippets,
-        )
-
-        # --- Phase 2: LLM explanation ---
-        try:
-            _run_phase2(
-                explained_output,
-                args,
-                explanation_path,
-                gaf_pmids,
-                gaf_abstracts,
-                hub_gene_abstracts,
-                snippet_evidence,
-                hub_gene_snippets,
-                co_annotation_snippets,
-                cross_theme_snippets,
-                gene_narratives,
-                csv_path=csv_path,
-            )
-        except Exception as e:
-            print(f"\n❌ Error: Explanation generation failed: {e}", file=sys.stderr)
-            import traceback
-            traceback.print_exc()
-            return 1
-
-        print("=" * 80)
-
-        # Print summary
-        _print_summary(enrichment_output)
-
-        print("\n" + "=" * 80)
-        print(f"✓ Analysis complete!")
-        print(f"  Enrichment: {enrichment_path.name}")
-        print(f"  Explanation: {explanation_path.name}")
-        print("=" * 80)
-
+        _run_pipeline(args, input_mode, genes, base_output)
         return 0
 
     except ValueError as e:
