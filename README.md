@@ -52,10 +52,37 @@ uv run go-enrichment --genes-file genes.txt -o results/my_analysis --dry-run
 uv run go-enrichment --genes TP53,BRCA1,BRCA2,PTEN,RB1,APC -o results/my_analysis
 ```
 
+### Batch Mode
+
+Process multiple gene lists from a CSV file in a single run — useful for analysing all clusters from a single-cell study or a suite of differential expression comparisons.
+
+```bash
+# Run all gene lists in a project CSV
+uv run go-enrichment --project input_data/my_project/project.csv
+
+# Enrichment only for every gene list (no API keys needed)
+uv run go-enrichment --project input_data/my_project/project.csv --stop-after enrichment
+
+# Preview batch plan without executing
+uv run go-enrichment --project input_data/my_project/project.csv --dry-run
+```
+
+The project CSV requires `name` and `genes` columns; `species` and `description` are optional per-row overrides:
+
+```csv
+name,genes,species,description
+C1_RTK_Rho,"EGFR,FGFR3,RHOA,CDC42,RAC1",human,RTK and Rho signalling cluster
+C2_immune,"LYN,PTPRC,CD247,CD3D",human,Immune response cluster
+C3_metabolic,"ACSL1,IRS2,PDK4,LEP",mouse,Metabolic cluster
+```
+
+Results are saved under `results/{project_name}/{name}/{datestamp}/` and a `batch_run.json` manifest is appended after each run.
+
 Output files are auto-named from the base path:
 - `*_enrichment.json` - Structured enrichment results (themes, leaves, hub genes)
 - `*_literature.json` - Pre-fetched literature evidence (GAF PMIDs, snippets, abstracts)
-- `*_explanation.md` - Provenance-labeled biological summary with inline citations
+- `*_explanation.md` - Provenance-labeled biological summary with inline citations; includes a clickable theme index at the top
+- `*_themes.csv` - Full theme table with all genes (semicolon-separated), fold enrichment, namespace, FDR, confidence
 - `*_gaf_pmids.json` - Curated GAF citation index (for interactive use)
 
 ### CLI Options
@@ -68,6 +95,7 @@ Output files are auto-named from the base path:
 | `--genes-file` | File with gene symbols (one per line, `#` for comments) |
 | `--enrichment-json` | Resume from enrichment JSON (skips Phase 1) |
 | `--literature-json` | Resume from literature JSON (skips Phase 1 + 1b) |
+| `--project CSV` | Batch mode: process all gene lists in project CSV (see [Batch Mode](#batch-mode)) |
 
 **Pipeline control:**
 

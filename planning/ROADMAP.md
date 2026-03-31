@@ -1,6 +1,6 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-03-13
+**Last Updated**: 2026-03-26
 
 ## What This Tool Does
 
@@ -133,6 +133,29 @@ Bug fixes and rendering improvements to the markdown report:
 
 **302 unit tests, 68% coverage**
 
+### 1e. Report Format Overhaul — DONE
+
+Clean up and restructure markdown report output:
+
+- **Theme index at top**: compact table linking to each theme section (anchor, NS, FDR, gene count, confidence); replaces the broken flat reference table at the bottom
+- **Themes CSV export**: `write_themes_csv()` writes `*_themes.csv` alongside the report — full gene lists (semicolon-separated), fold enrichment, confidence, namespace; linked from the theme index
+- **mdformat removed**: was causing `FDR\<0.05` escaping and `______` thematic breaks; removed entirely, output is clean without post-processing
+- **GO link double-linking fix**: `_add_go_term_hyperlinks()` regex changed from `GO:\d{7}` to `(?<!\[)GO:\d{7}` — negative lookbehind prevents re-linking IDs already inside markdown links
+
+### 1f. Batch Mode (`--project CSV`) — DONE
+
+Process multiple gene lists from a project CSV in a single invocation:
+
+- `--project CSV` added to the mutually exclusive input group; incompatible with `--output` (paths derived automatically)
+- `_parse_project_csv()` — validates required columns (`name`, `genes`), returns row dicts
+- `_run_pipeline()` — extracted from `main()` so single-run and batch share identical pipeline logic
+- `_run_batch()` — sequential execution; reads CSV, derives `project_name = CSV stem`, computes single datestamp for the whole batch, calls `_run_pipeline()` per row with `copy.copy(args)` for per-row species overrides, continues on failure, appends to `results/{project_name}/batch_run.json` manifest
+- Output layout: `results/{project_name}/{name}/{datestamp}/{name}_enrichment.json` etc.
+- `--dry-run` supported (prints plan per row, no execution)
+- 19 unit tests in `tests/unit/test_cli_batch.py`
+
+**502 unit tests**
+
 ### 2. Exploratory Sub-Threshold Term Discovery
 
 Surface GO annotation structure beneath FDR significance thresholds. For each enriched theme anchor, enumerate child GO terms with gene overlap that didn't reach significance. Rank by overlap proportion, show top 5 per parent. Flagged with `[EXPLORATORY]` provenance tag. Opt-in via `--exploratory` CLI flag.
@@ -257,11 +280,12 @@ The validation package skeleton exists but is largely empty. Needs to be develop
 ┌─────────────────────────────────────────────────────────┐
 │ RENDER + POST-PROCESS                                   │
 │ render_explanation_to_markdown() → PMID hyperlinks      │
-│ mdformat normalisation → final markdown report          │
+│ write_themes_csv() → *_themes.csv                       │
+│ theme index table injected at top of report             │
 └──────────────────────────┬──────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
-│ OUTPUT: Markdown report + JSON themes                   │
+│ OUTPUT: Markdown report + themes CSV + JSON             │
 └─────────────────────────────────────────────────────────┘
 ```
 
