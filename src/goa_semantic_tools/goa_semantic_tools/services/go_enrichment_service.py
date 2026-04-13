@@ -151,11 +151,17 @@ def run_go_enrichment(
 
     goea_results_all = goeaobj.run_study(study_set)
 
-    # Filter significant results
-    goea_results_sig = [r for r in goea_results_all if r.p_fdr_bh < fdr_threshold]
+    # Filter significant results — require enrichment (not depletion) and ≥2 genes
+    goea_results_sig = [
+        r for r in goea_results_all
+        if r.p_fdr_bh < fdr_threshold
+        and len(r.study_items) >= 2
+        and (r.ratio_in_study[0] / r.ratio_in_study[1] if r.ratio_in_study[1] else 0)
+        > (r.ratio_in_pop[0] / r.ratio_in_pop[1] if r.ratio_in_pop[1] else 0)
+    ]
 
     print(f"  Total terms tested: {len(goea_results_all)}")
-    print(f"  Significant terms (FDR < {fdr_threshold}): {len(goea_results_sig)}")
+    print(f"  Significant enriched terms (FDR < {fdr_threshold}, FE > 1, ≥2 genes): {len(goea_results_sig)}")
 
     if not goea_results_sig:
         # No enrichment found
