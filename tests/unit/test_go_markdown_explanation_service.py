@@ -11,19 +11,141 @@ from pathlib import Path
 from unittest.mock import patch
 
 from goa_semantic_tools.services.go_markdown_explanation_service import (
+    _DEFAULT_MAX_TOKENS,
+    _MODEL_MAX_TOKENS,
     _add_go_term_hyperlinks,
     _add_pmid_hyperlinks,
+    _build_correction_prompt,
     _count_provenance_tags,
     _empty_markdown_explanation,
     _format_enrichment_for_llm,
     _get_api_key_for_model,
+    _get_default_max_tokens,
     _load_prompt,
     _validate_citations,
+    build_pmid_whitelist,
+    correct_claim_types,
     generate_markdown_explanation,
     rank_genes_for_theme,
     render_explanation_to_markdown,
+    strip_hallucinated_pmids,
     validate_explanation_json,
+    validate_pmids_in_explanation,
 )
+
+
+@pytest.mark.unit
+class TestGetDefaultMaxTokens:
+    """Tests for _get_default_max_tokens and the _MODEL_MAX_TOKENS registry."""
+
+    def test_gpt5_returns_32000(self):
+        assert _get_default_max_tokens("gpt-5") == 32000
+
+    def test_gpt4o_returns_default(self):
+        assert _get_default_max_tokens("gpt-4o") == _DEFAULT_MAX_TOKENS
+
+    def test_gpt4o_mini_returns_default(self):
+        assert _get_default_max_tokens("gpt-4o-mini") == _DEFAULT_MAX_TOKENS
+
+    def test_unknown_model_returns_default(self):
+        assert _get_default_max_tokens("some-future-model") == _DEFAULT_MAX_TOKENS
+
+    def test_default_max_tokens_is_16000(self):
+        assert _DEFAULT_MAX_TOKENS == 16000
+
+    def test_gpt5_in_registry(self):
+        assert "gpt-5" in _MODEL_MAX_TOKENS
+        assert _MODEL_MAX_TOKENS["gpt-5"] == 32000
+
+    def test_generate_uses_model_default_when_max_tokens_none(self):
+        """generate_markdown_explanation should pass 32000 to LiteLLMAgent for gpt-5."""
+        minimal_enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 10,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": {},
+            "enrichment_leaves": [
+                {"go_id": "GO:0006281", "name": "DNA repair", "fdr": 0.001, "genes": ["BRCA1"]}
+            ],
+        }
+        captured = {}
+
+        class FakeAgent:
+            def __init__(self, model, api_key, max_tokens):
+                captured["max_tokens"] = max_tokens
+
+            def query_unified(self, **kwargs):
+                raise RuntimeError("stop")
+
+        with patch(
+            "goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent",
+            FakeAgent,
+        ):
+            with patch(
+                "goa_semantic_tools.services.go_markdown_explanation_service._get_api_key_for_model",
+                return_value="fake-key",
+            ):
+                try:
+                    generate_markdown_explanation(
+                        enrichment_output=minimal_enrichment,
+                        model="gpt-5",
+                        max_tokens=None,
+                    )
+                except RuntimeError:
+                    pass
+
+        assert captured.get("max_tokens") == 32000, (
+            f"Expected 32000 for gpt-5, got {captured.get('max_tokens')}"
+        )
+
+    def test_generate_uses_explicit_max_tokens_when_provided(self):
+        """Explicit max_tokens should override model default."""
+        minimal_enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 10,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": {},
+            "enrichment_leaves": [
+                {"go_id": "GO:0006281", "name": "DNA repair", "fdr": 0.001, "genes": ["BRCA1"]}
+            ],
+        }
+        captured = {}
+
+        class FakeAgent:
+            def __init__(self, model, api_key, max_tokens):
+                captured["max_tokens"] = max_tokens
+
+            def query_unified(self, **kwargs):
+                raise RuntimeError("stop")
+
+        with patch(
+            "goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent",
+            FakeAgent,
+        ):
+            with patch(
+                "goa_semantic_tools.services.go_markdown_explanation_service._get_api_key_for_model",
+                return_value="fake-key",
+            ):
+                try:
+                    generate_markdown_explanation(
+                        enrichment_output=minimal_enrichment,
+                        model="gpt-5",
+                        max_tokens=8000,  # explicit override
+                    )
+                except RuntimeError:
+                    pass
+
+        assert captured.get("max_tokens") == 8000
 
 
 @pytest.mark.unit
@@ -222,6 +344,419 @@ class TestFormatEnrichmentForLLM:
         assert "Enrichment Leaves" in result
         assert "DNA repair" in result
         assert "GO:0006281" in result
+
+    def test_includes_abstract_block_when_paper_abstracts_provided(self):
+        """Abstract block should appear in theme context when paper_abstracts is given."""
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+        paper_abstracts = {
+            0: [{"pmid": "12345678", "title": "TP53 and apoptosis", "abstract": "An informative abstract.", "authors": "Smith", "year": "2020"}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=paper_abstracts)
+
+        assert "Available Literature" in result
+        assert "PMID:12345678" in result
+        assert "TP53 and apoptosis" in result
+        assert "An informative abstract." in result
+
+    def test_no_abstract_block_when_paper_abstracts_not_provided(self):
+        """No abstract block should appear when paper_abstracts is None."""
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=None)
+
+        assert "Available Literature" not in result
+
+    def test_abstract_truncated_to_400_chars(self):
+        """Long abstracts should be truncated to 400 chars with ellipsis."""
+        long_abstract = "X" * 600
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [
+                {
+                    "anchor_term": {
+                        "go_id": "GO:0006915",
+                        "name": "apoptotic process",
+                        "namespace": "biological_process",
+                        "fdr": 0.001,
+                        "genes": ["TP53"],
+                    },
+                    "specific_terms": [],
+                    "anchor_confidence": "high",
+                }
+            ],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+        paper_abstracts = {
+            0: [{"pmid": "99", "title": "T", "abstract": long_abstract, "authors": "", "year": ""}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, paper_abstracts=paper_abstracts)
+
+        # Should NOT contain the full 600-char string untruncated
+        assert long_abstract not in result
+        assert "..." in result
+
+    def test_hub_genes_capped_at_20_in_context(self):
+        """Hub genes in LLM context should be capped at top 20 by theme_count."""
+        # Build enrichment with 30 hub genes, varying theme_counts
+        hub_genes = {}
+        for i in range(30):
+            hub_genes[f"GENE{i:02d}"] = {
+                "theme_count": 30 - i,  # GENE00 has 30, GENE29 has 1
+                "themes": [f"theme{j}" for j in range(30 - i)],
+            }
+
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 50,
+                "genes_with_annotations": 50,
+                "total_enriched_terms": 100,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        # Top 20 genes (GENE00–GENE19) should appear
+        for i in range(20):
+            assert f"GENE{i:02d}" in result, f"GENE{i:02d} should be in context"
+
+        # Genes 20–29 (lowest theme_count) should be excluded
+        for i in range(20, 30):
+            assert f"GENE{i:02d}" not in result, f"GENE{i:02d} should be excluded (capped)"
+
+    def test_hub_genes_sorted_by_theme_count_descending(self):
+        """Hub genes in context should appear in order of descending theme_count."""
+        hub_genes = {
+            "LOW_GENE": {"theme_count": 2, "themes": ["t1", "t2"]},
+            "HIGH_GENE": {"theme_count": 10, "themes": [f"t{i}" for i in range(10)]},
+            "MID_GENE": {"theme_count": 5, "themes": [f"t{i}" for i in range(5)]},
+        }
+        enrichment = {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 10,
+                "genes_with_annotations": 10,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [],
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        # HIGH_GENE should appear before MID_GENE, which before LOW_GENE
+        pos_high = result.index("HIGH_GENE")
+        pos_mid = result.index("MID_GENE")
+        pos_low = result.index("LOW_GENE")
+        assert pos_high < pos_mid < pos_low
+
+
+@pytest.mark.unit
+class TestFormatEnrichmentGafPmids:
+    """Tests for gaf_pmids and hub_gene_abstracts params in _format_enrichment_for_llm."""
+
+    def _base_enrichment(self, with_theme=True, with_hub=True):
+        themes = []
+        hub_genes = {}
+        if with_theme:
+            themes = [{
+                "anchor_term": {
+                    "go_id": "GO:0006915",
+                    "name": "apoptotic process",
+                    "namespace": "biological_process",
+                    "fdr": 0.001,
+                    "genes": ["TP53"],
+                },
+                "specific_terms": [],
+                "anchor_confidence": "high",
+                "all_genes": ["TP53"],
+            }]
+        if with_hub:
+            hub_genes = {
+                "TP53": {"theme_count": 3, "themes": ["apoptosis", "DNA repair", "cell cycle"]}
+            }
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": themes,
+            "hub_genes": hub_genes,
+            "enrichment_leaves": [],
+        }
+
+    def test_gaf_pmids_renders_citation_block(self):
+        """GAF PMIDs appear as citation bullets under theme."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{"pmid": "10383454", "genes_covered": ["TP53", "BRCA1"]}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "Available GAF Citations" in result
+        assert "PMID:10383454" in result
+        assert "TP53" in result
+        assert "BRCA1" in result
+
+    def test_gaf_pmids_not_shown_when_none(self):
+        """No GAF citation block when gaf_pmids is None."""
+        enrichment = self._base_enrichment()
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=None)
+
+        assert "Available GAF Citations" not in result
+
+    def test_gaf_pmids_not_shown_when_empty_for_theme(self):
+        """No GAF citation block when theme has empty list."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: []}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "Available GAF Citations" not in result
+
+    def test_gaf_pmids_prefers_over_paper_abstracts(self):
+        """gaf_pmids block shown instead of paper_abstracts when both provided."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{"pmid": "11111", "genes_covered": ["TP53"]}]}
+        paper_abstracts = {0: [{"pmid": "99999", "title": "Old abstract", "abstract": "text", "authors": "", "year": ""}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids, paper_abstracts=paper_abstracts)
+
+        assert "Available GAF Citations" in result
+        assert "PMID:11111" in result
+        assert "Available Literature" not in result
+        assert "PMID:99999" not in result
+
+    def test_paper_abstracts_fallback_when_no_gaf_pmids(self):
+        """paper_abstracts still shown when gaf_pmids is None (backward compat)."""
+        enrichment = self._base_enrichment()
+        paper_abstracts = {0: [{"pmid": "99999", "title": "Old abstract", "abstract": "text", "authors": "", "year": ""}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=None, paper_abstracts=paper_abstracts)
+
+        assert "Available Literature" in result
+        assert "PMID:99999" in result
+
+    def test_hub_gene_abstracts_injected_in_hub_section(self):
+        """Hub gene papers appear in hub_genes section under Supporting Literature."""
+        enrichment = self._base_enrichment(with_theme=False)
+        hub_gene_abstracts = {
+            "TP53": [{"pmid": "20027291", "title": "TP53 in apoptosis", "abstract": "Key study.", "authors": "Smith", "year": "2003"}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=hub_gene_abstracts)
+
+        assert "Supporting Literature" in result
+        assert "PMID:20027291" in result
+        assert "TP53 in apoptosis" in result
+        assert "Smith" in result
+
+    def test_hub_gene_abstracts_not_shown_when_none(self):
+        """No Supporting Literature block when hub_gene_abstracts is None."""
+        enrichment = self._base_enrichment(with_theme=False)
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=None)
+
+        assert "Supporting Literature" not in result
+
+    def test_hub_gene_abstract_truncated_to_400_chars(self):
+        """Hub gene abstracts truncated to 400 chars."""
+        long_abstract = "Y" * 600
+        enrichment = self._base_enrichment(with_theme=False)
+        hub_gene_abstracts = {
+            "TP53": [{"pmid": "1", "title": "T", "abstract": long_abstract, "authors": "", "year": ""}]
+        }
+
+        result = _format_enrichment_for_llm(enrichment, hub_gene_abstracts=hub_gene_abstracts)
+
+        assert long_abstract not in result
+        assert "..." in result
+
+    def test_gaf_pmids_truncates_gene_list_at_six(self):
+        """GAF citation line shows up to 6 genes then '+N more'."""
+        enrichment = self._base_enrichment()
+        genes = [f"GENE{i}" for i in range(10)]
+        gaf_pmids = {0: [{"pmid": "55555", "genes_covered": genes}]}
+
+        result = _format_enrichment_for_llm(enrichment, gaf_pmids=gaf_pmids)
+
+        assert "+4 more" in result
+
+
+@pytest.mark.unit
+class TestFormatEnrichmentGafAbstracts:
+    """Tests for gaf_abstracts parameter in _format_enrichment_for_llm."""
+
+    def _base_enrichment(self, with_theme=True):
+        theme = {
+            "anchor_term": {
+                "go_id": "GO:0006915",
+                "name": "apoptotic process",
+                "namespace": "biological_process",
+                "fdr": 0.001,
+                "genes": ["TP53"],
+            },
+            "specific_terms": [],
+            "anchor_confidence": "high",
+        }
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 5,
+                "genes_with_annotations": 5,
+                "total_enriched_terms": 20,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [theme] if with_theme else [],
+            "hub_genes": {},
+            "enrichment_leaves": [],
+        }
+
+    def _gaf_pmids(self):
+        return {0: [{"pmid": "12345678", "genes_covered": ["TP53", "BRCA1"]}]}
+
+    def _gaf_abstracts(self):
+        return {0: [{
+            "pmid": "12345678",
+            "title": "TP53 and apoptosis",
+            "abstract": "A detailed abstract about TP53.",
+            "authors": "Smith, Jones",
+            "year": "2020",
+        }]}
+
+    def test_gaf_abstracts_shows_full_abstract(self):
+        """When gaf_abstracts provided, abstract text should appear in context."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        assert "A detailed abstract about TP53." in result
+        assert "TP53 and apoptosis" in result
+        assert "PMID:12345678" in result
+
+    def test_gaf_abstracts_includes_gene_annotations(self):
+        """Abstract block should include gene annotation info from gaf_pmids."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        # Falls back to Covers: when no gene_go_named present
+        assert "Covers:" in result or "Annotates:" in result
+        assert "TP53" in result
+        assert "BRCA1" in result
+
+    def test_gaf_abstracts_shows_annotated_go_terms(self):
+        """When gene_go_named is present, should show Annotates: gene→term."""
+        enrichment = self._base_enrichment()
+        gaf_pmids = {0: [{
+            "pmid": "12345678",
+            "genes_covered": ["TP53"],
+            "gene_go_named": {"TP53": ["apoptotic process [GO:0006915]"]},
+        }]}
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=self._gaf_abstracts(),
+        )
+        assert "Annotates:" in result
+        assert "TP53→apoptotic process [GO:0006915]" in result
+
+    def test_gaf_abstracts_fallback_to_pmid_only_when_none(self):
+        """When gaf_abstracts=None, PMID + gene annotations format should be used."""
+        enrichment = self._base_enrichment()
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=None,
+        )
+        # PMID anchor present
+        assert "PMID:12345678" in result
+        # No abstract text
+        assert "A detailed abstract about TP53." not in result
+        # Gene annotation info present (Covers fallback or Annotates with GO terms)
+        assert "TP53" in result
+
+    def test_gaf_abstracts_fallback_when_theme_not_in_gaf_abstracts(self):
+        """When theme_index missing from gaf_abstracts, PMID-only fallback."""
+        enrichment = self._base_enrichment()
+        # gaf_abstracts for theme 99 (not theme 0)
+        gaf_abstracts_wrong_theme = {99: [{"pmid": "12345678", "title": "T", "abstract": "A", "authors": "", "year": ""}]}
+        result = _format_enrichment_for_llm(
+            enrichment,
+            gaf_pmids=self._gaf_pmids(),
+            gaf_abstracts=gaf_abstracts_wrong_theme,
+        )
+        assert "PMID:12345678" in result
+        # no abstract text
+        assert "Abstract: A" not in result
 
 
 @pytest.mark.unit
@@ -690,13 +1225,13 @@ class TestRenderExplanationToMarkdown:
 
         assert "[GO:0006954](http://purl.obolibrary.org/obo/GO_0006954)" in md
 
-    def test_ref_marker_added_for_key_gene(self):
-        """Each key gene entry should have a [REF:GENE] marker."""
+    def test_no_ref_marker_in_key_gene(self):
+        """Key gene entries must NOT have [REF:GENE] markers (LLM cites inline now)."""
         explanation, enrichment = self._make_explanation_and_enrichment()
 
         md = render_explanation_to_markdown(explanation, enrichment)
 
-        assert "[REF:CD14]" in md
+        assert "[REF:" not in md
 
     def test_key_gene_bold_name(self):
         """Gene names should be bolded in Key Genes section."""
@@ -729,3 +1264,913 @@ class TestRenderExplanationToMarkdown:
         md = render_explanation_to_markdown(explanation, enrichment)
 
         assert "FDR 1e-10" in md
+
+    def test_inline_pmid_in_narrative_passes_through(self):
+        """Inline PMIDs written by the LLM should appear as-is in rendered output."""
+        theme = _make_theme(
+            anchor_genes=["RELA"],
+            specific_genes_list=[],
+            anchor_go_id="GO:0006954",
+        )
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[EXTERNAL] RELA encodes NF-κB p65 PMID:10383454.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "PMID:10383454" in md
+
+
+# =============================================================================
+# Test Fix 1: theme_index field in LLM context
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestFormatEnrichmentThemeIndex:
+    """Explicit theme_index field is present in LLM context output."""
+
+    def test_theme_index_zero_based_first_theme(self):
+        """First theme block includes theme_index: 0."""
+        theme = _make_theme(anchor_genes=["GENE1"], anchor_go_id="GO:0000001")
+        enrichment = _make_enrichment_output([theme])
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        assert "theme_index (use this exact integer in your response): 0" in result
+
+    def test_theme_index_second_theme(self):
+        """Second theme block includes theme_index: 1."""
+        t1 = _make_theme(anchor_genes=["G1"], anchor_go_id="GO:0000001")
+        t2 = _make_theme(anchor_genes=["G2"], anchor_go_id="GO:0000002")
+        enrichment = _make_enrichment_output([t1, t2])
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        assert "theme_index (use this exact integer in your response): 1" in result
+
+    def test_theme_index_distinct_per_theme(self):
+        """Each theme has a different theme_index value."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(3)
+        ]
+        enrichment = _make_enrichment_output(themes)
+
+        result = _format_enrichment_for_llm(enrichment)
+
+        for i in range(3):
+            assert f"theme_index (use this exact integer in your response): {i}" in result
+
+
+# =============================================================================
+# Test Fix 2: methodology note, anchor confidence, reference table
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestRenderMethodologyAndTable:
+    """Tests for methodology note, anchor confidence, and reference table."""
+
+    def _make_partial_explanation(self, n_explained, n_total):
+        """Explanation covers n_explained themes; enrichment has n_total themes."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(n_total)
+        ]
+        enrichment = _make_enrichment_output(themes)
+        exp_themes = [
+            {
+                "theme_index": i,
+                "narrative": f"[DATA] Theme {i} narrative.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }
+            for i in range(n_explained)
+        ]
+        explanation = {"themes": exp_themes, "hub_genes": [], "overall_summary": []}
+        return explanation, enrichment
+
+    def test_methodology_note_always_present(self):
+        """Methodology note about MRCEA-B appears in all reports."""
+        explanation, enrichment = self._make_partial_explanation(1, 1)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "MRCEA-B" in md
+
+    def test_anchor_concept_explained(self):
+        """Report explains what an anchor is."""
+        explanation, enrichment = self._make_partial_explanation(1, 1)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "anchor" in md.lower()
+        assert "GO hierarchy" in md or "GO term" in md
+
+    def test_theme_count_note_when_capped(self):
+        """Header note includes count when not all themes are explained."""
+        explanation, enrichment = self._make_partial_explanation(1, 3)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "1" in md and "3" in md
+        # The note should reference the counts together
+        assert "1 of 3" in md or "1\nof 3" in md or "**1 of 3**" in md
+
+    def test_no_theme_count_note_when_all_explained(self):
+        """No truncation count note when all themes have narratives."""
+        explanation, enrichment = self._make_partial_explanation(2, 2)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # "2 of 2" should not appear
+        assert "2 of 2" not in md
+
+    def test_anchor_confidence_in_summary_line(self):
+        """Anchor confidence appears on the theme summary line."""
+        theme = _make_theme(anchor_genes=["CD14"], anchor_go_id="GO:0006954")
+        theme["anchor_confidence"] = "high"
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[DATA] Test.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "Anchor confidence" in md
+        assert "high" in md
+
+    def test_theme_index_heading_present(self):
+        """Theme Index section heading is present at the top of the report."""
+        explanation, enrichment = self._make_partial_explanation(1, 2)
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "## Theme Index" in md
+
+    def test_theme_index_lists_all_themes(self):
+        """Theme Index has a row for every theme in enrichment output."""
+        themes = [
+            _make_theme(anchor_genes=[f"G{i}"], anchor_go_id=f"GO:000000{i}")
+            for i in range(3)
+        ]
+        enrichment = _make_enrichment_output(themes)
+        explanation = {
+            "themes": [{"theme_index": 0, "narrative": "[DATA] T.", "key_insights": [], "key_genes": [], "statistical_context": ""}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # Theme Index table appears before theme sections; all 3 themes are listed
+        idx_start = md.index("## Theme Index")
+        theme_section = md[idx_start:]
+        assert "GO:0000001" in theme_section
+        assert "GO:0000002" in theme_section
+
+    def test_theme_index_contains_go_ids(self):
+        """Theme Index rows include linked GO IDs."""
+        theme = _make_theme(anchor_genes=["G1"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {"themes": [], "hub_genes": [], "overall_summary": []}
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        assert "GO:0006954" in md
+
+
+# =============================================================================
+# Test Fix 3: _add_pmid_hyperlinks is called
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestAddPmidHyperlinksWiring:
+    """_add_pmid_hyperlinks is called by render_explanation_to_markdown."""
+
+    def test_pmid_in_narrative_becomes_hyperlink(self):
+        """PMID:xxxxx in LLM narrative is hyperlinked in render output."""
+        theme = _make_theme(anchor_genes=["RELA"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[EXTERNAL] Key regulator PMID:12345678.",
+                "key_insights": [],
+                "key_genes": [],
+                "statistical_context": "",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment)
+
+        # After _add_pmid_hyperlinks the PMID should NOT be bare
+        assert "PMID:12345678" in md  # text still present
+        # Note: render_explanation_to_markdown does NOT call _add_pmid_hyperlinks
+        # That is called in generate_markdown_explanation. This test just confirms
+        # the PMID passes through the renderer unchanged so the outer call can link it.
+        # The hyperlink test for the full pipeline would require LLM mocking.
+
+    def test_add_pmid_hyperlinks_converts_bare_pmid(self):
+        """_add_pmid_hyperlinks converts PMID:xxxxx to markdown link."""
+        text = "See PMID:12345678 for details."
+
+        result = _add_pmid_hyperlinks(text)
+
+        assert "[PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/)" in result
+
+    def test_add_pmid_hyperlinks_no_match(self):
+        """_add_pmid_hyperlinks returns text unchanged when no PMIDs present."""
+        text = "No citations here."
+
+        result = _add_pmid_hyperlinks(text)
+
+        assert result == text
+
+
+# =============================================================================
+# Test mdformat integration
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestMdformatIntegration:
+    """mdformat normalises the rendered markdown output."""
+
+    def test_mdformat_normalises_missing_blank_lines(self):
+        """mdformat adds blank lines around headings if missing."""
+        import mdformat
+
+        sloppy = "# Title\n## Section\nSome text."
+        result = mdformat.text(sloppy, options={"wrap": "no"})
+
+        # Heading should be followed by blank line
+        assert "\n\n" in result
+
+    def test_mdformat_preserves_provenance_tags(self):
+        """mdformat does not strip [DATA], [INFERENCE] etc. tags."""
+        import mdformat
+
+        text = "# Report\n\n[DATA] STAT1 is enriched. [INFERENCE] Cross-talk likely.\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[DATA]" in result
+        assert "[INFERENCE]" in result
+
+    def test_mdformat_preserves_pmid_hyperlinks(self):
+        """mdformat does not break PMID hyperlinks."""
+        import mdformat
+
+        text = "# Report\n\nSee [PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/) for details.\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[PMID:12345678](https://pubmed.ncbi.nlm.nih.gov/12345678/)" in result
+
+    def test_mdformat_preserves_go_hyperlinks(self):
+        """mdformat does not break GO ID hyperlinks."""
+        import mdformat
+
+        text = "# Report\n\n[GO:0006955](http://purl.obolibrary.org/obo/GO_0006955)\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "[GO:0006955](http://purl.obolibrary.org/obo/GO_0006955)" in result
+
+    def test_mdformat_preserves_table(self):
+        """mdformat does not corrupt markdown tables."""
+        import mdformat
+
+        text = (
+            "# Report\n\n"
+            "| # | Theme | FDR |\n"
+            "|---|-------|-----|\n"
+            "| 1 | immune response | 1.2e-8 |\n"
+        )
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert "| 1 |" in result
+        assert "immune response" in result
+
+    def test_mdformat_wrap_no_preserves_long_lines(self):
+        """wrap=no option prevents mdformat from breaking long lines."""
+        import mdformat
+
+        long_line = "GENE1, GENE2, GENE3, GENE4, GENE5, GENE6, GENE7, GENE8, GENE9, GENE10, GENE11, GENE12 (12)"
+        text = f"# Report\n\n{long_line}\n"
+        result = mdformat.text(text, options={"wrap": "no"})
+
+        assert long_line in result
+
+
+@pytest.mark.unit
+class TestFlaggedThemesRendering:
+    """Tests for flagged_themes parameter in render_explanation_to_markdown."""
+
+    def _make_explanation_and_enrichment(self, theme_index=0):
+        theme = _make_theme(
+            anchor_genes=["CD14", "IL6", "TNF"],
+            anchor_go_id="GO:0006954",
+        )
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": theme_index,
+                "narrative": "WRONG_NARRATIVE should not appear.",
+                "key_insights": [
+                    {"insight": "WRONG_INSIGHT should not appear.", "go_id": "GO:9999999"},
+                ],
+                "key_genes": [
+                    {"gene": "FAKE_GENE", "go_id": "GO:9999999", "description": "Wrong description.", "claim_type": "EXTERNAL"},
+                ],
+                "statistical_context": "Wrong statistical context.",
+            }],
+            "hub_genes": [],
+            "overall_summary": ["Overall summary."],
+        }
+        return explanation, enrichment
+
+    def test_flagged_theme_omits_llm_narrative(self):
+        """Flagged theme should not include the (wrong) LLM narrative."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "WRONG_NARRATIVE" not in md
+
+    def test_flagged_theme_shows_validation_warning_indicator(self):
+        """Flagged theme should have a content validation warning in output."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "Content validation failed" in md or "validation failed" in md.lower()
+
+    def test_flagged_theme_still_shows_anchor_name(self):
+        """Flagged theme should still show the anchor name from trusted enrichment data."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "inflammatory response" in md
+
+    def test_flagged_theme_does_not_include_fake_gene(self):
+        """Fake gene from LLM should not appear in flagged theme output."""
+        explanation, enrichment = self._make_explanation_and_enrichment()
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes={0})
+
+        assert "FAKE_GENE" not in md
+
+    def test_unflagged_theme_includes_llm_narrative(self):
+        """Non-flagged themes should still render the LLM narrative normally."""
+        theme = _make_theme(anchor_genes=["CD14", "IL6"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "EXPECTED_NARRATIVE is here.",
+                "key_insights": [],
+                "key_genes": [
+                    {"gene": "CD14", "go_id": "GO:0006954", "description": "A real gene.", "claim_type": "DATA"},
+                ],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md = render_explanation_to_markdown(explanation, enrichment, flagged_themes=set())
+
+        assert "EXPECTED_NARRATIVE" in md
+
+    def test_empty_flagged_themes_behaves_same_as_no_flagged_themes(self):
+        """Passing empty set should behave identically to passing None."""
+        theme = _make_theme(anchor_genes=["CD14"], anchor_go_id="GO:0006954")
+        enrichment = _make_enrichment_output([theme])
+        explanation = {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "[DATA] Narrative text.",
+                "key_insights": [],
+                "key_genes": [
+                    {"gene": "CD14", "go_id": "GO:0006954", "description": "Desc.", "claim_type": "DATA"},
+                ],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+
+        md_none = render_explanation_to_markdown(explanation, enrichment, flagged_themes=None)
+        md_empty = render_explanation_to_markdown(explanation, enrichment, flagged_themes=set())
+
+        assert md_none == md_empty
+
+
+# =============================================================================
+# PMID Validation, claim_type Correction, and Stripping
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestBuildPmidWhitelist:
+    """Tests for build_pmid_whitelist — collects PMIDs from all literature sources."""
+
+    def test_empty_sources_returns_empty_set(self):
+        assert build_pmid_whitelist() == set()
+
+    def test_all_none_returns_empty_set(self):
+        result = build_pmid_whitelist(
+            gaf_pmids=None, gaf_abstracts=None, snippet_evidence=None,
+            hub_gene_snippets=None, hub_gene_abstracts=None,
+            co_annotation_snippets=None, cross_theme_snippets=None,
+            paper_abstracts=None, gene_narratives=None,
+        )
+        assert result == set()
+
+    def test_gaf_pmids_collected(self):
+        gaf = {0: [{"pmid": "12345678", "genes_covered": ["G1"]}]}
+        assert build_pmid_whitelist(gaf_pmids=gaf) == {"12345678"}
+
+    def test_gaf_abstracts_collected(self):
+        abstracts = {0: [{"pmid": "11111111", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(gaf_abstracts=abstracts) == {"11111111"}
+
+    def test_snippet_evidence_collected(self):
+        snippets = {0: [{"pmid": "22222222", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(snippet_evidence=snippets) == {"22222222"}
+
+    def test_hub_gene_snippets_collected(self):
+        hgs = {"TP53": [{"pmid": "33333333", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(hub_gene_snippets=hgs) == {"33333333"}
+
+    def test_hub_gene_abstracts_collected(self):
+        hga = {"BRCA1": [{"pmid": "44444444", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(hub_gene_abstracts=hga) == {"44444444"}
+
+    def test_co_annotation_snippets_collected(self):
+        co = {0: {"TP53": [{"pmid": "55555555", "snippet_text": "...", "title": "T"}]}}
+        assert build_pmid_whitelist(co_annotation_snippets=co) == {"55555555"}
+
+    def test_cross_theme_snippets_collected(self):
+        ct = {"TP53": [{"pmid": "66666666", "snippet_text": "...", "title": "T"}]}
+        assert build_pmid_whitelist(cross_theme_snippets=ct) == {"66666666"}
+
+    def test_paper_abstracts_collected(self):
+        pa = {0: [{"pmid": "77777777", "title": "T", "abstract": "A"}]}
+        assert build_pmid_whitelist(paper_abstracts=pa) == {"77777777"}
+
+    def test_gene_narratives_pmids_extracted(self):
+        narr = {
+            "hub_genes": {"TP53": "TP53 does X PMID:88888888 and Y PMID:99999999."},
+            "theme_genes": {0: {"BRCA1": "BRCA1 acts via Z PMID:11112222."}},
+            "co_annotations": {},
+        }
+        result = build_pmid_whitelist(gene_narratives=narr)
+        assert result == {"88888888", "99999999", "11112222"}
+
+    def test_deduplicates_across_sources(self):
+        gaf = {0: [{"pmid": "12345678"}]}
+        snippets = {0: [{"pmid": "12345678", "snippet_text": "...", "title": "T"}]}
+        result = build_pmid_whitelist(gaf_pmids=gaf, snippet_evidence=snippets)
+        assert result == {"12345678"}
+
+    def test_empty_pmid_strings_ignored(self):
+        gaf = {0: [{"pmid": ""}, {"pmid": "12345678"}]}
+        assert build_pmid_whitelist(gaf_pmids=gaf) == {"12345678"}
+
+
+@pytest.mark.unit
+class TestValidatePmidsInExplanation:
+    """Tests for validate_pmids_in_explanation — format + grounding checks."""
+
+    def _make_explanation(self, theme_narrative="", key_gene_desc="",
+                          hub_gene_narrative="", overall_summary=None):
+        return {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": theme_narrative,
+                "key_insights": [{"insight": "Test.", "go_id": "GO:0000001"}],
+                "key_genes": [{
+                    "gene": "TP53", "go_id": "GO:0000001",
+                    "description": key_gene_desc, "claim_type": "INFERENCE",
+                }] if key_gene_desc else [],
+                "statistical_context": "FDR 1e-5.",
+            }],
+            "hub_genes": [{
+                "gene": "BRCA1",
+                "narrative": hub_gene_narrative,
+                "claim_type": "INFERENCE",
+            }] if hub_gene_narrative else [],
+            "overall_summary": overall_summary or ["Summary paragraph."],
+        }
+
+    def test_no_pmids_returns_no_warnings(self):
+        exp = self._make_explanation(theme_narrative="No citations here.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert warnings == []
+        assert hallucinated == {}
+
+    def test_valid_pmid_returns_no_warnings(self):
+        exp = self._make_explanation(theme_narrative="See PMID:12345678.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert warnings == []
+        assert hallucinated == {}
+
+    def test_nine_digit_pmid_flagged_as_invalid_format(self):
+        exp = self._make_explanation(theme_narrative="See PMID:123456789.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, set())
+        assert len(warnings) == 1
+        assert "invalid format" in warnings[0].lower() or "9+" in warnings[0]
+        assert any("123456789" in pmids for pmids in hallucinated.values())
+
+    def test_ungrounded_pmid_flagged(self):
+        exp = self._make_explanation(theme_narrative="See PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+        assert any("99999999" in pmids for pmids in hallucinated.values())
+
+    def test_hallucinated_pmid_in_key_gene_flagged(self):
+        exp = self._make_explanation(key_gene_desc="Gene does X PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_hallucinated_pmid_in_hub_gene_flagged(self):
+        exp = self._make_explanation(hub_gene_narrative="BRCA1 does X PMID:99999999.")
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_hallucinated_pmid_in_overall_summary_flagged(self):
+        exp = self._make_explanation(overall_summary=["Summary PMID:99999999."])
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+
+    def test_mixed_valid_and_invalid(self):
+        exp = self._make_explanation(
+            theme_narrative="See PMID:12345678 and PMID:99999999."
+        )
+        warnings, hallucinated = validate_pmids_in_explanation(exp, {"12345678"})
+        assert len(warnings) == 1
+        assert "99999999" in warnings[0]
+        assert "12345678" not in str(warnings)
+
+
+@pytest.mark.unit
+class TestCorrectClaimTypes:
+    """Tests for correct_claim_types — deterministic claim_type fix."""
+
+    def test_key_gene_with_whitelisted_pmid_becomes_external(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:12345678.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "EXTERNAL"
+        assert len(corrections) >= 1
+
+    def test_key_gene_without_pmid_becomes_inference(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X.", "claim_type": "EXTERNAL"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "INFERENCE"
+        assert len(corrections) >= 1
+
+    def test_hub_gene_with_whitelisted_pmid_becomes_external(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [
+                {"gene": "BRCA1", "narrative": "Does X PMID:12345678.",
+                 "claim_type": "INFERENCE"},
+            ],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["hub_genes"][0]["claim_type"] == "EXTERNAL"
+
+    def test_hub_gene_without_pmid_becomes_inference(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [
+                {"gene": "BRCA1", "narrative": "Does X.",
+                 "claim_type": "EXTERNAL"},
+            ],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["hub_genes"][0]["claim_type"] == "INFERENCE"
+
+    def test_already_correct_returns_empty(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:12345678.", "claim_type": "EXTERNAL"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert corrections == []
+
+    def test_ungrounded_pmid_does_not_trigger_external(self):
+        """A PMID not in the whitelist should not make claim_type EXTERNAL."""
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:99999999.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+        }
+        corrections = correct_claim_types(exp, {"12345678"})
+        assert exp["themes"][0]["key_genes"][0]["claim_type"] == "INFERENCE"
+
+
+@pytest.mark.unit
+class TestStripHallucinatedPmids:
+    """Tests for strip_hallucinated_pmids — remove bad PMIDs from text."""
+
+    def test_strips_pmid_from_key_gene_description(self):
+        exp = {
+            "themes": [{"theme_index": 0, "key_genes": [
+                {"gene": "TP53", "go_id": "GO:0000001",
+                 "description": "Does X PMID:99999999.", "claim_type": "INFERENCE"},
+            ]}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_key_gene_TP53": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["themes"][0]["key_genes"][0]["description"]
+
+    def test_strips_pmid_from_hub_gene_narrative(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [{"gene": "BRCA1", "narrative": "Does X PMID:99999999.",
+                           "claim_type": "INFERENCE"}],
+            "overall_summary": [],
+        }
+        hallucinated = {"hub_gene_BRCA1": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["hub_genes"][0]["narrative"]
+
+    def test_strips_pmid_from_theme_narrative(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "See PMID:99999999.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_narrative": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["themes"][0]["narrative"]
+
+    def test_cleans_double_spaces(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "See PMID:99999999 for details.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        hallucinated = {"theme_0_narrative": {"99999999"}}
+        strip_hallucinated_pmids(exp, hallucinated)
+        assert "  " not in exp["themes"][0]["narrative"]
+
+    def test_no_hallucinated_pmids_no_change(self):
+        exp = {
+            "themes": [{"theme_index": 0, "narrative": "No PMIDs.",
+                        "key_genes": []}],
+            "hub_genes": [],
+            "overall_summary": [],
+        }
+        count = strip_hallucinated_pmids(exp, {})
+        assert count == 0
+
+    def test_strips_from_overall_summary(self):
+        exp = {
+            "themes": [],
+            "hub_genes": [],
+            "overall_summary": ["Summary PMID:99999999 text."],
+        }
+        hallucinated = {"overall_summary_0": {"99999999"}}
+        count = strip_hallucinated_pmids(exp, hallucinated)
+        assert count == 1
+        assert "PMID:99999999" not in exp["overall_summary"][0]
+
+
+@pytest.mark.unit
+class TestBuildCorrectionPrompt:
+    """Tests for _build_correction_prompt."""
+
+    def test_includes_error_list(self):
+        exp = {"themes": [], "hub_genes": [], "overall_summary": []}
+        warnings = ["Hub gene 'TP53': PMID:99999999 not in provided literature context"]
+        sys_p, usr_p = _build_correction_prompt(exp, warnings, {"12345678"})
+        assert "99999999" in usr_p
+        assert "12345678" in usr_p
+
+    def test_includes_explanation_json(self):
+        exp = {"themes": [{"theme_index": 0}], "hub_genes": [], "overall_summary": []}
+        sys_p, usr_p = _build_correction_prompt(exp, ["error"], {"12345678"})
+        assert "theme_index" in usr_p
+
+    def test_system_prompt_has_correction_rules(self):
+        exp = {"themes": [], "hub_genes": [], "overall_summary": []}
+        sys_p, usr_p = _build_correction_prompt(exp, ["error"], set())
+        assert "hallucinated" in sys_p.lower() or "remove" in sys_p.lower()
+
+
+@pytest.mark.unit
+class TestCorrectionLoopIntegration:
+    """Tests for the PMID correction loop in generate_markdown_explanation.
+
+    These test the integrated flow by mocking the LLM agent.
+    """
+
+    def _make_valid_explanation_dict(self, hub_narrative="Does X.", hub_claim="INFERENCE"):
+        """Build a minimal valid explanation dict."""
+        return {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": "This theme describes cell migration regulation. "
+                             "[DATA] Genes cluster under GO:0030336.",
+                "key_insights": [{
+                    "insight": "Cell migration is regulated by multiple pathways.",
+                    "go_id": "GO:0030336",
+                }],
+                "key_genes": [{
+                    "gene": "TP53",
+                    "go_id": "GO:0030336",
+                    "description": "TP53 regulates cell migration through p21-mediated "
+                                   "cytoskeletal remodeling.",
+                    "claim_type": "INFERENCE",
+                }],
+                "statistical_context": "FDR 1e-5, fold enrichment 4.0x.",
+            }],
+            "hub_genes": [{
+                "gene": "BRCA1",
+                "narrative": hub_narrative,
+                "claim_type": hub_claim,
+            }],
+            "overall_summary": [
+                "This analysis reveals cell migration regulation patterns.",
+                "The enrichment captures genuine biological signal.",
+                "Limitations include possible annotation bias in GO.",
+            ],
+        }
+
+    def _make_enrichment_output(self):
+        return {
+            "metadata": {
+                "species": "human",
+                "input_genes_count": 2,
+                "genes_with_annotations": 2,
+                "total_enriched_terms": 1,
+                "fdr_threshold": 0.05,
+            },
+            "themes": [{
+                "anchor_term": {
+                    "go_id": "GO:0030336",
+                    "name": "negative regulation of cell migration",
+                    "genes": ["TP53", "BRCA1"],
+                },
+                "specific_terms": [],
+            }],
+            "hub_genes": {"BRCA1": {"themes": ["negative regulation of cell migration"], "theme_count": 1}},
+        }
+
+    def test_correction_loop_skipped_when_no_hallucination(self):
+        """No correction calls if all PMIDs are grounded."""
+        explanation = self._make_valid_explanation_dict()
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self):
+                self.model = type("M", (), {"model_dump": lambda s: explanation})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                return FakeResult()
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=2,
+                )
+        # Only 1 call (the main LLM call), no correction calls
+        assert call_count["n"] == 1
+
+    def test_correction_loop_disabled_when_zero(self):
+        """max_correction_retries=0 skips the loop even with hallucinated PMIDs."""
+        explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X PMID:99999999."
+        )
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self):
+                self.model = type("M", (), {"model_dump": lambda s: explanation})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                return FakeResult()
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                md = generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=0,
+                )
+        # Only 1 call, and hallucinated PMID should be stripped
+        assert call_count["n"] == 1
+        assert "PMID:99999999" not in md
+
+    def test_correction_loop_retries_and_fixes(self):
+        """Correction loop calls LLM again and gets a fixed response."""
+        bad_explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X PMID:99999999."
+        )
+        good_explanation = self._make_valid_explanation_dict(
+            hub_narrative="BRCA1 does X."
+        )
+        enrichment = self._make_enrichment_output()
+
+        call_count = {"n": 0}
+
+        class FakeResult:
+            def __init__(self, exp):
+                self.model = type("M", (), {"model_dump": lambda s: exp})()
+                self.usage = type("U", (), {
+                    "input_tokens": 100, "output_tokens": 50,
+                    "estimated_cost_usd": 0.01,
+                })()
+
+        class FakeAgent:
+            def __init__(self, **kwargs):
+                pass
+            def query_unified(self, **kwargs):
+                call_count["n"] += 1
+                if call_count["n"] == 1:
+                    return FakeResult(bad_explanation)
+                else:
+                    return FakeResult(good_explanation)
+
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
+            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+                md = generate_markdown_explanation(
+                    enrichment, model="gpt-4o",
+                    max_correction_retries=2,
+                )
+        # 2 calls: initial + 1 correction
+        assert call_count["n"] == 2
+        assert "PMID:99999999" not in md

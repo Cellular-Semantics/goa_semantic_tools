@@ -510,3 +510,563 @@ class TestResolveAssertionsViaLiterature:
         mock_agent_cls.assert_called_once()
         call_kwargs = mock_agent_cls.call_args
         assert call_kwargs[1]["api_key"] == "env-test-key" or call_kwargs[0][1] == "env-test-key"
+
+
+# =============================================================================
+# Test _parse_search_results
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestParseSearchResults:
+    """Tests for _parse_search_results helper."""
+
+    def test_bare_list_format(self):
+        """Test parsing a bare JSON list of papers."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        raw = '[{"pmid": "12345", "title": "Test paper", "abstractText": "An abstract."}]'
+        papers = _parse_search_results(raw)
+
+        assert len(papers) == 1
+        assert papers[0]["pmid"] == "12345"
+        assert papers[0]["title"] == "Test paper"
+        assert papers[0]["abstract"] == "An abstract."
+
+    def test_europe_pmc_wrapped_format(self):
+        """Test parsing Europe PMC resultList.result wrapped format."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        raw = '{"resultList": {"result": [{"pmid": "99999", "title": "PMC paper", "abstractText": "Abstract here."}]}}'
+        papers = _parse_search_results(raw)
+
+        assert len(papers) == 1
+        assert papers[0]["pmid"] == "99999"
+
+    def test_author_extraction(self):
+        """Test that authors are extracted and formatted correctly."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        raw = '[{"pmid": "1", "title": "T", "authorList": {"author": [{"lastName": "Smith"}, {"lastName": "Jones"}, {"lastName": "Brown"}, {"lastName": "Extra"}]}}]'
+        papers = _parse_search_results(raw)
+
+        assert len(papers) == 1
+        assert "Smith" in papers[0]["authors"]
+        assert "et al." in papers[0]["authors"]
+        assert "Extra" not in papers[0]["authors"]
+
+    def test_empty_raw_returns_empty(self):
+        """Test that empty input returns empty list."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        assert _parse_search_results("") == []
+        assert _parse_search_results("null") == []
+
+    def test_malformed_json_returns_empty(self):
+        """Test that malformed JSON returns empty list."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        assert _parse_search_results("not json at all") == []
+
+    def test_skips_entries_without_pmid(self):
+        """Test that entries without a pmid are skipped."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        raw = '[{"title": "No PMID paper", "abstractText": "Abstract"}]'
+        papers = _parse_search_results(raw)
+
+        assert papers == []
+
+    def test_year_extracted(self):
+        """Test that pubYear is captured."""
+        from goa_semantic_tools.services.artl_literature_service import _parse_search_results
+
+        raw = '[{"pmid": "1", "title": "T", "pubYear": "2023", "abstractText": "A"}]'
+        papers = _parse_search_results(raw)
+
+        assert papers[0]["year"] == "2023"
+
+
+# =============================================================================
+# Test _build_theme_query
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestBuildThemeQuery:
+    """Tests for _build_theme_query helper."""
+
+    def _make_theme(self, anchor_name="T cell activation", genes=None):
+        return {
+            "anchor_term": {
+                "name": anchor_name,
+                "go_id": "GO:0050870",
+                "genes": genes or ["RELA", "IL6", "TNF"],
+            },
+            "specific_terms": [],
+        }
+
+    def test_includes_anchor_name(self):
+        """Test that anchor GO term name is included in query."""
+        from goa_semantic_tools.services.artl_literature_service import _build_theme_query
+
+        theme = self._make_theme(anchor_name="positive regulation of T cell activation")
+        query = _build_theme_query(theme, hub_genes={})
+
+        assert "positive regulation of T cell activation" in query
+
+    def test_includes_top_genes(self):
+        """Test that ranked genes appear in query."""
+        from goa_semantic_tools.services.artl_literature_service import _build_theme_query
+
+        theme = self._make_theme(genes=["RELA", "IL6", "TNF", "NFKB1"])
+        query = _build_theme_query(theme, hub_genes={})
+
+        # At least some of the genes should appear
+        assert any(g in query for g in ["RELA", "IL6", "TNF", "NFKB1"])
+
+    def test_returns_non_empty_string(self):
+        """Test that query is always a non-empty string."""
+        from goa_semantic_tools.services.artl_literature_service import _build_theme_query
+
+        theme = self._make_theme()
+        query = _build_theme_query(theme, hub_genes={})
+
+        assert isinstance(query, str)
+        assert len(query) > 0
+
+
+# =============================================================================
+# Test fetch_abstracts_for_themes (orchestration)
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestFetchAbstractsForThemes:
+    """Tests for fetch_abstracts_for_themes orchestration function."""
+
+    def _make_theme(self, name="T cell activation"):
+        return {
+            "anchor_term": {
+                "name": name,
+                "go_id": "GO:0050870",
+                "genes": ["RELA", "IL6", "TNF"],
+            },
+            "specific_terms": [],
+        }
+
+    def _make_search_tool(self, return_json='[{"pmid": "12345", "title": "Paper", "abstractText": "Abstract."}]'):
+        tool = MagicMock()
+        tool.name = "search_europepmc_papers"
+        tool.handler.return_value = return_json
+        return tool
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_returns_dict_keyed_by_theme_index(self, mock_mcp_cls):
+        """Test that return value is dict[int, list]."""
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_themes
+
+        search_tool = self._make_search_tool()
+        mock_source = MagicMock()
+        mock_source.tools = [search_tool]
+        mock_mcp_cls.return_value.__enter__ = MagicMock(return_value=mock_source)
+        mock_mcp_cls.return_value.__exit__ = MagicMock(return_value=False)
+
+        # Force lazy imports to use the mock
+        import goa_semantic_tools.services.artl_literature_service as svc
+        svc.MCPToolSource = mock_mcp_cls
+
+        themes = [self._make_theme("Theme A"), self._make_theme("Theme B")]
+        result = fetch_abstracts_for_themes(themes, hub_genes={})
+
+        assert isinstance(result, dict)
+        assert 0 in result
+        assert 1 in result
+        assert isinstance(result[0], list)
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_on_mcp_session_failure(self, mock_mcp_cls):
+        """Test that MCP session failure returns all-empty dict."""
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_themes
+
+        mock_mcp_cls.return_value.__enter__ = MagicMock(
+            side_effect=ConnectionError("MCP failed")
+        )
+        mock_mcp_cls.return_value.__exit__ = MagicMock(return_value=False)
+
+        import goa_semantic_tools.services.artl_literature_service as svc
+        svc.MCPToolSource = mock_mcp_cls
+
+        themes = [self._make_theme("Theme A"), self._make_theme("Theme B")]
+        result = fetch_abstracts_for_themes(themes, hub_genes={})
+
+        assert isinstance(result, dict)
+        assert len(result) == 2
+        assert result[0] == []
+        assert result[1] == []
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_per_theme_on_tool_error(self, mock_mcp_cls):
+        """Test that per-theme tool error gives empty list for that theme only."""
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_themes
+
+        good_tool = self._make_search_tool('[{"pmid": "111", "title": "T", "abstractText": "A"}]')
+        failing_tool = MagicMock()
+        failing_tool.name = "search_europepmc_papers"
+
+        # First call raises, second succeeds
+        failing_tool.handler.side_effect = [
+            RuntimeError("tool error"),
+            '[{"pmid": "222", "title": "T2", "abstractText": "B"}]',
+        ]
+
+        mock_source = MagicMock()
+        mock_source.tools = [failing_tool]
+        mock_mcp_cls.return_value.__enter__ = MagicMock(return_value=mock_source)
+        mock_mcp_cls.return_value.__exit__ = MagicMock(return_value=False)
+
+        import goa_semantic_tools.services.artl_literature_service as svc
+        svc.MCPToolSource = mock_mcp_cls
+
+        themes = [self._make_theme("Fails"), self._make_theme("Succeeds")]
+        result = fetch_abstracts_for_themes(themes, hub_genes={})
+
+        assert result[0] == []
+        assert len(result[1]) == 1
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_empty_themes_returns_empty_dict(self, mock_mcp_cls):
+        """Test that empty themes list returns empty dict without MCP call."""
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_themes
+
+        result = fetch_abstracts_for_themes([], hub_genes={})
+
+        assert result == {}
+        mock_mcp_cls.assert_not_called()
+
+
+# =============================================================================
+# Test fetch_abstracts_for_hub_genes
+# =============================================================================
+
+
+@pytest.mark.unit
+class TestFetchAbstractsForHubGenes:
+    """Tests for fetch_abstracts_for_hub_genes."""
+
+    def _make_hub_genes(self, names_counts):
+        """Helper: build hub_genes dict."""
+        return {
+            gene: {"theme_count": count, "themes": [f"theme_{i}" for i in range(min(count, 3))]}
+            for gene, count in names_counts.items()
+        }
+
+    def _make_mock_source(self, return_json):
+        """Helper: build mock MCPToolSource context manager."""
+        mock_tool = MagicMock()
+        mock_tool.name = "search_europepmc_papers"
+        mock_tool.handler.return_value = return_json
+
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+
+        return mock_ctx, mock_tool
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_empty_hub_genes_returns_empty_dict(self, mock_mcp_cls):
+        """Empty hub_genes → empty dict, no MCP call."""
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_hub_genes
+
+        result = fetch_abstracts_for_hub_genes({})
+        assert result == {}
+        mock_mcp_cls.assert_not_called()
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_selects_top_n_hub_genes_by_theme_count(self, mock_mcp_cls):
+        """Only top max_hub_genes genes (by theme_count) are searched."""
+        import json
+
+        paper_json = json.dumps([{"pmid": "11111", "title": "Test", "abstractText": "Abstract"}])
+        mock_ctx, mock_tool = self._make_mock_source(paper_json)
+        mock_mcp_cls.return_value = mock_ctx
+
+        hub_genes = self._make_hub_genes({"GENE_A": 50, "GENE_B": 30, "GENE_C": 20, "GENE_D": 10})
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_hub_genes
+        result = fetch_abstracts_for_hub_genes(hub_genes, max_hub_genes=2)
+
+        assert "GENE_A" in result
+        assert "GENE_B" in result
+        assert "GENE_C" not in result
+        assert "GENE_D" not in result
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_builds_query_from_gene_and_top_theme(self, mock_mcp_cls):
+        """Query should be '{gene} {top_theme_name}'."""
+        import json
+
+        paper_json = json.dumps([])
+        mock_ctx, mock_tool = self._make_mock_source(paper_json)
+        mock_mcp_cls.return_value = mock_ctx
+
+        hub_genes = {"IL6": {"theme_count": 10, "themes": ["inflammatory response", "immune signaling"]}}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_hub_genes
+        fetch_abstracts_for_hub_genes(hub_genes, max_hub_genes=5)
+
+        call_args = mock_tool.handler.call_args[0][0]
+        assert "IL6" in call_args["keywords"]
+        assert "inflammatory response" in call_args["keywords"]
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_session_failure(self, mock_mcp_cls):
+        """Session-level MCP failure → all genes get empty lists, no crash."""
+        mock_mcp_cls.side_effect = Exception("MCP connection refused")
+
+        hub_genes = self._make_hub_genes({"IL6": 10, "TNF": 8})
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_hub_genes
+        result = fetch_abstracts_for_hub_genes(hub_genes)
+
+        assert result == {"IL6": [], "TNF": []}
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_per_gene_failure(self, mock_mcp_cls):
+        """Per-gene tool failure → that gene gets empty list, others continue."""
+        import json
+
+        paper_json = json.dumps([{"pmid": "22222", "title": "Good paper", "abstractText": "Abstract"}])
+
+        mock_tool = MagicMock()
+        mock_tool.name = "search_europepmc_papers"
+        # First call raises, second succeeds
+        mock_tool.handler.side_effect = [Exception("Timeout"), paper_json]
+
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        mock_mcp_cls.return_value = mock_ctx
+
+        hub_genes = {"IL6": {"theme_count": 10, "themes": ["theme1"]},
+                     "TNF": {"theme_count": 8, "themes": ["theme2"]}}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_hub_genes
+        result = fetch_abstracts_for_hub_genes(hub_genes)
+
+        assert result["IL6"] == []
+        assert len(result["TNF"]) > 0
+
+
+# =============================================================================
+# _parse_paper_by_id_result
+# =============================================================================
+
+@pytest.mark.unit
+class TestParsePaperByIdResult:
+    """Tests for _parse_paper_by_id_result."""
+
+    def _paper_json(self, pmid="12345678", title="Test Title", abstract="Test abstract.",
+                    authors=None, year="2020", wrapped=False):
+        import json
+        paper = {
+            "pmid": pmid,
+            "title": title,
+            "abstractText": abstract,
+            "authorList": {"author": authors or [{"lastName": "Smith"}, {"lastName": "Jones"}]},
+            "pubYear": year,
+        }
+        obj = {"result": paper} if wrapped else paper
+        return json.dumps(obj)
+
+    def test_parses_bare_paper_dict(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(self._paper_json())
+        assert result is not None
+        assert result["pmid"] == "12345678"
+        assert result["title"] == "Test Title"
+        assert result["abstract"] == "Test abstract."
+        assert result["year"] == "2020"
+
+    def test_parses_wrapped_result_dict(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(self._paper_json(wrapped=True))
+        assert result is not None
+        assert result["pmid"] == "12345678"
+
+    def test_extracts_authors_up_to_three(self):
+        import json
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        paper = {
+            "pmid": "99",
+            "title": "T",
+            "authorList": {"author": [
+                {"lastName": "A"}, {"lastName": "B"}, {"lastName": "C"}, {"lastName": "D"}
+            ]},
+        }
+        result = _parse_paper_by_id_result(json.dumps(paper))
+        assert result is not None
+        assert "A, B, C et al." == result["authors"]
+
+    def test_returns_none_on_empty_string(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        assert _parse_paper_by_id_result("") is None
+
+    def test_returns_none_on_invalid_json(self):
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        assert _parse_paper_by_id_result("not json {") is None
+
+    def test_returns_none_when_no_pmid_and_no_content(self):
+        import json
+        from goa_semantic_tools.services.artl_literature_service import _parse_paper_by_id_result
+        result = _parse_paper_by_id_result(json.dumps({"pubYear": "2020"}))
+        assert result is None
+
+
+# =============================================================================
+# fetch_abstracts_for_gaf_pmids
+# =============================================================================
+
+@pytest.mark.unit
+class TestFetchAbstractsForGafPmids:
+    """Tests for fetch_abstracts_for_gaf_pmids."""
+
+    def _paper_json(self, pmid):
+        import json
+        return json.dumps({"pmid": pmid, "title": f"Paper {pmid}", "abstractText": f"Abstract {pmid}."})
+
+    def _make_mock_source(self, pmid_to_json: dict):
+        """Build mock MCPToolSource; handler returns per-PMID JSON by identifier arg."""
+        mock_tool = MagicMock()
+        mock_tool.name = "get_europepmc_paper_by_id"
+
+        def handler_side_effect(args):
+            identifier = args.get("identifier", "")
+            return pmid_to_json.get(identifier, "")
+
+        mock_tool.handler.side_effect = handler_side_effect
+
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        return mock_ctx, mock_tool
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_empty_input_returns_empty_dict(self, mock_mcp_cls):
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids({})
+        assert result == {}
+        mock_mcp_cls.assert_not_called()
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_deduplicates_pmids_across_themes(self, mock_mcp_cls):
+        """PMID appearing in 2 themes → only 1 handler call."""
+        shared_pmid = "11111111"
+        mock_ctx, mock_tool = self._make_mock_source({shared_pmid: self._paper_json(shared_pmid)})
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": shared_pmid, "genes_covered": ["GENE1"]}],
+            1: [{"pmid": shared_pmid, "genes_covered": ["GENE2"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        # Handler should be called exactly once despite 2 themes using the same PMID
+        assert mock_tool.handler.call_count == 1
+        # Both themes should have the paper
+        assert len(result[0]) == 1
+        assert len(result[1]) == 1
+        assert result[0][0]["pmid"] == shared_pmid
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_maps_papers_back_to_correct_themes(self, mock_mcp_cls):
+        """Each theme gets only the papers from its own PMIDs."""
+        pmid_a, pmid_b = "22222222", "33333333"
+        mock_ctx, _ = self._make_mock_source({
+            pmid_a: self._paper_json(pmid_a),
+            pmid_b: self._paper_json(pmid_b),
+        })
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": pmid_a, "genes_covered": ["A"]}],
+            1: [{"pmid": pmid_b, "genes_covered": ["B"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result[0][0]["pmid"] == pmid_a
+        assert result[1][0]["pmid"] == pmid_b
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_tool_not_found_returns_empty_lists(self, mock_mcp_cls):
+        """If get_europepmc_paper_by_id tool absent → all themes get empty lists."""
+        mock_source = MagicMock()
+        mock_source.tools = []  # no tools
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {0: [{"pmid": "44444444", "genes_covered": ["X"]}]}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result == {0: []}
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_session_failure(self, mock_mcp_cls):
+        """Session-level MCP failure → all themes get empty lists, no crash."""
+        mock_mcp_cls.side_effect = Exception("MCP connection refused")
+
+        gaf_pmids = {0: [{"pmid": "55555555", "genes_covered": ["X"]}]}
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert result == {0: []}
+
+    @patch("goa_semantic_tools.services.artl_literature_service.MCPToolSource")
+    def test_graceful_degradation_per_pmid_failure(self, mock_mcp_cls):
+        """Per-PMID failure → that PMID excluded, other themes still populated."""
+        pmid_ok, pmid_fail = "66666666", "77777777"
+
+        mock_tool = MagicMock()
+        mock_tool.name = "get_europepmc_paper_by_id"
+
+        def handler_side_effect(args):
+            if args.get("identifier") == pmid_fail:
+                raise RuntimeError("Timeout")
+            return self._paper_json(pmid_ok)
+
+        mock_tool.handler.side_effect = handler_side_effect
+        mock_source = MagicMock()
+        mock_source.tools = [mock_tool]
+        mock_ctx = MagicMock()
+        mock_ctx.__enter__ = MagicMock(return_value=mock_source)
+        mock_ctx.__exit__ = MagicMock(return_value=False)
+        mock_mcp_cls.return_value = mock_ctx
+
+        gaf_pmids = {
+            0: [{"pmid": pmid_ok, "genes_covered": ["A"]}],
+            1: [{"pmid": pmid_fail, "genes_covered": ["B"]}],
+        }
+
+        from goa_semantic_tools.services.artl_literature_service import fetch_abstracts_for_gaf_pmids
+        result = fetch_abstracts_for_gaf_pmids(gaf_pmids)
+
+        assert len(result[0]) == 1
+        assert result[0][0]["pmid"] == pmid_ok
+        assert result[1] == []  # failed PMID → empty

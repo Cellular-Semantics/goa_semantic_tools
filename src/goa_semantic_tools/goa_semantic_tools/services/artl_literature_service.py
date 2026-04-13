@@ -294,3 +294,375 @@ def _load_prompt(prompt_file: str) -> dict[str, Any]:
         raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
 
     return yaml.safe_load(prompt_path.read_text())
+
+
+# =============================================================================
+# Hub gene abstract fetch (targeted Europe PMC search for cross-theme genes)
+# =============================================================================
+
+
+def fetch_abstracts_for_hub_genes(
+    hub_genes: dict[str, Any],
+    max_hub_genes: int = 20,
+    mcp_command: str = "uvx artl-mcp",
+    max_results_per_gene: int = 5,
+) -> dict[str, list[dict[str, Any]]]:
+    """Fetch paper abstracts for top hub genes via Europe PMC (artl-mcp).
+
+    Selects the top max_hub_genes by theme_count (hub genes appearing in the
+    most themes). For each, searches Europe PMC using the gene symbol + its
+    top theme name as keywords. Opens a single MCPToolSource session for all
+    hub genes.
+
+    Args:
+        hub_genes: hub_genes dict from enrichment output
+            {gene: {"theme_count": int, "themes": [str, ...]}}
+        max_hub_genes: Maximum number of hub genes to search (top by theme_count)
+        mcp_command: Command to start the artl-mcp server
+        max_results_per_gene: Maximum papers to retrieve per hub gene
+
+    Returns:
+        Dict mapping gene symbol to list of paper dicts. Each paper dict has
+        keys: pmid, title, abstract, authors, year.
+        Hub genes that fail to retrieve papers get empty lists.
+    """
+    if not hub_genes:
+        return {}
+
+    _ensure_imports()
+
+    # Select top hub genes by theme_count
+    sorted_genes = sorted(
+        hub_genes.items(), key=lambda x: x[1].get("theme_count", 0), reverse=True
+    )[:max_hub_genes]
+
+    results: dict[str, list[dict[str, Any]]] = {}
+
+    try:
+        with MCPToolSource(mcp_command) as source:
+            search_tool = next(
+                (t for t in source.tools if t.name == "search_europepmc_papers"),
+                None,
+            )
+            if search_tool is None:
+                print("  ⚠ search_europepmc_papers tool not found in artl-mcp")
+                return {gene: [] for gene, _ in sorted_genes}
+
+            for gene, data in sorted_genes:
+                try:
+                    top_theme = data.get("themes", [""])[0] if data.get("themes") else ""
+                    query = f"{gene} {top_theme}".strip()
+                    print(f"  [{gene}] Fetching: {query[:70]}...")
+
+                    raw = search_tool.handler({
+                        "keywords": query,
+                        "max_results": max_results_per_gene,
+                        "result_type": "core",
+                    })
+
+                    papers = _parse_search_results(raw or "")
+                    results[gene] = papers
+                    print(f"    {len(papers)} paper(s) found")
+
+                except Exception as e:
+                    print(f"    ⚠ Failed for gene {gene}: {e}")
+                    results[gene] = []
+
+    except Exception as e:
+        print(f"  ⚠ MCP session failed: {e}")
+        results = {gene: [] for gene, _ in sorted_genes}
+
+    return results
+
+
+# =============================================================================
+# Literature pre-fetch (lit-first pipeline — kept for reference, not called by default)
+# =============================================================================
+
+
+def fetch_abstracts_for_themes(
+    themes: list[dict[str, Any]],
+    hub_genes: dict[str, Any],
+    mcp_command: str = "uvx artl-mcp",
+    max_results_per_theme: int = 10,
+) -> dict[int, list[dict[str, Any]]]:
+    """Fetch paper abstracts for each theme via Europe PMC (artl-mcp).
+
+    Opens a single MCPToolSource session for all themes. For each theme,
+    builds a keyword query from the top-ranked genes and anchor GO term name,
+    then calls search_europepmc_papers directly (no LLM involved).
+
+    Args:
+        themes: List of theme dicts from enrichment output
+        hub_genes: hub_genes dict from enrichment output (used for gene ranking)
+        mcp_command: Command to start the artl-mcp server
+        max_results_per_theme: Maximum papers to retrieve per theme
+
+    Returns:
+        Dict mapping theme index to list of paper dicts. Each paper dict has
+        keys: pmid, title, abstract, authors, year.
+        Themes that fail to retrieve papers get empty lists.
+    """
+    if not themes:
+        return {}
+
+    _ensure_imports()
+
+    results: dict[int, list[dict[str, Any]]] = {}
+
+    try:
+        with MCPToolSource(mcp_command) as source:
+            search_tool = next(
+                (t for t in source.tools if t.name == "search_europepmc_papers"),
+                None,
+            )
+            if search_tool is None:
+                print("  ⚠ search_europepmc_papers tool not found in artl-mcp")
+                return {i: [] for i in range(len(themes))}
+
+            for i, theme in enumerate(themes):
+                try:
+                    query = _build_theme_query(theme, hub_genes)
+                    print(f"  [{i + 1}/{len(themes)}] Fetching: {query[:70]}...")
+
+                    raw = search_tool.handler({
+                        "keywords": query,
+                        "max_results": max_results_per_theme,
+                        "result_type": "core",
+                    })
+
+                    papers = _parse_search_results(raw or "")
+                    results[i] = papers
+                    print(f"    {len(papers)} paper(s) found")
+
+                except Exception as e:
+                    print(f"    ⚠ Failed for theme {i}: {e}")
+                    results[i] = []
+
+    except Exception as e:
+        print(f"  ⚠ MCP session failed: {e}")
+        results = {i: [] for i in range(len(themes))}
+
+    return results
+
+
+def _build_theme_query(theme: dict[str, Any], hub_genes: dict[str, Any]) -> str:
+    """Build keyword search query for a theme.
+
+    Uses the top 3 ranked genes (by theme-specificity score) plus the anchor
+    GO term name as the search keywords.
+
+    Args:
+        theme: Single theme dict from enrichment output
+        hub_genes: hub_genes dict from enrichment output
+
+    Returns:
+        Space-separated keyword string for artl-mcp search
+    """
+    from .go_markdown_explanation_service import rank_genes_for_theme
+
+    ranked = rank_genes_for_theme(theme, hub_genes, top_n=3)
+    gene_names = [r["gene"] for r in ranked]
+    anchor_name = theme.get("anchor_term", {}).get("name", "")
+
+    parts = gene_names + ([anchor_name] if anchor_name else [])
+    return " ".join(parts)
+
+
+def _parse_search_results(raw: str) -> list[dict[str, Any]]:
+    """Parse raw JSON returned by search_europepmc_papers into paper dicts.
+
+    Handles both a bare list and dict-wrapped formats that artl-mcp may return.
+
+    Args:
+        raw: Raw string (JSON) from the MCP tool handler
+
+    Returns:
+        List of paper dicts with keys: pmid, title, abstract, authors, year.
+        Returns empty list if raw is empty or unparseable.
+    """
+    if not raw:
+        return []
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return []
+
+    if isinstance(data, list):
+        items = data
+    elif isinstance(data, dict):
+        # Europe PMC core API wraps results under resultList.result
+        items = (
+            data.get("resultList", {}).get("result")
+            or data.get("results")
+            or data.get("papers")
+            or []
+        )
+    else:
+        return []
+
+    papers = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+
+        pmid = str(item.get("pmid") or item.get("id") or "").strip()
+        title = item.get("title", "")
+        abstract = item.get("abstractText", item.get("abstract", ""))
+
+        # Extract author surnames (first 3 authors)
+        authors_data = item.get("authorList", {})
+        if isinstance(authors_data, dict):
+            author_list = authors_data.get("author", [])
+        elif isinstance(authors_data, list):
+            author_list = authors_data
+        else:
+            author_list = []
+
+        surnames = [
+            a.get("lastName", "")
+            for a in author_list[:3]
+            if isinstance(a, dict) and a.get("lastName")
+        ]
+        authors = ", ".join(surnames)
+        if len(author_list) > 3:
+            authors += " et al."
+
+        year = str(item.get("pubYear", "")).strip()
+
+        if pmid and (title or abstract):
+            papers.append({
+                "pmid": pmid,
+                "title": title,
+                "abstract": abstract,
+                "authors": authors,
+                "year": year,
+            })
+
+    return papers
+
+
+def _parse_paper_by_id_result(raw: str) -> dict[str, Any] | None:
+    """Parse raw JSON returned by get_europepmc_paper_by_id into a paper dict.
+
+    Args:
+        raw: Raw string (JSON) from the MCP tool handler
+
+    Returns:
+        Paper dict with keys: pmid, title, abstract, authors, year.
+        Returns None if raw is empty, unparseable, or missing pmid+content.
+    """
+    if not raw:
+        return None
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    # Response may be wrapped: {"result": {...}} or bare paper dict
+    paper = data.get("result", data)
+    if not isinstance(paper, dict):
+        return None
+
+    pmid = str(paper.get("pmid") or paper.get("id") or "").strip()
+    title = paper.get("title", "")
+    abstract = paper.get("abstractText", paper.get("abstract", ""))
+
+    authors_data = paper.get("authorList", {})
+    if isinstance(authors_data, dict):
+        author_list = authors_data.get("author", [])
+    elif isinstance(authors_data, list):
+        author_list = authors_data
+    else:
+        author_list = []
+
+    surnames = [
+        a.get("lastName", "")
+        for a in author_list[:3]
+        if isinstance(a, dict) and a.get("lastName")
+    ]
+    authors = ", ".join(surnames)
+    if len(author_list) > 3:
+        authors += " et al."
+
+    year = str(paper.get("pubYear", "")).strip()
+
+    if pmid and (title or abstract):
+        return {"pmid": pmid, "title": title, "abstract": abstract, "authors": authors, "year": year}
+    return None
+
+
+def fetch_abstracts_for_gaf_pmids(
+    gaf_pmids: dict[int, list[dict[str, Any]]],
+    mcp_command: str = "uvx artl-mcp",
+) -> dict[int, list[dict[str, Any]]]:
+    """Fetch paper abstracts for GAF-curated PMIDs via Europe PMC.
+
+    Deduplicates PMIDs across themes (each PMID fetched once via
+    get_europepmc_paper_by_id), then maps results back to theme indices.
+
+    Args:
+        gaf_pmids: {theme_index: [{pmid, genes_covered}, ...]} from
+            get_gaf_pmids_for_themes()
+        mcp_command: artl-mcp server command
+
+    Returns:
+        {theme_index: [{pmid, title, abstract, authors, year}, ...]}
+        Same shape as paper_abstracts from fetch_abstracts_for_themes().
+        Only entries where an abstract was successfully fetched are included.
+    """
+    if not gaf_pmids:
+        return {}
+
+    _ensure_imports()
+
+    # Collect unique PMIDs across all themes
+    pmid_to_themes: dict[str, list[int]] = {}
+    for theme_idx, entries in gaf_pmids.items():
+        for entry in entries:
+            pmid = entry.get("pmid", "")
+            if pmid:
+                pmid_to_themes.setdefault(pmid, []).append(theme_idx)
+
+    unique_pmids = list(pmid_to_themes)
+    if not unique_pmids:
+        return {i: [] for i in gaf_pmids}
+
+    pmid_to_paper: dict[str, dict[str, Any]] = {}
+    try:
+        with MCPToolSource(mcp_command) as source:
+            fetch_tool = next(
+                (t for t in source.tools if t.name == "get_europepmc_paper_by_id"),
+                None,
+            )
+            if fetch_tool is None:
+                print("  ⚠ get_europepmc_paper_by_id not found in artl-mcp")
+                return {i: [] for i in gaf_pmids}
+
+            print(f"  Fetching {len(unique_pmids)} unique GAF PMIDs from Europe PMC...")
+            for pmid in unique_pmids:
+                try:
+                    raw = fetch_tool.handler({"identifier": pmid})
+                    paper = _parse_paper_by_id_result(raw or "")
+                    if paper:
+                        pmid_to_paper[pmid] = paper
+                except Exception as e:
+                    print(f"    ⚠ Failed for PMID {pmid}: {e}")
+
+    except Exception as e:
+        print(f"  ⚠ MCP session failed: {e}")
+        return {i: [] for i in gaf_pmids}
+
+    print(f"  ✓ Fetched {len(pmid_to_paper)}/{len(unique_pmids)} GAF PMID abstracts")
+
+    # Map back to theme indices preserving entry order
+    results: dict[int, list[dict[str, Any]]] = {}
+    for theme_idx, entries in gaf_pmids.items():
+        results[theme_idx] = [
+            pmid_to_paper[e["pmid"]]
+            for e in entries
+            if e.get("pmid") in pmid_to_paper
+        ]
+    return results

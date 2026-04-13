@@ -1,0 +1,6 @@
+dataset,type,input_genes,annotated,total_terms,terms_per_gene,leaves,total_themes,genes_at_10,pct_at_10,genes_at_20,pct_at_20,genes_at_30,pct_at_30,fdr_at_30_anchor,exclusive_lost_at_20,pct_lost_at_20,exclusive_lost_at_30,pct_lost_at_30,mrcea_a_leaves,mrcea_a_themes,mrcea_a_lt,mrcea_b_themes,mrcea_b_lt,note
+Himes 2014 airway,real_sparse,314,288,80,0.28,22,22,102,35.4,125,43.4,141,49.0,4.77e-02,16,5.6,0,0.0,22,22,1.00,22,1.00,(all fit)
+NAFLD C_1 RTK/Rho,real_community,150,149,733,4.92,232,207,101,67.8,123,82.6,126,84.6,1.22e-08,25,16.8,22,14.8,154,98,1.57,85,1.81,MRCEA leaves differ from main pipeline (script FDR threshold)
+NAFLD C_3 cell cycle,real_community,152,148,536,3.62,147,139,90,60.8,106,71.6,118,79.7,5.03e-09,41,27.7,29,19.6,81,54,1.50,51,1.59,MRCEA leaves differ from main pipeline (script FDR threshold)
+Hoang 2019 NAFLD (full),real_mixed,637,623,2060,3.31,653,582,146,23.4,233,37.4,270,43.3,6.53e-10,372,59.7,335,53.8,477,359,1.33,331,1.44,
+hm_inflam (synthetic),synthetic,200,200,1042,5.21,253,224,98,49.0,126,63.0,138,69.0,2.09e-10,58,29.0,46,23.0,,,,,MRCEA-A not run on this set

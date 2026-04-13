@@ -1,6 +1,6 @@
 # GOA Semantic Tools - Development Roadmap
 
-**Last Updated**: 2026-02-24
+**Last Updated**: 2026-03-26
 
 ## What This Tool Does
 
@@ -81,52 +81,80 @@ JSON intermediate architecture: LLM fills structured `EnrichmentExplanation` JSO
 
 **Known issue: ~100 unresolved assertions per run.** The post-hoc pipeline extracts `[INFERENCE]`/`[EXTERNAL]` tagged narrative sentences, does GAF+artl-mcp lookup, but ~100 remain unresolvable. Root cause is the architecture: LLM generates claims from latent knowledge first, then we search for papers to support them — the tail end has claims that are too vague, too general, or slightly mismatched with what literature indexing can find. See Ring 1c below.
 
-### Future Ring 1 (after 1b)
+### 1c. Paper-Grounded Narrative Generation — DONE
 
-### 1c. Paper-Grounded Narrative Generation
+**Problem solved**: The post-hoc reference pipeline generated narrative from latent knowledge, then searched for papers to support it, leaving ~100 unresolved assertions per run.
 
-**Problem**: The current pipeline generates narrative from latent knowledge, then post-hoc searches for papers to support it. This produces ~100 unresolved assertions per run — claims the LLM made that no paper explicitly confirms.
-
-**Root cause**: The post-hoc direction is fundamentally harder than the pre-hoc direction. Finding a paper that matches a vague LLM-generated claim is harder than having the LLM write a claim based on a paper it has in context.
-
-**Proposed architectural shift**: Fetch papers *before* the LLM explanation call, and provide them as grounding context. The LLM then cites papers it is actually summarising rather than making claims that need retrospective validation.
-
-Three possible approaches:
-
-#### Option A: RAG per theme (pre-fetch, then generate)
+**Solution implemented**: Lit-first architecture — fetch Europe PMC abstracts *before* the LLM explanation call.
 
 ```text
-For each theme:
-  1. artl-mcp: search for papers on ranked key genes + anchor GO term name
-  2. Pass top 3-5 paper abstracts as context to LLM
-  3. LLM generates narrative with inline citations (e.g., "as shown in [1]")
-  4. Map citation numbers back to PMIDs in post-processing
+themes + hub_genes
+    ↓
+fetch_abstracts_for_themes()   [artl-mcp, single MCPToolSource session]
+    ↓  dict[theme_index → list[{pmid, title, abstract, ...}]]
+_format_enrichment_for_llm()   [injects "Available Literature" blocks per theme]
+    ↓
+LLM  [cites provided PMIDs inline: "PMID:10383454"]
+    ↓
+render_explanation_to_markdown()   [no [REF:GENE] markers]
+    ↓
+Final markdown with inline citations
 ```
 
-Advantages: eliminates the unresolved assertion problem; LLM narrative is grounded.
-Disadvantages: artl-mcp cost moves from ~$0.06/run (post-hoc, only unresolved) to ~cost × n_themes upfront; slower.
+Key changes:
+- `fetch_abstracts_for_themes()` in `artl_literature_service.py` — calls `search_europepmc_papers` tool handler directly (no LLM for search phase)
+- `_format_enrichment_for_llm()` — accepts `paper_abstracts` dict, injects abstract blocks per theme (400-char truncation)
+- `go_explanation.prompt.yaml` — instructs LLM to cite inline as `PMID:xxx`, only from provided papers
+- `cli.py` — Phase 1b pre-fetch before Phase 2 LLM; old post-hoc `_add_references_to_explanation()` bypassed
 
-#### Option B: Reuse key-gene PMIDs for narrative claims (cheaper fix)
+### 1d. Report Quality + Token Budget Robustness — DONE
 
-```text
-After artl-mcp runs for key genes, build gene→PMIDs map.
-For narrative sentences containing gene symbols, automatically attach
-the same PMIDs already found for that gene's key-gene entry.
-```
+Bug fixes and rendering improvements to the markdown report:
 
-Advantages: zero extra artl-mcp cost; reuses work already done.
-Disadvantages: PMID is about the gene broadly, not specifically about the claim sentence. Acceptable for `[EXTERNAL]` single-gene claims; less appropriate for multi-gene `[INFERENCE]` claims.
+**Theme index fix**: LLM context now includes explicit `theme_index` field per theme block, eliminating the off-by-one that caused theme headings to mismatch narrative content.
 
-#### Option C: Tighter claim extraction (cheapest fix)
+**Report structure**:
+- Methodology note at top explaining theme cap (top 30 by FDR), how themes are selected, and what anchors are
+- `anchor_confidence` rendered on each theme summary line
+- Full theme reference table at end of report (all themes, minimal detail)
+- PMID hyperlink wiring: `_add_pmid_hyperlinks()` now called in the render pipeline
 
-```text
-Current extract_claims() parses every [INFERENCE]/[EXTERNAL] sentence as a claim.
-Many produce no usable assertions (no gene match, or gene match too vague).
-Filter: only create assertions where ≥1 gene from the enrichment gene set is mentioned.
-This would reduce 102 → maybe 20-30 genuinely meaningful unresolved claims.
-```
+**Markdown quality**:
+- LLM prose fields constrained to plain text via schema descriptions + prompt rule (prevents `**bold**`, `##`, etc. in narrative)
+- `mdformat` post-processing (`wrap=no`) normalises whitespace and blank lines
+- Blank-line rendering fix: `"".join(lines)` was silently discarding empty strings — changed to `"\n"` tokens throughout `render_explanation_to_markdown()`
+- Subheadings promoted from inline bold to proper `####` headings
 
-Recommendation: Implement Option C first (filter low-signal claims), then evaluate whether Option B suffices or Option A is needed. Option A is the architecturally correct long-term solution but carries runtime and cost implications worth validating with users first.
+**Token budget**:
+- Hub gene cap: top 20 by theme_count in both JSON schema (`maxItems: 20`) and LLM context (was unordered all-genes); matches `fetch_abstracts_for_hub_genes(max_hub_genes=20)`
+- `max_tokens` default raised 8000 → 16000 for all models
+- Per-model token defaults: `gpt-5` auto-gets 32000 via `_get_default_max_tokens()` lookup
+- `--max-tokens` CLI flag added for user overrides on any model
+
+**302 unit tests, 68% coverage**
+
+### 1e. Report Format Overhaul — DONE
+
+Clean up and restructure markdown report output:
+
+- **Theme index at top**: compact table linking to each theme section (anchor, NS, FDR, gene count, confidence); replaces the broken flat reference table at the bottom
+- **Themes CSV export**: `write_themes_csv()` writes `*_themes.csv` alongside the report — full gene lists (semicolon-separated), fold enrichment, confidence, namespace; linked from the theme index
+- **mdformat removed**: was causing `FDR\<0.05` escaping and `______` thematic breaks; removed entirely, output is clean without post-processing
+- **GO link double-linking fix**: `_add_go_term_hyperlinks()` regex changed from `GO:\d{7}` to `(?<!\[)GO:\d{7}` — negative lookbehind prevents re-linking IDs already inside markdown links
+
+### 1f. Batch Mode (`--project CSV`) — DONE
+
+Process multiple gene lists from a project CSV in a single invocation:
+
+- `--project CSV` added to the mutually exclusive input group; incompatible with `--output` (paths derived automatically)
+- `_parse_project_csv()` — validates required columns (`name`, `genes`), returns row dicts
+- `_run_pipeline()` — extracted from `main()` so single-run and batch share identical pipeline logic
+- `_run_batch()` — sequential execution; reads CSV, derives `project_name = CSV stem`, computes single datestamp for the whole batch, calls `_run_pipeline()` per row with `copy.copy(args)` for per-row species overrides, continues on failure, appends to `results/{project_name}/batch_run.json` manifest
+- Output layout: `results/{project_name}/{name}/{datestamp}/{name}_enrichment.json` etc.
+- `--dry-run` supported (prints plan per row, no execution)
+- 19 unit tests in `tests/unit/test_cli_batch.py`
+
+**502 unit tests**
 
 ### 2. Exploratory Sub-Threshold Term Discovery
 
@@ -160,10 +188,18 @@ Strengthen biological interpretation by combining evidence across GO namespaces:
 
 ---
 
-## Ring 2: Speculative
+## Ring 2: Post-Ring-1 Features
 
 ### Semantic Similarity Clustering
 Use GO term IC-based or embedding-based similarity as alternative/complement to hierarchy-based clustering. May help in sparse GO branches.
+
+See: [Enrichment Anchor Critique](enrichment_anchor_critique.md) for analysis of current compression failure, comparison with REVIGO/rrvgo semantic similarity measures, and the `regulates`-extended anchor proposal.
+
+### Multi-Axis Narrative Structure
+
+Organise themes into 3–5 LLM-defined biological axes (e.g. "immune regulation", "metabolism", "ECM remodelling"), each with a tree-structured narrative. Two-phase: Phase A (axis identification, ~4–6k tokens) → Phase B (per-axis narrative, existing pipeline). Deferred until MRCEA-B theme quality is improved — axis identification over 153 cleaner themes will produce better results than over 224 semi-redundant depth-anchor themes.
+
+See: [Enrichment Anchor Critique §10](enrichment_anchor_critique.md) for context efficiency analysis and design notes.
 
 ### Multi-Ontology Support
 The architecture after flat enriched terms is ontology-agnostic if abstracted to: term→parent/child, term→genes, gene→annotation refs. Could extend to HPO, Disease Ontology, Reactome.
@@ -175,12 +211,37 @@ For enrichment leaves, pull PMIDs from non-significant child term annotations to
 
 ## Technical Debt
 
+- [x] **Fold enrichment formula** — was computing `study_count/pop_count` instead of `(study_count/study_total)/(pop_count/pop_total)`. Fixed 2026-03-13 in `go_enrichment_service.py`. See [Enrichment Anchor Critique §13](enrichment_anchor_critique.md).
+- [x] **Theme content mismatch** — LLM narrative rendered even when validator detected wrong genes/GO IDs (late sparse themes). Fixed 2026-03-13: renderer falls back to data-only stub for flagged themes. See [Enrichment Anchor Critique §13](enrichment_anchor_critique.md).
 - [ ] Add population counts to theme output (fold enrichment transparency)
 - [ ] Cache GO DAG loading (currently ~1s per run)
 - [ ] Schema updates for HierarchicalTheme structure (JSON schema → Pydantic)
 - [ ] Benchmark depth-anchor algorithm (Option C) across all hallmark sets
-- [ ] Consider IC calculation for term specificity metrics
+- [ ] Consider IC calculation for term specificity metrics (see [Enrichment Anchor Critique](enrichment_anchor_critique.md) — depth is a poor IC proxy in dense annotation branches)
+- [ ] Gene symbol normalisation — 26/314 Himes genes not found in GOA (outdated HGNC: CTGF→CCN2, CYR61→CCN1, WARS→WARS1 etc.). Pre-processing step needed.
 - [ ] Additional test cases: rare disease genes (sparse GO), small gene sets (<20 genes)
+
+---
+
+## Ring 3: Validation Tooling
+
+### `goa_semantic_tools_validation_tools` — Flesh Out
+
+The validation package skeleton exists but is largely empty. Needs to be developed to support systematic quality assessment as the pipeline evolves.
+
+**Planned components:**
+
+| Component | Description |
+|-----------|-------------|
+| `comparisons/theme_concordance.py` | Compare pipeline themes against published GO clusters (DAVID/clusterProfiler); compute recall/precision per cluster |
+| `comparisons/run_diff.py` | Diff two enrichment JSON outputs (e.g. depth-anchor vs MRCEA-B) on same gene list |
+| `metrics/compression_metrics.py` | L/T ratio, coverage at N themes, standalone fraction, hub gene concentration |
+| `metrics/narrative_quality.py` | Count `[DATA]` vs `[EXTERNAL]` vs unfilled placeholders; citation density |
+| `visualizations/theme_coverage.py` | Gene coverage curve as function of top-N themes |
+
+**Reference datasets for regression tests**: Experimental sets in `input_data/experimental/` with published GO analysis. Each test checks that key biological themes are recovered and that specific genes appear in expected theme positions.
+
+**Priority**: Implement after Ring 1 is fully stable and MRCEA-B is in production. Validation tooling is needed to confidently compare algorithm variants.
 
 ---
 
@@ -203,19 +264,28 @@ For enrichment leaves, pull PMIDs from non-significant child term annotations to
 └──────────────────────────┬──────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
-│ LLM EXPLANATION (go_markdown_explanation_service.py)     │
-│ Provenance-labeled summary: [DATA] [INFERENCE]          │
-│ [EXTERNAL] [GO-HIERARCHY]                               │
+│ PHASE 1b: LITERATURE PRE-FETCH (artl_literature_service)│
+│ Per theme: Europe PMC search (top genes + anchor name)  │
+│ Per hub gene: Europe PMC search (gene + theme)          │
+│ GAF PMIDs: gene→GO→PMID index (reference_index.py)     │
 └──────────────────────────┬──────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
-│ REFERENCE INJECTION (reference_retrieval_service.py)    │
-│ Parse claims → GAF PMID lookup → artl-mcp escalation    │
-│ → inject [Refs: PMID:xxx] into markdown                 │
+│ LLM EXPLANATION (go_markdown_explanation_service.py)    │
+│ Abstracts + GAF PMIDs injected into theme context       │
+│ LLM cites inline: PMID:xxxxx within provenance tags     │
+│ [DATA] [INFERENCE] [EXTERNAL] [GO-HIERARCHY]            │
 └──────────────────────────┬──────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
-│ OUTPUT: Markdown report + JSON themes + artl queries     │
+│ RENDER + POST-PROCESS                                   │
+│ render_explanation_to_markdown() → PMID hyperlinks      │
+│ write_themes_csv() → *_themes.csv                       │
+│ theme index table injected at top of report             │
+└──────────────────────────┬──────────────────────────────┘
+                           ↓
+┌─────────────────────────────────────────────────────────┐
+│ OUTPUT: Markdown report + themes CSV + JSON             │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -241,6 +311,18 @@ Located in `input_data/benchmark_sets/test_lists/`:
 **Positive controls**: `hallmark_apoptosis.txt` (161 genes), `hallmark_dna_repair.txt` (150), `hallmark_hypoxia.txt` (200), `hallmark_inflammatory_response.txt` (200), `hallmark_p53_pathway.txt` (200), `hallmark_oxidative_phosphorylation.txt` (200)
 
 **Negative controls**: `random_50_genes.txt`, `random_100_genes.txt`, `random_200_genes.txt`
+
+**Caveat**: Hallmark sets are synthetic (curated for GO-density) — ~5× more enriched terms/gene than typical experimental data. Not representative of real-world use.
+
+### Experimental Benchmark Sets
+
+Located in `test_data/experimental/` (git-tracked; small committed files). Real bulk RNA-seq datasets with published GO analysis for quality comparison.
+
+| Study | File | Genes | Published analysis | Key biology |
+|-------|------|-------|--------------------|-------------|
+| Himes et al. 2014 (PMID:24926665) | `test_data/experimental/himes2014_airway/himes2014_dex_airway_DEGs.txt` | 314 | DAVID clusters (Supplement 4) | Glucocorticoid response, ECM, cell migration |
+
+**Intended future use**: Reference datasets for `goa_semantic_tools_validation_tools` regression tests (narrative quality, theme concordance with published clusters). See Ring 3 below.
 
 ### Exploration Scripts
 

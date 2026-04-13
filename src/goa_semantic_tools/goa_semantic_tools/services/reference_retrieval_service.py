@@ -467,6 +467,75 @@ def format_references_needing_artl_mcp(
 # =============================================================================
 
 
+def get_gaf_pmids_for_themes(
+    themes: list[dict[str, Any]],
+    ref_index: dict[str, Any],
+    top_n: int = 5,
+    descendants_closure: dict[str, set[str]] | None = None,
+) -> dict[int, list[dict[str, Any]]]:
+    """Get curated GAF PMIDs for each theme using the reference index.
+
+    For each theme, collects all genes and GO IDs from the anchor term and
+    specific_terms, then calls find_pmids_covering_genes() to get curated
+    PMIDs sorted by how many theme genes they annotate.
+
+    Args:
+        themes: List of theme dicts from enrichment output (themes key)
+        ref_index: Reference index from load_gaf_with_pmids()
+        top_n: Maximum number of PMIDs to return per theme
+        descendants_closure: Optional pre-computed GO term descendant closure.
+            When provided, GAF annotations to descendant terms also match,
+            dramatically increasing PMID coverage for higher-level anchors.
+
+    Returns:
+        Dict mapping theme index to list of PMID dicts:
+        {theme_index: [{"pmid": str, "genes_covered": list[str]}, ...]}
+        Themes with no curated PMIDs get empty lists.
+    """
+    from ..utils.reference_index import find_pmids_covering_genes
+
+    results: dict[int, list[dict[str, Any]]] = {}
+
+    for i, theme in enumerate(themes):
+        anchor = theme.get("anchor_term", {})
+        specific_terms = theme.get("specific_terms", [])
+
+        # Collect all genes and GO IDs in this theme
+        genes: list[str] = list(anchor.get("genes", []))
+        go_ids: list[str] = []
+        if anchor.get("go_id"):
+            go_ids.append(anchor["go_id"])
+
+        for st in specific_terms:
+            genes.extend(st.get("genes", []))
+            if st.get("go_id"):
+                go_ids.append(st["go_id"])
+
+        # Deduplicate
+        genes = list(dict.fromkeys(genes))
+
+        if not genes or not go_ids:
+            results[i] = []
+            continue
+
+        pmid_records = find_pmids_covering_genes(
+            genes, go_ids, ref_index,
+            descendants_closure=descendants_closure,
+            min_genes=1,
+        )
+        results[i] = [
+            {
+                "pmid": r["pmid"],
+                "genes_covered": r["genes_covered"],
+                "go_terms": r.get("go_terms", []),
+                "gene_go_map": r.get("gene_go_map", {}),
+            }
+            for r in pmid_records[:top_n]
+        ]
+
+    return results
+
+
 def _load_prompt(prompt_file: str) -> dict[str, Any]:
     """
     Load co-located prompt YAML file.
