@@ -1,0 +1,1194 @@
+{
+  "0": [
+    {
+      "pmid": "26094765",
+      "genes_covered": [
+        "NTRK2"
+      ],
+      "go_terms": [
+        "GO:1902430"
+      ],
+      "gene_go_map": {
+        "NTRK2": [
+          "GO:1902430"
+        ]
+      },
+      "gene_go_named": {
+        "NTRK2": [
+          "negative regulation of amyloid-beta formation [GO:1902430]"
+        ]
+      }
+    },
+    {
+      "pmid": "24523320",
+      "genes_covered": [
+        "SORL1"
+      ],
+      "go_terms": [
+        "GO:1902430"
+      ],
+      "gene_go_map": {
+        "SORL1": [
+          "GO:1902430"
+        ]
+      },
+      "gene_go_named": {
+        "SORL1": [
+          "negative regulation of amyloid-beta formation [GO:1902430]"
+        ]
+      }
+    },
+    {
+      "pmid": "24154541",
+      "genes_covered": [
+        "APOE"
+      ],
+      "go_terms": [
+        "GO:1902430"
+      ],
+      "gene_go_map": {
+        "APOE": [
+          "GO:1902430"
+        ]
+      },
+      "gene_go_named": {
+        "APOE": [
+          "negative regulation of amyloid-beta formation [GO:1902430]"
+        ]
+      }
+    },
+    {
+      "pmid": "24001769",
+      "genes_covered": [
+        "SORL1"
+      ],
+      "go_terms": [
+        "GO:1902430"
+      ],
+      "gene_go_map": {
+        "SORL1": [
+          "GO:1902430"
+        ]
+      },
+      "gene_go_named": {
+        "SORL1": [
+          "negative regulation of amyloid-beta formation [GO:1902430]"
+        ]
+      }
+    },
+    {
+      "pmid": "22621900",
+      "genes_covered": [
+        "SORL1"
+      ],
+      "go_terms": [
+        "GO:1902430"
+      ],
+      "gene_go_map": {
+        "SORL1": [
+          "GO:1902430"
+        ]
+      },
+      "gene_go_named": {
+        "SORL1": [
+          "negative regulation of amyloid-beta formation [GO:1902430]"
+        ]
+      }
+    }
+  ],
+  "1": [
+    {
+      "pmid": "30992345",
+      "genes_covered": [
+        "GJA1"
+      ],
+      "go_terms": [
+        "GO:0000132"
+      ],
+      "gene_go_map": {
+        "GJA1": [
+          "GO:0000132"
+        ]
+      },
+      "gene_go_named": {
+        "GJA1": [
+          "establishment of mitotic spindle orientation [GO:0000132]"
+        ]
+      }
+    },
+    {
+      "pmid": "29467281",
+      "genes_covered": [
+        "DOCK7"
+      ],
+      "go_terms": [
+        "GO:0031106"
+      ],
+      "gene_go_map": {
+        "DOCK7": [
+          "GO:0031106"
+        ]
+      },
+      "gene_go_named": {
+        "DOCK7": [
+          "septin ring organization [GO:0031106]"
+        ]
+      }
+    },
+    {
+      "pmid": "29449551",
+      "genes_covered": [
+        "CFAP43"
+      ],
+      "go_terms": [
+        "GO:0007288"
+      ],
+      "gene_go_map": {
+        "CFAP43": [
+          "GO:0007288"
+        ]
+      },
+      "gene_go_named": {
+        "CFAP43": [
+          "sperm axoneme assembly [GO:0007288]"
+        ]
+      }
+    },
+    {
+      "pmid": "27410476",
+      "genes_covered": [
+        "KANK1"
+      ],
+      "go_terms": [
+        "GO:0043622"
+      ],
+      "gene_go_map": {
+        "KANK1": [
+          "GO:0043622"
+        ]
+      },
+      "gene_go_named": {
+        "KANK1": [
+          "cortical microtubule organization [GO:0043622]"
+        ]
+      }
+    },
+    {
+      "pmid": "26869880",
+      "genes_covered": [
+        "NOS1AP"
+      ],
+      "go_terms": [
+        "GO:0098974"
+      ],
+      "gene_go_map": {
+        "NOS1AP": [
+          "GO:0098974"
+        ]
+      },
+      "gene_go_named": {
+        "NOS1AP": [
+          "postsynaptic actin cytoskeleton organization [GO:0098974]"
+        ]
+      }
+    }
+  ],
+  "2": [],
+  "3": [
+    {
+      "pmid": "22797597",
+      "genes_covered": [
+        "TNIK"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "TNIK": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "TNIK": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    },
+    {
+      "pmid": "20962267",
+      "genes_covered": [
+        "CD44"
+      ],
+      "go_terms": [
+        "GO:0016324",
+        "GO:0031258"
+      ],
+      "gene_go_map": {
+        "CD44": [
+          "GO:0016324",
+          "GO:0031258"
+        ]
+      },
+      "gene_go_named": {
+        "CD44": [
+          "apical plasma membrane [GO:0016324]",
+          "lamellipodium membrane [GO:0031258]"
+        ]
+      }
+    },
+    {
+      "pmid": "19800018",
+      "genes_covered": [
+        "NOS1AP"
+      ],
+      "go_terms": [
+        "GO:0005901"
+      ],
+      "gene_go_map": {
+        "NOS1AP": [
+          "GO:0005901"
+        ]
+      },
+      "gene_go_named": {
+        "NOS1AP": [
+          "caveola [GO:0005901]"
+        ]
+      }
+    },
+    {
+      "pmid": "19559006",
+      "genes_covered": [
+        "KANK1"
+      ],
+      "go_terms": [
+        "GO:0032587"
+      ],
+      "gene_go_map": {
+        "KANK1": [
+          "GO:0032587"
+        ]
+      },
+      "gene_go_named": {
+        "KANK1": [
+          "ruffle membrane [GO:0032587]"
+        ]
+      }
+    },
+    {
+      "pmid": "18687783",
+      "genes_covered": [
+        "SLCO1C1"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "SLCO1C1": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "SLCO1C1": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    }
+  ],
+  "4": [
+    {
+      "pmid": "23382103",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0070527"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0070527"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "platelet aggregation [GO:0070527]"
+        ]
+      }
+    },
+    {
+      "pmid": "20086044",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0090136"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0090136"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "epithelial cell-cell adhesion [GO:0090136]"
+        ]
+      }
+    },
+    {
+      "pmid": "18644975",
+      "genes_covered": [
+        "PTPRT"
+      ],
+      "go_terms": [
+        "GO:0007156"
+      ],
+      "gene_go_map": {
+        "PTPRT": [
+          "GO:0007156"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRT": [
+          "homophilic cell-cell adhesion [GO:0007156]"
+        ]
+      }
+    },
+    {
+      "pmid": "15100360",
+      "genes_covered": [
+        "CD44"
+      ],
+      "go_terms": [
+        "GO:0070487"
+      ],
+      "gene_go_map": {
+        "CD44": [
+          "GO:0070487"
+        ]
+      },
+      "gene_go_named": {
+        "CD44": [
+          "monocyte aggregation [GO:0070487]"
+        ]
+      }
+    },
+    {
+      "pmid": "12504588",
+      "genes_covered": [
+        "ROBO2"
+      ],
+      "go_terms": [
+        "GO:0007156"
+      ],
+      "gene_go_map": {
+        "ROBO2": [
+          "GO:0007156"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO2": [
+          "homophilic cell-cell adhesion [GO:0007156]"
+        ]
+      }
+    }
+  ],
+  "5": [
+    {
+      "pmid": "34706237",
+      "genes_covered": [
+        "GRIK1"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "GRIK1": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "GRIK1": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "29114105",
+      "genes_covered": [
+        "NRG3"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "NRG3": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "NRG3": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "26869880",
+      "genes_covered": [
+        "NOS1AP"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "NOS1AP": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "NOS1AP": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "22637583",
+      "genes_covered": [
+        "APOE"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "APOE": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "APOE": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "21893069",
+      "genes_covered": [
+        "GRIK1"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "GRIK1": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "GRIK1": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    }
+  ],
+  "6": [
+    {
+      "pmid": "19800018",
+      "genes_covered": [
+        "NOS1AP"
+      ],
+      "go_terms": [
+        "GO:0005901"
+      ],
+      "gene_go_map": {
+        "NOS1AP": [
+          "GO:0005901"
+        ]
+      },
+      "gene_go_named": {
+        "NOS1AP": [
+          "caveola [GO:0005901]"
+        ]
+      }
+    },
+    {
+      "pmid": "16945930",
+      "genes_covered": [
+        "CD44"
+      ],
+      "go_terms": [
+        "GO:0045121"
+      ],
+      "gene_go_map": {
+        "CD44": [
+          "GO:0045121"
+        ]
+      },
+      "gene_go_named": {
+        "CD44": [
+          "membrane raft [GO:0045121]"
+        ]
+      }
+    },
+    {
+      "pmid": "15469992",
+      "genes_covered": [
+        "ABCA1"
+      ],
+      "go_terms": [
+        "GO:0045121"
+      ],
+      "gene_go_map": {
+        "ABCA1": [
+          "GO:0045121"
+        ]
+      },
+      "gene_go_named": {
+        "ABCA1": [
+          "membrane raft [GO:0045121]"
+        ]
+      }
+    }
+  ],
+  "7": [
+    {
+      "pmid": "29500354",
+      "genes_covered": [
+        "SLC4A4"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "SLC4A4": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "SLC4A4": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "21310825",
+      "genes_covered": [
+        "ITGB4"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ITGB4": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ITGB4": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "19933311",
+      "genes_covered": [
+        "ITGB4"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ITGB4": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ITGB4": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "18644975",
+      "genes_covered": [
+        "PTPRT"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "PTPRT": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRT": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "17567961",
+      "genes_covered": [
+        "CLU"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "CLU": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "CLU": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    }
+  ],
+  "8": [
+    {
+      "pmid": "21423176",
+      "genes_covered": [
+        "CD44",
+        "CD99",
+        "CNN3",
+        "DOCK7",
+        "GJA1",
+        "TLN2",
+        "TNC",
+        "VCL",
+        "VIM"
+      ],
+      "go_terms": [
+        "GO:0005925"
+      ],
+      "gene_go_map": {
+        "CD44": [
+          "GO:0005925"
+        ],
+        "CD99": [
+          "GO:0005925"
+        ],
+        "CNN3": [
+          "GO:0005925"
+        ],
+        "DOCK7": [
+          "GO:0005925"
+        ],
+        "GJA1": [
+          "GO:0005925"
+        ],
+        "TLN2": [
+          "GO:0005925"
+        ],
+        "TNC": [
+          "GO:0005925"
+        ],
+        "VCL": [
+          "GO:0005925"
+        ],
+        "VIM": [
+          "GO:0005925"
+        ]
+      },
+      "gene_go_named": {
+        "CD44": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "CD99": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "CNN3": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "DOCK7": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "GJA1": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "TLN2": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "TNC": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "VCL": [
+          "focal adhesion [GO:0005925]"
+        ],
+        "VIM": [
+          "focal adhesion [GO:0005925]"
+        ]
+      }
+    },
+    {
+      "pmid": "29162887",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005925"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005925"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "focal adhesion [GO:0005925]"
+        ]
+      }
+    },
+    {
+      "pmid": "26923917",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005925"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005925"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "focal adhesion [GO:0005925]"
+        ]
+      }
+    },
+    {
+      "pmid": "20086044",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005925"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005925"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "focal adhesion [GO:0005925]"
+        ]
+      }
+    },
+    {
+      "pmid": "15070891",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005925"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005925"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "focal adhesion [GO:0005925]"
+        ]
+      }
+    }
+  ],
+  "9": [
+    {
+      "pmid": "26923917",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "25468996",
+      "genes_covered": [
+        "CNN3"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "CNN3": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "CNN3": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "22846708",
+      "genes_covered": [
+        "FRMD5"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "FRMD5": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "FRMD5": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "20086044",
+      "genes_covered": [
+        "VCL"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "VCL": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "VCL": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "10085297",
+      "genes_covered": [
+        "SORBS1"
+      ],
+      "go_terms": [
+        "GO:0005915",
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "SORBS1": [
+          "GO:0005912",
+          "GO:0005915"
+        ]
+      },
+      "gene_go_named": {
+        "SORBS1": [
+          "adherens junction [GO:0005912]",
+          "zonula adherens [GO:0005915]"
+        ]
+      }
+    }
+  ],
+  "10": [
+    {
+      "pmid": "33811546",
+      "genes_covered": [
+        "CDH11"
+      ],
+      "go_terms": [
+        "GO:0030336"
+      ],
+      "gene_go_map": {
+        "CDH11": [
+          "GO:0030336"
+        ]
+      },
+      "gene_go_named": {
+        "CDH11": [
+          "negative regulation of cell migration [GO:0030336]"
+        ]
+      }
+    },
+    {
+      "pmid": "30599359",
+      "genes_covered": [
+        "GJA1"
+      ],
+      "go_terms": [
+        "GO:1901164"
+      ],
+      "gene_go_map": {
+        "GJA1": [
+          "GO:1901164"
+        ]
+      },
+      "gene_go_named": {
+        "GJA1": [
+          "negative regulation of trophoblast cell migration [GO:1901164]"
+        ]
+      }
+    },
+    {
+      "pmid": "28228547",
+      "genes_covered": [
+        "LIMCH1"
+      ],
+      "go_terms": [
+        "GO:0030336"
+      ],
+      "gene_go_map": {
+        "LIMCH1": [
+          "GO:0030336"
+        ]
+      },
+      "gene_go_named": {
+        "LIMCH1": [
+          "negative regulation of cell migration [GO:0030336]"
+        ]
+      }
+    },
+    {
+      "pmid": "25448675",
+      "genes_covered": [
+        "FRMD5"
+      ],
+      "go_terms": [
+        "GO:2000146"
+      ],
+      "gene_go_map": {
+        "FRMD5": [
+          "GO:2000146"
+        ]
+      },
+      "gene_go_named": {
+        "FRMD5": [
+          "negative regulation of cell motility [GO:2000146]"
+        ]
+      }
+    },
+    {
+      "pmid": "24846175",
+      "genes_covered": [
+        "PTPRT"
+      ],
+      "go_terms": [
+        "GO:0030336"
+      ],
+      "gene_go_map": {
+        "PTPRT": [
+          "GO:0030336"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRT": [
+          "negative regulation of cell migration [GO:0030336]"
+        ]
+      }
+    }
+  ],
+  "11": [
+    {
+      "pmid": "20082305",
+      "genes_covered": [
+        "FMN2"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "FMN2": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "FMN2": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "10629061",
+      "genes_covered": [
+        "DAPK1"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "DAPK1": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "DAPK1": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "10320934",
+      "genes_covered": [
+        "TLN2"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "TLN2": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "TLN2": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "9245787",
+      "genes_covered": [
+        "ABLIM1"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "ABLIM1": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "ABLIM1": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "8756646",
+      "genes_covered": [
+        "IQGAP2"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "IQGAP2": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "IQGAP2": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    }
+  ],
+  "12": [
+    {
+      "pmid": "16982419",
+      "genes_covered": [
+        "DOCK7"
+      ],
+      "go_terms": [
+        "GO:0030424",
+        "GO:0043005"
+      ],
+      "gene_go_map": {
+        "DOCK7": [
+          "GO:0030424",
+          "GO:0043005"
+        ]
+      },
+      "gene_go_named": {
+        "DOCK7": [
+          "axon [GO:0030424]",
+          "neuron projection [GO:0043005]"
+        ]
+      }
+    },
+    {
+      "pmid": "14532270",
+      "genes_covered": [
+        "PACRG"
+      ],
+      "go_terms": [
+        "GO:0043005"
+      ],
+      "gene_go_map": {
+        "PACRG": [
+          "GO:0043005"
+        ]
+      },
+      "gene_go_named": {
+        "PACRG": [
+          "neuron projection [GO:0043005]"
+        ]
+      }
+    },
+    {
+      "pmid": "10993894",
+      "genes_covered": [
+        "SEMA6A"
+      ],
+      "go_terms": [
+        "GO:0030424"
+      ],
+      "gene_go_map": {
+        "SEMA6A": [
+          "GO:0030424"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA6A": [
+          "axon [GO:0030424]"
+        ]
+      }
+    },
+    {
+      "pmid": "9560017",
+      "genes_covered": [
+        "CLU"
+      ],
+      "go_terms": [
+        "GO:0097440"
+      ],
+      "gene_go_map": {
+        "CLU": [
+          "GO:0097440"
+        ]
+      },
+      "gene_go_named": {
+        "CLU": [
+          "apical dendrite [GO:0097440]"
+        ]
+      }
+    },
+    {
+      "pmid": "8083695",
+      "genes_covered": [
+        "APOE"
+      ],
+      "go_terms": [
+        "GO:0030425"
+      ],
+      "gene_go_map": {
+        "APOE": [
+          "GO:0030425"
+        ]
+      },
+      "gene_go_named": {
+        "APOE": [
+          "dendrite [GO:0030425]"
+        ]
+      }
+    }
+  ]
+}

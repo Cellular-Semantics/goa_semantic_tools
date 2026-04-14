@@ -1,0 +1,2320 @@
+{
+  "enrichment_source": "results/Astrocytoma_nmf/Cluster_8/2026-04-13_125932/Cluster_8_enrichment.json",
+  "gaf_pmids": {
+    "0": [
+      {
+        "pmid": "31028571",
+        "genes_covered": [
+          "CDK18"
+        ],
+        "go_terms": [
+          "GO:0031643"
+        ],
+        "gene_go_map": {
+          "CDK18": [
+            "GO:0031643"
+          ]
+        },
+        "gene_go_named": {
+          "CDK18": [
+            "positive regulation of myelination [GO:0031643]"
+          ]
+        }
+      },
+      {
+        "pmid": "26002055",
+        "genes_covered": [
+          "PLLP"
+        ],
+        "go_terms": [
+          "GO:0032288"
+        ],
+        "gene_go_map": {
+          "PLLP": [
+            "GO:0032288"
+          ]
+        },
+        "gene_go_named": {
+          "PLLP": [
+            "myelin assembly [GO:0032288]"
+          ]
+        }
+      },
+      {
+        "pmid": "22524708",
+        "genes_covered": [
+          "MBP"
+        ],
+        "go_terms": [
+          "GO:0032288"
+        ],
+        "gene_go_map": {
+          "MBP": [
+            "GO:0032288"
+          ]
+        },
+        "gene_go_named": {
+          "MBP": [
+            "myelin assembly [GO:0032288]"
+          ]
+        }
+      },
+      {
+        "pmid": "12153479",
+        "genes_covered": [
+          "MAL"
+        ],
+        "go_terms": [
+          "GO:0042552"
+        ],
+        "gene_go_map": {
+          "MAL": [
+            "GO:0042552"
+          ]
+        },
+        "gene_go_named": {
+          "MAL": [
+            "myelination [GO:0042552]"
+          ]
+        }
+      },
+      {
+        "pmid": "11668196",
+        "genes_covered": [
+          "KLK6"
+        ],
+        "go_terms": [
+          "GO:0042552"
+        ],
+        "gene_go_map": {
+          "KLK6": [
+            "GO:0042552"
+          ]
+        },
+        "gene_go_named": {
+          "KLK6": [
+            "myelination [GO:0042552]"
+          ]
+        }
+      }
+    ],
+    "1": [
+      {
+        "pmid": "12153479",
+        "genes_covered": [
+          "MAL"
+        ],
+        "go_terms": [
+          "GO:0019911"
+        ],
+        "gene_go_map": {
+          "MAL": [
+            "GO:0019911"
+          ]
+        },
+        "gene_go_named": {
+          "MAL": [
+            "structural constituent of myelin sheath [GO:0019911]"
+          ]
+        }
+      }
+    ],
+    "2": [
+      {
+        "pmid": "25771685",
+        "genes_covered": [
+          "SRCIN1"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "SRCIN1": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "SRCIN1": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "21926414",
+        "genes_covered": [
+          "IL1RAPL1"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "IL1RAPL1": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "IL1RAPL1": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "17296554",
+        "genes_covered": [
+          "SEPTIN4"
+        ],
+        "go_terms": [
+          "GO:0098691"
+        ],
+        "gene_go_map": {
+          "SEPTIN4": [
+            "GO:0098691"
+          ]
+        },
+        "gene_go_named": {
+          "SEPTIN4": [
+            "dopaminergic synapse [GO:0098691]"
+          ]
+        }
+      },
+      {
+        "pmid": "11752468",
+        "genes_covered": [
+          "PLD1"
+        ],
+        "go_terms": [
+          "GO:0098981"
+        ],
+        "gene_go_map": {
+          "PLD1": [
+            "GO:0098981"
+          ]
+        },
+        "gene_go_named": {
+          "PLD1": [
+            "cholinergic synapse [GO:0098981]"
+          ]
+        }
+      }
+    ],
+    "3": [],
+    "4": [
+      {
+        "pmid": "30734065",
+        "genes_covered": [
+          "CLDN11"
+        ],
+        "go_terms": [
+          "GO:0030424"
+        ],
+        "gene_go_map": {
+          "CLDN11": [
+            "GO:0030424"
+          ]
+        },
+        "gene_go_named": {
+          "CLDN11": [
+            "axon [GO:0030424]"
+          ]
+        }
+      },
+      {
+        "pmid": "10918068",
+        "genes_covered": [
+          "RASGRF1"
+        ],
+        "go_terms": [
+          "GO:0043005"
+        ],
+        "gene_go_map": {
+          "RASGRF1": [
+            "GO:0043005"
+          ]
+        },
+        "gene_go_named": {
+          "RASGRF1": [
+            "neuron projection [GO:0043005]"
+          ]
+        }
+      }
+    ],
+    "5": [
+      {
+        "pmid": "20934411",
+        "genes_covered": [
+          "ERMN"
+        ],
+        "go_terms": [
+          "GO:0033269"
+        ],
+        "gene_go_map": {
+          "ERMN": [
+            "GO:0033269"
+          ]
+        },
+        "gene_go_named": {
+          "ERMN": [
+            "internode region of axon [GO:0033269]"
+          ]
+        }
+      }
+    ],
+    "6": [
+      {
+        "pmid": "6200494",
+        "genes_covered": [
+          "MAG"
+        ],
+        "go_terms": [
+          "GO:0043218"
+        ],
+        "gene_go_map": {
+          "MAG": [
+            "GO:0043218"
+          ]
+        },
+        "gene_go_named": {
+          "MAG": [
+            "compact myelin [GO:0043218]"
+          ]
+        }
+      }
+    ],
+    "7": [
+      {
+        "pmid": "23825075",
+        "genes_covered": [
+          "LRP2"
+        ],
+        "go_terms": [
+          "GO:0016324"
+        ],
+        "gene_go_map": {
+          "LRP2": [
+            "GO:0016324"
+          ]
+        },
+        "gene_go_named": {
+          "LRP2": [
+            "apical plasma membrane [GO:0016324]"
+          ]
+        }
+      },
+      {
+        "pmid": "22895261",
+        "genes_covered": [
+          "MAL"
+        ],
+        "go_terms": [
+          "GO:0016324"
+        ],
+        "gene_go_map": {
+          "MAL": [
+            "GO:0016324"
+          ]
+        },
+        "gene_go_named": {
+          "MAL": [
+            "apical plasma membrane [GO:0016324]"
+          ]
+        }
+      },
+      {
+        "pmid": "22797597",
+        "genes_covered": [
+          "PLD1"
+        ],
+        "go_terms": [
+          "GO:0016324"
+        ],
+        "gene_go_map": {
+          "PLD1": [
+            "GO:0016324"
+          ]
+        },
+        "gene_go_named": {
+          "PLD1": [
+            "apical plasma membrane [GO:0016324]"
+          ]
+        }
+      },
+      {
+        "pmid": "11208127",
+        "genes_covered": [
+          "TF"
+        ],
+        "go_terms": [
+          "GO:0016324"
+        ],
+        "gene_go_map": {
+          "TF": [
+            "GO:0016324"
+          ]
+        },
+        "gene_go_named": {
+          "TF": [
+            "apical plasma membrane [GO:0016324]"
+          ]
+        }
+      },
+      {
+        "pmid": "11193188",
+        "genes_covered": [
+          "ATP1B1"
+        ],
+        "go_terms": [
+          "GO:0016324"
+        ],
+        "gene_go_map": {
+          "ATP1B1": [
+            "GO:0016324"
+          ]
+        },
+        "gene_go_named": {
+          "ATP1B1": [
+            "apical plasma membrane [GO:0016324]"
+          ]
+        }
+      }
+    ],
+    "8": [],
+    "9": [
+      {
+        "pmid": "20202662",
+        "genes_covered": [
+          "TF"
+        ],
+        "go_terms": [
+          "GO:0048471"
+        ],
+        "gene_go_map": {
+          "TF": [
+            "GO:0048471"
+          ]
+        },
+        "gene_go_named": {
+          "TF": [
+            "perinuclear region of cytoplasm [GO:0048471]"
+          ]
+        }
+      },
+      {
+        "pmid": "16531006",
+        "genes_covered": [
+          "APLP1"
+        ],
+        "go_terms": [
+          "GO:0048471"
+        ],
+        "gene_go_map": {
+          "APLP1": [
+            "GO:0048471"
+          ]
+        },
+        "gene_go_named": {
+          "APLP1": [
+            "perinuclear region of cytoplasm [GO:0048471]"
+          ]
+        }
+      },
+      {
+        "pmid": "15880641",
+        "genes_covered": [
+          "TF"
+        ],
+        "go_terms": [
+          "GO:0048471"
+        ],
+        "gene_go_map": {
+          "TF": [
+            "GO:0048471"
+          ]
+        },
+        "gene_go_named": {
+          "TF": [
+            "perinuclear region of cytoplasm [GO:0048471]"
+          ]
+        }
+      },
+      {
+        "pmid": "15590652",
+        "genes_covered": [
+          "TPPP"
+        ],
+        "go_terms": [
+          "GO:0048471"
+        ],
+        "gene_go_map": {
+          "TPPP": [
+            "GO:0048471"
+          ]
+        },
+        "gene_go_named": {
+          "TPPP": [
+            "perinuclear region of cytoplasm [GO:0048471]"
+          ]
+        }
+      },
+      {
+        "pmid": "14551159",
+        "genes_covered": [
+          "APOD"
+        ],
+        "go_terms": [
+          "GO:0048471"
+        ],
+        "gene_go_map": {
+          "APOD": [
+            "GO:0048471"
+          ]
+        },
+        "gene_go_named": {
+          "APOD": [
+            "perinuclear region of cytoplasm [GO:0048471]"
+          ]
+        }
+      }
+    ],
+    "10": [
+      {
+        "pmid": "32094113",
+        "genes_covered": [
+          "RNF220"
+        ],
+        "go_terms": [
+          "GO:0045944"
+        ],
+        "gene_go_map": {
+          "RNF220": [
+            "GO:0045944"
+          ]
+        },
+        "gene_go_named": {
+          "RNF220": [
+            "positive regulation of transcription by RNA polymerase II [GO:0045944]"
+          ]
+        }
+      },
+      {
+        "pmid": "26482249",
+        "genes_covered": [
+          "SPP1"
+        ],
+        "go_terms": [
+          "GO:0045893"
+        ],
+        "gene_go_map": {
+          "SPP1": [
+            "GO:0045893"
+          ]
+        },
+        "gene_go_named": {
+          "SPP1": [
+            "positive regulation of DNA-templated transcription [GO:0045893]"
+          ]
+        }
+      },
+      {
+        "pmid": "22019888",
+        "genes_covered": [
+          "SEMA4D"
+        ],
+        "go_terms": [
+          "GO:0000122"
+        ],
+        "gene_go_map": {
+          "SEMA4D": [
+            "GO:0000122"
+          ]
+        },
+        "gene_go_named": {
+          "SEMA4D": [
+            "negative regulation of transcription by RNA polymerase II [GO:0000122]"
+          ]
+        }
+      },
+      {
+        "pmid": "19398580",
+        "genes_covered": [
+          "ZNF536"
+        ],
+        "go_terms": [
+          "GO:0000122"
+        ],
+        "gene_go_map": {
+          "ZNF536": [
+            "GO:0000122"
+          ]
+        },
+        "gene_go_named": {
+          "ZNF536": [
+            "negative regulation of transcription by RNA polymerase II [GO:0000122]"
+          ]
+        }
+      },
+      {
+        "pmid": "18676404",
+        "genes_covered": [
+          "ST18"
+        ],
+        "go_terms": [
+          "GO:0045944"
+        ],
+        "gene_go_map": {
+          "ST18": [
+            "GO:0045944"
+          ]
+        },
+        "gene_go_named": {
+          "ST18": [
+            "positive regulation of transcription by RNA polymerase II [GO:0045944]"
+          ]
+        }
+      }
+    ],
+    "11": [
+      {
+        "pmid": "23382103",
+        "genes_covered": [
+          "CSRP1"
+        ],
+        "go_terms": [
+          "GO:0070527"
+        ],
+        "gene_go_map": {
+          "CSRP1": [
+            "GO:0070527"
+          ]
+        },
+        "gene_go_named": {
+          "CSRP1": [
+            "platelet aggregation [GO:0070527]"
+          ]
+        }
+      },
+      {
+        "pmid": "23136403",
+        "genes_covered": [
+          "CTNNA3"
+        ],
+        "go_terms": [
+          "GO:0086073"
+        ],
+        "gene_go_map": {
+          "CTNNA3": [
+            "GO:0086073"
+          ]
+        },
+        "gene_go_named": {
+          "CTNNA3": [
+            "bundle of His cell-Purkinje myocyte adhesion involved in cell communication [GO:0086073]"
+          ]
+        }
+      },
+      {
+        "pmid": "22407321",
+        "genes_covered": [
+          "MEGF10"
+        ],
+        "go_terms": [
+          "GO:0034109"
+        ],
+        "gene_go_map": {
+          "MEGF10": [
+            "GO:0034109"
+          ]
+        },
+        "gene_go_named": {
+          "MEGF10": [
+            "homotypic cell-cell adhesion [GO:0034109]"
+          ]
+        }
+      },
+      {
+        "pmid": "11590244",
+        "genes_covered": [
+          "CTNNA3"
+        ],
+        "go_terms": [
+          "GO:0098609"
+        ],
+        "gene_go_map": {
+          "CTNNA3": [
+            "GO:0098609"
+          ]
+        },
+        "gene_go_named": {
+          "CTNNA3": [
+            "cell-cell adhesion [GO:0098609]"
+          ]
+        }
+      },
+      {
+        "pmid": "10627596",
+        "genes_covered": [
+          "NINJ2"
+        ],
+        "go_terms": [
+          "GO:0007158"
+        ],
+        "gene_go_map": {
+          "NINJ2": [
+            "GO:0007158"
+          ]
+        },
+        "gene_go_named": {
+          "NINJ2": [
+            "neuron cell-cell adhesion [GO:0007158]"
+          ]
+        }
+      }
+    ],
+    "12": [
+      {
+        "pmid": "31416931",
+        "genes_covered": [
+          "ATP8A1"
+        ],
+        "go_terms": [
+          "GO:0140331"
+        ],
+        "gene_go_map": {
+          "ATP8A1": [
+            "GO:0140331"
+          ]
+        },
+        "gene_go_named": {
+          "ATP8A1": [
+            "aminophospholipid translocation [GO:0140331]"
+          ]
+        }
+      },
+      {
+        "pmid": "24201375",
+        "genes_covered": [
+          "ABCA2"
+        ],
+        "go_terms": [
+          "GO:0099040"
+        ],
+        "gene_go_map": {
+          "ABCA2": [
+            "GO:0099040"
+          ]
+        },
+        "gene_go_named": {
+          "ABCA2": [
+            "ceramide translocation [GO:0099040]"
+          ]
+        }
+      },
+      {
+        "pmid": "23518707",
+        "genes_covered": [
+          "CNTN2"
+        ],
+        "go_terms": [
+          "GO:0097090"
+        ],
+        "gene_go_map": {
+          "CNTN2": [
+            "GO:0097090"
+          ]
+        },
+        "gene_go_named": {
+          "CNTN2": [
+            "presynaptic membrane organization [GO:0097090]"
+          ]
+        }
+      },
+      {
+        "pmid": "21914794",
+        "genes_covered": [
+          "ATP8A1"
+        ],
+        "go_terms": [
+          "GO:0045332"
+        ],
+        "gene_go_map": {
+          "ATP8A1": [
+            "GO:0045332"
+          ]
+        },
+        "gene_go_named": {
+          "ATP8A1": [
+            "phospholipid translocation [GO:0045332]"
+          ]
+        }
+      },
+      {
+        "pmid": "19683723",
+        "genes_covered": [
+          "ATP1B1"
+        ],
+        "go_terms": [
+          "GO:0044861"
+        ],
+        "gene_go_map": {
+          "ATP1B1": [
+            "GO:0044861"
+          ]
+        },
+        "gene_go_named": {
+          "ATP1B1": [
+            "protein transport into plasma membrane raft [GO:0044861]"
+          ]
+        }
+      }
+    ],
+    "13": [],
+    "14": [
+      {
+        "pmid": "10848592",
+        "genes_covered": [
+          "PLD1"
+        ],
+        "go_terms": [
+          "GO:0007265"
+        ],
+        "gene_go_map": {
+          "PLD1": [
+            "GO:0007265"
+          ]
+        },
+        "gene_go_named": {
+          "PLD1": [
+            "Ras protein signal transduction [GO:0007265]"
+          ]
+        }
+      }
+    ],
+    "15": [
+      {
+        "pmid": "26631410",
+        "genes_covered": [
+          "SLC24A2"
+        ],
+        "go_terms": [
+          "GO:0071805",
+          "GO:0035725",
+          "GO:0070588"
+        ],
+        "gene_go_map": {
+          "SLC24A2": [
+            "GO:0035725",
+            "GO:0070588",
+            "GO:0071805"
+          ]
+        },
+        "gene_go_named": {
+          "SLC24A2": [
+            "sodium ion transmembrane transport [GO:0035725]",
+            "calcium ion transmembrane transport [GO:0070588]",
+            "potassium ion transmembrane transport [GO:0071805]"
+          ]
+        }
+      },
+      {
+        "pmid": "24688018",
+        "genes_covered": [
+          "ATP1B1"
+        ],
+        "go_terms": [
+          "GO:0010248",
+          "GO:1902600"
+        ],
+        "gene_go_map": {
+          "ATP1B1": [
+            "GO:0010248",
+            "GO:1902600"
+          ]
+        },
+        "gene_go_named": {
+          "ATP1B1": [
+            "establishment or maintenance of transmembrane electrochemical gradient [GO:0010248]",
+            "proton transmembrane transport [GO:1902600]"
+          ]
+        }
+      },
+      {
+        "pmid": "22946059",
+        "genes_covered": [
+          "ANO4"
+        ],
+        "go_terms": [
+          "GO:1902476"
+        ],
+        "gene_go_map": {
+          "ANO4": [
+            "GO:1902476"
+          ]
+        },
+        "gene_go_named": {
+          "ANO4": [
+            "chloride transmembrane transport [GO:1902476]"
+          ]
+        }
+      },
+      {
+        "pmid": "22282804",
+        "genes_covered": [
+          "KCNK1"
+        ],
+        "go_terms": [
+          "GO:0071805"
+        ],
+        "gene_go_map": {
+          "KCNK1": [
+            "GO:0071805"
+          ]
+        },
+        "gene_go_named": {
+          "KCNK1": [
+            "potassium ion transmembrane transport [GO:0071805]"
+          ]
+        }
+      },
+      {
+        "pmid": "21653227",
+        "genes_covered": [
+          "KCNK1"
+        ],
+        "go_terms": [
+          "GO:0071805",
+          "GO:0035725"
+        ],
+        "gene_go_map": {
+          "KCNK1": [
+            "GO:0035725",
+            "GO:0071805"
+          ]
+        },
+        "gene_go_named": {
+          "KCNK1": [
+            "sodium ion transmembrane transport [GO:0035725]",
+            "potassium ion transmembrane transport [GO:0071805]"
+          ]
+        }
+      }
+    ],
+    "16": [
+      {
+        "pmid": "19129463",
+        "genes_covered": [
+          "SLCO1A2",
+          "SLCO3A1"
+        ],
+        "go_terms": [
+          "GO:0022857"
+        ],
+        "gene_go_map": {
+          "SLCO1A2": [
+            "GO:0022857"
+          ],
+          "SLCO3A1": [
+            "GO:0022857"
+          ]
+        },
+        "gene_go_named": {
+          "SLCO1A2": [
+            "transmembrane transporter activity [GO:0022857]"
+          ],
+          "SLCO3A1": [
+            "transmembrane transporter activity [GO:0022857]"
+          ]
+        }
+      },
+      {
+        "pmid": "10873595",
+        "genes_covered": [
+          "SLCO1A2",
+          "SLCO3A1"
+        ],
+        "go_terms": [
+          "GO:0022857",
+          "GO:0015132"
+        ],
+        "gene_go_map": {
+          "SLCO1A2": [
+            "GO:0022857"
+          ],
+          "SLCO3A1": [
+            "GO:0015132",
+            "GO:0022857"
+          ]
+        },
+        "gene_go_named": {
+          "SLCO1A2": [
+            "transmembrane transporter activity [GO:0022857]"
+          ],
+          "SLCO3A1": [
+            "prostaglandin transmembrane transporter activity [GO:0015132]",
+            "transmembrane transporter activity [GO:0022857]"
+          ]
+        }
+      },
+      {
+        "pmid": "39716028",
+        "genes_covered": [
+          "TMEM63A"
+        ],
+        "go_terms": [
+          "GO:0017128"
+        ],
+        "gene_go_map": {
+          "TMEM63A": [
+            "GO:0017128"
+          ]
+        },
+        "gene_go_named": {
+          "TMEM63A": [
+            "phospholipid scramblase activity [GO:0017128]"
+          ]
+        }
+      },
+      {
+        "pmid": "37543036",
+        "genes_covered": [
+          "TMEM63A"
+        ],
+        "go_terms": [
+          "GO:0008381"
+        ],
+        "gene_go_map": {
+          "TMEM63A": [
+            "GO:0008381"
+          ]
+        },
+        "gene_go_named": {
+          "TMEM63A": [
+            "mechanosensitive monoatomic ion channel activity [GO:0008381]"
+          ]
+        }
+      },
+      {
+        "pmid": "35789156",
+        "genes_covered": [
+          "BEST1"
+        ],
+        "go_terms": [
+          "GO:0005229"
+        ],
+        "gene_go_map": {
+          "BEST1": [
+            "GO:0005229"
+          ]
+        },
+        "gene_go_named": {
+          "BEST1": [
+            "intracellularly calcium-gated chloride channel activity [GO:0005229]"
+          ]
+        }
+      }
+    ],
+    "17": [
+      {
+        "pmid": "19581412",
+        "genes_covered": [
+          "CLDND1",
+          "ITGA2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "CLDND1": [
+            "GO:0009986"
+          ],
+          "ITGA2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "CLDND1": [
+            "cell surface [GO:0009986]"
+          ],
+          "ITGA2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "27616481",
+        "genes_covered": [
+          "GLDN"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "GLDN": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "GLDN": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "23658023",
+        "genes_covered": [
+          "ITGA2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ITGA2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ITGA2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "23382103",
+        "genes_covered": [
+          "ITGA2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ITGA2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ITGA2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "21310825",
+        "genes_covered": [
+          "ITGA2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ITGA2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ITGA2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      }
+    ],
+    "18": [],
+    "19": [
+      {
+        "pmid": "26200502",
+        "genes_covered": [
+          "BEST1"
+        ],
+        "go_terms": [
+          "GO:0016323"
+        ],
+        "gene_go_map": {
+          "BEST1": [
+            "GO:0016323"
+          ]
+        },
+        "gene_go_named": {
+          "BEST1": [
+            "basolateral plasma membrane [GO:0016323]"
+          ]
+        }
+      },
+      {
+        "pmid": "21330666",
+        "genes_covered": [
+          "BEST1"
+        ],
+        "go_terms": [
+          "GO:0016323"
+        ],
+        "gene_go_map": {
+          "BEST1": [
+            "GO:0016323"
+          ]
+        },
+        "gene_go_named": {
+          "BEST1": [
+            "basolateral plasma membrane [GO:0016323]"
+          ]
+        }
+      },
+      {
+        "pmid": "19853238",
+        "genes_covered": [
+          "BEST1"
+        ],
+        "go_terms": [
+          "GO:0016323"
+        ],
+        "gene_go_map": {
+          "BEST1": [
+            "GO:0016323"
+          ]
+        },
+        "gene_go_named": {
+          "BEST1": [
+            "basolateral plasma membrane [GO:0016323]"
+          ]
+        }
+      },
+      {
+        "pmid": "15611082",
+        "genes_covered": [
+          "ANK3"
+        ],
+        "go_terms": [
+          "GO:0016323"
+        ],
+        "gene_go_map": {
+          "ANK3": [
+            "GO:0016323"
+          ]
+        },
+        "gene_go_named": {
+          "ANK3": [
+            "basolateral plasma membrane [GO:0016323]"
+          ]
+        }
+      },
+      {
+        "pmid": "12646923",
+        "genes_covered": [
+          "ERBB3"
+        ],
+        "go_terms": [
+          "GO:0016323"
+        ],
+        "gene_go_map": {
+          "ERBB3": [
+            "GO:0016323"
+          ]
+        },
+        "gene_go_named": {
+          "ERBB3": [
+            "basolateral plasma membrane [GO:0016323]"
+          ]
+        }
+      }
+    ],
+    "20": [
+      {
+        "pmid": "32047108",
+        "genes_covered": [
+          "TMEM165"
+        ],
+        "go_terms": [
+          "GO:0006816",
+          "GO:0006828"
+        ],
+        "gene_go_map": {
+          "TMEM165": [
+            "GO:0006816",
+            "GO:0006828"
+          ]
+        },
+        "gene_go_named": {
+          "TMEM165": [
+            "calcium ion transport [GO:0006816]",
+            "manganese ion transport [GO:0006828]"
+          ]
+        }
+      },
+      {
+        "pmid": "27093457",
+        "genes_covered": [
+          "SLC24A2"
+        ],
+        "go_terms": [
+          "GO:0070509"
+        ],
+        "gene_go_map": {
+          "SLC24A2": [
+            "GO:0070509"
+          ]
+        },
+        "gene_go_named": {
+          "SLC24A2": [
+            "calcium ion import [GO:0070509]"
+          ]
+        }
+      },
+      {
+        "pmid": "26631410",
+        "genes_covered": [
+          "SLC24A2"
+        ],
+        "go_terms": [
+          "GO:0071805",
+          "GO:0035725",
+          "GO:0070588"
+        ],
+        "gene_go_map": {
+          "SLC24A2": [
+            "GO:0035725",
+            "GO:0070588",
+            "GO:0071805"
+          ]
+        },
+        "gene_go_named": {
+          "SLC24A2": [
+            "sodium ion transmembrane transport [GO:0035725]",
+            "calcium ion transmembrane transport [GO:0070588]",
+            "potassium ion transmembrane transport [GO:0071805]"
+          ]
+        }
+      },
+      {
+        "pmid": "24688018",
+        "genes_covered": [
+          "ATP1B1"
+        ],
+        "go_terms": [
+          "GO:0010248",
+          "GO:1902600"
+        ],
+        "gene_go_map": {
+          "ATP1B1": [
+            "GO:0010248",
+            "GO:1902600"
+          ]
+        },
+        "gene_go_named": {
+          "ATP1B1": [
+            "establishment or maintenance of transmembrane electrochemical gradient [GO:0010248]",
+            "proton transmembrane transport [GO:1902600]"
+          ]
+        }
+      },
+      {
+        "pmid": "23569283",
+        "genes_covered": [
+          "TMEM165"
+        ],
+        "go_terms": [
+          "GO:0032472"
+        ],
+        "gene_go_map": {
+          "TMEM165": [
+            "GO:0032472"
+          ]
+        },
+        "gene_go_named": {
+          "TMEM165": [
+            "Golgi calcium ion transport [GO:0032472]"
+          ]
+        }
+      }
+    ],
+    "21": [
+      {
+        "pmid": "23575248",
+        "genes_covered": [
+          "GSN"
+        ],
+        "go_terms": [
+          "GO:0030864"
+        ],
+        "gene_go_map": {
+          "GSN": [
+            "GO:0030864"
+          ]
+        },
+        "gene_go_named": {
+          "GSN": [
+            "cortical actin cytoskeleton [GO:0030864]"
+          ]
+        }
+      },
+      {
+        "pmid": "19158340",
+        "genes_covered": [
+          "DLC1"
+        ],
+        "go_terms": [
+          "GO:0030864"
+        ],
+        "gene_go_map": {
+          "DLC1": [
+            "GO:0030864"
+          ]
+        },
+        "gene_go_named": {
+          "DLC1": [
+            "cortical actin cytoskeleton [GO:0030864]"
+          ]
+        }
+      },
+      {
+        "pmid": "14657239",
+        "genes_covered": [
+          "SRCIN1"
+        ],
+        "go_terms": [
+          "GO:0015629"
+        ],
+        "gene_go_map": {
+          "SRCIN1": [
+            "GO:0015629"
+          ]
+        },
+        "gene_go_named": {
+          "SRCIN1": [
+            "actin cytoskeleton [GO:0015629]"
+          ]
+        }
+      },
+      {
+        "pmid": "10931866",
+        "genes_covered": [
+          "ANLN"
+        ],
+        "go_terms": [
+          "GO:0015629"
+        ],
+        "gene_go_map": {
+          "ANLN": [
+            "GO:0015629"
+          ]
+        },
+        "gene_go_named": {
+          "ANLN": [
+            "actin cytoskeleton [GO:0015629]"
+          ]
+        }
+      },
+      {
+        "pmid": "10427098",
+        "genes_covered": [
+          "LDB3"
+        ],
+        "go_terms": [
+          "GO:0005856"
+        ],
+        "gene_go_map": {
+          "LDB3": [
+            "GO:0005856"
+          ]
+        },
+        "gene_go_named": {
+          "LDB3": [
+            "cytoskeleton [GO:0005856]"
+          ]
+        }
+      }
+    ],
+    "22": [
+      {
+        "pmid": "34080016",
+        "genes_covered": [
+          "UGT8"
+        ],
+        "go_terms": [
+          "GO:0006688"
+        ],
+        "gene_go_map": {
+          "UGT8": [
+            "GO:0006688"
+          ]
+        },
+        "gene_go_named": {
+          "UGT8": [
+            "glycosphingolipid biosynthetic process [GO:0006688]"
+          ]
+        }
+      },
+      {
+        "pmid": "26510981",
+        "genes_covered": [
+          "ABCA2"
+        ],
+        "go_terms": [
+          "GO:0046512"
+        ],
+        "gene_go_map": {
+          "ABCA2": [
+            "GO:0046512"
+          ]
+        },
+        "gene_go_named": {
+          "ABCA2": [
+            "sphingosine biosynthetic process [GO:0046512]"
+          ]
+        }
+      },
+      {
+        "pmid": "23560799",
+        "genes_covered": [
+          "ABCA8"
+        ],
+        "go_terms": [
+          "GO:0006686"
+        ],
+        "gene_go_map": {
+          "ABCA8": [
+            "GO:0006686"
+          ]
+        },
+        "gene_go_named": {
+          "ABCA8": [
+            "sphingomyelin biosynthetic process [GO:0006686]"
+          ]
+        }
+      },
+      {
+        "pmid": "17123352",
+        "genes_covered": [
+          "ST6GALNAC3"
+        ],
+        "go_terms": [
+          "GO:0006687",
+          "GO:0006677"
+        ],
+        "gene_go_map": {
+          "ST6GALNAC3": [
+            "GO:0006677",
+            "GO:0006687"
+          ]
+        },
+        "gene_go_named": {
+          "ST6GALNAC3": [
+            "glycosylceramide metabolic process [GO:0006677]",
+            "glycosphingolipid metabolic process [GO:0006687]"
+          ]
+        }
+      },
+      {
+        "pmid": "15337768",
+        "genes_covered": [
+          "FA2H"
+        ],
+        "go_terms": [
+          "GO:0046513"
+        ],
+        "gene_go_map": {
+          "FA2H": [
+            "GO:0046513"
+          ]
+        },
+        "gene_go_named": {
+          "FA2H": [
+            "ceramide biosynthetic process [GO:0046513]"
+          ]
+        }
+      }
+    ],
+    "23": [],
+    "24": [
+      {
+        "pmid": "28473536",
+        "genes_covered": [
+          "NKX6-2",
+          "SOX10"
+        ],
+        "go_terms": [
+          "GO:1990837"
+        ],
+        "gene_go_map": {
+          "NKX6-2": [
+            "GO:1990837"
+          ],
+          "SOX10": [
+            "GO:1990837"
+          ]
+        },
+        "gene_go_named": {
+          "NKX6-2": [
+            "sequence-specific double-stranded DNA binding [GO:1990837]"
+          ],
+          "SOX10": [
+            "sequence-specific double-stranded DNA binding [GO:1990837]"
+          ]
+        }
+      },
+      {
+        "pmid": "19398580",
+        "genes_covered": [
+          "ZNF536"
+        ],
+        "go_terms": [
+          "GO:0000978"
+        ],
+        "gene_go_map": {
+          "ZNF536": [
+            "GO:0000978"
+          ]
+        },
+        "gene_go_named": {
+          "ZNF536": [
+            "RNA polymerase II cis-regulatory region sequence-specific DNA binding [GO:0000978]"
+          ]
+        }
+      },
+      {
+        "pmid": "18676404",
+        "genes_covered": [
+          "ST18"
+        ],
+        "go_terms": [
+          "GO:0000978"
+        ],
+        "gene_go_map": {
+          "ST18": [
+            "GO:0000978"
+          ]
+        },
+        "gene_go_named": {
+          "ST18": [
+            "RNA polymerase II cis-regulatory region sequence-specific DNA binding [GO:0000978]"
+          ]
+        }
+      }
+    ],
+    "25": [],
+    "26": []
+  },
+  "gaf_abstracts": {
+    "0": [
+      {
+        "pmid": "31028571",
+        "title": "Cyclin-dependent Kinase 18 Promotes Oligodendrocyte Precursor Cell Differentiation through Activating the Extracellular Signal-Regulated Kinase Signaling Pathway.",
+        "abstract": "The correct differentiation of oligodendrocyte precursor cells (OPCs) is essential for the myelination and remyelination processes in the central nervous system. Determining the regulatory mechanism is fundamental to the treatment of demyelinating diseases. By analyzing the RNA sequencing data of different neural cells, we found that cyclin-dependent kinase 18 (CDK18) is exclusively expressed in oligodendrocytes. In vivo studies showed that the expression level of CDK18 gradually increased along with myelin formation during development and in the remyelination phase in a lysophosphatidylcholine-induced demyelination model, and was distinctively highly expressed in oligodendrocytes. In vitro overexpression and interference experiments revealed that CDK18 directly promotes the differentiation of OPCs, without affecting their proliferation or apoptosis. Mechanistically, CDK18 activated the RAS/mitogen-activated protein kinase kinase 1/extracellular signal-regulated kinase pathway, thus promoting OPC differentiation. The results of the present study suggest that CDK18 is a promising cell-type specific target to treat demyelinating disease.",
+        "authors": "Pan, Jiang, Sun et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "26002055",
+        "title": "The myelin proteolipid plasmolipin forms oligomers and induces liquid-ordered membranes in the Golgi complex.",
+        "abstract": "Myelin comprises a compactly stacked massive surface area of protein-poor thick membrane that insulates axons to allow fast signal propagation. Increasing levels of the myelin protein plasmolipin (PLLP) were correlated with post-natal myelination; however, its function is unknown. Here, the intracellular localization and dynamics of PLLP were characterized in primary glial and cultured cells using fluorescently labeled PLLP and antibodies against PLLP. PLLP localized to and recycled between the plasma membrane and the Golgi complex. In the Golgi complex, PLLP forms oligomers based on fluorescence resonance energy transfer (FRET) analyses. PLLP oligomers blocked Golgi to plasma membrane transport of the secretory protein vesicular stomatitis virus G protein (VSVG), but not of a VSVG mutant with an elongated transmembrane domain. Laurdan staining analysis showed that this block is associated with PLLP-induced proliferation of liquid-ordered membranes. These findings show the capacity of PLLP to assemble potential myelin membrane precursor domains at the Golgi complex through its oligomerization and ability to attract liquid-ordered lipids. These data support a model in which PLLP functions in myelin biogenesis through organization of myelin liquid-ordered membranes in the Golgi complex.",
+        "authors": "Yaffe, Hugger, Yassaf et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "22524708",
+        "title": "Myelin basic protein induces inflammatory mediators from primary human endothelial cells and blood-brain barrier disruption: implications for the pathogenesis of multiple sclerosis.",
+        "abstract": "<h4>Aim</h4>Multiple sclerosis (MS) is an autoimmune disease of the central nervous system, characterized by demyelination of white matter, loss of myelin forming oligodendrocytes, changes in the blood-brain barrier (BBB) and leucocyte infiltration. Myelin basic protein (MBP) is a component of the myelin sheath. Degradation of myelin is believed to be an important step that leads to MS pathology. Transmigration of leucocytes across the vasculature, and a compromised BBB participate in the neuroinflammation of MS. We examined the expression and regulation of the chemokine (C-C motif) ligand 2 (CCL2) and the cytokine interleukin-6 (IL-6) in human endothelial cells (EC), a component of the BBB, after treatment with MBP.<h4>Methods</h4>EC were treated with full-length MBP. CCL2 and IL-6 protein were determined by ELISA. Western blot analysis was used to determine signalling pathways. A BBB model was treated with MBP and permeability was assayed using albumin conjugated to Evan's blue dye. The levels of the tight junction proteins occludin and claudin-1, and matrix metalloprotease (MMP)-2 were assayed by Western blot.<h4>Results</h4>MBP significantly induced CCL2 and IL-6 protein from EC. This induction was partially mediated by the p38 MAPK pathway as there was phosphorylation after MBP treatment. MBP treatment of a BBB model caused an increase in permeability that correlated with a decrease in occludin and claudin-1, and an induction of MMP2.<h4>Conclusion</h4>These data demonstrate that MBP induces chemotactic and inflammatory mediators. MBP also alters BBB permeability and tight junction expression, indicating additional factors that may contribute to the BBB breakdown characteristic of MS.",
+        "authors": "D'Aversa, Eugenin, Lopez et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "12153479",
+        "title": "Rafts in adult peripheral nerve myelin contain major structural myelin proteins and myelin and lymphocyte protein (MAL) and CD59 as specific markers.",
+        "abstract": "The myelin and lymphocyte protein (MAL) proteolipid is localized in central and peripheral compact myelin membranes, as well as in apical membranes of particular polarized cells. In this study, we addressed the question whether MAL and other peripheral myelin proteins are sorted and targeted to myelin membranes using mechanisms similar to those observed in polarized epithelial cells. To investigate the presence of raft-mediated sorting pathways in Schwann cells, we have isolated and analysed their composition in myelin membranes. Here, we show that rafts are present in adult human and rat peripheral compact myelin membranes and contain MAL, the GPI-anchored protein CD59, and substantial amounts of the PMP22 and P0. Colocalization studies show that CD59, and MAL have an almost identical expression pattern within compact myelin. Moreover, immuno-electron microscopy revealed that MAL, besides its localization in compact myelin, is also localized to Schmidt-Lanterman incisures. Taken together, our results demonstrate the presence of detergent-insoluble glycolipid-enriched complexes (DIGs) in different compartments of myelin membranes and indicate an important role for DIG-mediated transport mechanisms in the maintenance of the adult myelin sheath.",
+        "authors": "Erne, Sansano, Frank et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "11668196",
+        "title": "The spectrum of human kallikrein 6 (zyme/protease M/neurosin) expression in human tissues as assessed by immunohistochemistry.",
+        "abstract": "The KLK6 gene is a new member of the human kallikrein gene family and encodes for a secreted protease, human kallikrein 6 (hK6; also known as zyme/protease M/neurosin). No study has as yet reported detailed immunohistochemical localization of hK6 in human tissues. Our purpose was to examine the expression of hK6 in human tissues by immunohistochemistry. We have analyzed 199 paraffin blocks from archival, current, and autopsy material prepared from almost every normal human tissue. We employed an hK6-specific polyclonal rabbit antibody and avidin-biotin to localize hK6 by IHC. The staining pattern, the distribution of the immunostaining, and its intensity were studied in detail. The IHC expression of zyme was generally cytoplasmic. Various normal human tissues expressed the protein abundantly. Glandular epithelia constituted the main immunoexpression sites, with representative organs being the breast, prostate, kidney, endometrium, colon, appendix, salivary glands, bile ducts, and gallbladder. The small intestine, stomach, endocervix, Fallopian tube, epididymis, bronchus, and upper respiratory tract showed a focal expression as well. Choroid plexus epithelium, peripheral nerves, and some neuroendocrine cells (including the islets of Langerhans, cells in the anterior pituitary gland, and adrenal medulla) expressed the protein strongly and diffusely. A characteristic immunostaining was observed in the Hassall's corpuscles of the thymus, the oxyphilic cells of the thyroid and parathyroid glands, the primordial follicles of the ovary, dendritic cells mainly in the spleen, and in various cells of the placenta.",
+        "authors": "Petraki, Karavana, Skoufogiannis et al.",
+        "year": "2001"
+      }
+    ],
+    "1": [
+      {
+        "pmid": "12153479",
+        "title": "Rafts in adult peripheral nerve myelin contain major structural myelin proteins and myelin and lymphocyte protein (MAL) and CD59 as specific markers.",
+        "abstract": "The myelin and lymphocyte protein (MAL) proteolipid is localized in central and peripheral compact myelin membranes, as well as in apical membranes of particular polarized cells. In this study, we addressed the question whether MAL and other peripheral myelin proteins are sorted and targeted to myelin membranes using mechanisms similar to those observed in polarized epithelial cells. To investigate the presence of raft-mediated sorting pathways in Schwann cells, we have isolated and analysed their composition in myelin membranes. Here, we show that rafts are present in adult human and rat peripheral compact myelin membranes and contain MAL, the GPI-anchored protein CD59, and substantial amounts of the PMP22 and P0. Colocalization studies show that CD59, and MAL have an almost identical expression pattern within compact myelin. Moreover, immuno-electron microscopy revealed that MAL, besides its localization in compact myelin, is also localized to Schmidt-Lanterman incisures. Taken together, our results demonstrate the presence of detergent-insoluble glycolipid-enriched complexes (DIGs) in different compartments of myelin membranes and indicate an important role for DIG-mediated transport mechanisms in the maintenance of the adult myelin sheath.",
+        "authors": "Erne, Sansano, Frank et al.",
+        "year": "2002"
+      }
+    ],
+    "2": [
+      {
+        "pmid": "25771685",
+        "title": "Endophilin A1 regulates dendritic spine morphogenesis and stability through interaction with p140Cap.",
+        "abstract": "Dendritic spines are actin-rich membrane protrusions that are the major sites of excitatory synaptic input in the mammalian brain, and their morphological plasticity provides structural basis for learning and memory. Here we report that endophilin A1, with a well-established role in clathrin-mediated synaptic vesicle endocytosis at the presynaptic terminal, also localizes to dendritic spines and is required for spine morphogenesis, synapse formation and synaptic function. We identify p140Cap, a regulator of cytoskeleton reorganization, as a downstream effector of endophilin A1 and demonstrate that disruption of their interaction impairs spine formation and maturation. Moreover, we demonstrate that knockdown of endophilin A1 or p140Cap impairs spine stabilization and synaptic function. We further show that endophilin A1 regulates the distribution of p140Cap and its downstream effector, the F-actin-binding protein cortactin as well as F-actin enrichment in dendritic spines. Together, these results reveal a novel function of postsynaptic endophilin A1 in spine morphogenesis, stabilization and synaptic function through the regulation of p140Cap.",
+        "authors": "Yang, Wei, Xiong et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "21926414",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2.",
+        "abstract": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "authors": "Valnegri, Montrasio, Brambilla et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "17296554",
+        "title": "Sept4, a component of presynaptic scaffold and Lewy bodies, is required for the suppression of alpha-synuclein neurotoxicity.",
+        "abstract": "In Parkinson disease (PD), alpha-synuclein aggregates called Lewy bodies often involve and sequester Septin4 (Sept4), a polymerizing scaffold protein. However, the pathophysiological significance of this phenomenon is unclear. Here, we show the physiological association of Sept4 with alpha-synuclein, the dopamine transporter, and other presynaptic proteins in dopaminergic neurons; mice lacking Sept4 exhibit diminished dopaminergic neurotransmission due to scarcity of these presynaptic proteins. These data demonstrate an important role for septin scaffolds in the brain. In transgenic mice that express human alpha-synuclein(A53T) (a mutant protein responsible for familial PD), loss of Sept4 significantly enhances neuropathology and locomotor deterioration. In this PD model, insoluble deposits of Ser129-phosphorylated alpha-synuclein(A53T) are negatively correlated with the dosage of Sept4. In vitro, direct association with Sept4 protects alpha-synuclein against self-aggregation and Ser129 phosphorylation. Taken together, these data show that Sept4 may be involved in PD as a dual susceptibility factor, as its insufficiency can diminish dopaminergic neurotransmission and enhance alpha-synuclein neurotoxicity.",
+        "authors": "Ihara, Yamasaki, Hagiwara et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "11752468",
+        "title": "A role for phospholipase D1 in neurotransmitter release.",
+        "abstract": "Phosphatidic acid produced by phospholipase D (PLD) as a result of signaling activity is thought to play a role in membrane vesicle trafficking, either as an intracellular messenger or as a cone-shaped lipid that promotes membrane fusion. We recently described that, in neuroendocrine cells, plasma membrane-associated PLD1 operates at a stage of Ca(2+)-dependent exocytosis subsequent to cytoskeletal-mediated recruitment of secretory granules to exocytotic sites. We show here that PLD1 also plays a crucial role in neurotransmitter release. Using purified rat brain synaptosomes subjected to hypotonic lysis and centrifugation, we found that PLD1 is associated with the particulate fraction containing the plasma membrane. Immunostaining of rat cerebellar granule cells confirmed localization of PLD1 at the neuronal plasma membrane in zones specialized for neurotransmitter release (axonal neurites, varicosities, and growth cone-like structures). To determine the potential involvement of PLD1 in neurotransmitter release, we microinjected catalytically inactive PLD1(K898R) into Aplysia neurons and analyzed its effects on evoked acetylcholine (ACh) release. PLD1(K898R) produced a fast and potent dose-dependent inhibition of ACh release. By analyzing paired-pulse facilitation and postsynaptic responses evoked by high-frequency stimulations, we found that the exocytotic inhibition caused by PLD1(K898R) was not the result of an alteration in stimulus-secretion coupling or in vesicular trafficking. Analysis of the fluctuations in amplitude of the postsynaptic responses revealed that the PLD1(K898R) blocked ACh release by reducing the number of active presynaptic-releasing sites. Our results provide evidence that PLD1 plays a major role in neurotransmission, most likely by controlling the fusogenic status of presynaptic release sites.",
+        "authors": "Humeau, Vitale, Chasserot-Golaz et al.",
+        "year": "2001"
+      }
+    ],
+    "3": [],
+    "4": [
+      {
+        "pmid": "30734065",
+        "title": "Tight junction proteins at the blood-brain barrier: far more than claudin-5.",
+        "abstract": "At the blood-brain barrier (BBB), claudin (Cldn)-5 is thought to be the dominant tight junction (TJ) protein, with minor contributions from Cldn3 and -12, and occludin. However, the BBB appears ultrastructurally normal in Cldn5 knock-out mice, suggesting that further Cldns and/or TJ-associated marvel proteins (TAMPs) are involved. Microdissected human and murine brain capillaries, quickly frozen to recapitulate the in vivo situation, showed high transcript expression of Cldn5, -11, -12, and -25, and occludin, but also abundant levels of Cldn1 and -27 in man. Protein levels were quantified by a novel epitope dilution assay and confirmed the respective mRNA data. In contrast to the in vivo situation, Cldn5 dominates BBB expression in vitro, since all other TJ proteins are at comparably low levels or are not expressed. Cldn11 was highly abundant in vivo and contributed to paracellular tightness by homophilic oligomerization, but almost disappeared in vitro. Cldn25, also found at high levels, neither tightened the paracellular barrier nor interconnected opposing cells, but contributed to proper TJ strand morphology. Pathological conditions (in vivo ischemia and in vitro hypoxia) down-regulated Cldn1, -3, and -12, and occludin in cerebral capillaries, which was paralleled by up-regulation of Cldn5 after middle cerebral artery occlusion in rats. Cldn1 expression increased after Cldn5 knock-down. In conclusion, this complete Cldn/TAMP profile demonstrates the presence of up to a dozen TJ proteins in brain capillaries. Mouse and human share a similar and complex TJ profile in vivo, but this complexity is widely lost under in vitro conditions.",
+        "authors": "Berndt, Winkler, Cording et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "10918068",
+        "title": "Characterization of RasGRP2, a plasma membrane-targeted, dual specificity Ras/Rap exchange factor.",
+        "abstract": "Ras proteins operate as molecular switches in signal transduction pathways downstream of tyrosine kinases and G-protein-coupled receptors. Ras is switched from the inactive GDP-bound state to the active GTP-bound state by guanine nucleotide exchange factors (GEFs). We report here the cloning and characterization of RasGRP2, a longer alternatively spliced form of the recently cloned RapGEF, CalDAG-GEFI. A unique feature of RasGRP2 is that it is targeted to the plasma membrane by a combination of N-terminal myristoylation and palmitoylation. In vivo, RasGRP2 selectively catalyzes nucleotide exchange on N- and Ki-Ras, but not Ha-Ras. RasGRP2 also catalyzes nucleotide exchange on Rap1, but this RapGEF activity is less potent than that associated with CalDAG-GEFI. The nucleotide exchange activity of RasGRP2 toward N-Ras is stimulated by diacylglycerol and inhibited by calcium. The effects of diacylglycerol and calcium are additive but are not accompanied by any detectable change in the subcellular localization of RasGRP2. In contrast, CalDAG-GEFI is localized predominantly to the cytosol and lacks Ras exchange activity in vivo. However, prolonged exposure to phorbol esters, or growth in serum, results in localization of CalDAG-GEFI to the cell membrane and restoration of Ras exchange activity. Expression of RasGRP2 or CalDAG-GEFI in NIH3T3 cells transfected with wild type N-Ras results in an accelerated growth rate but not morphologic transformation. Thus, under appropriate growth conditions, CalDAG-GEFI and RasGRP2 are dual specificity Ras and Rap exchange factors.",
+        "authors": "Clyde-Smith, Silins, Gartside et al.",
+        "year": "2000"
+      }
+    ],
+    "5": [
+      {
+        "pmid": "20934411",
+        "title": "Human Ermin (hErmin), a new oligodendrocyte-specific cytoskeletal protein related to epileptic seizure.",
+        "abstract": "During the maturation of oligodendrocytes, cells are characterized by their morphological changes such as the number of process extensions and sheet-like membranes. This process relies critically on cytoskeleton rearrangement, but the molecular mechanisms underlying this are still unclear. Here, we identify human Ermin (hErmin), a novel cytoskeletal molecule that is expressed exclusively in oligodendrocytes in human brain, as a regulator of cytoskeleton rearrangement. In vitro, full-length hErmin expression, but not its truncated mutants lacking the actin-binding domain, promote arborization of cultured COS-7 cells and induce marked changes in cell morphology. The most important is that expression of hErmin in specimens of epileptic patients is much lower than that of control, implying that hErmin may be involved in epileptogenic process. These findings suggest a role for hErmin as a novel cytoskeleton-related oligodendroglial protein in human brain myelination and human epileptogenesis, and provide new evidence for the relationship between oligodendrocytes and epilepsy.",
+        "authors": "Wang, Jia, Jia et al.",
+        "year": "2011"
+      }
+    ],
+    "6": [
+      {
+        "pmid": "6200494",
+        "title": "Myelin-associated glycoprotein (MAG) distribution in human central nervous tissue studied immunocytochemically with monoclonal antibody.",
+        "abstract": "Recent biochemical data show that myelin-associated glycoprotein (MAG) is the antigen for a monoclonal antibody found in sera of patients with IgM paraproteinemia and neuropathy (Braun et al. 1982). Immunoreactivity of this antibody with CNS has not been described. To study this, monoclonal anti-MAG was used in the avidin-biotin-peroxidase complex method (Hsu et al. 1981) to immunostain paraffin and epon sections of human CNS. Well characterized polyclonal MAG antiserum (Quarles et al. 1981) was employed in comparison tests. In paraffin sections of developing CNS, both monoclonal and polyclonal MAG antisera stained oligodendroglia and myelin. In adult CNS, periaxonal regions of myelin sheaths were immunostained in paraffin sections and semithin epon sections treated with monoclonal and polyclonal anti-MAG. In electron-microscopic experiments that included milder pretreatment of epon thin sections and more precise reaction product localization, entire thickness of myelin sheaths were immunostained. Thus, in electron micrographs, monoclonal and polyclonal anti-MAG immunoreactivity also have the same localization. In other electron-microscopic experiments, the same reaction product localization was observed with antiserum to myelin basic protein (MBP), a known constituent of compact myelin. Thus, results with this monoclonal anti-MAG provide important new evidence to support the localization of MAG in compact CNS myelin. Our data also suggest that monoclonal antibodies against MAG will be useful in studies of the pathogenesis of multiple sclerosis and other demyelinating diseases.",
+        "authors": "Favilla, Frail, Palkovits et al.",
+        "year": "1984"
+      }
+    ],
+    "7": [
+      {
+        "pmid": "23825075",
+        "title": "Renal uptake of the antiapoptotic protein survivin is mediated by megalin at the apical membrane of the proximal tubule.",
+        "abstract": "The inhibitor of apoptosis protein survivin is a bifunctional molecule that regulates cellular division and survival. We have previously shown that survivin protein can be found at high concentrations in the adult kidney, particularly in the proximal tubules. Here, survivin is localized primarily at the apical membrane, a pattern that may indicate absorption of the protein. Several proteins in primary urine are internalized by megalin, an endocytosis receptor, which is in principle found in the same localization as survivin. Immunolabeling for survivin in different species confirmed survivin signal localizing to the apical membrane of the proximal tubule. Immunoelectron microscopy also showed apical localization of survivin in human kidneys. Furthermore, in polarized human primary tubular cells endogenous as well as external recombinant survivin is stored in the apical region of the cells. Costaining of survivin and megalin by immunohistochemistry and immunoelectron microscopy confirmed colocalization. Finally, by surface plasmon resonance we were able to demonstrate that survivin binds megalin and cubilin and that megalin knockout mice lose survivin through the urine. Survivin accumulates at the apical membrane of the renal tubule by reuptake, which is achieved by the endocytic receptor megalin, collaborating with cubilin. For this to occur, survivin will have to circulate in the blood and be filtered into the primary urine. It is not known at this stage what the functional role of tubular survivin is. However, a small number of experimental and clinical reports implicate that renal survivin is important for functional integrity of the kidney.",
+        "authors": "Jobst-Schwan, Knaup, Nielsen et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "22895261",
+        "title": "VIP17/MAL expression modulates epithelial cyst formation and ciliogenesis.",
+        "abstract": "The polarized organization of epithelial cells is required for vectorial solute transport and may be altered in renal cystic diseases. Vesicle integral protein of 17 kDa (VIP17/MAL) is involved in apical vesicle transport. VIP17/MAL overexpression in vivo results in renal cystogenesis of unknown etiology. Renal cystogenesis can occur as a consequence of defects of the primary cilium. To explore the role of VIP17/MAL in renal cystogenesis and ciliogenesis, we examined the polarization and ciliary morphology of wild-type and VIP17/MAL overexpressing Madin-Darby canine kidney renal epithelial cells grown in two-dimensional (2D) and three-dimensional (3D) cyst culture. VIP17/MAL is apically localized when expressed in cells maintained in 2D and 3D culture. VIP17/MAL overexpressing cells produce more multilumen cysts compared with controls. While the distributions of basolateral markers are not affected, VIP17/MAL expression results in aberrant sorting of the apical marker gp135 to the primary cilium. VIP17/MAL overexpression is also associated with shortened or absent cilia. Immunofluorescence analysis performed on kidney sections from VIP17/MAL transgenic mice also demonstrates fewer and shortened cilia within dilated lumens (P < 0.01). These studies demonstrate that VIP17/MAL overexpression results in abnormal cilium and cyst development, in vitro and in vivo, suggesting that VIP17/MAL overexpressing mice may develop cysts secondary to a ciliary defect.",
+        "authors": "Takiar, Mistry, Carmosino et al.",
+        "year": "2012"
+      },
+      {
+        "pmid": "22797597",
+        "title": "Rap2A links intestinal cell polarity to brush border formation.",
+        "abstract": "The microvillus brush border at the apex of the highly polarized enterocyte allows the regulated uptake of nutrients from the intestinal lumen. Here, we identify the small G protein Rap2A as a molecular link that couples the formation of microvilli directly to the preceding cell polarization. Establishment of apicobasal polarity, which can be triggered by the kinase LKB1 in single, isolated colon cells, results in enrichment of PtdIns(4,5)P(2) at the apical membrane. The subsequent recruitment of phospholipase D1 allows polarized accumulation of phosphatidic acid, which provides a local cue for successive signalling by the guanine nucleotide exchange factor PDZGEF, the small G protein Rap2A, its effector TNIK, the kinase MST4 and, ultimately, the actin-binding protein Ezrin. Thus, epithelial cell polarization is translated directly into the acquisition of brush borders through a small G protein signalling module whose action is positioned by a cortical lipid cue.",
+        "authors": "Gloerich, ten Klooster, Vliem et al.",
+        "year": "2012"
+      },
+      {
+        "pmid": "11208127",
+        "title": "Truncated brush border myosin I affects membrane traffic in polarized epithelial cells.",
+        "abstract": "We investigate, in this study, the potential involvement of an acto-myosin-driven mechanism in endocytosis of polarized cells. We observed that depolymerization of actin filaments using latrunculin A decreases the rate of transferrin recycling to the basolateral plasma membrane of Caco-2 cells, and increases its delivery to the apical plasma membrane. To analyze whether a myosin was involved in endocytosis, we produced, in this polarized cell line, truncated, non-functional, brush border, myosin I proteins (BBMI) that we have previously demonstrated to have a dominant negative effect on endocytosis of unpolarized cells. These non-functional proteins affect the rate of transferrin recycling and the rate of transepithelial transport of dipeptidyl-peptidase IV from the basolateral plasma membrane to the apical plasma membrane. They modify the distribution of internalized endocytic tracers in apical multivesicular endosomes that are accessible to fluid phase tracers internalized from apical and basolateral plasma membrane domains. Altogether, these observations suggest that an acto-myosin-driven mechanism is involved in the trafficking of basolaterally internalized molecules to the apical plasma membrane.",
+        "authors": "Durrbach, Raposo, Tenza et al.",
+        "year": "2000"
+      },
+      {
+        "pmid": "11193188",
+        "title": "Isoforms of Na+, K+-ATPase in human prostate; specificity of expression and apical membrane polarization.",
+        "abstract": "The cellular distribution of Na+, K+-ATPase subunit isoforms was mapped in the secretory epithelium of the human prostate gland by immunostaining with antibodies to the alpha and beta subunit isoforms of the enzyme. Immunolabeling of the alpha1, beta1 and beta2 isoforms was observed in the apical and lateral plasma membrane domains of prostatic epithelial cells in contrast to human kidney where the alpha1 and beta1 isoforms of Na+, K+-ATPase were localized in the basolateral membrane of both proximal and distal convoluted tubules. Using immunohistochemistry and PCR we found no evidence of Na+, K+-ATPase alpha2 and alpha3 isoform expression suggesting that prostatic Na+, K+-ATPase consists of alpha1/beta1 and alpha1/beta2 isozymes. Our immunohistochemical findings are consistent with previously proposed models placing prostatic Na+, K+-ATPase in the apical plasma membrane domain. Abundant expression of Na+, K+-ATPase in epithelial cells lining tubulo-alveoli in the human prostate gland confirms previous conclusions drawn from biochemical, pharmacological and physiological data and provides further evidence for the critical role of this enzyme in prostatic cell physiology and ion homeostasis. Na+, K+-ATPase most likely maintains an inwardly directed Na+ gradient essential for nutrient uptake and active citrate secretion by prostatic epithelial cells. Na+, K+-ATPase may also regulate lumenal Na+ and K+, major counter-ions for citrate.",
+        "authors": "Mobasheri, Oukrif, Dawodu et al.",
+        "year": "2001"
+      }
+    ],
+    "8": [],
+    "9": [
+      {
+        "pmid": "20202662",
+        "title": "Ebola virus uses clathrin-mediated endocytosis as an entry pathway.",
+        "abstract": "Ebola virus (EBOV) infects several cell types and while viral entry is known to be pH-dependent, the exact entry pathway(s) remains unknown. To gain insights into EBOV entry, the role of several inhibitors of clathrin-mediated endocytosis in blocking infection mediated by HIV pseudotyped with the EBOV envelope glycoprotein (EbGP) was examined. Wild type HIV and envelope-minus HIV pseudotyped with Vesicular Stomatitis Virus glycoprotein (VSVg) were used as controls to assess cell viability after inhibiting clathrin pathway. Inhibition of clathrin pathway using dominant-negative Eps15, siRNA-mediated knockdown of clathrin heavy chain, chlorpromazine and sucrose blocked EbGP pseudotyped HIV infection. Also, both chlorpromazine and Bafilomycin A1 inhibited entry of infectious EBOV. Sensitivity of EbGP pseudotyped HIV as well as infectious EBOV to inhibitors of clathrin suggests that EBOV uses clathrin-mediated endocytosis as an entry pathway. Furthermore, since chlorpromazine inhibits EBOV infection, novel therapeutic modalities could be designed based on this lead compound.",
+        "authors": "Bhattacharyya, Warfield, Ruthel et al.",
+        "year": "2010"
+      },
+      {
+        "pmid": "16531006",
+        "title": "Interaction of the amyloid precursor like protein 1 with the alpha2A-adrenergic receptor increases agonist-mediated inhibition of adenylate cyclase.",
+        "abstract": "Alpha2-adrenergic receptor agonists exert potent analgesic and sedative/hypnotic effects. In addition, they have been shown to be neuroprotective, but the mechanisms of these actions are still poorly defined. To isolate proteins that may control alpha2-adrenergic receptor function or trafficking, we performed a two-hybrid screen using the carboxy-terminal fourth intracellular tail of the alpha2A-adrenergic receptor as bait. This screen identified the amyloid precursor like protein 1 (APLP1), a homologue of the beta-amyloid precursor protein involved in Alzheimer's disease, as alpha2A-adrenergic receptor-binding protein. GST affinity chromatography revealed that APLP1 specifically interacts with all three human alpha2-adrenergic receptor subtypes and deletion mutant analysis confined the APLP1 domain involved in binding to alpha2-adrenergic receptors to the 13 amino acid residues Ser599-Ala611. Coimmunoprecipitations of transiently transfected cells with epitope-tagged APLP1 and alpha2-adrenergic receptors confirmed the interaction. Agonist treatment tended to increase the amount of alpha2A-adrenergic receptor associated with APLP1 while coimmunoprecipitations were not affected by the state of receptor phosphorylation or cotransfection of arrestin-3. Confocal laser microscopy showed that APLP1 causes a considerable shift of the alpha2A-adrenergic receptor localization from plasma membrane to intracellular compartments. Furthermore, cotransfection of alpha2A-adrenergic receptor and APLP1 into HEK293 cells significantly increased norepinephrine mediated inhibition of adenylate cyclase activity. These results suggest a possible role of APLP1 in regulation of alpha2A-adrenergic receptor trafficking. Moreover, we speculate that this interaction may present one mechanism by which alpha2-adrenergic receptor agonists exert their neuroprotective effects.",
+        "authors": "Weber, Schaper, Scholz et al.",
+        "year": "2006"
+      },
+      {
+        "pmid": "15880641",
+        "title": "Transferrin receptor co-localizes and interacts with the hemochromatosis factor (HFE) and the divalent metal transporter-1 (DMT1) in trophoblast cells.",
+        "abstract": "Iron uptake and storage are tightly regulated to guarantee sufficient iron for essential cellular processes and to prevent the production of damaging free radicals. The placenta is the entry site for iron, which is delivered to the developing embryo. Iron is taken up by syncytiotrophoblast cells and is transported unidirectionally from mother to fetus against a concentration gradient. Several iron transporters and regulators were recently characterized, including DMT1 and ferroportin/Ireg1 that transport iron through membranes, and HFE that regulates TfR-mediated iron uptake. In this study we demonstrate that in a differentiated choriocarcinoma cell line BeWo, HFE, and TfR are localized mainly in recycling endosomes and a small percentage of these complexes is observed in late endosomes with DMT1 while in trophoblast cells, the level of TfR is significantly lower and it is detected with HFE and DMT1 mainly in late endosomes. Most interestingly, TfR and HFE, as well as TfR and DMT1 interact in placental trophoblast cells. Based on previous and these data we suggest that the level of intracellular iron may regulate both TfR expression (on the post-transcriptional and the post-translational levels) and TfR trafficking/transcytosis in polarized cells.",
+        "authors": "Gruper, Bar, Bacharach et al.",
+        "year": "2005"
+      },
+      {
+        "pmid": "15590652",
+        "title": "p25alpha Stimulates alpha-synuclein aggregation and is co-localized with aggregated alpha-synuclein in alpha-synucleinopathies.",
+        "abstract": "Aggregation of the nerve cell protein alpha-synuclein is a characteristic of the common neurodegenerative alpha-synucleinopathies like Parkinson's disease and Lewy body dementia, and it plays a direct pathogenic role as demonstrated by early onset diseases caused by mis-sense mutations and multiplication of the alpha-synuclein gene. We investigated the existence of alpha-synuclein pro-aggregatory brain proteins whose dysregulation may contribute to disease progression, and we identified the brain-specific p25alpha as a candidate that preferentially binds to alpha-synuclein in its aggregated state. Functionally, purified recombinant human p25alpha strongly stimulates the aggregation of alpha-synuclein in vitro as demonstrated by thioflavin-T fluorescence and quantitative electron microscopy. p25alpha is normally only expressed in oligodendrocytes in contrast to alpha-synuclein, which is normally only expressed in neurons. This expression pattern is changed in alpha-synucleinopathies. In multiple systems atrophy, degenerating oligodendrocytes displayed accumulation of p25alpha and dystopically expressed alpha-synuclein in the glial cytoplasmic inclusions. In Parkinson's disease and Lewy body dementia, p25alpha was detectable in the neuronal Lewy body inclusions along with alpha-synuclein. The localization in alpha-synuclein-containing inclusions was verified biochemically by immunological detection in Lewy body inclusions purified from Lewy body dementia tissue and glial cytoplasmic inclusions purified from tissue from multiple systems atrophy. We suggest that p25alpha plays a pro-aggregatory role in the common neurodegenerative disorders hall-marked by alpha-synuclein aggregates.",
+        "authors": "Lindersson, Lundvig, Petersen et al.",
+        "year": "2005"
+      },
+      {
+        "pmid": "14551159",
+        "title": "Apolipoprotein D inhibits platelet-derived growth factor-BB-induced vascular smooth muscle cell proliferated by preventing translocation of phosphorylated extracellular signal regulated kinase 1/2 to the nucleus.",
+        "abstract": "<h4>Objective</h4>Elevated apolipoprotein D (apoD) levels are associated with reduced proliferation of cancer cells. We therefore investigated whether apoD, which occurs free or associated with HDL, suppresses vascular smooth muscle cell (VSMC) proliferation, which is related to the pathobiology of disease.<h4>Methods and results</h4>Intense immunoreactivity for apoD was observed in human atherosclerotic plaque but not in normal coronary artery. However, an increase in apoD mRNA was seen in quiescent relative to proliferating fetal lamb aortic VSMCs, and in the rat aortic VSMC line (A10), we demonstrated uptake of apoD from serum. Stable transfection of apoD in A10 cells in the absence of serum did not influence VSMC proliferation assessed by [3H]-thymidine incorporation. ApoD, administered at a dose of 100 ng/mL, completely inhibited basal as well as platelet-derived growth factor (PDGF)-BB-induced VSMC proliferation (P<0.01) but had no effect on fibroblast growth factor-induced VSMC proliferation. ApoD did not suppress PDGF-BB or fibroblast growth factor-2-induced phosphorylation of extracellular signal regulated kinase (ERK) 1/2 but selectively inhibited PDGF-BB-mediated ERK1/2 nuclear translocation.<h4>Conclusions</h4>Our data suggest that apoD selectively modulates the proliferative response of VSMC to growth factors by a mechanism related to nuclear translocation of ERK1/2.",
+        "authors": "Sarjeant, Lawrie, Kinnear et al.",
+        "year": "2003"
+      }
+    ],
+    "10": [
+      {
+        "pmid": "32094113",
+        "title": "Rnf220/Zc4h2-mediated monoubiquitylation of Phox2 is required for noradrenergic neuron development.",
+        "abstract": "Noradrenaline belongs to the monoamine system and is involved in cognition and emotional behaviors. Phox2a and Phox2b play essential but non-redundant roles during development of the locus coeruleus (LC), the main noradrenergic (NA) neuron center in the mammalian brain. The ubiquitin E3 ligase Rnf220 and its cofactor Zc4h2 participate in ventral neural tube patterning by modulating Shh/Gli signaling, and <i>ZC4H2</i> mutation is associated with intellectual disability, although the mechanisms for this remain poorly understood. Here, we report that Zc4h2 and Rnf220 are required for the development of central NA neurons in the mouse brain. Both <i>Zc4h2</i> and <i>Rnf220</i> are expressed in developing LC-NA neurons. Although properly initiated at E10.5, the expression of genes associated with LC-NA neurons is not maintained at the later embryonic stages in mice with a deficiency of either <i>Rnf220</i> or <i>Zc4h2</i> In addition, we show that the Rnf220/Zc4h2 complex monoubiquitylates Phox2a/Phox2b, a process required for the full transcriptional activity of Phox2a/Phox2b. Our work reveals a role for Rnf220/Zc4h2 in regulating LC-NA neuron development, and this finding may be helpful for understanding the pathogenesis of <i>ZC4H2</i> mutation-associated intellectual disability.",
+        "authors": "Song, Ma, Zhang et al.",
+        "year": "2020"
+      },
+      {
+        "pmid": "26482249",
+        "title": "Osteopontin promotes aromatase expression and estradiol production in human adipocytes.",
+        "abstract": "Breast and endometrial cancer are often estrogen dependent, and their incidence and mortality are increased by obesity in postmenopausal women. Osteopontin (OPN) is a cytokine strongly upregulated in adipose tissue (AT) in obesity. OPN function is potentiated by cleavage by matrix metalloproteinases (MMP). OPN and MMPs play a role in cancer development and are prognostic markers in breast cancer progression. While induction of the estrogen-synthesizing enzyme aromatase by TNFa and IL1 has been shown in preadipocytes, an impact of OPN on aromatase expression in AT has not been investigated yet. Gene expression was determined in AT samples of 21 morbidly obese and matched non-obese subjects. Primary human adipocytes were treated with full-length OPN or MMP-cleaved OPN (cOPN). Protein and mRNA expressions were analyzed from cell lysates, or cells were subsequently supplied with testosterone to determine estradiol production and for indirect co-culture with the estrogen-dependent MCF-7 cell line. Aromatase expression strongly correlated with gene expression of OPN and various MMPs in visceral and MMPs in subcutaneous AT, but not with TNF\u03b1 expression in both tissues. In vitro, cOPN more effectively than full-length OPN upregulated aromatase mRNA in adipocytes and significantly increased aromatase protein level and estradiol production, leading to increased MCF-7 growth in indirect co-culture. OPN and MMPs are upregulated in AT in obesity, and MMP-cleaved OPN is particularly effective in inducing aromatase activity in human adipocytes. Thereby, obesity-induced OPN expression in AT may contribute to estradiol production and thus to the association of obesity with estrogen-dependent cancers.",
+        "authors": "Leitner, J\u00fcrets, Itariu et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "22019888",
+        "title": "Suppression of bone formation by osteoclastic expression of semaphorin 4D.",
+        "abstract": "Most of the currently available drugs for osteoporosis inhibit osteoclastic bone resorption; only a few drugs promote osteoblastic bone formation. It is thus becoming increasingly necessary to identify the factors that regulate bone formation. We found that osteoclasts express semaphorin 4D (Sema4D), previously shown to be an axon guidance molecule, which potently inhibits bone formation. The binding of Sema4D to its receptor Plexin-B1 on osteoblasts resulted in the activation of the small GTPase RhoA, which inhibits bone formation by suppressing insulin-like growth factor-1 (IGF-1) signaling and by modulating osteoblast motility. Sema4d-/- mice, Plxnb1-/- mice and mice expressing a dominant-negative RhoA specifically in osteoblasts showed an osteosclerotic phenotype due to augmented bone formation. Notably, Sema4D-specific antibody treatment markedly prevented bone loss in a model of postmenopausal osteoporosis. Thus, Sema4D has emerged as a new therapeutic target for the discovery and development of bone-increasing drugs.",
+        "authors": "Negishi-Koga, Shinohara, Komatsu et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "19398580",
+        "title": "ZNF536, a novel zinc finger protein specifically expressed in the brain, negatively regulates neuron differentiation by repressing retinoic acid-induced gene transcription.",
+        "abstract": "Neuronal differentiation is tightly regulated by a variety of factors. In a search for neuron-specific genes, we identified a highly conserved novel zinc finger protein, ZNF536. We observed that ZNF536 is most abundant in the brain and, in particular, is expressed in the developing central nervous system and dorsal root ganglia and localized in the cerebral cortex, hippocampus, and hypothalamic area. During neuronal differentiation of P19 cells induced by retinoic acid (RA), ZNF536 expression is increased at an early stage, and it is maintained at a constant level in later stages. Overexpression of ZNF536 results in an inhibition of RA-induced neuronal differentiation, while depletion or mutation of the ZNF536 gene results in an enhancement of differentiation. We further demonstrated that ZNF536 inhibits expression of neuron-specific marker genes, possibly through the inhibition of RA response element-mediated transcriptional activity, as overexpression of RA receptor alpha can rescue the inhibitory role of ZNF536 in neuronal differentiation and neuron-specific gene expression. Our studies have identified a novel zinc finger protein that negatively regulates neuron differentiation.",
+        "authors": "Qin, Ren, Xu et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "18676404",
+        "title": "The transcription factor ST18 regulates proapoptotic and proinflammatory gene expression in fibroblasts.",
+        "abstract": "Suppression of tumorigenicity 18 (ST18) and the homologues neural zinc-finger protein-3 (NZF3) and myelin transcription factor 3 (Myt3) are transcription factors with unknown function. Previous studies have established that they repress transcription of a synthetic reporter construct consisting of the consensus sequence AAAGTTT linked to the thymidine kinase promoter. In addition, ST18 exhibits significantly reduced expression in breast cancer and breast cancer cell lines. We report here for the first time evidence that ST18 mediates tumor necrosis factor (TNF) -alpha induced mRNA levels of proapoptotic and proinflammatory genes in fibroblasts by mRNA profiling and silencing with ST18 small interfering RNA (siRNA). Gene set enrichment analysis and mRNA profiling support this conclusion by identifying several apoptotic and inflammatory pathways that are down-regulated by ST18 siRNA. In addition, ST18 siRNA reduces TNF-induced fibroblast apoptosis and caspase-3/7 activity. Fibroblasts that overexpress ST18 by transient transfection exhibit significantly increased apoptosis and increased expression of TNF-alpha, interleukin (IL) -1alpha, and IL-6. In addition, cotransfection of ST18 and a TNF-alpha or IL-1alpha reporter construct demonstrates that ST18 overexpression in fibroblasts significantly enhanced promoter activity of these genes. Taken together, these studies demonstrate that the transcription factor ST18/NZF3 regulates the mRNA levels of proapoptotic and proinflammatory genes in revealing a previously unrecognized function.",
+        "authors": "Yang, Siqueira, Behl et al.",
+        "year": "2008"
+      }
+    ],
+    "11": [
+      {
+        "pmid": "23382103",
+        "title": "Platelet proteome analysis reveals integrin-dependent aggregation defects in patients with myelodysplastic syndromes.",
+        "abstract": "Bleeding complications are a significant clinical problem in patients with myelodysplastic syndromes even at sufficient platelet counts (>50,000/\u03bcl). However, the underlying pathology of this hemorrhagic diathesis is still unknown. Here, we analyzed the platelet proteome of patients with myelodysplastic syndromes by quantitative two-dimensional difference gel electrophoresis followed by mass spectrometric protein identification. Proteins identified with lower concentrations, such as Talin-1, Vinculin, Myosin-9, Filmain-A, and Actin play critical roles in integrin \u03b1IIb\u03b23 signaling and thus platelet aggregation. Despite normal agonist receptor expression, calcium flux, and granule release upon activation, the activation capacity of integrin \u03b1IIb\u03b23 was diminished in myelodysplastic syndrome platelets. F\u00f6rster resonance energy transfer analysis showed a reduced co-localization of Talin-1 to the integrin's \u03b23-subunit, which is required for receptor activation and fibrinogen binding. In addition, platelet spreading on immobilized fibrinogen was incomplete, and platelet aggregation assays confirmed a general defect in integrin-dependent platelet aggregation in patients with myelodysplastic syndromes. Our data provide novel aspects on the molecular pathology of impaired platelet function in myelodysplastic syndromes and suggest a mechanism of defective integrin \u03b1IIb\u03b23 signaling that may contribute to the hemorrhagic diathesis observed in these patients.",
+        "authors": "Fr\u00f6bel, Cadeddu, Hartwig et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "23136403",
+        "title": "Mutations in the area composita protein \u03b1T-catenin are associated with arrhythmogenic right ventricular cardiomyopathy.",
+        "abstract": "<h4>Aims</h4>Arrhythmogenic right ventricular cardiomyopathy (ARVC) is a major cause of juvenile sudden death and is characterized by fibro-fatty replacement of the right ventricle. Mutations in several genes encoding desmosomal proteins have been identified in ARVC. We speculated that \u03b1T-catenin, encoded by CTNNA3, might also carry mutations in ARVC patients. Alpha-T-catenin binds plakophilins and this binding contributes to the formation of the area composita, which strengthens cell-cell adhesion in contractile cardiomyocytes.<h4>Methods and results</h4>We used denaturing high-performance liquid chromatography and direct sequencing to screen CTNNA3 in 76 ARVC patients who did not carry any mutations in the desmosomal genes commonly mutated in ARVC. Mutations c.281T > A (p.V94D) and c.2293_2295delTTG (p.del765L) were identified in two probands. They are located in important domains of \u03b1T-catenin. Yeast two-hybrid and cell transfection studies showed that the interaction between the p.V94D mutant protein and \u03b2-catenin was affected, whereas the p.del765L mutant protein showed a much stronger dimerization potential and formed aggresomes in HEK293T cells.<h4>Conclusion</h4>These findings might point to a causal relationship between CTNNA3 mutations and ARVC. This first report on the involvement of an area composita gene in ARVC shows that the pathogenesis of this disease extends beyond desmosomes. Since the frequency of CTNNA3 mutations in ARVC patients is not rare, systematic screening for this gene should be considered to improve the clinical management of ARVC families.",
+        "authors": "van Hengel, Calore, Bauce et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "22407321",
+        "title": "MEGF10 and MEGF11 mediate homotypic interactions required for mosaic spacing of retinal neurons.",
+        "abstract": "In many parts of the nervous system, neuronal somata display orderly spatial arrangements. In the retina, neurons of numerous individual subtypes form regular arrays called mosaics: they are less likely to be near neighbours of the same subtype than would occur by chance, resulting in 'exclusion zones' that separate them. Mosaic arrangements provide a mechanism to distribute each cell type evenly across the retina, ensuring that all parts of the visual field have access to a full set of processing elements. Remarkably, mosaics are independent of each other: although a neuron of one subtype is unlikely to be adjacent to another of the same subtype, there is no restriction on its spatial relationship to neighbouring neurons of other subtypes. This independence has led to the hypothesis that molecular cues expressed by specific subtypes pattern mosaics by mediating homotypic (within-subtype) short-range repulsive interactions. So far, however, no molecules have been identified that show such activity, so this hypothesis remains untested. Here we demonstrate in mouse that two related transmembrane proteins, MEGF10 and MEGF11, have critical roles in the formation of mosaics by two retinal interneuron subtypes, starburst amacrine cells and horizontal cells. MEGF10 and 11 and their invertebrate relatives Caenorhabditis elegans CED-1 and Drosophila Draper have hitherto been studied primarily as receptors necessary for engulfment of debris following apoptosis or axonal injury. Our results demonstrate that members of this gene family can also serve as subtype-specific ligands that pattern neuronal arrays.",
+        "authors": "Kay, Chu, Sanes",
+        "year": "2012"
+      },
+      {
+        "pmid": "11590244",
+        "title": "alphaT-catenin: a novel tissue-specific beta-catenin-binding protein mediating strong cell-cell adhesion.",
+        "abstract": "Cadherins are major cell-cell adhesion proteins whose cytoplasmic domains bind to catenin proteins. Strong intercellular adhesion depends on linkage of the cadherin/catenin complex to the actin cytoskeleton via alpha-catenin. To date, it is not clear how different cell types achieve the variable strength of cell-cell adhesion clearly needed in a multicellular organism. Here, we report the cloning and molecular characterization of alphaT(testis)-catenin, a novel human cDNA encoding a protein with homology to both human alphaE(epithelial)-catenin and alphaN(neural)-catenin. Although originally discovered in testis, alphaT-catenin is expressed in other tissues, the highest levels being observed in heart. Immunohistochemical analysis showed human alphaT-catenin localization at intercalated discs of cardiomyocytes and in peritubular myoid cells of testis. In cells transfected with alphaT-catenin cDNA, interaction with beta-catenin was demonstrated by co-immunoprecipitation. Transfection of alpha-catenin-deficient colon carcinoma cells recruited E-cadherin and beta-catenin to cell-cell contacts and functional cadherin-mediated cell-cell adhesion was restored in this way. Moreover, compaction of these cells was at least as prominent as in the case of cells expressing endogenous alphaE-catenin. We propose that alphaT-catenin is necessary for the formation of stretch-resistant cell-cell adhesion complexes, in particular, muscle cells.",
+        "authors": "Janssens, Goossens, Staes et al.",
+        "year": "2001"
+      },
+      {
+        "pmid": "10627596",
+        "title": "Ninjurin2, a novel homophilic adhesion molecule, is expressed in mature sensory and enteric neurons and promotes neurite outgrowth.",
+        "abstract": "A large number of cell adhesion molecules mediate cell-to-cell and cell-to-extracellular matrix interaction during development, differentiation and regeneration of the peripheral nervous system. Here, we report the identification of a novel cell surface adhesion molecule, ninjurin2 (for nerve injury induced protein 2). Ninjurin2 is a homolog of a homophilic cellular adhesion molecule, ninjurin1, that was previously isolated as a gene induced in Schwann cells after nerve injury. Ninjurin1 and 2 share conserved hydrophobic regions for their transmembrane domains; however, they do not contain comparable adhesion motifs nor do they interact with each other. In the peripheral nervous system, ninjurin2 is expressed constitutively in mature sensory and enteric neurons but not in glial cells or in autonomic ganglia. Ninjurin2 is upregulated in Schwann cells surrounding the distal segment of injured nerve with a time course similar to that of ninjurin1, neural CAM, and L1. Ninjurin2 promotes neurite outgrowth from primary cultured dorsal root ganglion neurons, presumably via homophilic cellular interactions. Ninjurin2 is also highly expressed in hematopoietic and lymphatic tissues. Finally, the ninjurin2 gene is located on human chromosome 12p13 in which several disorders of unknown etiology have been mapped, including inflammatory bowel disease and acrocallosal syndrome.",
+        "authors": "Araki, Milbrandt",
+        "year": "2000"
+      }
+    ],
+    "12": [
+      {
+        "pmid": "31416931",
+        "title": "Cryo-EM structures capture the transport cycle of the P4-ATPase flippase.",
+        "abstract": "In eukaryotic membranes, type IV P-type adenosine triphosphatases (P4-ATPases) mediate the translocation of phospholipids from the outer to the inner leaflet and maintain lipid asymmetry, which is critical for membrane trafficking and signaling pathways. Here, we report the cryo-electron microscopy structures of six distinct intermediates of the human ATP8A1-CDC50a heterocomplex at resolutions of 2.6 to 3.3 angstroms, elucidating the lipid translocation cycle of this P4-ATPase. ATP-dependent phosphorylation induces a large rotational movement of the actuator domain around the phosphorylation site in the phosphorylation domain, accompanied by lateral shifts of the first and second transmembrane helices, thereby allowing phosphatidylserine binding. The phospholipid head group passes through the hydrophilic cleft, while the acyl chain is exposed toward the lipid environment. These findings advance our understanding of the flippase mechanism and the disease-associated mutants of P4-ATPases.",
+        "authors": "Hiraizumi, Yamashita, Nishizawa et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "24201375",
+        "title": "The ATP-binding cassette transporter-2 (ABCA2) regulates esterification of plasma membrane cholesterol by modulation of sphingolipid metabolism.",
+        "abstract": "The ATP-binding cassette transporters are a large family (~48 genes divided into seven families A-G) of proteins that utilize the energy of ATP-hydrolysis to pump substrates across lipid bilayers against a concentration gradient. The ABC \"A\" subfamily is comprised of 13 members and transport sterols, phospholipids and bile acids. ABCA2 is the most abundant ABC transporter in human and rodent brain with highest expression in oligodendrocytes, although it is also expressed in neurons. Several groups have studied a possible connection between ABCA2 and Alzheimer's disease as well as early atherosclerosis. ABCA2 expression levels have been associated with changes in cholesterol and sphingolipid metabolism. In this paper, we hypothesized that ABCA2 expression level may regulate esterification of plasma membrane-derived cholesterol by modulation of sphingolipid metabolism. ABCA2 overexpression in N2a neuroblastoma cells was associated with an altered bilayer distribution of the sphingolipid ceramide that inhibited acylCoA:cholesterol acyltransferase (ACAT) activity and cholesterol esterification. In contrast, depletion of endogenous ABCA2 in the rat schwannoma cell line D6P2T increased esterification of plasma membrane cholesterol following treatment with exogenous bacterial sphingomyelinase. These findings suggest that control of ABCA2 expression level may be a key locus of regulation for esterification of plasma membrane-derived cholesterol through modulation of sphingolipid metabolism.",
+        "authors": "Davis",
+        "year": "2014"
+      },
+      {
+        "pmid": "23518707",
+        "title": "Autosomal recessive cortical myoclonic tremor and epilepsy: association with a mutation in the potassium channel associated gene CNTN2.",
+        "abstract": "We characterize a consanguineous Egyptian family with an autosomal recessively inherited familial cortical myoclonic tremor and epilepsy. We used multipoint linkage analysis to map the causative mutation to a 12.7 megabase interval within 1q31.3-q32.2 with a log of odds score of 3.6. For further investigation of the linked region in an efficient and unbiased manner, we performed exome sequencing. Within the suspected region we identified a homozygous single base pair deletion (c.503_503delG) leading to a frameshift in the coding region of the sixth exon of CNTN2 alias TAG-1 (p.Trp168fs), which segregated in the respective family. Many studies point towards an important role of the CNTN2 product contactin 2 in neuronal excitability. Contactin 2, a glycosylphosphatidylinositol-anchored neuronal membrane protein, and another transmembrane protein called contactin associated protein-like 2 (CNTNAP2 alias CASPR2) are together necessary to maintain voltage-gated potassium channels at the juxtaparanodal region. CNTN2 knockout mice were previously reported to suffer from spontaneous seizures and mutations in the CNTNAP2 gene have been described to cause epilepsy in humans. To further delineate the role of CNTN2 in patients with epilepsy, we sequenced the coding exons in 189 Caucasian patients with epilepsy. No recessive mutation was detected and heterozygote carriers of rare CNTN2 variants do not seem to be predisposed to epilepsy. Given the severity of the mutation and the proposed function of the gene, we consider this mutation as the most likely cause for cortical myoclonic tremor and epilepsy in this family.",
+        "authors": "Stogmann, Reinthaler, Eltawil et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "21914794",
+        "title": "ATP9B, a P4-ATPase (a putative aminophospholipid translocase), localizes to the trans-Golgi network in a CDC50 protein-independent manner.",
+        "abstract": "Type IV P-type ATPases (P4-ATPases) are putative phospholipid flippases that translocate phospholipids from the exoplasmic (lumenal) to the cytoplasmic leaflet of lipid bilayers and are believed to function in complex with CDC50 proteins. In Saccharomyces cerevisiae, five P4-ATPases are localized to specific cellular compartments and are required for vesicle-mediated protein transport from these compartments, suggesting a role for phospholipid translocation in vesicular transport. The human genome encodes 14 P4-ATPases and three CDC50 proteins. However, the subcellular localization of human P4-ATPases and their interactions with CDC50 proteins are poorly understood. Here, we show that class 5 (ATP10A, ATP10B, and ATP10D) and class 6 (ATP11A, ATP11B, and ATP11C) P4-ATPases require CDC50 proteins, primarily CDC50A, for their exit from the endoplasmic reticulum (ER) and final subcellular localization. In contrast, class 2 P4-ATPases (ATP9A and ATP9B) are able to exit the ER in the absence of exogenous CDC50 expression: ATP9B, but not ATP11B, was able to exit the ER despite depletion of CDC50 proteins by RNAi. Although ATP9A and ATP9B show a high overall sequence similarity, ATP9A localizes to endosomes and the trans-Golgi network (TGN), whereas ATP9B localizes exclusively to the TGN. A chimeric ATP9 protein in which the N-terminal cytoplasmic region of ATP9A was replaced with the corresponding region of ATP9B was localized exclusively to the Golgi. These results indicate that ATP9B is able to exit the ER and localize to the TGN independently of CDC50 proteins and that this protein contains a Golgi localization signal in its N-terminal cytoplasmic region.",
+        "authors": "Takatsu, Baba, Shima et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "19683723",
+        "title": "Dysfunction of ouabain-induced cardiac contractility in mice with heart-specific ablation of Na,K-ATPase beta1-subunit.",
+        "abstract": "Na,K-ATPase is composed of two essential alpha- and beta-subunits, both of which have multiple isoforms. Evidence indicates that the Na,K-ATPase enzymatic activity as well as its alpha(1), alpha(3) and beta(1) isoforms are reduced in the failing human heart. The catalytic alpha-subunit is the receptor for cardiac glycosides such as digitalis, used for the treatment of congestive heart failure. The role of the Na,K-ATPase beta(1)-subunit (Na,K-beta(1)) in cardiac function is not known. We used Cre/loxP technology to inactivate the Na,K-beta(1) gene exclusively in the ventricular cardiomyocytes. Animals with homozygous Na,K-beta(1) gene excision were born at the expected Mendelian ratio, grew into adulthood, and appeared to be healthy until 10 months of age. At 13-14 months, these mice had 13% higher heart/body weight ratios, and reduced contractility as revealed by echocardiography compared to their wild-type (WT) littermates. Pressure overload by transverse aortic constriction (TAC) in younger mice, resulted in compensated hypertrophy in WT mice, but decompensation in the Na,K-beta(1) KO mice. The young KO survivors of TAC exhibited decreased contractile function and mimicked the effects of the Na,K-beta(1) KO in older mice. Further, we show that intact hearts of Na,K-beta(1) KO anesthetized mice as well as isolated cardiomyocytes were insensitive to ouabain-induced positive inotropy. This insensitivity was associated with a reduction in NCX1, one of the proteins involved in regulating cardiac contractility. In conclusion, our results demonstrate that Na,K-beta(1) plays an essential role in regulating cardiac contractility and that its loss is associated with significant pathophysiology of the heart.",
+        "authors": "Barwe, Jordan, Skay et al.",
+        "year": "2009"
+      }
+    ],
+    "13": [],
+    "14": [
+      {
+        "pmid": "10848592",
+        "title": "Involvement of Ras and Ral in chemotactic migration of skeletal myoblasts.",
+        "abstract": "In skeletal myoblasts, Ras has been considered to be a strong inhibitor of myogenesis. Here, we demonstrate that Ras is involved also in the chemotactic response of skeletal myoblasts. Expression of a dominant-negative mutant of Ras inhibited chemotaxis of C2C12 myoblasts in response to basic fibroblast growth factor (bFGF), hepatocyte growth factor (HGF), and insulin-like growth factor 1 (IGF-1), key regulators of limb muscle development and skeletal muscle regeneration. A dominant-negative Ral also decreased chemotactic migration by these growth factors, while inhibitors for phosphatidylinositol 3-kinase and mitogen-activated protein kinase kinase (MEK) showed no effect. Activation of the Ras-Ral pathway by expression of an activated mutant of either Ras, the guanine-nucleotide dissociation stimulator for Ral, or Ral resulted in increased motility of myoblasts. The ability of Ral to stimulate motility was reduced by introduction of a mutation which prevents binding to Ral-binding protein 1 or phospholipase D. These results suggest that the Ras-Ral pathway is essential for the migration of myoblasts. Furthermore, we found that Ras and Ral are activated in C2C12 cells by bFGF, HGF and IGF-1 and that the Ral activation is regulated by the Ras- and the intracellular Ca(2+)-mediated pathways. Taken together, our data indicate that Ras and Ral regulate the chemotactic migration of skeletal muscle progenitors.",
+        "authors": "Suzuki, Yamazaki, Li et al.",
+        "year": "2000"
+      }
+    ],
+    "15": [
+      {
+        "pmid": "26631410",
+        "title": "Cation dependencies and turnover rates of the human K\u207a-dependent Na\u207a-Ca\u00b2\u207a exchangers NCKX1, NCKX2, NCKX3 and NCKX4.",
+        "abstract": "The Solute Carrier Family 24 (SLC24) belongs to the CaCA super family of Ca(2+)/cation antiporters and codes for five different K(+)- dependent Na(+)- Ca(2+) exchangers (NCKX1-5). NCKX proteins play a critical role in Ca(2+) homeostasis in a wide variety of biological processes such as vision, olfaction, enamel formation, Melanocortin-4-receptor-dependent satiety and skin pigmentation. NCKX transcripts are widely found throughout the brain. In this study we examine the differences between NCKX1-4 in terms of cation dependencies. We measured changes to Ca(2+) influx via the reverse exchange mode while manipulating external Ca(2+) or K(+) or internal Na(+) concentrations (External Ca(2+) Dependence, External K(+) Dependence and Internal Na(+) Dependence respectively); we also looked at the effect of external Na(+)/Ca(2+) competition and 3' 4'-Dichlorobenzamil on the transport of ions in HEK 293 cell lines. A fluorescence based assay was used to determine differences in transport kinetics of the four membrane spanning exchangers using the Michaelis-Menten constant (Km). Our results show that there are no significant differences between the NCKX isoforms to explain the variation in the specific expression pattern of these exchangers.",
+        "authors": "Jalloul, Szerencsei, Schnetkamp",
+        "year": "2016"
+      },
+      {
+        "pmid": "24688018",
+        "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps.",
+        "abstract": "A single Na(+)/K(+)-ATPase pumps three Na(+) outwards and two K(+) inwards by alternately exposing ion-binding sites to opposite sides of the membrane in a conformational sequence coupled to pump autophosphorylation from ATP and auto-dephosphorylation. The larger flow of Na(+) than K(+) generates outward current across the cell membrane. Less well understood is the ability of Na(+)/K(+) pumps to generate an inward current of protons. Originally noted in pumps deprived of external K(+) and Na(+) ions, as inward current at negative membrane potentials that becomes amplified when external pH is lowered, this proton current is generally viewed as an artifact of those unnatural conditions. We demonstrate here that this inward current also flows at physiological K(+) and Na(+) concentrations. We show that protons exploit ready reversibility of conformational changes associated with extracellular Na(+) release from phosphorylated Na(+)/K(+) pumps. Reversal of a subset of these transitions allows an extracellular proton to bind an acidic side chain and to be subsequently released to the cytoplasm. This back-step of phosphorylated Na(+)/K(+) pumps that enables proton import is not required for completion of the 3 Na(+)/2 K(+) transport cycle. However, the back-step occurs readily during Na(+)/K(+) transport when external K(+) ion binding and occlusion are delayed, and it occurs more frequently when lowered extracellular pH raises the probability of protonation of the externally accessible carboxylate side chain. The proton route passes through the Na(+)-selective binding site III and is distinct from the principal pathway traversed by the majority of transported Na(+) and K(+) ions that passes through binding site II. The inferred occurrence of Na(+)/K(+) exchange and H(+) import during the same conformational cycle of a single molecule identifies the Na(+)/K(+) pump as a hybrid transporter. Whether Na(+)/K(+) pump-mediated proton inflow may have any physiological or pathophysiological significance remains to be clarified.",
+        "authors": "Vedovato, Gadsby",
+        "year": "2014"
+      },
+      {
+        "pmid": "22946059",
+        "title": "Anoctamins are a family of Ca2+-activated Cl- channels.",
+        "abstract": "Anoctamin 1 (Ano1; TMEM16A) and anoctamin 2 (Ano2; TMEM16B) are novel Cl(-) channels transiently activated by an increase in intracellular Ca(2+). These channels are essential for epithelial Cl(-) secretion, smooth muscle peristalsis and olfactory signal transduction. They are central to inherited diseases and cancer and can act as heat sensors. Surprisingly, another member of this protein family, Ano6, operates as a Ca(2+)-activated phospholipid scramblase, and others were reported as intracellular proteins. It is therefore unclear whether anoctamins constitute a family of Ca(2+)-activated Cl(-) channels, or are proteins with heterogeneous functions. Using whole-cell patch clamping we demonstrate that Ano4-10 are all able to produce transient Ca(2+)-activated Cl(-) currents when expressed in HEK293 cells. Although some anoctamins (Ano1, 2, 4, 6, 7) were found to be well expressed in the plasma membrane, others (Ano8, 9, 10) show rather poor membrane expression and were mostly retained in the cytosol. The transient nature of the Cl(-) currents was demonstrated to be independent of intracellular Ca(2+) levels. We show that inactivation of Ano1 currents occurs in the continuous presence of elevated Ca(2+) concentrations, possibly by calmodulin-dependent kinase. The present results demonstrate that anoctamins are a family of Ca(2+)-activated Cl(-) channels, which also induce permeability for cations. They may operate as Cl(-) channels located in the plasma membrane or in intracellular compartments. These results increase our understanding of the physiological significance of anoctamins and their role in disease.",
+        "authors": "Tian, Schreiber, Kunzelmann",
+        "year": "2012"
+      },
+      {
+        "pmid": "22282804",
+        "title": "Crystal structure of the human two-pore domain potassium channel K2P1.",
+        "abstract": "Two-pore domain potassium (K(+)) channels (K2P channels) control the negative resting potential of eukaryotic cells and regulate cell excitability by conducting K(+) ions across the plasma membrane. Here, we present the 3.4 angstrom resolution crystal structure of a human K2P channel, K2P1 (TWIK-1). Unlike other K(+) channel structures, K2P1 is dimeric. An extracellular cap domain located above the selectivity filter forms an ion pathway in which K(+) ions flow through side portals. Openings within the transmembrane region expose the pore to the lipid bilayer and are filled with electron density attributable to alkyl chains. An interfacial helix appears structurally poised to affect gating. The structure lays a foundation to further investigate how K2P channels are regulated by diverse stimuli.",
+        "authors": "Miller, Long",
+        "year": "2012"
+      },
+      {
+        "pmid": "21653227",
+        "title": "TWIK-1 two-pore domain potassium channels change ion selectivity and conduct inward leak sodium currents in hypokalemia.",
+        "abstract": "Background potassium (K+) channels, which are normally selectively permeable to K+, maintain the cardiac resting membrane potential at around -80 mV. In subphysiological extracellular K+ concentrations ([K+]o), which occur in pathological hypokalemia, the resting membrane potential of human cardiomyocytes can depolarize to around -50 mV, whereas rat and mouse cardiomyocytes become hyperpolarized, consistent with the Nernst equation for K+. This paradoxical depolarization of cardiomyocytes in subphysiological [K+]o, which may contribute to cardiac arrhythmias, is thought to involve an inward leak sodium (Na+) current. Here, we show that human cardiac TWIK-1 (also known as K2P1) two-pore domain K+ channels change ion selectivity, becoming permeable to external Na+, and conduct inward leak Na+ currents in subphysiological [K+]o. A specific threonine residue (Thr118) within the pore selectivity sequence TxGYG was required for this altered ion selectivity. Mouse cardiomyocyte-derived HL-1 cells exhibited paradoxical depolarization with ectopic expression of TWIK-1 channels, whereas TWIK-1 knockdown in human spherical primary cardiac myocytes eliminated paradoxical depolarization. These findings indicate that ion selectivity of TWIK-1 K+ channels changes during pathological hypokalemia, elucidate a molecular basis for inward leak Na+ currents that could trigger or contribute to cardiac paradoxical depolarization in lowered [K+]o, and identify a mechanism for regulating cardiac excitability.",
+        "authors": "Ma, Zhang, Chen",
+        "year": "2011"
+      }
+    ],
+    "16": [
+      {
+        "pmid": "19129463",
+        "title": "Mechanisms of pH-gradient driven transport mediated by organic anion polypeptide transporters.",
+        "abstract": "Organic anion transporting polypeptides (humans OATPs, rodents Oatps) are expressed in most mammalian tissues and mediate cellular uptake of a wide variety of amphipathic organic compounds such as bile salts, steroid conjugates, oligopeptides, and a large list of drugs, probably by acting as anion exchangers. In the present study we aimed to investigate the role of the extracellular pH on the transport activity of nine human and four rat OATPs/Oatps. Furthermore, we aimed to test the concept that OATP/Oatp transport activity is accompanied by extrusion of bicarbonate. By using amphibian Xenopus laevis oocytes expressing OATPs/Oatps and mammalian cell lines stably transfected with OATPs/Oatps, we could demonstrate that in all OATPs/Oatps investigated, with the exception of OATP1C1, a low extracellular pH stimulated transport activity. This stimulation was accompanied by an increased substrate affinity as evidenced by lower apparent Michaelis-Menten constant values. OATP1C1 is lacking a highly conserved histidine in the third transmembrane domain, which was shown by site-directed mutagenesis to be critically involved in the pH dependency of OATPs/Oatps. Using online intracellular pH measurements in OATP/Oatp-transfected Chinese Hamster Ovary (CHO)-K1 cells, we could demonstrate the presence of a 4,4'-diisothiocyanatostilbene-2,2'-disulfonic acid-sensitive chloride/bicarbonate exchanger in CHO-K1 cells and that OATP/Oatp-mediated substrate transport is paralleled by bicarbonate efflux. We conclude that the pH dependency of OATPs/Oatps may lead to a stimulation of substrate transport in an acidic microenvironment and that the OATP/Oatp-mediated substrate transport into cells is generally compensated or accompanied by bicarbonate efflux.",
+        "authors": "Leuthold, Hagenbuch, Mohebbi et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "10873595",
+        "title": "Molecular identification and characterization of novel members of the human organic anion transporter (OATP) family.",
+        "abstract": "We identified three novel transporters structurally belonging to the organic anion transporting polypeptide (OATP) family in humans. Since previously known rat oatp1 to 3 do not necessarily correspond to the human OATPs in terms of either tissue distribution or function, here we designate the newly identified human OATPs as OATP-B, -D and -E, and we rename the previously known human OATP as OATP-A. OATP-C proved to be identical with the recently reported LST1/OATP-2. Expression profiles of the five OATPs and the prostaglandin transporter PGT (a member of OATP family) in human tissues showed that OATP-C is exclusively localized in liver, OATP-A and PGT are expressed in restricted ranges of tissues, and OATP-B, -D and -E show broad expression profiles. OATP-B, -C, -D and -E exhibited transport activity for [(3)H]estrone-3-sulfate as a common substrate. OATP-C has a high transport activity with broad substrate specificity.",
+        "authors": "Tamai, Nezu, Uchino et al.",
+        "year": "2000"
+      },
+      {
+        "pmid": "39716028",
+        "title": "Membrane structure-responsive lipid scramblase activity of the TMEM63/OSCA family.",
+        "abstract": "Phospholipids are asymmetrically distributed in the plasma membrane (PM), and scramblases disrupt this asymmetry by shuffling phospholipids. We recently identified mouse Tmem63b as a membrane structure-responsive scramblase. Tmem63b belongs to the TMEM63/OSCA family of ion channels; however, the conservation of the scramblase activity within this family remains unclear. We expressed human TMEM63 paralogs, TMEM63B orthologs, and plant OSCA1.1 in Tmem63b-deficient mouse pro-B cells and found that vertebrate TMEM63B orthologs exhibit scramblase activity at the PM. Previously, ten pathogenic human TMEM63B variants were identified, some of which exhibited constitutive scramblase activity. Upon expressing all variants, we found that nine variants displayed constitutive scramblase activity. These results suggest that membrane structure-responsive scramblase activity at the PM is conserved among vertebrate TMEM63B orthologs.",
+        "authors": "Miyata, Nishimura, Nagata et al.",
+        "year": "2025"
+      },
+      {
+        "pmid": "37543036",
+        "title": "TMEM63 proteins function as monomeric high-threshold mechanosensitive ion channels.",
+        "abstract": "OSCA/TMEM63s form mechanically activated (MA) ion channels in plants and animals, respectively. OSCAs and related TMEM16s and transmembrane channel-like (TMC) proteins form homodimers with two pores. Here, we uncover an unanticipated monomeric configuration of TMEM63 proteins. Structures of TMEM63A and TMEM63B (referred to as TMEM63s) revealed a single highly restricted pore. Functional analyses demonstrated that TMEM63s are bona fide mechanosensitive ion channels, characterized by small conductance and high thresholds. TMEM63s possess evolutionary variations in the intracellular linker IL2, which mediates dimerization in OSCAs. Replacement of OSCA1.2 IL2 with TMEM63A IL2 or mutations to key variable residues resulted in monomeric OSCA1.2 and MA currents with significantly higher thresholds. Structural analyses revealed substantial conformational differences in the mechano-sensing domain IL2 and gating helix TM6 between TMEM63s and OSCA1.2. Our studies reveal that mechanosensitivity in OSCA/TMEM63 channels is affected by oligomerization and suggest gating mechanisms that may be shared by OSCA/TMEM63, TMEM16, and TMC channels.",
+        "authors": "Zheng, Rawson, Shen et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "35789156",
+        "title": "Structures and gating mechanisms of human bestrophin anion channels.",
+        "abstract": "Bestrophin-1 (Best1) and bestrophin-2 (Best2) are two members of the bestrophin family of calcium (Ca<sup>2+</sup>)-activated chloride (Cl<sup>-</sup>) channels with critical involvement in ocular physiology and direct pathological relevance. Here, we report cryo-EM structures of wild-type human Best1 and Best2 in various states at up to 1.8\u2009\u00c5 resolution. Ca<sup>2+</sup>-bound Best1 structures illustrate partially open conformations at the two Ca<sup>2+</sup>-dependent gates of the channels, in contrast to the fully open conformations observed in Ca<sup>2+</sup>-bound Best2, which is in accord with the significantly smaller currents conducted by Best1 in electrophysiological recordings. Comparison of the closed and open states reveals a C-terminal auto-inhibitory segment (AS), which constricts the channel concentrically by wrapping around the channel periphery in an inter-protomer manner and must be released to allow channel opening. Our results demonstrate that removing the AS from Best1 and Best2 results in truncation mutants with similar activities, while swapping the AS between Best1 and Best2 results in chimeric mutants with swapped activities, underlying a key role of the AS in determining paralog specificity among bestrophins.",
+        "authors": "Owji, Wang, Kittredge et al.",
+        "year": "2022"
+      }
+    ],
+    "17": [
+      {
+        "pmid": "19581412",
+        "title": "Quantitative proteomics identifies a Dab2/integrin module regulating cell migration.",
+        "abstract": "Clathrin-associated endocytic adapters recruit cargoes to coated pits as a first step in endocytosis. We developed an unbiased quantitative proteomics approach to identify and quantify glycoprotein cargoes for an endocytic adapter, Dab2. Surface levels of integrins beta1, alpha1, alpha2, and alpha3 but not alpha5 or alphav chains were specifically increased on Dab2-deficient HeLa cells. Dab2 colocalizes with integrin beta1 in coated pits that are dispersed over the cell surface, suggesting that it regulates bulk endocytosis of inactive integrins. Depletion of Dab2 inhibits cell migration and polarized movement of integrin beta1 and vinculin to the leading edge. By manipulating intracellular and surface integrin beta1 levels, we show that migration speed correlates with the intracellular integrin pool but not the surface level. Together, these results suggest that Dab2 internalizes integrins freely diffusing on the cell surface and that Dab2 regulates migration, perhaps by maintaining an internal pool of integrins that can be recycled to create new adhesions at the leading edge.",
+        "authors": "Teckchandani, Toida, Goodchild et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "27616481",
+        "title": "Mutations in GLDN, Encoding Gliomedin, a Critical Component of the Nodes of Ranvier, Are Responsible for Lethal Arthrogryposis.",
+        "abstract": "Arthrogryposis multiplex congenita (AMC) is a developmental condition characterized by multiple joint contractures resulting from reduced or absent fetal movements. Through linkage analysis, homozygosity mapping, and exome sequencing in four unrelated families affected by lethal AMC, we identified biallelic mutations in GLDN in the affected individuals. GLDN encodes gliomedin, a secreted cell adhesion molecule involved in the formation of the nodes of Ranvier. Transmission electron microscopy of the sciatic nerve from one of the affected individuals showed a marked lengthening defect of the nodes. The GLDN mutations found in the affected individuals abolish the cell surface localization of gliomedin and its interaction with its axonal partner, neurofascin-186 (NF186), in a cell-based assay. The axoglial contact between gliomedin and NF186 is essential for the initial clustering of Na<sup>+</sup> channels at developing nodes. These results indicate a major role of gliomedin in node formation and the development of the peripheral nervous system in humans. These data indicate that mutations of GLDN or CNTNAP1 (MIM: 616286), encoding essential components of the nodes of Ranvier and paranodes, respectively, lead to inherited nodopathies, a distinct disease entity among peripheral neuropathies.",
+        "authors": "Maluenda, Manso, Quevarec et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "23658023",
+        "title": "Comparative proteomic analysis of supportive and unsupportive extracellular matrix substrates for human embryonic stem cell maintenance.",
+        "abstract": "Human embryonic stem cells (hESCs) are pluripotent cells that have indefinite replicative potential and the ability to differentiate into derivatives of all three germ layers. hESCs are conventionally grown on mitotically inactivated mouse embryonic fibroblasts (MEFs) or feeder cells of human origin. In addition, feeder-free culture systems can be used to support hESCs, in which the adhesive substrate plays a key role in the regulation of stem cell self-renewal or differentiation. Extracellular matrix (ECM) components define the microenvironment of the niche for many types of stem cells, but their role in the maintenance of hESCs remains poorly understood. We used a proteomic approach to characterize in detail the composition and interaction networks of ECMs that support the growth of self-renewing hESCs. Whereas many ECM components were produced by supportive and unsupportive MEF and human placental stromal fibroblast feeder cells, some proteins were only expressed in supportive ECM, suggestive of a role in the maintenance of pluripotency. We show that identified candidate molecules can support attachment and self-renewal of hESCs alone (fibrillin-1) or in combination with fibronectin (perlecan, fibulin-2), in the absence of feeder cells. Together, these data highlight the importance of specific ECM interactions in the regulation of hESC phenotype and provide a resource for future studies of hESC self-renewal.",
+        "authors": "Soteriou, Iskender, Byron et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "23382103",
+        "title": "Platelet proteome analysis reveals integrin-dependent aggregation defects in patients with myelodysplastic syndromes.",
+        "abstract": "Bleeding complications are a significant clinical problem in patients with myelodysplastic syndromes even at sufficient platelet counts (>50,000/\u03bcl). However, the underlying pathology of this hemorrhagic diathesis is still unknown. Here, we analyzed the platelet proteome of patients with myelodysplastic syndromes by quantitative two-dimensional difference gel electrophoresis followed by mass spectrometric protein identification. Proteins identified with lower concentrations, such as Talin-1, Vinculin, Myosin-9, Filmain-A, and Actin play critical roles in integrin \u03b1IIb\u03b23 signaling and thus platelet aggregation. Despite normal agonist receptor expression, calcium flux, and granule release upon activation, the activation capacity of integrin \u03b1IIb\u03b23 was diminished in myelodysplastic syndrome platelets. F\u00f6rster resonance energy transfer analysis showed a reduced co-localization of Talin-1 to the integrin's \u03b23-subunit, which is required for receptor activation and fibrinogen binding. In addition, platelet spreading on immobilized fibrinogen was incomplete, and platelet aggregation assays confirmed a general defect in integrin-dependent platelet aggregation in patients with myelodysplastic syndromes. Our data provide novel aspects on the molecular pathology of impaired platelet function in myelodysplastic syndromes and suggest a mechanism of defective integrin \u03b1IIb\u03b23 signaling that may contribute to the hemorrhagic diathesis observed in these patients.",
+        "authors": "Fr\u00f6bel, Cadeddu, Hartwig et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "21310825",
+        "title": "The androgen receptor induces integrin \u03b16\u03b21 to promote prostate tumor cell survival via NF-\u03baB and Bcl-xL Independently of PI3K signaling.",
+        "abstract": "Recent studies indicate that androgen receptor (AR) signaling is critical for prostate cancer cell survival, even in castration-resistant disease wherein AR continues to function independently of exogenous androgens. Integrin-mediated adhesion to the extracellular matrix is also important for prostate cell survival. AR-positive prostate cancer cells express primarily integrin \u03b16\u03b21 and adhere to a laminin-rich matrix. In this study, we show that active nuclear-localized AR protects prostate cancer cells from death induced by phosphoinositide 3-kinase (PI3K) inhibition when cells adhere to laminin. Resistance to PI3K inhibition is mediated directly by an AR-dependent increase in integrin \u03b16\u03b21 mRNA transcription and protein expression. Subsequent signaling by integrin \u03b16\u03b21 in AR-expressing cells increased NF-\u03baB activation and Bcl-xL expression. Blocking AR, integrin \u03b16, NF-\u03baB, or Bcl-xL concurrent with inhibition of PI3K was sufficient and necessary to trigger death of laminin-adherent AR-expressing cells. Taken together, these results define a novel integrin-dependent survival pathway in prostate cancer cells that is regulated by AR, independent of and parallel to the PI3K pathway. Our findings suggest that combined targeting of both the AR/\u03b16\u03b21 and PI3K pathways may effectively trigger prostate cancer cell death, enhancing the potential therapeutic value of PI3K inhibitors being evaluated in this setting.",
+        "authors": "Lamb, Zarif, Miranti",
+        "year": "2011"
+      }
+    ],
+    "18": [],
+    "19": [
+      {
+        "pmid": "26200502",
+        "title": "Autosomal Recessive Bestrophinopathy Is Not Associated With the Loss of Bestrophin-1 Anion Channel Function in a Patient With a Novel BEST1 Mutation.",
+        "abstract": "<h4>Purpose</h4>Mutations in BEST1, encoding bestrophin-1 (Best1), cause autosomal recessive bestrophinopathy (ARB). Encoding bestrophin-1 is a pentameric anion channel localized to the basolateral plasma membrane of the RPE. Here, we characterize the effects of the mutations R141H (CGC > CAC) and I366fsX18 (c.1098_1100+7del), identified in a patient in our practice, on Best1 trafficking, oligomerization, and channel activity.<h4>Methods</h4>Currents of Cl- were assessed in transfected HEK293 cells using whole-cell patch clamp. Best1 localization was assessed by confocal microscopy in differentiated, human-induced pluripotent stem cell-derived RPE (iPSC-RPE) cells following expression of mutants via adenovirus-mediated gene transfer. Oligomerization was evaluated by coimmunoprecipitation in iPSC-RPE and MDCK cells.<h4>Results</h4>Compared to Best1, Best1 I366fsX18 currents were increased while Best1 R141H Cl- currents were diminished. Coexpression of Best1 R141H with Best1 or Best1 I366fsX18 resulted in rescued channel activity. Overexpressed Best1, Best1 R141H, and Best1 I366fsX18 were all properly localized in iPSC-RPE cells; Best1 R141H and Best1 I366fsX18 coimmunoprecipitated with endogenous Best1 in iPSC-RPE cells and with each other in MDCK cells.<h4>Conclusions</h4>The first 366 amino acids of Best1 are sufficient to mediate channel activity and homo-oligomerization. The combination of Best1 and Best1 R141H does not cause disease, while Best1 R141H together with Best1 I366fsX18 causes ARB. Since both combinations generate comparable Cl- currents, this indicates that ARB in this patient is not caused by a loss of channel activity. Moreover, Best1 I366fsX18 differs from Best1 in that it lacks most of the cytosolic C-terminal domain, suggesting that the loss of this region contributes significantly to the pathogenesis of ARB in this patient.",
+        "authors": "Johnson, Bachman, Gilles et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "21330666",
+        "title": "Functional characterization of bestrophin-1 missense mutations associated with autosomal recessive bestrophinopathy.",
+        "abstract": "<h4>Purpose</h4>Autosomal recessive bestrophinopathy (ARB) is a retinal dystrophy affecting macular and retinal pigmented epithelium function resulting from homozygous or compound heterozygous mutations in BEST1. In this study we characterize the functional implications of missense bestrophin-1 mutations that cause ARB by investigating their effect on bestrophin-1's chloride conductance, cellular localization, and stability.<h4>Methods</h4>The chloride conductance of wild-type bestropin-1 and a series of ARB mutants were determined by whole-cell patch-clamping of transiently transfected HEK cells. The effect of ARB mutations on the cellular localization of bestrophin-1 was determined by confocal immunofluorescence on transiently transfected MDCK II cells that had been polarized on Transwell filters. Protein stability of wild-type and ARB mutant forms of bestrophin-l was determined by the addition of proteasomal or lysosomal inhibitors to transiently transfected MDCK II cells. Lysates were then analyzed by Western blot analysis.<h4>Results</h4>All ARB mutants investigated produced significantly smaller chloride currents compared to wild-type bestrophin-1. Additionally, co-transfection of compound heterozygous mutants abolished chloride conductance in contrast to co-transfections of a single mutant with wild-type bestrophin-l, reflecting the recessive nature of the condition. In control experiments, expression of two dominant vitelliform macular dystrophy mutants was shown to inhibit wild-type currents. Cellular localization of ARB mutants demonstrated that the majority did not traffic correctly to the plasma membrane and that five of these seven mutants were rapidly degraded by the proteasome. Two ARB-associated mutants (p.D312N and p.V317M) that were not trafficked correctly nor targeted to the proteasome had a distinctive appearance, possibly indicative of aggresome or aggresome-like inclusion bodies.<h4>Conclusions</h4>Differences in cellular processing mechanisms for different ARB associated mutants lead to the same disease phenotype. The existence of distinct pathogenic disease mechanisms has important ramifications for potential gene replacement therapies since we show that missense mutations associated with an autosomal recessive disease have a pathogenic influence beyond simple loss of function.",
+        "authors": "Davidson, Millar, Burgess-Mullan et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "19853238",
+        "title": "Missense mutations in a retinal pigment epithelium protein, bestrophin-1, cause retinitis pigmentosa.",
+        "abstract": "Bestrophin-1 is preferentially expressed at the basolateral membrane of the retinal pigmented epithelium (RPE) of the retina. Mutations in the BEST1 gene cause the retinal dystrophies vitelliform macular dystrophy, autosomal-dominant vitreochoroidopathy, and autosomal-recessive bestrophinopathy. Here, we describe four missense mutations in bestrophin-1, three that we believe are previously unreported, in patients diagnosed with autosomal-dominant and -recessive forms of retinitis pigmentosa (RP). The physiological function of bestrophin-1 remains poorly understood although its heterologous expression induces a Cl--specific current. We tested the effect of RP-causing variants on Cl- channel activity and cellular localization of bestrophin-1. Two (p.L140V and p.I205T) produced significantly decreased chloride-selective whole-cell currents in comparison to those of wild-type protein. In a model system of a polarized epithelium, two of three mutations (p.L140V and p.D228N) caused mislocalization of bestrophin-1 from the basolateral membrane to the cytoplasm. Mutations in bestrophin-1 are increasingly recognized as an important cause of inherited retinal dystrophy.",
+        "authors": "Davidson, Millar, Urquhart et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "15611082",
+        "title": "The ammonium transporter RhBG: requirement of a tyrosine-based signal and ankyrin-G for basolateral targeting and membrane anchorage in polarized kidney epithelial cells.",
+        "abstract": "RhBG is a nonerythroid member of the Rhesus (Rh) protein family, mainly expressed in the kidney and belonging to the Amt/Mep/Rh superfamily of ammonium transporters. The epithelial expression of renal RhBG is restricted to the basolateral membrane of the connecting tubule and collecting duct cells. We report here that sorting and anchoring of RhBG to the basolateral plasma membrane require a cis-tyrosine-based signal and an association with ankyrin-G, respectively. First, we show by using a model of polarized epithelial Madin-Darby canine kidney cells that the targeting of transfected RhBG depends on a YED motif localized in the cytoplasmic C terminus of the protein. Second, we reveal by yeast two-hybrid analysis a direct interaction between an FLD determinant in the cytoplasmic C-terminal tail of RhBG and the third and fourth repeat domains of ankyrin-G. The biological relevance of this interaction is supported by two observations. (i) RhBG and ankyrin-G were colocalized in vivo in the basolateral domain of epithelial cells from the distal nephron by immunohistochemistry on kidney sections. (ii) The disruption of the FLD-binding motif impaired the membrane expression of RhBG leading to retention on cytoplasmic structures in transfected Madin-Darby canine kidney cells. Mutation of both targeting signal and ankyrin-G-binding site resulted in the same cell surface but nonpolarized expression pattern as observed for the protein mutated on the targeting signal alone, suggesting the existence of a close relationship between sorting and anchoring of RhBG to the basolateral domain of epithelial cells.",
+        "authors": "Lopez, M\u00e9tral, Eladari et al.",
+        "year": "2005"
+      },
+      {
+        "pmid": "12646923",
+        "title": "Segregation of receptor and ligand regulates activation of epithelial growth factor receptor.",
+        "abstract": "Interactions between ligands and receptors are central to communication between cells and tissues. Human airway epithelia constitutively produce both a ligand, the growth factor heregulin, and its receptors--erbB2, erbB3 and erbB4 (refs 1-3). Although heregulin binding initiates cellular proliferation and differentiation, airway epithelia have a low rate of cell division. This raises the question of how ligand-receptor interactions are controlled in epithelia. Here we show that in differentiated human airway epithelia, heregulin-alpha is present exclusively in the apical membrane and the overlying airway surface liquid, physically separated from erbB2-4, which segregate to the basolateral membrane. This physical arrangement creates a ligand-receptor pair poised for activation whenever epithelial integrity is disrupted. Indeed, immediately following a mechanical injury, heregulin-alpha activates erbB2 in cells at the edge of the wound, and this process hastens restoration of epithelial integrity. Likewise, when epithelial cells are not separated into apical and basolateral membranes ('polarized'), or when tight junctions between adjacent cells are opened, heregulin-alpha activates its receptor. This mechanism of ligand-receptor segregation on either side of epithelial tight junctions may be vital for rapid restoration of integrity following injury, and hence critical for survival. This model also suggests a mechanism for abnormal receptor activation in diseases with increased epithelial permeability.",
+        "authors": "Vermeer, Einwalter, Moninger et al.",
+        "year": "2003"
+      }
+    ],
+    "20": [
+      {
+        "pmid": "32047108",
+        "title": "The human Golgi protein TMEM165 transports calcium and manganese in yeast and bacterial cells.",
+        "abstract": "Cases of congenital disorders of glycosylation (CDG) have been associated with specific mutations within the gene encoding the human Golgi TMEM165 (transmembrane protein 165), belonging to UPF0016 (uncharacterized protein family 0016), a family of secondary ion transporters. To date, members of this family have been reported to be involved in calcium, manganese, and pH homeostases. Although it has been suggested that TMEM165 has cation transport activity, direct evidence for its Ca<sup>2+</sup>- and Mn<sup>2+</sup>-transporting activities is still lacking. Here, we functionally characterized human TMEM165 by heterologously expressing it in budding yeast (<i>Saccharomyces cerevisiae</i>) and in the bacterium <i>Lactococcus lactis</i> Protein production in these two microbial hosts was enhanced by codon optimization and truncation of the putatively autoregulatory N terminus of TMEM165. We show that TMEM165 expression in a yeast strain devoid of Golgi Ca<sup>2+</sup> and Mn<sup>2+</sup> transporters abrogates Ca<sup>2+</sup>- and Mn<sup>2+</sup>-induced growth defects, excessive Mn<sup>2+</sup> accumulation in the cell, and glycosylation defects. Using bacterial cells loaded with the fluorescent Fura-2 probe, we further obtained direct biochemical evidence that TMEM165 mediates Ca<sup>2+</sup> and Mn<sup>2+</sup> influxes. We also used the yeast and bacterial systems to evaluate the impact of four disease-causing missense mutations identified in individuals with TMEM165-associated CDG. We found that a mutation leading to a E108G substitution within the conserved UPF0016 family motif significantly reduces TMEM165 activity. These results indicate that TMEM165 can transport Ca<sup>2+</sup> and Mn<sup>2+</sup>, which are both required for proper protein glycosylation in cells. Our work also provides tools to better understand the pathogenicity of CDG-associated <i>TMEM165</i> mutations.",
+        "authors": "Stribny, Thines, Deschamps et al.",
+        "year": "2020"
+      },
+      {
+        "pmid": "27093457",
+        "title": "Identification and Characterization of K(+)-Dependent Na(+)-Ca(2+) Exchange Transport in Pigmented MEB4 Cells Mediated by NCKX4.",
+        "abstract": "The SLC24 gene family encodes K(+)-dependent Na(+)-Ca(2+) exchangers or NCKX proteins. The NCKX4 and NCKX5 isoforms have been shown to be important for pigmentation, and single nucleotide polymorphism (SNP) in both alleles of the SLC24a5 gene is the major genetic determinant for light skin in Caucasians. NCKX4 is thought to operate in the surface membrane of cells, whereas NCKX5 is thought to be located in intracellular membranes. However, no functional data have yet been reported to describe either NCKX4 or NCKX5 activity in pigmented cells. In this study, we used the B16 and MEB4 mouse pigmented cell lines to investigate NCKX-mediated Ca(2+) fluxes using (45)Ca uptake experiments and measurements of changes in intracellular free Ca(2+) with the fluorescent Ca(2+)-indicating dye Fluo-4. We used siRNA-mediated knockdown to selectively reduce either NCKX4 or NCKX5 expression. The results show that both B16 and MEB4 cells contain roughly equal amounts of NCKX4 and NCKX5 transcript, but surface membrane NCKX activity is restricted to NCKX4. Intracellular NCKX4 activity was also observed, but we could not unambiguously detect any NCKX5 activity. We were able to demonstrate that NCKX5 is a functional K(+)-dependent Na(+)-Ca(2+) exchanger located in internal membranes after transfection of NCKX5 cDNA in HEK293 cells. We conclude that pigment cells express robust, functional NCKX4 activity, but that the role of NCKX5 remains enigmatic ten years after the discovery of its link to pigmentation.",
+        "authors": "Szerencsei, Ginger, Green et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "26631410",
+        "title": "Cation dependencies and turnover rates of the human K\u207a-dependent Na\u207a-Ca\u00b2\u207a exchangers NCKX1, NCKX2, NCKX3 and NCKX4.",
+        "abstract": "The Solute Carrier Family 24 (SLC24) belongs to the CaCA super family of Ca(2+)/cation antiporters and codes for five different K(+)- dependent Na(+)- Ca(2+) exchangers (NCKX1-5). NCKX proteins play a critical role in Ca(2+) homeostasis in a wide variety of biological processes such as vision, olfaction, enamel formation, Melanocortin-4-receptor-dependent satiety and skin pigmentation. NCKX transcripts are widely found throughout the brain. In this study we examine the differences between NCKX1-4 in terms of cation dependencies. We measured changes to Ca(2+) influx via the reverse exchange mode while manipulating external Ca(2+) or K(+) or internal Na(+) concentrations (External Ca(2+) Dependence, External K(+) Dependence and Internal Na(+) Dependence respectively); we also looked at the effect of external Na(+)/Ca(2+) competition and 3' 4'-Dichlorobenzamil on the transport of ions in HEK 293 cell lines. A fluorescence based assay was used to determine differences in transport kinetics of the four membrane spanning exchangers using the Michaelis-Menten constant (Km). Our results show that there are no significant differences between the NCKX isoforms to explain the variation in the specific expression pattern of these exchangers.",
+        "authors": "Jalloul, Szerencsei, Schnetkamp",
+        "year": "2016"
+      },
+      {
+        "pmid": "24688018",
+        "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps.",
+        "abstract": "A single Na(+)/K(+)-ATPase pumps three Na(+) outwards and two K(+) inwards by alternately exposing ion-binding sites to opposite sides of the membrane in a conformational sequence coupled to pump autophosphorylation from ATP and auto-dephosphorylation. The larger flow of Na(+) than K(+) generates outward current across the cell membrane. Less well understood is the ability of Na(+)/K(+) pumps to generate an inward current of protons. Originally noted in pumps deprived of external K(+) and Na(+) ions, as inward current at negative membrane potentials that becomes amplified when external pH is lowered, this proton current is generally viewed as an artifact of those unnatural conditions. We demonstrate here that this inward current also flows at physiological K(+) and Na(+) concentrations. We show that protons exploit ready reversibility of conformational changes associated with extracellular Na(+) release from phosphorylated Na(+)/K(+) pumps. Reversal of a subset of these transitions allows an extracellular proton to bind an acidic side chain and to be subsequently released to the cytoplasm. This back-step of phosphorylated Na(+)/K(+) pumps that enables proton import is not required for completion of the 3 Na(+)/2 K(+) transport cycle. However, the back-step occurs readily during Na(+)/K(+) transport when external K(+) ion binding and occlusion are delayed, and it occurs more frequently when lowered extracellular pH raises the probability of protonation of the externally accessible carboxylate side chain. The proton route passes through the Na(+)-selective binding site III and is distinct from the principal pathway traversed by the majority of transported Na(+) and K(+) ions that passes through binding site II. The inferred occurrence of Na(+)/K(+) exchange and H(+) import during the same conformational cycle of a single molecule identifies the Na(+)/K(+) pump as a hybrid transporter. Whether Na(+)/K(+) pump-mediated proton inflow may have any physiological or pathophysiological significance remains to be clarified.",
+        "authors": "Vedovato, Gadsby",
+        "year": "2014"
+      },
+      {
+        "pmid": "23569283",
+        "title": "Newly characterized Golgi-localized family of proteins is involved in calcium and pH homeostasis in yeast and human cells.",
+        "abstract": "Defects in the human protein TMEM165 are known to cause a subtype of Congenital Disorders of Glycosylation. Transmembrane protein 165 (TMEM165) belongs to an uncharacterized family of membrane proteins called Uncharacterized Protein Family 0016, which are well conserved throughout evolution and share characteristics reminiscent of the cation/Ca(2+) exchanger superfamily. Gcr1 dependent translation factor 1 (Gdt1p), the budding yeast member of this family, contributes to Ca(2+) homeostasis via an uncharacterized Ca(2+) transport pathway localized in the Golgi apparatus. The gdt1\u0394 mutant was found to be sensitive to high concentrations of Ca(2+), and interestingly, this sensitivity was suppressed by expression of TMEM165, the human ortholog of Gdt1p, indicating conservation of function among the members of this family. Patch-clamp analyses on human cells indicated that TMEM165 expression is linked to Ca(2+) ion transport. Furthermore, defects in TMEM165 affected both Ca(2+) and pH homeostasis. Based on these results, we propose that Gdt1p and TMEM165 could be members of a unique family of Golgi-localized Ca(2+)/H(+) antiporters and that modification of the Golgi Ca(2+) and pH balance could explain the glycosylation defects observed in TMEM165-deficient patients.",
+        "authors": "Demaegd, Foulquier, Colinet et al.",
+        "year": "2013"
+      }
+    ],
+    "21": [
+      {
+        "pmid": "23575248",
+        "title": "Gelsolin activity controls efficient early HIV-1 infection.",
+        "abstract": "<h4>Background</h4>HIV-1 entry into target lymphocytes requires the activity of actin adaptors that stabilize and reorganize cortical F-actin, like moesin and filamin-A. These alterations are necessary for the redistribution of CD4-CXCR4/CCR5 to one pole of the cell, a process that increases the probability of HIV-1 Envelope (Env)-CD4/co-receptor interactions and that generates the tension at the plasma membrane necessary to potentiate fusion pore formation, thereby favouring early HIV-1 infection. However, it remains unclear whether the dynamic processing of F-actin and the amount of cortical actin available during the initial virus-cell contact are required to such events.<h4>Results</h4>Here we show that gelsolin restructures cortical F-actin during HIV-1 Env-gp120-mediated signalling, without affecting cell-surface expression of receptors or viral co-receptor signalling. Remarkably, efficient HIV-1 Env-mediated membrane fusion and infection of permissive lymphocytes were impaired when gelsolin was either overexpressed or silenced, which led to a loss or gain of cortical actin, respectively. Indeed, HIV-1 Env-gp120-induced F-actin reorganization and viral receptor capping were impaired under these experimental conditions. Moreover, gelsolin knockdown promoted HIV-1 Env-gp120-mediated aberrant pseudopodia formation. These perturbed-actin events are responsible for the inhibition of early HIV-1 infection.<h4>Conclusions</h4>For the first time we provide evidence that through its severing of cortical actin, and by controlling the amount of actin available for reorganization during HIV-1 Env-mediated viral fusion, entry and infection, gelsolin can constitute a barrier that restricts HIV-1 infection of CD4+ lymphocytes in a pre-fusion step. These findings provide important insights into the complex molecular and actin-associated dynamics events that underlie early viral infection. Thus, we propose that gelsolin is a new factor that can limit HIV-1 infection acting at a pre-fusion step, and accordingly, cell-signals that regulate gelsolin expression and/or its actin-severing activity may be crucial to combat HIV-1 infection.",
+        "authors": "Garc\u00eda-Exp\u00f3sito, Ziglio, Barroso-Gonz\u00e1lez et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "19158340",
+        "title": "The SAM domain of the RhoGAP DLC1 binds EF1A1 to regulate cell migration.",
+        "abstract": "Deleted in liver cancer 1 (DLC1) is a multi-modular Rho-GTPase-activating protein (RhoGAP) and a tumor suppressor. Besides its RhoGAP domain, functions of other domains in DLC1 remain largely unknown. By protein precipitation and mass spectrometry, we identified eukaryotic elongation factor 1A1 (EF1A1) as a novel partner for the sterile alpha motif (SAM) domain of DLC1 but not the SAM domain of DLC2. The solution structure of DLC1 SAM revealed a new monomeric fold with four parallel helices, similar to that of DLC2 SAM but distinct from other SAM domains. Mutating F38, L39 and F40 within a hydrophobic patch retained its overall structure but abolished its interaction with EF1A1 with F38 and L39 forming an indispensable interacting motif. DLC1 SAM did not localize to and was not required for DLC1 to suppress the turnover of focal adhesions. Instead, DLC1 SAM facilitated EF1A1 distribution to the membrane periphery and ruffles upon growth factor stimulation. Compared with wild-type DLC1, the non-interactive DLC1 mutant is less potent in suppressing cell migration, whereas overexpression of the DLC1 SAM domain alone, but not the non-interactive mutant SAM or DLC2 SAM, greatly enhanced cell migration. This finding reveals a novel contribution of the SAM-EF1A1 interaction as a potentially important GAP-independent modulation of cell migration by DLC1.",
+        "authors": "Zhong, Zhang, Yang et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "14657239",
+        "title": "P130Cas-associated protein (p140Cap) as a new tyrosine-phosphorylated protein involved in cell spreading.",
+        "abstract": "Integrin-mediated cell adhesion stimulates a cascade of signaling pathways that control cell proliferation, migration, and survival, mostly through tyrosine phosphorylation of signaling molecules. p130Cas, originally identified as a major substrate of v-Src, is a scaffold molecule that interacts with several proteins and mediates multiple cellular events after cell adhesion and mitogen treatment. Here, we describe a novel p130Cas-associated protein named p140Cap (Cas-associated protein) as a new tyrosine phosphorylated molecule involved in integrin- and epidermal growth factor (EGF)-dependent signaling. By affinity chromatography of human ECV304 cell extracts on a MBP-p130Cas column followed by mass spectrometry matrix-assisted laser desorption ionization/time of flight analysis, we identified p140Cap as a protein migrating at 140 kDa. We detected its expression in human, mouse, and rat cells and in different mouse tissues. Endogenous and transfected p140Cap proteins coimmunoprecipitate with p130Cas in ECV304 and in human embryonic kidney 293 cells and associate with p130Cas through their carboxy-terminal region. By immunofluorescence analysis, we demonstrated that in ECV304 cells plated on fibronectin, the endogenous p140Cap colocalizes with p130Cas in the perinuclear region as well as in lamellipodia. In addition p140Cap codistributes with cortical actin and actin stress fibers but not with focal adhesions. We also show that p140Cap is tyrosine phosphorylated within 15 min of cell adhesion to integrin ligands. p140Cap tyrosine phosphorylation is also induced in response to EGF through an EGF receptor dependent-mechanism. Interestingly expression of p140Cap in NIH3T3 and in ECV304 cells delays the onset of cell spreading in the early phases of cell adhesion to fibronectin. Therefore, p140Cap is a novel protein associated with p130Cas and actin cytoskeletal structures. Its tyrosine phosphorylation by integrin-mediated adhesion and EGF stimulation and its involvement in cell spreading on matrix proteins suggest that p140Cap plays a role in controlling actin cytoskeleton organization in response to adhesive and growth factor signaling.",
+        "authors": "Di Stefano, Cabodi, Boeri Erba et al.",
+        "year": "2004"
+      },
+      {
+        "pmid": "10931866",
+        "title": "Functional analysis of a human homologue of the Drosophila actin binding protein anillin suggests a role in cytokinesis.",
+        "abstract": "We have characterized a human homologue of anillin, a Drosophila actin binding protein. Like Drosophila anillin, the human protein localizes to the nucleus during interphase, the cortex following nuclear envelope breakdown, and the cleavage furrow during cytokinesis. Anillin also localizes to ectopic cleavage furrows generated between two spindles in fused PtK(1) cells. Microinjection of antianillin antibodies slows cleavage, leading to furrow regression and the generation of multinucleate cells. GFP fusions that contain the COOH-terminal 197 amino acids of anillin, which includes a pleckstrin homology (PH) domain, form ectopic cortical foci during interphase. The septin Hcdc10 localizes to these ectopic foci, whereas myosin II and actin do not, suggesting that anillin interacts with the septins at the cortex. Robust cleavage furrow localization requires both this COOH-terminal domain and additional NH(2)-terminal sequences corresponding to an actin binding domain defined by in vitro cosedimentation assays. Endogenous anillin and Hcdc10 colocalize to punctate foci associated with actin cables throughout mitosis and the accumulation of both proteins at the cell equator requires filamentous actin. These results indicate that anillin is a conserved cleavage furrow component important for cytokinesis. Interactions with at least two other furrow proteins, actin and the septins, likely contribute to anillin function.",
+        "authors": "Oegema, Savoian, Mitchison et al.",
+        "year": "2000"
+      },
+      {
+        "pmid": "10427098",
+        "title": "ZASP: a new Z-band alternatively spliced PDZ-motif protein.",
+        "abstract": "PDZ motifs are modular protein-protein interaction domains, consisting of 80-120 amino acid residues, whose function appears to be the direction of intracellular proteins to multiprotein complexes. In skeletal muscle, there are a few known PDZ-domain proteins, which include neuronal nitric oxide synthase and syntrophin, both of which are components of the dystrophin complex, and actinin-associated LIM protein, which binds to the spectrin-like repeats of alpha-actinin-2. Here, we report the identification and characterization of a new skeletal muscle protein containing a PDZ domain that binds to the COOH-terminal region of alpha-actinin-2. This novel 31-kD protein is specifically expressed in heart and skeletal muscle. Using antibodies produced to a fragment of the protein, we can show its location in the sarcomere at the level of the Z-band by immunoelectron microscopy. At least two proteins, 32 kD and 78 kD, can be detected by Western blot analysis of both heart and skeletal muscle, suggesting the existence of alternative forms of the protein. In fact, several forms were found that appear to be the result of alternative splicing. The transcript coding for this Z-band alternatively spliced PDZ motif (ZASP) protein maps on chromosome 10q22.3-10q23.2, near the locus for infantile-onset spinocerebellar ataxia.",
+        "authors": "Faulkner, Pallavicini, Formentin et al.",
+        "year": "1999"
+      }
+    ],
+    "22": [
+      {
+        "pmid": "34080016",
+        "title": "Glucosylceramide and galactosylceramide, small glycosphingolipids with significant impact on health and disease.",
+        "abstract": "Numerous clinical observations and exploitation of cellular and animal models indicate that glucosylceramide (GlcCer) and galactosylceramide (GalCer) are involved in many physiological and pathological phenomena. In many cases, the biological importance of these monohexosylcermides has been shown indirectly as the result of studies on enzymes involved in their synthesis and degradation. Under physiological conditions, GalCer plays a key role in the maintenance of proper structure and stability of myelin and differentiation of oligodendrocytes. On the other hand, GlcCer is necessary for the proper functions of epidermis. Such an important lysosomal storage disease as Gaucher disease (GD) and a neurodegenerative disorder as Parkinson's disease are characterized by mutations in the GBA1 gene, decreased activity of lysosomal GBA1 glucosylceramidase and accumulation of GlcCer. In contrast, another lysosomal disease, Krabbe disease, is associated with mutations in the GALC gene, resulting in deficiency or decreased activity of lysosomal galactosylceramidase and accumulation of GalCer and galactosylsphingosine. Little is known about the role of both monohexosylceramides in tumor progression; however, numerous studies indicate that GlcCer and GalCer play important roles in the development of multidrug-resistance by cancer cells. It was shown that GlcCer is able to provoke immune reaction and acts as a self-antigen in GD. On the other hand, GalCer was recognized as an important cellular receptor for HIV-1. Altogether, these two molecules are excellent examples of how slight differences in chemical composition and molecular conformation contribute to profound differences in their physicochemical properties and biological functions.",
+        "authors": "Reza, Ugorski, Sucha\u0144ski",
+        "year": "2021"
+      },
+      {
+        "pmid": "26510981",
+        "title": "The ATP-Binding Cassette Transporter-2 (ABCA2) Overexpression Modulates Sphingosine Levels and Transcription of the Amyloid Precursor Protein (APP) Gene.",
+        "abstract": "The ATP-binding cassette transporter-2 (ABCA2) is a member of a family of multipass transmembrane proteins that use the energy of ATP hydrolysis to transport substrates across membrane bilayers. ABCA2 has also been genetically linked with Alzheimer's disease but the molecular mechanisms are unknown. In this report, we hypothesized that ABCA2 modulation of sphingolipid metabolism activates a signaling pathway that regulates amyloid precursor protein transcription. We found that ABCA2 overexpression in N2a cells was associated with increased mass of the sphingolipid sphingosine, derived from the catabolism of ceramide. ABCA2 overexpression increased in vitro alkaline and acid ceramidase activity. Sphingosine is a physiological inhibitor of protein kinase C (PKC) activity. Pharmacological inhibition of ceramidase activity or activation PKC activity with 12-myristate 13-acetate (PMA) or diacylglycerol (DAG) decreased endogenous APP mRNA levels in ABCA2 overexpressing cells. Treatment with PMA also decreased the expression of a transfected human APP promoter reporter construct, while treatment with a general PKC inhibitor, GF109203x, increased APP promoter activity. In N2a cells, chromatin immunoprecipitation experiments revealed that a repressive complex forms at the AP-1 site in the human APP promoter, consisting of c-jun, c-jun dimerization protein 2 (JDP2) and HDAC3 and this complex was reduced in ABCA2 overexpressing cells. Activation of the human APP promoter in A2 cells was directed by the upstream stimulatory factors USF-1 and USF-2 that bound to an E-box element in vivo. These findings indicate that ABCA2 overexpression modulates sphingosine levels and regulates transcription of the endogenous APP gene.",
+        "authors": "Davis",
+        "year": "2015"
+      },
+      {
+        "pmid": "23560799",
+        "title": "ABCA8 stimulates sphingomyelin production in oligodendrocytes.",
+        "abstract": "Members of the ABCA (ATP-binding cassette subfamily A) family are characterized by their ability to transport lipids across cellular membranes and regulate lipid homoeostasis in the brain and peripheral tissues. ABCA8 is a little-known member of this subfamily that was originally cloned from human brain libraries and has no known function. In an effort to elucidate the role of ABCA8\u00a0in the brain we first undertook a comprehensive analysis of its expression in the human brain. ABCA8 was differentially expressed in multiple regions of adult human brains with significantly higher expression in oligodendrocyte-enriched white matter regions compared with grey matter cortical regions. We then assessed the impact of ABCA8 on sphingomyelin production in oligodendrocyte and showed that ABCA8 was able to significantly stimulate both sphingomyelin synthase 1 expression and sphingomyelin production. Furthermore, ABCA8 expression in the prefrontal cortex across the human life span correlated strongly with age-associated myelination, and the myelinating gene p25\u03b1 was significantly up-regulated with ABCA8. The present study represents the first extensive expression and functional study of ABCA8\u00a0in the human brain and the results strongly suggest that ABCA8 regulates lipid metabolism in oligodendrocytes and potentially plays a role in myelin formation and maintenance.",
+        "authors": "Kim, Hsiao, Bhatia et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "17123352",
+        "title": "Identification and expression of a sialyltransferase responsible for the synthesis of disialylgalactosylgloboside in normal and malignant kidney cells: downregulation of ST6GalNAc VI in renal cancers.",
+        "abstract": "Although disialyl glycosphingolipids such as GD3 and GD2 have been considered to be associated with malignant tumours, whether branched-type disialyl glycosphingolipids show such an association is not well understood. We investigated the sialyltransferases responsible for the biosynthesis of DSGG (disialylgalactosylgloboside) from MSGG (monosialylgalactosylgloboside). Among six GalNAc:alpha2,6-sialyltransferases cloned to date, we focused on ST6GalNAc III, V and VI, which utilize sialylglycolipids as substrates. In vitro enzyme analyses revealed that ST6GalNAc III and VI generated DSGG from MSGG with V(max)/K(m) values of 1.91 and 4.16 respectively. Transfection of the cDNA expression vectors for these enzymes resulted in DSGG expression in a renal cancer cell line. Although both ST6GalNAc III and VI genes were expressed in normal kidney cells, the expression profiles of ST6GalNAc VI among 20 renal cancer cell lines correlated clearly with those of DSGG, suggesting that the sialyltransferase involved in the synthesis of DSGG in the kidney is ST6GalNAc-VI. ST6GalNAc-VI and DSGG were found in proximal tubule epithelial cells in normal kidney tissues, while they were downregulated in renal cancer cell lines and cancer tissues. All these findings indicated that DSGG was suppressed during the malignant transformation of the proximal tubules as a maturation arrest of glycosylation.",
+        "authors": "Senda, Ito, Tsuchida et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "15337768",
+        "title": "The human FA2H gene encodes a fatty acid 2-hydroxylase.",
+        "abstract": "2-Hydroxysphingolipids are a subset of sphingolipids containing 2-hydroxy fatty acids. The 2-hydroxylation occurs during de novo ceramide synthesis and is catalyzed by fatty acid 2-hydroxylase (also known as fatty acid alpha-hydroxylase). In mammals, 2-hydroxysphingolipids are present abundantly in brain because the major myelin lipids galactosylceramides and sulfatides contain 2-hydroxy fatty acids. Here we report identification and characterization of a human gene that encodes a fatty acid 2-hydroxylase. Data base searches revealed a human homologue of the yeast ceramide 2-hydroxylase gene (FAH1), which we named FA2H. The FA2H gene encodes a 372-amino acid protein with 36% identity and 46% similarity to yeast Fah1p. The amino acid sequence indicates that FA2H protein contains an N-terminal cytochrome b5 domain and four potential transmembrane domains. FA2H also contains the iron-binding histidine motif conserved among membrane-bound desaturases/hydroxylases. COS7 cells expressing human FA2H contained 3-20-fold higher levels of 2-hydroxyceramides (C16, C18, C24, and C24:1) and 2-hydroxy fatty acids compared with control cells. Microsomal fractions prepared from transfected COS7 cells showed tetracosanoic acid 2-hydroxylase activities in an NADPH- and NADPH: cytochrome P-450 reductase-dependent manner. FA2H lacking the N-terminal cytochrome b5 domain had little activity, indicating that this domain is a functional component of this enzyme. Northern blot analysis showed that the FA2H gene is highly expressed in brain and colon tissues. These results demonstrate that the human FA2H gene encodes a fatty acid 2-hydroxylase. FA2H is likely involved in the formation of myelin 2-hydroxy galactosylceramides and -sulfatides.",
+        "authors": "Alderson, Rembiesa, Walla et al.",
+        "year": "2004"
+      }
+    ],
+    "23": [],
+    "24": [
+      {
+        "pmid": "28473536",
+        "title": "Impact of cytosine methylation on DNA binding specificities of human transcription factors.",
+        "abstract": "The majority of CpG dinucleotides in the human genome are methylated at cytosine bases. However, active gene regulatory elements are generally hypomethylated relative to their flanking regions, and the binding of some transcription factors (TFs) is diminished by methylation of their target sequences. By analysis of 542 human TFs with methylation-sensitive SELEX (systematic evolution of ligands by exponential enrichment), we found that there are also many TFs that prefer CpG-methylated sequences. Most of these are in the extended homeodomain family. Structural analysis showed that homeodomain specificity for methylcytosine depends on direct hydrophobic interactions with the methylcytosine 5-methyl group. This study provides a systematic examination of the effect of an epigenetic DNA modification on human TF binding specificity and reveals that many developmentally important proteins display preference for mCpG-containing sequences.",
+        "authors": "Yin, Morgunova, Jolma et al.",
+        "year": "2017"
+      },
+      {
+        "pmid": "19398580",
+        "title": "ZNF536, a novel zinc finger protein specifically expressed in the brain, negatively regulates neuron differentiation by repressing retinoic acid-induced gene transcription.",
+        "abstract": "Neuronal differentiation is tightly regulated by a variety of factors. In a search for neuron-specific genes, we identified a highly conserved novel zinc finger protein, ZNF536. We observed that ZNF536 is most abundant in the brain and, in particular, is expressed in the developing central nervous system and dorsal root ganglia and localized in the cerebral cortex, hippocampus, and hypothalamic area. During neuronal differentiation of P19 cells induced by retinoic acid (RA), ZNF536 expression is increased at an early stage, and it is maintained at a constant level in later stages. Overexpression of ZNF536 results in an inhibition of RA-induced neuronal differentiation, while depletion or mutation of the ZNF536 gene results in an enhancement of differentiation. We further demonstrated that ZNF536 inhibits expression of neuron-specific marker genes, possibly through the inhibition of RA response element-mediated transcriptional activity, as overexpression of RA receptor alpha can rescue the inhibitory role of ZNF536 in neuronal differentiation and neuron-specific gene expression. Our studies have identified a novel zinc finger protein that negatively regulates neuron differentiation.",
+        "authors": "Qin, Ren, Xu et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "18676404",
+        "title": "The transcription factor ST18 regulates proapoptotic and proinflammatory gene expression in fibroblasts.",
+        "abstract": "Suppression of tumorigenicity 18 (ST18) and the homologues neural zinc-finger protein-3 (NZF3) and myelin transcription factor 3 (Myt3) are transcription factors with unknown function. Previous studies have established that they repress transcription of a synthetic reporter construct consisting of the consensus sequence AAAGTTT linked to the thymidine kinase promoter. In addition, ST18 exhibits significantly reduced expression in breast cancer and breast cancer cell lines. We report here for the first time evidence that ST18 mediates tumor necrosis factor (TNF) -alpha induced mRNA levels of proapoptotic and proinflammatory genes in fibroblasts by mRNA profiling and silencing with ST18 small interfering RNA (siRNA). Gene set enrichment analysis and mRNA profiling support this conclusion by identifying several apoptotic and inflammatory pathways that are down-regulated by ST18 siRNA. In addition, ST18 siRNA reduces TNF-induced fibroblast apoptosis and caspase-3/7 activity. Fibroblasts that overexpress ST18 by transient transfection exhibit significantly increased apoptosis and increased expression of TNF-alpha, interleukin (IL) -1alpha, and IL-6. In addition, cotransfection of ST18 and a TNF-alpha or IL-1alpha reporter construct demonstrates that ST18 overexpression in fibroblasts significantly enhanced promoter activity of these genes. Taken together, these studies demonstrate that the transcription factor ST18/NZF3 regulates the mRNA levels of proapoptotic and proinflammatory genes in revealing a previously unrecognized function.",
+        "authors": "Yang, Siqueira, Behl et al.",
+        "year": "2008"
+      }
+    ],
+    "25": [],
+    "26": []
+  },
+  "hub_gene_abstracts": {},
+  "snippet_evidence": {
+    "3": [],
+    "8": [],
+    "13": [],
+    "18": [],
+    "23": [],
+    "25": [],
+    "26": [],
+    "0": [],
+    "1": [],
+    "2": [
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "), but not GluR1 (relative to control, 3.3 + 0.27 versus 2.8 + 0.31) or GluR2 (relative to control, 2.7 + 0.27 versus 2.2 + 0.45) (Fig. 5A and B).\n\nThese data demonstrate that RhoGAP2 is a novel synaptic RhoGAP that interacts with IL1RAPL1 and might contribute to excitatory synapse formation.",
+        "score": 0.20157948292563838
+      }
+    ],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": [
+      {
+        "paperId": "25288931",
+        "pmid": "",
+        "title": "ATP9B, a P4-ATPase (a Putative Aminophospholipid Translocase), Localizes to the trans-Golgi Network in a CDC50 Protein-independent Manner*",
+        "authors": "H. Takatsu, K. Baba, Takahiro Shima et al.",
+        "snippet_text": "In eukaryotic cells, the lipid bilayer of the plasma membrane as well as membranes of secretory and endocytic compartments exhibits asymmetric lipid distributions; aminophospholipids, phosphatidylserine (PS), 3 and phosphatidylethanolamine are concentrated in the cytoplasmic leaflet (1,2). For example, in resting human red blood cells, PS and phosphatidylethanolamine are restricted primarily to the inner leaflet of the plasma membrane, whereas phosphatidylcholine and sphingomyelin are exposed on the cell surface (3,4). Regulated exposure of PS in the outer leaflet occurs in many biological processes, such as apoptotic cell death, platelet coagulation reactions, and the fusion of muscle (4 -7); similarly, phosphatidylethanolamine is exposed on the surface of the cleavage furrow during cytokinesis (8). In addition, phospholipid asymmetry of the bile canalicular membrane is critical to membrane integrity and normal bile secretion by hepatocytes (9); loss of phospholipid asymmetry due to mutations in the human FIC1/ATP8B1 (a member of the P4-ATPase family) gene causes a liver disease, progressive familial intrahepatic cholestasis (10).\n\nP4-ATPases are a subfamily of P-type ATPases and have been implicated in flipping aminophospholipids from the exoplasmic (lumenal) leaflet to the cytoplasmic leaflet (11)(12)(13)(14)(15). The yeast P4-ATPases (Drs2p, Neo1p, Dnf1p, Dnf2p, and Dnf3p) are all involved in protein transport in the secretory and endocytic pathways albeit at different stages (16). P4-ATPases also play essential roles in membrane trafficking in other organisms, including Caenorhabditis elegans and Arabidopsis thaliana (17,18). P4-",
+        "score": 0.2541216277418875
+      }
+    ],
+    "14": [],
+    "15": [
+      {
+        "paperId": "24638059",
+        "pmid": "",
+        "title": "Anoctamins are a family of Ca2+-activated Cl\u2212 channels",
+        "authors": "Yuemin Tian, R. Schreiber, K. Kunzelmann",
+        "snippet_text": "Following transfection (2-3 days) of His-tagged anoctamins or siRNA, respectively, overexpressing HEK293 or siRNA-transfected HT 29 cells were identified by incubating the cells 1-2 min with Dynabeads CD8 (Invitrogen). Histagging of anoctamins did not interfere with its properties as a Cl 2 channel. Coverslips were mounted on the stage of an inverted microscope (IM35, Zeiss) and kept at 37\u02daC. The bath was perfused continuously with Ringer solution (mM: NaCl 145, KH 2 PO 4 0.4, K 2 HPO 4 1.6, D-glucose 5, MgCl 2 1, calcium gluconate 1.3, pH 7.4) or NMDG solution (NMDG 145, HCl 130, KH 2 PO 4 0.4, K 2 HPO 4 1.6, Dglucose 5, MgCl 2 1, calcium gluconate 1.3, pH 7.4) at the rate of 5 ml/min. For fast whole-cell patch clamping pipettes were filled with intracellular like solution containing (mM: KCl 30, potassium gluconate 95, NaH 2 PO 4 1.2, Na 2 HPO 4 4.8, EGTA 1, calcium gluconate 0.758, MgCl 2 1.034, D-glucose 5, ATP 3, pH was 7.2) or CsCl solution containing (mM: CsCl 130, NaH 2 PO 4 1.2, Na 2 HPO 4 4.8, EGTA 1, calcium gluconate 0.758, MgCl 2 1.034, D-glucose 5, ATP 3, pH was 7.2) and had an input resistance of 2-4 MV. In other experiments K + in the pipette filling solution was replaced with NMDG + . For all solutions Ca 2+ concentrations were adjusted to 10 27 (pipette) and 1.3 mM (bath). Experiments were conducted as described earlier . During experiments cells were current clamped and membrane voltages were measured. At intervals cells were voltage clamped to 650 mV in steps",
+        "score": 0.24269787698683498
+      }
+    ],
+    "16": [],
+    "17": [
+      {
+        "paperId": "7859771",
+        "pmid": "",
+        "title": "Quantitative proteomics identifies a Dab2/integrin module regulating cell migration",
+        "authors": "Anjali M Teckchandani, Natalie Toida, J. Goodchild et al.",
+        "snippet_text": "Discovery-driven quantitative analysis of cell surface glycoproteins and antibody analysis showed that Dab2 regulates the surface levels and endocytosis of specific integrins. In HeLa cells, Dab2 has the greatest effects on the surface levels of integrins \ue0621, \ue0611, \ue0612, and \ue0613 but not \ue0615 or \ue061v. In the case of integrin \ue0621, the absence of Dab2 increases the surface level and reduces the G and H). We found that migrating control cells are asymmetric, with an increased concentration of integrin \ue0621 and the focal complex protein vinculin along the leading edge. However, Dab2-deficient cells are isotropic, with points of vinculin and integrin \ue0621 scattered around the entire periphery. These results are consistent with a failure of polarized routing of integrin \ue0621 to the leading edge, perhaps caused by reduced internalization. \ue061L\ue0622 and \ue0615\ue0621 have no effects on their endocytosis (Vignoud et al., 1994;Fabbri et al., 1999). Importantly, Bretscher (1992) noted that different integrin \ue0621 dimers had different endocytic rates depending on their \ue061 chains. Therefore, it is possible that the integrin \ue061 chains rather than the \ue062 chains may be recognized for endocytosis. Indeed, the differential endocytosis of \ue061 chains by Dab2 and Numb implies that adapters may distinguish different \ue061\ue062 complexes based on \ue061 cytoplasmic domains. An alternative explanation, that Dab2 selects integrins for endocytosis only when they are disengaged from the cytoskeleton, is discussed next.",
+        "score": 0.35672793550167836
+      }
+    ],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "24": []
+  },
+  "hub_gene_snippets": {},
+  "co_annotation_snippets": {
+    "15": {
+      "SLC24A2": [],
+      "ATP1B1": [
+        {
+          "paperId": "5063217",
+          "pmid": "",
+          "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+          "authors": "Natascia Vedovato, D. Gadsby",
+          "snippet_text": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+          "score": 0.3067005143291574
+        },
+        {
+          "paperId": "5063217",
+          "pmid": "",
+          "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+          "authors": "Natascia Vedovato, D. Gadsby",
+          "snippet_text": "The Na+/K+ pump is a hybrid transporter that can also import protons at physiological K+ and Na+ concentrations.",
+          "score": 0.2393116333839907
+        }
+      ],
+      "KCNK1": []
+    },
+    "16": {
+      "SLCO3A1": []
+    },
+    "20": {
+      "SLC24A2": [],
+      "TMEM165": [],
+      "ATP1B1": []
+    },
+    "22": {
+      "ST6GALNAC3": []
+    }
+  },
+  "cross_theme_snippets": {
+    "MAL": [],
+    "ZNF536": [],
+    "ST18": [],
+    "SLC24A2": [],
+    "ATP1B1": [
+      {
+        "paperId": "5063217",
+        "pmid": "",
+        "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+        "authors": "Natascia Vedovato, D. Gadsby",
+        "snippet_text": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+        "score": 0.26064336842822
+      },
+      {
+        "paperId": "5063217",
+        "pmid": "",
+        "title": "Route, mechanism, and implications of proton import during Na+/K+ exchange by native Na+/K+-ATPase pumps",
+        "authors": "Natascia Vedovato, D. Gadsby",
+        "snippet_text": "The Na+/K+ pump is a hybrid transporter that can also import protons at physiological K+ and Na+ concentrations.",
+        "score": 0.2008730718939122
+      }
+    ]
+  },
+  "cross_theme_gaf_snippets": {
+    "MAL": [],
+    "ZNF536": [],
+    "ST18": [],
+    "SLC24A2": [],
+    "ATP1B1": []
+  }
+}

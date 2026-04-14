@@ -1,0 +1,2983 @@
+{
+  "enrichment_leaves": [
+    {
+      "go_id": "GO:0030424",
+      "name": "axon",
+      "namespace": "cellular_component",
+      "fdr": 6.551800871046079e-06,
+      "fold_enrichment": 4.974709982971478,
+      "genes": [
+        "ANK3",
+        "CLDN11",
+        "CNTN2",
+        "COBL",
+        "DLG2",
+        "GLDN",
+        "GRM3",
+        "IL1RAPL1",
+        "ITGA2",
+        "KIRREL3",
+        "LGI3",
+        "LRP2",
+        "MAP7",
+        "MYO1D",
+        "SEPTIN4",
+        "SHTN1",
+        "SRCIN1",
+        "TMEM151A",
+        "UNC5C"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0031643",
+      "name": "positive regulation of myelination",
+      "namespace": "biological_process",
+      "fdr": 3.2786019679030345e-05,
+      "fold_enrichment": 33.93275862068966,
+      "genes": [
+        "CDK18",
+        "MAG",
+        "MYRF",
+        "RNF220",
+        "SOX10",
+        "TPPP"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0032288",
+      "name": "myelin assembly",
+      "namespace": "biological_process",
+      "fdr": 8.412573097095873e-05,
+      "fold_enrichment": 43.50353669319186,
+      "genes": [
+        "ABCA2",
+        "MAG",
+        "MBP",
+        "PLLP",
+        "TPPP"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0019911",
+      "name": "structural constituent of myelin sheath",
+      "namespace": "molecular_function",
+      "fdr": 0.00011581686996872854,
+      "fold_enrichment": 51.413270637408566,
+      "genes": [
+        "MAL",
+        "MBP",
+        "MOBP",
+        "PLLP",
+        "PLP1"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0045202",
+      "name": "synapse",
+      "namespace": "cellular_component",
+      "fdr": 0.0002107754115961654,
+      "fold_enrichment": 2.6866792257078114,
+      "genes": [
+        "ANK3",
+        "ATP8A1",
+        "CNP",
+        "CNTN2",
+        "CNTNAP4",
+        "COL4A5",
+        "DLG2",
+        "DNAJC6",
+        "ELMO1",
+        "FGFR2",
+        "GPR37",
+        "GRM3",
+        "HAPLN2",
+        "IL1RAPL1",
+        "KCNMB4",
+        "LGI3",
+        "LPAR1",
+        "MBP",
+        "PCDH9",
+        "PLD1",
+        "PLP1",
+        "PPM1H",
+        "RASGRF2",
+        "RNF220",
+        "SEMA4D",
+        "SEPTIN4",
+        "SH3GL3",
+        "SHROOM4",
+        "SRCIN1",
+        "UNC5C"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0099612",
+      "name": "protein localization to axon",
+      "namespace": "biological_process",
+      "fdr": 0.00036371933235884713,
+      "fold_enrichment": 56.554597701149426,
+      "genes": [
+        "ANK3",
+        "CNTN2",
+        "MAL",
+        "UGT8"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0033269",
+      "name": "internode region of axon",
+      "namespace": "cellular_component",
+      "fdr": 0.0005266547793187827,
+      "fold_enrichment": 84.83189655172414,
+      "genes": [
+        "ERMN",
+        "MBP",
+        "TUBB4A"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0043218",
+      "name": "compact myelin",
+      "namespace": "cellular_component",
+      "fdr": 0.0005266547793187827,
+      "fold_enrichment": 84.83189655172414,
+      "genes": [
+        "MAG",
+        "MBP",
+        "PLLP"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0016324",
+      "name": "apical plasma membrane",
+      "namespace": "cellular_component",
+      "fdr": 0.0005539432945852027,
+      "fold_enrichment": 4.178911160183455,
+      "genes": [
+        "ATP1B1",
+        "CLCA4",
+        "CLDND1",
+        "ERBB3",
+        "KCNK1",
+        "LRP2",
+        "MAL",
+        "PLD1",
+        "PLLP",
+        "SHROOM4",
+        "SLC5A11",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TF",
+        "TMEM235"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0022010",
+      "name": "central nervous system myelination",
+      "namespace": "biological_process",
+      "fdr": 0.0007700324853239087,
+      "fold_enrichment": 45.24367816091954,
+      "genes": [
+        "MAG",
+        "MYRF",
+        "PLP1",
+        "SOX10"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0006351",
+      "name": "DNA-templated transcription",
+      "namespace": "biological_process",
+      "fdr": 0.001013187526428742,
+      "fold_enrichment": 0.1810471314962767,
+      "genes": [
+        "MYRF",
+        "SOX10",
+        "ST18",
+        "ZNF536"
+      ],
+      "depth": 8
+    },
+    {
+      "go_id": "GO:0048471",
+      "name": "perinuclear region of cytoplasm",
+      "namespace": "cellular_component",
+      "fdr": 0.00241478899967456,
+      "fold_enrichment": 3.0183633604546043,
+      "genes": [
+        "AATK",
+        "APLP1",
+        "APOD",
+        "COBL",
+        "HHATL",
+        "ITGA2",
+        "LDB3",
+        "MAP7",
+        "MOBP",
+        "PLAAT3",
+        "PLD1",
+        "PPP1R16B",
+        "PTGDS",
+        "RASGRP3",
+        "SHTN1",
+        "SPP1",
+        "SYNJ2",
+        "TF",
+        "TPPP"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0006355",
+      "name": "regulation of DNA-templated transcription",
+      "namespace": "biological_process",
+      "fdr": 0.0052643537688468476,
+      "fold_enrichment": 0.31821905552381674,
+      "genes": [
+        "FGFR2",
+        "MYRF",
+        "NKX6-2",
+        "RNF220",
+        "SEMA4D",
+        "SOX10",
+        "SPP1",
+        "ST18",
+        "ZNF536"
+      ],
+      "depth": 9
+    },
+    {
+      "go_id": "GO:0098609",
+      "name": "cell-cell adhesion",
+      "namespace": "biological_process",
+      "fdr": 0.006894784532141367,
+      "fold_enrichment": 3.493720321306528,
+      "genes": [
+        "CDH19",
+        "CERCAM",
+        "CLDN11",
+        "CNTN2",
+        "CSRP1",
+        "CTNNA3",
+        "DLG2",
+        "GLDN",
+        "IL1RAPL1",
+        "ITGA2",
+        "KIRREL3",
+        "MAG",
+        "MEGF10",
+        "NINJ2",
+        "PCDH9",
+        "SEMA4D"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0061024",
+      "name": "membrane organization",
+      "namespace": "biological_process",
+      "fdr": 0.007351616395361818,
+      "fold_enrichment": 3.3038768416479045,
+      "genes": [
+        "ABCA2",
+        "ANK3",
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "CNTN2",
+        "ELMO1",
+        "FA2H",
+        "GSN",
+        "IL1RAPL1",
+        "MAL",
+        "MEGF10",
+        "MYRF",
+        "PIP4K2A",
+        "PLAAT3",
+        "SH3GL3",
+        "SYNJ2"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0005654",
+      "name": "nucleoplasm",
+      "namespace": "cellular_component",
+      "fdr": 0.00792812816442696,
+      "fold_enrichment": 0.4075442184672631,
+      "genes": [
+        "ABCA6",
+        "ANLN",
+        "DAAM2",
+        "FAM107B",
+        "KLK6",
+        "NECAB1",
+        "PIP4K2A",
+        "PPM1H",
+        "PPP1R14A",
+        "RAPGEF5",
+        "RNF220",
+        "SGK1",
+        "SOX10"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0007265",
+      "name": "Ras protein signal transduction",
+      "namespace": "biological_process",
+      "fdr": 0.011505451342723117,
+      "fold_enrichment": 10.129181677817806,
+      "genes": [
+        "PLD1",
+        "RAPGEF5",
+        "RASGRF1",
+        "RASGRF2",
+        "RASGRP3",
+        "SHTN1"
+      ],
+      "depth": 8
+    },
+    {
+      "go_id": "GO:0055085",
+      "name": "transmembrane transport",
+      "namespace": "biological_process",
+      "fdr": 0.012132939937794672,
+      "fold_enrichment": 2.3821749421701006,
+      "genes": [
+        "ABCA2",
+        "ABCA6",
+        "ABCA8",
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "BOK",
+        "CLCA4",
+        "GJB1",
+        "KCNK1",
+        "KCNMB4",
+        "LRP2",
+        "PIEZO2",
+        "PLCL1",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC44A1",
+        "SLC45A3",
+        "SLC5A11",
+        "SLC7A14",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TMEM144",
+        "TMEM165",
+        "TMEM63A"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0005319",
+      "name": "lipid transporter activity",
+      "namespace": "molecular_function",
+      "fdr": 0.012260373251148997,
+      "fold_enrichment": 5.800471559092249,
+      "genes": [
+        "ABCA2",
+        "ABCA6",
+        "ABCA8",
+        "ANO4",
+        "APOD",
+        "ATP8A1",
+        "OSBPL1A",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TMEM63A"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0009986",
+      "name": "cell surface",
+      "namespace": "cellular_component",
+      "fdr": 0.013199401399231545,
+      "fold_enrichment": 2.8029975537012835,
+      "genes": [
+        "ANK3",
+        "CD22",
+        "CLDND1",
+        "CNTN2",
+        "FGFR2",
+        "FOLH1",
+        "GLDN",
+        "GPR37",
+        "HHIP",
+        "HSPA2",
+        "IL1RAPL1",
+        "ITGA2",
+        "LPAR1",
+        "MBP",
+        "PCSK6",
+        "TF",
+        "UNC5C"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0030425",
+      "name": "dendrite",
+      "namespace": "cellular_component",
+      "fdr": 0.013199401399231545,
+      "fold_enrichment": 3.218554340715821,
+      "genes": [
+        "ANK3",
+        "APOD",
+        "COBL",
+        "GPR37",
+        "IL1RAPL1",
+        "KCNK1",
+        "KIRREL3",
+        "LRP2",
+        "MYO1D",
+        "SEPTIN4",
+        "SRCIN1",
+        "TMEM151A",
+        "TTLL7",
+        "UNC5C"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0044224",
+      "name": "juxtaparanode region of axon",
+      "namespace": "cellular_component",
+      "fdr": 0.01374616670107049,
+      "fold_enrichment": 28.277298850574713,
+      "genes": [
+        "CNTN2",
+        "DLG2",
+        "LGI3"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0016323",
+      "name": "basolateral plasma membrane",
+      "namespace": "cellular_component",
+      "fdr": 0.016164900743093225,
+      "fold_enrichment": 4.113061650992686,
+      "genes": [
+        "ABCA8",
+        "ANK3",
+        "ATP1B1",
+        "BEST1",
+        "DLG2",
+        "ERBB3",
+        "MAP7",
+        "MYO1D",
+        "SLCO1A2",
+        "SLCO3A1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0006811",
+      "name": "monoatomic ion transport",
+      "namespace": "biological_process",
+      "fdr": 0.01997267036021914,
+      "fold_enrichment": 2.5365976542819317,
+      "genes": [
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "CLCA4",
+        "FTH1",
+        "KCNK1",
+        "KCNMB4",
+        "LRP2",
+        "PIEZO2",
+        "PLCL1",
+        "PLLP",
+        "SGK1",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC5A11",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TF",
+        "TMEM165",
+        "TMEM63A"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0005856",
+      "name": "cytoskeleton",
+      "namespace": "cellular_component",
+      "fdr": 0.02117178522010595,
+      "fold_enrichment": 2.343128341667208,
+      "genes": [
+        "ANK3",
+        "ANLN",
+        "COBL",
+        "CTNNA3",
+        "DLC1",
+        "ERMN",
+        "FRMD4B",
+        "GSN",
+        "KIF6",
+        "LDB3",
+        "MAP7",
+        "MTUS1",
+        "MYO1D",
+        "PLEKHH1",
+        "SEPTIN4",
+        "SHROOM4",
+        "SHTN1",
+        "SLAIN1",
+        "SRCIN1",
+        "SYNJ2",
+        "TPPP",
+        "TUBB4A"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0006665",
+      "name": "sphingolipid metabolic process",
+      "namespace": "biological_process",
+      "fdr": 0.02187356329482786,
+      "fold_enrichment": 5.875802358560978,
+      "genes": [
+        "ABCA2",
+        "ABCA8",
+        "ELOVL7",
+        "ENPP2",
+        "FA2H",
+        "PLPP2",
+        "ST6GALNAC3",
+        "UGT8"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0140513",
+      "name": "nuclear protein-containing complex",
+      "namespace": "cellular_component",
+      "fdr": 0.021900274607278107,
+      "fold_enrichment": 0.0885048477326282,
+      "genes": [
+        "CLMN"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0022857",
+      "name": "transmembrane transporter activity",
+      "namespace": "molecular_function",
+      "fdr": 0.027772553346933612,
+      "fold_enrichment": 2.4610355831657715,
+      "genes": [
+        "ABCA2",
+        "ABCA6",
+        "ABCA8",
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "BOK",
+        "CLCA4",
+        "GJB1",
+        "KCNK1",
+        "KCNMB4",
+        "PIEZO2",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC44A1",
+        "SLC45A3",
+        "SLC5A11",
+        "SLC7A14",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TMEM144",
+        "TMEM165",
+        "TMEM63A"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0003677",
+      "name": "DNA binding",
+      "namespace": "molecular_function",
+      "fdr": 0.027772553346933612,
+      "fold_enrichment": 0.2672923089459603,
+      "genes": [
+        "MYRF",
+        "NKX6-2",
+        "OTUD7A",
+        "SOX10",
+        "ST18",
+        "ZNF536"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0048713",
+      "name": "regulation of oligodendrocyte differentiation",
+      "namespace": "biological_process",
+      "fdr": 0.030212650916548546,
+      "fold_enrichment": 16.15845648604269,
+      "genes": [
+        "DAAM2",
+        "MYRF",
+        "OPALIN",
+        "SLC45A3"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0043025",
+      "name": "neuronal cell body",
+      "namespace": "cellular_component",
+      "fdr": 0.03045351395035822,
+      "fold_enrichment": 3.4370197497936115,
+      "genes": [
+        "APOD",
+        "CNTN2",
+        "COBL",
+        "ERMN",
+        "LPAR1",
+        "MBP",
+        "MYO1D",
+        "PDE1A",
+        "PDE1C",
+        "TUBB4A",
+        "UNC5C"
+      ],
+      "depth": 3
+    }
+  ],
+  "themes": [
+    {
+      "anchor_term": {
+        "go_id": "GO:0042552",
+        "name": "myelination",
+        "namespace": "biological_process",
+        "fdr": 4.489851030407085e-08,
+        "fold_enrichment": 19.749224594052183,
+        "genes": [
+          "BCAS1",
+          "ERBB3",
+          "KLK6",
+          "LPAR1",
+          "MAG",
+          "MAL",
+          "MBP",
+          "MYRF",
+          "PLLP",
+          "PLP1",
+          "SOX10"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0031643",
+          "name": "positive regulation of myelination",
+          "namespace": "biological_process",
+          "fdr": 3.2786019679030345e-05,
+          "fold_enrichment": 33.93275862068966,
+          "genes": [
+            "CDK18",
+            "MAG",
+            "MYRF",
+            "RNF220",
+            "SOX10",
+            "TPPP"
+          ],
+          "depth": 7
+        },
+        {
+          "go_id": "GO:0032288",
+          "name": "myelin assembly",
+          "namespace": "biological_process",
+          "fdr": 8.412573097095873e-05,
+          "fold_enrichment": 43.50353669319186,
+          "genes": [
+            "ABCA2",
+            "MAG",
+            "MBP",
+            "PLLP",
+            "TPPP"
+          ],
+          "depth": 6
+        },
+        {
+          "go_id": "GO:0022010",
+          "name": "central nervous system myelination",
+          "namespace": "biological_process",
+          "fdr": 0.0007700324853239087,
+          "fold_enrichment": 45.24367816091954,
+          "genes": [
+            "MAG",
+            "MYRF",
+            "PLP1",
+            "SOX10"
+          ],
+          "depth": 5
+        }
+      ],
+      "n_specific_terms": 3,
+      "all_genes": [
+        "ABCA2",
+        "BCAS1",
+        "CDK18",
+        "ERBB3",
+        "KLK6",
+        "LPAR1",
+        "MAG",
+        "MAL",
+        "MBP",
+        "MYRF",
+        "PLLP",
+        "PLP1",
+        "RNF220",
+        "SOX10",
+        "TPPP"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0019911",
+        "name": "structural constituent of myelin sheath",
+        "namespace": "molecular_function",
+        "fdr": 0.00011581686996872854,
+        "fold_enrichment": 51.413270637408566,
+        "genes": [
+          "MAL",
+          "MBP",
+          "MOBP",
+          "PLLP",
+          "PLP1"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "MAL",
+        "MBP",
+        "MOBP",
+        "PLLP",
+        "PLP1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0045202",
+        "name": "synapse",
+        "namespace": "cellular_component",
+        "fdr": 0.0002107754115961654,
+        "fold_enrichment": 2.6866792257078114,
+        "genes": [
+          "ANK3",
+          "ATP8A1",
+          "CNP",
+          "CNTN2",
+          "CNTNAP4",
+          "COL4A5",
+          "DLG2",
+          "DNAJC6",
+          "ELMO1",
+          "FGFR2",
+          "GPR37",
+          "GRM3",
+          "HAPLN2",
+          "IL1RAPL1",
+          "KCNMB4",
+          "LGI3",
+          "LPAR1",
+          "MBP",
+          "PCDH9",
+          "PLD1",
+          "PLP1",
+          "PPM1H",
+          "RASGRF2",
+          "RNF220",
+          "SEMA4D",
+          "SEPTIN4",
+          "SH3GL3",
+          "SHROOM4",
+          "SRCIN1",
+          "UNC5C"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANK3",
+        "ATP8A1",
+        "CNP",
+        "CNTN2",
+        "CNTNAP4",
+        "COL4A5",
+        "DLG2",
+        "DNAJC6",
+        "ELMO1",
+        "FGFR2",
+        "GPR37",
+        "GRM3",
+        "HAPLN2",
+        "IL1RAPL1",
+        "KCNMB4",
+        "LGI3",
+        "LPAR1",
+        "MBP",
+        "PCDH9",
+        "PLD1",
+        "PLP1",
+        "PPM1H",
+        "RASGRF2",
+        "RNF220",
+        "SEMA4D",
+        "SEPTIN4",
+        "SH3GL3",
+        "SHROOM4",
+        "SRCIN1",
+        "UNC5C"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0099612",
+        "name": "protein localization to axon",
+        "namespace": "biological_process",
+        "fdr": 0.00036371933235884713,
+        "fold_enrichment": 56.554597701149426,
+        "genes": [
+          "ANK3",
+          "CNTN2",
+          "MAL",
+          "UGT8"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANK3",
+        "CNTN2",
+        "MAL",
+        "UGT8"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043005",
+        "name": "neuron projection",
+        "namespace": "cellular_component",
+        "fdr": 0.0005266547793187827,
+        "fold_enrichment": 2.7484477387474486,
+        "genes": [
+          "ANK3",
+          "APOD",
+          "CLDN11",
+          "CNTN2",
+          "COBL",
+          "DLG2",
+          "GLDN",
+          "GPR37",
+          "GRM3",
+          "IL1RAPL1",
+          "ITGA2",
+          "KCNK1",
+          "KIRREL3",
+          "LGI3",
+          "LPAR1",
+          "LRP2",
+          "MAP7",
+          "MYO1D",
+          "PIEZO2",
+          "RASGRF1",
+          "SEPTIN4",
+          "SHTN1",
+          "SRCIN1",
+          "TMEM151A",
+          "TTLL7",
+          "UNC5C"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0030424",
+          "name": "axon",
+          "namespace": "cellular_component",
+          "fdr": 6.551800871046079e-06,
+          "fold_enrichment": 4.974709982971478,
+          "genes": [
+            "ANK3",
+            "CLDN11",
+            "CNTN2",
+            "COBL",
+            "DLG2",
+            "GLDN",
+            "GRM3",
+            "IL1RAPL1",
+            "ITGA2",
+            "KIRREL3",
+            "LGI3",
+            "LRP2",
+            "MAP7",
+            "MYO1D",
+            "SEPTIN4",
+            "SHTN1",
+            "SRCIN1",
+            "TMEM151A",
+            "UNC5C"
+          ],
+          "depth": 5
+        },
+        {
+          "go_id": "GO:0030425",
+          "name": "dendrite",
+          "namespace": "cellular_component",
+          "fdr": 0.013199401399231545,
+          "fold_enrichment": 3.218554340715821,
+          "genes": [
+            "ANK3",
+            "APOD",
+            "COBL",
+            "GPR37",
+            "IL1RAPL1",
+            "KCNK1",
+            "KIRREL3",
+            "LRP2",
+            "MYO1D",
+            "SEPTIN4",
+            "SRCIN1",
+            "TMEM151A",
+            "TTLL7",
+            "UNC5C"
+          ],
+          "depth": 5
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "ANK3",
+        "APOD",
+        "CLDN11",
+        "CNTN2",
+        "COBL",
+        "DLG2",
+        "GLDN",
+        "GPR37",
+        "GRM3",
+        "IL1RAPL1",
+        "ITGA2",
+        "KCNK1",
+        "KIRREL3",
+        "LGI3",
+        "LPAR1",
+        "LRP2",
+        "MAP7",
+        "MYO1D",
+        "PIEZO2",
+        "RASGRF1",
+        "SEPTIN4",
+        "SHTN1",
+        "SRCIN1",
+        "TMEM151A",
+        "TTLL7",
+        "UNC5C"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0033269",
+        "name": "internode region of axon",
+        "namespace": "cellular_component",
+        "fdr": 0.0005266547793187827,
+        "fold_enrichment": 84.83189655172414,
+        "genes": [
+          "ERMN",
+          "MBP",
+          "TUBB4A"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ERMN",
+        "MBP",
+        "TUBB4A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043218",
+        "name": "compact myelin",
+        "namespace": "cellular_component",
+        "fdr": 0.0005266547793187827,
+        "fold_enrichment": 84.83189655172414,
+        "genes": [
+          "MAG",
+          "MBP",
+          "PLLP"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "MAG",
+        "MBP",
+        "PLLP"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0016324",
+        "name": "apical plasma membrane",
+        "namespace": "cellular_component",
+        "fdr": 0.0005539432945852027,
+        "fold_enrichment": 4.178911160183455,
+        "genes": [
+          "ATP1B1",
+          "CLCA4",
+          "CLDND1",
+          "ERBB3",
+          "KCNK1",
+          "LRP2",
+          "MAL",
+          "PLD1",
+          "PLLP",
+          "SHROOM4",
+          "SLC5A11",
+          "SLCO1A2",
+          "SLCO3A1",
+          "TF",
+          "TMEM235"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ATP1B1",
+        "CLCA4",
+        "CLDND1",
+        "ERBB3",
+        "KCNK1",
+        "LRP2",
+        "MAL",
+        "PLD1",
+        "PLLP",
+        "SHROOM4",
+        "SLC5A11",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TF",
+        "TMEM235"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006351",
+        "name": "DNA-templated transcription",
+        "namespace": "biological_process",
+        "fdr": 0.001013187526428742,
+        "fold_enrichment": 0.1810471314962767,
+        "genes": [
+          "MYRF",
+          "SOX10",
+          "ST18",
+          "ZNF536"
+        ],
+        "depth": 8
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "MYRF",
+        "SOX10",
+        "ST18",
+        "ZNF536"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0048471",
+        "name": "perinuclear region of cytoplasm",
+        "namespace": "cellular_component",
+        "fdr": 0.00241478899967456,
+        "fold_enrichment": 3.0183633604546043,
+        "genes": [
+          "AATK",
+          "APLP1",
+          "APOD",
+          "COBL",
+          "HHATL",
+          "ITGA2",
+          "LDB3",
+          "MAP7",
+          "MOBP",
+          "PLAAT3",
+          "PLD1",
+          "PPP1R16B",
+          "PTGDS",
+          "RASGRP3",
+          "SHTN1",
+          "SPP1",
+          "SYNJ2",
+          "TF",
+          "TPPP"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AATK",
+        "APLP1",
+        "APOD",
+        "COBL",
+        "HHATL",
+        "ITGA2",
+        "LDB3",
+        "MAP7",
+        "MOBP",
+        "PLAAT3",
+        "PLD1",
+        "PPP1R16B",
+        "PTGDS",
+        "RASGRP3",
+        "SHTN1",
+        "SPP1",
+        "SYNJ2",
+        "TF",
+        "TPPP"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006355",
+        "name": "regulation of DNA-templated transcription",
+        "namespace": "biological_process",
+        "fdr": 0.0052643537688468476,
+        "fold_enrichment": 0.31821905552381674,
+        "genes": [
+          "FGFR2",
+          "MYRF",
+          "NKX6-2",
+          "RNF220",
+          "SEMA4D",
+          "SOX10",
+          "SPP1",
+          "ST18",
+          "ZNF536"
+        ],
+        "depth": 9
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "FGFR2",
+        "MYRF",
+        "NKX6-2",
+        "RNF220",
+        "SEMA4D",
+        "SOX10",
+        "SPP1",
+        "ST18",
+        "ZNF536"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098609",
+        "name": "cell-cell adhesion",
+        "namespace": "biological_process",
+        "fdr": 0.006894784532141367,
+        "fold_enrichment": 3.493720321306528,
+        "genes": [
+          "CDH19",
+          "CERCAM",
+          "CLDN11",
+          "CNTN2",
+          "CSRP1",
+          "CTNNA3",
+          "DLG2",
+          "GLDN",
+          "IL1RAPL1",
+          "ITGA2",
+          "KIRREL3",
+          "MAG",
+          "MEGF10",
+          "NINJ2",
+          "PCDH9",
+          "SEMA4D"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDH19",
+        "CERCAM",
+        "CLDN11",
+        "CNTN2",
+        "CSRP1",
+        "CTNNA3",
+        "DLG2",
+        "GLDN",
+        "IL1RAPL1",
+        "ITGA2",
+        "KIRREL3",
+        "MAG",
+        "MEGF10",
+        "NINJ2",
+        "PCDH9",
+        "SEMA4D"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0061024",
+        "name": "membrane organization",
+        "namespace": "biological_process",
+        "fdr": 0.007351616395361818,
+        "fold_enrichment": 3.3038768416479045,
+        "genes": [
+          "ABCA2",
+          "ANK3",
+          "ANO4",
+          "ATP1B1",
+          "ATP8A1",
+          "CNTN2",
+          "ELMO1",
+          "FA2H",
+          "GSN",
+          "IL1RAPL1",
+          "MAL",
+          "MEGF10",
+          "MYRF",
+          "PIP4K2A",
+          "PLAAT3",
+          "SH3GL3",
+          "SYNJ2"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA2",
+        "ANK3",
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "CNTN2",
+        "ELMO1",
+        "FA2H",
+        "GSN",
+        "IL1RAPL1",
+        "MAL",
+        "MEGF10",
+        "MYRF",
+        "PIP4K2A",
+        "PLAAT3",
+        "SH3GL3",
+        "SYNJ2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005654",
+        "name": "nucleoplasm",
+        "namespace": "cellular_component",
+        "fdr": 0.00792812816442696,
+        "fold_enrichment": 0.4075442184672631,
+        "genes": [
+          "ABCA6",
+          "ANLN",
+          "DAAM2",
+          "FAM107B",
+          "KLK6",
+          "NECAB1",
+          "PIP4K2A",
+          "PPM1H",
+          "PPP1R14A",
+          "RAPGEF5",
+          "RNF220",
+          "SGK1",
+          "SOX10"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA6",
+        "ANLN",
+        "DAAM2",
+        "FAM107B",
+        "KLK6",
+        "NECAB1",
+        "PIP4K2A",
+        "PPM1H",
+        "PPP1R14A",
+        "RAPGEF5",
+        "RNF220",
+        "SGK1",
+        "SOX10"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007265",
+        "name": "Ras protein signal transduction",
+        "namespace": "biological_process",
+        "fdr": 0.011505451342723117,
+        "fold_enrichment": 10.129181677817806,
+        "genes": [
+          "PLD1",
+          "RAPGEF5",
+          "RASGRF1",
+          "RASGRF2",
+          "RASGRP3",
+          "SHTN1"
+        ],
+        "depth": 8
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "PLD1",
+        "RAPGEF5",
+        "RASGRF1",
+        "RASGRF2",
+        "RASGRP3",
+        "SHTN1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0055085",
+        "name": "transmembrane transport",
+        "namespace": "biological_process",
+        "fdr": 0.012132939937794672,
+        "fold_enrichment": 2.3821749421701006,
+        "genes": [
+          "ABCA2",
+          "ABCA6",
+          "ABCA8",
+          "ANO4",
+          "ATP1B1",
+          "ATP8A1",
+          "BEST1",
+          "BOK",
+          "CLCA4",
+          "GJB1",
+          "KCNK1",
+          "KCNMB4",
+          "LRP2",
+          "PIEZO2",
+          "PLCL1",
+          "SLC22A15",
+          "SLC24A2",
+          "SLC31A2",
+          "SLC44A1",
+          "SLC45A3",
+          "SLC5A11",
+          "SLC7A14",
+          "SLCO1A2",
+          "SLCO3A1",
+          "TMEM144",
+          "TMEM165",
+          "TMEM63A"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA2",
+        "ABCA6",
+        "ABCA8",
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "BOK",
+        "CLCA4",
+        "GJB1",
+        "KCNK1",
+        "KCNMB4",
+        "LRP2",
+        "PIEZO2",
+        "PLCL1",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC44A1",
+        "SLC45A3",
+        "SLC5A11",
+        "SLC7A14",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TMEM144",
+        "TMEM165",
+        "TMEM63A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005215",
+        "name": "transporter activity",
+        "namespace": "molecular_function",
+        "fdr": 0.012260373251148997,
+        "fold_enrichment": 2.4742636494252874,
+        "genes": [
+          "ABCA2",
+          "ABCA6",
+          "ABCA8",
+          "ANO4",
+          "APOD",
+          "ATP1B1",
+          "ATP8A1",
+          "BEST1",
+          "BOK",
+          "CLCA4",
+          "GJB1",
+          "KCNK1",
+          "KCNMB4",
+          "LRP2",
+          "OSBPL1A",
+          "PIEZO2",
+          "SLC22A15",
+          "SLC24A2",
+          "SLC31A2",
+          "SLC44A1",
+          "SLC45A3",
+          "SLC5A11",
+          "SLC7A14",
+          "SLCO1A2",
+          "SLCO3A1",
+          "TMEM144",
+          "TMEM165",
+          "TMEM63A"
+        ],
+        "depth": 1
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [
+        {
+          "go_id": "GO:0005319",
+          "name": "lipid transporter activity",
+          "namespace": "molecular_function",
+          "fdr": 0.012260373251148997,
+          "fold_enrichment": 5.800471559092249,
+          "genes": [
+            "ABCA2",
+            "ABCA6",
+            "ABCA8",
+            "ANO4",
+            "APOD",
+            "ATP8A1",
+            "OSBPL1A",
+            "SLCO1A2",
+            "SLCO3A1",
+            "TMEM63A"
+          ],
+          "depth": 2
+        },
+        {
+          "go_id": "GO:0022857",
+          "name": "transmembrane transporter activity",
+          "namespace": "molecular_function",
+          "fdr": 0.027772553346933612,
+          "fold_enrichment": 2.4610355831657715,
+          "genes": [
+            "ABCA2",
+            "ABCA6",
+            "ABCA8",
+            "ANO4",
+            "ATP1B1",
+            "ATP8A1",
+            "BEST1",
+            "BOK",
+            "CLCA4",
+            "GJB1",
+            "KCNK1",
+            "KCNMB4",
+            "PIEZO2",
+            "SLC22A15",
+            "SLC24A2",
+            "SLC31A2",
+            "SLC44A1",
+            "SLC45A3",
+            "SLC5A11",
+            "SLC7A14",
+            "SLCO1A2",
+            "SLCO3A1",
+            "TMEM144",
+            "TMEM165",
+            "TMEM63A"
+          ],
+          "depth": 2
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "ABCA2",
+        "ABCA6",
+        "ABCA8",
+        "ANO4",
+        "APOD",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "BOK",
+        "CLCA4",
+        "GJB1",
+        "KCNK1",
+        "KCNMB4",
+        "LRP2",
+        "OSBPL1A",
+        "PIEZO2",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC44A1",
+        "SLC45A3",
+        "SLC5A11",
+        "SLC7A14",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TMEM144",
+        "TMEM165",
+        "TMEM63A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0009986",
+        "name": "cell surface",
+        "namespace": "cellular_component",
+        "fdr": 0.013199401399231545,
+        "fold_enrichment": 2.8029975537012835,
+        "genes": [
+          "ANK3",
+          "CD22",
+          "CLDND1",
+          "CNTN2",
+          "FGFR2",
+          "FOLH1",
+          "GLDN",
+          "GPR37",
+          "HHIP",
+          "HSPA2",
+          "IL1RAPL1",
+          "ITGA2",
+          "LPAR1",
+          "MBP",
+          "PCSK6",
+          "TF",
+          "UNC5C"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANK3",
+        "CD22",
+        "CLDND1",
+        "CNTN2",
+        "FGFR2",
+        "FOLH1",
+        "GLDN",
+        "GPR37",
+        "HHIP",
+        "HSPA2",
+        "IL1RAPL1",
+        "ITGA2",
+        "LPAR1",
+        "MBP",
+        "PCSK6",
+        "TF",
+        "UNC5C"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0044224",
+        "name": "juxtaparanode region of axon",
+        "namespace": "cellular_component",
+        "fdr": 0.01374616670107049,
+        "fold_enrichment": 28.277298850574713,
+        "genes": [
+          "CNTN2",
+          "DLG2",
+          "LGI3"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CNTN2",
+        "DLG2",
+        "LGI3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0016323",
+        "name": "basolateral plasma membrane",
+        "namespace": "cellular_component",
+        "fdr": 0.016164900743093225,
+        "fold_enrichment": 4.113061650992686,
+        "genes": [
+          "ABCA8",
+          "ANK3",
+          "ATP1B1",
+          "BEST1",
+          "DLG2",
+          "ERBB3",
+          "MAP7",
+          "MYO1D",
+          "SLCO1A2",
+          "SLCO3A1"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA8",
+        "ANK3",
+        "ATP1B1",
+        "BEST1",
+        "DLG2",
+        "ERBB3",
+        "MAP7",
+        "MYO1D",
+        "SLCO1A2",
+        "SLCO3A1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006811",
+        "name": "monoatomic ion transport",
+        "namespace": "biological_process",
+        "fdr": 0.01997267036021914,
+        "fold_enrichment": 2.5365976542819317,
+        "genes": [
+          "ANO4",
+          "ATP1B1",
+          "ATP8A1",
+          "BEST1",
+          "CLCA4",
+          "FTH1",
+          "KCNK1",
+          "KCNMB4",
+          "LRP2",
+          "PIEZO2",
+          "PLCL1",
+          "PLLP",
+          "SGK1",
+          "SLC22A15",
+          "SLC24A2",
+          "SLC31A2",
+          "SLC5A11",
+          "SLCO1A2",
+          "SLCO3A1",
+          "TF",
+          "TMEM165",
+          "TMEM63A"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANO4",
+        "ATP1B1",
+        "ATP8A1",
+        "BEST1",
+        "CLCA4",
+        "FTH1",
+        "KCNK1",
+        "KCNMB4",
+        "LRP2",
+        "PIEZO2",
+        "PLCL1",
+        "PLLP",
+        "SGK1",
+        "SLC22A15",
+        "SLC24A2",
+        "SLC31A2",
+        "SLC5A11",
+        "SLCO1A2",
+        "SLCO3A1",
+        "TF",
+        "TMEM165",
+        "TMEM63A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005856",
+        "name": "cytoskeleton",
+        "namespace": "cellular_component",
+        "fdr": 0.02117178522010595,
+        "fold_enrichment": 2.343128341667208,
+        "genes": [
+          "ANK3",
+          "ANLN",
+          "COBL",
+          "CTNNA3",
+          "DLC1",
+          "ERMN",
+          "FRMD4B",
+          "GSN",
+          "KIF6",
+          "LDB3",
+          "MAP7",
+          "MTUS1",
+          "MYO1D",
+          "PLEKHH1",
+          "SEPTIN4",
+          "SHROOM4",
+          "SHTN1",
+          "SLAIN1",
+          "SRCIN1",
+          "SYNJ2",
+          "TPPP",
+          "TUBB4A"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANK3",
+        "ANLN",
+        "COBL",
+        "CTNNA3",
+        "DLC1",
+        "ERMN",
+        "FRMD4B",
+        "GSN",
+        "KIF6",
+        "LDB3",
+        "MAP7",
+        "MTUS1",
+        "MYO1D",
+        "PLEKHH1",
+        "SEPTIN4",
+        "SHROOM4",
+        "SHTN1",
+        "SLAIN1",
+        "SRCIN1",
+        "SYNJ2",
+        "TPPP",
+        "TUBB4A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006665",
+        "name": "sphingolipid metabolic process",
+        "namespace": "biological_process",
+        "fdr": 0.02187356329482786,
+        "fold_enrichment": 5.875802358560978,
+        "genes": [
+          "ABCA2",
+          "ABCA8",
+          "ELOVL7",
+          "ENPP2",
+          "FA2H",
+          "PLPP2",
+          "ST6GALNAC3",
+          "UGT8"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA2",
+        "ABCA8",
+        "ELOVL7",
+        "ENPP2",
+        "FA2H",
+        "PLPP2",
+        "ST6GALNAC3",
+        "UGT8"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0140513",
+        "name": "nuclear protein-containing complex",
+        "namespace": "cellular_component",
+        "fdr": 0.021900274607278107,
+        "fold_enrichment": 0.0885048477326282,
+        "genes": [
+          "CLMN"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CLMN"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0003677",
+        "name": "DNA binding",
+        "namespace": "molecular_function",
+        "fdr": 0.027772553346933612,
+        "fold_enrichment": 0.2672923089459603,
+        "genes": [
+          "MYRF",
+          "NKX6-2",
+          "OTUD7A",
+          "SOX10",
+          "ST18",
+          "ZNF536"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "MYRF",
+        "NKX6-2",
+        "OTUD7A",
+        "SOX10",
+        "ST18",
+        "ZNF536"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0048713",
+        "name": "regulation of oligodendrocyte differentiation",
+        "namespace": "biological_process",
+        "fdr": 0.030212650916548546,
+        "fold_enrichment": 16.15845648604269,
+        "genes": [
+          "DAAM2",
+          "MYRF",
+          "OPALIN",
+          "SLC45A3"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "DAAM2",
+        "MYRF",
+        "OPALIN",
+        "SLC45A3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043025",
+        "name": "neuronal cell body",
+        "namespace": "cellular_component",
+        "fdr": 0.03045351395035822,
+        "fold_enrichment": 3.4370197497936115,
+        "genes": [
+          "APOD",
+          "CNTN2",
+          "COBL",
+          "ERMN",
+          "LPAR1",
+          "MBP",
+          "MYO1D",
+          "PDE1A",
+          "PDE1C",
+          "TUBB4A",
+          "UNC5C"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "APOD",
+        "CNTN2",
+        "COBL",
+        "ERMN",
+        "LPAR1",
+        "MBP",
+        "MYO1D",
+        "PDE1A",
+        "PDE1C",
+        "TUBB4A",
+        "UNC5C"
+      ]
+    }
+  ],
+  "hub_genes": {
+    "CNTN2": {
+      "theme_count": 8,
+      "themes": [
+        "synapse",
+        "protein localization to axon",
+        "neuron projection",
+        "cell-cell adhesion",
+        "membrane organization",
+        "cell surface",
+        "juxtaparanode region of axon",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0043025",
+        "GO:0043005",
+        "GO:0099612",
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0030425",
+        "GO:0061024",
+        "GO:0044224",
+        "GO:0098609"
+      ]
+    },
+    "MBP": {
+      "theme_count": 7,
+      "themes": [
+        "myelination",
+        "structural constituent of myelin sheath",
+        "synapse",
+        "internode region of axon",
+        "compact myelin",
+        "cell surface",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0033269",
+        "GO:0031643",
+        "GO:0043025",
+        "GO:0032288",
+        "GO:0022010",
+        "GO:0042552",
+        "GO:0009986",
+        "GO:0019911",
+        "GO:0045202",
+        "GO:0043218"
+      ]
+    },
+    "ANK3": {
+      "theme_count": 7,
+      "themes": [
+        "synapse",
+        "protein localization to axon",
+        "neuron projection",
+        "membrane organization",
+        "cell surface",
+        "basolateral plasma membrane",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0005856",
+        "GO:0043005",
+        "GO:0099612",
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0030425",
+        "GO:0061024",
+        "GO:0016323"
+      ]
+    },
+    "MYRF": {
+      "theme_count": 6,
+      "themes": [
+        "myelination",
+        "DNA-templated transcription",
+        "regulation of DNA-templated transcription",
+        "membrane organization",
+        "DNA binding",
+        "regulation of oligodendrocyte differentiation"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0022010",
+        "GO:0048713",
+        "GO:0006351",
+        "GO:0042552",
+        "GO:0006355",
+        "GO:0003677",
+        "GO:0061024"
+      ]
+    },
+    "ATP1B1": {
+      "theme_count": 6,
+      "themes": [
+        "apical plasma membrane",
+        "membrane organization",
+        "transmembrane transport",
+        "transporter activity",
+        "basolateral plasma membrane",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0061024",
+        "GO:0016323",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "PLLP": {
+      "theme_count": 5,
+      "themes": [
+        "myelination",
+        "structural constituent of myelin sheath",
+        "compact myelin",
+        "apical plasma membrane",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0019911",
+        "GO:0043218",
+        "GO:0016324",
+        "GO:0022010",
+        "GO:0042552",
+        "GO:0006811"
+      ]
+    },
+    "ABCA2": {
+      "theme_count": 5,
+      "themes": [
+        "myelination",
+        "membrane organization",
+        "transmembrane transport",
+        "transporter activity",
+        "sphingolipid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0055085",
+        "GO:0032288",
+        "GO:0022010",
+        "GO:0042552",
+        "GO:0005319",
+        "GO:0022857",
+        "GO:0005215",
+        "GO:0061024",
+        "GO:0006665"
+      ]
+    },
+    "SOX10": {
+      "theme_count": 5,
+      "themes": [
+        "myelination",
+        "DNA-templated transcription",
+        "regulation of DNA-templated transcription",
+        "nucleoplasm",
+        "DNA binding"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0005654",
+        "GO:0003677",
+        "GO:0022010",
+        "GO:0006351",
+        "GO:0042552",
+        "GO:0006355"
+      ]
+    },
+    "MAL": {
+      "theme_count": 5,
+      "themes": [
+        "myelination",
+        "structural constituent of myelin sheath",
+        "protein localization to axon",
+        "apical plasma membrane",
+        "membrane organization"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0019911",
+        "GO:0099612",
+        "GO:0016324",
+        "GO:0061024",
+        "GO:0022010",
+        "GO:0042552"
+      ]
+    },
+    "LPAR1": {
+      "theme_count": 5,
+      "themes": [
+        "myelination",
+        "synapse",
+        "neuron projection",
+        "cell surface",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0043025",
+        "GO:0043005",
+        "GO:0032288",
+        "GO:0022010",
+        "GO:0042552",
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0030425"
+      ]
+    },
+    "DLG2": {
+      "theme_count": 5,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cell-cell adhesion",
+        "juxtaparanode region of axon",
+        "basolateral plasma membrane"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0016323",
+        "GO:0044224",
+        "GO:0098609"
+      ]
+    },
+    "IL1RAPL1": {
+      "theme_count": 5,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cell-cell adhesion",
+        "membrane organization",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0061024",
+        "GO:0098609"
+      ]
+    },
+    "ATP8A1": {
+      "theme_count": 5,
+      "themes": [
+        "synapse",
+        "membrane organization",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0045202",
+        "GO:0061024",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "LRP2": {
+      "theme_count": 5,
+      "themes": [
+        "neuron projection",
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0043005",
+        "GO:0005215",
+        "GO:0022857",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0030424",
+        "GO:0030425"
+      ]
+    },
+    "KCNK1": {
+      "theme_count": 5,
+      "themes": [
+        "neuron projection",
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0043005",
+        "GO:0005215",
+        "GO:0022857",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0030424",
+        "GO:0030425"
+      ]
+    },
+    "SLCO1A2": {
+      "theme_count": 5,
+      "themes": [
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "basolateral plasma membrane",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0016323",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "SLCO3A1": {
+      "theme_count": 5,
+      "themes": [
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "basolateral plasma membrane",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0016323",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "RNF220": {
+      "theme_count": 4,
+      "themes": [
+        "myelination",
+        "synapse",
+        "regulation of DNA-templated transcription",
+        "nucleoplasm"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0045202",
+        "GO:0005654",
+        "GO:0022010",
+        "GO:0006355",
+        "GO:0042552"
+      ]
+    },
+    "UNC5C": {
+      "theme_count": 4,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cell surface",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0043025"
+      ]
+    },
+    "KCNMB4": {
+      "theme_count": 4,
+      "themes": [
+        "synapse",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0045202",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "PLD1": {
+      "theme_count": 4,
+      "themes": [
+        "synapse",
+        "apical plasma membrane",
+        "perinuclear region of cytoplasm",
+        "Ras protein signal transduction"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0048471",
+        "GO:0016324",
+        "GO:0007265"
+      ]
+    },
+    "PIEZO2": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "MYO1D": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "basolateral plasma membrane",
+        "cytoskeleton",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0043025",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856",
+        "GO:0016323"
+      ]
+    },
+    "SHTN1": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "perinuclear region of cytoplasm",
+        "Ras protein signal transduction",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0007265",
+        "GO:0048471",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856"
+      ]
+    },
+    "MAP7": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "perinuclear region of cytoplasm",
+        "basolateral plasma membrane",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0048471",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856",
+        "GO:0016323"
+      ]
+    },
+    "APOD": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "perinuclear region of cytoplasm",
+        "transporter activity",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0043025",
+        "GO:0048471",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005215",
+        "GO:0005319"
+      ]
+    },
+    "ITGA2": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "perinuclear region of cytoplasm",
+        "cell-cell adhesion",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0048471",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0098609"
+      ]
+    },
+    "COBL": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "perinuclear region of cytoplasm",
+        "cytoskeleton",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0043025",
+        "GO:0048471",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856"
+      ]
+    },
+    "TF": {
+      "theme_count": 4,
+      "themes": [
+        "apical plasma membrane",
+        "perinuclear region of cytoplasm",
+        "cell surface",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0016324",
+        "GO:0048471",
+        "GO:0006811"
+      ]
+    },
+    "CLCA4": {
+      "theme_count": 4,
+      "themes": [
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "SLC5A11": {
+      "theme_count": 4,
+      "themes": [
+        "apical plasma membrane",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0016324",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "ANO4": {
+      "theme_count": 4,
+      "themes": [
+        "membrane organization",
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0061024",
+        "GO:0005215",
+        "GO:0006811",
+        "GO:0005319"
+      ]
+    },
+    "ABCA8": {
+      "theme_count": 4,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "basolateral plasma membrane",
+        "sphingolipid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0016323",
+        "GO:0006665",
+        "GO:0005215"
+      ]
+    },
+    "BEST1": {
+      "theme_count": 4,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "basolateral plasma membrane",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0016323",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    },
+    "TPPP": {
+      "theme_count": 3,
+      "themes": [
+        "myelination",
+        "perinuclear region of cytoplasm",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0048471",
+        "GO:0005856",
+        "GO:0022010",
+        "GO:0042552"
+      ]
+    },
+    "MAG": {
+      "theme_count": 3,
+      "themes": [
+        "myelination",
+        "compact myelin",
+        "cell-cell adhesion"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0043218",
+        "GO:0022010",
+        "GO:0042552",
+        "GO:0098609"
+      ]
+    },
+    "PLP1": {
+      "theme_count": 3,
+      "themes": [
+        "myelination",
+        "structural constituent of myelin sheath",
+        "synapse"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0019911",
+        "GO:0045202",
+        "GO:0022010",
+        "GO:0042552"
+      ]
+    },
+    "ERBB3": {
+      "theme_count": 3,
+      "themes": [
+        "myelination",
+        "apical plasma membrane",
+        "basolateral plasma membrane"
+      ],
+      "go_terms": [
+        "GO:0031643",
+        "GO:0032288",
+        "GO:0016324",
+        "GO:0022010",
+        "GO:0016323",
+        "GO:0042552"
+      ]
+    },
+    "SHROOM4": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "apical plasma membrane",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0005856",
+        "GO:0016324"
+      ]
+    },
+    "GPR37": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425"
+      ]
+    },
+    "FGFR2": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "regulation of DNA-templated transcription",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045202",
+        "GO:0006355"
+      ]
+    },
+    "SRCIN1": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856"
+      ]
+    },
+    "LGI3": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "juxtaparanode region of axon"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0044224"
+      ]
+    },
+    "SEPTIN4": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "neuron projection",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0005856"
+      ]
+    },
+    "SEMA4D": {
+      "theme_count": 3,
+      "themes": [
+        "synapse",
+        "regulation of DNA-templated transcription",
+        "cell-cell adhesion"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0006355",
+        "GO:0098609"
+      ]
+    },
+    "GLDN": {
+      "theme_count": 3,
+      "themes": [
+        "neuron projection",
+        "cell-cell adhesion",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0030424",
+        "GO:0043005",
+        "GO:0030425",
+        "GO:0098609"
+      ]
+    },
+    "TUBB4A": {
+      "theme_count": 3,
+      "themes": [
+        "internode region of axon",
+        "cytoskeleton",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0033269",
+        "GO:0043025",
+        "GO:0005856"
+      ]
+    },
+    "ERMN": {
+      "theme_count": 3,
+      "themes": [
+        "internode region of axon",
+        "cytoskeleton",
+        "neuronal cell body"
+      ],
+      "go_terms": [
+        "GO:0033269",
+        "GO:0043025",
+        "GO:0005856"
+      ]
+    },
+    "ZNF536": {
+      "theme_count": 3,
+      "themes": [
+        "DNA-templated transcription",
+        "regulation of DNA-templated transcription",
+        "DNA binding"
+      ],
+      "go_terms": [
+        "GO:0003677",
+        "GO:0006351",
+        "GO:0006355"
+      ]
+    },
+    "ST18": {
+      "theme_count": 3,
+      "themes": [
+        "DNA-templated transcription",
+        "regulation of DNA-templated transcription",
+        "DNA binding"
+      ],
+      "go_terms": [
+        "GO:0003677",
+        "GO:0006351",
+        "GO:0006355"
+      ]
+    },
+    "SYNJ2": {
+      "theme_count": 3,
+      "themes": [
+        "perinuclear region of cytoplasm",
+        "membrane organization",
+        "cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0048471",
+        "GO:0061024",
+        "GO:0005856"
+      ]
+    },
+    "ABCA6": {
+      "theme_count": 3,
+      "themes": [
+        "nucleoplasm",
+        "transmembrane transport",
+        "transporter activity"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005654",
+        "GO:0005215",
+        "GO:0005319"
+      ]
+    },
+    "TMEM63A": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    },
+    "SLC31A2": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    },
+    "TMEM165": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    },
+    "SLC24A2": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    },
+    "SLC45A3": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "regulation of oligodendrocyte differentiation"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0048713",
+        "GO:0005215"
+      ]
+    },
+    "SLC22A15": {
+      "theme_count": 3,
+      "themes": [
+        "transmembrane transport",
+        "transporter activity",
+        "monoatomic ion transport"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0055085",
+        "GO:0005319",
+        "GO:0006811",
+        "GO:0005215"
+      ]
+    }
+  },
+  "metadata": {
+    "input_genes_count": 200,
+    "genes_with_annotations": 174,
+    "total_enriched_terms": 77,
+    "enrichment_leaves_count": 31,
+    "themes_count": 27,
+    "themes_with_children": 3,
+    "hub_genes_count": 58,
+    "fdr_threshold": 0.05,
+    "species": "human",
+    "min_ic": 3.0,
+    "min_leaves": 2,
+    "timestamp": "2026-04-13T14:51:48.405094+00:00"
+  }
+}

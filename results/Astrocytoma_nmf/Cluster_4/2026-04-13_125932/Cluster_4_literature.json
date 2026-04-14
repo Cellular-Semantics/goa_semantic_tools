@@ -1,0 +1,2375 @@
+{
+  "enrichment_source": "results/Astrocytoma_nmf/Cluster_4/2026-04-13_125932/Cluster_4_enrichment.json",
+  "gaf_pmids": {
+    "0": [
+      {
+        "pmid": "34706237",
+        "genes_covered": [
+          "GRIK2"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "GRIK2": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "GRIK2": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "31257103",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "21926414",
+        "genes_covered": [
+          "IL1RAPL1"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "IL1RAPL1": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "IL1RAPL1": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "21893069",
+        "genes_covered": [
+          "GRIK2"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "GRIK2": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "GRIK2": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "21838267",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098985"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098985"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "asymmetric, glutamatergic, excitatory synapse [GO:0098985]"
+          ]
+        }
+      }
+    ],
+    "1": [
+      {
+        "pmid": "19706678",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0030424"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0030424"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "axon [GO:0030424]"
+          ]
+        }
+      }
+    ],
+    "2": [
+      {
+        "pmid": "37865312",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0007416"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0007416"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "synapse assembly [GO:0007416]"
+          ]
+        }
+      },
+      {
+        "pmid": "30021165",
+        "genes_covered": [
+          "PPFIA2"
+        ],
+        "go_terms": [
+          "GO:0061001"
+        ],
+        "gene_go_map": {
+          "PPFIA2": [
+            "GO:0061001"
+          ]
+        },
+        "gene_go_named": {
+          "PPFIA2": [
+            "regulation of dendritic spine morphogenesis [GO:0061001]"
+          ]
+        }
+      },
+      {
+        "pmid": "27418511",
+        "genes_covered": [
+          "GRID2"
+        ],
+        "go_terms": [
+          "GO:1904861"
+        ],
+        "gene_go_map": {
+          "GRID2": [
+            "GO:1904861"
+          ]
+        },
+        "gene_go_named": {
+          "GRID2": [
+            "excitatory synapse assembly [GO:1904861]"
+          ]
+        }
+      },
+      {
+        "pmid": "25489750",
+        "genes_covered": [
+          "GABRB3"
+        ],
+        "go_terms": [
+          "GO:1904862"
+        ],
+        "gene_go_map": {
+          "GABRB3": [
+            "GO:1904862"
+          ]
+        },
+        "gene_go_named": {
+          "GABRB3": [
+            "inhibitory synapse assembly [GO:1904862]"
+          ]
+        }
+      },
+      {
+        "pmid": "21926414",
+        "genes_covered": [
+          "IL1RAPL1"
+        ],
+        "go_terms": [
+          "GO:0099175"
+        ],
+        "gene_go_map": {
+          "IL1RAPL1": [
+            "GO:0099175"
+          ]
+        },
+        "gene_go_named": {
+          "IL1RAPL1": [
+            "regulation of postsynapse organization [GO:0099175]"
+          ]
+        }
+      }
+    ],
+    "3": [
+      {
+        "pmid": "27837918",
+        "genes_covered": [
+          "ZNF804A"
+        ],
+        "go_terms": [
+          "GO:0043025"
+        ],
+        "gene_go_map": {
+          "ZNF804A": [
+            "GO:0043025"
+          ]
+        },
+        "gene_go_named": {
+          "ZNF804A": [
+            "neuronal cell body [GO:0043025]"
+          ]
+        }
+      },
+      {
+        "pmid": "10624965",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0043025"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0043025"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "neuronal cell body [GO:0043025]"
+          ]
+        }
+      }
+    ],
+    "4": [
+      {
+        "pmid": "31257103",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098982"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098982"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "GABA-ergic synapse [GO:0098982]"
+          ]
+        }
+      },
+      {
+        "pmid": "21838267",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098983"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098983"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "symmetric, GABA-ergic, inhibitory synapse [GO:0098983]"
+          ]
+        }
+      }
+    ],
+    "5": [
+      {
+        "pmid": "33234346",
+        "genes_covered": [
+          "GABRB3"
+        ],
+        "go_terms": [
+          "GO:0032229"
+        ],
+        "gene_go_map": {
+          "GABRB3": [
+            "GO:0032229"
+          ]
+        },
+        "gene_go_named": {
+          "GABRB3": [
+            "negative regulation of synaptic transmission, GABAergic [GO:0032229]"
+          ]
+        }
+      },
+      {
+        "pmid": "31257103",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0050804"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0050804"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "modulation of chemical synaptic transmission [GO:0050804]"
+          ]
+        }
+      },
+      {
+        "pmid": "27418511",
+        "genes_covered": [
+          "GRID2"
+        ],
+        "go_terms": [
+          "GO:1900454"
+        ],
+        "gene_go_map": {
+          "GRID2": [
+            "GO:1900454"
+          ]
+        },
+        "gene_go_named": {
+          "GRID2": [
+            "positive regulation of long-term synaptic depression [GO:1900454]"
+          ]
+        }
+      },
+      {
+        "pmid": "23376566",
+        "genes_covered": [
+          "CACNA1A"
+        ],
+        "go_terms": [
+          "GO:0050804"
+        ],
+        "gene_go_map": {
+          "CACNA1A": [
+            "GO:0050804"
+          ]
+        },
+        "gene_go_named": {
+          "CACNA1A": [
+            "modulation of chemical synaptic transmission [GO:0050804]"
+          ]
+        }
+      },
+      {
+        "pmid": "19822762",
+        "genes_covered": [
+          "NRXN1"
+        ],
+        "go_terms": [
+          "GO:0051968",
+          "GO:2000463"
+        ],
+        "gene_go_map": {
+          "NRXN1": [
+            "GO:0051968",
+            "GO:2000463"
+          ]
+        },
+        "gene_go_named": {
+          "NRXN1": [
+            "positive regulation of synaptic transmission, glutamatergic [GO:0051968]",
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ]
+        }
+      }
+    ],
+    "6": [
+      {
+        "pmid": "31257103",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098839"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098839"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "postsynaptic density membrane [GO:0098839]"
+          ]
+        }
+      },
+      {
+        "pmid": "30021165",
+        "genes_covered": [
+          "PPFIA2"
+        ],
+        "go_terms": [
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "PPFIA2": [
+            "GO:0043197"
+          ]
+        },
+        "gene_go_named": {
+          "PPFIA2": [
+            "dendritic spine [GO:0043197]"
+          ]
+        }
+      },
+      {
+        "pmid": "27837918",
+        "genes_covered": [
+          "ZNF804A"
+        ],
+        "go_terms": [
+          "GO:0098794",
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "ZNF804A": [
+            "GO:0043197",
+            "GO:0098794"
+          ]
+        },
+        "gene_go_named": {
+          "ZNF804A": [
+            "dendritic spine [GO:0043197]",
+            "postsynapse [GO:0098794]"
+          ]
+        }
+      },
+      {
+        "pmid": "25025157",
+        "genes_covered": [
+          "GABRB3"
+        ],
+        "go_terms": [
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "GABRB3": [
+            "GO:0043197"
+          ]
+        },
+        "gene_go_named": {
+          "GABRB3": [
+            "dendritic spine [GO:0043197]"
+          ]
+        }
+      },
+      {
+        "pmid": "24357660",
+        "genes_covered": [
+          "GRID2"
+        ],
+        "go_terms": [
+          "GO:0098839"
+        ],
+        "gene_go_map": {
+          "GRID2": [
+            "GO:0098839"
+          ]
+        },
+        "gene_go_named": {
+          "GRID2": [
+            "postsynaptic density membrane [GO:0098839]"
+          ]
+        }
+      }
+    ],
+    "7": [
+      {
+        "pmid": "21278334",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0030182"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0030182"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "neuron differentiation [GO:0030182]"
+          ]
+        }
+      },
+      {
+        "pmid": "15687260",
+        "genes_covered": [
+          "NKD1"
+        ],
+        "go_terms": [
+          "GO:0001754"
+        ],
+        "gene_go_map": {
+          "NKD1": [
+            "GO:0001754"
+          ]
+        },
+        "gene_go_named": {
+          "NKD1": [
+            "eye photoreceptor cell differentiation [GO:0001754]"
+          ]
+        }
+      },
+      {
+        "pmid": "15019943",
+        "genes_covered": [
+          "MDGA2"
+        ],
+        "go_terms": [
+          "GO:0021522"
+        ],
+        "gene_go_map": {
+          "MDGA2": [
+            "GO:0021522"
+          ]
+        },
+        "gene_go_named": {
+          "MDGA2": [
+            "spinal cord motor neuron differentiation [GO:0021522]"
+          ]
+        }
+      },
+      {
+        "pmid": "10574465",
+        "genes_covered": [
+          "SOX11"
+        ],
+        "go_terms": [
+          "GO:0030182"
+        ],
+        "gene_go_map": {
+          "SOX11": [
+            "GO:0030182"
+          ]
+        },
+        "gene_go_named": {
+          "SOX11": [
+            "neuron differentiation [GO:0030182]"
+          ]
+        }
+      }
+    ],
+    "8": [
+      {
+        "pmid": "35277491",
+        "genes_covered": [
+          "SCN3A"
+        ],
+        "go_terms": [
+          "GO:0086010"
+        ],
+        "gene_go_map": {
+          "SCN3A": [
+            "GO:0086010"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3A": [
+            "membrane depolarization during action potential [GO:0086010]"
+          ]
+        }
+      },
+      {
+        "pmid": "27207958",
+        "genes_covered": [
+          "SCN1A"
+        ],
+        "go_terms": [
+          "GO:0086002"
+        ],
+        "gene_go_map": {
+          "SCN1A": [
+            "GO:0086002"
+          ]
+        },
+        "gene_go_named": {
+          "SCN1A": [
+            "cardiac muscle cell action potential involved in contraction [GO:0086002]"
+          ]
+        }
+      },
+      {
+        "pmid": "27164707",
+        "genes_covered": [
+          "FGF12"
+        ],
+        "go_terms": [
+          "GO:0098908"
+        ],
+        "gene_go_map": {
+          "FGF12": [
+            "GO:0098908"
+          ]
+        },
+        "gene_go_named": {
+          "FGF12": [
+            "regulation of neuronal action potential [GO:0098908]"
+          ]
+        }
+      },
+      {
+        "pmid": "21677768",
+        "genes_covered": [
+          "DMD"
+        ],
+        "go_terms": [
+          "GO:0086001"
+        ],
+        "gene_go_map": {
+          "DMD": [
+            "GO:0086001"
+          ]
+        },
+        "gene_go_named": {
+          "DMD": [
+            "cardiac muscle cell action potential [GO:0086001]"
+          ]
+        }
+      },
+      {
+        "pmid": "20165904",
+        "genes_covered": [
+          "PID1"
+        ],
+        "go_terms": [
+          "GO:0051881"
+        ],
+        "gene_go_map": {
+          "PID1": [
+            "GO:0051881"
+          ]
+        },
+        "gene_go_named": {
+          "PID1": [
+            "regulation of mitochondrial membrane potential [GO:0051881]"
+          ]
+        }
+      }
+    ],
+    "9": [],
+    "10": [
+      {
+        "pmid": "35277491",
+        "genes_covered": [
+          "SCN3A"
+        ],
+        "go_terms": [
+          "GO:0001518"
+        ],
+        "gene_go_map": {
+          "SCN3A": [
+            "GO:0001518"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3A": [
+            "voltage-gated sodium channel complex [GO:0001518]"
+          ]
+        }
+      },
+      {
+        "pmid": "24811166",
+        "genes_covered": [
+          "KCND2"
+        ],
+        "go_terms": [
+          "GO:0008076"
+        ],
+        "gene_go_map": {
+          "KCND2": [
+            "GO:0008076"
+          ]
+        },
+        "gene_go_named": {
+          "KCND2": [
+            "voltage-gated potassium channel complex [GO:0008076]"
+          ]
+        }
+      },
+      {
+        "pmid": "22102369",
+        "genes_covered": [
+          "CALCRL"
+        ],
+        "go_terms": [
+          "GO:1903143"
+        ],
+        "gene_go_map": {
+          "CALCRL": [
+            "GO:1903143"
+          ]
+        },
+        "gene_go_named": {
+          "CALCRL": [
+            "adrenomedullin receptor complex [GO:1903143]"
+          ]
+        }
+      },
+      {
+        "pmid": "21164104",
+        "genes_covered": [
+          "DMD"
+        ],
+        "go_terms": [
+          "GO:0016013"
+        ],
+        "gene_go_map": {
+          "DMD": [
+            "GO:0016013"
+          ]
+        },
+        "gene_go_named": {
+          "DMD": [
+            "syntrophin complex [GO:0016013]"
+          ]
+        }
+      },
+      {
+        "pmid": "20074556",
+        "genes_covered": [
+          "CALCRL"
+        ],
+        "go_terms": [
+          "GO:1903143"
+        ],
+        "gene_go_map": {
+          "CALCRL": [
+            "GO:1903143"
+          ]
+        },
+        "gene_go_named": {
+          "CALCRL": [
+            "adrenomedullin receptor complex [GO:1903143]"
+          ]
+        }
+      }
+    ],
+    "11": [],
+    "12": [
+      {
+        "pmid": "28386764",
+        "genes_covered": [
+          "FYN"
+        ],
+        "go_terms": [
+          "GO:0045121"
+        ],
+        "gene_go_map": {
+          "FYN": [
+            "GO:0045121"
+          ]
+        },
+        "gene_go_named": {
+          "FYN": [
+            "membrane raft [GO:0045121]"
+          ]
+        }
+      },
+      {
+        "pmid": "23386614",
+        "genes_covered": [
+          "FYN"
+        ],
+        "go_terms": [
+          "GO:0045121"
+        ],
+        "gene_go_map": {
+          "FYN": [
+            "GO:0045121"
+          ]
+        },
+        "gene_go_named": {
+          "FYN": [
+            "membrane raft [GO:0045121]"
+          ]
+        }
+      },
+      {
+        "pmid": "12218089",
+        "genes_covered": [
+          "FYN"
+        ],
+        "go_terms": [
+          "GO:0045121"
+        ],
+        "gene_go_map": {
+          "FYN": [
+            "GO:0045121"
+          ]
+        },
+        "gene_go_named": {
+          "FYN": [
+            "membrane raft [GO:0045121]"
+          ]
+        }
+      },
+      {
+        "pmid": "12150984",
+        "genes_covered": [
+          "FYN"
+        ],
+        "go_terms": [
+          "GO:0045121"
+        ],
+        "gene_go_map": {
+          "FYN": [
+            "GO:0045121"
+          ]
+        },
+        "gene_go_named": {
+          "FYN": [
+            "membrane raft [GO:0045121]"
+          ]
+        }
+      },
+      {
+        "pmid": "12009895",
+        "genes_covered": [
+          "EGFR"
+        ],
+        "go_terms": [
+          "GO:0045121"
+        ],
+        "gene_go_map": {
+          "EGFR": [
+            "GO:0045121"
+          ]
+        },
+        "gene_go_named": {
+          "EGFR": [
+            "membrane raft [GO:0045121]"
+          ]
+        }
+      }
+    ],
+    "13": [
+      {
+        "pmid": "11453658",
+        "genes_covered": [
+          "DSCAML1"
+        ],
+        "go_terms": [
+          "GO:0007156"
+        ],
+        "gene_go_map": {
+          "DSCAML1": [
+            "GO:0007156"
+          ]
+        },
+        "gene_go_named": {
+          "DSCAML1": [
+            "homophilic cell-cell adhesion [GO:0007156]"
+          ]
+        }
+      },
+      {
+        "pmid": "10601632",
+        "genes_covered": [
+          "CDH13"
+        ],
+        "go_terms": [
+          "GO:0007156"
+        ],
+        "gene_go_map": {
+          "CDH13": [
+            "GO:0007156"
+          ]
+        },
+        "gene_go_named": {
+          "CDH13": [
+            "homophilic cell-cell adhesion [GO:0007156]"
+          ]
+        }
+      }
+    ],
+    "14": [
+      {
+        "pmid": "25666625",
+        "genes_covered": [
+          "EGFR"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "EGFR": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "EGFR": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "21424692",
+        "genes_covered": [
+          "NRXN1"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "NRXN1": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "NRXN1": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "21129411",
+        "genes_covered": [
+          "ANTXR1"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ANTXR1": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ANTXR1": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "19726642",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "19706678",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      }
+    ],
+    "15": [
+      {
+        "pmid": "25707991",
+        "genes_covered": [
+          "FYN"
+        ],
+        "go_terms": [
+          "GO:0097062"
+        ],
+        "gene_go_map": {
+          "FYN": [
+            "GO:0097062"
+          ]
+        },
+        "gene_go_named": {
+          "FYN": [
+            "dendritic spine maintenance [GO:0097062]"
+          ]
+        }
+      },
+      {
+        "pmid": "19406747",
+        "genes_covered": [
+          "IGF1R"
+        ],
+        "go_terms": [
+          "GO:0097062"
+        ],
+        "gene_go_map": {
+          "IGF1R": [
+            "GO:0097062"
+          ]
+        },
+        "gene_go_named": {
+          "IGF1R": [
+            "dendritic spine maintenance [GO:0097062]"
+          ]
+        }
+      }
+    ],
+    "16": [],
+    "17": [
+      {
+        "pmid": "9655483",
+        "genes_covered": [
+          "KLRC2"
+        ],
+        "go_terms": [
+          "GO:0002223"
+        ],
+        "gene_go_map": {
+          "KLRC2": [
+            "GO:0002223"
+          ]
+        },
+        "gene_go_named": {
+          "KLRC2": [
+            "stimulatory C-type lectin receptor signaling pathway [GO:0002223]"
+          ]
+        }
+      }
+    ],
+    "18": [
+      {
+        "pmid": "24046456",
+        "genes_covered": [
+          "CDH2"
+        ],
+        "go_terms": [
+          "GO:0005912"
+        ],
+        "gene_go_map": {
+          "CDH2": [
+            "GO:0005912"
+          ]
+        },
+        "gene_go_named": {
+          "CDH2": [
+            "adherens junction [GO:0005912]"
+          ]
+        }
+      },
+      {
+        "pmid": "19101069",
+        "genes_covered": [
+          "CDH2"
+        ],
+        "go_terms": [
+          "GO:0005912"
+        ],
+        "gene_go_map": {
+          "CDH2": [
+            "GO:0005912"
+          ]
+        },
+        "gene_go_named": {
+          "CDH2": [
+            "adherens junction [GO:0005912]"
+          ]
+        }
+      },
+      {
+        "pmid": "15914641",
+        "genes_covered": [
+          "CRB1"
+        ],
+        "go_terms": [
+          "GO:0005912"
+        ],
+        "gene_go_map": {
+          "CRB1": [
+            "GO:0005912"
+          ]
+        },
+        "gene_go_named": {
+          "CRB1": [
+            "adherens junction [GO:0005912]"
+          ]
+        }
+      }
+    ],
+    "19": [],
+    "20": [
+      {
+        "pmid": "27837918",
+        "genes_covered": [
+          "ZNF804A"
+        ],
+        "go_terms": [
+          "GO:0030426"
+        ],
+        "gene_go_map": {
+          "ZNF804A": [
+            "GO:0030426"
+          ]
+        },
+        "gene_go_named": {
+          "ZNF804A": [
+            "growth cone [GO:0030426]"
+          ]
+        }
+      }
+    ],
+    "21": [
+      {
+        "pmid": "9501179",
+        "genes_covered": [
+          "TFDP2"
+        ],
+        "go_terms": [
+          "GO:0090575"
+        ],
+        "gene_go_map": {
+          "TFDP2": [
+            "GO:0090575"
+          ]
+        },
+        "gene_go_named": {
+          "TFDP2": [
+            "RNA polymerase II transcription regulator complex [GO:0090575]"
+          ]
+        }
+      },
+      {
+        "pmid": "7739537",
+        "genes_covered": [
+          "TFDP2"
+        ],
+        "go_terms": [
+          "GO:0090575"
+        ],
+        "gene_go_map": {
+          "TFDP2": [
+            "GO:0090575"
+          ]
+        },
+        "gene_go_named": {
+          "TFDP2": [
+            "RNA polymerase II transcription regulator complex [GO:0090575]"
+          ]
+        }
+      }
+    ],
+    "22": [
+      {
+        "pmid": "30241478",
+        "genes_covered": [
+          "ANTXR1"
+        ],
+        "go_terms": [
+          "GO:0045742"
+        ],
+        "gene_go_map": {
+          "ANTXR1": [
+            "GO:0045742"
+          ]
+        },
+        "gene_go_named": {
+          "ANTXR1": [
+            "positive regulation of epidermal growth factor receptor signaling pathway [GO:0045742]"
+          ]
+        }
+      },
+      {
+        "pmid": "17573778",
+        "genes_covered": [
+          "CDH13"
+        ],
+        "go_terms": [
+          "GO:0042058"
+        ],
+        "gene_go_map": {
+          "CDH13": [
+            "GO:0042058"
+          ]
+        },
+        "gene_go_named": {
+          "CDH13": [
+            "regulation of epidermal growth factor receptor signaling pathway [GO:0042058]"
+          ]
+        }
+      },
+      {
+        "pmid": "14732715",
+        "genes_covered": [
+          "HIP1"
+        ],
+        "go_terms": [
+          "GO:0045742"
+        ],
+        "gene_go_map": {
+          "HIP1": [
+            "GO:0045742"
+          ]
+        },
+        "gene_go_named": {
+          "HIP1": [
+            "positive regulation of epidermal growth factor receptor signaling pathway [GO:0045742]"
+          ]
+        }
+      }
+    ],
+    "23": [],
+    "24": [
+      {
+        "pmid": "21838267",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098985",
+          "GO:0098983"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098983",
+            "GO:0098985"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "symmetric, GABA-ergic, inhibitory synapse [GO:0098983]",
+            "asymmetric, glutamatergic, excitatory synapse [GO:0098985]"
+          ]
+        }
+      }
+    ],
+    "25": [
+      {
+        "pmid": "11445554",
+        "genes_covered": [
+          "CHST9"
+        ],
+        "go_terms": [
+          "GO:0001537"
+        ],
+        "gene_go_map": {
+          "CHST9": [
+            "GO:0001537"
+          ]
+        },
+        "gene_go_named": {
+          "CHST9": [
+            "dermatan 4-sulfotransferase activity [GO:0001537]"
+          ]
+        }
+      },
+      {
+        "pmid": "11139592",
+        "genes_covered": [
+          "CHST9"
+        ],
+        "go_terms": [
+          "GO:0001537"
+        ],
+        "gene_go_map": {
+          "CHST9": [
+            "GO:0001537"
+          ]
+        },
+        "gene_go_named": {
+          "CHST9": [
+            "dermatan 4-sulfotransferase activity [GO:0001537]"
+          ]
+        }
+      },
+      {
+        "pmid": "11056388",
+        "genes_covered": [
+          "CHST11"
+        ],
+        "go_terms": [
+          "GO:0001537"
+        ],
+        "gene_go_map": {
+          "CHST11": [
+            "GO:0001537"
+          ]
+        },
+        "gene_go_named": {
+          "CHST11": [
+            "dermatan 4-sulfotransferase activity [GO:0001537]"
+          ]
+        }
+      },
+      {
+        "pmid": "10187838",
+        "genes_covered": [
+          "UST"
+        ],
+        "go_terms": [
+          "GO:0102142"
+        ],
+        "gene_go_map": {
+          "UST": [
+            "GO:0102142"
+          ]
+        },
+        "gene_go_named": {
+          "UST": [
+            "dermatan 2-sulfotransferase activity [GO:0102142]"
+          ]
+        }
+      }
+    ],
+    "26": [
+      {
+        "pmid": "21172611",
+        "genes_covered": [
+          "GRIA4"
+        ],
+        "go_terms": [
+          "GO:0004971"
+        ],
+        "gene_go_map": {
+          "GRIA4": [
+            "GO:0004971"
+          ]
+        },
+        "gene_go_named": {
+          "GRIA4": [
+            "AMPA glutamate receptor activity [GO:0004971]"
+          ]
+        }
+      },
+      {
+        "pmid": "20032460",
+        "genes_covered": [
+          "GRIA2"
+        ],
+        "go_terms": [
+          "GO:0004971"
+        ],
+        "gene_go_map": {
+          "GRIA2": [
+            "GO:0004971"
+          ]
+        },
+        "gene_go_named": {
+          "GRIA2": [
+            "AMPA glutamate receptor activity [GO:0004971]"
+          ]
+        }
+      }
+    ],
+    "27": [
+      {
+        "pmid": "23069713",
+        "genes_covered": [
+          "EGFR"
+        ],
+        "go_terms": [
+          "GO:1905208"
+        ],
+        "gene_go_map": {
+          "EGFR": [
+            "GO:1905208"
+          ]
+        },
+        "gene_go_named": {
+          "EGFR": [
+            "negative regulation of cardiocyte differentiation [GO:1905208]"
+          ]
+        }
+      },
+      {
+        "pmid": "20081117",
+        "genes_covered": [
+          "SOX6"
+        ],
+        "go_terms": [
+          "GO:2000726"
+        ],
+        "gene_go_map": {
+          "SOX6": [
+            "GO:2000726"
+          ]
+        },
+        "gene_go_named": {
+          "SOX6": [
+            "negative regulation of cardiac muscle cell differentiation [GO:2000726]"
+          ]
+        }
+      }
+    ],
+    "28": [
+      {
+        "pmid": "25468996",
+        "genes_covered": [
+          "CTNNA2",
+          "EGFR"
+        ],
+        "go_terms": [
+          "GO:0045296"
+        ],
+        "gene_go_map": {
+          "CTNNA2": [
+            "GO:0045296"
+          ],
+          "EGFR": [
+            "GO:0045296"
+          ]
+        },
+        "gene_go_named": {
+          "CTNNA2": [
+            "cadherin binding [GO:0045296]"
+          ],
+          "EGFR": [
+            "cadherin binding [GO:0045296]"
+          ]
+        }
+      },
+      {
+        "pmid": "37865312",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0098631"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0098631"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "cell adhesion mediator activity [GO:0098631]"
+          ]
+        }
+      },
+      {
+        "pmid": "19141530",
+        "genes_covered": [
+          "PTPRZ1"
+        ],
+        "go_terms": [
+          "GO:0005178"
+        ],
+        "gene_go_map": {
+          "PTPRZ1": [
+            "GO:0005178"
+          ]
+        },
+        "gene_go_named": {
+          "PTPRZ1": [
+            "integrin binding [GO:0005178]"
+          ]
+        }
+      },
+      {
+        "pmid": "18923512",
+        "genes_covered": [
+          "NLGN4X"
+        ],
+        "go_terms": [
+          "GO:0050839"
+        ],
+        "gene_go_map": {
+          "NLGN4X": [
+            "GO:0050839"
+          ]
+        },
+        "gene_go_named": {
+          "NLGN4X": [
+            "cell adhesion molecule binding [GO:0050839]"
+          ]
+        }
+      },
+      {
+        "pmid": "10601632",
+        "genes_covered": [
+          "CDH13"
+        ],
+        "go_terms": [
+          "GO:0045296"
+        ],
+        "gene_go_map": {
+          "CDH13": [
+            "GO:0045296"
+          ]
+        },
+        "gene_go_named": {
+          "CDH13": [
+            "cadherin binding [GO:0045296]"
+          ]
+        }
+      }
+    ],
+    "29": [
+      {
+        "pmid": "26235030",
+        "genes_covered": [
+          "ADGRL3"
+        ],
+        "go_terms": [
+          "GO:0005509"
+        ],
+        "gene_go_map": {
+          "ADGRL3": [
+            "GO:0005509"
+          ]
+        },
+        "gene_go_named": {
+          "ADGRL3": [
+            "calcium ion binding [GO:0005509]"
+          ]
+        }
+      }
+    ]
+  },
+  "gaf_abstracts": {
+    "0": [
+      {
+        "pmid": "34706237",
+        "title": "Structural and compositional diversity in the kainate receptor family.",
+        "abstract": "The kainate receptors (KARs) are members of the ionotropic glutamate receptor family and assemble into tetramers from a pool of five subunit types (GluK1-5). Each subunit confers distinct functional properties to a receptor, but the compositional and stoichiometric diversity of KAR tetramers is not well understood. To address this, we first solve the structure of the GluK1 homomer, which enables a systematic assessment of structural compatibility among KAR subunits. Next, we analyze single-cell RNA sequencing data, which reveal extreme diversity in the combinations of two or more KAR subunits co-expressed within the same cell. We then investigate the composition of individual receptor complexes using single-molecule fluorescence techniques and find that di-heteromers assembled from GluK1, GluK2, or GluK3 can form with all possible stoichiometries, while GluK1/K5, GluK2/K5, and GluK3/K5 can form 3:1 or 2:2 complexes. Finally, using three-color single-molecule imaging, we discover that KARs can form tri- and tetra-heteromers.",
+        "authors": "Selvakumar, Lee, Khanra et al.",
+        "year": "2021"
+      },
+      {
+        "pmid": "31257103",
+        "title": "Neuroligin-4 Regulates Excitatory Synaptic Transmission in Human Neurons.",
+        "abstract": "The autism-associated synaptic-adhesion gene Neuroligin-4 (NLGN4) is poorly conserved evolutionarily, limiting conclusions from Nlgn4 mouse models for human cells. Here, we show that the cellular and subcellular expression of human and murine Neuroligin-4 differ, with human Neuroligin-4 primarily expressed in cerebral cortex and localized to excitatory synapses. Overexpression of NLGN4 in human embryonic stem cell-derived neurons resulted in an increase in excitatory synapse numbers but a remarkable decrease in synaptic strength. Human neurons carrying the syndromic autism mutation NLGN4-R704C also formed more excitatory synapses but with increased functional synaptic transmission due to a postsynaptic mechanism, while genetic loss of NLGN4 did not significantly affect synapses in the human neurons analyzed. Thus, the NLGN4-R704C mutation represents a change-of-function mutation. Our work reveals contrasting roles of NLGN4 in human and mouse neurons, suggesting that human evolution has impacted even fundamental cell biological processes generally assumed to be highly conserved.",
+        "authors": "Marro, Chanda, Yang et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "21926414",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2.",
+        "abstract": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "authors": "Valnegri, Montrasio, Brambilla et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21893069",
+        "title": "Binding and selectivity of the marine toxin neodysiherbaine A and its synthetic analogues to GluK1 and GluK2 kainate receptors.",
+        "abstract": "Dysiherbaine (DH) and neodysiherbaine A (NDH) selectively bind and activate two kainate-type ionotropic glutamate receptors, GluK1 and GluK2. The ligand-binding domains of human GluK1 and GluK2 were crystallized as bound forms with a series of DH analogues including DH, NDH, 8-deoxy-NDH, 9-deoxy-NDH and 8,9-dideoxy-NDH (MSVIII-19), isolated from natural sources or prepared by total synthesis. Since the DH analogues exhibit a wide range of binding affinities and agonist efficacies, it follows that the detailed analysis of crystal structure would provide us with a significant opportunity to elucidate structural factors responsible for selective binding and some aspects of gating efficacy. We found that differences in three amino acids (Thr503, Ser706 and Ser726 in GluK1 and Ala487, Asn690 and Thr710 in GluK2) in the ligand-binding pocket generate differences in the binding modes of NDH to GluK1 and GluK2. Furthermore, deletion of the C(9) hydroxy group in NDH alters the ligand conformation such that it is no longer suited for binding to the GluK1 ligand-binding pocket. In GluK2, NDH pushes and rotates the side chain of Asn690 (substituted for Ser706 in GluK1) and disrupts an interdomain hydrogen bond with Glu409. The present data support the idea that receptor selectivities of DH analogues resulted from the differences in the binding modes of the ligands in GluK1/GluK2 and the steric repulsion of Asn690 in GluK2. All ligands, regardless of agonist efficacy, induced full domain closure. Consequently, ligand efficacy and domain closure did not directly coincide with DH analogues and the kainate receptors.",
+        "authors": "Unno, Shinohara, Takayama et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21838267",
+        "title": "The synaptic protein neuroligin-1 interacts with the amyloid \u03b2-peptide. Is there a role in Alzheimer's disease?",
+        "abstract": "Amyloid \u03b2-peptide (A\u03b2) is the main component of the amyloid plaques associated with Alzheimer's disease (AD). In the early steps of the disease soluble A\u03b2 oligomers are produced. According to the current \"amyloid hypothesis\" these oligomers can accumulate over time, leading progressively to the loss of synaptic function and the cognitive failure characteristic of AD. To understand the role of oligomeric A\u03b2 species in AD pathology, it is important to understand the mechanism by which A\u03b2 oligomers are targeted to synaptic junction. We report here the interaction between A\u03b2 with neuroligin-1 (NL-1), a postsynaptic cell-adhesion protein specific for excitatory synapses, which shares a high degree of similarity with acetylcholinesterase, the first synaptic protein described to interact with A\u03b2. Using intrinsic fluorescence and surface plasmon resonance, we found that A\u03b2 binds to the extracellular domain of NL-1 with a K(d) in the nanomolar range. In the case of NL-2, a postsynaptic cell-adhesion protein specific for inhibitory synapses, just a very weak interaction with A\u03b2 was observed. A\u03b2 polymerization analysis-studied by thioflavin-T assay and electron microscopy-indicated that NL-1 stabilized A\u03b2 aggregates in vitro. Moreover, NL-1 acts as a nucleating factor during the A\u03b2 aggregation process, stimulating the formation of A\u03b2 oligomers. Besides, immunoprecipitation assays confirm that A\u03b2 oligomers interact with NL-1 but not with NL-2. In conclusion, our results show that NL-1 interacts with A\u03b2 increasing the formation of A\u03b2 oligomers, suggesting that this interaction could triggers the targeting of A\u03b2 oligomer to the postsynaptic regions of excitatory synapses.",
+        "authors": "Dinamarca, Weinstein, Monasterio et al.",
+        "year": "2011"
+      }
+    ],
+    "1": [
+      {
+        "pmid": "19706678",
+        "title": "Axonal targeting of Caspr2 in hippocampal neurons via selective somatodendritic endocytosis.",
+        "abstract": "Contactin-associated protein 2 (Caspr2) is a neuronal membrane protein that is mutated in autism and related disorders. Although it is highly enriched at juxtaparanodes of Ranvier where it is essential for Shaker-type K(+) channel clustering, little is known about its function and regulation. In the present study, we examined the polarized expression of Caspr2 in hippocampal neurons using extracellular hemagglutinin (HA)-tagged Caspr2 constructs. We found that Caspr2 was targeted to the axonal surface, but colocalized with early endosomes in the somatodendritic compartment. The inhibition of endocytosis using a Dynamin-1 mutant or treatment with Dynasore prevented Caspr2 internalization from the dendrites and cell body. We identified a short sequence included into the 4.1B-binding domain that is required for the endocytosis of Caspr2. This sequence contains a protein kinase C (PKC) substrate motif on Thr1292, and point mutation of this residue or treatment with a PKC inhibitor prevented the somatodendritic internalization of Caspr2. Thus, the PKC-dependent trafficking of Caspr2 underlies its polarized expression in hippocampal neurons.",
+        "authors": "Bel, Oguievetskaia, Pitaval et al.",
+        "year": "2009"
+      }
+    ],
+    "2": [
+      {
+        "pmid": "37865312",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms.",
+        "abstract": "In recent years, elegant glycomic and glycoproteomic approaches have revealed an intricate glycosylation profile of mammalian brain with enormous spatial and temporal diversities. Nevertheless, at a cellular level, it is unclear how these post-translational modifications affect various proteins to influence crucial neuronal properties. Here, we have investigated the impact of N-linked glycosylation on neuroligins (NLGNs), a class of cell-adhesion molecules that play instructive roles in synapse organization. We found that endogenous NLGN proteins are differentially glycosylated across several regions of murine brain in a sex-independent but isoform-dependent manner. In both rodent primary neurons derived from brain sections and human neurons differentiated from stem cells, all NLGN variants were highly enriched with multiple N-glycan subtypes, which cumulatively ensured their efficient trafficking to the cell surface. Removal of these N-glycosylation residues only had a moderate effect on NLGNs' stability or expression levels but particularly enhanced their retention at the endoplasmic reticulum. As a result, the glycosylation-deficient NLGNs exhibited considerable impairments in their dendritic distribution and postsynaptic accumulation, which in turn, virtually eliminated their ability to recruit presynaptic terminals and significantly reduced NLGN overexpression-induced assemblies of both glutamatergic and GABAergic synapse structures. Therefore, our results highlight an essential mechanistic contribution of N-linked glycosylations in facilitating the appropriate secretory transport of a major synaptic cell-adhesion molecule and promoting its cellular function in neurons.",
+        "authors": "Benner, Cast, Minamide et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "30021165",
+        "title": "Regulation of KIF1A-Driven Dense Core Vesicle Transport: Ca<sup>2+</sup>/CaM Controls DCV Binding and Liprin-\u03b1/TANC2 Recruits DCVs to Postsynaptic Sites.",
+        "abstract": "Tight regulation of neuronal transport allows for cargo binding and release at specific cellular locations. The mechanisms by which motor proteins are loaded on vesicles and how cargoes are captured at appropriate sites remain unclear. To better understand how KIF1A-driven dense core vesicle (DCV) transport is regulated, we identified the KIF1A interactome and focused on three binding partners, the calcium binding protein calmodulin (CaM) and two synaptic scaffolding proteins: liprin-\u03b1 and TANC2. We showed that calcium, acting via CaM, enhances KIF1A binding to DCVs and increases vesicle motility. In contrast, liprin-\u03b1 and TANC2 are not part of the KIF1A-cargo complex but capture DCVs at dendritic spines. Furthermore, we found that specific TANC2 mutations-reported in patients with different neuropsychiatric disorders-abolish the interaction with KIF1A. We propose a model in which Ca<sup>2+</sup>/CaM regulates cargo binding and liprin-\u03b1 and TANC2 recruit KIF1A-transported vesicles.",
+        "authors": "Stucchi, Pluci\u0144ska, Hummel et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "27418511",
+        "title": "Structural basis for integration of GluD receptors within synaptic organizer complexes.",
+        "abstract": "Ionotropic glutamate receptor (iGluR) family members are integrated into supramolecular complexes that modulate their location and function at excitatory synapses. However, a lack of structural information beyond isolated receptors or fragments thereof currently limits the mechanistic understanding of physiological iGluR signaling. Here, we report structural and functional analyses of the prototypical molecular bridge linking postsynaptic iGluR \u03b42 (GluD2) and presynaptic \u03b2-neurexin 1 (\u03b2-NRX1) via Cbln1, a C1q-like synaptic organizer. We show how Cbln1 hexamers \"anchor\" GluD2 amino-terminal domain dimers to monomeric \u03b2-NRX1. This arrangement promotes synaptogenesis and is essential for D: -serine-dependent GluD2 signaling in vivo, which underlies long-term depression of cerebellar parallel fiber-Purkinje cell (PF-PC) synapses and motor coordination in developing mice. These results lead to a model where protein and small-molecule ligands synergistically control synaptic iGluR function.",
+        "authors": "Elegheert, Kakegawa, Clay et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "25489750",
+        "title": "Inhibitory synapse formation in a co-culture model incorporating GABAergic medium spiny neurons and HEK293 cells stably expressing GABAA receptors.",
+        "abstract": "Inhibitory neurons act in the central nervous system to regulate the dynamics and spatio-temporal co-ordination of neuronal networks. GABA (\u03b3-aminobutyric acid) is the predominant inhibitory neurotransmitter in the brain. It is released from the presynaptic terminals of inhibitory neurons within highly specialized intercellular junctions known as synapses, where it binds to GABAA receptors (GABAARs) present at the plasma membrane of the synapse-receiving, postsynaptic neurons. Activation of these GABA-gated ion channels leads to influx of chloride resulting in postsynaptic potential changes that decrease the probability that these neurons will generate action potentials. During development, diverse types of inhibitory neurons with distinct morphological, electrophysiological and neurochemical characteristics have the ability to recognize their target neurons and form synapses which incorporate specific GABAARs subtypes. This principle of selective innervation of neuronal targets raises the question as to how the appropriate synaptic partners identify each other. To elucidate the underlying molecular mechanisms, a novel in vitro co-culture model system was established, in which medium spiny GABAergic neurons, a highly homogenous population of neurons isolated from the embryonic striatum, were cultured with stably transfected HEK293 cell lines that express different GABAAR subtypes. Synapses form rapidly, efficiently and selectively in this system, and are easily accessible for quantification. Our results indicate that various GABAAR subtypes differ in their ability to promote synapse formation, suggesting that this reduced in vitro model system can be used to reproduce, at least in part, the in vivo conditions required for the recognition of the appropriate synaptic partners and formation of specific synapses. Here the protocols for culturing the medium spiny neurons and generating HEK293 cells lines expressing GABAARs are first described, followed by detailed instructions on how to combine these two cell types in co-culture and analyze the formation of synaptic contacts.",
+        "authors": "Brown, Fuchs, Nicholson et al.",
+        "year": "2014"
+      },
+      {
+        "pmid": "21926414",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2.",
+        "abstract": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "authors": "Valnegri, Montrasio, Brambilla et al.",
+        "year": "2011"
+      }
+    ],
+    "3": [
+      {
+        "pmid": "27837918",
+        "title": "Psychosis Risk Candidate ZNF804A Localizes to Synapses and Regulates Neurite Formation and Dendritic Spine Structure.",
+        "abstract": "<h4>Background</h4>Variation in the gene encoding zinc finger binding protein 804A (ZNF804A) is associated with schizophrenia and bipolar disorder. Evidence suggests that ZNF804A is a regulator of gene transcription and is present in nuclear and extranuclear compartments. However, a detailed examination of ZNF804A distribution and its neuronal functions has yet to be performed.<h4>Methods</h4>The localization of ZNF804A protein was examined in neurons derived from human neural progenitor cells, human induced pluripotent stem cells, or in primary rat cortical neurons. In addition, small interfering RNA-mediated knockdown of ZNF804A was conducted to determine its role in neurite formation, maintenance of dendritic spine morphology, and responses to activity-dependent stimulations.<h4>Results</h4>Endogenous ZNF804A protein localized to somatodendritic compartments and colocalized with the putative synaptic markers in young neurons derived from human neural progenitor cells and human induced pluripotent stem cells. In mature rat neurons, Zfp804A, the homolog of ZNF804A, was present in a subset of dendritic spines and colocalized with synaptic proteins in specific nanodomains, as determined by super-resolution microscopy. Interestingly, knockdown of ZNF804A attenuated neurite outgrowth in young neurons, an effect potentially mediated by reduced neuroligin-4 expression. Furthermore, knockdown of ZNF804A in mature neurons resulted in the loss of dendritic spine density and impaired responses to activity-dependent stimulation.<h4>Conclusions</h4>These data reveal a novel subcellular distribution for ZNF804A within somatodendritic compartments and a nanoscopic organization at excitatory synapses. Moreover, our results suggest that ZNF804A plays an active role in neurite formation, maintenance of dendritic spines, and activity-dependent structural plasticity.",
+        "authors": "Deans, Raval, Sellers et al.",
+        "year": "2017"
+      },
+      {
+        "pmid": "10624965",
+        "title": "Caspr2, a new member of the neurexin superfamily, is localized at the juxtaparanodes of myelinated axons and associates with K+ channels.",
+        "abstract": "Rapid conduction in myelinated axons depends on the generation of specialized subcellular domains to which different sets of ion channels are localized. Here, we describe the identification of Caspr2, a mammalian homolog of Drosophila Neurexin IV (Nrx-IV), and show that this neurexin-like protein and the closely related molecule Caspr/Paranodin demarcate distinct subdomains in myelinated axons. While contactin-associated protein (Caspr) is present at the paranodal junctions, Caspr2 is precisely colocalized with Shaker-like K+ channels in the juxtaparanodal region. We further show that Caspr2 specifically associates with Kv1.1, Kv1.2, and their Kvbeta2 subunit. This association involves the C-terminal sequence of Caspr2, which contains a putative PDZ binding site. These results suggest a role for Caspr family members in the local differentiation of the axon into distinct functional subdomains.",
+        "authors": "Poliak, Gollan, Martinez et al.",
+        "year": "1999"
+      }
+    ],
+    "4": [
+      {
+        "pmid": "31257103",
+        "title": "Neuroligin-4 Regulates Excitatory Synaptic Transmission in Human Neurons.",
+        "abstract": "The autism-associated synaptic-adhesion gene Neuroligin-4 (NLGN4) is poorly conserved evolutionarily, limiting conclusions from Nlgn4 mouse models for human cells. Here, we show that the cellular and subcellular expression of human and murine Neuroligin-4 differ, with human Neuroligin-4 primarily expressed in cerebral cortex and localized to excitatory synapses. Overexpression of NLGN4 in human embryonic stem cell-derived neurons resulted in an increase in excitatory synapse numbers but a remarkable decrease in synaptic strength. Human neurons carrying the syndromic autism mutation NLGN4-R704C also formed more excitatory synapses but with increased functional synaptic transmission due to a postsynaptic mechanism, while genetic loss of NLGN4 did not significantly affect synapses in the human neurons analyzed. Thus, the NLGN4-R704C mutation represents a change-of-function mutation. Our work reveals contrasting roles of NLGN4 in human and mouse neurons, suggesting that human evolution has impacted even fundamental cell biological processes generally assumed to be highly conserved.",
+        "authors": "Marro, Chanda, Yang et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "21838267",
+        "title": "The synaptic protein neuroligin-1 interacts with the amyloid \u03b2-peptide. Is there a role in Alzheimer's disease?",
+        "abstract": "Amyloid \u03b2-peptide (A\u03b2) is the main component of the amyloid plaques associated with Alzheimer's disease (AD). In the early steps of the disease soluble A\u03b2 oligomers are produced. According to the current \"amyloid hypothesis\" these oligomers can accumulate over time, leading progressively to the loss of synaptic function and the cognitive failure characteristic of AD. To understand the role of oligomeric A\u03b2 species in AD pathology, it is important to understand the mechanism by which A\u03b2 oligomers are targeted to synaptic junction. We report here the interaction between A\u03b2 with neuroligin-1 (NL-1), a postsynaptic cell-adhesion protein specific for excitatory synapses, which shares a high degree of similarity with acetylcholinesterase, the first synaptic protein described to interact with A\u03b2. Using intrinsic fluorescence and surface plasmon resonance, we found that A\u03b2 binds to the extracellular domain of NL-1 with a K(d) in the nanomolar range. In the case of NL-2, a postsynaptic cell-adhesion protein specific for inhibitory synapses, just a very weak interaction with A\u03b2 was observed. A\u03b2 polymerization analysis-studied by thioflavin-T assay and electron microscopy-indicated that NL-1 stabilized A\u03b2 aggregates in vitro. Moreover, NL-1 acts as a nucleating factor during the A\u03b2 aggregation process, stimulating the formation of A\u03b2 oligomers. Besides, immunoprecipitation assays confirm that A\u03b2 oligomers interact with NL-1 but not with NL-2. In conclusion, our results show that NL-1 interacts with A\u03b2 increasing the formation of A\u03b2 oligomers, suggesting that this interaction could triggers the targeting of A\u03b2 oligomer to the postsynaptic regions of excitatory synapses.",
+        "authors": "Dinamarca, Weinstein, Monasterio et al.",
+        "year": "2011"
+      }
+    ],
+    "5": [
+      {
+        "pmid": "33234346",
+        "title": "Regulation of GABA&lt;sub&gt;A&lt;/sub&gt;Rs by Transmembrane Accessory Proteins.",
+        "abstract": "The vast majority of fast inhibitory transmission in the brain is mediated by GABA acting on GABA<sub>A</sub> receptors (GABA<sub>A</sub>Rs), which provides inhibitory balance to excitatory drive and controls neuronal output. GABA<sub>A</sub>Rs are also effectively targeted by clinically important drugs for treatment in a number of neurological disorders. It has long been hypothesized that function and pharmacology of GABA<sub>A</sub>Rs are determined by the channel pore-forming subunits. However, recent studies have provided new dimensions in studying GABA<sub>A</sub>Rs due to several transmembrane proteins that interact with GABA<sub>A</sub>Rs and modulate their trafficking and function. In this review, we summarize recent findings on these novel GABA<sub>A</sub>R transmembrane regulators and highlight a potential avenue to develop new GABA<sub>A</sub>R psychopharmacology by targeting these receptor-associated membrane proteins.",
+        "authors": "Han, Shepard, Lu",
+        "year": "2021"
+      },
+      {
+        "pmid": "31257103",
+        "title": "Neuroligin-4 Regulates Excitatory Synaptic Transmission in Human Neurons.",
+        "abstract": "The autism-associated synaptic-adhesion gene Neuroligin-4 (NLGN4) is poorly conserved evolutionarily, limiting conclusions from Nlgn4 mouse models for human cells. Here, we show that the cellular and subcellular expression of human and murine Neuroligin-4 differ, with human Neuroligin-4 primarily expressed in cerebral cortex and localized to excitatory synapses. Overexpression of NLGN4 in human embryonic stem cell-derived neurons resulted in an increase in excitatory synapse numbers but a remarkable decrease in synaptic strength. Human neurons carrying the syndromic autism mutation NLGN4-R704C also formed more excitatory synapses but with increased functional synaptic transmission due to a postsynaptic mechanism, while genetic loss of NLGN4 did not significantly affect synapses in the human neurons analyzed. Thus, the NLGN4-R704C mutation represents a change-of-function mutation. Our work reveals contrasting roles of NLGN4 in human and mouse neurons, suggesting that human evolution has impacted even fundamental cell biological processes generally assumed to be highly conserved.",
+        "authors": "Marro, Chanda, Yang et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "27418511",
+        "title": "Structural basis for integration of GluD receptors within synaptic organizer complexes.",
+        "abstract": "Ionotropic glutamate receptor (iGluR) family members are integrated into supramolecular complexes that modulate their location and function at excitatory synapses. However, a lack of structural information beyond isolated receptors or fragments thereof currently limits the mechanistic understanding of physiological iGluR signaling. Here, we report structural and functional analyses of the prototypical molecular bridge linking postsynaptic iGluR \u03b42 (GluD2) and presynaptic \u03b2-neurexin 1 (\u03b2-NRX1) via Cbln1, a C1q-like synaptic organizer. We show how Cbln1 hexamers \"anchor\" GluD2 amino-terminal domain dimers to monomeric \u03b2-NRX1. This arrangement promotes synaptogenesis and is essential for D: -serine-dependent GluD2 signaling in vivo, which underlies long-term depression of cerebellar parallel fiber-Purkinje cell (PF-PC) synapses and motor coordination in developing mice. These results lead to a model where protein and small-molecule ligands synergistically control synaptic iGluR function.",
+        "authors": "Elegheert, Kakegawa, Clay et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "23376566",
+        "title": "Synthetic A\u03b2 oligomers (A\u03b2(1-42) globulomer) modulate presynaptic calcium currents: prevention of A\u03b2-induced synaptic deficits by calcium channel blockers.",
+        "abstract": "Alzheimer's disease is accompanied by increased brain levels of soluble amyloid-\u03b2 (A\u03b2) oligomers. It has been suggested that oligomers directly impair synaptic function, thereby causing cognitive deficits in Alzheimer's disease patients. Recently, it has been shown that synthetic A\u03b2 oligomers directly modulate P/Q-type calcium channels, possibly leading to excitotoxic cascades and subsequent synaptic decline. Using whole-cell recordings we studied the modulation of recombinant presynaptic calcium channels in HEK293 cells after application of a stable A\u03b2 oligomer preparation (A\u03b21-42 globulomer). A\u03b2 globulomer shifted the half-activation voltage of P/Q-type and N-type calcium channels to more hyperpolarized values (by 11.5 and 7.5 mV). Application of non-aggregated A\u03b2 peptides had no effect. We then analyzed the potential of calcium channel blockers to prevent A\u03b2 globulomer-induced synaptic decline in hippocampal slice cultures. Specific block of P/Q-type or N-type calcium channels with peptide toxins completely reversed A\u03b2 globulomer-induced deficits in glutamatergic neurotransmission. Two state-dependent low molecular weight P/Q-type and N-type calcium channel blockers also protected neurons from A\u03b2-induced alterations. On the contrary, inhibition of L-type calcium channels failed to reverse the deficit. Our data show that A\u03b2 globulomer directly modulates recombinant P/Q-type and N-type calcium channels in HEK293 cells. Block of presynaptic calcium channels with both state-dependent and state-independent modulators can reverse A\u03b2-induced functional deficits in synaptic transmission. These findings indicate that presynaptic calcium channel blockers may be a therapeutic strategy for the treatment of Alzheimer's disease.",
+        "authors": "Hermann, Mezler, M\u00fcller et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "19822762",
+        "title": "Mouse neurexin-1alpha deletion causes correlated electrophysiological and behavioral changes consistent with cognitive impairments.",
+        "abstract": "Deletions in the neurexin-1alpha gene were identified in large-scale unbiased screens for copy-number variations in patients with autism or schizophrenia. To explore the underlying biology, we studied the electrophysiological and behavioral phenotype of mice lacking neurexin-1alpha. Hippocampal slice physiology uncovered a defect in excitatory synaptic strength in neurexin-1alpha deficient mice, as revealed by a decrease in miniature excitatory postsynaptic current (EPSC) frequency and in the input-output relation of evoked postsynaptic potentials. This defect was specific for excitatory synaptic transmission, because no change in inhibitory synaptic transmission was observed in the hippocampus. Behavioral studies revealed that, compared with littermate control mice, neurexin-1alpha deficient mice displayed a decrease in prepulse inhibition, an increase in grooming behaviors, an impairment in nest-building activity, and an improvement in motor learning. However, neurexin-1alpha deficient mice did not exhibit any obvious changes in social behaviors or in spatial learning. Together, these data indicate that the neurexin-1alpha deficiency induces a discrete neural phenotype whose extent correlates, at least in part, with impairments observed in human patients.",
+        "authors": "Etherton, Blaiss, Powell et al.",
+        "year": "2009"
+      }
+    ],
+    "6": [
+      {
+        "pmid": "31257103",
+        "title": "Neuroligin-4 Regulates Excitatory Synaptic Transmission in Human Neurons.",
+        "abstract": "The autism-associated synaptic-adhesion gene Neuroligin-4 (NLGN4) is poorly conserved evolutionarily, limiting conclusions from Nlgn4 mouse models for human cells. Here, we show that the cellular and subcellular expression of human and murine Neuroligin-4 differ, with human Neuroligin-4 primarily expressed in cerebral cortex and localized to excitatory synapses. Overexpression of NLGN4 in human embryonic stem cell-derived neurons resulted in an increase in excitatory synapse numbers but a remarkable decrease in synaptic strength. Human neurons carrying the syndromic autism mutation NLGN4-R704C also formed more excitatory synapses but with increased functional synaptic transmission due to a postsynaptic mechanism, while genetic loss of NLGN4 did not significantly affect synapses in the human neurons analyzed. Thus, the NLGN4-R704C mutation represents a change-of-function mutation. Our work reveals contrasting roles of NLGN4 in human and mouse neurons, suggesting that human evolution has impacted even fundamental cell biological processes generally assumed to be highly conserved.",
+        "authors": "Marro, Chanda, Yang et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "30021165",
+        "title": "Regulation of KIF1A-Driven Dense Core Vesicle Transport: Ca<sup>2+</sup>/CaM Controls DCV Binding and Liprin-\u03b1/TANC2 Recruits DCVs to Postsynaptic Sites.",
+        "abstract": "Tight regulation of neuronal transport allows for cargo binding and release at specific cellular locations. The mechanisms by which motor proteins are loaded on vesicles and how cargoes are captured at appropriate sites remain unclear. To better understand how KIF1A-driven dense core vesicle (DCV) transport is regulated, we identified the KIF1A interactome and focused on three binding partners, the calcium binding protein calmodulin (CaM) and two synaptic scaffolding proteins: liprin-\u03b1 and TANC2. We showed that calcium, acting via CaM, enhances KIF1A binding to DCVs and increases vesicle motility. In contrast, liprin-\u03b1 and TANC2 are not part of the KIF1A-cargo complex but capture DCVs at dendritic spines. Furthermore, we found that specific TANC2 mutations-reported in patients with different neuropsychiatric disorders-abolish the interaction with KIF1A. We propose a model in which Ca<sup>2+</sup>/CaM regulates cargo binding and liprin-\u03b1 and TANC2 recruit KIF1A-transported vesicles.",
+        "authors": "Stucchi, Pluci\u0144ska, Hummel et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "27837918",
+        "title": "Psychosis Risk Candidate ZNF804A Localizes to Synapses and Regulates Neurite Formation and Dendritic Spine Structure.",
+        "abstract": "<h4>Background</h4>Variation in the gene encoding zinc finger binding protein 804A (ZNF804A) is associated with schizophrenia and bipolar disorder. Evidence suggests that ZNF804A is a regulator of gene transcription and is present in nuclear and extranuclear compartments. However, a detailed examination of ZNF804A distribution and its neuronal functions has yet to be performed.<h4>Methods</h4>The localization of ZNF804A protein was examined in neurons derived from human neural progenitor cells, human induced pluripotent stem cells, or in primary rat cortical neurons. In addition, small interfering RNA-mediated knockdown of ZNF804A was conducted to determine its role in neurite formation, maintenance of dendritic spine morphology, and responses to activity-dependent stimulations.<h4>Results</h4>Endogenous ZNF804A protein localized to somatodendritic compartments and colocalized with the putative synaptic markers in young neurons derived from human neural progenitor cells and human induced pluripotent stem cells. In mature rat neurons, Zfp804A, the homolog of ZNF804A, was present in a subset of dendritic spines and colocalized with synaptic proteins in specific nanodomains, as determined by super-resolution microscopy. Interestingly, knockdown of ZNF804A attenuated neurite outgrowth in young neurons, an effect potentially mediated by reduced neuroligin-4 expression. Furthermore, knockdown of ZNF804A in mature neurons resulted in the loss of dendritic spine density and impaired responses to activity-dependent stimulation.<h4>Conclusions</h4>These data reveal a novel subcellular distribution for ZNF804A within somatodendritic compartments and a nanoscopic organization at excitatory synapses. Moreover, our results suggest that ZNF804A plays an active role in neurite formation, maintenance of dendritic spines, and activity-dependent structural plasticity.",
+        "authors": "Deans, Raval, Sellers et al.",
+        "year": "2017"
+      },
+      {
+        "pmid": "25025157",
+        "title": "Palmitoylation of gephyrin controls receptor clustering and plasticity of GABAergic synapses.",
+        "abstract": "Postsynaptic scaffolding proteins regulate coordinated neurotransmission by anchoring and clustering receptors and adhesion molecules. Gephyrin is the major instructive molecule at inhibitory synapses, where it clusters glycine as well as major subsets of GABA type A receptors (GABAARs). Here, we identified palmitoylation of gephyrin as an important mechanism of strengthening GABAergic synaptic transmission, which is regulated by GABAAR activity. We mapped palmitoylation to Cys212 and Cys284, which are critical for both association of gephyrin with the postsynaptic membrane and gephyrin clustering. We identified DHHC-12 as the principal palmitoyl acyltransferase that palmitoylates gephyrin. Furthermore, gephyrin pamitoylation potentiated GABAergic synaptic transmission, as evidenced by an increased amplitude of miniature inhibitory postsynaptic currents. Consistently, inhibiting gephyrin palmitoylation either pharmacologically or by expression of palmitoylation-deficient gephyrin reduced the gephyrin cluster size. In aggregate, our study reveals that palmitoylation of gephyrin by DHHC-12 contributes to dynamic and functional modulation of GABAergic synapses.",
+        "authors": "Dejanovic, Semtner, Ebert et al.",
+        "year": "2014"
+      },
+      {
+        "pmid": "24357660",
+        "title": "Type 1 metabotropic glutamate receptors (mGlu1) trigger the gating of GluD2 delta glutamate receptors.",
+        "abstract": "The orphan GluD2 receptor belongs to the ionotropic glutamate receptor family but does not bind glutamate. Ligand-gated GluD2 currents have never been evidenced, and whether GluD2 operates as an ion channel has been a long-standing question. Here, we show that GluD2 gating is triggered by type 1 metabotropic glutamate receptors, both in a heterologous expression system and in Purkinje cells. Thus, GluD2 is not only an adhesion molecule at synapses but also works as a channel. This gating mechanism reveals new properties of glutamate receptors that emerge from their interaction and opens unexpected perspectives regarding synaptic transmission and plasticity.",
+        "authors": "Ady, Perroy, Tricoire et al.",
+        "year": "2014"
+      }
+    ],
+    "7": [
+      {
+        "pmid": "21278334",
+        "title": "Investigating synapse formation and function using human pluripotent stem cell-derived neurons.",
+        "abstract": "A major goal of stem-cell research is to identify conditions that reliably regulate their differentiation into specific cell types. This goal is particularly important for human stem cells if they are to be used for in vivo transplantation or as a platform for drug development. Here we describe the establishment of procedures to direct the differentiation of human embryonic stem cells and human induced pluripotent stem cells into forebrain neurons that are capable of forming synaptic connections. In addition, HEK293T cells expressing Neuroligin (NLGN) 3 and NLGN4, but not those containing autism-associated mutations, are able to induce presynaptic differentiation in human induced pluripotent stem cell-derived neurons. We show that a mutant NLGN4 containing an in-frame deletion is unable to localize correctly to the cell surface when overexpressed and fails to enhance synapse formation in human induced pluripotent stem cell-derived neurons. These findings establish human pluripotent stem cell-derived neurons as a viable model for the study of synaptic differentiation and function under normal and disorder-associated conditions.",
+        "authors": "Kim, O'Sullivan, Sanchez et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "15687260",
+        "title": "PR72, a novel regulator of Wnt signaling required for Naked cuticle function.",
+        "abstract": "The Wnt signaling cascade is a central regulator of cell fate determination during embryonic development, whose deregulation contributes to oncogenesis. Naked cuticle is the first Wnt-induced antagonist found in this pathway, establishing a negative-feedback loop that limits the Wnt signal required for early segmentation. In addition, Naked cuticle is proposed to function as a switch, acting to restrict classical Wnt signaling and to activate a second Wnt signaling pathway that controls planar cell polarity during gastrulation movements in vertebrates. Little is known about the biochemical function of Naked cuticle or its regulation. Here we report that PR72, a Protein Phosphatase type 2A regulatory subunit of unknown function, interacts both physically and functionally with Naked cuticle. We show that PR72, like Naked cuticle, acts as a negative regulator of the classical Wnt signaling cascade, establishing PR72 as a novel regulator of the Wnt signaling pathway. Our data provide evidence that the inhibitory effect of Naked cuticle on Wnt signaling depends on the presence of PR72, both in mammalian cell culture and in Xenopus embryos. Moreover, PR72 is required during early embryonic development to regulate cell morphogenetic movements during body axis formation.",
+        "authors": "Creyghton, Ro\u00ebl, Eichhorn et al.",
+        "year": "2005"
+      },
+      {
+        "pmid": "15019943",
+        "title": "Identification and characterization of two novel brain-derived immunoglobulin superfamily members with a unique structural organization.",
+        "abstract": "We recently used a differential display PCR screen to identify secreted and transmembrane proteins that are highly expressed in the developing rat basilar pons, a prominent ventral hindbrain nucleus used as a model for studies of neuronal migration, axon outgrowth, and axon-target recognition. Here we describe cloning and characterization of one of these molecules, now called MDGA1, and a closely related homologue, MDGA2. Analyses of the full-length coding region of MDGA1 and MDGA2 indicate that they encode proteins that comprise a novel subgroup of the Ig superfamily and have a unique structural organization consisting of six immunoglobulin (Ig)-like domains followed by a single MAM domain. Biochemical characterization demonstrates that MDGA1 and MDGA2 proteins are highly glycosylated, and that MDGA1 is tethered to the cell membrane by a GPI anchor. The MDGAs are differentially expressed by subpopulations of neurons in both the central and peripheral nervous systems, including neurons of the basilar pons, inferior olive, cerebellum, cerebral cortex, olfactory bulb, spinal cord, and dorsal root and trigeminal ganglia. Little or no MDGA expression is detected outside of the nervous system of developing rats. The similarity of MDGAs to other Ig-containing molecules and their temporal-spatial patterns of expression within restricted neuronal populations, for example migrating pontine neurons and D1 spinal interneurons, suggest a role for these novel proteins in regulating neuronal migration, as well as other aspects of neural development, including axon guidance.",
+        "authors": "Litwack, Babey, Buser et al.",
+        "year": "2004"
+      },
+      {
+        "pmid": "10574465",
+        "title": "Human SOX11, an upregulated gene during the neural differentiation, has a long 3' untranslated region.",
+        "abstract": "To obtain essential genes for neuronal development, we have performed a molecular indexing method using a human teratocarcinoma cell line, NTera-2. We isolated a cDNA fragment, designated B18, as an upregulated gene during the neural differentiation. From the complete cDNA sequence of B18 it was revealed that this cDNA was the human SOX11 gene. While a previous report has determined only a approximately 2 kb of the SOX11 cDNA including the entire open reading frame, our full length cDNA was 8743 bp possessing a long 3' untranslated region. Human SOX11 cDNA was mapped to chromosome region 2p25.3 between markers AFMA070WC9 and WI-1412 by radiation hybrid mapping.",
+        "authors": "Azuma, Ao, Saito et al.",
+        "year": "1999"
+      }
+    ],
+    "8": [
+      {
+        "pmid": "35277491",
+        "title": "Structural basis for modulation of human Na<sub>V</sub>1.3 by clinical drug and selective antagonist.",
+        "abstract": "Voltage-gated sodium (Na<sub>V</sub>) channels play fundamental roles in initiating and propagating action potentials. Na<sub>V</sub>1.3 is involved in numerous physiological processes including neuronal development, hormone secretion and pain perception. Here we report structures of human Na<sub>V</sub>1.3/\u03b21/\u03b22 in complex with clinically-used drug bulleyaconitine A and selective antagonist ICA121431. Bulleyaconitine A is located around domain I-II fenestration, providing the detailed view of the site-2 neurotoxin binding site. It partially blocks ion path and expands the pore-lining helices, elucidating how the bulleyaconitine A reduces peak amplitude but improves channel open probability. In contrast, ICA121431 preferentially binds to activated domain IV voltage-sensor, consequently strengthens the Ile-Phe-Met motif binding to its receptor site, stabilizes the channel in inactivated state, revealing an allosterically inhibitory mechanism of Na<sub>V</sub> channels. Our results provide structural details of distinct small-molecular modulators binding sites, elucidate molecular mechanisms of their action on Na<sub>V</sub> channels and pave a way for subtype-selective therapeutic development.",
+        "authors": "Li, Xu, Xu et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "27207958",
+        "title": "Variants of Transient Receptor Potential Melastatin Member 4 in Childhood Atrioventricular Block.",
+        "abstract": "<h4>Background</h4>Transient receptor potential melastatin member 4 (TRPM4) is a nonselective cation channel. TRPM4 mutations have been linked to cardiac conduction disease and Brugada syndrome. The mechanisms underlying TRPM4-dependent conduction slowing are not fully understood. The aim of this study was to characterize TRPM4 genetic variants found in patients with congenital or childhood atrioventricular block.<h4>Methods and results</h4>Ninety-one patients with congenital or childhood atrioventricular block were screened for candidate genes. Five rare TRPM4 genetic variants were identified and investigated. The variants were expressed heterologously in HEK293 cells. Two of the variants, A432T and A432T/G582S, showed decreased expression of the protein at the cell membrane; inversely, the G582S variant showed increased expression. Further functional characterization of these variants using whole-cell patch-clamp configuration showed a loss of function and a gain of function, respectively. We hypothesized that the observed decrease in expression was caused by a folding and trafficking defect. This was supported by the observation that incubation of these variants at lower temperature partially rescued their expression and function. Previous studies have suggested that altered SUMOylation of TRPM4 may cause a gain of function; however, we did not find any evidence that supports SUMOylation as being directly involved for the gain-of-function variant.<h4>Conclusions</h4>This study underpins the role of TRPM4 in the cardiac conduction system. The loss-of-function variants A432T/G582S found in 2 unrelated patients with atrioventricular block are most likely caused by misfolding-dependent altered trafficking. The ability to rescue this variant with lower temperature may provide a novel use of pharmacological chaperones in treatment strategies.",
+        "authors": "Syam, Chatel, Ozhathil et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "27164707",
+        "title": "Gain-of-function FHF1 mutation causes early-onset epileptic encephalopathy with cerebellar atrophy.",
+        "abstract": "<h4>Objective</h4>Voltage-gated sodium channel (Nav)-encoding genes are among early-onset epileptic encephalopathies (EOEE) targets, suggesting that other genes encoding Nav-binding proteins, such as fibroblast growth factor homologous factors (FHFs), may also play roles in these disorders.<h4>Methods</h4>To identify additional genes for EOEE, we performed whole-exome sequencing in a family quintet with 2 siblings with a lethal disease characterized by EOEE and cerebellar atrophy. The pathogenic nature and functional consequences of the identified sequence alteration were determined by electrophysiologic studies in vitro and in vivo.<h4>Results</h4>A de novo heterozygous missense mutation was identified in the FHF1 gene (FHF1AR114H, FHF1BR52H) in the 2 affected siblings. The mutant FHF1 proteins had a strong gain-of-function phenotype in transfected Neuro2A cells, enhancing the depolarizing shifts in Nav1.6 voltage-dependent fast inactivation, predicting increased neuronal excitability. Surprisingly, the gain-of-function effect is predicted to result from weaker interaction of mutant FHF1 with the Nav cytoplasmic tail. Transgenic overexpression of mutant FHF1B in zebrafish larvae enhanced epileptiform discharges, demonstrating the epileptic potential of this FHF1 mutation in the affected children.<h4>Conclusions</h4>Our data demonstrate that gain-of-function FHF mutations can cause neurologic disorder, and expand the repertoire of genetic causes (FHF1) and mechanisms (altered Nav gating) underlying EOEE and cerebellar atrophy.",
+        "authors": "Siekierska, Isrie, Liu et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "21677768",
+        "title": "Voltage-gated ion channel dysfunction precedes cardiomyopathy development in the dystrophic heart.",
+        "abstract": "<h4>Background</h4>Duchenne muscular dystrophy (DMD), caused by mutations in the dystrophin gene, is associated with severe cardiac complications including cardiomyopathy and cardiac arrhythmias. Recent research suggests that impaired voltage-gated ion channels in dystrophic cardiomyocytes accompany cardiac pathology. It is, however, unknown if the ion channel defects are primary effects of dystrophic gene mutations, or secondary effects of the developing cardiac pathology.<h4>Methodology/principal findings</h4>To address this question, we first investigated sodium channel impairments in cardiomyocytes derived from dystrophic neonatal mice prior to cardiomyopahty development, by using the whole cell patch clamp technique. Besides the most common model for DMD, the dystrophin-deficient mdx mouse, we also used mice additionally carrying an utrophin mutation. In neonatal cardiomyocytes, dystrophin-deficiency generated a 25% reduction in sodium current density. In addition, extra utrophin-deficiency significantly altered sodium channel gating parameters. Moreover, also calcium channel inactivation was considerably reduced in dystrophic neonatal cardiomyocytes, suggesting that ion channel abnormalities are universal primary effects of dystrophic gene mutations. To assess developmental changes, we also studied sodium channel impairments in cardiomyocytes derived from dystrophic adult mice, and compared them with the respective abnormalities in dystrophic neonatal cells. Here, we found a much stronger sodium current reduction in adult cardiomyocytes. The described sodium channel impairments slowed the upstroke of the action potential in adult cardiomyocytes, and only in dystrophic adult mice, the QRS interval of the electrocardiogram was prolonged.<h4>Conclusions/significance</h4>Ion channel impairments precede pathology development in the dystrophic heart, and may thus be considered potential cardiomyopathy triggers.",
+        "authors": "Koenig, Dysek, Kimbacher et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "20165904",
+        "title": "Overexpression of NYGGF4 (PID1) induces mitochondrial impairment in 3T3-L1 adipocytes.",
+        "abstract": "NYGGF4 is a recently discovered gene that is involved in obesity-associated insulin resistance. The exact mechanism by which NYGGF4 induces insulin resistance has not yet been fully elucidated. In this study, we demonstrated that the overexpression of NYGGF4 in 3T3-L1 adipocytes decreased mitochondrial mass, mitochondrial DNA, and intracellular ATP synthesis. In addition, NYGGF4 overexpression also led to an imbalance of the mitochondrial dynamics and excess intracellular ROS production. Collectively, our results indicated that the overexpression of NYGGF4 caused mitochondrial dysfunction in adipocytes, which might be responsible for the development of NYGGF4-induced insulin resistance.",
+        "authors": "Zhao, Zhang, Chen et al.",
+        "year": "2010"
+      }
+    ],
+    "9": [],
+    "10": [
+      {
+        "pmid": "35277491",
+        "title": "Structural basis for modulation of human Na<sub>V</sub>1.3 by clinical drug and selective antagonist.",
+        "abstract": "Voltage-gated sodium (Na<sub>V</sub>) channels play fundamental roles in initiating and propagating action potentials. Na<sub>V</sub>1.3 is involved in numerous physiological processes including neuronal development, hormone secretion and pain perception. Here we report structures of human Na<sub>V</sub>1.3/\u03b21/\u03b22 in complex with clinically-used drug bulleyaconitine A and selective antagonist ICA121431. Bulleyaconitine A is located around domain I-II fenestration, providing the detailed view of the site-2 neurotoxin binding site. It partially blocks ion path and expands the pore-lining helices, elucidating how the bulleyaconitine A reduces peak amplitude but improves channel open probability. In contrast, ICA121431 preferentially binds to activated domain IV voltage-sensor, consequently strengthens the Ile-Phe-Met motif binding to its receptor site, stabilizes the channel in inactivated state, revealing an allosterically inhibitory mechanism of Na<sub>V</sub> channels. Our results provide structural details of distinct small-molecular modulators binding sites, elucidate molecular mechanisms of their action on Na<sub>V</sub> channels and pave a way for subtype-selective therapeutic development.",
+        "authors": "Li, Xu, Xu et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "24811166",
+        "title": "The stoichiometry and biophysical properties of the Kv4 potassium channel complex with K+ channel-interacting protein (KChIP) subunits are variable, depending on the relative expression level.",
+        "abstract": "Kv4 is a voltage-gated K(+) channel, which underlies somatodendritic subthreshold A-type current (ISA) and cardiac transient outward K(+) (Ito) current. Various ion channel properties of Kv4 are known to be modulated by its auxiliary subunits, such as K(+) channel-interacting protein (KChIP) or dipeptidyl peptidase-like protein. KChIP is a cytoplasmic protein and increases the current amplitude, decelerates the inactivation, and accelerates the recovery from inactivation of Kv4. Crystal structure analysis demonstrated that Kv4 and KChIP form an octameric complex with four Kv4 subunits and four KChIP subunits. However, it remains unknown whether the Kv4\u00b7KChIP complex can have a different stoichiometry other than 4:4. In this study, we expressed Kv4.2 and KChIP4 with various ratios in Xenopus oocytes and observed that the biophysical properties of Kv4.2 gradually changed with the increase in co-expressed KChIP4. The tandem repeat constructs of Kv4.2 and KChIP4 revealed that the 4:4 (Kv4.2/KChIP4) channel shows faster recovery than the 4:2 channel, suggesting that the biophysical properties of Kv4.2 change, depending on the number of bound KChIP4s. Subunit counting by single-molecule imaging revealed that the bound number of KChIP4 in each Kv4.2\u00b7KChIP4 complex was dependent on the expression level of KChIP4. Taken together, we conclude that the stoichiometry of Kv4\u00b7KChIP complex is variable, and the biophysical properties of Kv4 change depending on the number of bound KChIP subunits.",
+        "authors": "Kitazawa, Kubo, Nakajo",
+        "year": "2014"
+      },
+      {
+        "pmid": "22102369",
+        "title": "Structural basis for extracellular interactions between calcitonin receptor-like receptor and receptor activity-modifying protein 2 for adrenomedullin-specific binding.",
+        "abstract": "The calcitonin receptor-like receptor (CRLR), a class B GPCR, forms a heterodimer with receptor activity-modifying protein 2 (RAMP2), and serves as the adrenomedullin (AM) receptor to control neovascularization, while CRLR and RAMP1 form the calcitonin gene-related peptide (CGRP) receptor. Here, we report the crystal structures of the RAMP2 extracellular domain alone and in the complex with the CRLR extracellular domain. The CRLR-RAMP2 complex exhibits several intermolecular interactions that were not observed in the previously reported CRLR-RAMP1 complex, and thus the shape of the putative ligand-binding pocket of CRLR-RAMP2 is distinct from that of CRLR-RAMP1. The CRLR-RAMP2 interactions were confirmed for the full-length proteins on the cell surface by site-specific photo-crosslinking. Mutagenesis revealed that AM binding requires RAMP2 residues that are not conserved in RAMP1. Therefore, the differences in both the shapes and the key residues of the binding pocket are essential for the ligand specificity.",
+        "authors": "Kusano, Kukimoto-Niino, Hino et al.",
+        "year": "2012"
+      },
+      {
+        "pmid": "21164104",
+        "title": "SAP97 and dystrophin macromolecular complexes determine two pools of cardiac sodium channels Nav1.5 in cardiomyocytes.",
+        "abstract": "<h4>Rationale</h4>The cardiac sodium channel Na(v)1.5 plays a key role in excitability and conduction. The 3 last residues of Na(v)1.5 (Ser-Ile-Val) constitute a PDZ-domain binding motif that interacts with the syntrophin-dystrophin complex. As dystrophin is absent at the intercalated discs, Na(v)1.5 could potentially interact with other, yet unknown, proteins at this site.<h4>Objective</h4>The aim of this study was to determine whether Na(v)1.5 is part of distinct regulatory complexes at lateral membranes and intercalated discs.<h4>Methods and results</h4>Immunostaining experiments demonstrated that Na(v)1.5 localizes at lateral membranes of cardiomyocytes with dystrophin and syntrophin. Optical measurements on isolated dystrophin-deficient mdx hearts revealed significantly reduced conduction velocity, accompanied by strong reduction of Na(v)1.5 at lateral membranes of mdx cardiomyocytes. Pull-down experiments revealed that the MAGUK protein SAP97 also interacts with the SIV motif of Na(v)1.5, an interaction specific for SAP97 as no pull-down could be detected with other cardiac MAGUK proteins (PSD95 or ZO-1). Furthermore, immunostainings showed that Na(v)1.5 and SAP97 are both localized at intercalated discs. Silencing of SAP97 expression in HEK293 and rat cardiomyocytes resulted in reduced sodium current (I(Na)) measured by patch-clamp. The I(Na) generated by Na(v)1.5 channels lacking the SIV motif was also reduced. Finally, surface expression of Na(v)1.5 was decreased in silenced cells, as well as in cells transfected with SIV-truncated channels.<h4>Conclusions</h4>These data support a model with at least 2 coexisting pools of Na(v)1.5 channels in cardiomyocytes: one targeted at lateral membranes by the syntrophin-dystrophin complex, and one at intercalated discs by SAP97.",
+        "authors": "Petitprez, Zmoos, Ogrodnik et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "20074556",
+        "title": "Function of the cytoplasmic tail of human calcitonin receptor-like receptor in complex with receptor activity-modifying protein 2.",
+        "abstract": "Receptor activity-modifying protein 2 (RAMP2) enables calcitonin receptor-like receptor (CRLR) to form an adrenomedullin (AM)-specific receptor. Here we investigated the function of the cytoplasmic C-terminal tail (C-tail) of human (h)CRLR by co-transfecting its C-terminal mutants into HEK-293 cells stably expressing hRAMP2. Deleting the C-tail from CRLR disrupted AM-evoked cAMP production or receptor internalization, but did not affect [(125)I]AM binding. We found that CRLR residues 428-439 are required for AM-evoked cAMP production, though deleting this region had little effect on receptor internalization. Moreover, pretreatment with pertussis toxin (100ng/mL) led to significant increases in AM-induced cAMP production via wild-type CRLR/RAMP2 complexes. This effect was canceled by deleting CRLR residues 454-457, suggesting Gi couples to this region. Flow cytometric analysis revealed that CRLR truncation mutants lacking residues in the Ser/Thr-rich region extending from Ser(449) to Ser(467) were unable to undergo AM-induced receptor internalization and, in contrast to the effect on wild-type CRLR, overexpression of GPCR kinases-2, -3 and -4 failed to promote internalization of CRLR mutants lacking residues 449-467. Thus, the hCRLR C-tail is crucial for AM-evoked cAMP production and internalization of the CRLR/RAMP2, while the receptor internalization is dependent on the aforementioned GPCR kinases, but not Gs coupling.",
+        "authors": "Kuwasako, Kitamura, Nagata et al.",
+        "year": "2010"
+      }
+    ],
+    "11": [],
+    "12": [
+      {
+        "pmid": "28386764",
+        "title": "Roles of tau protein in health and disease.",
+        "abstract": "Tau is well established as a microtubule-associated protein in neurons. However, under pathological conditions, aberrant assembly of tau into insoluble aggregates is accompanied by synaptic dysfunction and neural cell death in a range of neurodegenerative disorders, collectively referred to as tauopathies. Recent advances in our understanding of the multiple functions and different locations of tau inside and outside neurons have revealed novel insights into its importance in a diverse range of molecular pathways including cell signalling, synaptic plasticity, and regulation of genomic stability. The present review describes the physiological and pathophysiological properties of tau and how these relate to its distribution and functions in neurons. We highlight the post-translational modifications of tau, which are pivotal in defining and modulating tau localisation and its roles in health and disease. We include discussion of other pathologically relevant changes in tau, including mutation and aggregation, and how these aspects impinge on the propensity of tau to propagate, and potentially drive neuronal loss, in diseased brain. Finally, we describe the cascade of pathological events that may be driven by tau dysfunction, including impaired axonal transport, alterations in synapse and mitochondrial function, activation of the unfolded protein response and defective protein degradation. It is important to fully understand the range of neuronal functions attributed to tau, since this will provide vital information on its involvement in the development and pathogenesis of disease. Such knowledge will enable determination of which critical molecular pathways should be targeted by potential therapeutic agents developed for the treatment of tauopathies.",
+        "authors": "Guo, Noble, Hanger",
+        "year": "2017"
+      },
+      {
+        "pmid": "23386614",
+        "title": "Prion protein-mediated toxicity of amyloid-\u03b2 oligomers requires lipid rafts and the transmembrane LRP1.",
+        "abstract": "Soluble oligomers of the amyloid-\u03b2 (A\u03b2) peptide cause neurotoxicity, synaptic dysfunction, and memory impairments that underlie Alzheimer disease (AD). The cellular prion protein (PrP(C)) was recently identified as a high affinity neuronal receptor for A\u03b2 oligomers. We report that fibrillar A\u03b2 oligomers recognized by the OC antibody, which have been shown to correlate with the onset and severity of AD, bind preferentially to cells and neurons expressing PrP(C). The binding of A\u03b2 oligomers to cell surface PrP(C), as well as their downstream activation of Fyn kinase, was dependent on the integrity of cholesterol-rich lipid rafts. In SH-SY5Y cells, fluorescence microscopy and co-localization with subcellular markers revealed that the A\u03b2 oligomers co-internalized with PrP(C), accumulated in endosomes, and subsequently trafficked to lysosomes. The cell surface binding, internalization, and downstream toxicity of A\u03b2 oligomers was dependent on the transmembrane low density lipoprotein receptor-related protein-1 (LRP1). The binding of A\u03b2 oligomers to cell surface PrP(C) impaired its ability to inhibit the activity of the \u03b2-secretase BACE1, which cleaves the amyloid precursor protein to produce A\u03b2. The green tea polyphenol (-)-epigallocatechin gallate and the red wine extract resveratrol both remodeled the fibrillar conformation of A\u03b2 oligomers. The resulting nonfibrillar oligomers displayed significantly reduced binding to PrP(C)-expressing cells and were no longer cytotoxic. These data indicate that soluble, fibrillar A\u03b2 oligomers bind to PrP(C) in a conformation-dependent manner and require the integrity of lipid rafts and the transmembrane LRP1 for their cytotoxicity, thus revealing potential targets to alleviate the neurotoxic properties of A\u03b2 oligomers in AD.",
+        "authors": "Rushworth, Griffiths, Watt et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "12218089",
+        "title": "Cutting edge: Fyn is essential for tyrosine phosphorylation of Csk-binding protein/phosphoprotein associated with glycolipid-enriched microdomains in lipid rafts in resting T cells.",
+        "abstract": "In resting T cells, Csk is constitutively localized in lipid rafts by virtue of interaction with a phosphorylated adaptor protein, Csk-binding protein (Cbp)/phosphoprotein associated with glycolipid-enriched microdomains, and sets an activation threshold in TCR signaling. In this study, we examined a kinase responsible for Cbp phosphorylation in T cell membrane rafts. By analyzing T cells from Fyn-/- mice, we clearly demonstrated that Fyn, but not Lck, has its kinase activity in membrane rafts, and plays a critical role in Cbp phosphorylation, Cbp-Csk interaction, and Csk kinase activity. Naive CD44(low)CD62 ligand(high) T cells were substantially reduced in Fyn-/- mice, presumably due to the inhibition of Cbp phosphorylation. Thus, Fyn mediates Cbp-Csk interaction and recruits Csk to rafts by phosphorylating Cbp. Csk recruited to rafts would then be activated and inhibit the kinase activity of Lck to keep resting T cells in a quiescent state. Our results elucidate a negative regulatory role for Fyn in proximal TCR signaling in lipid rafts.",
+        "authors": "Yasuda, Nagafuku, Shima et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "12150984",
+        "title": "Calpain II colocalizes with detergent-insoluble rafts on human and Jurkat T-cells.",
+        "abstract": "Calpain, a calcium-dependent cysteine protease, is known to associate with the T-cell plasma membrane and subsequently cleave a number of cytoskeletal-associated proteins. In this study, we report the novel observation that calpain II, but not calpain I, associates with membrane lipid rafts on human peripheral blood T-cells and Jurkat cells. Raft-associated calpain activity is enhanced with exogenous calcium and inhibited with calpeptin, a specific inhibitor of calpain activity. In addition, we demonstrate that calpain cleaves the cytoskeletal-associated protein, talin, during the first 30-min after cell stimulation. We propose that lipid raft associated-calpain II could function in early TCR signaling to facilitate immune synapse formation through cytoskeletal remodeling mechanisms. Hence, we demonstrate that the positioning of calpain II within T-cell lipid rafts strategically places it in close proximity to known calpain substrates that are cleaved during Ag-specific T-cell signaling and immune synapse formation.",
+        "authors": "Morford, Forrest, Logan et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "12009895",
+        "title": "Plasma membrane phospholipid scramblase 1 is enriched in lipid rafts and interacts with the epidermal growth factor receptor.",
+        "abstract": "We have identified physical and functional interactions between the epidermal growth factor (EGF) receptor and phospholipid scramblase 1 (PLSCR1), an endofacial plasma membrane protein proposed to affect phospholipid organization. PLSCR1, a palmitoylated protein, was found to partition with the EGF receptor in membrane lipid rafts. Cell stimulation with EGF transiently elevated Tyr-phosphorylation of PLSCR1, peaking at 5 min. Although PLSCR1 is a known substrate of c-Abl [Sun, J., et al. (2001) J.Biol. Chem. 276, 28984-28990], the Abl inhibitor STI571 did not substantially affect its EGF-dependent phosphorylation, suggesting PLSCR1 is a substrate of the EGF receptor kinase, or another EGF-activated kinase. Coinciding with phosphorylation, there was a transient increase in physical association of PLSCR1 with both the EGF receptor and the adapter protein Shc, as determined by immunoprecipitation and Western blotting. Confocal immunofluorescence analysis revealed that EGF initiates rapid internalization of both the EGF receptor and PLSCR1, with trafficking into both distinct and common endosomal pools. These data also suggested that whereas the EGF receptor is ultimately degraded, much of the endocytosed PLSCR1 is recycled to the cell surface within 3 h after EGF treatment. Consistent with this interpretation, Western blotting revealed neither ubiquitination nor proteolysis of PLSCR1 under these conditions, whereas the ubiquitination and degradation of the EGF receptor were readily confirmed. Finally, stimulation with EGF was also found to markedly increase the total cellular expression of PLSCR1, suggesting that in addition to its initial interactions with activated EGF receptor, PLSCR1 may also contribute to posttranscriptional effector pathway(s) mediating the cellular response to EGF.",
+        "authors": "Sun, Nanjundan, Pike et al.",
+        "year": "2002"
+      }
+    ],
+    "13": [
+      {
+        "pmid": "11453658",
+        "title": "Cloning and functional characterization of DSCAML1, a novel DSCAM-like cell adhesion molecule that mediates homophilic intercellular adhesion.",
+        "abstract": "DSCAM, a conserved gene involved in neuronal differentiation, is a member of the Ig superfamily of cell adhesion molecules. Herein, we report the functional characterization of a human DSCAM (Down syndrome cell adhesion molecule) paralogue, DSCAML1, located on chromosome 11q23. The deduced DSCAML1 protein contains 10 Ig domains, six fibronectin-III domains, and an intracellular domain, all of which are structurally identical to DSCAM. When compared to DSCAM, DSCAML1 protein showed 64% identity to the extracellular domain and 45% identity to the cytoplasmic domain. In the mouse brain, DSCAML1 is predominantly expressed in Purkinje cells of the cerebellum, granule cells of the dentate gyrus, and in neurons of the cerebral cortex and olfactory bulb. Biochemical and immunofluorescence analyses indicated that DSCAML1 is a cell surface molecule that targets axonal features in differentiated PC12 cells. DSCAML1 exhibits homophilic binding activity that does not require divalent cations. Based on its structural and functional properties and similarities to DSCAM, we suggest that DSCAML1 may be involved in formation and maintenance of neural networks. The chromosomal locus for DSCAML1 makes it an ideal candidate for neuronal disorders (such as Gilles de la Tourette and Jacobsen syndromes) that have been mapped on 11q23.",
+        "authors": "Agarwala, Ganesh, Tsutsumi et al.",
+        "year": "2001"
+      },
+      {
+        "pmid": "10601632",
+        "title": "LDL binds to surface-expressed human T-cadherin in transfected HEK293 cells and influences homophilic adhesive interactions.",
+        "abstract": "T-cadherin (T-cad) is an unusual glycosylphosphatidylinositol-anchored member of the cadherin family of cell adhesion molecules. Binding of low density lipoproteins (LDLs) to T-cad can be demonstrated on Western blots of smooth muscle cell lysates, membranes and purified proteins. Using HEK293 cells transfected with human T-cad cDNA (T-cad+), we have investigated the adhesion properties of expressed mature and precursor proteins and examined the postulate that LDL represents a physiologically relevant ligand for T-cad. T-cad+ exhibits an increased Ca(2+)-dependent aggregation (vs. control) that was reduced by selective proteolytic cleavage of precursor T-cad and abolished after either proteolytic or phosphatidylinositol-specific phospholipase C (PI-PLC) cleavage of both mature and precursor proteins, indicating that both proteins function in intercellular adhesion. T-cad+ exhibited a significantly increased specific cell surface-binding of [(125)I]-LDL that was sensitive to PI-PLC pre-treatment of cells. Ca(2+)-dependent intercellular adhesion of T-cad+ was significantly inhibited by LDL. Our results support the suggestion that LDL is a physiologically relevant ligand for T-cad.",
+        "authors": "Resink, Kuzmenko, Kern et al.",
+        "year": "1999"
+      }
+    ],
+    "14": [
+      {
+        "pmid": "25666625",
+        "title": "Epidermal growth factor receptor (EGFR) signaling requires a specific endoplasmic reticulum thioredoxin for the post-translational control of receptor presentation to the cell surface.",
+        "abstract": "The epidermal growth factor receptor (EGFR) is a well characterized receptor-tyrosine kinase that functions in development and serves a vital role in many human cancers. Understanding EGFR regulatory mechanisms, and hence approaches for clinical intervention, has focused on ligand-receptor interactions and tyrosine kinase activity. Here, we show using the NCI-H460 lung and A431 epidermoid human cancer cell lines that EGFR binding to anterior gradient homolog 2 (AGR2) in the endoplasmic reticulum is required for receptor delivery to the plasma membrane and thus EGFR signaling. Reduced AGR2 protein levels or mutation of an essential cysteine in the active site result in decreased cell surface EGFR and a concomitant decrease in signaling as reflected by AREG, EGR1, and FOS expression. Similar to previously described EGFR nulls, an AGR2 null also resulted in embryonic lethality. Consistent with its role in regulating EGFR-mediated signaling, AGR2 expression is also enhanced in many human cancers and promotes the transformed phenotype. Furthermore, EGFR-mediated signaling in NCI-H460 cells, which are resistant to the tyrosine kinase inhibitor AG1478, is also disrupted with reduced AGR2 expression. The results provide insights into why cancer prognosis or response to therapy often does not correlate with EGFR protein or RNA levels because they do not reflect delivery to the cell surface where signaling is initiated. AGR2, therefore, represents a novel post-translational regulator of EGFR-mediated signaling and a promising target for treating human cancers.",
+        "authors": "Dong, Wodziak, Lowe",
+        "year": "2015"
+      },
+      {
+        "pmid": "21424692",
+        "title": "Truncating mutations in NRXN2 and NRXN1 in autism spectrum disorders and schizophrenia.",
+        "abstract": "Growing genetic evidence is converging in favor of common pathogenic mechanisms for autism spectrum disorders (ASD), intellectual disability (ID or mental retardation) and schizophrenia (SCZ), three neurodevelopmental disorders affecting cognition and behavior. Copy number variations and deleterious mutations in synaptic organizing proteins including NRXN1 have been associated with these neurodevelopmental disorders, but no such associations have been reported for NRXN2 or NRXN3. From resequencing the three neurexin genes in individuals affected by ASD (n = 142), SCZ (n = 143) or non-syndromic ID (n = 94), we identified a truncating mutation in NRXN2 in a patient with ASD inherited from a father with severe language delay and family history of SCZ. We also identified a de novo truncating mutation in NRXN1 in a patient with SCZ, and other potential pathogenic ASD mutations. These truncating mutations result in proteins that fail to promote synaptic differentiation in neuron coculture and fail to bind either of the established postsynaptic binding partners LRRTM2 or NLGN2 in cell binding assays. Our findings link NRXN2 disruption to the pathogenesis of ASD for the first time and further strengthen the involvement of NRXN1 in SCZ, supporting the notion of a common genetic mechanism in these disorders.",
+        "authors": "Gauthier, Siddiqui, Huashan et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21129411",
+        "title": "The cell surface structure of tumor endothelial marker 8 (TEM8) is regulated by the actin cytoskeleton.",
+        "abstract": "Tumor endothelial marker 8 (TEM8) is an integrin-like cell surface protein upregulated on tumor blood vessels and a potential vascular target for cancer therapy. Here, we found that the ability of an anti-TEM8 antibody, clone SB5, to recognize the extracellular domain of TEM8 on the cell surface depends on other host-cell factors. By taking advantage of SB5's ability to distinguish different forms of cell surface TEM8, we identified alpha-smooth muscle actin and transgelin, an actin binding protein, as intracellular factors able to alter TEM8 cell surface structure. Overexpression of either of these proteins in cells converted TEM8 from an SB5-exposed to an SB5-masked form and protected cells from SB5-saporin immunotoxins. Because the predominant form of TEM8 on the cell surface is not recognized by SB5, we also developed a new monoclonal antibody, called AF334, which is able to recognize both the SB5-exposed and the SB5-masked forms of TEM8. AF334-saporin selectively killed TEM8-positive cells independent of TEM8 cell surface structure. These studies reveal that TEM8 exists in different forms at the cell surface, a structure dependent on interactions with components of the actin cytoskeleton, and should aid in the rational design of the most effective diagnostic and therapeutic anti-TEM8 monoclonal antibodies.",
+        "authors": "Yang, Chaudhary, Seaman et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "19726642",
+        "title": "A neuroligin-4 missense mutation associated with autism impairs neuroligin-4 folding and endoplasmic reticulum export.",
+        "abstract": "Neuroligins (NLs) are postsynaptic cell-adhesion molecules essential for normal synapse function. Mutations in neuroligin-4 (NL4) (gene symbol: NLGN4) have been reported in some patients with autism spectrum disorder (ASD) and other neurodevelopmental impairments. However, the low frequency of NL4 mutations and the limited information about the affected patients and the functional consequences of their mutations cast doubt on the causal role of NL4 mutations in these disorders. Here, we describe two brothers with classical ASD who carry a single amino-acid substitution in NL4 (R87W). This substitution was absent from the brothers' asymptomatic parents, suggesting that it arose in the maternal germ line. R87 is conserved in all NL isoforms, and the R87W substitution is not observed in control individuals. At the protein level, the R87W substitution impaired glycosylation processing of NL4 expressed in HEK293 and COS cells, destabilized NL4, caused NL4 retention in the endoplasmic reticulum in non-neuronal cells and neurons, and blocked NL4 transport to the cell surface. As a result, the R87W substitution inactivated the synapse-formation activity of NL4 and abolished the functional effect of NL4 on synapse strength. Viewed together, these observations suggest that a point mutation in NL4 can cause ASD by a loss-of-function mechanism.",
+        "authors": "Zhang, Milunsky, Newton et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "19706678",
+        "title": "Axonal targeting of Caspr2 in hippocampal neurons via selective somatodendritic endocytosis.",
+        "abstract": "Contactin-associated protein 2 (Caspr2) is a neuronal membrane protein that is mutated in autism and related disorders. Although it is highly enriched at juxtaparanodes of Ranvier where it is essential for Shaker-type K(+) channel clustering, little is known about its function and regulation. In the present study, we examined the polarized expression of Caspr2 in hippocampal neurons using extracellular hemagglutinin (HA)-tagged Caspr2 constructs. We found that Caspr2 was targeted to the axonal surface, but colocalized with early endosomes in the somatodendritic compartment. The inhibition of endocytosis using a Dynamin-1 mutant or treatment with Dynasore prevented Caspr2 internalization from the dendrites and cell body. We identified a short sequence included into the 4.1B-binding domain that is required for the endocytosis of Caspr2. This sequence contains a protein kinase C (PKC) substrate motif on Thr1292, and point mutation of this residue or treatment with a PKC inhibitor prevented the somatodendritic internalization of Caspr2. Thus, the PKC-dependent trafficking of Caspr2 underlies its polarized expression in hippocampal neurons.",
+        "authors": "Bel, Oguievetskaia, Pitaval et al.",
+        "year": "2009"
+      }
+    ],
+    "15": [
+      {
+        "pmid": "25707991",
+        "title": "Fyn inhibition rescues established memory and synapse loss in Alzheimer mice.",
+        "abstract": "<h4>Objective</h4>Currently no effective disease-modifying agents exist for the treatment of Alzheimer disease (AD). The Fyn tyrosine kinase is implicated in AD pathology triggered by amyloid-\u00df oligomers (A\u00dfo) and propagated by Tau. Thus, Fyn inhibition may prevent or delay disease progression. Here, we sought to repurpose the Src family kinase inhibitor oncology compound, AZD0530, for AD.<h4>Methods</h4>The pharmacokinetics and distribution of AZD0530 were evaluated in mice. Inhibition of A\u00dfo signaling to Fyn, Pyk2, and Glu receptors by AZD0530 was tested by brain slice assays. After AZD0530 or vehicle treatment of wild-type and AD transgenic mice, memory was assessed by Morris water maze and novel object recognition. For these cohorts, amyloid precursor protein (APP) metabolism, synaptic markers (SV2 and PSD-95), and targets of Fyn (Pyk2 and Tau) were studied by immunohistochemistry and by immunoblotting.<h4>Results</h4>AZD0530 potently inhibits Fyn and prevents both A\u00dfo-induced Fyn signaling and downstream phosphorylation of the AD risk gene product Pyk2, and of NR2B Glu receptors in brain slices. After 4 weeks of treatment, AZD0530 dosing of APP/PS1 transgenic mice fully rescues spatial memory deficits and synaptic depletion, without altering APP or A\u00df metabolism. AZD0530 treatment also reduces microglial activation in APP/PS1 mice, and rescues Tau phosphorylation and deposition abnormalities in APP/PS1/Tau transgenic mice. There is no evidence of AZD0530 chronic toxicity.<h4>Interpretation</h4>Targeting Fyn can reverse memory deficits found in AD mouse models, and rescue synapse density loss characteristic of the disease. Thus, AZD0530 is a promising candidate to test as a potential therapy for AD.",
+        "authors": "Kaufman, Salazar, Haas et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "19406747",
+        "title": "Insulin receptor dysfunction impairs cellular clearance of neurotoxic oligomeric a{beta}.",
+        "abstract": "Accumulation of amyloid beta (Abeta) oligomers in the brain is toxic to synapses and may play an important role in memory loss in Alzheimer disease. However, how these toxins are built up in the brain is not understood. In this study we investigate whether impairments of insulin and insulin-like growth factor-1 (IGF-1) receptors play a role in aggregation of Abeta. Using primary neuronal culture and immortal cell line models, we show that expression of normal insulin or IGF-1 receptors confers cells with abilities to reduce exogenously applied Abeta oligomers (also known as ADDLs) to monomers. In contrast, transfection of malfunctioning human insulin receptor mutants, identified originally from patient with insulin resistance syndrome, or inhibition of insulin and IGF-1 receptors via pharmacological reagents increases ADDL levels by exacerbating their aggregation. In healthy cells, activation of insulin and IGF-1 receptor reduces the extracellular ADDLs applied to cells via seemingly the insulin-degrading enzyme activity. Although insulin triggers ADDL internalization, IGF-1 appears to keep ADDLs on the cell surface. Nevertheless, both insulin and IGF-1 reduce ADDL binding, protect synapses from ADDL synaptotoxic effects, and prevent the ADDL-induced surface insulin receptor loss. Our results suggest that dysfunctions of brain insulin and IGF-1 receptors contribute to Abeta aggregation and subsequent synaptic loss.",
+        "authors": "Zhao, Lacor, Chen et al.",
+        "year": "2009"
+      }
+    ],
+    "16": [],
+    "17": [
+      {
+        "pmid": "9655483",
+        "title": "Association of DAP12 with activating CD94/NKG2C NK cell receptors.",
+        "abstract": "While the inhibitory NK cell receptors for MHC class I express immunoreceptor tyrosine-based inhibitory motifs that recruit intracellular tyrosine phosphatases and prevent NK cell effector function, the activating NK cell receptors lack intrinsic sequences required for cellular stimulation. CD94/NKG2C, an activating NK cell receptor of the C-type lectin superfamily that binds to HLA-E, noncovalently associates with DAP12, a membrane receptor containing an immunoreceptor tyrosine-based activating motif. Efficient expression of CD94/NKG2C on the cell surface requires the presence of DAP12, and charged residues in the transmembrane domains of DAP12 and NKG2C are necessary for this interaction. These results provide a molecular basis for the assembly of NK cell receptors for MHC class I involved in cellular activation and inhibition.",
+        "authors": "Lanier, Corliss, Wu et al.",
+        "year": "1998"
+      }
+    ],
+    "18": [
+      {
+        "pmid": "24046456",
+        "title": "Flotillin microdomains stabilize cadherins at cell-cell junctions.",
+        "abstract": "Cadherins are essential in many fundamental processes and assemble at regions of cell-cell contact in large macromolecular complexes named adherens junctions. We have identified flotillin 1 and 2 as new partners of the cadherin complexes. We show that flotillins are localised at cell-cell junctions (CCJs) in a cadherin-dependent manner. Flotillins and cadherins are constitutively associated at the plasma membrane and their colocalisation at CCJ increases with CCJ maturation. Using three-dimensional structured illumination super-resolution microscopy, we found that cadherin and flotillin complexes are associated with F-actin bundles at CCJs. The knockdown of flotillins dramatically affected N- and E-cadherin recruitment at CCJs in mesenchymal and epithelial cell types and perturbed CCJ integrity and functionality. Moreover, we determined that flotillins are required for cadherin association with GM1-containing plasma membrane microdomains. This allows p120 catenin binding to the cadherin complex and its stabilization at CCJs. Altogether, these data demonstrate that flotillin microdomains are required for cadherin stabilization at CCJs and for the formation of functional CCJs.",
+        "authors": "Guillaume, Comunale, Do Khoa et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "19101069",
+        "title": "beta-catenin is involved in N-cadherin-dependent adhesion, but not in canonical Wnt signaling in E2A-PBX1-positive B acute lymphoblastic leukemia cells.",
+        "abstract": "<h4>Objective</h4>The t(1;19)(q23;13) translocation, resulting in the production of the E2A-PBX1 chimeric protein, is a common nonrandom translocation in pediatric B-lineage acute lymphoblastic leukemia (B-ALL). The E2A-PBX1 chimeric protein activates expression of several genes, including Wnt16. In the present study, we explored the role of Wnt16 and beta-catenin in t(1;19) B-ALL cells.<h4>Materials and methods</h4>Canonical Wnt signaling was measured by TOPflash activity. Localization of beta-catenin in the cell membrane and its involvement in leukemia-stroma interaction were studied by confocal microscopy. Adhesion to N-cadherin was analyzed by adding (3)H-thymidin-labeled cells to N-cadherin-coated wells.<h4>Results</h4>In contrast to previous reports, we detected no effects on cell viability or proliferation upon modulation of the Wnt16 levels. Moreover, despite high levels of Wnt16 and beta-catenin, the cells had very low levels of canonical Wnt signaling. Instead, beta-catenin was located in the cell membrane along with N-cadherin. E2A-PBX1-positive leukemia cells adhered strongly to bone marrow stroma cells, and we showed that adherence junctions stained strongly for both proteins. Moreover, knockdown of beta-catenin reduced the adhesion of E2A-PBX1-positive leukemia cells to N-cadherin, suggesting that beta-catenin and N-cadherin play a central role in homotypic cell-to-cell adhesion and in leukemia-stroma adhesion. Interestingly, knockdown of Wnt16 by small interfering RNA reduced the level of N-cadherin.<h4>Conclusion</h4>Wnt16 does not activate canonical Wnt signaling in E2A-PBX1-positive cells. Instead, beta-catenin is involved in N-cadherin-dependent adherence junctions, suggesting for the first time that leukemia-stroma interactions may be mediated via an N-cadherin-dependent mechanism.",
+        "authors": "Nygren, D\u00f8sen-Dahl, Stubberud et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "15914641",
+        "title": "MPP5 recruits MPP4 to the CRB1 complex in photoreceptors.",
+        "abstract": "<h4>Purpose</h4>Mutations in the human Crumbs homologue 1 (CRB1) gene are a frequent cause of Leber congenital amaurosis (LCA) and various forms of retinitis pigmentosa. CRB1 is thought to organize an intracellular protein scaffold in the retina that is involved in photoreceptor polarity. This study was focused on the identification, subcellular localization, and binding characteristics of a novel member of the protein scaffold connected to CRB1.<h4>Methods</h4>To dissect the protein scaffold connected to CRB1, the yeast two-hybrid approach was used to screen for interacting proteins. Glutathione S-transferase (GST) pull-down analysis and immunoprecipitation were used to verify protein-protein interactions. The subcellular localization of the proteins was visualized by immunohistochemistry and confocal microscopy on human retinas and immunoelectron microscopy on mouse retinas.<h4>Results</h4>A novel member of the scaffold connected to CRB1, called membrane palmitoylated protein (MPP) subfamily member 4 (MPP4), a membrane-associated guanylate kinase (MAGUK) protein, was identified. MPP4 was found to exist in a complex with CRB1 through direct interaction with the MPP subfamily member MPP5 (PALS1). 3D homology modeling provided evidence for a mechanism that regulates the recruitment of both homo- and heterodimers of MPP4 and -5 proteins to the complex. Localization studies in the retina showed that CRB1, MPP5, and MPP4 colocalize at the outer limiting membrane (OLM).<h4>Conclusions</h4>These data imply that MPP4 and -5 have a role in photoreceptor polarity and, by association with CRB1, pinpoint the cognate genes as functional candidate genes for inherited retinopathies.",
+        "authors": "Kantardzhieva, Gosens, Alexeeva et al.",
+        "year": "2005"
+      }
+    ],
+    "19": [],
+    "20": [
+      {
+        "pmid": "27837918",
+        "title": "Psychosis Risk Candidate ZNF804A Localizes to Synapses and Regulates Neurite Formation and Dendritic Spine Structure.",
+        "abstract": "<h4>Background</h4>Variation in the gene encoding zinc finger binding protein 804A (ZNF804A) is associated with schizophrenia and bipolar disorder. Evidence suggests that ZNF804A is a regulator of gene transcription and is present in nuclear and extranuclear compartments. However, a detailed examination of ZNF804A distribution and its neuronal functions has yet to be performed.<h4>Methods</h4>The localization of ZNF804A protein was examined in neurons derived from human neural progenitor cells, human induced pluripotent stem cells, or in primary rat cortical neurons. In addition, small interfering RNA-mediated knockdown of ZNF804A was conducted to determine its role in neurite formation, maintenance of dendritic spine morphology, and responses to activity-dependent stimulations.<h4>Results</h4>Endogenous ZNF804A protein localized to somatodendritic compartments and colocalized with the putative synaptic markers in young neurons derived from human neural progenitor cells and human induced pluripotent stem cells. In mature rat neurons, Zfp804A, the homolog of ZNF804A, was present in a subset of dendritic spines and colocalized with synaptic proteins in specific nanodomains, as determined by super-resolution microscopy. Interestingly, knockdown of ZNF804A attenuated neurite outgrowth in young neurons, an effect potentially mediated by reduced neuroligin-4 expression. Furthermore, knockdown of ZNF804A in mature neurons resulted in the loss of dendritic spine density and impaired responses to activity-dependent stimulation.<h4>Conclusions</h4>These data reveal a novel subcellular distribution for ZNF804A within somatodendritic compartments and a nanoscopic organization at excitatory synapses. Moreover, our results suggest that ZNF804A plays an active role in neurite formation, maintenance of dendritic spines, and activity-dependent structural plasticity.",
+        "authors": "Deans, Raval, Sellers et al.",
+        "year": "2017"
+      }
+    ],
+    "21": [
+      {
+        "pmid": "9501179",
+        "title": "E2F-6, a member of the E2F family that can behave as a transcriptional repressor.",
+        "abstract": "The E2F family of proteins is required to establish the correct cell-cycle-dependent transcription of genes that direct the process of cell division. All previously identified E2F proteins can act in a similar manner; depending on whether or not they are associated with the cell cycle inhibitors the retinoblastoma protein (pRB), p107, or p130, they can either repress or activate the transcription of E2F-responsive genes. We now report the cloning and characterization of another E2F family member, E2F-6, whose structure is reminiscent of the dominant inhibitors of other transcription factor families. The dimerization and DNA binding properties of E2F-6 are similar to those of the other E2F family members. However, it is not regulated by pRB, p107, or p130, and it is unable to activate transcription. Instead, it can act to repress the transcription of E2F responsive genes by countering the activity of the other E2F complexes via a pRB-, p107-, or p130-independent mechanism.",
+        "authors": "Trimarchi, Fairchild, Verona et al.",
+        "year": "1998"
+      },
+      {
+        "pmid": "7739537",
+        "title": "In vivo association of E2F and DP family proteins.",
+        "abstract": "The mammalian transcription factor E2F plays an important role in regulating the expression of genes that are required for passage through the cell cycle. This transcriptional activity is inhibited by association with the retinoblastoma tumor suppressor protein (pRB) or its relatives p107 and p103. The first cDNA from the E2F family to be cloned was designated E2F-1, and multiple E2F family members have now been identified. They bind to DNA as heterodimers, interacting with proteins known as DP. Here we demonstrate that DP is also a family of polypeptides with at least two members (hDP-1 and hDP-2). Both hDP-1 and hDP-2 bind to all E2F family members in vivo, and each complex is capable of activating transcription. However, the various E2F/DP complexes display strong differences in the ability to bind to either pRB or p107 in vivo, and the specificity of pRB or p107 binding is mediated by the E2F subunit.",
+        "authors": "Wu, Zukerberg, Ngwu et al.",
+        "year": "1995"
+      }
+    ],
+    "22": [
+      {
+        "pmid": "30241478",
+        "title": "TEM8 functions as a receptor for uPA and mediates uPA-stimulated EGFR phosphorylation.",
+        "abstract": "<h4>Background</h4>TEM8 is a cell membrane protein predominantly expressed in tumor endothelium, which serves as a receptor for the protective antigen (PA) of anthrax toxin. However, the physiological ligands for TEM8 remain unknown.<h4>Results</h4>Here we identified uPA as an interacting partner of TEM8. Binding of uPA stimulated the phosphorylation of TEM8 and augmented phosphorylation of EGFR and ERK1/2. Finally, TEM8-Fc, a recombinant fusion protein comprising the extracellular domain of human TEM8 linked to the Fc portion of human IgG1, efficiently abrogated the interaction between uPA and TEM8, blocked uPA-induced migration of HepG2 cells in vitro and inhibited the growth and metastasis of human MCF-7 xenografts in vivo. uPA, TEM8 and EGFR overexpression and ERK1/2 phosphorylation were found co-located on frozen cancer tissue sections.<h4>Conclusions</h4>Taken together, our data provide evidence that TEM8 is a novel receptor for uPA, which may play a significant role in the regulation of tumor growth and metastasis.",
+        "authors": "Zhang, Shao, Gao et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "17573778",
+        "title": "T-cadherin enhances cell-matrix adhesiveness by regulating beta1 integrin trafficking in cutaneous squamous carcinoma cells.",
+        "abstract": "T-cadherin is a glycosyl-phosphatidylinositol (GPI) anchored cadherin molecule. We previously reported that T-cadherin is normally expressed on the basal keratinocytes of the epidermis and is down-regulated in cutaneous squamous cell carcinoma (SCC). We found that expression of T-cadherin in cutaneous squamous carcinoma cells regulated level of surface beta1 integrin, which functioned as extracellular matrix (ECM) receptor. Involvement of T-cadherin in beta1 integrin trafficking was studied using three different stable cell lines with cytomegalovirus (CMV)-driven over-expression, tetracycline (Tet)-inducible expression and RNAi-mediated suppressed expression of T-cadherin. Pulse-chase analysis using a cholesterol-depleting reagent and a tyrosine kinase inhibitor showed that beta1 integrin mainly internalized via caveolae. Over-expression of T-cadherin suppressed the internalization of both beta1 integrin and cholera toxin (CTX), a marker of caveolae-mediated endocytosis. By Western blot analysis of tyrosine-kinase target molecules, we demonstrated a reduced level of EGF receptor (EGFR)-phosphorylation in T-cadherin over-expressing cells. In addition, studies using EGF and EGFR specific inhibitors revealed that EGFR activation stimulated beta1 integrin internalization. Taking these results together, T-cadherin may modulate cell-matrix adhesion in basal keratinocytes as well as invasive potency in SCC by regulating surface level of beta1 integrin.",
+        "authors": "Mukoyama, Utani, Matsui et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "14732715",
+        "title": "HIP1 and HIP1r stabilize receptor tyrosine kinases and bind 3-phosphoinositides via epsin N-terminal homology domains.",
+        "abstract": "Huntingtin-interacting protein 1-related (HIP1r) is the only known mammalian relative of huntingtin-interacting protein 1 (HIP1), a protein that transforms fibroblasts via undefined mechanisms. Here we demonstrate that both HIP1r and HIP1 bind inositol lipids via their epsin N-terminal homology (ENTH) domains. In contrast to other ENTH domain-containing proteins, lipid binding is preferential to the 3-phosphate-containing inositol lipids, phosphatidylinositol 3,4-bisphosphate and phosphatidylinositol 3,5-bisphosphate. Furthermore, the HIP1r ENTH domain, like that of HIP1, is necessary for lipid binding, and expression of an ENTH domain-deletion mutant, HIP1r/deltaE, induces apoptosis. Consistent with the ability of HIP1r and HIP1 to affect cell survival, full-length HIP1 and HIP1r stabilize pools of growth factor receptors by prolonging their half-life following ligand-induced endocytosis. Although HIP1r and HIP1 display only a partially overlapping pattern of protein interactions, these data suggest that both proteins share a functional homology by binding 3-phosphorylated inositol lipids and stabilizing receptor tyrosine kinases in a fashion that may contribute to their ability to alter cell growth and survival.",
+        "authors": "Hyun, Rao, Saint-Dic et al.",
+        "year": "2004"
+      }
+    ],
+    "23": [],
+    "24": [
+      {
+        "pmid": "21838267",
+        "title": "The synaptic protein neuroligin-1 interacts with the amyloid \u03b2-peptide. Is there a role in Alzheimer's disease?",
+        "abstract": "Amyloid \u03b2-peptide (A\u03b2) is the main component of the amyloid plaques associated with Alzheimer's disease (AD). In the early steps of the disease soluble A\u03b2 oligomers are produced. According to the current \"amyloid hypothesis\" these oligomers can accumulate over time, leading progressively to the loss of synaptic function and the cognitive failure characteristic of AD. To understand the role of oligomeric A\u03b2 species in AD pathology, it is important to understand the mechanism by which A\u03b2 oligomers are targeted to synaptic junction. We report here the interaction between A\u03b2 with neuroligin-1 (NL-1), a postsynaptic cell-adhesion protein specific for excitatory synapses, which shares a high degree of similarity with acetylcholinesterase, the first synaptic protein described to interact with A\u03b2. Using intrinsic fluorescence and surface plasmon resonance, we found that A\u03b2 binds to the extracellular domain of NL-1 with a K(d) in the nanomolar range. In the case of NL-2, a postsynaptic cell-adhesion protein specific for inhibitory synapses, just a very weak interaction with A\u03b2 was observed. A\u03b2 polymerization analysis-studied by thioflavin-T assay and electron microscopy-indicated that NL-1 stabilized A\u03b2 aggregates in vitro. Moreover, NL-1 acts as a nucleating factor during the A\u03b2 aggregation process, stimulating the formation of A\u03b2 oligomers. Besides, immunoprecipitation assays confirm that A\u03b2 oligomers interact with NL-1 but not with NL-2. In conclusion, our results show that NL-1 interacts with A\u03b2 increasing the formation of A\u03b2 oligomers, suggesting that this interaction could triggers the targeting of A\u03b2 oligomer to the postsynaptic regions of excitatory synapses.",
+        "authors": "Dinamarca, Weinstein, Monasterio et al.",
+        "year": "2011"
+      }
+    ],
+    "25": [
+      {
+        "pmid": "11445554",
+        "title": "Molecular cloning and expression of two distinct human N-acetylgalactosamine 4-O-sulfotransferases that transfer sulfate to GalNAc beta 1-->4GlcNAc beta 1-->R in both N- and O-glycans.",
+        "abstract": "Recently, cDNAs encoding human chondroitin 4-O-sulfotransferase-1 and -2 (C4ST-1 and C4ST-2) were cloned based on their similarity to HNK-1 sulfotransferase (HNK-1ST) (Hiraoka, N., Nakagawa, H., Ong, E., Akama, T.O., Fukuda, M.N., and Fukuda, M. [2000] Molecular cloning and expression of two distinct human chondroitin 4-O-sulfotransferases that belong to the HNK-1 sulfotransferase gene family. J. Biol. Chem., 275, 20188--20196). In the present study, we identified two additional novel sulfotransferases by searching the expression sequence tag and genomic DNA database for enzymes similar to C4ST-1 and C4ST-2. These newly cloned enzymes, termed GalNAc4ST-1 and GalNAc4ST-2, belong to the HNK-1ST gene family having 40--42% identity with C4ST-1. GalNAc4ST-1 and -2 do not add sulfate to HNK-1 precursor glycans, chondroitin, or desulfated dermatan sulfate. Instead, both enzymes can transfer sulfate to the 4-position of GalNAc in the context of GalNAc beta 1-->4GlcNAc beta 1-->R attached to both N-linked and core 2 branched O-linked oligosaccharides. GalNAc4ST-1 and -2 transcripts are highly expressed in the pituitary gland and trachea, respectively, and GalNAc4ST-1 and -2 transcripts are reciprocally expressed in other tissues as well. Moreover, both enzymes can transfer sulfate to lutropin, a pituitary glycoprotein hormone. These combined results indicate that GalNAc4ST-1 and -2 play critical roles in forming sulfo-->4GalNAc beta 1-->4GlcNAc beta 1-->R in both N-glycans and O-glycans in a tissue-specific manner.",
+        "authors": "Hiraoka, Misra, Belot et al.",
+        "year": "2001"
+      },
+      {
+        "pmid": "11139592",
+        "title": "Molecular cloning and expression of an N-acetylgalactosamine-4-O-sulfotransferase that transfers sulfate to terminal and non-terminal beta 1,4-linked N-acetylgalactosamine.",
+        "abstract": "We have identified and characterized an N-acetylgalactosamine-4-O-sulfotransferase designated GalNAc-4-ST2 (GenBank(TM) accession number ) based on its homology to HNK-1 sulfotransferase (HNK-1 ST). The cDNA predicts an open reading frame encoding a type II membrane protein of 443 amino acids with a 12-amino acid cytoplasmic domain, a 23-amino acid transmembrane domain, and a 408-amino acid luminal domain containing four potential N-linked glycosylation sites. GalNAc-4-ST2 displays a high degree of amino acid sequence identity with GalNAc-4-ST1 (46%), HNK-1 ST (23%), chondroitin 4-O-sulfotransferase-1 (C4ST-1) (27%), and chondroitin 4-O-sulfotransferase-2 (C4ST-2) (24%). GalNAc-4-ST2 transfers sulfate to the C-4 hydroxyl of terminal beta1,4-linked GalNAc in the sequence GalNAc-beta1,4GlcNAcbeta-R found on N-linked oligosaccharides and nonterminal beta1,4-linked GalNAc in chondroitin and dermatan. The translated region of GalNAc-4-ST2 is encoded by five exons located on human chromosome 18q11.2. Northern blot analysis reveals a 2.1-kilobase transcript. GalNAc-4-ST2 message is most highly expressed in trachea and to a lesser extent in heart, liver, pancreas, salivary gland, and testis. The I.M.A.G.E. cDNA clone 49547 contains a putative GalNAc-4-ST2 splice form with an open reading frame encoding a protein of 358 amino acids that lacks the transmembrane domain and the stem region. This form of GalNAc-4-ST2 is not retained by transfected cells and is active against chondroitin but not terminal beta1,4-linked GalNAc. Thus, as with GalNAc-4-ST1, sequences N-terminal to the catalytic domain contribute to the specificity of GalNAc-4-ST2 toward terminal beta1,4-linked GalNAc.",
+        "authors": "Kang, Evers, Xia et al.",
+        "year": "2001"
+      },
+      {
+        "pmid": "11056388",
+        "title": "Molecular cloning, expression, and chromosomal mapping of human chondroitin 4-sulfotransferase, whose expression pattern in human tissues is different from that of chondroitin 6-sulfotransferase.",
+        "abstract": "Chondroitin 4-sulfotransferase (C4ST) catalyzes the transfer of sulfate from 3'-phosphoadenosine 5'-phosphosulfate to position 4 of the N-acetylgalactosamine residues of chondroitin. We previously reported the cloning of C4ST cDNA from mouse brain. We here report the cloning and expression of human C4ST cDNA. The cDNA was isolated from a human fetal brain cDNA library by hybridization with a DNA probe prepared from rat poly(A)(+) RNA used for the cloning of mouse C4ST cDNA. The cDNA comprises a single open reading frame that predicts a Type II transmembrane protein composed of 352 amino acids. The protein has an amino acid sequence homology of 96% with mouse C4ST. When the cDNA was introduced into a eukaryotic expression vector and transfected in COS-7 cells, the sulfotransferase activity that transfers sulfate to both chondroitin and desulfated dermatan sulfate was overexpressed. Northern blot analysis indicated that human C4ST mRNAs (6.0 and 1.9 kb) are expressed ubiquitously in various adult human tissues. Dot blot analysis has shown that human C4ST is strongly expressed in colorectal adenocarcinoma and peripheral blood leukocytes, whereas strong expression of human chondroitin 6-sulfotransferase (C6ST) is observed in aorta and testis. These observations suggest that the expression of C4ST and C6ST may be controlled differently in human tissues. The C4ST gene was localized to chromosome 12q23.2-q23.3 by fluorescence in situ hybridization.",
+        "authors": "Okuda, Mita, Yamauchi et al.",
+        "year": "2000"
+      },
+      {
+        "pmid": "10187838",
+        "title": "Molecular cloning and characterization of a human uronyl 2-sulfotransferase that sulfates iduronyl and glucuronyl residues in dermatan/chondroitin sulfate.",
+        "abstract": "A partial-length human cDNA with a predicted amino acid sequence homologous to a previously described heparan sulfate iduronyl 2-sulfotransferase (Kobayashi, M., Habuchi, H., Yoneda, M., Habuchi, O., and Kimata, K. (1997) J. Biol. Chem. 272, 13980-13985) was obtained by searching the expressed sequence-tagged data bank. Northern blot analysis was performed using this homologous cDNA as a probe, which demonstrated ubiquitous expression of messages of 5.1 and 2.0 kilobases in a number of human tissues and in several human cancer cell lines. Since the human lymphoma Raji cell line had the highest level of expression, it was used to isolate a full-length cDNA clone. The full-length cDNA was found to contain an open reading frame that predicted a type II transmembrane protein composed of 406 amino acid residues. The cDNA in a baculovirus expression vector was expressed in Sf9 insect cells, and cell extracts were then incubated together with 3'-phosphoadenosine 5'-phospho[35S]sulfate and potential glycosaminoglycan acceptors. This demonstrated substantial sulfotransferase activity with dermatan sulfate, a small degree of activity with chondroitin sulfate, but no sulfotransferase activity with desulfated N-resulfated heparin. Analysis of [35S]sulfate-labeled disaccharide products of chondroitin ABC, chondroitin AC, and chondroitin B lyase treatment demonstrated that the enzyme only transferred sulfate to the 2-position of uronyl residues, which were preponderantly iduronyl residues in dermatan sulfate, but some lesser transfer to glucuronyl residues of chondroitin sulfate.",
+        "authors": "Kobayashi, Sugumaran, Liu et al.",
+        "year": "1999"
+      }
+    ],
+    "26": [
+      {
+        "pmid": "21172611",
+        "title": "Hippocampal AMPA receptor gating controlled by both TARP and cornichon proteins.",
+        "abstract": "Transmembrane AMPA receptor regulatory proteins (TARPs) and cornichon proteins (CNIH-2/3) independently modulate AMPA receptor trafficking and gating. However, the potential for interactions of these subunits within an AMPA receptor complex is unknown. Here, we find that TARPs \u03b3-4, \u03b3-7, and \u03b3-8, but not \u03b3-2, \u03b3-3, or \u03b3-5, cause AMPA receptors to \"resensitize\" upon continued glutamate application. With \u03b3-8, resensitization occurs with all GluA subunit combinations; however, \u03b3-8-containing hippocampal neurons do not display resensitization. In recombinant systems, CNIH-2 abrogates \u03b3-8-mediated resensitization and modifies AMPA receptor pharmacology and gating to match that of hippocampal neurons. In hippocampus, \u03b3-8 and CNIH-2 associate in postsynaptic densities and CNIH-2 protein levels are markedly diminished in \u03b3-8 knockout mice. Manipulating neuronal CNIH-2 levels modulates the electrophysiological properties of extrasynaptic and synaptic \u03b3-8-containing AMPA receptors. Thus, \u03b3-8 and CNIH-2 functionally interact with common hippocampal AMPA receptor complexes to modulate synergistically kinetics and pharmacology.",
+        "authors": "Kato, Gill, Ho et al.",
+        "year": "2010"
+      },
+      {
+        "pmid": "20032460",
+        "title": "Inhibition of calcineurin-mediated endocytosis and alpha-amino-3-hydroxy-5-methyl-4-isoxazolepropionic acid (AMPA) receptors prevents amyloid beta oligomer-induced synaptic disruption.",
+        "abstract": "Synaptic degeneration, including impairment of synaptic plasticity and loss of synapses, is an important feature of Alzheimer disease pathogenesis. Increasing evidence suggests that these degenerative synaptic changes are associated with an accumulation of soluble oligomeric assemblies of amyloid beta (Abeta) known as ADDLs. In primary hippocampal cultures ADDLs bind to a subpopulation of neurons. However the molecular basis of this cell type-selective interaction is not understood. Here, using siRNA screening technology, we identified alpha-amino-3-hydroxy-5-methyl-4-isoxazolepropionic acid (AMPA) receptor subunits and calcineurin as candidate genes potentially involved in ADDL-neuron interactions. Immunocolocalization experiments confirmed that ADDL binding occurs in dendritic spines that express surface AMPA receptors, particularly the calcium-impermeable type II AMPA receptor subunit (GluR2). Pharmacological removal of the surface AMPA receptors or inhibition of AMPA receptors with antagonists reduces ADDL binding. Furthermore, using co-immunoprecipitation and photoreactive amino acid cross-linking, we found that ADDLs interact preferentially with GluR2-containing complexes. We demonstrate that calcineurin mediates an endocytotic process that is responsible for the rapid internalization of bound ADDLs along with surface AMPA receptor subunits, which then both colocalize with cpg2, a molecule localized specifically at the postsynaptic endocytic zone of excitatory synapses that plays an important role in activity-dependent glutamate receptor endocytosis. Both AMPA receptor and calcineurin inhibitors prevent oligomer-induced surface AMPAR and spine loss. These results support a model of disease pathogenesis in which Abeta oligomers interact selectively with neurotransmission pathways at excitatory synapses, resulting in synaptic loss via facilitated endocytosis. Validation of this model in human disease would identify therapeutic targets for Alzheimer disease.",
+        "authors": "Zhao, Santini, Breese et al.",
+        "year": "2010"
+      }
+    ],
+    "27": [
+      {
+        "pmid": "23069713",
+        "title": "The promotion of cardiogenic differentiation of hMSCs by targeting epidermal growth factor receptor using microRNA-133a.",
+        "abstract": "Human bone marrow-derived mesenchymal stem cells (hMSCs) are an attractive candidate for cell therapy in heart disease. Low survival and incomplete electromechanical integration between resident cardiomyocytes and transplanted hMSCs remain unsolved. In order for an infarcted heart to tolerate transplantation, differentiation capacity in stem cells must be reinforced. In this study, we found that compound 56, an epidermal growth factor receptor (EGFR) inhibitor, promotes cardiogenic differentiation of hMSCs and the transplantation of hMSCs treated with compound 56 resulted in enhancement of heart functions. Furthermore, hMSCs transfected with microRNA-133a (miR-133a), which targets EGFR, were observed to express cardiac-specific markers. We also discovered that luciferase activity is exclusively decreased by targeting EGFR in hMSCs transfected with miR-133a mimic. These results suggest that EGFR plays a key role in the regulation of cardiogenic differentiation in hMSCs.",
+        "authors": "Lee, Ham, Cha et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "20081117",
+        "title": "MicroRNA-1 and -499 regulate differentiation and proliferation in human-derived cardiomyocyte progenitor cells.",
+        "abstract": "<h4>Objective</h4>To improve regeneration of the injured myocardium, it is necessary to enhance the intrinsic capacity of the heart to regenerate itself and/or replace the damaged tissue by cell transplantation. Cardiomyocyte progenitor cells (CMPCs) are a promising cell population, easily expanded and efficiently differentiated into beating cardiomyocytes. Recently, several studies have demonstrated that microRNAs (miRNAs) are important for stem cell maintenance and differentiation via translational repression. We hypothesize that miRNAs are also involved in proliferation/differentiation of the human CMPCs in vitro.<h4>Methods and results</h4>Human fetal CMPCs were isolated, cultured, and efficiently differentiated into beating cardiomyocytes. miRNA expression profiling demonstrated that muscle-specific miR-1 and miR-499 were highly upregulated in differentiated cells. Transient transfection of miR-1 and -499 in CMPC reduced proliferation rate by 25% and 15%, respectively, and enhanced differentiation into cardiomyocytes in human CMPCs and embryonic stem cells, likely via the repression of histone deacetylase 4 or Sox6. Histone deacetylase 4 and Sox6 protein levels were reduced, and small interference RNA (siRNA)-mediated knockdown of Sox6 strongly induced myogenic differentiation.<h4>Conclusions</h4>miRNAs regulate the proliferation of human CMPC and their differentiation into cardiomyocytes. By modulating miR-1 and -499 expression levels, human CMPC function can be altered and differentiation directed, thereby enhancing cardiomyogenic differentiation.",
+        "authors": "Sluijter, van Mil, van Vliet et al.",
+        "year": "2010"
+      }
+    ],
+    "28": [
+      {
+        "pmid": "25468996",
+        "title": "E-cadherin interactome complexity and robustness resolved by quantitative proteomics.",
+        "abstract": "E-cadherin-mediated cell-cell adhesion and signaling plays an essential role in development and maintenance of healthy epithelial tissues. Adhesiveness mediated by E-cadherin is conferred by its extracellular cadherin domains and is regulated by an assembly of intracellular adaptors and enzymes associated with its cytoplasmic tail. We used proximity biotinylation and quantitative proteomics to identify 561 proteins in the vicinity of the cytoplasmic tail of E-cadherin. In addition, we used proteomics to identify proteins associated with E-cadherin-containing adhesion plaques from a cell-glass interface, which enabled the assignment of cellular localization to putative E-cadherin-interacting proteins. Moreover, by tagging identified proteins with GFP (green fluorescent protein), we determined the subcellular localization of 83 putative E-cadherin-proximal proteins and identified 24 proteins that were previously uncharacterized as part of adherens junctions. We constructed and characterized a comprehensive E-cadherin interaction network of 79 published and 394 previously uncharacterized proteins using a structure-informed database of protein-protein interactions. Finally, we found that calcium chelation, which disrupts the interaction of the extracellular E-cadherin domains, did not disrupt most intracellular protein interactions with E-cadherin, suggesting that the E-cadherin intracellular interactome is predominantly independent of cell-cell adhesion.",
+        "authors": "Guo, Neilson, Zhong et al.",
+        "year": "2014"
+      },
+      {
+        "pmid": "37865312",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms.",
+        "abstract": "In recent years, elegant glycomic and glycoproteomic approaches have revealed an intricate glycosylation profile of mammalian brain with enormous spatial and temporal diversities. Nevertheless, at a cellular level, it is unclear how these post-translational modifications affect various proteins to influence crucial neuronal properties. Here, we have investigated the impact of N-linked glycosylation on neuroligins (NLGNs), a class of cell-adhesion molecules that play instructive roles in synapse organization. We found that endogenous NLGN proteins are differentially glycosylated across several regions of murine brain in a sex-independent but isoform-dependent manner. In both rodent primary neurons derived from brain sections and human neurons differentiated from stem cells, all NLGN variants were highly enriched with multiple N-glycan subtypes, which cumulatively ensured their efficient trafficking to the cell surface. Removal of these N-glycosylation residues only had a moderate effect on NLGNs' stability or expression levels but particularly enhanced their retention at the endoplasmic reticulum. As a result, the glycosylation-deficient NLGNs exhibited considerable impairments in their dendritic distribution and postsynaptic accumulation, which in turn, virtually eliminated their ability to recruit presynaptic terminals and significantly reduced NLGN overexpression-induced assemblies of both glutamatergic and GABAergic synapse structures. Therefore, our results highlight an essential mechanistic contribution of N-linked glycosylations in facilitating the appropriate secretory transport of a major synaptic cell-adhesion molecule and promoting its cellular function in neurons.",
+        "authors": "Benner, Cast, Minamide et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "19141530",
+        "title": "Integrin alpha(v)beta(3) is a pleiotrophin receptor required for pleiotrophin-induced endothelial cell migration through receptor protein tyrosine phosphatase beta/zeta.",
+        "abstract": "We have previously shown that the angiogenic growth factor pleiotrophin (PTN) induces migration of endothelial cells through binding to its receptor protein tyrosine phosphatase beta/zeta (RPTPbeta/zeta). In this study, we show that a monoclonal antibody against alpha(nu)beta(3) but not alpha(5)beta(1) integrin abolished PTN-induced human endothelial cell migration in a concentration-dependent manner. Integrin alpha(nu)beta(3) was found to directly interact with PTN in an RGD-independent manner, whereas a synthetic peptide corresponding to the specificity loop of the beta(3) integrin extracellular domain ((177)CYDMKTTC(184)) inhibited PTN-alpha(nu)beta(3) interaction and totally abolished PTN-induced endothelial cell migration. Interestingly, alpha(nu)beta(3) was also found to directly interact with RPTPbeta/zeta, and PTN-induced Y773 phosphorylation of beta(3) integrin was dependent on both RPTPbeta/zeta and the downstream c-src kinase activation. Midkine was found to interact with RPTPbeta/zeta, but not with alpha(nu)beta(3), and caused a small but statistically significant decrease in cell migration. In the same line, PTN decreased migration of different glioma cell lines that express RPTPbeta/zeta but do not express alpha(nu)beta(3), while it stimulated migration of U87MG cells that express alpha(nu)beta(3) on their cell membrane. Overexpression or down-regulation of beta(3) stimulated or abolished, respectively, the effect of PTN on cell migration. Collectively, these data suggest that alpha(nu)beta(3) is a key molecule that determines the stimulatory or inhibitory effect of PTN on cell migration.",
+        "authors": "Mikelis, Sfaelou, Koutsioumpa et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "18923512",
+        "title": "Neuroligins and neurexins link synaptic function to cognitive disease.",
+        "abstract": "The brain processes information by transmitting signals at synapses, which connect neurons into vast networks of communicating cells. In these networks, synapses not only transmit signals but also transform and refine them. Neurexins and neuroligins are synaptic cell-adhesion molecules that connect presynaptic and postsynaptic neurons at synapses, mediate signalling across the synapse, and shape the properties of neural networks by specifying synaptic functions. In humans, alterations in genes encoding neurexins or neuroligins have recently been implicated in autism and other cognitive diseases, linking synaptic cell adhesion to cognition and its disorders.",
+        "authors": "S\u00fcdhof",
+        "year": "2008"
+      },
+      {
+        "pmid": "10601632",
+        "title": "LDL binds to surface-expressed human T-cadherin in transfected HEK293 cells and influences homophilic adhesive interactions.",
+        "abstract": "T-cadherin (T-cad) is an unusual glycosylphosphatidylinositol-anchored member of the cadherin family of cell adhesion molecules. Binding of low density lipoproteins (LDLs) to T-cad can be demonstrated on Western blots of smooth muscle cell lysates, membranes and purified proteins. Using HEK293 cells transfected with human T-cad cDNA (T-cad+), we have investigated the adhesion properties of expressed mature and precursor proteins and examined the postulate that LDL represents a physiologically relevant ligand for T-cad. T-cad+ exhibits an increased Ca(2+)-dependent aggregation (vs. control) that was reduced by selective proteolytic cleavage of precursor T-cad and abolished after either proteolytic or phosphatidylinositol-specific phospholipase C (PI-PLC) cleavage of both mature and precursor proteins, indicating that both proteins function in intercellular adhesion. T-cad+ exhibited a significantly increased specific cell surface-binding of [(125)I]-LDL that was sensitive to PI-PLC pre-treatment of cells. Ca(2+)-dependent intercellular adhesion of T-cad+ was significantly inhibited by LDL. Our results support the suggestion that LDL is a physiologically relevant ligand for T-cad.",
+        "authors": "Resink, Kuzmenko, Kern et al.",
+        "year": "1999"
+      }
+    ],
+    "29": [
+      {
+        "pmid": "26235030",
+        "title": "Structural Basis of Latrophilin-FLRT-UNC5 Interaction in Cell Adhesion.",
+        "abstract": "Fibronectin leucine-rich repeat transmembrane proteins (FLRTs) are cell-adhesion molecules with emerging functions in cortical development and synapse formation. Their extracellular regions interact with latrophilins (LPHNs) to mediate synapse development, and with Uncoordinated-5 (UNC5)/netrin receptors to control the migration of neurons in the\u00a0developing cortex. Here, we present the crystal structures of FLRT3 in isolation and in complex with LPHN3. The LPHN3/FLRT3 structure reveals that LPHN3 binds to FLRT3 at a site distinct from UNC5. Structure-based mutations specifically disrupt LPHN3/FLRT3 binding, but do not disturb their interactions with other proteins or their cell-membrane localization. Thus, they can be used as molecular tools to dissect the functions of FLRTs and LPHNs in\u00a0vivo. Our results suggest that UNC5 and LPHN3 can simultaneously bind to FLRT3, forming a trimeric complex, and that FLRT3 may form transsynaptic complexes with both LPHN3 and UNC5. These findings provide molecular insights for understanding the role of cell-adhesion proteins in synapse function.",
+        "authors": "Lu, Nazarko, Sando et al.",
+        "year": "2015"
+      }
+    ]
+  },
+  "hub_gene_abstracts": {},
+  "snippet_evidence": {
+    "9": [],
+    "11": [],
+    "16": [],
+    "19": [],
+    "23": [],
+    "0": [
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "), but not GluR1 (relative to control, 3.3 + 0.27 versus 2.8 + 0.31) or GluR2 (relative to control, 2.7 + 0.27 versus 2.2 + 0.45) (Fig. 5A and B).\n\nThese data demonstrate that RhoGAP2 is a novel synaptic RhoGAP that interacts with IL1RAPL1 and might contribute to excitatory synapse formation.",
+        "score": 0.31678229488991594
+      }
+    ],
+    "1": [],
+    "2": [
+      {
+        "paperId": "14889930",
+        "pmid": "",
+        "title": "Inhibitory Synapse Formation in a Co-culture Model Incorporating GABAergic Medium Spiny Neurons and HEK293 Cells Stably Expressing GABAA Receptors",
+        "authors": "Laura E. Brown, C. Fuchs, Martin W. Nicholson et al.",
+        "snippet_text": "the plasma membrane are dependent on the presence of \u03b2-subunits 15,16 . However, selective incorporation of different GABA A R subtypes into distinct types of synapses correlates well with the presence of specific \u03b1 subunits (\u03b11, \u03b12, \u03b13 or \u03b15) 7,17,18 . Importantly, deletion of \u03b11 or \u03b12 subunit in mice causes ultrastructural changes at inhibitory synapses 19 . This suggests that GABA A Rs themselves may play a direct role in regulating synapse formation.\n\nEvidence indicates that GABAergic synapse development is a precisely co-ordinated sequence of events, in which both the neuronal targets contacted by different types of inhibitory axons and the receptors that are clustered at each class of inhibitory synapse are selective and functionally attuned 17,[20][21][22] . This fundamental principle of specificity at GABAergic synapses raises the question as to how the pre-and postsynaptic partners recognize each other during the initiation of synaptic contacts.\n\nIn vitro co-culture assays have been applied successfully to study some of the mechanisms of synapse formation and to test the role of individual synaptic cleft-spanning proteins in this process. One of the common trans-synaptic interacting protein combinations that function bi-directionally to mediate synapse formation and maturation, are the Neurexins (Nrxns) and Neuroligins (NLs). Nrxns are presynaptic proteins that exhibit alternative splicing within their laminin-neurexin-sex hormone-binding protein domains, giving rise to many different isoforms 23 . While the Nrxns also interact with other proteins, NLs are thought to be their ubiquitous postsynaptic partners 24 . Together these proteins contribute to holding the presynaptic and postsynaptic membranes in close and rigid apposition 25 . The two most abundant isoforms are NL-1 and NL-2 which are present at excitatory and inhibitory synapses, respectively 26 . One of the earliest co-culture model systems, designed to investigate trans-synaptic protein interactions, employed different types of non-neuronal cells, most commonly",
+        "score": 0.26935366398481736
+      },
+      {
+        "paperId": "264390036",
+        "pmid": "",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms",
+        "authors": "Orion Benner, Thomas P. Cast, L. Minamide et al.",
+        "snippet_text": "During development, NLGNs define the functional parameters of synapses in an isoform-dependent manner (4)(5)(6). Using systematic analysis of conditional and constitutive KO animals or transient overexpressions, we and others have demonstrated that NLGNs regulate the postsynaptic clustering of neurotransmitter receptors at both glutamatergic and GABAergic synapses (7)(8)(9)(10)(11)(12). In addition, loss of NLGN function by disease-associated genetic mutations can also severely disrupt the basal forms of excitatory and/or inhibitory synaptic transmission at different circuits, which further underscores their pivotal roles in neuronal communication (13)(14)(15)(16)(17)(18)(19)(20)(21)(22). \n\nVarious structural regions with unique amino acid composition are known to determine NLGNs' mechanistic features at synapses. NLGNs form heterophilic interactions with presynaptic neurexins (NRXNs) via their acetyl cholinesterase (AChE)-like domains in a Ca 2+ -dependent fashion (23)(24)(25)(26)(27). Different NLGN variants also comprise multiple shared and isoform-specific sequences within their intracellular domain and extracellular domain (ECD) that enable homodimerization versus heterodimerization and guide their respective binding affinities for other synaptic proteins, for example, PSD-95, gephyrin, collybistin, MDGA, GARLH, and synaptic receptors (28)(29)(30)(31)(32)(33)(34)(35)(36)(37). These amino acid residues play vital roles in promoting efficient transport of NLGN isoforms to synapses, and establishing NLGN-dependent cis-and trans-synaptic molecular networks, which support an optimal assembly and organization of synapses. \n\nNLGNs are also modulated by alternative splicing in their ECDs.",
+        "score": 0.21620191108457443
+      }
+    ],
+    "3": [
+      {
+        "paperId": "4438586",
+        "pmid": "",
+        "title": "Psychosis Risk Candidate ZNF804A Localizes to Synapses and Regulates Neurite Formation and Dendritic Spine Structure",
+        "authors": "P. Deans, P. Raval, K. Sellers et al.",
+        "snippet_text": "Because previous studies have suggested that ZNF804A regulates the expression of genes involved in cell adhesion, neurite outgrowth, and synaptic transmission (15,19), we reasoned that ZNF804A might influence the development of early neuronal morphology. With the use of siRNAs, we reduced ZNF804A expression in CTX0E16 neurons and examined neurite outgrowth after 7 days of differentiation. ZNF804A protein levels were reduced by between 30% and 40% by siRNA 1 and siRNA 2, respectively ( Figure 1A and Supplemental Figures S1H and 3A-C). Measurements of neuronal morphology revealed that total neurite length was significantly reduced in the presence of ZNF804A knockdown (total neurite length: scramble siRNA, 36.1 6 1.9 mm; siRNA 1, 27.8 6 0.5 mm; siRNA 2, 24.6 6 1.3 mm; Figure 2A, B). ZNF804A has been suggested to control the expression of NLGN4X (16), a member of the neuroligin-neurexin family of adhesion proteins. This protein is associated with ASDs, and it localizes to and regulates synapse density (21,22). Intriguingly, we observed a significant reduction in NLGN4 levels in cell lysates from ZNF804A siRNA CTX0E16 neurons; the adhesion protein N-cadherin and GluA2-alpha-amino-3-hydroxy-5methyl-4-isoxazole propionic acid (AMPA) receptor subunit were unaffected ( Figure 2C). NLGN4 has been suggested to be involved in neurite outgrowth (23); however, this has not been validated. Nevertheless, we reasoned that if NLGN4 was important for neurite outgrowth, exogenous expression of this protein would rescue deficits in neurite length in siRNA-treated cells. Consistent with this, total neurite length in siRNA 1-or 2-treated cells, overexpressing HA-NLGN4, was significantly increased compared with siRNA-alone conditions but",
+        "score": 0.22961589620149325
+      }
+    ],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "10": [],
+    "12": [
+      {
+        "paperId": "6437820",
+        "pmid": "",
+        "title": "Prion Protein-mediated Toxicity of Amyloid-\u03b2 Oligomers Requires Lipid Rafts and the Transmembrane LRP1*",
+        "authors": "Jo V Rushworth, Heledd H. Griffiths, N. Watt et al.",
+        "snippet_text": "B, images presented in A were analyzed using ImageJ to determine the uniformity of PrP C staining around the membrane in the presence or absence of M\u2424CD (A.U., arbitrary units). SH-SY5Y cells expressing PrP C were incubated in the absence (C) or presence (D) of 2 mM M\u2424CD for 1 h at 37 \u00b0C. Lipid rafts were prepared using a sucrose gradient and immunoblotted for transferrin receptor (TfR), Flotillin-1, PrP C (3F4), and Fyn. Fractions labeled 1-9 with non-raft in fractions 1-3 and raft in fractions 7-9. Cells from A were also immunostained for A\u2424 (E), and the amount of A\u2424 per length of cell membrane was quantified using ImageJ (n \u03ed 10; ***, p \u03fd 0.001) (F). NB7 cells were incubated in the presence or absence of 2 mM M\u2424CD for 1 h at 37 \u00b0C. Cells were then incubated with A\u2424 oligomers (A\u2424O \u03e9, 500 nM total peptide) or vehicle (\u03ea) for 20 min at 37 \u00b0C. G, total cholesterol was measured in cell lysates using the Amplex Red cholesterol assay kit (n \u03ed 6; ***, p \u03fd 0.001). H, lysates were prepared and immunoblotted for Fyn, phospho-SFK (pSFK416), PrP C , and \u2424-actin. I, amount of phospho-SFK was calculated from the immunoblots in H normalized to Fyn kinase, and presented as a percentage of the vehicle control (n \u03ed 6; **, p \u03fd 0.01; N.S., not significant).",
+        "score": 0.36127539619834936
+      }
+    ],
+    "13": [],
+    "14": [
+      {
+        "paperId": "46377328",
+        "pmid": "",
+        "title": "Epidermal Growth Factor Receptor (EGFR) Signaling Requires a Specific Endoplasmic Reticulum Thioredoxin for the Post-translational Control of Receptor Presentation to the Cell Surface*",
+        "authors": "Aiwen Dong, Dariusz Wodziak, A. Lowe",
+        "snippet_text": "After four washes with Cell Staining Buffer, cells were incubated with allophycocyanin-labeled anti-EGFR (BioLegend, 352905) or isotype control (BioLegend, 400121) for 45 min at 4 \u00b0C in the dark. Flow cytometry data were acquired using the Scanford (FACScan, Cytek) and analyzed with FlowJo v10 software (TreeStar). \n\nIsolation of Cell Surface Biotinylated Proteins-Cell surface proteins were labeled covalently using a membrane-impermeant biotinylation reagent EZ-Link Sulfo-NHS-Biotin (Pierce, 21217). The following steps were carried out at 4 \u00b0C to prevent any trafficking; cells were washed 3 times with PBS 2\u03e9 (PBS with 0.1 mM CaCl 2 , 1 mM MgCl 2 ) followed by a 30-min incubation with 1 mg/ml Sulfo-NHS-Biotin in PBS 2\u03e9 , washed twice with PBS 2\u03e9 , and quenched twice with 50 mM glycine in PBS 2\u03e9 for 5 min. After four washes with PBS 2\u03e9 , the cells were lysed while on the plate (1% Triton X-100, 150 mM NaCl, 10% glycerol, 50 mM HEPES pH 7.5, 0.1% SDS, 0.5% sodium deoxy-cholate, 1 mM Na 3 VO 4 , 2 mM EDTA, and a protease inhibitor mixture (Sigma, P8340)) followed by centrifugation for 10 min at 16,000 \u03eb g. The protein concentration of the cleared lysate was determined using the bicinchoninic acid assay (Pierce, 23228 and 23224). 200 g of protein samples were transferred to new tubes, and the volume was brought up to 400 l with lysis buffer before streptavidin beads (GE Healthcare, 17511301) were added and agitated at 4 \u00b0C for 3 h. The beads were collected by centrifugation (7000 \u03eb g) and washed 4 times with lysis buffer at 4 \u00b0C followed by an incubation at 95 \u00b0C in Laemmli sample buffer.",
+        "score": 0.3317319941035469
+      },
+      {
+        "paperId": "17849690",
+        "pmid": "",
+        "title": "A Neuroligin-4 Missense Mutation Associated with Autism Impairs Neuroligin-4 Folding and Endoplasmic Reticulum Export",
+        "authors": "Chen Zhang, J. Milunsky, Stephanie Newton et al.",
+        "snippet_text": "If the R87W substitution impairs maturation of NL4 by trapping it in the ER, it should block surface expression of NL4. To test this hypothesis, we examined the localization of wild-type and R87Wmutant NL4 in transfected COS cells whose large size facilitates localization of proteins. Whereas wild-type NL4 was predominantly localized to the plasma membrane in COS cells, the majority of R87W-mutant NL4 localized to the ER in which it was present in the same compartment as calnexin, distinct from the Golgi marker GM130 (Fig. 3 A, B). 4 Figure 4. Wild-type but not R87W-mutant NL4 is transported to dendrites in transfected neurons. A-C, Fluorescence images of hippocampal neurons transfected with wild-type and R87W-mutant NL4 that were tagged with mVenus (hNL4 WT and hNL4 R87W , respectively). Neurons were double labeled for the dendritic marker MAP2 (A), the cis-Golgi marker GM130 (B), or the synaptic vesicle protein synaptotagmin-1 (Syt 1; C); transfected NL4 was visualized with a GFP-directed antibody reacting to its Venus moiety. Arrows point to the soma of transfected neurons. Scale bars (20 m) apply to all images in a set.\n\nTo confirm that the R87W mutation impaired the surface exposure of NL4, we performed surface biotinylation experiments, using Na,K-ATPase as an internal control. Surface proteins were biotinylated in transfected HEK293 cells and purified on avidin columns, and the relative amount of biotinylated surface protein was measured by quantitative immunoblotting (Fig. 3C). We found that the R87W mutation severely impaired the surface expression of NL4 protein (percentage of surface-biotinylated NL4 protein of the total NL4 protein: 4.54 \u03ee 0.70% for wild-type NL4 vs 0.23 \u03ee 0.03% for R87W-mutant NL",
+        "score": 0.2715023972076359
+      }
+    ],
+    "15": [
+      {
+        "paperId": "13514263",
+        "pmid": "",
+        "title": "Insulin Receptor Dysfunction Impairs Cellular Clearance of Neurotoxic Oligomeric A\u03b2*",
+        "authors": "Wei\u2043qin Zhao, P. Lacor, Hui Chen et al.",
+        "snippet_text": "ADDLs in the Extracellular Compartment-In the brain, the IR tetramer exists frequently as hybrids of IR and IGF-1R, the latter also responding to insulin. We thus tested the involvement of IGF-1R in ADDL cellular clearance. Unlike insulin, IGF-1 did not increase the ADDL immunoreactivity in the lysate fraction of cortical neurons ( Fig.  3A-4). It caused, however, a profound reduction in ADDL reactivity in the medium (Fig. 3, A and D-4), which was also blocked by AG1024 (Fig. 3A-6). When present alone, the AG1024-increased extracellular ADDLs was accompanied by a reduction in intracellular ADDLs, probably due to inhibition of basal insulin receptor action ( Fig. 2A-5). Similarly, in human IGF-1Roverexpressing NIH3T3 (NIH3T3 IGF-1R (\u03e9)) cells, IGF-1 completely eliminated the extracellular ADDL immunoreactivity ( Fig. 3B-4). These results suggest IGF-1R is more effective in ADDL clearance compared with IR. Unlike IR, activation of which mediates ADDL attachment to cells, IGF-1R activation appears to clear ADDLs using an extracellular mechanism.\n\nImpairments of IR and IGF-1R Promote Extracellular ADDL Aggregation-To verify that the increased detectable ADDLs on dot blots under IR and IGF-1 inhibition represents oligomers rather than monomers, we measured SDS-resistant ADDL species using Western blots. As shown in Fig. 4A, the majority of ADDLs in the neuronal extracellular media were reduced to monomers (lane 2), that further decreased in the To inhibit IR tyrosine kinase activity neurons were treated with AG1024 prior to ADDL and insulin addition. At the end of the reaction, ADDL levels from the extracellular medium from each treatment were measured on dot blots with specific ADDL antibody NU2. B, time course of ADDL degradation in rat cortical neurons (14 days in vitro) with and without insulin. B-1, ADDL levels from the medium; B-",
+        "score": 0.2194579037891292
+      }
+    ],
+    "17": [],
+    "18": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "24": [],
+    "25": [
+      {
+        "paperId": "25912948",
+        "pmid": "",
+        "title": "Molecular Cloning and Characterization of a Human Uronyl 2-Sulfotransferase That Sulfates Iduronyl and Glucuronyl Residues in Dermatan/Chondroitin Sulfate*",
+        "authors": "Masashi Kobayashi, G. Sugumaran, Jian Liu et al.",
+        "snippet_text": "Dermatan sulfate is a glycosaminoglycan polysaccharide consisting of N-acetylgalactosamine (GalNAc) residues alternating with varying proportions of glucuronyl (GlcA) 1 and iduronyl (IdceA) residues that are formed from the GlcA by epimerization during polymerization and GalNAc 4-sulfation (1)(2)(3)(4). Thus dermatan sulfate can be considered as a variant of chondroitin 4-sulfate, containing some IdceA as well as GlcA, with the IdceA only found next to 4-sulfated GalNAc residues (5). In addition the IdceA of dermatan sulfate is frequently 2-sulfated (6). Some 2-sulfation of GlcA on chondroitin sulfate has also been found but only next to GalNAc 6-sulfate rather than GalNAc 4-sulfate. Proteoglycans containing dermatan sulfate are ubiquitously present in most tissues, where the dermatan sulfate portion may be involved in various biological activities presumably relating in great part to its fine structure. Activities include interaction with heparin cofactor II (7,8) requiring repeating 2-sulfated iduronyl-containing disaccharide units (7), hepatocyte growth factor/scatter factor (9), and promotion of fibroblast growth factor-2 during wound repair (10). Although there is little information concerning detailed biological activities based on the structural diversity of the dermatan sulfate, the 2-sulfation of IdceA would appear to be of special interest. \n\nThe only galactosaminoglycan sulfotransferase that has been cloned to date is a chondroitin 6-sulfotransferase (11). However, several glucosaminoglycan sulfotransferases have been cloned (12)(13)(14)(15)(16)(17)(18)(19), including an IdceA 2-sulfotransferase for heparan sulfate (15,20).",
+        "score": 0.41135370028146595
+      }
+    ],
+    "26": [
+      {
+        "paperId": "9769988",
+        "pmid": "",
+        "title": "Inhibition of Calcineurin-mediated Endocytosis and \u03b1-Amino-3-hydroxy-5-methyl-4-isoxazolepropionic Acid (AMPA) Receptors Prevents Amyloid \u03b2 Oligomer-induced Synaptic Disruption",
+        "authors": "Wei\u2043qin Zhao, F. Santini, R. Breese et al.",
+        "snippet_text": "In contrast, the AMPA receptor (AMPAR), the glutamate receptor subtype that mediates the majority of the fast excitatory synaptic transmission (25) essential for memory processing (26 -28), has not been implicated as a binding partner for A\u2424. \n\nDespite a lack of data demonstrating direct A\u2424 binding to AMPARs, detrimental changes in AMPARs are a molecular correlate of synaptic losses in the AD brain. For example, the",
+        "score": 0.408621703453009
+      }
+    ],
+    "27": [],
+    "28": [
+      {
+        "paperId": "264390036",
+        "pmid": "",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms",
+        "authors": "Orion Benner, Thomas P. Cast, L. Minamide et al.",
+        "snippet_text": "In recent years, elegant glycomic and glycoproteomic approaches have revealed an intricate glycosylation profile of mammalian brain with enormous spatial and temporal diversities. Nevertheless, at a cellular level, it is unclear how these post-translational modifications affect various proteins to influence crucial neuronal properties. Here, we have investigated the impact of N-linked glycosylation on neuroligins (NLGNs), a class of cell-adhesion molecules that play instructive roles in synapse organization. We found that endogenous NLGN proteins are differentially glycosylated across several regions of murine brain in a sex-independent but isoform-dependent manner. In both rodent primary neurons derived from brain sections and human neurons differentiated from stem cells, all NLGN variants were highly enriched with multiple N-glycan subtypes, which cumulatively ensured their efficient trafficking to the cell surface. Removal of these N-glycosylation residues only had a moderate effect on NLGNs\u2019 stability or expression levels but particularly enhanced their retention at the endoplasmic reticulum. As a result, the glycosylation-deficient NLGNs exhibited considerable impairments in their dendritic distribution and postsynaptic accumulation, which in turn, virtually eliminated their ability to recruit presynaptic terminals and significantly reduced NLGN overexpression\u2013induced assemblies of both glutamatergic and GABAergic synapse structures. Therefore, our results highlight an essential mechanistic contribution of N-linked glycosylations in facilitating the appropriate secretory transport of a major synaptic cell-adhesion molecule and promoting its cellular function in neurons.",
+        "score": 0.2942247584068489
+      }
+    ],
+    "29": []
+  },
+  "hub_gene_snippets": {},
+  "co_annotation_snippets": {
+    "5": {
+      "NRXN1": []
+    },
+    "6": {
+      "ZNF804A": []
+    },
+    "24": {
+      "NLGN4X": []
+    }
+  },
+  "cross_theme_snippets": {
+    "NLGN4X": [
+      {
+        "paperId": "264390036",
+        "pmid": "",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms",
+        "authors": "Orion Benner, Thomas P. Cast, L. Minamide et al.",
+        "snippet_text": "A similar trend was detected when we repeated the experiments to probe for GABAergic synapses (Fig. 6G). Coimmunostaining for surface HA-NLGNs and GABAergic synapse marker vGAT revealed notable increase in synapse number and size by WT NLGN2 and NLGN3 overexpressions in NLGN1/2/3/4 KO background, whereas NLGN1 only enhanced vGAT density without affecting the puncta size, and NLGN4 failed to induce any changes (Fig. 6, G and H). Once again, glycan-deleted NLGNs were unable to generate similar impacts on GABAergic synapse morphologies and produced little to no effects compared with control groups (Fig. 6, G and H). In addition, glycan-null NLGNs continued to display a limited colocalization also with vGAT puncta, confirming their minimal recruitment at GABAergic synapses (Fig. 6, I-L). Together, these data uncovered an indispensable role of Nglycosylation for all NLGN isoforms, which ensures their efficient dendritic distribution and functional contribution in synapse development.",
+        "score": 0.47158443422296914
+      },
+      {
+        "paperId": "264390036",
+        "pmid": "",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms",
+        "authors": "Orion Benner, Thomas P. Cast, L. Minamide et al.",
+        "snippet_text": "During development, NLGNs define the functional parameters of synapses in an isoform-dependent manner (4)(5)(6). Using systematic analysis of conditional and constitutive KO animals or transient overexpressions, we and others have demonstrated that NLGNs regulate the postsynaptic clustering of neurotransmitter receptors at both glutamatergic and GABAergic synapses (7)(8)(9)(10)(11)(12). In addition, loss of NLGN function by disease-associated genetic mutations can also severely disrupt the basal forms of excitatory and/or inhibitory synaptic transmission at different circuits, which further underscores their pivotal roles in neuronal communication (13)(14)(15)(16)(17)(18)(19)(20)(21)(22). \n\nVarious structural regions with unique amino acid composition are known to determine NLGNs' mechanistic features at synapses. NLGNs form heterophilic interactions with presynaptic neurexins (NRXNs) via their acetyl cholinesterase (AChE)-like domains in a Ca 2+ -dependent fashion (23)(24)(25)(26)(27). Different NLGN variants also comprise multiple shared and isoform-specific sequences within their intracellular domain and extracellular domain (ECD) that enable homodimerization versus heterodimerization and guide their respective binding affinities for other synaptic proteins, for example, PSD-95, gephyrin, collybistin, MDGA, GARLH, and synaptic receptors (28)(29)(30)(31)(32)(33)(34)(35)(36)(37). These amino acid residues play vital roles in promoting efficient transport of NLGN isoforms to synapses, and establishing NLGN-dependent cis-and trans-synaptic molecular networks, which support an optimal assembly and organization of synapses. \n\nNLGNs are also modulated by alternative splicing in their ECDs.",
+        "score": 0.4500414771505014
+      }
+    ],
+    "IL1RAPL1": [
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "score": 0.70307674202329
+      },
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "In this study, we found that both IL1RAPL1 and IL1RAPL2 can induce excitatory pre-synapse differentiation and dendritic spine formation. Interestingly, although the extracellular domain is sufficient for inducing pre-synaptic differentiation, both extracellular and intracellular TIR domains are required for dendritic spine formation. Using affinity chromatography, we identified protein tyrosine phosphatase delta (PTPd) as a binding partner of IL1RAPL1 through its extracellular domain. This interaction was confirmed biochemically and with an HEK cell trans-clustering assay using both IL1RAPL1 and IL1RAPL2. Using yeast two-hybrid screening, we found that the IL1RAPL1 intracellular TIR domain interacts with RhoGAP2, which is localized at the excitatory post-synaptic density. The interaction of IL1RAPL1 with RhoGAP2 is required to induce dendritic spine formation. Interestingly, we found that blocking the IL1RAPL1/PTPd interaction abolished RhoGAP2 recruitment at excitatory synapses, suggesting that IL1RAPL1 is involved in a novel trans-synaptic signaling pathway that regulates excitatory synapse and dendritic spine formation.",
+        "score": 0.6161059048464863
+      }
+    ],
+    "CNTNAP2": [],
+    "PPFIA2": [],
+    "GRID2": [],
+    "ZNF804A": [],
+    "SCN3A": [],
+    "CDH13": []
+  },
+  "cross_theme_gaf_snippets": {
+    "NLGN4X": [
+      {
+        "paperId": "264390036",
+        "pmid": "",
+        "title": "Multiple N-linked glycosylation sites critically modulate the synaptic abundance of neuroligin isoforms",
+        "authors": "Orion Benner, Thomas P. Cast, L. Minamide et al.",
+        "snippet_text": "A similar trend was detected when we repeated the experiments to probe for GABAergic synapses (Fig. 6G). Coimmunostaining for surface HA-NLGNs and GABAergic synapse marker vGAT revealed notable increase in synapse number and size by WT NLGN2 and NLGN3 overexpressions in NLGN1/2/3/4 KO background, whereas NLGN1 only enhanced vGAT density without affecting the puncta size, and NLGN4 failed to induce any changes (Fig. 6, G and H). Once again, glycan-deleted NLGNs were unable to generate similar impacts on GABAergic synapse morphologies and produced little to no effects compared with control groups (Fig. 6, G and H). In addition, glycan-null NLGNs continued to display a limited colocalization also with vGAT puncta, confirming their minimal recruitment at GABAergic synapses (Fig. 6, I-L). Together, these data uncovered an indispensable role of Nglycosylation for all NLGN isoforms, which ensures their efficient dendritic distribution and functional contribution in synapse development.",
+        "score": 0.47158443422296914
+      }
+    ],
+    "IL1RAPL1": [
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "score": 0.70307674202329
+      }
+    ],
+    "CNTNAP2": [],
+    "PPFIA2": [],
+    "GRID2": [],
+    "ZNF804A": [],
+    "SCN3A": [],
+    "CDH13": []
+  }
+}

@@ -1,0 +1,1907 @@
+{
+  "0": [
+    {
+      "pmid": "37865312",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0030425"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0030425"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "dendrite [GO:0030425]"
+        ]
+      }
+    },
+    {
+      "pmid": "33856728",
+      "genes_covered": [
+        "PTCHD1"
+      ],
+      "go_terms": [
+        "GO:0043197"
+      ],
+      "gene_go_map": {
+        "PTCHD1": [
+          "GO:0043197"
+        ]
+      },
+      "gene_go_named": {
+        "PTCHD1": [
+          "dendritic spine [GO:0043197]"
+        ]
+      }
+    },
+    {
+      "pmid": "19726642",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0030425"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0030425"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "dendrite [GO:0030425]"
+        ]
+      }
+    },
+    {
+      "pmid": "14532270",
+      "genes_covered": [
+        "PACRG"
+      ],
+      "go_terms": [
+        "GO:0043005"
+      ],
+      "gene_go_map": {
+        "PACRG": [
+          "GO:0043005"
+        ]
+      },
+      "gene_go_named": {
+        "PACRG": [
+          "neuron projection [GO:0043005]"
+        ]
+      }
+    },
+    {
+      "pmid": "8812479",
+      "genes_covered": [
+        "NRCAM"
+      ],
+      "go_terms": [
+        "GO:0043005"
+      ],
+      "gene_go_map": {
+        "NRCAM": [
+          "GO:0043005"
+        ]
+      },
+      "gene_go_named": {
+        "NRCAM": [
+          "neuron projection [GO:0043005]"
+        ]
+      }
+    }
+  ],
+  "1": [
+    {
+      "pmid": "31257103",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0098839"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0098839"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "postsynaptic density membrane [GO:0098839]"
+        ]
+      }
+    }
+  ],
+  "2": [
+    {
+      "pmid": "34706237",
+      "genes_covered": [
+        "GRIK3"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "GRIK3": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "GRIK3": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "31257103",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "26776509",
+      "genes_covered": [
+        "LRRTM3"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "LRRTM3": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "LRRTM3": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "21838267",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0098985"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0098985"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "asymmetric, glutamatergic, excitatory synapse [GO:0098985]"
+        ]
+      }
+    }
+  ],
+  "3": [
+    {
+      "pmid": "25468996",
+      "genes_covered": [
+        "PDLIM5"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "PDLIM5": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "PDLIM5": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "24046456",
+      "genes_covered": [
+        "CDH2"
+      ],
+      "go_terms": [
+        "GO:0005912"
+      ],
+      "gene_go_map": {
+        "CDH2": [
+          "GO:0005912"
+        ]
+      },
+      "gene_go_named": {
+        "CDH2": [
+          "adherens junction [GO:0005912]"
+        ]
+      }
+    },
+    {
+      "pmid": "22006950",
+      "genes_covered": [
+        "PARD3"
+      ],
+      "go_terms": [
+        "GO:0005923"
+      ],
+      "gene_go_map": {
+        "PARD3": [
+          "GO:0005923"
+        ]
+      },
+      "gene_go_named": {
+        "PARD3": [
+          "bicellular tight junction [GO:0005923]"
+        ]
+      }
+    },
+    {
+      "pmid": "20332120",
+      "genes_covered": [
+        "PARD3"
+      ],
+      "go_terms": [
+        "GO:0005911"
+      ],
+      "gene_go_map": {
+        "PARD3": [
+          "GO:0005911"
+        ]
+      },
+      "gene_go_named": {
+        "PARD3": [
+          "cell-cell junction [GO:0005911]"
+        ]
+      }
+    },
+    {
+      "pmid": "19332538",
+      "genes_covered": [
+        "PTPRJ"
+      ],
+      "go_terms": [
+        "GO:0005911"
+      ],
+      "gene_go_map": {
+        "PTPRJ": [
+          "GO:0005911"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRJ": [
+          "cell-cell junction [GO:0005911]"
+        ]
+      }
+    }
+  ],
+  "4": [
+    {
+      "pmid": "10806482",
+      "genes_covered": [
+        "PDGFC",
+        "PDGFRA"
+      ],
+      "go_terms": [
+        "GO:0048008"
+      ],
+      "gene_go_map": {
+        "PDGFC": [
+          "GO:0048008"
+        ],
+        "PDGFRA": [
+          "GO:0048008"
+        ]
+      },
+      "gene_go_named": {
+        "PDGFC": [
+          "platelet-derived growth factor receptor signaling pathway [GO:0048008]"
+        ],
+        "PDGFRA": [
+          "platelet-derived growth factor receptor signaling pathway [GO:0048008]"
+        ]
+      }
+    },
+    {
+      "pmid": "23554459",
+      "genes_covered": [
+        "NR4A3"
+      ],
+      "go_terms": [
+        "GO:0048008"
+      ],
+      "gene_go_map": {
+        "NR4A3": [
+          "GO:0048008"
+        ]
+      },
+      "gene_go_named": {
+        "NR4A3": [
+          "platelet-derived growth factor receptor signaling pathway [GO:0048008]"
+        ]
+      }
+    },
+    {
+      "pmid": "21091576",
+      "genes_covered": [
+        "PTPRJ"
+      ],
+      "go_terms": [
+        "GO:0048008"
+      ],
+      "gene_go_map": {
+        "PTPRJ": [
+          "GO:0048008"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRJ": [
+          "platelet-derived growth factor receptor signaling pathway [GO:0048008]"
+        ]
+      }
+    },
+    {
+      "pmid": "17470632",
+      "genes_covered": [
+        "PDGFRA"
+      ],
+      "go_terms": [
+        "GO:0038091"
+      ],
+      "gene_go_map": {
+        "PDGFRA": [
+          "GO:0038091"
+        ]
+      },
+      "gene_go_named": {
+        "PDGFRA": [
+          "positive regulation of cell proliferation by VEGF-activated platelet derived growth factor receptor signaling pathway [GO:0038091]"
+        ]
+      }
+    },
+    {
+      "pmid": "11297552",
+      "genes_covered": [
+        "PDGFRA"
+      ],
+      "go_terms": [
+        "GO:0035790"
+      ],
+      "gene_go_map": {
+        "PDGFRA": [
+          "GO:0035790"
+        ]
+      },
+      "gene_go_named": {
+        "PDGFRA": [
+          "platelet-derived growth factor receptor-alpha signaling pathway [GO:0035790]"
+        ]
+      }
+    }
+  ],
+  "5": [
+    {
+      "pmid": "18923512",
+      "genes_covered": [
+        "NLGN4X",
+        "NRXN3"
+      ],
+      "go_terms": [
+        "GO:0007158"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0007158"
+        ],
+        "NRXN3": [
+          "GO:0007158"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "neuron cell-cell adhesion [GO:0007158]"
+        ],
+        "NRXN3": [
+          "neuron cell-cell adhesion [GO:0007158]"
+        ]
+      }
+    },
+    {
+      "pmid": "31585109",
+      "genes_covered": [
+        "CDH2"
+      ],
+      "go_terms": [
+        "GO:0098609"
+      ],
+      "gene_go_map": {
+        "CDH2": [
+          "GO:0098609"
+        ]
+      },
+      "gene_go_named": {
+        "CDH2": [
+          "cell-cell adhesion [GO:0098609]"
+        ]
+      }
+    },
+    {
+      "pmid": "26235030",
+      "genes_covered": [
+        "ADGRL3"
+      ],
+      "go_terms": [
+        "GO:0098609"
+      ],
+      "gene_go_map": {
+        "ADGRL3": [
+          "GO:0098609"
+        ]
+      },
+      "gene_go_named": {
+        "ADGRL3": [
+          "cell-cell adhesion [GO:0098609]"
+        ]
+      }
+    },
+    {
+      "pmid": "23986473",
+      "genes_covered": [
+        "LRRC4C"
+      ],
+      "go_terms": [
+        "GO:0099560"
+      ],
+      "gene_go_map": {
+        "LRRC4C": [
+          "GO:0099560"
+        ]
+      },
+      "gene_go_named": {
+        "LRRC4C": [
+          "synaptic membrane adhesion [GO:0099560]"
+        ]
+      }
+    },
+    {
+      "pmid": "23136403",
+      "genes_covered": [
+        "CTNNA3"
+      ],
+      "go_terms": [
+        "GO:0086073"
+      ],
+      "gene_go_map": {
+        "CTNNA3": [
+          "GO:0086073"
+        ]
+      },
+      "gene_go_named": {
+        "CTNNA3": [
+          "bundle of His cell-Purkinje myocyte adhesion involved in cell communication [GO:0086073]"
+        ]
+      }
+    }
+  ],
+  "6": [
+    {
+      "pmid": "25468996",
+      "genes_covered": [
+        "PDLIM5",
+        "PHLDB2"
+      ],
+      "go_terms": [
+        "GO:0045296",
+        "GO:0098641"
+      ],
+      "gene_go_map": {
+        "PDLIM5": [
+          "GO:0098641"
+        ],
+        "PHLDB2": [
+          "GO:0045296"
+        ]
+      },
+      "gene_go_named": {
+        "PDLIM5": [
+          "cadherin binding involved in cell-cell adhesion [GO:0098641]"
+        ],
+        "PHLDB2": [
+          "cadherin binding [GO:0045296]"
+        ]
+      }
+    },
+    {
+      "pmid": "19141530",
+      "genes_covered": [
+        "PTN",
+        "PTPRZ1"
+      ],
+      "go_terms": [
+        "GO:0005178"
+      ],
+      "gene_go_map": {
+        "PTN": [
+          "GO:0005178"
+        ],
+        "PTPRZ1": [
+          "GO:0005178"
+        ]
+      },
+      "gene_go_named": {
+        "PTN": [
+          "integrin binding [GO:0005178]"
+        ],
+        "PTPRZ1": [
+          "integrin binding [GO:0005178]"
+        ]
+      }
+    },
+    {
+      "pmid": "18923512",
+      "genes_covered": [
+        "NLGN4X",
+        "NRXN3"
+      ],
+      "go_terms": [
+        "GO:0050839"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0050839"
+        ],
+        "NRXN3": [
+          "GO:0050839"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "cell adhesion molecule binding [GO:0050839]"
+        ],
+        "NRXN3": [
+          "cell adhesion molecule binding [GO:0050839]"
+        ]
+      }
+    },
+    {
+      "pmid": "37865312",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0098631"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0098631"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "cell adhesion mediator activity [GO:0098631]"
+        ]
+      }
+    },
+    {
+      "pmid": "28926625",
+      "genes_covered": [
+        "PTPRJ"
+      ],
+      "go_terms": [
+        "GO:0045296"
+      ],
+      "gene_go_map": {
+        "PTPRJ": [
+          "GO:0045296"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRJ": [
+          "cadherin binding [GO:0045296]"
+        ]
+      }
+    }
+  ],
+  "7": [
+    {
+      "pmid": "28688764",
+      "genes_covered": [
+        "RELL1"
+      ],
+      "go_terms": [
+        "GO:1900745"
+      ],
+      "gene_go_map": {
+        "RELL1": [
+          "GO:1900745"
+        ]
+      },
+      "gene_go_named": {
+        "RELL1": [
+          "positive regulation of p38MAPK cascade [GO:1900745]"
+        ]
+      }
+    },
+    {
+      "pmid": "28131417",
+      "genes_covered": [
+        "TGFBR2"
+      ],
+      "go_terms": [
+        "GO:0060391"
+      ],
+      "gene_go_map": {
+        "TGFBR2": [
+          "GO:0060391"
+        ]
+      },
+      "gene_go_named": {
+        "TGFBR2": [
+          "positive regulation of SMAD protein signal transduction [GO:0060391]"
+        ]
+      }
+    },
+    {
+      "pmid": "26865629",
+      "genes_covered": [
+        "NPSR1"
+      ],
+      "go_terms": [
+        "GO:0141163",
+        "GO:0070374"
+      ],
+      "gene_go_map": {
+        "NPSR1": [
+          "GO:0070374",
+          "GO:0141163"
+        ]
+      },
+      "gene_go_named": {
+        "NPSR1": [
+          "positive regulation of ERK1 and ERK2 cascade [GO:0070374]",
+          "positive regulation of cAMP/PKA signal transduction [GO:0141163]"
+        ]
+      }
+    },
+    {
+      "pmid": "25985275",
+      "genes_covered": [
+        "SEMA3E"
+      ],
+      "go_terms": [
+        "GO:0051897"
+      ],
+      "gene_go_map": {
+        "SEMA3E": [
+          "GO:0051897"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA3E": [
+          "positive regulation of phosphatidylinositol 3-kinase/protein kinase B signal transduction [GO:0051897]"
+        ]
+      }
+    },
+    {
+      "pmid": "24606633",
+      "genes_covered": [
+        "TGFBR2"
+      ],
+      "go_terms": [
+        "GO:0060391"
+      ],
+      "gene_go_map": {
+        "TGFBR2": [
+          "GO:0060391"
+        ]
+      },
+      "gene_go_named": {
+        "TGFBR2": [
+          "positive regulation of SMAD protein signal transduction [GO:0060391]"
+        ]
+      }
+    }
+  ],
+  "8": [
+    {
+      "pmid": "23990668",
+      "genes_covered": [
+        "PRKCA"
+      ],
+      "go_terms": [
+        "GO:0030335"
+      ],
+      "gene_go_map": {
+        "PRKCA": [
+          "GO:0030335"
+        ]
+      },
+      "gene_go_named": {
+        "PRKCA": [
+          "positive regulation of cell migration [GO:0030335]"
+        ]
+      }
+    },
+    {
+      "pmid": "23554459",
+      "genes_covered": [
+        "NR4A3"
+      ],
+      "go_terms": [
+        "GO:1904754"
+      ],
+      "gene_go_map": {
+        "NR4A3": [
+          "GO:1904754"
+        ]
+      },
+      "gene_go_named": {
+        "NR4A3": [
+          "positive regulation of vascular associated smooth muscle cell migration [GO:1904754]"
+        ]
+      }
+    },
+    {
+      "pmid": "23437250",
+      "genes_covered": [
+        "ADAM9"
+      ],
+      "go_terms": [
+        "GO:0030335"
+      ],
+      "gene_go_map": {
+        "ADAM9": [
+          "GO:0030335"
+        ]
+      },
+      "gene_go_named": {
+        "ADAM9": [
+          "positive regulation of cell migration [GO:0030335]"
+        ]
+      }
+    },
+    {
+      "pmid": "23027130",
+      "genes_covered": [
+        "NTRK3"
+      ],
+      "go_terms": [
+        "GO:0030335",
+        "GO:0050927"
+      ],
+      "gene_go_map": {
+        "NTRK3": [
+          "GO:0030335",
+          "GO:0050927"
+        ]
+      },
+      "gene_go_named": {
+        "NTRK3": [
+          "positive regulation of cell migration [GO:0030335]",
+          "positive regulation of positive chemotaxis [GO:0050927]"
+        ]
+      }
+    },
+    {
+      "pmid": "20497126",
+      "genes_covered": [
+        "PRKD1"
+      ],
+      "go_terms": [
+        "GO:2001028",
+        "GO:0043536"
+      ],
+      "gene_go_map": {
+        "PRKD1": [
+          "GO:0043536",
+          "GO:2001028"
+        ]
+      },
+      "gene_go_named": {
+        "PRKD1": [
+          "positive regulation of blood vessel endothelial cell migration [GO:0043536]",
+          "positive regulation of endothelial cell chemotaxis [GO:2001028]"
+        ]
+      }
+    }
+  ],
+  "9": [
+    {
+      "pmid": "31257103",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0051963"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0051963"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "regulation of synapse assembly [GO:0051963]"
+        ]
+      }
+    },
+    {
+      "pmid": "26776509",
+      "genes_covered": [
+        "LRRTM3"
+      ],
+      "go_terms": [
+        "GO:1905606"
+      ],
+      "gene_go_map": {
+        "LRRTM3": [
+          "GO:1905606"
+        ]
+      },
+      "gene_go_named": {
+        "LRRTM3": [
+          "regulation of presynapse assembly [GO:1905606]"
+        ]
+      }
+    }
+  ],
+  "10": [
+    {
+      "pmid": "31257103",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0051963"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0051963"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "regulation of synapse assembly [GO:0051963]"
+        ]
+      }
+    },
+    {
+      "pmid": "26776509",
+      "genes_covered": [
+        "LRRTM3"
+      ],
+      "go_terms": [
+        "GO:1905606"
+      ],
+      "gene_go_map": {
+        "LRRTM3": [
+          "GO:1905606"
+        ]
+      },
+      "gene_go_named": {
+        "LRRTM3": [
+          "regulation of presynapse assembly [GO:1905606]"
+        ]
+      }
+    },
+    {
+      "pmid": "24859005",
+      "genes_covered": [
+        "PHLDB2"
+      ],
+      "go_terms": [
+        "GO:0051895"
+      ],
+      "gene_go_map": {
+        "PHLDB2": [
+          "GO:0051895"
+        ]
+      },
+      "gene_go_named": {
+        "PHLDB2": [
+          "negative regulation of focal adhesion assembly [GO:0051895]"
+        ]
+      }
+    },
+    {
+      "pmid": "21091576",
+      "genes_covered": [
+        "PTPRJ"
+      ],
+      "go_terms": [
+        "GO:0051894"
+      ],
+      "gene_go_map": {
+        "PTPRJ": [
+          "GO:0051894"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRJ": [
+          "positive regulation of focal adhesion assembly [GO:0051894]"
+        ]
+      }
+    },
+    {
+      "pmid": "11870224",
+      "genes_covered": [
+        "EPHA3"
+      ],
+      "go_terms": [
+        "GO:0051893"
+      ],
+      "gene_go_map": {
+        "EPHA3": [
+          "GO:0051893"
+        ]
+      },
+      "gene_go_named": {
+        "EPHA3": [
+          "regulation of focal adhesion assembly [GO:0051893]"
+        ]
+      }
+    }
+  ],
+  "11": [
+    {
+      "pmid": "29058690",
+      "genes_covered": [
+        "PLCE1"
+      ],
+      "go_terms": [
+        "GO:0010592"
+      ],
+      "gene_go_map": {
+        "PLCE1": [
+          "GO:0010592"
+        ]
+      },
+      "gene_go_named": {
+        "PLCE1": [
+          "positive regulation of lamellipodium assembly [GO:0010592]"
+        ]
+      }
+    },
+    {
+      "pmid": "28008308",
+      "genes_covered": [
+        "PTEN"
+      ],
+      "go_terms": [
+        "GO:0010977"
+      ],
+      "gene_go_map": {
+        "PTEN": [
+          "GO:0010977"
+        ]
+      },
+      "gene_go_named": {
+        "PTEN": [
+          "negative regulation of neuron projection development [GO:0010977]"
+        ]
+      }
+    },
+    {
+      "pmid": "27655914",
+      "genes_covered": [
+        "PTPN9"
+      ],
+      "go_terms": [
+        "GO:0010977"
+      ],
+      "gene_go_map": {
+        "PTPN9": [
+          "GO:0010977"
+        ]
+      },
+      "gene_go_named": {
+        "PTPN9": [
+          "negative regulation of neuron projection development [GO:0010977]"
+        ]
+      }
+    },
+    {
+      "pmid": "22797597",
+      "genes_covered": [
+        "TNIK"
+      ],
+      "go_terms": [
+        "GO:1903698"
+      ],
+      "gene_go_map": {
+        "TNIK": [
+          "GO:1903698"
+        ]
+      },
+      "gene_go_named": {
+        "TNIK": [
+          "positive regulation of microvillus assembly [GO:1903698]"
+        ]
+      }
+    },
+    {
+      "pmid": "22683681",
+      "genes_covered": [
+        "SEMA3A"
+      ],
+      "go_terms": [
+        "GO:0150020"
+      ],
+      "gene_go_map": {
+        "SEMA3A": [
+          "GO:0150020"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA3A": [
+          "basal dendrite arborization [GO:0150020]"
+        ]
+      }
+    }
+  ],
+  "12": [
+    {
+      "pmid": "31537781",
+      "genes_covered": [
+        "STK33"
+      ],
+      "go_terms": [
+        "GO:0018107"
+      ],
+      "gene_go_map": {
+        "STK33": [
+          "GO:0018107"
+        ]
+      },
+      "gene_go_named": {
+        "STK33": [
+          "peptidyl-threonine phosphorylation [GO:0018107]"
+        ]
+      }
+    },
+    {
+      "pmid": "31409757",
+      "genes_covered": [
+        "NEK6"
+      ],
+      "go_terms": [
+        "GO:0006468"
+      ],
+      "gene_go_map": {
+        "NEK6": [
+          "GO:0006468"
+        ]
+      },
+      "gene_go_named": {
+        "NEK6": [
+          "protein phosphorylation [GO:0006468]"
+        ]
+      }
+    },
+    {
+      "pmid": "27655914",
+      "genes_covered": [
+        "PTPN9"
+      ],
+      "go_terms": [
+        "GO:0035335"
+      ],
+      "gene_go_map": {
+        "PTPN9": [
+          "GO:0035335"
+        ]
+      },
+      "gene_go_named": {
+        "PTPN9": [
+          "peptidyl-tyrosine dephosphorylation [GO:0035335]"
+        ]
+      }
+    },
+    {
+      "pmid": "25329316",
+      "genes_covered": [
+        "NUAK1"
+      ],
+      "go_terms": [
+        "GO:0006468"
+      ],
+      "gene_go_map": {
+        "NUAK1": [
+          "GO:0006468"
+        ]
+      },
+      "gene_go_named": {
+        "NUAK1": [
+          "protein phosphorylation [GO:0006468]"
+        ]
+      }
+    },
+    {
+      "pmid": "24623306",
+      "genes_covered": [
+        "PRKD1"
+      ],
+      "go_terms": [
+        "GO:0046777"
+      ],
+      "gene_go_map": {
+        "PRKD1": [
+          "GO:0046777"
+        ]
+      },
+      "gene_go_named": {
+        "PRKD1": [
+          "protein autophosphorylation [GO:0046777]"
+        ]
+      }
+    }
+  ],
+  "13": [
+    {
+      "pmid": "22209245",
+      "genes_covered": [
+        "NRXN3"
+      ],
+      "go_terms": [
+        "GO:0007612"
+      ],
+      "gene_go_map": {
+        "NRXN3": [
+          "GO:0007612"
+        ]
+      },
+      "gene_go_named": {
+        "NRXN3": [
+          "learning [GO:0007612]"
+        ]
+      }
+    },
+    {
+      "pmid": "16675393",
+      "genes_covered": [
+        "PTEN"
+      ],
+      "go_terms": [
+        "GO:0007611"
+      ],
+      "gene_go_map": {
+        "PTEN": [
+          "GO:0007611"
+        ]
+      },
+      "gene_go_named": {
+        "PTEN": [
+          "learning or memory [GO:0007611]"
+        ]
+      }
+    },
+    {
+      "pmid": "12669065",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0007612"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0007612"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "learning [GO:0007612]"
+        ]
+      }
+    },
+    {
+      "pmid": "10485705",
+      "genes_covered": [
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0007611"
+      ],
+      "gene_go_map": {
+        "GRIN2B": [
+          "GO:0007611"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN2B": [
+          "learning or memory [GO:0007611]"
+        ]
+      }
+    }
+  ],
+  "14": [
+    {
+      "pmid": "15702972",
+      "genes_covered": [
+        "PLCH1"
+      ],
+      "go_terms": [
+        "GO:0048015"
+      ],
+      "gene_go_map": {
+        "PLCH1": [
+          "GO:0048015"
+        ]
+      },
+      "gene_go_named": {
+        "PLCH1": [
+          "phosphatidylinositol-mediated signaling [GO:0048015]"
+        ]
+      }
+    }
+  ],
+  "15": [
+    {
+      "pmid": "29431694",
+      "genes_covered": [
+        "ILDR2"
+      ],
+      "go_terms": [
+        "GO:0050868"
+      ],
+      "gene_go_map": {
+        "ILDR2": [
+          "GO:0050868"
+        ]
+      },
+      "gene_go_named": {
+        "ILDR2": [
+          "negative regulation of T cell activation [GO:0050868]"
+        ]
+      }
+    },
+    {
+      "pmid": "24859005",
+      "genes_covered": [
+        "PHLDB2"
+      ],
+      "go_terms": [
+        "GO:0051895"
+      ],
+      "gene_go_map": {
+        "PHLDB2": [
+          "GO:0051895"
+        ]
+      },
+      "gene_go_named": {
+        "PHLDB2": [
+          "negative regulation of focal adhesion assembly [GO:0051895]"
+        ]
+      }
+    },
+    {
+      "pmid": "21724833",
+      "genes_covered": [
+        "PTPRG"
+      ],
+      "go_terms": [
+        "GO:1903385"
+      ],
+      "gene_go_map": {
+        "PTPRG": [
+          "GO:1903385"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRG": [
+          "regulation of homophilic cell adhesion [GO:1903385]"
+        ]
+      }
+    },
+    {
+      "pmid": "21091576",
+      "genes_covered": [
+        "PTPRJ"
+      ],
+      "go_terms": [
+        "GO:0051894",
+        "GO:0045785"
+      ],
+      "gene_go_map": {
+        "PTPRJ": [
+          "GO:0045785",
+          "GO:0051894"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRJ": [
+          "positive regulation of cell adhesion [GO:0045785]",
+          "positive regulation of focal adhesion assembly [GO:0051894]"
+        ]
+      }
+    },
+    {
+      "pmid": "20558821",
+      "genes_covered": [
+        "NR4A3"
+      ],
+      "go_terms": [
+        "GO:1900625"
+      ],
+      "gene_go_map": {
+        "NR4A3": [
+          "GO:1900625"
+        ]
+      },
+      "gene_go_named": {
+        "NR4A3": [
+          "positive regulation of monocyte aggregation [GO:1900625]"
+        ]
+      }
+    }
+  ],
+  "16": [
+    {
+      "pmid": "19726642",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0090394"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0090394"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "negative regulation of excitatory postsynaptic potential [GO:0090394]"
+        ]
+      }
+    },
+    {
+      "pmid": "15003177",
+      "genes_covered": [
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:2000463"
+      ],
+      "gene_go_map": {
+        "GRIN2B": [
+          "GO:2000463"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN2B": [
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ]
+      }
+    }
+  ],
+  "17": [
+    {
+      "pmid": "35108495",
+      "genes_covered": [
+        "NRCAM"
+      ],
+      "go_terms": [
+        "GO:0007417"
+      ],
+      "gene_go_map": {
+        "NRCAM": [
+          "GO:0007417"
+        ]
+      },
+      "gene_go_named": {
+        "NRCAM": [
+          "central nervous system development [GO:0007417]"
+        ]
+      }
+    },
+    {
+      "pmid": "19909241",
+      "genes_covered": [
+        "SEMA3A"
+      ],
+      "go_terms": [
+        "GO:0048485",
+        "GO:0048880"
+      ],
+      "gene_go_map": {
+        "SEMA3A": [
+          "GO:0048485",
+          "GO:0048880"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA3A": [
+          "sympathetic nervous system development [GO:0048485]",
+          "sensory system development [GO:0048880]"
+        ]
+      }
+    },
+    {
+      "pmid": "10858496",
+      "genes_covered": [
+        "PDGFC"
+      ],
+      "go_terms": [
+        "GO:0007417"
+      ],
+      "gene_go_map": {
+        "PDGFC": [
+          "GO:0007417"
+        ]
+      },
+      "gene_go_named": {
+        "PDGFC": [
+          "central nervous system development [GO:0007417]"
+        ]
+      }
+    },
+    {
+      "pmid": "10341219",
+      "genes_covered": [
+        "TENM1"
+      ],
+      "go_terms": [
+        "GO:0007399"
+      ],
+      "gene_go_map": {
+        "TENM1": [
+          "GO:0007399"
+        ]
+      },
+      "gene_go_named": {
+        "TENM1": [
+          "nervous system development [GO:0007399]"
+        ]
+      }
+    },
+    {
+      "pmid": "9693107",
+      "genes_covered": [
+        "ADAM23"
+      ],
+      "go_terms": [
+        "GO:0007417"
+      ],
+      "gene_go_map": {
+        "ADAM23": [
+          "GO:0007417"
+        ]
+      },
+      "gene_go_named": {
+        "ADAM23": [
+          "central nervous system development [GO:0007417]"
+        ]
+      }
+    }
+  ],
+  "18": [
+    {
+      "pmid": "25985275",
+      "genes_covered": [
+        "SEMA3E"
+      ],
+      "go_terms": [
+        "GO:0021828"
+      ],
+      "gene_go_map": {
+        "SEMA3E": [
+          "GO:0021828"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA3E": [
+          "gonadotrophin-releasing hormone neuronal migration to the hypothalamus [GO:0021828]"
+        ]
+      }
+    },
+    {
+      "pmid": "24223803",
+      "genes_covered": [
+        "FMN2"
+      ],
+      "go_terms": [
+        "GO:0016477"
+      ],
+      "gene_go_map": {
+        "FMN2": [
+          "GO:0016477"
+        ]
+      },
+      "gene_go_named": {
+        "FMN2": [
+          "cell migration [GO:0016477]"
+        ]
+      }
+    },
+    {
+      "pmid": "19846667",
+      "genes_covered": [
+        "CARMIL1"
+      ],
+      "go_terms": [
+        "GO:0016477"
+      ],
+      "gene_go_map": {
+        "CARMIL1": [
+          "GO:0016477"
+        ]
+      },
+      "gene_go_named": {
+        "CARMIL1": [
+          "cell migration [GO:0016477]"
+        ]
+      }
+    },
+    {
+      "pmid": "11483367",
+      "genes_covered": [
+        "NRCAM"
+      ],
+      "go_terms": [
+        "GO:0001764"
+      ],
+      "gene_go_map": {
+        "NRCAM": [
+          "GO:0001764"
+        ]
+      },
+      "gene_go_named": {
+        "NRCAM": [
+          "neuron migration [GO:0001764]"
+        ]
+      }
+    }
+  ],
+  "19": [],
+  "20": [
+    {
+      "pmid": "17404263",
+      "genes_covered": [
+        "PDE4B",
+        "PDE4D"
+      ],
+      "go_terms": [
+        "GO:0004115"
+      ],
+      "gene_go_map": {
+        "PDE4B": [
+          "GO:0004115"
+        ],
+        "PDE4D": [
+          "GO:0004115"
+        ]
+      },
+      "gene_go_named": {
+        "PDE4B": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]"
+        ],
+        "PDE4D": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]"
+        ]
+      }
+    },
+    {
+      "pmid": "8413254",
+      "genes_covered": [
+        "PDE4B",
+        "PDE4D"
+      ],
+      "go_terms": [
+        "GO:0004115"
+      ],
+      "gene_go_map": {
+        "PDE4B": [
+          "GO:0004115"
+        ],
+        "PDE4D": [
+          "GO:0004115"
+        ]
+      },
+      "gene_go_named": {
+        "PDE4B": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]"
+        ],
+        "PDE4D": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]"
+        ]
+      }
+    },
+    {
+      "pmid": "32514138",
+      "genes_covered": [
+        "PLCG2"
+      ],
+      "go_terms": [
+        "GO:0004435"
+      ],
+      "gene_go_map": {
+        "PLCG2": [
+          "GO:0004435"
+        ]
+      },
+      "gene_go_named": {
+        "PLCG2": [
+          "phosphatidylinositol-4,5-bisphosphate phospholipase C activity [GO:0004435]"
+        ]
+      }
+    },
+    {
+      "pmid": "29860631",
+      "genes_covered": [
+        "PDE1C"
+      ],
+      "go_terms": [
+        "GO:0004115",
+        "GO:0047555"
+      ],
+      "gene_go_map": {
+        "PDE1C": [
+          "GO:0004115",
+          "GO:0047555"
+        ]
+      },
+      "gene_go_named": {
+        "PDE1C": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]",
+          "3',5'-cyclic-GMP phosphodiesterase activity [GO:0047555]"
+        ]
+      }
+    },
+    {
+      "pmid": "20819076",
+      "genes_covered": [
+        "PDE4D"
+      ],
+      "go_terms": [
+        "GO:0004115"
+      ],
+      "gene_go_map": {
+        "PDE4D": [
+          "GO:0004115"
+        ]
+      },
+      "gene_go_named": {
+        "PDE4D": [
+          "3',5'-cyclic-AMP phosphodiesterase activity [GO:0004115]"
+        ]
+      }
+    }
+  ],
+  "21": [
+    {
+      "pmid": "21812984",
+      "genes_covered": [
+        "PRKAR2B"
+      ],
+      "go_terms": [
+        "GO:0141162"
+      ],
+      "gene_go_map": {
+        "PRKAR2B": [
+          "GO:0141162"
+        ]
+      },
+      "gene_go_named": {
+        "PRKAR2B": [
+          "negative regulation of cAMP/PKA signal transduction [GO:0141162]"
+        ]
+      }
+    }
+  ],
+  "22": [],
+  "23": [
+    {
+      "pmid": "24120883",
+      "genes_covered": [
+        "PHLDB2"
+      ],
+      "go_terms": [
+        "GO:0005938"
+      ],
+      "gene_go_map": {
+        "PHLDB2": [
+          "GO:0005938"
+        ]
+      },
+      "gene_go_named": {
+        "PHLDB2": [
+          "cell cortex [GO:0005938]"
+        ]
+      }
+    },
+    {
+      "pmid": "23940118",
+      "genes_covered": [
+        "PHLDB2"
+      ],
+      "go_terms": [
+        "GO:0045180"
+      ],
+      "gene_go_map": {
+        "PHLDB2": [
+          "GO:0045180"
+        ]
+      },
+      "gene_go_named": {
+        "PHLDB2": [
+          "basal cortex [GO:0045180]"
+        ]
+      }
+    },
+    {
+      "pmid": "21206382",
+      "genes_covered": [
+        "MYO5B"
+      ],
+      "go_terms": [
+        "GO:0045179"
+      ],
+      "gene_go_map": {
+        "MYO5B": [
+          "GO:0045179"
+        ]
+      },
+      "gene_go_named": {
+        "MYO5B": [
+          "apical cortex [GO:0045179]"
+        ]
+      }
+    }
+  ],
+  "24": [],
+  "25": [
+    {
+      "pmid": "21349352",
+      "genes_covered": [
+        "KCND3"
+      ],
+      "go_terms": [
+        "GO:0007268"
+      ],
+      "gene_go_map": {
+        "KCND3": [
+          "GO:0007268"
+        ]
+      },
+      "gene_go_named": {
+        "KCND3": [
+          "chemical synaptic transmission [GO:0007268]"
+        ]
+      }
+    },
+    {
+      "pmid": "19899002",
+      "genes_covered": [
+        "SNTG1"
+      ],
+      "go_terms": [
+        "GO:0099536"
+      ],
+      "gene_go_map": {
+        "SNTG1": [
+          "GO:0099536"
+        ]
+      },
+      "gene_go_named": {
+        "SNTG1": [
+          "synaptic signaling [GO:0099536]"
+        ]
+      }
+    },
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0098976"
+      ],
+      "gene_go_map": {
+        "GRIN2B": [
+          "GO:0098976"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN2B": [
+          "excitatory chemical synaptic transmission [GO:0098976]"
+        ]
+      }
+    },
+    {
+      "pmid": "10485705",
+      "genes_covered": [
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0007268"
+      ],
+      "gene_go_map": {
+        "GRIN2B": [
+          "GO:0007268"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN2B": [
+          "chemical synaptic transmission [GO:0007268]"
+        ]
+      }
+    },
+    {
+      "pmid": "9119373",
+      "genes_covered": [
+        "DTNA"
+      ],
+      "go_terms": [
+        "GO:0007274"
+      ],
+      "gene_go_map": {
+        "DTNA": [
+          "GO:0007274"
+        ]
+      },
+      "gene_go_named": {
+        "DTNA": [
+          "neuromuscular synaptic transmission [GO:0007274]"
+        ]
+      }
+    }
+  ],
+  "26": [
+    {
+      "pmid": "37865312",
+      "genes_covered": [
+        "NLGN4X"
+      ],
+      "go_terms": [
+        "GO:0007416"
+      ],
+      "gene_go_map": {
+        "NLGN4X": [
+          "GO:0007416"
+        ]
+      },
+      "gene_go_named": {
+        "NLGN4X": [
+          "synapse assembly [GO:0007416]"
+        ]
+      }
+    },
+    {
+      "pmid": "8812479",
+      "genes_covered": [
+        "NRCAM"
+      ],
+      "go_terms": [
+        "GO:0007416"
+      ],
+      "gene_go_map": {
+        "NRCAM": [
+          "GO:0007416"
+        ]
+      },
+      "gene_go_named": {
+        "NRCAM": [
+          "synapse assembly [GO:0007416]"
+        ]
+      }
+    }
+  ]
+}

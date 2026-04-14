@@ -1,0 +1,1589 @@
+{
+  "0": [
+    {
+      "pmid": "31028571",
+      "genes_covered": [
+        "CDK18"
+      ],
+      "go_terms": [
+        "GO:0031643"
+      ],
+      "gene_go_map": {
+        "CDK18": [
+          "GO:0031643"
+        ]
+      },
+      "gene_go_named": {
+        "CDK18": [
+          "positive regulation of myelination [GO:0031643]"
+        ]
+      }
+    },
+    {
+      "pmid": "26002055",
+      "genes_covered": [
+        "PLLP"
+      ],
+      "go_terms": [
+        "GO:0032288"
+      ],
+      "gene_go_map": {
+        "PLLP": [
+          "GO:0032288"
+        ]
+      },
+      "gene_go_named": {
+        "PLLP": [
+          "myelin assembly [GO:0032288]"
+        ]
+      }
+    },
+    {
+      "pmid": "22524708",
+      "genes_covered": [
+        "MBP"
+      ],
+      "go_terms": [
+        "GO:0032288"
+      ],
+      "gene_go_map": {
+        "MBP": [
+          "GO:0032288"
+        ]
+      },
+      "gene_go_named": {
+        "MBP": [
+          "myelin assembly [GO:0032288]"
+        ]
+      }
+    },
+    {
+      "pmid": "12153479",
+      "genes_covered": [
+        "MAL"
+      ],
+      "go_terms": [
+        "GO:0042552"
+      ],
+      "gene_go_map": {
+        "MAL": [
+          "GO:0042552"
+        ]
+      },
+      "gene_go_named": {
+        "MAL": [
+          "myelination [GO:0042552]"
+        ]
+      }
+    },
+    {
+      "pmid": "11668196",
+      "genes_covered": [
+        "KLK6"
+      ],
+      "go_terms": [
+        "GO:0042552"
+      ],
+      "gene_go_map": {
+        "KLK6": [
+          "GO:0042552"
+        ]
+      },
+      "gene_go_named": {
+        "KLK6": [
+          "myelination [GO:0042552]"
+        ]
+      }
+    }
+  ],
+  "1": [
+    {
+      "pmid": "12153479",
+      "genes_covered": [
+        "MAL"
+      ],
+      "go_terms": [
+        "GO:0019911"
+      ],
+      "gene_go_map": {
+        "MAL": [
+          "GO:0019911"
+        ]
+      },
+      "gene_go_named": {
+        "MAL": [
+          "structural constituent of myelin sheath [GO:0019911]"
+        ]
+      }
+    }
+  ],
+  "2": [
+    {
+      "pmid": "25771685",
+      "genes_covered": [
+        "SRCIN1"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "SRCIN1": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "SRCIN1": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "21926414",
+      "genes_covered": [
+        "IL1RAPL1"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "IL1RAPL1": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "IL1RAPL1": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "17296554",
+      "genes_covered": [
+        "SEPTIN4"
+      ],
+      "go_terms": [
+        "GO:0098691"
+      ],
+      "gene_go_map": {
+        "SEPTIN4": [
+          "GO:0098691"
+        ]
+      },
+      "gene_go_named": {
+        "SEPTIN4": [
+          "dopaminergic synapse [GO:0098691]"
+        ]
+      }
+    },
+    {
+      "pmid": "11752468",
+      "genes_covered": [
+        "PLD1"
+      ],
+      "go_terms": [
+        "GO:0098981"
+      ],
+      "gene_go_map": {
+        "PLD1": [
+          "GO:0098981"
+        ]
+      },
+      "gene_go_named": {
+        "PLD1": [
+          "cholinergic synapse [GO:0098981]"
+        ]
+      }
+    }
+  ],
+  "3": [],
+  "4": [
+    {
+      "pmid": "30734065",
+      "genes_covered": [
+        "CLDN11"
+      ],
+      "go_terms": [
+        "GO:0030424"
+      ],
+      "gene_go_map": {
+        "CLDN11": [
+          "GO:0030424"
+        ]
+      },
+      "gene_go_named": {
+        "CLDN11": [
+          "axon [GO:0030424]"
+        ]
+      }
+    },
+    {
+      "pmid": "10918068",
+      "genes_covered": [
+        "RASGRF1"
+      ],
+      "go_terms": [
+        "GO:0043005"
+      ],
+      "gene_go_map": {
+        "RASGRF1": [
+          "GO:0043005"
+        ]
+      },
+      "gene_go_named": {
+        "RASGRF1": [
+          "neuron projection [GO:0043005]"
+        ]
+      }
+    }
+  ],
+  "5": [
+    {
+      "pmid": "20934411",
+      "genes_covered": [
+        "ERMN"
+      ],
+      "go_terms": [
+        "GO:0033269"
+      ],
+      "gene_go_map": {
+        "ERMN": [
+          "GO:0033269"
+        ]
+      },
+      "gene_go_named": {
+        "ERMN": [
+          "internode region of axon [GO:0033269]"
+        ]
+      }
+    }
+  ],
+  "6": [
+    {
+      "pmid": "6200494",
+      "genes_covered": [
+        "MAG"
+      ],
+      "go_terms": [
+        "GO:0043218"
+      ],
+      "gene_go_map": {
+        "MAG": [
+          "GO:0043218"
+        ]
+      },
+      "gene_go_named": {
+        "MAG": [
+          "compact myelin [GO:0043218]"
+        ]
+      }
+    }
+  ],
+  "7": [
+    {
+      "pmid": "23825075",
+      "genes_covered": [
+        "LRP2"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "LRP2": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "LRP2": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    },
+    {
+      "pmid": "22895261",
+      "genes_covered": [
+        "MAL"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "MAL": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "MAL": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    },
+    {
+      "pmid": "22797597",
+      "genes_covered": [
+        "PLD1"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "PLD1": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "PLD1": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    },
+    {
+      "pmid": "11208127",
+      "genes_covered": [
+        "TF"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "TF": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "TF": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    },
+    {
+      "pmid": "11193188",
+      "genes_covered": [
+        "ATP1B1"
+      ],
+      "go_terms": [
+        "GO:0016324"
+      ],
+      "gene_go_map": {
+        "ATP1B1": [
+          "GO:0016324"
+        ]
+      },
+      "gene_go_named": {
+        "ATP1B1": [
+          "apical plasma membrane [GO:0016324]"
+        ]
+      }
+    }
+  ],
+  "8": [],
+  "9": [
+    {
+      "pmid": "20202662",
+      "genes_covered": [
+        "TF"
+      ],
+      "go_terms": [
+        "GO:0048471"
+      ],
+      "gene_go_map": {
+        "TF": [
+          "GO:0048471"
+        ]
+      },
+      "gene_go_named": {
+        "TF": [
+          "perinuclear region of cytoplasm [GO:0048471]"
+        ]
+      }
+    },
+    {
+      "pmid": "16531006",
+      "genes_covered": [
+        "APLP1"
+      ],
+      "go_terms": [
+        "GO:0048471"
+      ],
+      "gene_go_map": {
+        "APLP1": [
+          "GO:0048471"
+        ]
+      },
+      "gene_go_named": {
+        "APLP1": [
+          "perinuclear region of cytoplasm [GO:0048471]"
+        ]
+      }
+    },
+    {
+      "pmid": "15880641",
+      "genes_covered": [
+        "TF"
+      ],
+      "go_terms": [
+        "GO:0048471"
+      ],
+      "gene_go_map": {
+        "TF": [
+          "GO:0048471"
+        ]
+      },
+      "gene_go_named": {
+        "TF": [
+          "perinuclear region of cytoplasm [GO:0048471]"
+        ]
+      }
+    },
+    {
+      "pmid": "15590652",
+      "genes_covered": [
+        "TPPP"
+      ],
+      "go_terms": [
+        "GO:0048471"
+      ],
+      "gene_go_map": {
+        "TPPP": [
+          "GO:0048471"
+        ]
+      },
+      "gene_go_named": {
+        "TPPP": [
+          "perinuclear region of cytoplasm [GO:0048471]"
+        ]
+      }
+    },
+    {
+      "pmid": "14551159",
+      "genes_covered": [
+        "APOD"
+      ],
+      "go_terms": [
+        "GO:0048471"
+      ],
+      "gene_go_map": {
+        "APOD": [
+          "GO:0048471"
+        ]
+      },
+      "gene_go_named": {
+        "APOD": [
+          "perinuclear region of cytoplasm [GO:0048471]"
+        ]
+      }
+    }
+  ],
+  "10": [
+    {
+      "pmid": "32094113",
+      "genes_covered": [
+        "RNF220"
+      ],
+      "go_terms": [
+        "GO:0045944"
+      ],
+      "gene_go_map": {
+        "RNF220": [
+          "GO:0045944"
+        ]
+      },
+      "gene_go_named": {
+        "RNF220": [
+          "positive regulation of transcription by RNA polymerase II [GO:0045944]"
+        ]
+      }
+    },
+    {
+      "pmid": "26482249",
+      "genes_covered": [
+        "SPP1"
+      ],
+      "go_terms": [
+        "GO:0045893"
+      ],
+      "gene_go_map": {
+        "SPP1": [
+          "GO:0045893"
+        ]
+      },
+      "gene_go_named": {
+        "SPP1": [
+          "positive regulation of DNA-templated transcription [GO:0045893]"
+        ]
+      }
+    },
+    {
+      "pmid": "22019888",
+      "genes_covered": [
+        "SEMA4D"
+      ],
+      "go_terms": [
+        "GO:0000122"
+      ],
+      "gene_go_map": {
+        "SEMA4D": [
+          "GO:0000122"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA4D": [
+          "negative regulation of transcription by RNA polymerase II [GO:0000122]"
+        ]
+      }
+    },
+    {
+      "pmid": "19398580",
+      "genes_covered": [
+        "ZNF536"
+      ],
+      "go_terms": [
+        "GO:0000122"
+      ],
+      "gene_go_map": {
+        "ZNF536": [
+          "GO:0000122"
+        ]
+      },
+      "gene_go_named": {
+        "ZNF536": [
+          "negative regulation of transcription by RNA polymerase II [GO:0000122]"
+        ]
+      }
+    },
+    {
+      "pmid": "18676404",
+      "genes_covered": [
+        "ST18"
+      ],
+      "go_terms": [
+        "GO:0045944"
+      ],
+      "gene_go_map": {
+        "ST18": [
+          "GO:0045944"
+        ]
+      },
+      "gene_go_named": {
+        "ST18": [
+          "positive regulation of transcription by RNA polymerase II [GO:0045944]"
+        ]
+      }
+    }
+  ],
+  "11": [
+    {
+      "pmid": "23382103",
+      "genes_covered": [
+        "CSRP1"
+      ],
+      "go_terms": [
+        "GO:0070527"
+      ],
+      "gene_go_map": {
+        "CSRP1": [
+          "GO:0070527"
+        ]
+      },
+      "gene_go_named": {
+        "CSRP1": [
+          "platelet aggregation [GO:0070527]"
+        ]
+      }
+    },
+    {
+      "pmid": "23136403",
+      "genes_covered": [
+        "CTNNA3"
+      ],
+      "go_terms": [
+        "GO:0086073"
+      ],
+      "gene_go_map": {
+        "CTNNA3": [
+          "GO:0086073"
+        ]
+      },
+      "gene_go_named": {
+        "CTNNA3": [
+          "bundle of His cell-Purkinje myocyte adhesion involved in cell communication [GO:0086073]"
+        ]
+      }
+    },
+    {
+      "pmid": "22407321",
+      "genes_covered": [
+        "MEGF10"
+      ],
+      "go_terms": [
+        "GO:0034109"
+      ],
+      "gene_go_map": {
+        "MEGF10": [
+          "GO:0034109"
+        ]
+      },
+      "gene_go_named": {
+        "MEGF10": [
+          "homotypic cell-cell adhesion [GO:0034109]"
+        ]
+      }
+    },
+    {
+      "pmid": "11590244",
+      "genes_covered": [
+        "CTNNA3"
+      ],
+      "go_terms": [
+        "GO:0098609"
+      ],
+      "gene_go_map": {
+        "CTNNA3": [
+          "GO:0098609"
+        ]
+      },
+      "gene_go_named": {
+        "CTNNA3": [
+          "cell-cell adhesion [GO:0098609]"
+        ]
+      }
+    },
+    {
+      "pmid": "10627596",
+      "genes_covered": [
+        "NINJ2"
+      ],
+      "go_terms": [
+        "GO:0007158"
+      ],
+      "gene_go_map": {
+        "NINJ2": [
+          "GO:0007158"
+        ]
+      },
+      "gene_go_named": {
+        "NINJ2": [
+          "neuron cell-cell adhesion [GO:0007158]"
+        ]
+      }
+    }
+  ],
+  "12": [
+    {
+      "pmid": "31416931",
+      "genes_covered": [
+        "ATP8A1"
+      ],
+      "go_terms": [
+        "GO:0140331"
+      ],
+      "gene_go_map": {
+        "ATP8A1": [
+          "GO:0140331"
+        ]
+      },
+      "gene_go_named": {
+        "ATP8A1": [
+          "aminophospholipid translocation [GO:0140331]"
+        ]
+      }
+    },
+    {
+      "pmid": "24201375",
+      "genes_covered": [
+        "ABCA2"
+      ],
+      "go_terms": [
+        "GO:0099040"
+      ],
+      "gene_go_map": {
+        "ABCA2": [
+          "GO:0099040"
+        ]
+      },
+      "gene_go_named": {
+        "ABCA2": [
+          "ceramide translocation [GO:0099040]"
+        ]
+      }
+    },
+    {
+      "pmid": "23518707",
+      "genes_covered": [
+        "CNTN2"
+      ],
+      "go_terms": [
+        "GO:0097090"
+      ],
+      "gene_go_map": {
+        "CNTN2": [
+          "GO:0097090"
+        ]
+      },
+      "gene_go_named": {
+        "CNTN2": [
+          "presynaptic membrane organization [GO:0097090]"
+        ]
+      }
+    },
+    {
+      "pmid": "21914794",
+      "genes_covered": [
+        "ATP8A1"
+      ],
+      "go_terms": [
+        "GO:0045332"
+      ],
+      "gene_go_map": {
+        "ATP8A1": [
+          "GO:0045332"
+        ]
+      },
+      "gene_go_named": {
+        "ATP8A1": [
+          "phospholipid translocation [GO:0045332]"
+        ]
+      }
+    },
+    {
+      "pmid": "19683723",
+      "genes_covered": [
+        "ATP1B1"
+      ],
+      "go_terms": [
+        "GO:0044861"
+      ],
+      "gene_go_map": {
+        "ATP1B1": [
+          "GO:0044861"
+        ]
+      },
+      "gene_go_named": {
+        "ATP1B1": [
+          "protein transport into plasma membrane raft [GO:0044861]"
+        ]
+      }
+    }
+  ],
+  "13": [],
+  "14": [
+    {
+      "pmid": "10848592",
+      "genes_covered": [
+        "PLD1"
+      ],
+      "go_terms": [
+        "GO:0007265"
+      ],
+      "gene_go_map": {
+        "PLD1": [
+          "GO:0007265"
+        ]
+      },
+      "gene_go_named": {
+        "PLD1": [
+          "Ras protein signal transduction [GO:0007265]"
+        ]
+      }
+    }
+  ],
+  "15": [
+    {
+      "pmid": "26631410",
+      "genes_covered": [
+        "SLC24A2"
+      ],
+      "go_terms": [
+        "GO:0071805",
+        "GO:0035725",
+        "GO:0070588"
+      ],
+      "gene_go_map": {
+        "SLC24A2": [
+          "GO:0035725",
+          "GO:0070588",
+          "GO:0071805"
+        ]
+      },
+      "gene_go_named": {
+        "SLC24A2": [
+          "sodium ion transmembrane transport [GO:0035725]",
+          "calcium ion transmembrane transport [GO:0070588]",
+          "potassium ion transmembrane transport [GO:0071805]"
+        ]
+      }
+    },
+    {
+      "pmid": "24688018",
+      "genes_covered": [
+        "ATP1B1"
+      ],
+      "go_terms": [
+        "GO:0010248",
+        "GO:1902600"
+      ],
+      "gene_go_map": {
+        "ATP1B1": [
+          "GO:0010248",
+          "GO:1902600"
+        ]
+      },
+      "gene_go_named": {
+        "ATP1B1": [
+          "establishment or maintenance of transmembrane electrochemical gradient [GO:0010248]",
+          "proton transmembrane transport [GO:1902600]"
+        ]
+      }
+    },
+    {
+      "pmid": "22946059",
+      "genes_covered": [
+        "ANO4"
+      ],
+      "go_terms": [
+        "GO:1902476"
+      ],
+      "gene_go_map": {
+        "ANO4": [
+          "GO:1902476"
+        ]
+      },
+      "gene_go_named": {
+        "ANO4": [
+          "chloride transmembrane transport [GO:1902476]"
+        ]
+      }
+    },
+    {
+      "pmid": "22282804",
+      "genes_covered": [
+        "KCNK1"
+      ],
+      "go_terms": [
+        "GO:0071805"
+      ],
+      "gene_go_map": {
+        "KCNK1": [
+          "GO:0071805"
+        ]
+      },
+      "gene_go_named": {
+        "KCNK1": [
+          "potassium ion transmembrane transport [GO:0071805]"
+        ]
+      }
+    },
+    {
+      "pmid": "21653227",
+      "genes_covered": [
+        "KCNK1"
+      ],
+      "go_terms": [
+        "GO:0071805",
+        "GO:0035725"
+      ],
+      "gene_go_map": {
+        "KCNK1": [
+          "GO:0035725",
+          "GO:0071805"
+        ]
+      },
+      "gene_go_named": {
+        "KCNK1": [
+          "sodium ion transmembrane transport [GO:0035725]",
+          "potassium ion transmembrane transport [GO:0071805]"
+        ]
+      }
+    }
+  ],
+  "16": [
+    {
+      "pmid": "19129463",
+      "genes_covered": [
+        "SLCO1A2",
+        "SLCO3A1"
+      ],
+      "go_terms": [
+        "GO:0022857"
+      ],
+      "gene_go_map": {
+        "SLCO1A2": [
+          "GO:0022857"
+        ],
+        "SLCO3A1": [
+          "GO:0022857"
+        ]
+      },
+      "gene_go_named": {
+        "SLCO1A2": [
+          "transmembrane transporter activity [GO:0022857]"
+        ],
+        "SLCO3A1": [
+          "transmembrane transporter activity [GO:0022857]"
+        ]
+      }
+    },
+    {
+      "pmid": "10873595",
+      "genes_covered": [
+        "SLCO1A2",
+        "SLCO3A1"
+      ],
+      "go_terms": [
+        "GO:0022857",
+        "GO:0015132"
+      ],
+      "gene_go_map": {
+        "SLCO1A2": [
+          "GO:0022857"
+        ],
+        "SLCO3A1": [
+          "GO:0015132",
+          "GO:0022857"
+        ]
+      },
+      "gene_go_named": {
+        "SLCO1A2": [
+          "transmembrane transporter activity [GO:0022857]"
+        ],
+        "SLCO3A1": [
+          "prostaglandin transmembrane transporter activity [GO:0015132]",
+          "transmembrane transporter activity [GO:0022857]"
+        ]
+      }
+    },
+    {
+      "pmid": "39716028",
+      "genes_covered": [
+        "TMEM63A"
+      ],
+      "go_terms": [
+        "GO:0017128"
+      ],
+      "gene_go_map": {
+        "TMEM63A": [
+          "GO:0017128"
+        ]
+      },
+      "gene_go_named": {
+        "TMEM63A": [
+          "phospholipid scramblase activity [GO:0017128]"
+        ]
+      }
+    },
+    {
+      "pmid": "37543036",
+      "genes_covered": [
+        "TMEM63A"
+      ],
+      "go_terms": [
+        "GO:0008381"
+      ],
+      "gene_go_map": {
+        "TMEM63A": [
+          "GO:0008381"
+        ]
+      },
+      "gene_go_named": {
+        "TMEM63A": [
+          "mechanosensitive monoatomic ion channel activity [GO:0008381]"
+        ]
+      }
+    },
+    {
+      "pmid": "35789156",
+      "genes_covered": [
+        "BEST1"
+      ],
+      "go_terms": [
+        "GO:0005229"
+      ],
+      "gene_go_map": {
+        "BEST1": [
+          "GO:0005229"
+        ]
+      },
+      "gene_go_named": {
+        "BEST1": [
+          "intracellularly calcium-gated chloride channel activity [GO:0005229]"
+        ]
+      }
+    }
+  ],
+  "17": [
+    {
+      "pmid": "19581412",
+      "genes_covered": [
+        "CLDND1",
+        "ITGA2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "CLDND1": [
+          "GO:0009986"
+        ],
+        "ITGA2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "CLDND1": [
+          "cell surface [GO:0009986]"
+        ],
+        "ITGA2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "27616481",
+      "genes_covered": [
+        "GLDN"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "GLDN": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "GLDN": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "23658023",
+      "genes_covered": [
+        "ITGA2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ITGA2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ITGA2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "23382103",
+      "genes_covered": [
+        "ITGA2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ITGA2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ITGA2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "21310825",
+      "genes_covered": [
+        "ITGA2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ITGA2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ITGA2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    }
+  ],
+  "18": [],
+  "19": [
+    {
+      "pmid": "26200502",
+      "genes_covered": [
+        "BEST1"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "BEST1": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "BEST1": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    },
+    {
+      "pmid": "21330666",
+      "genes_covered": [
+        "BEST1"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "BEST1": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "BEST1": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    },
+    {
+      "pmid": "19853238",
+      "genes_covered": [
+        "BEST1"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "BEST1": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "BEST1": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    },
+    {
+      "pmid": "15611082",
+      "genes_covered": [
+        "ANK3"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "ANK3": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "ANK3": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    },
+    {
+      "pmid": "12646923",
+      "genes_covered": [
+        "ERBB3"
+      ],
+      "go_terms": [
+        "GO:0016323"
+      ],
+      "gene_go_map": {
+        "ERBB3": [
+          "GO:0016323"
+        ]
+      },
+      "gene_go_named": {
+        "ERBB3": [
+          "basolateral plasma membrane [GO:0016323]"
+        ]
+      }
+    }
+  ],
+  "20": [
+    {
+      "pmid": "32047108",
+      "genes_covered": [
+        "TMEM165"
+      ],
+      "go_terms": [
+        "GO:0006816",
+        "GO:0006828"
+      ],
+      "gene_go_map": {
+        "TMEM165": [
+          "GO:0006816",
+          "GO:0006828"
+        ]
+      },
+      "gene_go_named": {
+        "TMEM165": [
+          "calcium ion transport [GO:0006816]",
+          "manganese ion transport [GO:0006828]"
+        ]
+      }
+    },
+    {
+      "pmid": "27093457",
+      "genes_covered": [
+        "SLC24A2"
+      ],
+      "go_terms": [
+        "GO:0070509"
+      ],
+      "gene_go_map": {
+        "SLC24A2": [
+          "GO:0070509"
+        ]
+      },
+      "gene_go_named": {
+        "SLC24A2": [
+          "calcium ion import [GO:0070509]"
+        ]
+      }
+    },
+    {
+      "pmid": "26631410",
+      "genes_covered": [
+        "SLC24A2"
+      ],
+      "go_terms": [
+        "GO:0071805",
+        "GO:0035725",
+        "GO:0070588"
+      ],
+      "gene_go_map": {
+        "SLC24A2": [
+          "GO:0035725",
+          "GO:0070588",
+          "GO:0071805"
+        ]
+      },
+      "gene_go_named": {
+        "SLC24A2": [
+          "sodium ion transmembrane transport [GO:0035725]",
+          "calcium ion transmembrane transport [GO:0070588]",
+          "potassium ion transmembrane transport [GO:0071805]"
+        ]
+      }
+    },
+    {
+      "pmid": "24688018",
+      "genes_covered": [
+        "ATP1B1"
+      ],
+      "go_terms": [
+        "GO:0010248",
+        "GO:1902600"
+      ],
+      "gene_go_map": {
+        "ATP1B1": [
+          "GO:0010248",
+          "GO:1902600"
+        ]
+      },
+      "gene_go_named": {
+        "ATP1B1": [
+          "establishment or maintenance of transmembrane electrochemical gradient [GO:0010248]",
+          "proton transmembrane transport [GO:1902600]"
+        ]
+      }
+    },
+    {
+      "pmid": "23569283",
+      "genes_covered": [
+        "TMEM165"
+      ],
+      "go_terms": [
+        "GO:0032472"
+      ],
+      "gene_go_map": {
+        "TMEM165": [
+          "GO:0032472"
+        ]
+      },
+      "gene_go_named": {
+        "TMEM165": [
+          "Golgi calcium ion transport [GO:0032472]"
+        ]
+      }
+    }
+  ],
+  "21": [
+    {
+      "pmid": "23575248",
+      "genes_covered": [
+        "GSN"
+      ],
+      "go_terms": [
+        "GO:0030864"
+      ],
+      "gene_go_map": {
+        "GSN": [
+          "GO:0030864"
+        ]
+      },
+      "gene_go_named": {
+        "GSN": [
+          "cortical actin cytoskeleton [GO:0030864]"
+        ]
+      }
+    },
+    {
+      "pmid": "19158340",
+      "genes_covered": [
+        "DLC1"
+      ],
+      "go_terms": [
+        "GO:0030864"
+      ],
+      "gene_go_map": {
+        "DLC1": [
+          "GO:0030864"
+        ]
+      },
+      "gene_go_named": {
+        "DLC1": [
+          "cortical actin cytoskeleton [GO:0030864]"
+        ]
+      }
+    },
+    {
+      "pmid": "14657239",
+      "genes_covered": [
+        "SRCIN1"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "SRCIN1": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "SRCIN1": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "10931866",
+      "genes_covered": [
+        "ANLN"
+      ],
+      "go_terms": [
+        "GO:0015629"
+      ],
+      "gene_go_map": {
+        "ANLN": [
+          "GO:0015629"
+        ]
+      },
+      "gene_go_named": {
+        "ANLN": [
+          "actin cytoskeleton [GO:0015629]"
+        ]
+      }
+    },
+    {
+      "pmid": "10427098",
+      "genes_covered": [
+        "LDB3"
+      ],
+      "go_terms": [
+        "GO:0005856"
+      ],
+      "gene_go_map": {
+        "LDB3": [
+          "GO:0005856"
+        ]
+      },
+      "gene_go_named": {
+        "LDB3": [
+          "cytoskeleton [GO:0005856]"
+        ]
+      }
+    }
+  ],
+  "22": [
+    {
+      "pmid": "34080016",
+      "genes_covered": [
+        "UGT8"
+      ],
+      "go_terms": [
+        "GO:0006688"
+      ],
+      "gene_go_map": {
+        "UGT8": [
+          "GO:0006688"
+        ]
+      },
+      "gene_go_named": {
+        "UGT8": [
+          "glycosphingolipid biosynthetic process [GO:0006688]"
+        ]
+      }
+    },
+    {
+      "pmid": "26510981",
+      "genes_covered": [
+        "ABCA2"
+      ],
+      "go_terms": [
+        "GO:0046512"
+      ],
+      "gene_go_map": {
+        "ABCA2": [
+          "GO:0046512"
+        ]
+      },
+      "gene_go_named": {
+        "ABCA2": [
+          "sphingosine biosynthetic process [GO:0046512]"
+        ]
+      }
+    },
+    {
+      "pmid": "23560799",
+      "genes_covered": [
+        "ABCA8"
+      ],
+      "go_terms": [
+        "GO:0006686"
+      ],
+      "gene_go_map": {
+        "ABCA8": [
+          "GO:0006686"
+        ]
+      },
+      "gene_go_named": {
+        "ABCA8": [
+          "sphingomyelin biosynthetic process [GO:0006686]"
+        ]
+      }
+    },
+    {
+      "pmid": "17123352",
+      "genes_covered": [
+        "ST6GALNAC3"
+      ],
+      "go_terms": [
+        "GO:0006687",
+        "GO:0006677"
+      ],
+      "gene_go_map": {
+        "ST6GALNAC3": [
+          "GO:0006677",
+          "GO:0006687"
+        ]
+      },
+      "gene_go_named": {
+        "ST6GALNAC3": [
+          "glycosylceramide metabolic process [GO:0006677]",
+          "glycosphingolipid metabolic process [GO:0006687]"
+        ]
+      }
+    },
+    {
+      "pmid": "15337768",
+      "genes_covered": [
+        "FA2H"
+      ],
+      "go_terms": [
+        "GO:0046513"
+      ],
+      "gene_go_map": {
+        "FA2H": [
+          "GO:0046513"
+        ]
+      },
+      "gene_go_named": {
+        "FA2H": [
+          "ceramide biosynthetic process [GO:0046513]"
+        ]
+      }
+    }
+  ],
+  "23": [],
+  "24": [
+    {
+      "pmid": "28473536",
+      "genes_covered": [
+        "NKX6-2",
+        "SOX10"
+      ],
+      "go_terms": [
+        "GO:1990837"
+      ],
+      "gene_go_map": {
+        "NKX6-2": [
+          "GO:1990837"
+        ],
+        "SOX10": [
+          "GO:1990837"
+        ]
+      },
+      "gene_go_named": {
+        "NKX6-2": [
+          "sequence-specific double-stranded DNA binding [GO:1990837]"
+        ],
+        "SOX10": [
+          "sequence-specific double-stranded DNA binding [GO:1990837]"
+        ]
+      }
+    },
+    {
+      "pmid": "19398580",
+      "genes_covered": [
+        "ZNF536"
+      ],
+      "go_terms": [
+        "GO:0000978"
+      ],
+      "gene_go_map": {
+        "ZNF536": [
+          "GO:0000978"
+        ]
+      },
+      "gene_go_named": {
+        "ZNF536": [
+          "RNA polymerase II cis-regulatory region sequence-specific DNA binding [GO:0000978]"
+        ]
+      }
+    },
+    {
+      "pmid": "18676404",
+      "genes_covered": [
+        "ST18"
+      ],
+      "go_terms": [
+        "GO:0000978"
+      ],
+      "gene_go_map": {
+        "ST18": [
+          "GO:0000978"
+        ]
+      },
+      "gene_go_named": {
+        "ST18": [
+          "RNA polymerase II cis-regulatory region sequence-specific DNA binding [GO:0000978]"
+        ]
+      }
+    }
+  ],
+  "25": [],
+  "26": []
+}

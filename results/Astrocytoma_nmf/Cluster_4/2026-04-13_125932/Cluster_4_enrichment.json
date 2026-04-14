@@ -1,0 +1,3271 @@
+{
+  "enrichment_leaves": [
+    {
+      "go_id": "GO:0098978",
+      "name": "glutamatergic synapse",
+      "namespace": "cellular_component",
+      "fdr": 1.031304778838197e-07,
+      "fold_enrichment": 4.800243902439025,
+      "genes": [
+        "ADGRL3",
+        "CBLB",
+        "CDH10",
+        "CNTN1",
+        "CNTNAP2",
+        "CSMD2",
+        "DLGAP1",
+        "ELMO1",
+        "ERBB4",
+        "ERC2",
+        "FYN",
+        "GRID2",
+        "GRIK2",
+        "HIP1",
+        "IL1RAPL1",
+        "KCND2",
+        "NLGN4X",
+        "NTRK3",
+        "NXPH1",
+        "PAK3",
+        "PDE10A",
+        "PPFIA2",
+        "TNR"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0030424",
+      "name": "axon",
+      "namespace": "cellular_component",
+      "fdr": 1.1352851613741001e-07,
+      "fold_enrichment": 5.555837850045167,
+      "genes": [
+        "ADAM22",
+        "ADGRL3",
+        "ALCAM",
+        "CADM2",
+        "CDH2",
+        "CNTN1",
+        "CNTNAP2",
+        "CTNNA2",
+        "DSCAM",
+        "DSCAML1",
+        "ELAVL4",
+        "GRIK2",
+        "IGF1R",
+        "IL1RAPL1",
+        "NCAM2",
+        "NTRK3",
+        "PPFIA2",
+        "SCN1A",
+        "SLC8A3",
+        "ZNF804A"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0043025",
+      "name": "neuronal cell body",
+      "namespace": "cellular_component",
+      "fdr": 5.022160532561183e-05,
+      "fold_enrichment": 4.9726283519741274,
+      "genes": [
+        "ALCAM",
+        "BRINP3",
+        "CACNA1A",
+        "CNTNAP2",
+        "DSCAM",
+        "GRIA2",
+        "GRIA4",
+        "GRIK2",
+        "KCND2",
+        "MAP2",
+        "NRXN1",
+        "SCN1A",
+        "SEZ6L",
+        "SLC8A3",
+        "ZNF804A"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0098982",
+      "name": "GABA-ergic synapse",
+      "namespace": "cellular_component",
+      "fdr": 6.266945631502212e-05,
+      "fold_enrichment": 9.391781548250265,
+      "genes": [
+        "CDH10",
+        "CDH13",
+        "CNTNAP2",
+        "ERBB4",
+        "ERC2",
+        "GABRB3",
+        "KCND2",
+        "NLGN4X",
+        "NXPH1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0043197",
+      "name": "dendritic spine",
+      "namespace": "cellular_component",
+      "fdr": 6.429014116014065e-05,
+      "fold_enrichment": 7.9474236795348085,
+      "genes": [
+        "DNM3",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "KCND2",
+        "NLGN4X",
+        "PPFIA2",
+        "SLC8A3",
+        "ZNF804A"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0050804",
+      "name": "modulation of chemical synaptic transmission",
+      "namespace": "biological_process",
+      "fdr": 0.00011543916503217715,
+      "fold_enrichment": 4.635428661153564,
+      "genes": [
+        "ADAM22",
+        "BCHE",
+        "CACNA1A",
+        "CASK",
+        "DLGAP1",
+        "FYN",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "HIP1",
+        "NLGN4X",
+        "NRXN1",
+        "NXPH1",
+        "PPFIA2",
+        "SLC8A3",
+        "TNR"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0007416",
+      "name": "synapse assembly",
+      "namespace": "biological_process",
+      "fdr": 0.00014646168100747642,
+      "fold_enrichment": 11.134586371636912,
+      "genes": [
+        "ADGRL3",
+        "CDH2",
+        "DNM3",
+        "DSCAM",
+        "ERBB4",
+        "GABRB3",
+        "GRID2",
+        "NLGN4X",
+        "NRXN1"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0016342",
+      "name": "catenin complex",
+      "namespace": "cellular_component",
+      "fdr": 0.0005534166161346185,
+      "fold_enrichment": 19.35582218725413,
+      "genes": [
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CTNNA2"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0098839",
+      "name": "postsynaptic density membrane",
+      "namespace": "cellular_component",
+      "fdr": 0.0006934045496028122,
+      "fold_enrichment": 8.00040650406504,
+      "genes": [
+        "ADAM22",
+        "CSMD2",
+        "ERBB4",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "NLGN4X"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0030182",
+      "name": "neuron differentiation",
+      "namespace": "biological_process",
+      "fdr": 0.0007439035475461553,
+      "fold_enrichment": 6.00030487804878,
+      "genes": [
+        "BRINP3",
+        "DSCAM",
+        "EGFR",
+        "ERBB4",
+        "GRID2",
+        "IL1RAPL1",
+        "MDGA2",
+        "NKD1",
+        "NLGN4X",
+        "OLIG2",
+        "SOX11",
+        "SOX4"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0042391",
+      "name": "regulation of membrane potential",
+      "namespace": "biological_process",
+      "fdr": 0.001226059278838897,
+      "fold_enrichment": 4.433722816292202,
+      "genes": [
+        "DMD",
+        "FGF12",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "KCND2",
+        "KCNH8",
+        "NLGN4X",
+        "NRXN1",
+        "PID1",
+        "SCN1A",
+        "SCN3A",
+        "SLC8A3"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0042734",
+      "name": "presynaptic membrane",
+      "namespace": "cellular_component",
+      "fdr": 0.002656899804769751,
+      "fold_enrichment": 6.443280405958422,
+      "genes": [
+        "CASK",
+        "CNTN1",
+        "CNTNAP2",
+        "ERBB4",
+        "ERC2",
+        "GRIK2",
+        "NRXN1",
+        "PPFIA2"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0072534",
+      "name": "perineuronal net",
+      "namespace": "cellular_component",
+      "fdr": 0.0044929301854868715,
+      "fold_enrichment": 36.00182926829268,
+      "genes": [
+        "PTPRZ1",
+        "TNR",
+        "VCAN"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0045121",
+      "name": "membrane raft",
+      "namespace": "cellular_component",
+      "fdr": 0.00869419814462969,
+      "fold_enrichment": 4.152460123217149,
+      "genes": [
+        "CBLB",
+        "CDH13",
+        "CDH2",
+        "DLL1",
+        "DMD",
+        "EGFR",
+        "FYN",
+        "KCND2",
+        "PTCH1",
+        "TNR"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0007156",
+      "name": "homophilic cell-cell adhesion",
+      "namespace": "biological_process",
+      "fdr": 0.008884677580626815,
+      "fold_enrichment": 6.207211942809083,
+      "genes": [
+        "CADM2",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "DSCAM",
+        "DSCAML1",
+        "PCDH11X",
+        "PCDH15"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0009986",
+      "name": "cell surface",
+      "namespace": "cellular_component",
+      "fdr": 0.010446114675256513,
+      "fold_enrichment": 2.7989760364075944,
+      "genes": [
+        "ANTXR1",
+        "CDH2",
+        "CNTNAP2",
+        "DMD",
+        "DSCAML1",
+        "EGFR",
+        "GABRB3",
+        "IL1RAPL1",
+        "KLRC2",
+        "KLRC3",
+        "MMP16",
+        "NLGN4X",
+        "NRXN1",
+        "PPFIA2",
+        "PTPRK",
+        "TNR"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0043954",
+      "name": "cellular component maintenance",
+      "namespace": "biological_process",
+      "fdr": 0.01045702640063756,
+      "fold_enrichment": 10.746814706953039,
+      "genes": [
+        "CSMD2",
+        "ERC2",
+        "FYN",
+        "IGF1R",
+        "MTSS1",
+        "PPFIA2"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0048709",
+      "name": "oligodendrocyte differentiation",
+      "namespace": "biological_process",
+      "fdr": 0.010905978713541898,
+      "fold_enrichment": 22.85830429732869,
+      "genes": [
+        "OLIG2",
+        "PTPRZ1",
+        "SLC8A3",
+        "SOX6"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0099175",
+      "name": "regulation of postsynapse organization",
+      "namespace": "biological_process",
+      "fdr": 0.010905978713541898,
+      "fold_enrichment": 6.80885659920429,
+      "genes": [
+        "CDH2",
+        "ELMO1",
+        "FYN",
+        "GRID2",
+        "IL1RAPL1",
+        "PAK3",
+        "PPFIA2",
+        "ZNF804A"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0002223",
+      "name": "stimulatory C-type lectin receptor signaling pathway",
+      "namespace": "biological_process",
+      "fdr": 0.010905978713541898,
+      "fold_enrichment": 22.85830429732869,
+      "genes": [
+        "FYN",
+        "KLRC2",
+        "KLRC3",
+        "PAK3"
+      ],
+      "depth": 11
+    },
+    {
+      "go_id": "GO:0005912",
+      "name": "adherens junction",
+      "namespace": "cellular_component",
+      "fdr": 0.011879136467872375,
+      "fold_enrichment": 4.89820806371329,
+      "genes": [
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CRB1",
+        "CTNNA2",
+        "DLL1",
+        "PTPRK"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0060134",
+      "name": "prepulse inhibition",
+      "namespace": "biological_process",
+      "fdr": 0.012691975737795388,
+      "fold_enrichment": 45.00228658536585,
+      "genes": [
+        "CNTNAP2",
+        "CTNNA2",
+        "GRID2"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0030426",
+      "name": "growth cone",
+      "namespace": "cellular_component",
+      "fdr": 0.01594067662603775,
+      "fold_enrichment": 5.350590337113562,
+      "genes": [
+        "DSCAM",
+        "ELAVL4",
+        "ERC2",
+        "MAP2",
+        "PTCH1",
+        "SLC2A13",
+        "ZNF804A"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0140513",
+      "name": "nuclear protein-containing complex",
+      "namespace": "cellular_component",
+      "fdr": 0.01594067662603775,
+      "fold_enrichment": 0.09390148478949578,
+      "genes": [
+        "TFDP2"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:1901184",
+      "name": "regulation of ERBB signaling pathway",
+      "namespace": "biological_process",
+      "fdr": 0.016469098279345312,
+      "fold_enrichment": 9.474165596919127,
+      "genes": [
+        "ANTXR1",
+        "CBLB",
+        "CDH13",
+        "EGFR",
+        "HIP1",
+        "RBPJ"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0016013",
+      "name": "syntrophin complex",
+      "namespace": "cellular_component",
+      "fdr": 0.01750496597373541,
+      "fold_enrichment": 60.00304878048781,
+      "genes": [
+        "DMD",
+        "SNTG1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0034332",
+      "name": "adherens junction organization",
+      "namespace": "biological_process",
+      "fdr": 0.017775607268106713,
+      "fold_enrichment": 12.500635162601627,
+      "genes": [
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "MTSS1"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0008328",
+      "name": "ionotropic glutamate receptor complex",
+      "namespace": "cellular_component",
+      "fdr": 0.019779957645056915,
+      "fold_enrichment": 10.909645232815965,
+      "genes": [
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0098984",
+      "name": "neuron to neuron synapse",
+      "namespace": "cellular_component",
+      "fdr": 0.021806305279437808,
+      "fold_enrichment": 7.500381097560976,
+      "genes": [
+        "CTNNA2",
+        "GRIA2",
+        "GRIK2",
+        "NLGN4X",
+        "RAPGEF4"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0120534",
+      "name": "dermatan sulfotransferase activity",
+      "namespace": "molecular_function",
+      "fdr": 0.022211725018745337,
+      "fold_enrichment": 60.0030487804878,
+      "genes": [
+        "CHST11",
+        "CHST9",
+        "UST"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0004971",
+      "name": "AMPA glutamate receptor activity",
+      "namespace": "molecular_function",
+      "fdr": 0.022211725018745337,
+      "fold_enrichment": 60.0030487804878,
+      "genes": [
+        "GRIA2",
+        "GRIA4",
+        "GRID2"
+      ],
+      "depth": 11
+    },
+    {
+      "go_id": "GO:1905208",
+      "name": "negative regulation of cardiocyte differentiation",
+      "namespace": "biological_process",
+      "fdr": 0.022731936513491428,
+      "fold_enrichment": 36.00182926829268,
+      "genes": [
+        "DLL1",
+        "EGFR",
+        "SOX6"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0050839",
+      "name": "cell adhesion molecule binding",
+      "namespace": "molecular_function",
+      "fdr": 0.023188040634519128,
+      "fold_enrichment": 3.2229125727276227,
+      "genes": [
+        "ADAM22",
+        "ADGRL3",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CNTN1",
+        "CTNNA2",
+        "DSCAM",
+        "DSCAML1",
+        "EGFR",
+        "FERMT1",
+        "NLGN4X",
+        "NRXN1",
+        "PCDH11X",
+        "PCDH15",
+        "PTPRZ1"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0005509",
+      "name": "calcium ion binding",
+      "namespace": "molecular_function",
+      "fdr": 0.023974608183541347,
+      "fold_enrichment": 3.038129052176598,
+      "genes": [
+        "ADGRL3",
+        "CBLB",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CRB1",
+        "DGKB",
+        "DLL1",
+        "DLL3",
+        "EYS",
+        "LRP1B",
+        "NKD1",
+        "NRXN1",
+        "PCDH11X",
+        "PCDH15",
+        "SMOC1",
+        "VCAN"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0007411",
+      "name": "axon guidance",
+      "namespace": "biological_process",
+      "fdr": 0.031057468970786192,
+      "fold_enrichment": 5.647345767575323,
+      "genes": [
+        "ALCAM",
+        "CNTN1",
+        "DSCAM",
+        "DSCAML1",
+        "FYN",
+        "NRXN1",
+        "PTCH1",
+        "TNR"
+      ],
+      "depth": 8
+    },
+    {
+      "go_id": "GO:0060412",
+      "name": "ventricular septum morphogenesis",
+      "namespace": "biological_process",
+      "fdr": 0.03244865730272783,
+      "fold_enrichment": 16.00081300813008,
+      "genes": [
+        "ADAMTS19",
+        "RBPJ",
+        "SOX11",
+        "SOX4"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0035235",
+      "name": "ionotropic glutamate receptor signaling pathway",
+      "namespace": "biological_process",
+      "fdr": 0.03244865730272783,
+      "fold_enrichment": 16.00081300813008,
+      "genes": [
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0016477",
+      "name": "cell migration",
+      "namespace": "biological_process",
+      "fdr": 0.035404080849398493,
+      "fold_enrichment": 2.810060135725324,
+      "genes": [
+        "ADGRL3",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CTNNA2",
+        "DCX",
+        "ERBB4",
+        "FERMT1",
+        "FYN",
+        "NTRK3",
+        "PAK3",
+        "PEAK1",
+        "PIK3R3",
+        "PTPRK",
+        "SH3RF1",
+        "TMEFF2"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0034706",
+      "name": "sodium channel complex",
+      "namespace": "cellular_component",
+      "fdr": 0.037280454773023844,
+      "fold_enrichment": 15.00076219512195,
+      "genes": [
+        "GRIK2",
+        "SCN1A",
+        "SCN3A"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0033165",
+      "name": "interphotoreceptor matrix",
+      "namespace": "cellular_component",
+      "fdr": 0.037280454773023844,
+      "fold_enrichment": 40.00203252032521,
+      "genes": [
+        "EYS",
+        "VCAN"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0007612",
+      "name": "learning",
+      "namespace": "biological_process",
+      "fdr": 0.04225652917754779,
+      "fold_enrichment": 7.500381097560975,
+      "genes": [
+        "BCHE",
+        "CNTNAP2",
+        "FYN",
+        "NLGN4X",
+        "NRXN1",
+        "SLC8A3"
+      ],
+      "depth": 6
+    }
+  ],
+  "themes": [
+    {
+      "anchor_term": {
+        "go_id": "GO:0098978",
+        "name": "glutamatergic synapse",
+        "namespace": "cellular_component",
+        "fdr": 1.031304778838197e-07,
+        "fold_enrichment": 4.800243902439025,
+        "genes": [
+          "ADGRL3",
+          "CBLB",
+          "CDH10",
+          "CNTN1",
+          "CNTNAP2",
+          "CSMD2",
+          "DLGAP1",
+          "ELMO1",
+          "ERBB4",
+          "ERC2",
+          "FYN",
+          "GRID2",
+          "GRIK2",
+          "HIP1",
+          "IL1RAPL1",
+          "KCND2",
+          "NLGN4X",
+          "NTRK3",
+          "NXPH1",
+          "PAK3",
+          "PDE10A",
+          "PPFIA2",
+          "TNR"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRL3",
+        "CBLB",
+        "CDH10",
+        "CNTN1",
+        "CNTNAP2",
+        "CSMD2",
+        "DLGAP1",
+        "ELMO1",
+        "ERBB4",
+        "ERC2",
+        "FYN",
+        "GRID2",
+        "GRIK2",
+        "HIP1",
+        "IL1RAPL1",
+        "KCND2",
+        "NLGN4X",
+        "NTRK3",
+        "NXPH1",
+        "PAK3",
+        "PDE10A",
+        "PPFIA2",
+        "TNR"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0030424",
+        "name": "axon",
+        "namespace": "cellular_component",
+        "fdr": 1.1352851613741001e-07,
+        "fold_enrichment": 5.555837850045167,
+        "genes": [
+          "ADAM22",
+          "ADGRL3",
+          "ALCAM",
+          "CADM2",
+          "CDH2",
+          "CNTN1",
+          "CNTNAP2",
+          "CTNNA2",
+          "DSCAM",
+          "DSCAML1",
+          "ELAVL4",
+          "GRIK2",
+          "IGF1R",
+          "IL1RAPL1",
+          "NCAM2",
+          "NTRK3",
+          "PPFIA2",
+          "SCN1A",
+          "SLC8A3",
+          "ZNF804A"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADAM22",
+        "ADGRL3",
+        "ALCAM",
+        "CADM2",
+        "CDH2",
+        "CNTN1",
+        "CNTNAP2",
+        "CTNNA2",
+        "DSCAM",
+        "DSCAML1",
+        "ELAVL4",
+        "GRIK2",
+        "IGF1R",
+        "IL1RAPL1",
+        "NCAM2",
+        "NTRK3",
+        "PPFIA2",
+        "SCN1A",
+        "SLC8A3",
+        "ZNF804A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0050808",
+        "name": "synapse organization",
+        "namespace": "biological_process",
+        "fdr": 5.062685632971722e-07,
+        "fold_enrichment": 8.101677472470927,
+        "genes": [
+          "ADGRL3",
+          "CDH2",
+          "CSMD2",
+          "CTNNA2",
+          "DNM3",
+          "DSCAM",
+          "ERBB4",
+          "ERC2",
+          "GABRB3",
+          "GRID2",
+          "NLGN4X",
+          "NRXN1",
+          "PAK3",
+          "PPFIA2",
+          "SEZ6L",
+          "SLC8A3"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0007416",
+          "name": "synapse assembly",
+          "namespace": "biological_process",
+          "fdr": 0.00014646168100747642,
+          "fold_enrichment": 11.134586371636912,
+          "genes": [
+            "ADGRL3",
+            "CDH2",
+            "DNM3",
+            "DSCAM",
+            "ERBB4",
+            "GABRB3",
+            "GRID2",
+            "NLGN4X",
+            "NRXN1"
+          ],
+          "depth": 6
+        },
+        {
+          "go_id": "GO:0099175",
+          "name": "regulation of postsynapse organization",
+          "namespace": "biological_process",
+          "fdr": 0.010905978713541898,
+          "fold_enrichment": 6.80885659920429,
+          "genes": [
+            "CDH2",
+            "ELMO1",
+            "FYN",
+            "GRID2",
+            "IL1RAPL1",
+            "PAK3",
+            "PPFIA2",
+            "ZNF804A"
+          ],
+          "depth": 6
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "ADGRL3",
+        "CDH2",
+        "CSMD2",
+        "CTNNA2",
+        "DNM3",
+        "DSCAM",
+        "ELMO1",
+        "ERBB4",
+        "ERC2",
+        "FYN",
+        "GABRB3",
+        "GRID2",
+        "IL1RAPL1",
+        "NLGN4X",
+        "NRXN1",
+        "PAK3",
+        "PPFIA2",
+        "SEZ6L",
+        "SLC8A3",
+        "ZNF804A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043025",
+        "name": "neuronal cell body",
+        "namespace": "cellular_component",
+        "fdr": 5.022160532561183e-05,
+        "fold_enrichment": 4.9726283519741274,
+        "genes": [
+          "ALCAM",
+          "BRINP3",
+          "CACNA1A",
+          "CNTNAP2",
+          "DSCAM",
+          "GRIA2",
+          "GRIA4",
+          "GRIK2",
+          "KCND2",
+          "MAP2",
+          "NRXN1",
+          "SCN1A",
+          "SEZ6L",
+          "SLC8A3",
+          "ZNF804A"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ALCAM",
+        "BRINP3",
+        "CACNA1A",
+        "CNTNAP2",
+        "DSCAM",
+        "GRIA2",
+        "GRIA4",
+        "GRIK2",
+        "KCND2",
+        "MAP2",
+        "NRXN1",
+        "SCN1A",
+        "SEZ6L",
+        "SLC8A3",
+        "ZNF804A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098982",
+        "name": "GABA-ergic synapse",
+        "namespace": "cellular_component",
+        "fdr": 6.266945631502212e-05,
+        "fold_enrichment": 9.391781548250265,
+        "genes": [
+          "CDH10",
+          "CDH13",
+          "CNTNAP2",
+          "ERBB4",
+          "ERC2",
+          "GABRB3",
+          "KCND2",
+          "NLGN4X",
+          "NXPH1"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDH10",
+        "CDH13",
+        "CNTNAP2",
+        "ERBB4",
+        "ERC2",
+        "GABRB3",
+        "KCND2",
+        "NLGN4X",
+        "NXPH1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0050804",
+        "name": "modulation of chemical synaptic transmission",
+        "namespace": "biological_process",
+        "fdr": 0.00011543916503217715,
+        "fold_enrichment": 4.635428661153564,
+        "genes": [
+          "ADAM22",
+          "BCHE",
+          "CACNA1A",
+          "CASK",
+          "DLGAP1",
+          "FYN",
+          "GABRB3",
+          "GRIA2",
+          "GRIA4",
+          "GRID2",
+          "GRIK2",
+          "HIP1",
+          "NLGN4X",
+          "NRXN1",
+          "NXPH1",
+          "PPFIA2",
+          "SLC8A3",
+          "TNR"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADAM22",
+        "BCHE",
+        "CACNA1A",
+        "CASK",
+        "DLGAP1",
+        "FYN",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "HIP1",
+        "NLGN4X",
+        "NRXN1",
+        "NXPH1",
+        "PPFIA2",
+        "SLC8A3",
+        "TNR"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098794",
+        "name": "postsynapse",
+        "namespace": "cellular_component",
+        "fdr": 0.0006934045496028122,
+        "fold_enrichment": 4.482986403139893,
+        "genes": [
+          "CBLB",
+          "DNM3",
+          "ELMO1",
+          "GABRB3",
+          "GRIA2",
+          "GRIA4",
+          "GRID2",
+          "HIP1",
+          "KCND2",
+          "NLGN4X",
+          "PPFIA2",
+          "SLC8A3",
+          "ZNF804A"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0043197",
+          "name": "dendritic spine",
+          "namespace": "cellular_component",
+          "fdr": 6.429014116014065e-05,
+          "fold_enrichment": 7.9474236795348085,
+          "genes": [
+            "DNM3",
+            "GABRB3",
+            "GRIA2",
+            "GRIA4",
+            "GRID2",
+            "KCND2",
+            "NLGN4X",
+            "PPFIA2",
+            "SLC8A3",
+            "ZNF804A"
+          ],
+          "depth": 6
+        },
+        {
+          "go_id": "GO:0098839",
+          "name": "postsynaptic density membrane",
+          "namespace": "cellular_component",
+          "fdr": 0.0006934045496028122,
+          "fold_enrichment": 8.00040650406504,
+          "genes": [
+            "ADAM22",
+            "CSMD2",
+            "ERBB4",
+            "GRIA2",
+            "GRIA4",
+            "GRID2",
+            "GRIK2",
+            "NLGN4X"
+          ],
+          "depth": 6
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "ADAM22",
+        "CBLB",
+        "CSMD2",
+        "DNM3",
+        "ELMO1",
+        "ERBB4",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "HIP1",
+        "KCND2",
+        "NLGN4X",
+        "PPFIA2",
+        "SLC8A3",
+        "ZNF804A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0030182",
+        "name": "neuron differentiation",
+        "namespace": "biological_process",
+        "fdr": 0.0007439035475461553,
+        "fold_enrichment": 6.00030487804878,
+        "genes": [
+          "BRINP3",
+          "DSCAM",
+          "EGFR",
+          "ERBB4",
+          "GRID2",
+          "IL1RAPL1",
+          "MDGA2",
+          "NKD1",
+          "NLGN4X",
+          "OLIG2",
+          "SOX11",
+          "SOX4"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "BRINP3",
+        "DSCAM",
+        "EGFR",
+        "ERBB4",
+        "GRID2",
+        "IL1RAPL1",
+        "MDGA2",
+        "NKD1",
+        "NLGN4X",
+        "OLIG2",
+        "SOX11",
+        "SOX4"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0042391",
+        "name": "regulation of membrane potential",
+        "namespace": "biological_process",
+        "fdr": 0.001226059278838897,
+        "fold_enrichment": 4.433722816292202,
+        "genes": [
+          "DMD",
+          "FGF12",
+          "GABRB3",
+          "GRIA2",
+          "GRIA4",
+          "GRID2",
+          "GRIK2",
+          "KCND2",
+          "KCNH8",
+          "NLGN4X",
+          "NRXN1",
+          "PID1",
+          "SCN1A",
+          "SCN3A",
+          "SLC8A3"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "DMD",
+        "FGF12",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "KCND2",
+        "KCNH8",
+        "NLGN4X",
+        "NRXN1",
+        "PID1",
+        "SCN1A",
+        "SCN3A",
+        "SLC8A3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0140047",
+        "name": "specialized extracellular matrix",
+        "namespace": "cellular_component",
+        "fdr": 0.0023601027620955613,
+        "fold_enrichment": 21.81929046563193,
+        "genes": [
+          "EYS",
+          "PTPRZ1",
+          "TNR",
+          "VCAN"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0072534",
+          "name": "perineuronal net",
+          "namespace": "cellular_component",
+          "fdr": 0.0044929301854868715,
+          "fold_enrichment": 36.00182926829268,
+          "genes": [
+            "PTPRZ1",
+            "TNR",
+            "VCAN"
+          ],
+          "depth": 7
+        },
+        {
+          "go_id": "GO:0033165",
+          "name": "interphotoreceptor matrix",
+          "namespace": "cellular_component",
+          "fdr": 0.037280454773023844,
+          "fold_enrichment": 40.00203252032521,
+          "genes": [
+            "EYS",
+            "VCAN"
+          ],
+          "depth": 5
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "EYS",
+        "PTPRZ1",
+        "TNR",
+        "VCAN"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098796",
+        "name": "membrane protein complex",
+        "namespace": "cellular_component",
+        "fdr": 0.002656899804769751,
+        "fold_enrichment": 2.3344125606241652,
+        "genes": [
+          "ALCAM",
+          "BEST3",
+          "CACNA1A",
+          "CALCRL",
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "CNTNAP2",
+          "CRB1",
+          "CTNNA2",
+          "DMD",
+          "DPP6",
+          "EGFR",
+          "GABRB3",
+          "GRIA2",
+          "GRIA4",
+          "GRID2",
+          "GRIK2",
+          "IGF1R",
+          "IMMP2L",
+          "KCND2",
+          "KCNH8",
+          "PIK3R3",
+          "SCN1A",
+          "SCN3A",
+          "SNTG1"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [
+        {
+          "go_id": "GO:0016342",
+          "name": "catenin complex",
+          "namespace": "cellular_component",
+          "fdr": 0.0005534166161346185,
+          "fold_enrichment": 19.35582218725413,
+          "genes": [
+            "CDH10",
+            "CDH13",
+            "CDH2",
+            "CDH20",
+            "CTNNA2"
+          ],
+          "depth": 4
+        },
+        {
+          "go_id": "GO:0016013",
+          "name": "syntrophin complex",
+          "namespace": "cellular_component",
+          "fdr": 0.01750496597373541,
+          "fold_enrichment": 60.00304878048781,
+          "genes": [
+            "DMD",
+            "SNTG1"
+          ],
+          "depth": 4
+        },
+        {
+          "go_id": "GO:0008328",
+          "name": "ionotropic glutamate receptor complex",
+          "namespace": "cellular_component",
+          "fdr": 0.019779957645056915,
+          "fold_enrichment": 10.909645232815965,
+          "genes": [
+            "GRIA2",
+            "GRIA4",
+            "GRID2",
+            "GRIK2"
+          ],
+          "depth": 6
+        }
+      ],
+      "n_specific_terms": 3,
+      "all_genes": [
+        "ALCAM",
+        "BEST3",
+        "CACNA1A",
+        "CALCRL",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CNTNAP2",
+        "CRB1",
+        "CTNNA2",
+        "DMD",
+        "DPP6",
+        "EGFR",
+        "GABRB3",
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2",
+        "IGF1R",
+        "IMMP2L",
+        "KCND2",
+        "KCNH8",
+        "PIK3R3",
+        "SCN1A",
+        "SCN3A",
+        "SNTG1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0042734",
+        "name": "presynaptic membrane",
+        "namespace": "cellular_component",
+        "fdr": 0.002656899804769751,
+        "fold_enrichment": 6.443280405958422,
+        "genes": [
+          "CASK",
+          "CNTN1",
+          "CNTNAP2",
+          "ERBB4",
+          "ERC2",
+          "GRIK2",
+          "NRXN1",
+          "PPFIA2"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CASK",
+        "CNTN1",
+        "CNTNAP2",
+        "ERBB4",
+        "ERC2",
+        "GRIK2",
+        "NRXN1",
+        "PPFIA2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0045121",
+        "name": "membrane raft",
+        "namespace": "cellular_component",
+        "fdr": 0.00869419814462969,
+        "fold_enrichment": 4.152460123217149,
+        "genes": [
+          "CBLB",
+          "CDH13",
+          "CDH2",
+          "DLL1",
+          "DMD",
+          "EGFR",
+          "FYN",
+          "KCND2",
+          "PTCH1",
+          "TNR"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CBLB",
+        "CDH13",
+        "CDH2",
+        "DLL1",
+        "DMD",
+        "EGFR",
+        "FYN",
+        "KCND2",
+        "PTCH1",
+        "TNR"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007156",
+        "name": "homophilic cell-cell adhesion",
+        "namespace": "biological_process",
+        "fdr": 0.008884677580626815,
+        "fold_enrichment": 6.207211942809083,
+        "genes": [
+          "CADM2",
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "DSCAM",
+          "DSCAML1",
+          "PCDH11X",
+          "PCDH15"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CADM2",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "DSCAM",
+        "DSCAML1",
+        "PCDH11X",
+        "PCDH15"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0009986",
+        "name": "cell surface",
+        "namespace": "cellular_component",
+        "fdr": 0.010446114675256513,
+        "fold_enrichment": 2.7989760364075944,
+        "genes": [
+          "ANTXR1",
+          "CDH2",
+          "CNTNAP2",
+          "DMD",
+          "DSCAML1",
+          "EGFR",
+          "GABRB3",
+          "IL1RAPL1",
+          "KLRC2",
+          "KLRC3",
+          "MMP16",
+          "NLGN4X",
+          "NRXN1",
+          "PPFIA2",
+          "PTPRK",
+          "TNR"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANTXR1",
+        "CDH2",
+        "CNTNAP2",
+        "DMD",
+        "DSCAML1",
+        "EGFR",
+        "GABRB3",
+        "IL1RAPL1",
+        "KLRC2",
+        "KLRC3",
+        "MMP16",
+        "NLGN4X",
+        "NRXN1",
+        "PPFIA2",
+        "PTPRK",
+        "TNR"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043954",
+        "name": "cellular component maintenance",
+        "namespace": "biological_process",
+        "fdr": 0.01045702640063756,
+        "fold_enrichment": 10.746814706953039,
+        "genes": [
+          "CSMD2",
+          "ERC2",
+          "FYN",
+          "IGF1R",
+          "MTSS1",
+          "PPFIA2"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CSMD2",
+        "ERC2",
+        "FYN",
+        "IGF1R",
+        "MTSS1",
+        "PPFIA2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0048709",
+        "name": "oligodendrocyte differentiation",
+        "namespace": "biological_process",
+        "fdr": 0.010905978713541898,
+        "fold_enrichment": 22.85830429732869,
+        "genes": [
+          "OLIG2",
+          "PTPRZ1",
+          "SLC8A3",
+          "SOX6"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "OLIG2",
+        "PTPRZ1",
+        "SLC8A3",
+        "SOX6"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0002223",
+        "name": "stimulatory C-type lectin receptor signaling pathway",
+        "namespace": "biological_process",
+        "fdr": 0.010905978713541898,
+        "fold_enrichment": 22.85830429732869,
+        "genes": [
+          "FYN",
+          "KLRC2",
+          "KLRC3",
+          "PAK3"
+        ],
+        "depth": 11
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "FYN",
+        "KLRC2",
+        "KLRC3",
+        "PAK3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005912",
+        "name": "adherens junction",
+        "namespace": "cellular_component",
+        "fdr": 0.011879136467872375,
+        "fold_enrichment": 4.89820806371329,
+        "genes": [
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "CRB1",
+          "CTNNA2",
+          "DLL1",
+          "PTPRK"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CRB1",
+        "CTNNA2",
+        "DLL1",
+        "PTPRK"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0060134",
+        "name": "prepulse inhibition",
+        "namespace": "biological_process",
+        "fdr": 0.012691975737795388,
+        "fold_enrichment": 45.00228658536585,
+        "genes": [
+          "CNTNAP2",
+          "CTNNA2",
+          "GRID2"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CNTNAP2",
+        "CTNNA2",
+        "GRID2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0030426",
+        "name": "growth cone",
+        "namespace": "cellular_component",
+        "fdr": 0.01594067662603775,
+        "fold_enrichment": 5.350590337113562,
+        "genes": [
+          "DSCAM",
+          "ELAVL4",
+          "ERC2",
+          "MAP2",
+          "PTCH1",
+          "SLC2A13",
+          "ZNF804A"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "DSCAM",
+        "ELAVL4",
+        "ERC2",
+        "MAP2",
+        "PTCH1",
+        "SLC2A13",
+        "ZNF804A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0140513",
+        "name": "nuclear protein-containing complex",
+        "namespace": "cellular_component",
+        "fdr": 0.01594067662603775,
+        "fold_enrichment": 0.09390148478949578,
+        "genes": [
+          "TFDP2"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "TFDP2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:1901184",
+        "name": "regulation of ERBB signaling pathway",
+        "namespace": "biological_process",
+        "fdr": 0.016469098279345312,
+        "fold_enrichment": 9.474165596919127,
+        "genes": [
+          "ANTXR1",
+          "CBLB",
+          "CDH13",
+          "EGFR",
+          "HIP1",
+          "RBPJ"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANTXR1",
+        "CBLB",
+        "CDH13",
+        "EGFR",
+        "HIP1",
+        "RBPJ"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0034332",
+        "name": "adherens junction organization",
+        "namespace": "biological_process",
+        "fdr": 0.017775607268106713,
+        "fold_enrichment": 12.500635162601627,
+        "genes": [
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "MTSS1"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "MTSS1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098984",
+        "name": "neuron to neuron synapse",
+        "namespace": "cellular_component",
+        "fdr": 0.021806305279437808,
+        "fold_enrichment": 7.500381097560976,
+        "genes": [
+          "CTNNA2",
+          "GRIA2",
+          "GRIK2",
+          "NLGN4X",
+          "RAPGEF4"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CTNNA2",
+        "GRIA2",
+        "GRIK2",
+        "NLGN4X",
+        "RAPGEF4"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0120534",
+        "name": "dermatan sulfotransferase activity",
+        "namespace": "molecular_function",
+        "fdr": 0.022211725018745337,
+        "fold_enrichment": 60.0030487804878,
+        "genes": [
+          "CHST11",
+          "CHST9",
+          "UST"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CHST11",
+        "CHST9",
+        "UST"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0004971",
+        "name": "AMPA glutamate receptor activity",
+        "namespace": "molecular_function",
+        "fdr": 0.022211725018745337,
+        "fold_enrichment": 60.0030487804878,
+        "genes": [
+          "GRIA2",
+          "GRIA4",
+          "GRID2"
+        ],
+        "depth": 11
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "GRIA2",
+        "GRIA4",
+        "GRID2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:1905208",
+        "name": "negative regulation of cardiocyte differentiation",
+        "namespace": "biological_process",
+        "fdr": 0.022731936513491428,
+        "fold_enrichment": 36.00182926829268,
+        "genes": [
+          "DLL1",
+          "EGFR",
+          "SOX6"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "DLL1",
+        "EGFR",
+        "SOX6"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0050839",
+        "name": "cell adhesion molecule binding",
+        "namespace": "molecular_function",
+        "fdr": 0.023188040634519128,
+        "fold_enrichment": 3.2229125727276227,
+        "genes": [
+          "ADAM22",
+          "ADGRL3",
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "CNTN1",
+          "CTNNA2",
+          "DSCAM",
+          "DSCAML1",
+          "EGFR",
+          "FERMT1",
+          "NLGN4X",
+          "NRXN1",
+          "PCDH11X",
+          "PCDH15",
+          "PTPRZ1"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADAM22",
+        "ADGRL3",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CNTN1",
+        "CTNNA2",
+        "DSCAM",
+        "DSCAML1",
+        "EGFR",
+        "FERMT1",
+        "NLGN4X",
+        "NRXN1",
+        "PCDH11X",
+        "PCDH15",
+        "PTPRZ1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005509",
+        "name": "calcium ion binding",
+        "namespace": "molecular_function",
+        "fdr": 0.023974608183541347,
+        "fold_enrichment": 3.038129052176598,
+        "genes": [
+          "ADGRL3",
+          "CBLB",
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "CRB1",
+          "DGKB",
+          "DLL1",
+          "DLL3",
+          "EYS",
+          "LRP1B",
+          "NKD1",
+          "NRXN1",
+          "PCDH11X",
+          "PCDH15",
+          "SMOC1",
+          "VCAN"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRL3",
+        "CBLB",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CRB1",
+        "DGKB",
+        "DLL1",
+        "DLL3",
+        "EYS",
+        "LRP1B",
+        "NKD1",
+        "NRXN1",
+        "PCDH11X",
+        "PCDH15",
+        "SMOC1",
+        "VCAN"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007411",
+        "name": "axon guidance",
+        "namespace": "biological_process",
+        "fdr": 0.031057468970786192,
+        "fold_enrichment": 5.647345767575323,
+        "genes": [
+          "ALCAM",
+          "CNTN1",
+          "DSCAM",
+          "DSCAML1",
+          "FYN",
+          "NRXN1",
+          "PTCH1",
+          "TNR"
+        ],
+        "depth": 8
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ALCAM",
+        "CNTN1",
+        "DSCAM",
+        "DSCAML1",
+        "FYN",
+        "NRXN1",
+        "PTCH1",
+        "TNR"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0060412",
+        "name": "ventricular septum morphogenesis",
+        "namespace": "biological_process",
+        "fdr": 0.03244865730272783,
+        "fold_enrichment": 16.00081300813008,
+        "genes": [
+          "ADAMTS19",
+          "RBPJ",
+          "SOX11",
+          "SOX4"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADAMTS19",
+        "RBPJ",
+        "SOX11",
+        "SOX4"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0035235",
+        "name": "ionotropic glutamate receptor signaling pathway",
+        "namespace": "biological_process",
+        "fdr": 0.03244865730272783,
+        "fold_enrichment": 16.00081300813008,
+        "genes": [
+          "GRIA2",
+          "GRIA4",
+          "GRID2",
+          "GRIK2"
+        ],
+        "depth": 7
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "GRIA2",
+        "GRIA4",
+        "GRID2",
+        "GRIK2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0016477",
+        "name": "cell migration",
+        "namespace": "biological_process",
+        "fdr": 0.035404080849398493,
+        "fold_enrichment": 2.810060135725324,
+        "genes": [
+          "ADGRL3",
+          "CDH10",
+          "CDH13",
+          "CDH2",
+          "CDH20",
+          "CTNNA2",
+          "DCX",
+          "ERBB4",
+          "FERMT1",
+          "FYN",
+          "NTRK3",
+          "PAK3",
+          "PEAK1",
+          "PIK3R3",
+          "PTPRK",
+          "SH3RF1",
+          "TMEFF2"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRL3",
+        "CDH10",
+        "CDH13",
+        "CDH2",
+        "CDH20",
+        "CTNNA2",
+        "DCX",
+        "ERBB4",
+        "FERMT1",
+        "FYN",
+        "NTRK3",
+        "PAK3",
+        "PEAK1",
+        "PIK3R3",
+        "PTPRK",
+        "SH3RF1",
+        "TMEFF2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0034706",
+        "name": "sodium channel complex",
+        "namespace": "cellular_component",
+        "fdr": 0.037280454773023844,
+        "fold_enrichment": 15.00076219512195,
+        "genes": [
+          "GRIK2",
+          "SCN1A",
+          "SCN3A"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "GRIK2",
+        "SCN1A",
+        "SCN3A"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007612",
+        "name": "learning",
+        "namespace": "biological_process",
+        "fdr": 0.04225652917754779,
+        "fold_enrichment": 7.500381097560975,
+        "genes": [
+          "BCHE",
+          "CNTNAP2",
+          "FYN",
+          "NLGN4X",
+          "NRXN1",
+          "SLC8A3"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "BCHE",
+        "CNTNAP2",
+        "FYN",
+        "NLGN4X",
+        "NRXN1",
+        "SLC8A3"
+      ]
+    }
+  ],
+  "hub_genes": {
+    "NLGN4X": {
+      "theme_count": 11,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "GABA-ergic synapse",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "neuron differentiation",
+        "regulation of membrane potential",
+        "cell surface",
+        "neuron to neuron synapse",
+        "cell adhesion molecule binding"
+      ],
+      "go_terms": [
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0098984",
+        "GO:0007612",
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0050804",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0042391",
+        "GO:0043197",
+        "GO:0030182"
+      ]
+    },
+    "GRIK2": {
+      "theme_count": 11,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "presynaptic membrane",
+        "neuron to neuron synapse",
+        "ionotropic glutamate receptor signaling pathway"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0042734",
+        "GO:0098796",
+        "GO:0098839",
+        "GO:0016013",
+        "GO:0098978",
+        "GO:0034706",
+        "GO:0098984",
+        "GO:0030424",
+        "GO:0050804",
+        "GO:0035235",
+        "GO:0098794",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "CDH2": {
+      "theme_count": 11,
+      "themes": [
+        "axon",
+        "synapse organization",
+        "membrane protein complex",
+        "membrane raft",
+        "homophilic cell-cell adhesion",
+        "cell surface",
+        "adherens junction",
+        "adherens junction organization",
+        "cell adhesion molecule binding",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0008328",
+        "GO:0016477",
+        "GO:0098796",
+        "GO:0050808",
+        "GO:0045121",
+        "GO:0016013",
+        "GO:0034332",
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0016342",
+        "GO:0007156",
+        "GO:0007416",
+        "GO:0005912"
+      ]
+    },
+    "GRID2": {
+      "theme_count": 10,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "neuron differentiation",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "prepulse inhibition",
+        "AMPA glutamate receptor activity",
+        "ionotropic glutamate receptor signaling pathway"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0016013",
+        "GO:0098978",
+        "GO:0004971",
+        "GO:0099175",
+        "GO:0016342",
+        "GO:0050804",
+        "GO:0035235",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0042391",
+        "GO:0060134",
+        "GO:0043197",
+        "GO:0030182"
+      ]
+    },
+    "NRXN1": {
+      "theme_count": 10,
+      "themes": [
+        "synapse organization",
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "regulation of membrane potential",
+        "presynaptic membrane",
+        "cell surface",
+        "cell adhesion molecule binding",
+        "calcium ion binding",
+        "axon guidance",
+        "learning"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0043025",
+        "GO:0050808",
+        "GO:0007411",
+        "GO:0007612",
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0050804",
+        "GO:0042734",
+        "GO:0007416",
+        "GO:0042391"
+      ]
+    },
+    "CDH13": {
+      "theme_count": 10,
+      "themes": [
+        "GABA-ergic synapse",
+        "membrane protein complex",
+        "membrane raft",
+        "homophilic cell-cell adhesion",
+        "adherens junction",
+        "regulation of ERBB signaling pathway",
+        "adherens junction organization",
+        "cell adhesion molecule binding",
+        "calcium ion binding",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0008328",
+        "GO:0016477",
+        "GO:0098796",
+        "GO:0045121",
+        "GO:1901184",
+        "GO:0016013",
+        "GO:0098982",
+        "GO:0034332",
+        "GO:0050839",
+        "GO:0007156",
+        "GO:0016342",
+        "GO:0005912"
+      ]
+    },
+    "CDH10": {
+      "theme_count": 9,
+      "themes": [
+        "glutamatergic synapse",
+        "GABA-ergic synapse",
+        "membrane protein complex",
+        "homophilic cell-cell adhesion",
+        "adherens junction",
+        "adherens junction organization",
+        "cell adhesion molecule binding",
+        "calcium ion binding",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0008328",
+        "GO:0016477",
+        "GO:0098796",
+        "GO:0034332",
+        "GO:0016013",
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0050839",
+        "GO:0007156",
+        "GO:0016342",
+        "GO:0005912"
+      ]
+    },
+    "FYN": {
+      "theme_count": 9,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "modulation of chemical synaptic transmission",
+        "membrane raft",
+        "cellular component maintenance",
+        "stimulatory C-type lectin receptor signaling pathway",
+        "axon guidance",
+        "cell migration",
+        "learning"
+      ],
+      "go_terms": [
+        "GO:0016477",
+        "GO:0045121",
+        "GO:0050808",
+        "GO:0007411",
+        "GO:0098978",
+        "GO:0043954",
+        "GO:0099175",
+        "GO:0002223",
+        "GO:0050804",
+        "GO:0007416",
+        "GO:0007612"
+      ]
+    },
+    "CNTNAP2": {
+      "theme_count": 9,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "neuronal cell body",
+        "GABA-ergic synapse",
+        "membrane protein complex",
+        "presynaptic membrane",
+        "cell surface",
+        "prepulse inhibition",
+        "learning"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0009986",
+        "GO:0030424",
+        "GO:0042734",
+        "GO:0016342",
+        "GO:0007612",
+        "GO:0060134"
+      ]
+    },
+    "PPFIA2": {
+      "theme_count": 8,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "synapse organization",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "presynaptic membrane",
+        "cell surface",
+        "cellular component maintenance"
+      ],
+      "go_terms": [
+        "GO:0042734",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0098978",
+        "GO:0043954",
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0030424",
+        "GO:0050804",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0043197"
+      ]
+    },
+    "DSCAM": {
+      "theme_count": 8,
+      "themes": [
+        "axon",
+        "synapse organization",
+        "neuronal cell body",
+        "neuron differentiation",
+        "homophilic cell-cell adhesion",
+        "growth cone",
+        "cell adhesion molecule binding",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0043025",
+        "GO:0050808",
+        "GO:0007411",
+        "GO:0030426",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0007156",
+        "GO:0007416",
+        "GO:0030182"
+      ]
+    },
+    "SLC8A3": {
+      "theme_count": 8,
+      "themes": [
+        "axon",
+        "synapse organization",
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of membrane potential",
+        "oligodendrocyte differentiation",
+        "learning"
+      ],
+      "go_terms": [
+        "GO:0048709",
+        "GO:0043025",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0007612",
+        "GO:0099175",
+        "GO:0030424",
+        "GO:0050804",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "CTNNA2": {
+      "theme_count": 8,
+      "themes": [
+        "axon",
+        "synapse organization",
+        "membrane protein complex",
+        "adherens junction",
+        "prepulse inhibition",
+        "neuron to neuron synapse",
+        "cell adhesion molecule binding",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0016477",
+        "GO:0098796",
+        "GO:0050808",
+        "GO:0016013",
+        "GO:0098984",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0016342",
+        "GO:0007416",
+        "GO:0005912",
+        "GO:0060134"
+      ]
+    },
+    "GRIA2": {
+      "theme_count": 8,
+      "themes": [
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "neuron to neuron synapse",
+        "AMPA glutamate receptor activity",
+        "ionotropic glutamate receptor signaling pathway"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0098796",
+        "GO:0098839",
+        "GO:0016013",
+        "GO:0098984",
+        "GO:0004971",
+        "GO:0050804",
+        "GO:0035235",
+        "GO:0098794",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "KCND2": {
+      "theme_count": 7,
+      "themes": [
+        "glutamatergic synapse",
+        "neuronal cell body",
+        "GABA-ergic synapse",
+        "postsynapse",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "membrane raft"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0098796",
+        "GO:0045121",
+        "GO:0098839",
+        "GO:0098982",
+        "GO:0016013",
+        "GO:0098978",
+        "GO:0098794",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "ERBB4": {
+      "theme_count": 7,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "GABA-ergic synapse",
+        "postsynapse",
+        "neuron differentiation",
+        "presynaptic membrane",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0016477",
+        "GO:0042734",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0099175",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0043197",
+        "GO:0030182"
+      ]
+    },
+    "GABRB3": {
+      "theme_count": 7,
+      "themes": [
+        "synapse organization",
+        "GABA-ergic synapse",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0098982",
+        "GO:0016013",
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0016342",
+        "GO:0050804",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "GRIA4": {
+      "theme_count": 7,
+      "themes": [
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "AMPA glutamate receptor activity",
+        "ionotropic glutamate receptor signaling pathway"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0098796",
+        "GO:0098839",
+        "GO:0016013",
+        "GO:0004971",
+        "GO:0050804",
+        "GO:0035235",
+        "GO:0098794",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0043197"
+      ]
+    },
+    "EGFR": {
+      "theme_count": 7,
+      "themes": [
+        "neuron differentiation",
+        "membrane protein complex",
+        "membrane raft",
+        "cell surface",
+        "regulation of ERBB signaling pathway",
+        "negative regulation of cardiocyte differentiation",
+        "cell adhesion molecule binding"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0045121",
+        "GO:0016013",
+        "GO:0009986",
+        "GO:1905208",
+        "GO:0050839",
+        "GO:1901184",
+        "GO:0016342",
+        "GO:0030182"
+      ]
+    },
+    "CDH20": {
+      "theme_count": 7,
+      "themes": [
+        "membrane protein complex",
+        "homophilic cell-cell adhesion",
+        "adherens junction",
+        "adherens junction organization",
+        "cell adhesion molecule binding",
+        "calcium ion binding",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0008328",
+        "GO:0016477",
+        "GO:0098796",
+        "GO:0034332",
+        "GO:0016013",
+        "GO:0050839",
+        "GO:0007156",
+        "GO:0016342",
+        "GO:0005912"
+      ]
+    },
+    "ERC2": {
+      "theme_count": 6,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "GABA-ergic synapse",
+        "presynaptic membrane",
+        "cellular component maintenance",
+        "growth cone"
+      ],
+      "go_terms": [
+        "GO:0030426",
+        "GO:0099175",
+        "GO:0050808",
+        "GO:0042734",
+        "GO:0007416",
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0043954"
+      ]
+    },
+    "TNR": {
+      "theme_count": 6,
+      "themes": [
+        "glutamatergic synapse",
+        "modulation of chemical synaptic transmission",
+        "specialized extracellular matrix",
+        "membrane raft",
+        "cell surface",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0072534",
+        "GO:0009986",
+        "GO:0045121",
+        "GO:0050804",
+        "GO:0033165",
+        "GO:0140047",
+        "GO:0098978",
+        "GO:0007411"
+      ]
+    },
+    "ADGRL3": {
+      "theme_count": 6,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "synapse organization",
+        "cell adhesion molecule binding",
+        "calcium ion binding",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0099175",
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0016477",
+        "GO:0050808",
+        "GO:0007416",
+        "GO:0098978"
+      ]
+    },
+    "IL1RAPL1": {
+      "theme_count": 5,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "synapse organization",
+        "neuron differentiation",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0099175",
+        "GO:0030424",
+        "GO:0050808",
+        "GO:0007416",
+        "GO:0098978",
+        "GO:0030182"
+      ]
+    },
+    "CBLB": {
+      "theme_count": 5,
+      "themes": [
+        "glutamatergic synapse",
+        "postsynapse",
+        "membrane raft",
+        "regulation of ERBB signaling pathway",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0045121",
+        "GO:1901184",
+        "GO:0098794",
+        "GO:0098839",
+        "GO:0043197",
+        "GO:0098978"
+      ]
+    },
+    "CNTN1": {
+      "theme_count": 5,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "presynaptic membrane",
+        "cell adhesion molecule binding",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0042734",
+        "GO:0007411",
+        "GO:0098978"
+      ]
+    },
+    "ZNF804A": {
+      "theme_count": 5,
+      "themes": [
+        "axon",
+        "synapse organization",
+        "neuronal cell body",
+        "postsynapse",
+        "growth cone"
+      ],
+      "go_terms": [
+        "GO:0043025",
+        "GO:0050808",
+        "GO:0098839",
+        "GO:0030426",
+        "GO:0099175",
+        "GO:0030424",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0043197"
+      ]
+    },
+    "DSCAML1": {
+      "theme_count": 5,
+      "themes": [
+        "axon",
+        "homophilic cell-cell adhesion",
+        "cell surface",
+        "cell adhesion molecule binding",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0007156",
+        "GO:0007411"
+      ]
+    },
+    "SCN1A": {
+      "theme_count": 5,
+      "themes": [
+        "axon",
+        "neuronal cell body",
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "sodium channel complex"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0030424",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0034706"
+      ]
+    },
+    "PAK3": {
+      "theme_count": 4,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "stimulatory C-type lectin receptor signaling pathway",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0099175",
+        "GO:0016477",
+        "GO:0002223",
+        "GO:0050808",
+        "GO:0007416",
+        "GO:0098978"
+      ]
+    },
+    "CSMD2": {
+      "theme_count": 4,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "postsynapse",
+        "cellular component maintenance"
+      ],
+      "go_terms": [
+        "GO:0099175",
+        "GO:0098839",
+        "GO:0050808",
+        "GO:0043954",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0098978",
+        "GO:0043197"
+      ]
+    },
+    "HIP1": {
+      "theme_count": 4,
+      "themes": [
+        "glutamatergic synapse",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "regulation of ERBB signaling pathway"
+      ],
+      "go_terms": [
+        "GO:0050804",
+        "GO:1901184",
+        "GO:0098794",
+        "GO:0098839",
+        "GO:0098978",
+        "GO:0043197"
+      ]
+    },
+    "ADAM22": {
+      "theme_count": 4,
+      "themes": [
+        "axon",
+        "modulation of chemical synaptic transmission",
+        "postsynapse",
+        "cell adhesion molecule binding"
+      ],
+      "go_terms": [
+        "GO:0050839",
+        "GO:0030424",
+        "GO:0050804",
+        "GO:0098794",
+        "GO:0098839",
+        "GO:0043197"
+      ]
+    },
+    "ALCAM": {
+      "theme_count": 4,
+      "themes": [
+        "axon",
+        "neuronal cell body",
+        "membrane protein complex",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0030424",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0007411"
+      ]
+    },
+    "DMD": {
+      "theme_count": 4,
+      "themes": [
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "membrane raft",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0045121",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0042391"
+      ]
+    },
+    "DLL1": {
+      "theme_count": 4,
+      "themes": [
+        "membrane raft",
+        "adherens junction",
+        "negative regulation of cardiocyte differentiation",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:1905208",
+        "GO:0005912",
+        "GO:0045121"
+      ]
+    },
+    "ELMO1": {
+      "theme_count": 3,
+      "themes": [
+        "glutamatergic synapse",
+        "synapse organization",
+        "postsynapse"
+      ],
+      "go_terms": [
+        "GO:0099175",
+        "GO:0098839",
+        "GO:0050808",
+        "GO:0098794",
+        "GO:0007416",
+        "GO:0098978",
+        "GO:0043197"
+      ]
+    },
+    "NTRK3": {
+      "theme_count": 3,
+      "themes": [
+        "glutamatergic synapse",
+        "axon",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0016477",
+        "GO:0030424",
+        "GO:0098978"
+      ]
+    },
+    "NXPH1": {
+      "theme_count": 3,
+      "themes": [
+        "glutamatergic synapse",
+        "GABA-ergic synapse",
+        "modulation of chemical synaptic transmission"
+      ],
+      "go_terms": [
+        "GO:0098982",
+        "GO:0098978",
+        "GO:0050804"
+      ]
+    },
+    "IGF1R": {
+      "theme_count": 3,
+      "themes": [
+        "axon",
+        "membrane protein complex",
+        "cellular component maintenance"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0030424",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0043954"
+      ]
+    },
+    "CACNA1A": {
+      "theme_count": 3,
+      "themes": [
+        "neuronal cell body",
+        "modulation of chemical synaptic transmission",
+        "membrane protein complex"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0043025",
+        "GO:0098796",
+        "GO:0050804",
+        "GO:0016013",
+        "GO:0016342"
+      ]
+    },
+    "SCN3A": {
+      "theme_count": 3,
+      "themes": [
+        "regulation of membrane potential",
+        "membrane protein complex",
+        "sodium channel complex"
+      ],
+      "go_terms": [
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0042391",
+        "GO:0034706"
+      ]
+    },
+    "PTPRZ1": {
+      "theme_count": 3,
+      "themes": [
+        "specialized extracellular matrix",
+        "oligodendrocyte differentiation",
+        "cell adhesion molecule binding"
+      ],
+      "go_terms": [
+        "GO:0072534",
+        "GO:0048709",
+        "GO:0050839",
+        "GO:0033165",
+        "GO:0140047"
+      ]
+    },
+    "CRB1": {
+      "theme_count": 3,
+      "themes": [
+        "membrane protein complex",
+        "adherens junction",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0005509",
+        "GO:0008328",
+        "GO:0098796",
+        "GO:0016013",
+        "GO:0016342",
+        "GO:0005912"
+      ]
+    },
+    "PTCH1": {
+      "theme_count": 3,
+      "themes": [
+        "membrane raft",
+        "growth cone",
+        "axon guidance"
+      ],
+      "go_terms": [
+        "GO:0030426",
+        "GO:0007411",
+        "GO:0045121"
+      ]
+    },
+    "PCDH15": {
+      "theme_count": 3,
+      "themes": [
+        "homophilic cell-cell adhesion",
+        "cell adhesion molecule binding",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0007156",
+        "GO:0050839",
+        "GO:0005509"
+      ]
+    },
+    "PCDH11X": {
+      "theme_count": 3,
+      "themes": [
+        "homophilic cell-cell adhesion",
+        "cell adhesion molecule binding",
+        "calcium ion binding"
+      ],
+      "go_terms": [
+        "GO:0007156",
+        "GO:0050839",
+        "GO:0005509"
+      ]
+    },
+    "PTPRK": {
+      "theme_count": 3,
+      "themes": [
+        "cell surface",
+        "adherens junction",
+        "cell migration"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0016477",
+        "GO:0005912"
+      ]
+    }
+  },
+  "metadata": {
+    "input_genes_count": 200,
+    "genes_with_annotations": 164,
+    "total_enriched_terms": 110,
+    "enrichment_leaves_count": 41,
+    "themes_count": 36,
+    "themes_with_children": 4,
+    "hub_genes_count": 48,
+    "fdr_threshold": 0.05,
+    "species": "human",
+    "min_ic": 3.0,
+    "min_leaves": 2,
+    "timestamp": "2026-04-13T13:32:39.971578+00:00"
+  }
+}

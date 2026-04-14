@@ -1,0 +1,1386 @@
+{
+  "enrichment_leaves": [
+    {
+      "go_id": "GO:1902430",
+      "name": "negative regulation of amyloid-beta formation",
+      "namespace": "biological_process",
+      "fdr": 0.001389554165618675,
+      "fold_enrichment": 35.7316630355846,
+      "genes": [
+        "APOE",
+        "CLU",
+        "NTRK2",
+        "RTN1",
+        "SORL1"
+      ],
+      "depth": 9
+    },
+    {
+      "go_id": "GO:0007010",
+      "name": "cytoskeleton organization",
+      "namespace": "biological_process",
+      "fdr": 0.001389554165618675,
+      "fold_enrichment": 3.167039997940241,
+      "genes": [
+        "ABLIM1",
+        "ANKFN1",
+        "APOE",
+        "CFAP43",
+        "CNN3",
+        "DCLK2",
+        "DMD",
+        "DOCK7",
+        "FIGN",
+        "FMN2",
+        "FRMD5",
+        "GFAP",
+        "GJA1",
+        "KANK1",
+        "LIMCH1",
+        "NCKAP5",
+        "NOS1AP",
+        "PARD3",
+        "PARD3B",
+        "RNF19A",
+        "SEMA6A",
+        "SORBS1",
+        "TLN2",
+        "TNIK",
+        "VIM"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0046058",
+      "name": "cAMP metabolic process",
+      "namespace": "biological_process",
+      "fdr": 0.004484804225933307,
+      "fold_enrichment": 24.29753086419753,
+      "genes": [
+        "ADCY2",
+        "ADCY8",
+        "ADCYAP1R1",
+        "PDE8A",
+        "PDE8B"
+      ],
+      "depth": 10
+    },
+    {
+      "go_id": "GO:0098590",
+      "name": "plasma membrane region",
+      "namespace": "cellular_component",
+      "fdr": 0.006930932389540862,
+      "fold_enrichment": 2.4774672708962737,
+      "genes": [
+        "ABCA1",
+        "ADCY8",
+        "ADCYAP1R1",
+        "ADGRV1",
+        "AHCYL1",
+        "AKAP6",
+        "ARHGEF4",
+        "ATP1B2",
+        "CD44",
+        "DMD",
+        "GABRB1",
+        "GJA1",
+        "GPM6A",
+        "GRIK1",
+        "ITGB4",
+        "KANK1",
+        "NOS1AP",
+        "PARD3",
+        "PARD3B",
+        "PCDH9",
+        "ROBO2",
+        "SLC14A1",
+        "SLC1A3",
+        "SLC24A4",
+        "SLC4A4",
+        "SLCO1C1",
+        "TNIK"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0098609",
+      "name": "cell-cell adhesion",
+      "namespace": "biological_process",
+      "fdr": 0.010422313760567584,
+      "fold_enrichment": 3.7525144191810855,
+      "genes": [
+        "ADGRV1",
+        "ASTN2",
+        "ATP1B2",
+        "CD44",
+        "CD99",
+        "CDH11",
+        "CNN3",
+        "FAT3",
+        "ITGB4",
+        "PCDH9",
+        "PTPRT",
+        "ROBO2",
+        "SPARCL1",
+        "TENM4",
+        "TLN2",
+        "VCL"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0098978",
+      "name": "glutamatergic synapse",
+      "namespace": "cellular_component",
+      "fdr": 0.023458603543855976,
+      "fold_enrichment": 3.169243156199678,
+      "genes": [
+        "ADCY8",
+        "APOE",
+        "CADPS",
+        "CDH11",
+        "DAPK1",
+        "GPM6A",
+        "GRIK1",
+        "NOS1AP",
+        "NRG3",
+        "PCDH9",
+        "PLEKHA5",
+        "PRUNE2",
+        "SPARCL1",
+        "TENM4",
+        "TNIK"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0045121",
+      "name": "membrane raft",
+      "namespace": "cellular_component",
+      "fdr": 0.02703325442109461,
+      "fold_enrichment": 4.203725063009953,
+      "genes": [
+        "ABCA1",
+        "ADCY2",
+        "ADCY8",
+        "ADCYAP1R1",
+        "AKAP6",
+        "CD44",
+        "DMD",
+        "GJA1",
+        "NOS1AP",
+        "SORBS1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0009986",
+      "name": "cell surface",
+      "namespace": "cellular_component",
+      "fdr": 0.02703325442109461,
+      "fold_enrichment": 2.83353129611633,
+      "genes": [
+        "ABCA1",
+        "ADCYAP1R1",
+        "ADGRV1",
+        "ANOS1",
+        "CD44",
+        "CLU",
+        "DMD",
+        "IQGAP2",
+        "ITGB4",
+        "MASP1",
+        "PTPRT",
+        "RGMA",
+        "ROBO2",
+        "SLC1A3",
+        "SLC4A4",
+        "SORL1"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0030055",
+      "name": "cell-substrate junction",
+      "namespace": "cellular_component",
+      "fdr": 0.02703325442109461,
+      "fold_enrichment": 3.4960476063593564,
+      "genes": [
+        "CD44",
+        "CD99",
+        "CNN3",
+        "DMD",
+        "DOCK7",
+        "GJA1",
+        "ITGB4",
+        "SORBS1",
+        "TLN2",
+        "TNC",
+        "VCL",
+        "VIM"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0005912",
+      "name": "adherens junction",
+      "namespace": "cellular_component",
+      "fdr": 0.029140788977968686,
+      "fold_enrichment": 4.958679768203577,
+      "genes": [
+        "CDH11",
+        "CNN3",
+        "FAT3",
+        "FRMD5",
+        "PARD3",
+        "PARD3B",
+        "SORBS1",
+        "VCL"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:2000146",
+      "name": "negative regulation of cell motility",
+      "namespace": "biological_process",
+      "fdr": 0.033214958756186796,
+      "fold_enrichment": 4.608152405278842,
+      "genes": [
+        "APOE",
+        "ATP1B2",
+        "CDH11",
+        "FRMD5",
+        "GJA1",
+        "IL33",
+        "KANK1",
+        "LIMCH1",
+        "PTPRG",
+        "PTPRT",
+        "VCL"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0015629",
+      "name": "actin cytoskeleton",
+      "namespace": "cellular_component",
+      "fdr": 0.036765851868712285,
+      "fold_enrichment": 4.189229459344402,
+      "genes": [
+        "ABLIM1",
+        "ADCY8",
+        "CNN3",
+        "DAPK1",
+        "FMN2",
+        "IQGAP2",
+        "LIMCH1",
+        "TLN2",
+        "VCL"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0043005",
+      "name": "neuron projection",
+      "namespace": "cellular_component",
+      "fdr": 0.036765851868712285,
+      "fold_enrichment": 2.3843371408791967,
+      "genes": [
+        "ADCY2",
+        "ADCY8",
+        "ADGRV1",
+        "APOE",
+        "BMPR1B",
+        "CLU",
+        "DOCK7",
+        "DTNA",
+        "FAT3",
+        "GABRB1",
+        "GPM6A",
+        "HRH1",
+        "KCNN3",
+        "NTRK2",
+        "PACRG",
+        "RTN1",
+        "SEMA6A",
+        "SLC1A3",
+        "STON2",
+        "TENM4",
+        "VIM"
+      ],
+      "depth": 4
+    }
+  ],
+  "themes": [
+    {
+      "anchor_term": {
+        "go_id": "GO:1902430",
+        "name": "negative regulation of amyloid-beta formation",
+        "namespace": "biological_process",
+        "fdr": 0.001389554165618675,
+        "fold_enrichment": 35.7316630355846,
+        "genes": [
+          "APOE",
+          "CLU",
+          "NTRK2",
+          "RTN1",
+          "SORL1"
+        ],
+        "depth": 9
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "APOE",
+        "CLU",
+        "NTRK2",
+        "RTN1",
+        "SORL1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007010",
+        "name": "cytoskeleton organization",
+        "namespace": "biological_process",
+        "fdr": 0.001389554165618675,
+        "fold_enrichment": 3.167039997940241,
+        "genes": [
+          "ABLIM1",
+          "ANKFN1",
+          "APOE",
+          "CFAP43",
+          "CNN3",
+          "DCLK2",
+          "DMD",
+          "DOCK7",
+          "FIGN",
+          "FMN2",
+          "FRMD5",
+          "GFAP",
+          "GJA1",
+          "KANK1",
+          "LIMCH1",
+          "NCKAP5",
+          "NOS1AP",
+          "PARD3",
+          "PARD3B",
+          "RNF19A",
+          "SEMA6A",
+          "SORBS1",
+          "TLN2",
+          "TNIK",
+          "VIM"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABLIM1",
+        "ANKFN1",
+        "APOE",
+        "CFAP43",
+        "CNN3",
+        "DCLK2",
+        "DMD",
+        "DOCK7",
+        "FIGN",
+        "FMN2",
+        "FRMD5",
+        "GFAP",
+        "GJA1",
+        "KANK1",
+        "LIMCH1",
+        "NCKAP5",
+        "NOS1AP",
+        "PARD3",
+        "PARD3B",
+        "RNF19A",
+        "SEMA6A",
+        "SORBS1",
+        "TLN2",
+        "TNIK",
+        "VIM"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0046058",
+        "name": "cAMP metabolic process",
+        "namespace": "biological_process",
+        "fdr": 0.004484804225933307,
+        "fold_enrichment": 24.29753086419753,
+        "genes": [
+          "ADCY2",
+          "ADCY8",
+          "ADCYAP1R1",
+          "PDE8A",
+          "PDE8B"
+        ],
+        "depth": 10
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADCY2",
+        "ADCY8",
+        "ADCYAP1R1",
+        "PDE8A",
+        "PDE8B"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098590",
+        "name": "plasma membrane region",
+        "namespace": "cellular_component",
+        "fdr": 0.006930932389540862,
+        "fold_enrichment": 2.4774672708962737,
+        "genes": [
+          "ABCA1",
+          "ADCY8",
+          "ADCYAP1R1",
+          "ADGRV1",
+          "AHCYL1",
+          "AKAP6",
+          "ARHGEF4",
+          "ATP1B2",
+          "CD44",
+          "DMD",
+          "GABRB1",
+          "GJA1",
+          "GPM6A",
+          "GRIK1",
+          "ITGB4",
+          "KANK1",
+          "NOS1AP",
+          "PARD3",
+          "PARD3B",
+          "PCDH9",
+          "ROBO2",
+          "SLC14A1",
+          "SLC1A3",
+          "SLC24A4",
+          "SLC4A4",
+          "SLCO1C1",
+          "TNIK"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA1",
+        "ADCY8",
+        "ADCYAP1R1",
+        "ADGRV1",
+        "AHCYL1",
+        "AKAP6",
+        "ARHGEF4",
+        "ATP1B2",
+        "CD44",
+        "DMD",
+        "GABRB1",
+        "GJA1",
+        "GPM6A",
+        "GRIK1",
+        "ITGB4",
+        "KANK1",
+        "NOS1AP",
+        "PARD3",
+        "PARD3B",
+        "PCDH9",
+        "ROBO2",
+        "SLC14A1",
+        "SLC1A3",
+        "SLC24A4",
+        "SLC4A4",
+        "SLCO1C1",
+        "TNIK"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098609",
+        "name": "cell-cell adhesion",
+        "namespace": "biological_process",
+        "fdr": 0.010422313760567584,
+        "fold_enrichment": 3.7525144191810855,
+        "genes": [
+          "ADGRV1",
+          "ASTN2",
+          "ATP1B2",
+          "CD44",
+          "CD99",
+          "CDH11",
+          "CNN3",
+          "FAT3",
+          "ITGB4",
+          "PCDH9",
+          "PTPRT",
+          "ROBO2",
+          "SPARCL1",
+          "TENM4",
+          "TLN2",
+          "VCL"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRV1",
+        "ASTN2",
+        "ATP1B2",
+        "CD44",
+        "CD99",
+        "CDH11",
+        "CNN3",
+        "FAT3",
+        "ITGB4",
+        "PCDH9",
+        "PTPRT",
+        "ROBO2",
+        "SPARCL1",
+        "TENM4",
+        "TLN2",
+        "VCL"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0098978",
+        "name": "glutamatergic synapse",
+        "namespace": "cellular_component",
+        "fdr": 0.023458603543855976,
+        "fold_enrichment": 3.169243156199678,
+        "genes": [
+          "ADCY8",
+          "APOE",
+          "CADPS",
+          "CDH11",
+          "DAPK1",
+          "GPM6A",
+          "GRIK1",
+          "NOS1AP",
+          "NRG3",
+          "PCDH9",
+          "PLEKHA5",
+          "PRUNE2",
+          "SPARCL1",
+          "TENM4",
+          "TNIK"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADCY8",
+        "APOE",
+        "CADPS",
+        "CDH11",
+        "DAPK1",
+        "GPM6A",
+        "GRIK1",
+        "NOS1AP",
+        "NRG3",
+        "PCDH9",
+        "PLEKHA5",
+        "PRUNE2",
+        "SPARCL1",
+        "TENM4",
+        "TNIK"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0045121",
+        "name": "membrane raft",
+        "namespace": "cellular_component",
+        "fdr": 0.02703325442109461,
+        "fold_enrichment": 4.203725063009953,
+        "genes": [
+          "ABCA1",
+          "ADCY2",
+          "ADCY8",
+          "ADCYAP1R1",
+          "AKAP6",
+          "CD44",
+          "DMD",
+          "GJA1",
+          "NOS1AP",
+          "SORBS1"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA1",
+        "ADCY2",
+        "ADCY8",
+        "ADCYAP1R1",
+        "AKAP6",
+        "CD44",
+        "DMD",
+        "GJA1",
+        "NOS1AP",
+        "SORBS1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0009986",
+        "name": "cell surface",
+        "namespace": "cellular_component",
+        "fdr": 0.02703325442109461,
+        "fold_enrichment": 2.83353129611633,
+        "genes": [
+          "ABCA1",
+          "ADCYAP1R1",
+          "ADGRV1",
+          "ANOS1",
+          "CD44",
+          "CLU",
+          "DMD",
+          "IQGAP2",
+          "ITGB4",
+          "MASP1",
+          "PTPRT",
+          "RGMA",
+          "ROBO2",
+          "SLC1A3",
+          "SLC4A4",
+          "SORL1"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCA1",
+        "ADCYAP1R1",
+        "ADGRV1",
+        "ANOS1",
+        "CD44",
+        "CLU",
+        "DMD",
+        "IQGAP2",
+        "ITGB4",
+        "MASP1",
+        "PTPRT",
+        "RGMA",
+        "ROBO2",
+        "SLC1A3",
+        "SLC4A4",
+        "SORL1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0030055",
+        "name": "cell-substrate junction",
+        "namespace": "cellular_component",
+        "fdr": 0.02703325442109461,
+        "fold_enrichment": 3.4960476063593564,
+        "genes": [
+          "CD44",
+          "CD99",
+          "CNN3",
+          "DMD",
+          "DOCK7",
+          "GJA1",
+          "ITGB4",
+          "SORBS1",
+          "TLN2",
+          "TNC",
+          "VCL",
+          "VIM"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CD44",
+        "CD99",
+        "CNN3",
+        "DMD",
+        "DOCK7",
+        "GJA1",
+        "ITGB4",
+        "SORBS1",
+        "TLN2",
+        "TNC",
+        "VCL",
+        "VIM"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005912",
+        "name": "adherens junction",
+        "namespace": "cellular_component",
+        "fdr": 0.029140788977968686,
+        "fold_enrichment": 4.958679768203577,
+        "genes": [
+          "CDH11",
+          "CNN3",
+          "FAT3",
+          "FRMD5",
+          "PARD3",
+          "PARD3B",
+          "SORBS1",
+          "VCL"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDH11",
+        "CNN3",
+        "FAT3",
+        "FRMD5",
+        "PARD3",
+        "PARD3B",
+        "SORBS1",
+        "VCL"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:2000146",
+        "name": "negative regulation of cell motility",
+        "namespace": "biological_process",
+        "fdr": 0.033214958756186796,
+        "fold_enrichment": 4.608152405278842,
+        "genes": [
+          "APOE",
+          "ATP1B2",
+          "CDH11",
+          "FRMD5",
+          "GJA1",
+          "IL33",
+          "KANK1",
+          "LIMCH1",
+          "PTPRG",
+          "PTPRT",
+          "VCL"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "APOE",
+        "ATP1B2",
+        "CDH11",
+        "FRMD5",
+        "GJA1",
+        "IL33",
+        "KANK1",
+        "LIMCH1",
+        "PTPRG",
+        "PTPRT",
+        "VCL"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0015629",
+        "name": "actin cytoskeleton",
+        "namespace": "cellular_component",
+        "fdr": 0.036765851868712285,
+        "fold_enrichment": 4.189229459344402,
+        "genes": [
+          "ABLIM1",
+          "ADCY8",
+          "CNN3",
+          "DAPK1",
+          "FMN2",
+          "IQGAP2",
+          "LIMCH1",
+          "TLN2",
+          "VCL"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABLIM1",
+        "ADCY8",
+        "CNN3",
+        "DAPK1",
+        "FMN2",
+        "IQGAP2",
+        "LIMCH1",
+        "TLN2",
+        "VCL"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043005",
+        "name": "neuron projection",
+        "namespace": "cellular_component",
+        "fdr": 0.036765851868712285,
+        "fold_enrichment": 2.3843371408791967,
+        "genes": [
+          "ADCY2",
+          "ADCY8",
+          "ADGRV1",
+          "APOE",
+          "BMPR1B",
+          "CLU",
+          "DOCK7",
+          "DTNA",
+          "FAT3",
+          "GABRB1",
+          "GPM6A",
+          "HRH1",
+          "KCNN3",
+          "NTRK2",
+          "PACRG",
+          "RTN1",
+          "SEMA6A",
+          "SLC1A3",
+          "STON2",
+          "TENM4",
+          "VIM"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADCY2",
+        "ADCY8",
+        "ADGRV1",
+        "APOE",
+        "BMPR1B",
+        "CLU",
+        "DOCK7",
+        "DTNA",
+        "FAT3",
+        "GABRB1",
+        "GPM6A",
+        "HRH1",
+        "KCNN3",
+        "NTRK2",
+        "PACRG",
+        "RTN1",
+        "SEMA6A",
+        "SLC1A3",
+        "STON2",
+        "TENM4",
+        "VIM"
+      ]
+    }
+  ],
+  "hub_genes": {
+    "ADCY8": {
+      "theme_count": 6,
+      "themes": [
+        "cAMP metabolic process",
+        "plasma membrane region",
+        "glutamatergic synapse",
+        "membrane raft",
+        "actin cytoskeleton",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0015629",
+        "GO:0043005",
+        "GO:0045121",
+        "GO:0098978",
+        "GO:0046058",
+        "GO:0098590"
+      ]
+    },
+    "APOE": {
+      "theme_count": 5,
+      "themes": [
+        "negative regulation of amyloid-beta formation",
+        "cytoskeleton organization",
+        "glutamatergic synapse",
+        "negative regulation of cell motility",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:1902430",
+        "GO:0043005",
+        "GO:2000146",
+        "GO:0007010",
+        "GO:0098978"
+      ]
+    },
+    "DMD": {
+      "theme_count": 5,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "membrane raft",
+        "cell surface",
+        "cell-substrate junction"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045121",
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0098590"
+      ]
+    },
+    "CNN3": {
+      "theme_count": 5,
+      "themes": [
+        "cytoskeleton organization",
+        "cell-cell adhesion",
+        "cell-substrate junction",
+        "adherens junction",
+        "actin cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0015629",
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0005912",
+        "GO:0098609"
+      ]
+    },
+    "GJA1": {
+      "theme_count": 5,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "membrane raft",
+        "cell-substrate junction",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0045121",
+        "GO:2000146",
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0098590"
+      ]
+    },
+    "CD44": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "membrane raft",
+        "cell surface",
+        "cell-substrate junction"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045121",
+        "GO:0030055",
+        "GO:0098609",
+        "GO:0098590"
+      ]
+    },
+    "VCL": {
+      "theme_count": 5,
+      "themes": [
+        "cell-cell adhesion",
+        "cell-substrate junction",
+        "adherens junction",
+        "negative regulation of cell motility",
+        "actin cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0015629",
+        "GO:2000146",
+        "GO:0030055",
+        "GO:0005912",
+        "GO:0098609"
+      ]
+    },
+    "SORBS1": {
+      "theme_count": 4,
+      "themes": [
+        "cytoskeleton organization",
+        "membrane raft",
+        "cell-substrate junction",
+        "adherens junction"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0005912",
+        "GO:0045121"
+      ]
+    },
+    "TLN2": {
+      "theme_count": 4,
+      "themes": [
+        "cytoskeleton organization",
+        "cell-cell adhesion",
+        "cell-substrate junction",
+        "actin cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0098609",
+        "GO:0015629"
+      ]
+    },
+    "NOS1AP": {
+      "theme_count": 4,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "glutamatergic synapse",
+        "membrane raft"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0098978",
+        "GO:0045121",
+        "GO:0098590"
+      ]
+    },
+    "ADCYAP1R1": {
+      "theme_count": 4,
+      "themes": [
+        "cAMP metabolic process",
+        "plasma membrane region",
+        "membrane raft",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045121",
+        "GO:0046058",
+        "GO:0098590"
+      ]
+    },
+    "ADGRV1": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "cell surface",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0043005",
+        "GO:0098609",
+        "GO:0098590"
+      ]
+    },
+    "ITGB4": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "cell surface",
+        "cell-substrate junction"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0030055",
+        "GO:0098609",
+        "GO:0098590"
+      ]
+    },
+    "CDH11": {
+      "theme_count": 4,
+      "themes": [
+        "cell-cell adhesion",
+        "glutamatergic synapse",
+        "adherens junction",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0005912",
+        "GO:0098978",
+        "GO:0098609",
+        "GO:2000146"
+      ]
+    },
+    "CLU": {
+      "theme_count": 3,
+      "themes": [
+        "negative regulation of amyloid-beta formation",
+        "cell surface",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:1902430",
+        "GO:0043005"
+      ]
+    },
+    "PARD3B": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "adherens junction"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0005912",
+        "GO:0098590"
+      ]
+    },
+    "KANK1": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0098590",
+        "GO:2000146"
+      ]
+    },
+    "DOCK7": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "cell-substrate junction",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0043005"
+      ]
+    },
+    "TNIK": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "glutamatergic synapse"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0098978",
+        "GO:0098590"
+      ]
+    },
+    "PARD3": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "plasma membrane region",
+        "adherens junction"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0005912",
+        "GO:0098590"
+      ]
+    },
+    "LIMCH1": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "negative regulation of cell motility",
+        "actin cytoskeleton"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0015629",
+        "GO:2000146"
+      ]
+    },
+    "FRMD5": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "adherens junction",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0005912",
+        "GO:2000146"
+      ]
+    },
+    "VIM": {
+      "theme_count": 3,
+      "themes": [
+        "cytoskeleton organization",
+        "cell-substrate junction",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0007010",
+        "GO:0030055",
+        "GO:0043005"
+      ]
+    },
+    "ADCY2": {
+      "theme_count": 3,
+      "themes": [
+        "cAMP metabolic process",
+        "membrane raft",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0045121",
+        "GO:0043005",
+        "GO:0046058"
+      ]
+    },
+    "ABCA1": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "membrane raft",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0045121",
+        "GO:0098590"
+      ]
+    },
+    "PCDH9": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "glutamatergic synapse"
+      ],
+      "go_terms": [
+        "GO:0098978",
+        "GO:0098609",
+        "GO:0098590"
+      ]
+    },
+    "ROBO2": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "cell surface"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0098609",
+        "GO:0098590"
+      ]
+    },
+    "GPM6A": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "glutamatergic synapse",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0043005",
+        "GO:0098978",
+        "GO:0098590"
+      ]
+    },
+    "SLC1A3": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "cell surface",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0043005",
+        "GO:0098590"
+      ]
+    },
+    "ATP1B2": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "cell-cell adhesion",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0098609",
+        "GO:0098590",
+        "GO:2000146"
+      ]
+    },
+    "PTPRT": {
+      "theme_count": 3,
+      "themes": [
+        "cell-cell adhesion",
+        "cell surface",
+        "negative regulation of cell motility"
+      ],
+      "go_terms": [
+        "GO:0009986",
+        "GO:0098609",
+        "GO:2000146"
+      ]
+    },
+    "TENM4": {
+      "theme_count": 3,
+      "themes": [
+        "cell-cell adhesion",
+        "glutamatergic synapse",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0043005",
+        "GO:0098978",
+        "GO:0098609"
+      ]
+    },
+    "FAT3": {
+      "theme_count": 3,
+      "themes": [
+        "cell-cell adhesion",
+        "adherens junction",
+        "neuron projection"
+      ],
+      "go_terms": [
+        "GO:0005912",
+        "GO:0043005",
+        "GO:0098609"
+      ]
+    }
+  },
+  "metadata": {
+    "input_genes_count": 200,
+    "genes_with_annotations": 162,
+    "total_enriched_terms": 29,
+    "enrichment_leaves_count": 13,
+    "themes_count": 13,
+    "themes_with_children": 0,
+    "hub_genes_count": 33,
+    "fdr_threshold": 0.05,
+    "species": "human",
+    "min_ic": 3.0,
+    "min_leaves": 2,
+    "timestamp": "2026-04-13T13:54:23.238594+00:00"
+  }
+}

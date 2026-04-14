@@ -1,0 +1,3158 @@
+{
+  "0": [
+    {
+      "pmid": "26875626",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0017146"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0017146"
+        ],
+        "GRIN2A": [
+          "GO:0017146"
+        ],
+        "GRIN2B": [
+          "GO:0017146"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2A": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2B": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ]
+      }
+    },
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0017146"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0017146"
+        ],
+        "GRIN2A": [
+          "GO:0017146"
+        ],
+        "GRIN2B": [
+          "GO:0017146"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2A": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2B": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ]
+      }
+    },
+    {
+      "pmid": "10480938",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0017146"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0017146"
+        ],
+        "GRIN2A": [
+          "GO:0017146"
+        ],
+        "GRIN2B": [
+          "GO:0017146"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2A": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2B": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ]
+      }
+    },
+    {
+      "pmid": "26919761",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0017146"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0017146"
+        ],
+        "GRIN2B": [
+          "GO:0017146"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2B": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ]
+      }
+    },
+    {
+      "pmid": "17047094",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0017146"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0017146"
+        ],
+        "GRIN2B": [
+          "GO:0017146"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ],
+        "GRIN2B": [
+          "NMDA selective glutamate receptor complex [GO:0017146]"
+        ]
+      }
+    }
+  ],
+  "1": [
+    {
+      "pmid": "21926414",
+      "genes_covered": [
+        "IL1RAPL2",
+        "PTPRD"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "IL1RAPL2": [
+          "GO:0098978"
+        ],
+        "PTPRD": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "IL1RAPL2": [
+          "glutamatergic synapse [GO:0098978]"
+        ],
+        "PTPRD": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "34706237",
+      "genes_covered": [
+        "GRIK4"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "GRIK4": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "GRIK4": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "29114105",
+      "genes_covered": [
+        "NRG3"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "NRG3": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "NRG3": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    },
+    {
+      "pmid": "16221846",
+      "genes_covered": [
+        "NRG1"
+      ],
+      "go_terms": [
+        "GO:0098978"
+      ],
+      "gene_go_map": {
+        "NRG1": [
+          "GO:0098978"
+        ]
+      },
+      "gene_go_named": {
+        "NRG1": [
+          "glutamatergic synapse [GO:0098978]"
+        ]
+      }
+    }
+  ],
+  "2": [
+    {
+      "pmid": "34929720",
+      "genes_covered": [
+        "NALCN",
+        "UNC79"
+      ],
+      "go_terms": [
+        "GO:0098908"
+      ],
+      "gene_go_map": {
+        "NALCN": [
+          "GO:0098908"
+        ],
+        "UNC79": [
+          "GO:0098908"
+        ]
+      },
+      "gene_go_named": {
+        "NALCN": [
+          "regulation of neuronal action potential [GO:0098908]"
+        ],
+        "UNC79": [
+          "regulation of neuronal action potential [GO:0098908]"
+        ]
+      }
+    },
+    {
+      "pmid": "15003177",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:2000463"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:2000463"
+        ],
+        "GRIN2B": [
+          "GO:2000463"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ],
+        "GRIN2B": [
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ]
+      }
+    },
+    {
+      "pmid": "36959261",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:2000463"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:2000463"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ]
+      }
+    },
+    {
+      "pmid": "35301303",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0042391"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0042391"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "regulation of membrane potential [GO:0042391]"
+        ]
+      }
+    },
+    {
+      "pmid": "29844171",
+      "genes_covered": [
+        "SCN2A"
+      ],
+      "go_terms": [
+        "GO:0019228"
+      ],
+      "gene_go_map": {
+        "SCN2A": [
+          "GO:0019228"
+        ]
+      },
+      "gene_go_named": {
+        "SCN2A": [
+          "neuronal action potential [GO:0019228]"
+        ]
+      }
+    }
+  ],
+  "3": [
+    {
+      "pmid": "30021165",
+      "genes_covered": [
+        "PPFIA2"
+      ],
+      "go_terms": [
+        "GO:0061001"
+      ],
+      "gene_go_map": {
+        "PPFIA2": [
+          "GO:0061001"
+        ]
+      },
+      "gene_go_named": {
+        "PPFIA2": [
+          "regulation of dendritic spine morphogenesis [GO:0061001]"
+        ]
+      }
+    },
+    {
+      "pmid": "25489750",
+      "genes_covered": [
+        "GABRG2"
+      ],
+      "go_terms": [
+        "GO:1904862"
+      ],
+      "gene_go_map": {
+        "GABRG2": [
+          "GO:1904862"
+        ]
+      },
+      "gene_go_named": {
+        "GABRG2": [
+          "inhibitory synapse assembly [GO:1904862]"
+        ]
+      }
+    },
+    {
+      "pmid": "23909897",
+      "genes_covered": [
+        "GABRG2"
+      ],
+      "go_terms": [
+        "GO:1904862"
+      ],
+      "gene_go_map": {
+        "GABRG2": [
+          "GO:1904862"
+        ]
+      },
+      "gene_go_named": {
+        "GABRG2": [
+          "inhibitory synapse assembly [GO:1904862]"
+        ]
+      }
+    },
+    {
+      "pmid": "22699620",
+      "genes_covered": [
+        "SHANK2"
+      ],
+      "go_terms": [
+        "GO:0007416"
+      ],
+      "gene_go_map": {
+        "SHANK2": [
+          "GO:0007416"
+        ]
+      },
+      "gene_go_named": {
+        "SHANK2": [
+          "synapse assembly [GO:0007416]"
+        ]
+      }
+    },
+    {
+      "pmid": "21926414",
+      "genes_covered": [
+        "PTPRD"
+      ],
+      "go_terms": [
+        "GO:0099054"
+      ],
+      "gene_go_map": {
+        "PTPRD": [
+          "GO:0099054"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRD": [
+          "presynapse assembly [GO:0099054]"
+        ]
+      }
+    }
+  ],
+  "4": [
+    {
+      "pmid": "19706678",
+      "genes_covered": [
+        "CNTNAP2"
+      ],
+      "go_terms": [
+        "GO:0030424"
+      ],
+      "gene_go_map": {
+        "CNTNAP2": [
+          "GO:0030424"
+        ]
+      },
+      "gene_go_named": {
+        "CNTNAP2": [
+          "axon [GO:0030424]"
+        ]
+      }
+    },
+    {
+      "pmid": "16652168",
+      "genes_covered": [
+        "SCN2A"
+      ],
+      "go_terms": [
+        "GO:0030424"
+      ],
+      "gene_go_map": {
+        "SCN2A": [
+          "GO:0030424"
+        ]
+      },
+      "gene_go_named": {
+        "SCN2A": [
+          "axon [GO:0030424]"
+        ]
+      }
+    }
+  ],
+  "5": [],
+  "6": [
+    {
+      "pmid": "29950725",
+      "genes_covered": [
+        "GABRA2",
+        "GABRB1",
+        "GABRG2"
+      ],
+      "go_terms": [
+        "GO:0051932"
+      ],
+      "gene_go_map": {
+        "GABRA2": [
+          "GO:0051932"
+        ],
+        "GABRB1": [
+          "GO:0051932"
+        ],
+        "GABRG2": [
+          "GO:0051932"
+        ]
+      },
+      "gene_go_named": {
+        "GABRA2": [
+          "synaptic transmission, GABAergic [GO:0051932]"
+        ],
+        "GABRB1": [
+          "synaptic transmission, GABAergic [GO:0051932]"
+        ],
+        "GABRG2": [
+          "synaptic transmission, GABAergic [GO:0051932]"
+        ]
+      }
+    },
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0098976"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0098976"
+        ],
+        "GRIN2A": [
+          "GO:0098976"
+        ],
+        "GRIN2B": [
+          "GO:0098976"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "excitatory chemical synaptic transmission [GO:0098976]"
+        ],
+        "GRIN2A": [
+          "excitatory chemical synaptic transmission [GO:0098976]"
+        ],
+        "GRIN2B": [
+          "excitatory chemical synaptic transmission [GO:0098976]"
+        ]
+      }
+    },
+    {
+      "pmid": "15003177",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0051968",
+        "GO:0048168",
+        "GO:2000463"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0048168",
+          "GO:0051968",
+          "GO:2000463"
+        ],
+        "GRIN2A": [
+          "GO:0048168"
+        ],
+        "GRIN2B": [
+          "GO:0048168",
+          "GO:0051968",
+          "GO:2000463"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "regulation of neuronal synaptic plasticity [GO:0048168]",
+          "positive regulation of synaptic transmission, glutamatergic [GO:0051968]",
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ],
+        "GRIN2A": [
+          "regulation of neuronal synaptic plasticity [GO:0048168]"
+        ],
+        "GRIN2B": [
+          "regulation of neuronal synaptic plasticity [GO:0048168]",
+          "positive regulation of synaptic transmission, glutamatergic [GO:0051968]",
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ]
+      }
+    },
+    {
+      "pmid": "33234346",
+      "genes_covered": [
+        "GABRB1",
+        "GABRG2"
+      ],
+      "go_terms": [
+        "GO:0032229"
+      ],
+      "gene_go_map": {
+        "GABRB1": [
+          "GO:0032229"
+        ],
+        "GABRG2": [
+          "GO:0032229"
+        ]
+      },
+      "gene_go_named": {
+        "GABRB1": [
+          "negative regulation of synaptic transmission, GABAergic [GO:0032229]"
+        ],
+        "GABRG2": [
+          "negative regulation of synaptic transmission, GABAergic [GO:0032229]"
+        ]
+      }
+    },
+    {
+      "pmid": "36959261",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:2000463"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:2000463"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+        ]
+      }
+    }
+  ],
+  "7": [
+    {
+      "pmid": "30021165",
+      "genes_covered": [
+        "PPFIA2"
+      ],
+      "go_terms": [
+        "GO:0043197"
+      ],
+      "gene_go_map": {
+        "PPFIA2": [
+          "GO:0043197"
+        ]
+      },
+      "gene_go_named": {
+        "PPFIA2": [
+          "dendritic spine [GO:0043197]"
+        ]
+      }
+    },
+    {
+      "pmid": "26671989",
+      "genes_covered": [
+        "PLPPR4"
+      ],
+      "go_terms": [
+        "GO:0098839"
+      ],
+      "gene_go_map": {
+        "PLPPR4": [
+          "GO:0098839"
+        ]
+      },
+      "gene_go_named": {
+        "PLPPR4": [
+          "postsynaptic density membrane [GO:0098839]"
+        ]
+      }
+    },
+    {
+      "pmid": "21119615",
+      "genes_covered": [
+        "DGKI"
+      ],
+      "go_terms": [
+        "GO:0043197"
+      ],
+      "gene_go_map": {
+        "DGKI": [
+          "GO:0043197"
+        ]
+      },
+      "gene_go_named": {
+        "DGKI": [
+          "dendritic spine [GO:0043197]"
+        ]
+      }
+    },
+    {
+      "pmid": "19118189",
+      "genes_covered": [
+        "FRMPD4"
+      ],
+      "go_terms": [
+        "GO:0043197"
+      ],
+      "gene_go_map": {
+        "FRMPD4": [
+          "GO:0043197"
+        ]
+      },
+      "gene_go_named": {
+        "FRMPD4": [
+          "dendritic spine [GO:0043197]"
+        ]
+      }
+    }
+  ],
+  "8": [
+    {
+      "pmid": "38538865",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0004972"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0004972"
+        ],
+        "GRIN2A": [
+          "GO:0004972"
+        ],
+        "GRIN2B": [
+          "GO:0004972"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2A": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2B": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ]
+      }
+    },
+    {
+      "pmid": "26919761",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0004972"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0004972"
+        ],
+        "GRIN2A": [
+          "GO:0004972"
+        ],
+        "GRIN2B": [
+          "GO:0004972"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2A": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2B": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ]
+      }
+    },
+    {
+      "pmid": "26875626",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0022849",
+        "GO:0004972"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0004972"
+        ],
+        "GRIN2A": [
+          "GO:0004972",
+          "GO:0022849"
+        ],
+        "GRIN2B": [
+          "GO:0022849"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2A": [
+          "NMDA glutamate receptor activity [GO:0004972]",
+          "glutamate-gated calcium ion channel activity [GO:0022849]"
+        ],
+        "GRIN2B": [
+          "glutamate-gated calcium ion channel activity [GO:0022849]"
+        ]
+      }
+    },
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0004972"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0004972"
+        ],
+        "GRIN2A": [
+          "GO:0004972"
+        ],
+        "GRIN2B": [
+          "GO:0004972"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2A": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ],
+        "GRIN2B": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ]
+      }
+    },
+    {
+      "pmid": "28126851",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A"
+      ],
+      "go_terms": [
+        "GO:0022849",
+        "GO:0004972"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0004972",
+          "GO:0022849"
+        ],
+        "GRIN2A": [
+          "GO:0004972"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "NMDA glutamate receptor activity [GO:0004972]",
+          "glutamate-gated calcium ion channel activity [GO:0022849]"
+        ],
+        "GRIN2A": [
+          "NMDA glutamate receptor activity [GO:0004972]"
+        ]
+      }
+    }
+  ],
+  "9": [
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0007420"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0007420"
+        ],
+        "GRIN2A": [
+          "GO:0007420"
+        ],
+        "GRIN2B": [
+          "GO:0007420"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "brain development [GO:0007420]"
+        ],
+        "GRIN2A": [
+          "brain development [GO:0007420]"
+        ],
+        "GRIN2B": [
+          "brain development [GO:0007420]"
+        ]
+      }
+    },
+    {
+      "pmid": "12051741",
+      "genes_covered": [
+        "DSCAML1"
+      ],
+      "go_terms": [
+        "GO:0007420"
+      ],
+      "gene_go_map": {
+        "DSCAML1": [
+          "GO:0007420"
+        ]
+      },
+      "gene_go_named": {
+        "DSCAML1": [
+          "brain development [GO:0007420]"
+        ]
+      }
+    },
+    {
+      "pmid": "10624965",
+      "genes_covered": [
+        "CNTNAP2"
+      ],
+      "go_terms": [
+        "GO:0007420"
+      ],
+      "gene_go_map": {
+        "CNTNAP2": [
+          "GO:0007420"
+        ]
+      },
+      "gene_go_named": {
+        "CNTNAP2": [
+          "brain development [GO:0007420]"
+        ]
+      }
+    },
+    {
+      "pmid": "10197527",
+      "genes_covered": [
+        "ROBO2"
+      ],
+      "go_terms": [
+        "GO:0007420"
+      ],
+      "gene_go_map": {
+        "ROBO2": [
+          "GO:0007420"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO2": [
+          "brain development [GO:0007420]"
+        ]
+      }
+    }
+  ],
+  "10": [
+    {
+      "pmid": "20434989",
+      "genes_covered": [
+        "GRIA1"
+      ],
+      "go_terms": [
+        "GO:0032591"
+      ],
+      "gene_go_map": {
+        "GRIA1": [
+          "GO:0032591"
+        ]
+      },
+      "gene_go_named": {
+        "GRIA1": [
+          "dendritic spine membrane [GO:0032591]"
+        ]
+      }
+    },
+    {
+      "pmid": "19706678",
+      "genes_covered": [
+        "CNTNAP2"
+      ],
+      "go_terms": [
+        "GO:0030673"
+      ],
+      "gene_go_map": {
+        "CNTNAP2": [
+          "GO:0030673"
+        ]
+      },
+      "gene_go_named": {
+        "CNTNAP2": [
+          "axolemma [GO:0030673]"
+        ]
+      }
+    }
+  ],
+  "11": [],
+  "12": [
+    {
+      "pmid": "27940359",
+      "genes_covered": [
+        "NEGR1"
+      ],
+      "go_terms": [
+        "GO:0044325"
+      ],
+      "gene_go_map": {
+        "NEGR1": [
+          "GO:0044325"
+        ]
+      },
+      "gene_go_named": {
+        "NEGR1": [
+          "transmembrane transporter binding [GO:0044325]"
+        ]
+      }
+    },
+    {
+      "pmid": "27198182",
+      "genes_covered": [
+        "DPP10"
+      ],
+      "go_terms": [
+        "GO:0044325"
+      ],
+      "gene_go_map": {
+        "DPP10": [
+          "GO:0044325"
+        ]
+      },
+      "gene_go_named": {
+        "DPP10": [
+          "transmembrane transporter binding [GO:0044325]"
+        ]
+      }
+    },
+    {
+      "pmid": "21817159",
+      "genes_covered": [
+        "FGF13"
+      ],
+      "go_terms": [
+        "GO:0044325"
+      ],
+      "gene_go_map": {
+        "FGF13": [
+          "GO:0044325"
+        ]
+      },
+      "gene_go_named": {
+        "FGF13": [
+          "transmembrane transporter binding [GO:0044325]"
+        ]
+      }
+    },
+    {
+      "pmid": "21463633",
+      "genes_covered": [
+        "NEDD4L"
+      ],
+      "go_terms": [
+        "GO:0044325"
+      ],
+      "gene_go_map": {
+        "NEDD4L": [
+          "GO:0044325"
+        ]
+      },
+      "gene_go_named": {
+        "NEDD4L": [
+          "transmembrane transporter binding [GO:0044325]"
+        ]
+      }
+    },
+    {
+      "pmid": "20042427",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0044325"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0044325"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "transmembrane transporter binding [GO:0044325]"
+        ]
+      }
+    }
+  ],
+  "13": [
+    {
+      "pmid": "34321660",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:1904062"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:1904062"
+        ],
+        "GRIN2B": [
+          "GO:1904062"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+        ],
+        "GRIN2B": [
+          "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+        ]
+      }
+    },
+    {
+      "pmid": "36696443",
+      "genes_covered": [
+        "FGF13"
+      ],
+      "go_terms": [
+        "GO:1905152"
+      ],
+      "gene_go_map": {
+        "FGF13": [
+          "GO:1905152"
+        ]
+      },
+      "gene_go_named": {
+        "FGF13": [
+          "positive regulation of voltage-gated sodium channel activity [GO:1905152]"
+        ]
+      }
+    },
+    {
+      "pmid": "36309015",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:1904062"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:1904062"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+        ]
+      }
+    },
+    {
+      "pmid": "21463633",
+      "genes_covered": [
+        "NEDD4L"
+      ],
+      "go_terms": [
+        "GO:1901380"
+      ],
+      "gene_go_map": {
+        "NEDD4L": [
+          "GO:1901380"
+        ]
+      },
+      "gene_go_named": {
+        "NEDD4L": [
+          "negative regulation of potassium ion transmembrane transport [GO:1901380]"
+        ]
+      }
+    },
+    {
+      "pmid": "21051419",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0010765"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0010765"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "positive regulation of sodium ion transport [GO:0010765]"
+        ]
+      }
+    }
+  ],
+  "14": [
+    {
+      "pmid": "25973365",
+      "genes_covered": [
+        "SYT1"
+      ],
+      "go_terms": [
+        "GO:0042734"
+      ],
+      "gene_go_map": {
+        "SYT1": [
+          "GO:0042734"
+        ]
+      },
+      "gene_go_named": {
+        "SYT1": [
+          "presynaptic membrane [GO:0042734]"
+        ]
+      }
+    },
+    {
+      "pmid": "11438518",
+      "genes_covered": [
+        "RIMS1"
+      ],
+      "go_terms": [
+        "GO:0042734"
+      ],
+      "gene_go_map": {
+        "RIMS1": [
+          "GO:0042734"
+        ]
+      },
+      "gene_go_named": {
+        "RIMS1": [
+          "presynaptic membrane [GO:0042734]"
+        ]
+      }
+    },
+    {
+      "pmid": "8391122",
+      "genes_covered": [
+        "GABRA2"
+      ],
+      "go_terms": [
+        "GO:0030672"
+      ],
+      "gene_go_map": {
+        "GABRA2": [
+          "GO:0030672"
+        ]
+      },
+      "gene_go_named": {
+        "GABRA2": [
+          "synaptic vesicle membrane [GO:0030672]"
+        ]
+      }
+    }
+  ],
+  "15": [
+    {
+      "pmid": "17526495",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0009986"
+        ],
+        "GRIN2B": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "cell surface [GO:0009986]"
+        ],
+        "GRIN2B": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "12504588",
+      "genes_covered": [
+        "ROBO1",
+        "ROBO2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ROBO1": [
+          "GO:0009986"
+        ],
+        "ROBO2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO1": [
+          "cell surface [GO:0009986]"
+        ],
+        "ROBO2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "21223964",
+      "genes_covered": [
+        "ANK3"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "ANK3": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "ANK3": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "19706678",
+      "genes_covered": [
+        "CNTNAP2"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "CNTNAP2": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "CNTNAP2": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    },
+    {
+      "pmid": "19581412",
+      "genes_covered": [
+        "IGSF3"
+      ],
+      "go_terms": [
+        "GO:0009986"
+      ],
+      "gene_go_map": {
+        "IGSF3": [
+          "GO:0009986"
+        ]
+      },
+      "gene_go_named": {
+        "IGSF3": [
+          "cell surface [GO:0009986]"
+        ]
+      }
+    }
+  ],
+  "16": [
+    {
+      "pmid": "16525039",
+      "genes_covered": [
+        "KCNQ3"
+      ],
+      "go_terms": [
+        "GO:0033268"
+      ],
+      "gene_go_map": {
+        "KCNQ3": [
+          "GO:0033268"
+        ]
+      },
+      "gene_go_named": {
+        "KCNQ3": [
+          "node of Ranvier [GO:0033268]"
+        ]
+      }
+    }
+  ],
+  "17": [
+    {
+      "pmid": "34321660",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0035235"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0035235"
+        ],
+        "GRIN2B": [
+          "GO:0035235"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ],
+        "GRIN2B": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ]
+      }
+    },
+    {
+      "pmid": "36959261",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:0035235"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0035235"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ]
+      }
+    },
+    {
+      "pmid": "36309015",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:0035235"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0035235"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ]
+      }
+    },
+    {
+      "pmid": "30872532",
+      "genes_covered": [
+        "GRIA1"
+      ],
+      "go_terms": [
+        "GO:0035235"
+      ],
+      "gene_go_map": {
+        "GRIA1": [
+          "GO:0035235"
+        ]
+      },
+      "gene_go_named": {
+        "GRIA1": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ]
+      }
+    },
+    {
+      "pmid": "28228639",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:0035235"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0035235"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+        ]
+      }
+    }
+  ],
+  "18": [
+    {
+      "pmid": "30872532",
+      "genes_covered": [
+        "GRIA1"
+      ],
+      "go_terms": [
+        "GO:0098685"
+      ],
+      "gene_go_map": {
+        "GRIA1": [
+          "GO:0098685"
+        ]
+      },
+      "gene_go_named": {
+        "GRIA1": [
+          "Schaffer collateral - CA1 synapse [GO:0098685]"
+        ]
+      }
+    }
+  ],
+  "19": [],
+  "20": [],
+  "21": [],
+  "22": [],
+  "23": [
+    {
+      "pmid": "27356871",
+      "genes_covered": [
+        "ANK3"
+      ],
+      "go_terms": [
+        "GO:0043194"
+      ],
+      "gene_go_map": {
+        "ANK3": [
+          "GO:0043194"
+        ]
+      },
+      "gene_go_named": {
+        "ANK3": [
+          "axon initial segment [GO:0043194]"
+        ]
+      }
+    },
+    {
+      "pmid": "16525039",
+      "genes_covered": [
+        "KCNQ3"
+      ],
+      "go_terms": [
+        "GO:0043194"
+      ],
+      "gene_go_map": {
+        "KCNQ3": [
+          "GO:0043194"
+        ]
+      },
+      "gene_go_named": {
+        "KCNQ3": [
+          "axon initial segment [GO:0043194]"
+        ]
+      }
+    }
+  ],
+  "24": [
+    {
+      "pmid": "9168980",
+      "genes_covered": [
+        "SEMA3C"
+      ],
+      "go_terms": [
+        "GO:0006955"
+      ],
+      "gene_go_map": {
+        "SEMA3C": [
+          "GO:0006955"
+        ]
+      },
+      "gene_go_named": {
+        "SEMA3C": [
+          "immune response [GO:0006955]"
+        ]
+      }
+    }
+  ],
+  "25": [
+    {
+      "pmid": "28822966",
+      "genes_covered": [
+        "NRG1"
+      ],
+      "go_terms": [
+        "GO:0038138"
+      ],
+      "gene_go_map": {
+        "NRG1": [
+          "GO:0038138"
+        ]
+      },
+      "gene_go_named": {
+        "NRG1": [
+          "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+        ]
+      }
+    },
+    {
+      "pmid": "12466964",
+      "genes_covered": [
+        "ERBB4"
+      ],
+      "go_terms": [
+        "GO:0038138"
+      ],
+      "gene_go_map": {
+        "ERBB4": [
+          "GO:0038138"
+        ]
+      },
+      "gene_go_named": {
+        "ERBB4": [
+          "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+        ]
+      }
+    },
+    {
+      "pmid": "9275162",
+      "genes_covered": [
+        "ERBB4"
+      ],
+      "go_terms": [
+        "GO:0038138"
+      ],
+      "gene_go_map": {
+        "ERBB4": [
+          "GO:0038138"
+        ]
+      },
+      "gene_go_named": {
+        "ERBB4": [
+          "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+        ]
+      }
+    },
+    {
+      "pmid": "8702723",
+      "genes_covered": [
+        "NRG1"
+      ],
+      "go_terms": [
+        "GO:0038138"
+      ],
+      "gene_go_map": {
+        "NRG1": [
+          "GO:0038138"
+        ]
+      },
+      "gene_go_named": {
+        "NRG1": [
+          "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+        ]
+      }
+    }
+  ],
+  "26": [],
+  "27": [
+    {
+      "pmid": "19720736",
+      "genes_covered": [
+        "CELF4"
+      ],
+      "go_terms": [
+        "GO:0000380"
+      ],
+      "gene_go_map": {
+        "CELF4": [
+          "GO:0000380"
+        ]
+      },
+      "gene_go_named": {
+        "CELF4": [
+          "alternative mRNA splicing, via spliceosome [GO:0000380]"
+        ]
+      }
+    }
+  ],
+  "28": [],
+  "29": [
+    {
+      "pmid": "36696443",
+      "genes_covered": [
+        "FGF13"
+      ],
+      "go_terms": [
+        "GO:0017080"
+      ],
+      "gene_go_map": {
+        "FGF13": [
+          "GO:0017080"
+        ]
+      },
+      "gene_go_named": {
+        "FGF13": [
+          "sodium channel regulator activity [GO:0017080]"
+        ]
+      }
+    },
+    {
+      "pmid": "21817159",
+      "genes_covered": [
+        "FGF13"
+      ],
+      "go_terms": [
+        "GO:0017080"
+      ],
+      "gene_go_map": {
+        "FGF13": [
+          "GO:0017080"
+        ]
+      },
+      "gene_go_named": {
+        "FGF13": [
+          "sodium channel regulator activity [GO:0017080]"
+        ]
+      }
+    },
+    {
+      "pmid": "21051419",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0017080"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0017080"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "sodium channel regulator activity [GO:0017080]"
+        ]
+      }
+    },
+    {
+      "pmid": "20226894",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0017080"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0017080"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "sodium channel regulator activity [GO:0017080]"
+        ]
+      }
+    },
+    {
+      "pmid": "20042427",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0017080"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0017080"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "sodium channel regulator activity [GO:0017080]"
+        ]
+      }
+    }
+  ],
+  "30": [],
+  "31": [
+    {
+      "pmid": "23999003",
+      "genes_covered": [
+        "NEDD4L",
+        "RIMS1",
+        "RIMS2",
+        "SYT1"
+      ],
+      "go_terms": [
+        "GO:1903861"
+      ],
+      "gene_go_map": {
+        "NEDD4L": [
+          "GO:1903861"
+        ],
+        "RIMS1": [
+          "GO:1903861"
+        ],
+        "RIMS2": [
+          "GO:1903861"
+        ],
+        "SYT1": [
+          "GO:1903861"
+        ]
+      },
+      "gene_go_named": {
+        "NEDD4L": [
+          "positive regulation of dendrite extension [GO:1903861]"
+        ],
+        "RIMS1": [
+          "positive regulation of dendrite extension [GO:1903861]"
+        ],
+        "RIMS2": [
+          "positive regulation of dendrite extension [GO:1903861]"
+        ],
+        "SYT1": [
+          "positive regulation of dendrite extension [GO:1903861]"
+        ]
+      }
+    }
+  ],
+  "32": [
+    {
+      "pmid": "15207848",
+      "genes_covered": [
+        "ROBO1"
+      ],
+      "go_terms": [
+        "GO:0021836"
+      ],
+      "gene_go_map": {
+        "ROBO1": [
+          "GO:0021836"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO1": [
+          "chemorepulsion involved in postnatal olfactory bulb interneuron migration [GO:0021836]"
+        ]
+      }
+    }
+  ],
+  "33": [
+    {
+      "pmid": "30602789",
+      "genes_covered": [
+        "GABRG2"
+      ],
+      "go_terms": [
+        "GO:0004890"
+      ],
+      "gene_go_map": {
+        "GABRG2": [
+          "GO:0004890"
+        ]
+      },
+      "gene_go_named": {
+        "GABRG2": [
+          "GABA-A receptor activity [GO:0004890]"
+        ]
+      }
+    },
+    {
+      "pmid": "16412217",
+      "genes_covered": [
+        "GABRB1"
+      ],
+      "go_terms": [
+        "GO:0004890"
+      ],
+      "gene_go_map": {
+        "GABRB1": [
+          "GO:0004890"
+        ]
+      },
+      "gene_go_named": {
+        "GABRB1": [
+          "GABA-A receptor activity [GO:0004890]"
+        ]
+      }
+    },
+    {
+      "pmid": "10328880",
+      "genes_covered": [
+        "GABBR2"
+      ],
+      "go_terms": [
+        "GO:0004965"
+      ],
+      "gene_go_map": {
+        "GABBR2": [
+          "GO:0004965"
+        ]
+      },
+      "gene_go_named": {
+        "GABBR2": [
+          "G protein-coupled GABA receptor activity [GO:0004965]"
+        ]
+      }
+    },
+    {
+      "pmid": "9872316",
+      "genes_covered": [
+        "GABBR2"
+      ],
+      "go_terms": [
+        "GO:0004965"
+      ],
+      "gene_go_map": {
+        "GABBR2": [
+          "GO:0004965"
+        ]
+      },
+      "gene_go_named": {
+        "GABBR2": [
+          "G protein-coupled GABA receptor activity [GO:0004965]"
+        ]
+      }
+    }
+  ],
+  "34": [
+    {
+      "pmid": "26253506",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "24728418",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0061337"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0061337"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "cardiac conduction [GO:0061337]"
+        ]
+      }
+    },
+    {
+      "pmid": "21131953",
+      "genes_covered": [
+        "CACNA1D"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "CACNA1D": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1D": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "21051419",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "20560207",
+      "genes_covered": [
+        "KCNJ3"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "KCNJ3": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "KCNJ3": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    }
+  ],
+  "35": [],
+  "36": [
+    {
+      "pmid": "16778220",
+      "genes_covered": [
+        "ERBB4"
+      ],
+      "go_terms": [
+        "GO:0005739"
+      ],
+      "gene_go_map": {
+        "ERBB4": [
+          "GO:0005739"
+        ]
+      },
+      "gene_go_named": {
+        "ERBB4": [
+          "mitochondrion [GO:0005739]"
+        ]
+      }
+    }
+  ],
+  "37": [],
+  "38": [],
+  "39": [
+    {
+      "pmid": "12504588",
+      "genes_covered": [
+        "ROBO1",
+        "ROBO2"
+      ],
+      "go_terms": [
+        "GO:0007156"
+      ],
+      "gene_go_map": {
+        "ROBO1": [
+          "GO:0007156"
+        ],
+        "ROBO2": [
+          "GO:0007156"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO1": [
+          "homophilic cell-cell adhesion [GO:0007156]"
+        ],
+        "ROBO2": [
+          "homophilic cell-cell adhesion [GO:0007156]"
+        ]
+      }
+    },
+    {
+      "pmid": "26235030",
+      "genes_covered": [
+        "UNC5D"
+      ],
+      "go_terms": [
+        "GO:0098609"
+      ],
+      "gene_go_map": {
+        "UNC5D": [
+          "GO:0098609"
+        ]
+      },
+      "gene_go_named": {
+        "UNC5D": [
+          "cell-cell adhesion [GO:0098609]"
+        ]
+      }
+    },
+    {
+      "pmid": "23345436",
+      "genes_covered": [
+        "PTPRD"
+      ],
+      "go_terms": [
+        "GO:0099560"
+      ],
+      "gene_go_map": {
+        "PTPRD": [
+          "GO:0099560"
+        ]
+      },
+      "gene_go_named": {
+        "PTPRD": [
+          "synaptic membrane adhesion [GO:0099560]"
+        ]
+      }
+    },
+    {
+      "pmid": "11453658",
+      "genes_covered": [
+        "DSCAML1"
+      ],
+      "go_terms": [
+        "GO:0007156"
+      ],
+      "gene_go_map": {
+        "DSCAML1": [
+          "GO:0007156"
+        ]
+      },
+      "gene_go_named": {
+        "DSCAML1": [
+          "homophilic cell-cell adhesion [GO:0007156]"
+        ]
+      }
+    },
+    {
+      "pmid": "9226371",
+      "genes_covered": [
+        "NCAM2"
+      ],
+      "go_terms": [
+        "GO:0007158"
+      ],
+      "gene_go_map": {
+        "NCAM2": [
+          "GO:0007158"
+        ]
+      },
+      "gene_go_named": {
+        "NCAM2": [
+          "neuron cell-cell adhesion [GO:0007158]"
+        ]
+      }
+    }
+  ],
+  "40": [
+    {
+      "pmid": "19166515",
+      "genes_covered": [
+        "CNTNAP2"
+      ],
+      "go_terms": [
+        "GO:0043204"
+      ],
+      "gene_go_map": {
+        "CNTNAP2": [
+          "GO:0043204"
+        ]
+      },
+      "gene_go_named": {
+        "CNTNAP2": [
+          "perikaryon [GO:0043204]"
+        ]
+      }
+    }
+  ],
+  "41": [
+    {
+      "pmid": "27564677",
+      "genes_covered": [
+        "KCNQ3"
+      ],
+      "go_terms": [
+        "GO:0005516"
+      ],
+      "gene_go_map": {
+        "KCNQ3": [
+          "GO:0005516"
+        ]
+      },
+      "gene_go_named": {
+        "KCNQ3": [
+          "calmodulin binding [GO:0005516]"
+        ]
+      }
+    },
+    {
+      "pmid": "25232683",
+      "genes_covered": [
+        "SCN2A"
+      ],
+      "go_terms": [
+        "GO:0005516"
+      ],
+      "gene_go_map": {
+        "SCN2A": [
+          "GO:0005516"
+        ]
+      },
+      "gene_go_named": {
+        "SCN2A": [
+          "calmodulin binding [GO:0005516]"
+        ]
+      }
+    },
+    {
+      "pmid": "15140941",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0005516"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0005516"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "calmodulin binding [GO:0005516]"
+        ]
+      }
+    },
+    {
+      "pmid": "8918462",
+      "genes_covered": [
+        "RIT2"
+      ],
+      "go_terms": [
+        "GO:0005516"
+      ],
+      "gene_go_map": {
+        "RIT2": [
+          "GO:0005516"
+        ]
+      },
+      "gene_go_named": {
+        "RIT2": [
+          "calmodulin binding [GO:0005516]"
+        ]
+      }
+    }
+  ],
+  "42": [
+    {
+      "pmid": "26875626",
+      "genes_covered": [
+        "GRIN1",
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0097553"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:0097553"
+        ],
+        "GRIN2A": [
+          "GO:0097553"
+        ],
+        "GRIN2B": [
+          "GO:0097553"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "calcium ion transmembrane import into cytosol [GO:0097553]"
+        ],
+        "GRIN2A": [
+          "calcium ion transmembrane import into cytosol [GO:0097553]"
+        ],
+        "GRIN2B": [
+          "calcium ion transmembrane import into cytosol [GO:0097553]"
+        ]
+      }
+    },
+    {
+      "pmid": "27839871",
+      "genes_covered": [
+        "GRIN2A",
+        "GRIN2B"
+      ],
+      "go_terms": [
+        "GO:0097553"
+      ],
+      "gene_go_map": {
+        "GRIN2A": [
+          "GO:0097553"
+        ],
+        "GRIN2B": [
+          "GO:0097553"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN2A": [
+          "calcium ion transmembrane import into cytosol [GO:0097553]"
+        ],
+        "GRIN2B": [
+          "calcium ion transmembrane import into cytosol [GO:0097553]"
+        ]
+      }
+    },
+    {
+      "pmid": "19095005",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0060402"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0060402"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "calcium ion transport into cytosol [GO:0060402]"
+        ]
+      }
+    }
+  ],
+  "43": [
+    {
+      "pmid": "9039914",
+      "genes_covered": [
+        "GABRA2",
+        "GABRB1"
+      ],
+      "go_terms": [
+        "GO:1902711"
+      ],
+      "gene_go_map": {
+        "GABRA2": [
+          "GO:1902711"
+        ],
+        "GABRB1": [
+          "GO:1902711"
+        ]
+      },
+      "gene_go_named": {
+        "GABRA2": [
+          "GABA-A receptor complex [GO:1902711]"
+        ],
+        "GABRB1": [
+          "GABA-A receptor complex [GO:1902711]"
+        ]
+      }
+    },
+    {
+      "pmid": "26950270",
+      "genes_covered": [
+        "GABRB1"
+      ],
+      "go_terms": [
+        "GO:1902711"
+      ],
+      "gene_go_map": {
+        "GABRB1": [
+          "GO:1902711"
+        ]
+      },
+      "gene_go_named": {
+        "GABRB1": [
+          "GABA-A receptor complex [GO:1902711]"
+        ]
+      }
+    }
+  ],
+  "44": [
+    {
+      "pmid": "34314702",
+      "genes_covered": [
+        "NMNAT2"
+      ],
+      "go_terms": [
+        "GO:2000766"
+      ],
+      "gene_go_map": {
+        "NMNAT2": [
+          "GO:2000766"
+        ]
+      },
+      "gene_go_named": {
+        "NMNAT2": [
+          "negative regulation of cytoplasmic translation [GO:2000766]"
+        ]
+      }
+    },
+    {
+      "pmid": "29961578",
+      "genes_covered": [
+        "SRRM4"
+      ],
+      "go_terms": [
+        "GO:0000381"
+      ],
+      "gene_go_map": {
+        "SRRM4": [
+          "GO:0000381"
+        ]
+      },
+      "gene_go_named": {
+        "SRRM4": [
+          "regulation of alternative mRNA splicing, via spliceosome [GO:0000381]"
+        ]
+      }
+    },
+    {
+      "pmid": "28228547",
+      "genes_covered": [
+        "LIMCH1"
+      ],
+      "go_terms": [
+        "GO:0001934"
+      ],
+      "gene_go_map": {
+        "LIMCH1": [
+          "GO:0001934"
+        ]
+      },
+      "gene_go_named": {
+        "LIMCH1": [
+          "positive regulation of protein phosphorylation [GO:0001934]"
+        ]
+      }
+    },
+    {
+      "pmid": "23948251",
+      "genes_covered": [
+        "CHD5"
+      ],
+      "go_terms": [
+        "GO:0006357"
+      ],
+      "gene_go_map": {
+        "CHD5": [
+          "GO:0006357"
+        ]
+      },
+      "gene_go_named": {
+        "CHD5": [
+          "regulation of transcription by RNA polymerase II [GO:0006357]"
+        ]
+      }
+    },
+    {
+      "pmid": "23836911",
+      "genes_covered": [
+        "ESRRG"
+      ],
+      "go_terms": [
+        "GO:0006355"
+      ],
+      "gene_go_map": {
+        "ESRRG": [
+          "GO:0006355"
+        ]
+      },
+      "gene_go_named": {
+        "ESRRG": [
+          "regulation of DNA-templated transcription [GO:0006355]"
+        ]
+      }
+    }
+  ],
+  "45": [
+    {
+      "pmid": "17224476",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0005891"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0005891"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "voltage-gated calcium channel complex [GO:0005891]"
+        ]
+      }
+    },
+    {
+      "pmid": "15454078",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:1990454"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:1990454"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "L-type voltage-gated calcium channel complex [GO:1990454]"
+        ]
+      }
+    },
+    {
+      "pmid": "12130699",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0005891"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0005891"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "voltage-gated calcium channel complex [GO:0005891]"
+        ]
+      }
+    },
+    {
+      "pmid": "11160515",
+      "genes_covered": [
+        "CACNA1D"
+      ],
+      "go_terms": [
+        "GO:0005891"
+      ],
+      "gene_go_map": {
+        "CACNA1D": [
+          "GO:0005891"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1D": [
+          "voltage-gated calcium channel complex [GO:0005891]"
+        ]
+      }
+    },
+    {
+      "pmid": "8071363",
+      "genes_covered": [
+        "CACNA1E"
+      ],
+      "go_terms": [
+        "GO:0005891"
+      ],
+      "gene_go_map": {
+        "CACNA1E": [
+          "GO:0005891"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1E": [
+          "voltage-gated calcium channel complex [GO:0005891]"
+        ]
+      }
+    }
+  ],
+  "46": [
+    {
+      "pmid": "28409548",
+      "genes_covered": [
+        "RBMS3"
+      ],
+      "go_terms": [
+        "GO:0002357"
+      ],
+      "gene_go_map": {
+        "RBMS3": [
+          "GO:0002357"
+        ]
+      },
+      "gene_go_named": {
+        "RBMS3": [
+          "defense response to tumor cell [GO:0002357]"
+        ]
+      }
+    },
+    {
+      "pmid": "23474712",
+      "genes_covered": [
+        "MACROD2"
+      ],
+      "go_terms": [
+        "GO:0006974"
+      ],
+      "gene_go_map": {
+        "MACROD2": [
+          "GO:0006974"
+        ]
+      },
+      "gene_go_named": {
+        "MACROD2": [
+          "DNA damage response [GO:0006974]"
+        ]
+      }
+    },
+    {
+      "pmid": "17875758",
+      "genes_covered": [
+        "VAV3"
+      ],
+      "go_terms": [
+        "GO:0006974"
+      ],
+      "gene_go_map": {
+        "VAV3": [
+          "GO:0006974"
+        ]
+      },
+      "gene_go_named": {
+        "VAV3": [
+          "DNA damage response [GO:0006974]"
+        ]
+      }
+    },
+    {
+      "pmid": "17167337",
+      "genes_covered": [
+        "GRM7"
+      ],
+      "go_terms": [
+        "GO:0001662"
+      ],
+      "gene_go_map": {
+        "GRM7": [
+          "GO:0001662"
+        ]
+      },
+      "gene_go_named": {
+        "GRM7": [
+          "behavioral fear response [GO:0001662]"
+        ]
+      }
+    },
+    {
+      "pmid": "16412517",
+      "genes_covered": [
+        "NRG1"
+      ],
+      "go_terms": [
+        "GO:0042060"
+      ],
+      "gene_go_map": {
+        "NRG1": [
+          "GO:0042060"
+        ]
+      },
+      "gene_go_named": {
+        "NRG1": [
+          "wound healing [GO:0042060]"
+        ]
+      }
+    }
+  ],
+  "47": [
+    {
+      "pmid": "11748139",
+      "genes_covered": [
+        "ROBO1",
+        "ROBO2"
+      ],
+      "go_terms": [
+        "GO:0050925"
+      ],
+      "gene_go_map": {
+        "ROBO1": [
+          "GO:0050925"
+        ],
+        "ROBO2": [
+          "GO:0050925"
+        ]
+      },
+      "gene_go_named": {
+        "ROBO1": [
+          "negative regulation of negative chemotaxis [GO:0050925]"
+        ],
+        "ROBO2": [
+          "negative regulation of negative chemotaxis [GO:0050925]"
+        ]
+      }
+    }
+  ],
+  "48": [],
+  "49": [
+    {
+      "pmid": "28105280",
+      "genes_covered": [
+        "GRIN1"
+      ],
+      "go_terms": [
+        "GO:1905429"
+      ],
+      "gene_go_map": {
+        "GRIN1": [
+          "GO:1905429"
+        ]
+      },
+      "gene_go_named": {
+        "GRIN1": [
+          "response to glycine [GO:1905429]"
+        ]
+      }
+    }
+  ],
+  "50": [],
+  "51": [
+    {
+      "pmid": "26253506",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "21131953",
+      "genes_covered": [
+        "CACNA1D"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "CACNA1D": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1D": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "21051419",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "20560207",
+      "genes_covered": [
+        "KCNJ3"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "KCNJ3": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "KCNJ3": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    },
+    {
+      "pmid": "20042427",
+      "genes_covered": [
+        "SCN3B"
+      ],
+      "go_terms": [
+        "GO:0086091"
+      ],
+      "gene_go_map": {
+        "SCN3B": [
+          "GO:0086091"
+        ]
+      },
+      "gene_go_named": {
+        "SCN3B": [
+          "regulation of heart rate by cardiac conduction [GO:0086091]"
+        ]
+      }
+    }
+  ],
+  "52": [],
+  "53": [],
+  "54": [],
+  "55": [
+    {
+      "pmid": "15454078",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0008331"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0008331"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "high voltage-gated calcium channel activity [GO:0008331]"
+        ]
+      }
+    },
+    {
+      "pmid": "11576544",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0008331"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0008331"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "high voltage-gated calcium channel activity [GO:0008331]"
+        ]
+      }
+    },
+    {
+      "pmid": "1309651",
+      "genes_covered": [
+        "CACNA1D"
+      ],
+      "go_terms": [
+        "GO:0008331"
+      ],
+      "gene_go_map": {
+        "CACNA1D": [
+          "GO:0008331"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1D": [
+          "high voltage-gated calcium channel activity [GO:0008331]"
+        ]
+      }
+    }
+  ],
+  "56": [],
+  "57": [
+    {
+      "pmid": "12907690",
+      "genes_covered": [
+        "HS3ST5"
+      ],
+      "go_terms": [
+        "GO:0008467"
+      ],
+      "gene_go_map": {
+        "HS3ST5": [
+          "GO:0008467"
+        ]
+      },
+      "gene_go_named": {
+        "HS3ST5": [
+          "[heparan sulfate]-glucosamine 3-sulfotransferase activity [GO:0008467]"
+        ]
+      }
+    },
+    {
+      "pmid": "12740361",
+      "genes_covered": [
+        "HS3ST5"
+      ],
+      "go_terms": [
+        "GO:0008467"
+      ],
+      "gene_go_map": {
+        "HS3ST5": [
+          "GO:0008467"
+        ]
+      },
+      "gene_go_named": {
+        "HS3ST5": [
+          "[heparan sulfate]-glucosamine 3-sulfotransferase activity [GO:0008467]"
+        ]
+      }
+    },
+    {
+      "pmid": "12138164",
+      "genes_covered": [
+        "HS3ST5"
+      ],
+      "go_terms": [
+        "GO:0008467"
+      ],
+      "gene_go_map": {
+        "HS3ST5": [
+          "GO:0008467"
+        ]
+      },
+      "gene_go_named": {
+        "HS3ST5": [
+          "[heparan sulfate]-glucosamine 3-sulfotransferase activity [GO:0008467]"
+        ]
+      }
+    },
+    {
+      "pmid": "9915799",
+      "genes_covered": [
+        "NDST3"
+      ],
+      "go_terms": [
+        "GO:0015016"
+      ],
+      "gene_go_map": {
+        "NDST3": [
+          "GO:0015016"
+        ]
+      },
+      "gene_go_named": {
+        "NDST3": [
+          "heparan sulfate N-sulfotransferase activity [GO:0015016]"
+        ]
+      }
+    }
+  ],
+  "58": [
+    {
+      "pmid": "11576544",
+      "genes_covered": [
+        "CACNA1C"
+      ],
+      "go_terms": [
+        "GO:0010881"
+      ],
+      "gene_go_map": {
+        "CACNA1C": [
+          "GO:0010881"
+        ]
+      },
+      "gene_go_named": {
+        "CACNA1C": [
+          "regulation of cardiac muscle contraction by regulation of the release of sequestered calcium ion [GO:0010881]"
+        ]
+      }
+    }
+  ],
+  "59": [
+    {
+      "pmid": "28855441",
+      "genes_covered": [
+        "HDAC9"
+      ],
+      "go_terms": [
+        "GO:0034739"
+      ],
+      "gene_go_map": {
+        "HDAC9": [
+          "GO:0034739"
+        ]
+      },
+      "gene_go_named": {
+        "HDAC9": [
+          "histone H4K16 deacetylase activity, hydrolytic mechanism [GO:0034739]"
+        ]
+      }
+    },
+    {
+      "pmid": "21708950",
+      "genes_covered": [
+        "HDAC9"
+      ],
+      "go_terms": [
+        "GO:0031078",
+        "GO:0032129"
+      ],
+      "gene_go_map": {
+        "HDAC9": [
+          "GO:0031078",
+          "GO:0032129"
+        ]
+      },
+      "gene_go_named": {
+        "HDAC9": [
+          "histone H3K14 deacetylase activity, hydrolytic mechanism [GO:0031078]",
+          "histone H3K9 deacetylase activity, hydrolytic mechanism [GO:0032129]"
+        ]
+      }
+    },
+    {
+      "pmid": "21257746",
+      "genes_covered": [
+        "MACROD2"
+      ],
+      "go_terms": [
+        "GO:0019213"
+      ],
+      "gene_go_map": {
+        "MACROD2": [
+          "GO:0019213"
+        ]
+      },
+      "gene_go_named": {
+        "MACROD2": [
+          "deacetylase activity [GO:0019213]"
+        ]
+      }
+    },
+    {
+      "pmid": "12590135",
+      "genes_covered": [
+        "HDAC9"
+      ],
+      "go_terms": [
+        "GO:0004407"
+      ],
+      "gene_go_map": {
+        "HDAC9": [
+          "GO:0004407"
+        ]
+      },
+      "gene_go_named": {
+        "HDAC9": [
+          "histone deacetylase activity [GO:0004407]"
+        ]
+      }
+    },
+    {
+      "pmid": "11535832",
+      "genes_covered": [
+        "HDAC9"
+      ],
+      "go_terms": [
+        "GO:0033558",
+        "GO:0004407"
+      ],
+      "gene_go_map": {
+        "HDAC9": [
+          "GO:0004407",
+          "GO:0033558"
+        ]
+      },
+      "gene_go_named": {
+        "HDAC9": [
+          "histone deacetylase activity [GO:0004407]",
+          "protein lysine deacetylase activity [GO:0033558]"
+        ]
+      }
+    }
+  ],
+  "60": [
+    {
+      "pmid": "30021165",
+      "genes_covered": [
+        "PPFIA2"
+      ],
+      "go_terms": [
+        "GO:0099519"
+      ],
+      "gene_go_map": {
+        "PPFIA2": [
+          "GO:0099519"
+        ]
+      },
+      "gene_go_named": {
+        "PPFIA2": [
+          "dense core granule cytoskeletal transport [GO:0099519]"
+        ]
+      }
+    },
+    {
+      "pmid": "24561039",
+      "genes_covered": [
+        "DYNC1I1"
+      ],
+      "go_terms": [
+        "GO:0047496"
+      ],
+      "gene_go_map": {
+        "DYNC1I1": [
+          "GO:0047496"
+        ]
+      },
+      "gene_go_named": {
+        "DYNC1I1": [
+          "vesicle transport along microtubule [GO:0047496]"
+        ]
+      }
+    },
+    {
+      "pmid": "20730103",
+      "genes_covered": [
+        "FNBP1L"
+      ],
+      "go_terms": [
+        "GO:0030050"
+      ],
+      "gene_go_map": {
+        "FNBP1L": [
+          "GO:0030050"
+        ]
+      },
+      "gene_go_named": {
+        "FNBP1L": [
+          "vesicle transport along actin filament [GO:0030050]"
+        ]
+      }
+    }
+  ]
+}

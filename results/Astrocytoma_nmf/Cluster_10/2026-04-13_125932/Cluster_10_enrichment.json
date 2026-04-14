@@ -1,0 +1,2718 @@
+{
+  "enrichment_leaves": [
+    {
+      "go_id": "GO:0098590",
+      "name": "plasma membrane region",
+      "namespace": "cellular_component",
+      "fdr": 0.0003669632904048572,
+      "fold_enrichment": 2.644658313717495,
+      "genes": [
+        "ADGRV1",
+        "AQP1",
+        "AQP4",
+        "ARHGEF4",
+        "ATP1A2",
+        "ATP1B2",
+        "CADM1",
+        "DLC1",
+        "EFNA5",
+        "FAM107A",
+        "FRMPD2",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "GJA1",
+        "GPM6A",
+        "GRM3",
+        "HEPH",
+        "NTM",
+        "PCDH9",
+        "PDGFRB",
+        "RAB34",
+        "SHROOM3",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC6A11",
+        "SORCS2",
+        "TENM2"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0043005",
+      "name": "neuron projection",
+      "namespace": "cellular_component",
+      "fdr": 0.0020054894517072767,
+      "fold_enrichment": 2.708239206467519,
+      "genes": [
+        "ADGRV1",
+        "ALDH1A1",
+        "APOE",
+        "AQP1",
+        "ATP1A2",
+        "CADM1",
+        "CHL1",
+        "CLU",
+        "DTNA",
+        "EMX2",
+        "EPHA6",
+        "FAM107A",
+        "GABRA2",
+        "GABRB1",
+        "GPM6A",
+        "GRM3",
+        "LGI1",
+        "MICALL2",
+        "MT3",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SORCS2",
+        "TENM2"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0045202",
+      "name": "synapse",
+      "namespace": "cellular_component",
+      "fdr": 0.0032710489894101557,
+      "fold_enrichment": 2.4855903511456314,
+      "genes": [
+        "ALDH1A1",
+        "APOE",
+        "ATP1B2",
+        "CADM1",
+        "CLU",
+        "CNTNAP3",
+        "CNTNAP3B",
+        "DTNA",
+        "EFNA5",
+        "FAM107A",
+        "GABRA2",
+        "GABRB1",
+        "GPM6A",
+        "GRM3",
+        "LAMA1",
+        "LGI1",
+        "PCDH9",
+        "PDE7B",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SLC6A11",
+        "SNTA1",
+        "SORCS2",
+        "SPARCL1",
+        "TENM2"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0070161",
+      "name": "anchoring junction",
+      "namespace": "cellular_component",
+      "fdr": 0.008627941831847353,
+      "fold_enrichment": 2.7255605256962427,
+      "genes": [
+        "ATP1A2",
+        "CADM1",
+        "CDHR3",
+        "CGNL1",
+        "CLDN10",
+        "CSRP1",
+        "DLC1",
+        "EFNA5",
+        "FAM107A",
+        "FGFR3",
+        "FRMPD2",
+        "FXYD1",
+        "GJA1",
+        "GJB6",
+        "LAMA1",
+        "MICALL2",
+        "PDGFRB",
+        "SDC4",
+        "SHROOM3",
+        "SNTA1"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0042383",
+      "name": "sarcolemma",
+      "namespace": "cellular_component",
+      "fdr": 0.008627941831847353,
+      "fold_enrichment": 7.3495332088556955,
+      "genes": [
+        "AQP1",
+        "AQP4",
+        "ATP1A2",
+        "DTNA",
+        "FXYD1",
+        "RYR3",
+        "SNTA1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0003676",
+      "name": "nucleic acid binding",
+      "namespace": "molecular_function",
+      "fdr": 0.010091145914266105,
+      "fold_enrichment": 0.330307297729863,
+      "genes": [
+        "BHLHE40",
+        "CSRP1",
+        "ECHDC2",
+        "EMX2",
+        "GLI3",
+        "HIF3A",
+        "HOPX",
+        "LGALS3",
+        "LHX2",
+        "RORB",
+        "ZNF98"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0005313",
+      "name": "L-glutamate transmembrane transporter activity",
+      "namespace": "molecular_function",
+      "fdr": 0.011092823977844384,
+      "fold_enrichment": 32.197955010224945,
+      "genes": [
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SLC25A18"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0005654",
+      "name": "nucleoplasm",
+      "namespace": "cellular_component",
+      "fdr": 0.014162503807380333,
+      "fold_enrichment": 0.4015820331097901,
+      "genes": [
+        "ADIRF",
+        "ARRB1",
+        "EYA2",
+        "GLI3",
+        "HIF3A",
+        "LGALS3",
+        "MAPK4",
+        "PIR",
+        "PLEKHG1",
+        "RAB34",
+        "RORB",
+        "XAF1"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0031012",
+      "name": "extracellular matrix",
+      "namespace": "cellular_component",
+      "fdr": 0.014162503807380333,
+      "fold_enrichment": 3.3080090763929744,
+      "genes": [
+        "AGT",
+        "ANGPTL4",
+        "APOE",
+        "COL5A3",
+        "EFNA5",
+        "F3",
+        "FGL1",
+        "GPC5",
+        "HPSE2",
+        "LAMA1",
+        "LGALS3",
+        "PAPLN",
+        "SDC2",
+        "SPARCL1"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0097450",
+      "name": "astrocyte end-foot",
+      "namespace": "cellular_component",
+      "fdr": 0.014162503807380333,
+      "fold_enrichment": 30.185582822085895,
+      "genes": [
+        "AQP4",
+        "ATP1B2",
+        "MT3"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0005890",
+      "name": "sodium:potassium-exchanging ATPase complex",
+      "namespace": "cellular_component",
+      "fdr": 0.014162503807380333,
+      "fold_enrichment": 30.185582822085895,
+      "genes": [
+        "ATP1A2",
+        "ATP1B2",
+        "FXYD1"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0042940",
+      "name": "D-amino acid transport",
+      "namespace": "biological_process",
+      "fdr": 0.01684182956461764,
+      "fold_enrichment": 72.44539877300615,
+      "genes": [
+        "SLC1A2",
+        "SLC1A3",
+        "SLC7A10"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0140009",
+      "name": "L-aspartate import across plasma membrane",
+      "namespace": "biological_process",
+      "fdr": 0.01684182956461764,
+      "fold_enrichment": 60.37116564417179,
+      "genes": [
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4"
+      ],
+      "depth": 10
+    },
+    {
+      "go_id": "GO:0031256",
+      "name": "leading edge membrane",
+      "namespace": "cellular_component",
+      "fdr": 0.01946046381799167,
+      "fold_enrichment": 5.165447327843575,
+      "genes": [
+        "ADGRV1",
+        "ARHGEF4",
+        "DLC1",
+        "FAM107A",
+        "GABRA2",
+        "GABRG1",
+        "RAB34",
+        "SLC1A2"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0010644",
+      "name": "cell communication by electrical coupling",
+      "namespace": "biological_process",
+      "fdr": 0.021773092879370157,
+      "fold_enrichment": 24.148466257668716,
+      "genes": [
+        "ATP1A2",
+        "ATP1B2",
+        "GJA1",
+        "GJB6"
+      ],
+      "depth": 3
+    },
+    {
+      "go_id": "GO:0071616",
+      "name": "acyl-CoA biosynthetic process",
+      "namespace": "biological_process",
+      "fdr": 0.02401787239603615,
+      "fold_enrichment": 13.124166444385168,
+      "genes": [
+        "ACACB",
+        "ACSBG1",
+        "ACSL6",
+        "ACSS1",
+        "ELOVL2"
+      ],
+      "depth": 8
+    },
+    {
+      "go_id": "GO:1902476",
+      "name": "chloride transmembrane transport",
+      "namespace": "biological_process",
+      "fdr": 0.02401787239603615,
+      "fold_enrichment": 7.414002798407061,
+      "genes": [
+        "ANO5",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "SLC1A3",
+        "SLC1A4"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0051056",
+      "name": "regulation of small GTPase mediated signal transduction",
+      "namespace": "biological_process",
+      "fdr": 0.02401787239603615,
+      "fold_enrichment": 4.397899484012514,
+      "genes": [
+        "APOE",
+        "ARHGEF4",
+        "ARRB1",
+        "CGNL1",
+        "DLC1",
+        "LAMA1",
+        "MMD2",
+        "PLEKHG1",
+        "PREX2",
+        "SNTA1",
+        "VAV3"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0001504",
+      "name": "neurotransmitter uptake",
+      "namespace": "biological_process",
+      "fdr": 0.026609627580724295,
+      "fold_enrichment": 18.575743275129778,
+      "genes": [
+        "ATP1A2",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC6A11"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0071280",
+      "name": "cellular response to copper ion",
+      "namespace": "biological_process",
+      "fdr": 0.026609627580724295,
+      "fold_enrichment": 18.575743275129778,
+      "genes": [
+        "AQP1",
+        "MT1E",
+        "MT1M",
+        "MT3"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0005416",
+      "name": "amino acid:monoatomic cation symporter activity",
+      "namespace": "molecular_function",
+      "fdr": 0.03138649240531646,
+      "fold_enrichment": 17.248904469763367,
+      "genes": [
+        "SLC1A2",
+        "SLC1A3",
+        "SLC25A18",
+        "SLC6A11"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0120515",
+      "name": "fatty acid-CoA ligase activity",
+      "namespace": "molecular_function",
+      "fdr": 0.03138649240531646,
+      "fold_enrichment": 19.31877300613497,
+      "genes": [
+        "ACSBG1",
+        "ACSL6",
+        "ACSS1",
+        "ACSS3"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0005254",
+      "name": "chloride channel activity",
+      "namespace": "molecular_function",
+      "fdr": 0.03138649240531646,
+      "fold_enrichment": 8.834804728415383,
+      "genes": [
+        "ANO5",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "SLC1A4"
+      ],
+      "depth": 7
+    },
+    {
+      "go_id": "GO:0006633",
+      "name": "fatty acid biosynthetic process",
+      "namespace": "biological_process",
+      "fdr": 0.03189544425419648,
+      "fold_enrichment": 6.816099346922621,
+      "genes": [
+        "ABCD2",
+        "ACACB",
+        "ACSBG1",
+        "ACSS1",
+        "CBR1",
+        "ELOVL2",
+        "PTGDS"
+      ],
+      "depth": 9
+    },
+    {
+      "go_id": "GO:1901570",
+      "name": "fatty acid derivative biosynthetic process",
+      "namespace": "biological_process",
+      "fdr": 0.03189544425419648,
+      "fold_enrichment": 11.390785970598449,
+      "genes": [
+        "ACSBG1",
+        "ACSL6",
+        "ACSS3",
+        "ELOVL2",
+        "HMGCLL1"
+      ],
+      "depth": 6
+    },
+    {
+      "go_id": "GO:0090304",
+      "name": "nucleic acid metabolic process",
+      "namespace": "biological_process",
+      "fdr": 0.04154980633006728,
+      "fold_enrichment": 0.42827277376154294,
+      "genes": [
+        "ADIRF",
+        "ARRB1",
+        "BHLHE40",
+        "EYA2",
+        "GLI3",
+        "HIF3A",
+        "HOPX",
+        "LGALS3",
+        "LHX2",
+        "LMO3",
+        "PIR",
+        "RORB",
+        "TENM2",
+        "ZNF98"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0000038",
+      "name": "very long-chain fatty acid metabolic process",
+      "namespace": "biological_process",
+      "fdr": 0.042811402768581586,
+      "fold_enrichment": 15.579655650108847,
+      "genes": [
+        "ABCD2",
+        "ACSBG1",
+        "ACSL6",
+        "ELOVL2"
+      ],
+      "depth": 9
+    },
+    {
+      "go_id": "GO:0048878",
+      "name": "chemical homeostasis",
+      "namespace": "biological_process",
+      "fdr": 0.04590984975135409,
+      "fold_enrichment": 2.660173761554693,
+      "genes": [
+        "ACACB",
+        "ANGPTL4",
+        "APOC1",
+        "APOE",
+        "AQP1",
+        "AQP4",
+        "ARRB1",
+        "ATP1A2",
+        "ATP1B2",
+        "FXYD1",
+        "GLUL",
+        "HEPH",
+        "HIF3A",
+        "MT1E",
+        "MT1M",
+        "MT3",
+        "RYR3",
+        "SLC39A12"
+      ],
+      "depth": 2
+    },
+    {
+      "go_id": "GO:0051241",
+      "name": "negative regulation of multicellular organismal process",
+      "namespace": "biological_process",
+      "fdr": 0.04760504663250151,
+      "fold_enrichment": 2.4742281001709747,
+      "genes": [
+        "ABCD2",
+        "ACOT11",
+        "ALDH1A1",
+        "ANGPTL4",
+        "APOC1",
+        "APOE",
+        "ARRB1",
+        "ATP1A2",
+        "CST3",
+        "FGL1",
+        "GJA1",
+        "GLI3",
+        "KIAA0319",
+        "LGALS3",
+        "LHX2",
+        "MT3",
+        "NAV3",
+        "PRKG1",
+        "SDC4",
+        "XAF1"
+      ],
+      "depth": 4
+    },
+    {
+      "go_id": "GO:0001558",
+      "name": "regulation of cell growth",
+      "namespace": "biological_process",
+      "fdr": 0.04760504663250151,
+      "fold_enrichment": 3.7947589833479403,
+      "genes": [
+        "AGT",
+        "APOE",
+        "CPNE8",
+        "EFNA5",
+        "FAM107A",
+        "GJA1",
+        "KIAA0319",
+        "LGI1",
+        "MT3",
+        "PRR5",
+        "RERG"
+      ],
+      "depth": 5
+    },
+    {
+      "go_id": "GO:0007268",
+      "name": "chemical synaptic transmission",
+      "namespace": "biological_process",
+      "fdr": 0.04760504663250151,
+      "fold_enrichment": 4.106882016610325,
+      "genes": [
+        "APOE",
+        "DTNA",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "GRM3",
+        "PDE7B",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4"
+      ],
+      "depth": 8
+    },
+    {
+      "go_id": "GO:0034329",
+      "name": "cell junction assembly",
+      "namespace": "biological_process",
+      "fdr": 0.04950663745268485,
+      "fold_enrichment": 4.509049716162207,
+      "genes": [
+        "CDHR3",
+        "DLC1",
+        "FRMPD2",
+        "GABRA2",
+        "GABRG1",
+        "GJA1",
+        "GJB6",
+        "GPM6A",
+        "MICALL2"
+      ],
+      "depth": 5
+    }
+  ],
+  "themes": [
+    {
+      "anchor_term": {
+        "go_id": "GO:0098590",
+        "name": "plasma membrane region",
+        "namespace": "cellular_component",
+        "fdr": 0.0003669632904048572,
+        "fold_enrichment": 2.644658313717495,
+        "genes": [
+          "ADGRV1",
+          "AQP1",
+          "AQP4",
+          "ARHGEF4",
+          "ATP1A2",
+          "ATP1B2",
+          "CADM1",
+          "DLC1",
+          "EFNA5",
+          "FAM107A",
+          "FRMPD2",
+          "FXYD1",
+          "GABRA2",
+          "GABRB1",
+          "GABRG1",
+          "GJA1",
+          "GPM6A",
+          "GRM3",
+          "HEPH",
+          "NTM",
+          "PCDH9",
+          "PDGFRB",
+          "RAB34",
+          "SHROOM3",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC6A11",
+          "SORCS2",
+          "TENM2"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRV1",
+        "AQP1",
+        "AQP4",
+        "ARHGEF4",
+        "ATP1A2",
+        "ATP1B2",
+        "CADM1",
+        "DLC1",
+        "EFNA5",
+        "FAM107A",
+        "FRMPD2",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "GJA1",
+        "GPM6A",
+        "GRM3",
+        "HEPH",
+        "NTM",
+        "PCDH9",
+        "PDGFRB",
+        "RAB34",
+        "SHROOM3",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC6A11",
+        "SORCS2",
+        "TENM2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0043005",
+        "name": "neuron projection",
+        "namespace": "cellular_component",
+        "fdr": 0.0020054894517072767,
+        "fold_enrichment": 2.708239206467519,
+        "genes": [
+          "ADGRV1",
+          "ALDH1A1",
+          "APOE",
+          "AQP1",
+          "ATP1A2",
+          "CADM1",
+          "CHL1",
+          "CLU",
+          "DTNA",
+          "EMX2",
+          "EPHA6",
+          "FAM107A",
+          "GABRA2",
+          "GABRB1",
+          "GPM6A",
+          "GRM3",
+          "LGI1",
+          "MICALL2",
+          "MT3",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC1A4",
+          "SORCS2",
+          "TENM2"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRV1",
+        "ALDH1A1",
+        "APOE",
+        "AQP1",
+        "ATP1A2",
+        "CADM1",
+        "CHL1",
+        "CLU",
+        "DTNA",
+        "EMX2",
+        "EPHA6",
+        "FAM107A",
+        "GABRA2",
+        "GABRB1",
+        "GPM6A",
+        "GRM3",
+        "LGI1",
+        "MICALL2",
+        "MT3",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SORCS2",
+        "TENM2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0045202",
+        "name": "synapse",
+        "namespace": "cellular_component",
+        "fdr": 0.0032710489894101557,
+        "fold_enrichment": 2.4855903511456314,
+        "genes": [
+          "ALDH1A1",
+          "APOE",
+          "ATP1B2",
+          "CADM1",
+          "CLU",
+          "CNTNAP3",
+          "CNTNAP3B",
+          "DTNA",
+          "EFNA5",
+          "FAM107A",
+          "GABRA2",
+          "GABRB1",
+          "GPM6A",
+          "GRM3",
+          "LAMA1",
+          "LGI1",
+          "PCDH9",
+          "PDE7B",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC1A4",
+          "SLC6A11",
+          "SNTA1",
+          "SORCS2",
+          "SPARCL1",
+          "TENM2"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ALDH1A1",
+        "APOE",
+        "ATP1B2",
+        "CADM1",
+        "CLU",
+        "CNTNAP3",
+        "CNTNAP3B",
+        "DTNA",
+        "EFNA5",
+        "FAM107A",
+        "GABRA2",
+        "GABRB1",
+        "GPM6A",
+        "GRM3",
+        "LAMA1",
+        "LGI1",
+        "PCDH9",
+        "PDE7B",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SLC6A11",
+        "SNTA1",
+        "SORCS2",
+        "SPARCL1",
+        "TENM2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0070161",
+        "name": "anchoring junction",
+        "namespace": "cellular_component",
+        "fdr": 0.008627941831847353,
+        "fold_enrichment": 2.7255605256962427,
+        "genes": [
+          "ATP1A2",
+          "CADM1",
+          "CDHR3",
+          "CGNL1",
+          "CLDN10",
+          "CSRP1",
+          "DLC1",
+          "EFNA5",
+          "FAM107A",
+          "FGFR3",
+          "FRMPD2",
+          "FXYD1",
+          "GJA1",
+          "GJB6",
+          "LAMA1",
+          "MICALL2",
+          "PDGFRB",
+          "SDC4",
+          "SHROOM3",
+          "SNTA1"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ATP1A2",
+        "CADM1",
+        "CDHR3",
+        "CGNL1",
+        "CLDN10",
+        "CSRP1",
+        "DLC1",
+        "EFNA5",
+        "FAM107A",
+        "FGFR3",
+        "FRMPD2",
+        "FXYD1",
+        "GJA1",
+        "GJB6",
+        "LAMA1",
+        "MICALL2",
+        "PDGFRB",
+        "SDC4",
+        "SHROOM3",
+        "SNTA1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0042383",
+        "name": "sarcolemma",
+        "namespace": "cellular_component",
+        "fdr": 0.008627941831847353,
+        "fold_enrichment": 7.3495332088556955,
+        "genes": [
+          "AQP1",
+          "AQP4",
+          "ATP1A2",
+          "DTNA",
+          "FXYD1",
+          "RYR3",
+          "SNTA1"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.01",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AQP1",
+        "AQP4",
+        "ATP1A2",
+        "DTNA",
+        "FXYD1",
+        "RYR3",
+        "SNTA1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0003676",
+        "name": "nucleic acid binding",
+        "namespace": "molecular_function",
+        "fdr": 0.010091145914266105,
+        "fold_enrichment": 0.330307297729863,
+        "genes": [
+          "BHLHE40",
+          "CSRP1",
+          "ECHDC2",
+          "EMX2",
+          "GLI3",
+          "HIF3A",
+          "HOPX",
+          "LGALS3",
+          "LHX2",
+          "RORB",
+          "ZNF98"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "BHLHE40",
+        "CSRP1",
+        "ECHDC2",
+        "EMX2",
+        "GLI3",
+        "HIF3A",
+        "HOPX",
+        "LGALS3",
+        "LHX2",
+        "RORB",
+        "ZNF98"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0007154",
+        "name": "cell communication",
+        "namespace": "biological_process",
+        "fdr": 0.011268321162014972,
+        "fold_enrichment": 3.567813832781536,
+        "genes": [
+          "ADGRV1",
+          "AGT",
+          "APOE",
+          "ATP1A2",
+          "ATP1B2",
+          "CXCL14",
+          "DTNA",
+          "GABRA2",
+          "GABRB1",
+          "GABRG1",
+          "GJA1",
+          "GJB6",
+          "GRM3",
+          "PDE7B",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC1A4",
+          "SNTA1",
+          "TENM2"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [
+        {
+          "go_id": "GO:0010644",
+          "name": "cell communication by electrical coupling",
+          "namespace": "biological_process",
+          "fdr": 0.021773092879370157,
+          "fold_enrichment": 24.148466257668716,
+          "genes": [
+            "ATP1A2",
+            "ATP1B2",
+            "GJA1",
+            "GJB6"
+          ],
+          "depth": 3
+        },
+        {
+          "go_id": "GO:0007268",
+          "name": "chemical synaptic transmission",
+          "namespace": "biological_process",
+          "fdr": 0.04760504663250151,
+          "fold_enrichment": 4.106882016610325,
+          "genes": [
+            "APOE",
+            "DTNA",
+            "GABRA2",
+            "GABRB1",
+            "GABRG1",
+            "GRM3",
+            "PDE7B",
+            "SLC1A2",
+            "SLC1A3",
+            "SLC1A4"
+          ],
+          "depth": 8
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "ADGRV1",
+        "AGT",
+        "APOE",
+        "ATP1A2",
+        "ATP1B2",
+        "CXCL14",
+        "DTNA",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "GJA1",
+        "GJB6",
+        "GRM3",
+        "PDE7B",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SNTA1",
+        "TENM2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005654",
+        "name": "nucleoplasm",
+        "namespace": "cellular_component",
+        "fdr": 0.014162503807380333,
+        "fold_enrichment": 0.4015820331097901,
+        "genes": [
+          "ADIRF",
+          "ARRB1",
+          "EYA2",
+          "GLI3",
+          "HIF3A",
+          "LGALS3",
+          "MAPK4",
+          "PIR",
+          "PLEKHG1",
+          "RAB34",
+          "RORB",
+          "XAF1"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADIRF",
+        "ARRB1",
+        "EYA2",
+        "GLI3",
+        "HIF3A",
+        "LGALS3",
+        "MAPK4",
+        "PIR",
+        "PLEKHG1",
+        "RAB34",
+        "RORB",
+        "XAF1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0031012",
+        "name": "extracellular matrix",
+        "namespace": "cellular_component",
+        "fdr": 0.014162503807380333,
+        "fold_enrichment": 3.3080090763929744,
+        "genes": [
+          "AGT",
+          "ANGPTL4",
+          "APOE",
+          "COL5A3",
+          "EFNA5",
+          "F3",
+          "FGL1",
+          "GPC5",
+          "HPSE2",
+          "LAMA1",
+          "LGALS3",
+          "PAPLN",
+          "SDC2",
+          "SPARCL1"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AGT",
+        "ANGPTL4",
+        "APOE",
+        "COL5A3",
+        "EFNA5",
+        "F3",
+        "FGL1",
+        "GPC5",
+        "HPSE2",
+        "LAMA1",
+        "LGALS3",
+        "PAPLN",
+        "SDC2",
+        "SPARCL1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0097450",
+        "name": "astrocyte end-foot",
+        "namespace": "cellular_component",
+        "fdr": 0.014162503807380333,
+        "fold_enrichment": 30.185582822085895,
+        "genes": [
+          "AQP4",
+          "ATP1B2",
+          "MT3"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AQP4",
+        "ATP1B2",
+        "MT3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005890",
+        "name": "sodium:potassium-exchanging ATPase complex",
+        "namespace": "cellular_component",
+        "fdr": 0.014162503807380333,
+        "fold_enrichment": 30.185582822085895,
+        "genes": [
+          "ATP1A2",
+          "ATP1B2",
+          "FXYD1"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ATP1A2",
+        "ATP1B2",
+        "FXYD1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006865",
+        "name": "amino acid transport",
+        "namespace": "biological_process",
+        "fdr": 0.01684182956461764,
+        "fold_enrichment": 7.727509202453988,
+        "genes": [
+          "GJA1",
+          "SFXN5",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC1A4",
+          "SLC25A18",
+          "SLC6A11",
+          "SLC7A10"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [
+        {
+          "go_id": "GO:0042940",
+          "name": "D-amino acid transport",
+          "namespace": "biological_process",
+          "fdr": 0.01684182956461764,
+          "fold_enrichment": 72.44539877300615,
+          "genes": [
+            "SLC1A2",
+            "SLC1A3",
+            "SLC7A10"
+          ],
+          "depth": 6
+        },
+        {
+          "go_id": "GO:0140009",
+          "name": "L-aspartate import across plasma membrane",
+          "namespace": "biological_process",
+          "fdr": 0.01684182956461764,
+          "fold_enrichment": 60.37116564417179,
+          "genes": [
+            "SLC1A2",
+            "SLC1A3",
+            "SLC1A4"
+          ],
+          "depth": 10
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "GJA1",
+        "SFXN5",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SLC25A18",
+        "SLC6A11",
+        "SLC7A10"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0031256",
+        "name": "leading edge membrane",
+        "namespace": "cellular_component",
+        "fdr": 0.01946046381799167,
+        "fold_enrichment": 5.165447327843575,
+        "genes": [
+          "ADGRV1",
+          "ARHGEF4",
+          "DLC1",
+          "FAM107A",
+          "GABRA2",
+          "GABRG1",
+          "RAB34",
+          "SLC1A2"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADGRV1",
+        "ARHGEF4",
+        "DLC1",
+        "FAM107A",
+        "GABRA2",
+        "GABRG1",
+        "RAB34",
+        "SLC1A2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0051056",
+        "name": "regulation of small GTPase mediated signal transduction",
+        "namespace": "biological_process",
+        "fdr": 0.02401787239603615,
+        "fold_enrichment": 4.397899484012514,
+        "genes": [
+          "APOE",
+          "ARHGEF4",
+          "ARRB1",
+          "CGNL1",
+          "DLC1",
+          "LAMA1",
+          "MMD2",
+          "PLEKHG1",
+          "PREX2",
+          "SNTA1",
+          "VAV3"
+        ],
+        "depth": 7
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "APOE",
+        "ARHGEF4",
+        "ARRB1",
+        "CGNL1",
+        "DLC1",
+        "LAMA1",
+        "MMD2",
+        "PLEKHG1",
+        "PREX2",
+        "SNTA1",
+        "VAV3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0071616",
+        "name": "acyl-CoA biosynthetic process",
+        "namespace": "biological_process",
+        "fdr": 0.02401787239603615,
+        "fold_enrichment": 13.124166444385168,
+        "genes": [
+          "ACACB",
+          "ACSBG1",
+          "ACSL6",
+          "ACSS1",
+          "ELOVL2"
+        ],
+        "depth": 8
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ACACB",
+        "ACSBG1",
+        "ACSL6",
+        "ACSS1",
+        "ELOVL2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:1902476",
+        "name": "chloride transmembrane transport",
+        "namespace": "biological_process",
+        "fdr": 0.02401787239603615,
+        "fold_enrichment": 7.414002798407061,
+        "genes": [
+          "ANO5",
+          "FXYD1",
+          "GABRA2",
+          "GABRB1",
+          "GABRG1",
+          "SLC1A3",
+          "SLC1A4"
+        ],
+        "depth": 7
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANO5",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "SLC1A3",
+        "SLC1A4"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0001504",
+        "name": "neurotransmitter uptake",
+        "namespace": "biological_process",
+        "fdr": 0.026609627580724295,
+        "fold_enrichment": 18.575743275129778,
+        "genes": [
+          "ATP1A2",
+          "SLC1A2",
+          "SLC1A3",
+          "SLC6A11"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ATP1A2",
+        "SLC1A2",
+        "SLC1A3",
+        "SLC6A11"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0071280",
+        "name": "cellular response to copper ion",
+        "namespace": "biological_process",
+        "fdr": 0.026609627580724295,
+        "fold_enrichment": 18.575743275129778,
+        "genes": [
+          "AQP1",
+          "MT1E",
+          "MT1M",
+          "MT3"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AQP1",
+        "MT1E",
+        "MT1M",
+        "MT3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0120515",
+        "name": "fatty acid-CoA ligase activity",
+        "namespace": "molecular_function",
+        "fdr": 0.03138649240531646,
+        "fold_enrichment": 19.31877300613497,
+        "genes": [
+          "ACSBG1",
+          "ACSL6",
+          "ACSS1",
+          "ACSS3"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ACSBG1",
+        "ACSL6",
+        "ACSS1",
+        "ACSS3"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0005254",
+        "name": "chloride channel activity",
+        "namespace": "molecular_function",
+        "fdr": 0.03138649240531646,
+        "fold_enrichment": 8.834804728415383,
+        "genes": [
+          "ANO5",
+          "FXYD1",
+          "GABRA2",
+          "GABRB1",
+          "GABRG1",
+          "SLC1A4"
+        ],
+        "depth": 7
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ANO5",
+        "FXYD1",
+        "GABRA2",
+        "GABRB1",
+        "GABRG1",
+        "SLC1A4"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0006633",
+        "name": "fatty acid biosynthetic process",
+        "namespace": "biological_process",
+        "fdr": 0.03189544425419648,
+        "fold_enrichment": 6.816099346922621,
+        "genes": [
+          "ABCD2",
+          "ACACB",
+          "ACSBG1",
+          "ACSS1",
+          "CBR1",
+          "ELOVL2",
+          "PTGDS"
+        ],
+        "depth": 9
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCD2",
+        "ACACB",
+        "ACSBG1",
+        "ACSS1",
+        "CBR1",
+        "ELOVL2",
+        "PTGDS"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:1901570",
+        "name": "fatty acid derivative biosynthetic process",
+        "namespace": "biological_process",
+        "fdr": 0.03189544425419648,
+        "fold_enrichment": 11.390785970598449,
+        "genes": [
+          "ACSBG1",
+          "ACSL6",
+          "ACSS3",
+          "ELOVL2",
+          "HMGCLL1"
+        ],
+        "depth": 6
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ACSBG1",
+        "ACSL6",
+        "ACSS3",
+        "ELOVL2",
+        "HMGCLL1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0090304",
+        "name": "nucleic acid metabolic process",
+        "namespace": "biological_process",
+        "fdr": 0.04154980633006728,
+        "fold_enrichment": 0.42827277376154294,
+        "genes": [
+          "ADIRF",
+          "ARRB1",
+          "BHLHE40",
+          "EYA2",
+          "GLI3",
+          "HIF3A",
+          "HOPX",
+          "LGALS3",
+          "LHX2",
+          "LMO3",
+          "PIR",
+          "RORB",
+          "TENM2",
+          "ZNF98"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ADIRF",
+        "ARRB1",
+        "BHLHE40",
+        "EYA2",
+        "GLI3",
+        "HIF3A",
+        "HOPX",
+        "LGALS3",
+        "LHX2",
+        "LMO3",
+        "PIR",
+        "RORB",
+        "TENM2",
+        "ZNF98"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0000038",
+        "name": "very long-chain fatty acid metabolic process",
+        "namespace": "biological_process",
+        "fdr": 0.042811402768581586,
+        "fold_enrichment": 15.579655650108847,
+        "genes": [
+          "ABCD2",
+          "ACSBG1",
+          "ACSL6",
+          "ELOVL2"
+        ],
+        "depth": 9
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCD2",
+        "ACSBG1",
+        "ACSL6",
+        "ELOVL2"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0048878",
+        "name": "chemical homeostasis",
+        "namespace": "biological_process",
+        "fdr": 0.04590984975135409,
+        "fold_enrichment": 2.660173761554693,
+        "genes": [
+          "ACACB",
+          "ANGPTL4",
+          "APOC1",
+          "APOE",
+          "AQP1",
+          "AQP4",
+          "ARRB1",
+          "ATP1A2",
+          "ATP1B2",
+          "FXYD1",
+          "GLUL",
+          "HEPH",
+          "HIF3A",
+          "MT1E",
+          "MT1M",
+          "MT3",
+          "RYR3",
+          "SLC39A12"
+        ],
+        "depth": 2
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ACACB",
+        "ANGPTL4",
+        "APOC1",
+        "APOE",
+        "AQP1",
+        "AQP4",
+        "ARRB1",
+        "ATP1A2",
+        "ATP1B2",
+        "FXYD1",
+        "GLUL",
+        "HEPH",
+        "HIF3A",
+        "MT1E",
+        "MT1M",
+        "MT3",
+        "RYR3",
+        "SLC39A12"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0051241",
+        "name": "negative regulation of multicellular organismal process",
+        "namespace": "biological_process",
+        "fdr": 0.04760504663250151,
+        "fold_enrichment": 2.4742281001709747,
+        "genes": [
+          "ABCD2",
+          "ACOT11",
+          "ALDH1A1",
+          "ANGPTL4",
+          "APOC1",
+          "APOE",
+          "ARRB1",
+          "ATP1A2",
+          "CST3",
+          "FGL1",
+          "GJA1",
+          "GLI3",
+          "KIAA0319",
+          "LGALS3",
+          "LHX2",
+          "MT3",
+          "NAV3",
+          "PRKG1",
+          "SDC4",
+          "XAF1"
+        ],
+        "depth": 4
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "ABCD2",
+        "ACOT11",
+        "ALDH1A1",
+        "ANGPTL4",
+        "APOC1",
+        "APOE",
+        "ARRB1",
+        "ATP1A2",
+        "CST3",
+        "FGL1",
+        "GJA1",
+        "GLI3",
+        "KIAA0319",
+        "LGALS3",
+        "LHX2",
+        "MT3",
+        "NAV3",
+        "PRKG1",
+        "SDC4",
+        "XAF1"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0001558",
+        "name": "regulation of cell growth",
+        "namespace": "biological_process",
+        "fdr": 0.04760504663250151,
+        "fold_enrichment": 3.7947589833479403,
+        "genes": [
+          "AGT",
+          "APOE",
+          "CPNE8",
+          "EFNA5",
+          "FAM107A",
+          "GJA1",
+          "KIAA0319",
+          "LGI1",
+          "MT3",
+          "PRR5",
+          "RERG"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "AGT",
+        "APOE",
+        "CPNE8",
+        "EFNA5",
+        "FAM107A",
+        "GJA1",
+        "KIAA0319",
+        "LGI1",
+        "MT3",
+        "PRR5",
+        "RERG"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0015171",
+        "name": "amino acid transmembrane transporter activity",
+        "namespace": "molecular_function",
+        "fdr": 0.04798867439320559,
+        "fold_enrichment": 7.102490075784916,
+        "genes": [
+          "SLC1A2",
+          "SLC1A3",
+          "SLC1A4",
+          "SLC25A18",
+          "SLC6A11",
+          "SLC7A10"
+        ],
+        "depth": 3
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [
+        {
+          "go_id": "GO:0005313",
+          "name": "L-glutamate transmembrane transporter activity",
+          "namespace": "molecular_function",
+          "fdr": 0.011092823977844384,
+          "fold_enrichment": 32.197955010224945,
+          "genes": [
+            "SLC1A2",
+            "SLC1A3",
+            "SLC1A4",
+            "SLC25A18"
+          ],
+          "depth": 5
+        },
+        {
+          "go_id": "GO:0005416",
+          "name": "amino acid:monoatomic cation symporter activity",
+          "namespace": "molecular_function",
+          "fdr": 0.03138649240531646,
+          "fold_enrichment": 17.248904469763367,
+          "genes": [
+            "SLC1A2",
+            "SLC1A3",
+            "SLC25A18",
+            "SLC6A11"
+          ],
+          "depth": 7
+        }
+      ],
+      "n_specific_terms": 2,
+      "all_genes": [
+        "SLC1A2",
+        "SLC1A3",
+        "SLC1A4",
+        "SLC25A18",
+        "SLC6A11",
+        "SLC7A10"
+      ]
+    },
+    {
+      "anchor_term": {
+        "go_id": "GO:0034329",
+        "name": "cell junction assembly",
+        "namespace": "biological_process",
+        "fdr": 0.04950663745268485,
+        "fold_enrichment": 4.509049716162207,
+        "genes": [
+          "CDHR3",
+          "DLC1",
+          "FRMPD2",
+          "GABRA2",
+          "GABRG1",
+          "GJA1",
+          "GJB6",
+          "GPM6A",
+          "MICALL2"
+        ],
+        "depth": 5
+      },
+      "anchor_confidence": "FDR<0.05",
+      "specific_terms": [],
+      "n_specific_terms": 0,
+      "all_genes": [
+        "CDHR3",
+        "DLC1",
+        "FRMPD2",
+        "GABRA2",
+        "GABRG1",
+        "GJA1",
+        "GJB6",
+        "GPM6A",
+        "MICALL2"
+      ]
+    }
+  ],
+  "hub_genes": {
+    "ATP1A2": {
+      "theme_count": 9,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "anchoring junction",
+        "sarcolemma",
+        "cell communication",
+        "sodium:potassium-exchanging ATPase complex",
+        "neurotransmitter uptake",
+        "chemical homeostasis",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0043005",
+        "GO:0048878",
+        "GO:0051241",
+        "GO:0070161",
+        "GO:0001504",
+        "GO:0098590",
+        "GO:0010644",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0042383",
+        "GO:0005890"
+      ]
+    },
+    "SLC1A2": {
+      "theme_count": 8,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "amino acid transport",
+        "leading edge membrane",
+        "neurotransmitter uptake",
+        "amino acid transmembrane transporter activity"
+      ],
+      "go_terms": [
+        "GO:0005416",
+        "GO:0043005",
+        "GO:0006865",
+        "GO:0042940",
+        "GO:0005313",
+        "GO:0001504",
+        "GO:0098590",
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0031256",
+        "GO:0140009",
+        "GO:0007154",
+        "GO:0015171",
+        "GO:0007268"
+      ]
+    },
+    "SLC1A3": {
+      "theme_count": 8,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "amino acid transport",
+        "chloride transmembrane transport",
+        "neurotransmitter uptake",
+        "amino acid transmembrane transporter activity"
+      ],
+      "go_terms": [
+        "GO:1902476",
+        "GO:0005416",
+        "GO:0043005",
+        "GO:0006865",
+        "GO:0042940",
+        "GO:0005313",
+        "GO:0001504",
+        "GO:0098590",
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0140009",
+        "GO:0007154",
+        "GO:0015171",
+        "GO:0007268"
+      ]
+    },
+    "GABRA2": {
+      "theme_count": 8,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "leading edge membrane",
+        "chloride transmembrane transport",
+        "chloride channel activity",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:1902476",
+        "GO:0043005",
+        "GO:0005254",
+        "GO:0034329",
+        "GO:0098590",
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0007154",
+        "GO:0031256",
+        "GO:0007268"
+      ]
+    },
+    "APOE": {
+      "theme_count": 8,
+      "themes": [
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "extracellular matrix",
+        "regulation of small GTPase mediated signal transduction",
+        "chemical homeostasis",
+        "negative regulation of multicellular organismal process",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0043005",
+        "GO:0048878",
+        "GO:0051241",
+        "GO:0001558",
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0051056",
+        "GO:0007154",
+        "GO:0031012",
+        "GO:0007268"
+      ]
+    },
+    "FXYD1": {
+      "theme_count": 7,
+      "themes": [
+        "plasma membrane region",
+        "anchoring junction",
+        "sarcolemma",
+        "sodium:potassium-exchanging ATPase complex",
+        "chloride transmembrane transport",
+        "chloride channel activity",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:1902476",
+        "GO:0048878",
+        "GO:0005254",
+        "GO:0070161",
+        "GO:0098590",
+        "GO:0042383",
+        "GO:0005890"
+      ]
+    },
+    "GJA1": {
+      "theme_count": 7,
+      "themes": [
+        "plasma membrane region",
+        "anchoring junction",
+        "cell communication",
+        "amino acid transport",
+        "negative regulation of multicellular organismal process",
+        "regulation of cell growth",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0006865",
+        "GO:0042940",
+        "GO:0034329",
+        "GO:0051241",
+        "GO:0001558",
+        "GO:0070161",
+        "GO:0098590",
+        "GO:0010644",
+        "GO:0140009",
+        "GO:0007154",
+        "GO:0007268"
+      ]
+    },
+    "SLC1A4": {
+      "theme_count": 7,
+      "themes": [
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "amino acid transport",
+        "chloride transmembrane transport",
+        "chloride channel activity",
+        "amino acid transmembrane transporter activity"
+      ],
+      "go_terms": [
+        "GO:1902476",
+        "GO:0005416",
+        "GO:0043005",
+        "GO:0006865",
+        "GO:0042940",
+        "GO:0005254",
+        "GO:0005313",
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0140009",
+        "GO:0007154",
+        "GO:0015171",
+        "GO:0007268"
+      ]
+    },
+    "FAM107A": {
+      "theme_count": 6,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "anchoring junction",
+        "leading edge membrane",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0043005",
+        "GO:0001558",
+        "GO:0070161",
+        "GO:0031256",
+        "GO:0098590"
+      ]
+    },
+    "GABRB1": {
+      "theme_count": 6,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "chloride transmembrane transport",
+        "chloride channel activity"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0043005",
+        "GO:1902476",
+        "GO:0005254",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0098590"
+      ]
+    },
+    "GABRG1": {
+      "theme_count": 6,
+      "themes": [
+        "plasma membrane region",
+        "cell communication",
+        "leading edge membrane",
+        "chloride transmembrane transport",
+        "chloride channel activity",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0010644",
+        "GO:0031256",
+        "GO:1902476",
+        "GO:0005254",
+        "GO:0007154",
+        "GO:0034329",
+        "GO:0007268",
+        "GO:0098590"
+      ]
+    },
+    "ATP1B2": {
+      "theme_count": 6,
+      "themes": [
+        "plasma membrane region",
+        "synapse",
+        "cell communication",
+        "astrocyte end-foot",
+        "sodium:potassium-exchanging ATPase complex",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0097450",
+        "GO:0048878",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0098590",
+        "GO:0005890"
+      ]
+    },
+    "MT3": {
+      "theme_count": 6,
+      "themes": [
+        "neuron projection",
+        "astrocyte end-foot",
+        "cellular response to copper ion",
+        "chemical homeostasis",
+        "negative regulation of multicellular organismal process",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0048878",
+        "GO:0043005",
+        "GO:0071280",
+        "GO:0051241",
+        "GO:0001558",
+        "GO:0097450"
+      ]
+    },
+    "SLC6A11": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "synapse",
+        "amino acid transport",
+        "neurotransmitter uptake",
+        "amino acid transmembrane transporter activity"
+      ],
+      "go_terms": [
+        "GO:0005416",
+        "GO:0006865",
+        "GO:0042940",
+        "GO:0001504",
+        "GO:0098590",
+        "GO:0045202",
+        "GO:0140009",
+        "GO:0005313",
+        "GO:0015171"
+      ]
+    },
+    "TENM2": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication",
+        "nucleic acid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0043005",
+        "GO:0007154",
+        "GO:0090304",
+        "GO:0007268",
+        "GO:0098590"
+      ]
+    },
+    "AQP1": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "sarcolemma",
+        "cellular response to copper ion",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:0043005",
+        "GO:0048878",
+        "GO:0071280",
+        "GO:0098590",
+        "GO:0042383"
+      ]
+    },
+    "DLC1": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "anchoring junction",
+        "leading edge membrane",
+        "regulation of small GTPase mediated signal transduction",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0051056",
+        "GO:0070161",
+        "GO:0031256",
+        "GO:0098590",
+        "GO:0034329"
+      ]
+    },
+    "EFNA5": {
+      "theme_count": 5,
+      "themes": [
+        "plasma membrane region",
+        "synapse",
+        "anchoring junction",
+        "extracellular matrix",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0031012",
+        "GO:0001558",
+        "GO:0070161",
+        "GO:0098590"
+      ]
+    },
+    "SNTA1": {
+      "theme_count": 5,
+      "themes": [
+        "synapse",
+        "anchoring junction",
+        "sarcolemma",
+        "cell communication",
+        "regulation of small GTPase mediated signal transduction"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0051056",
+        "GO:0007154",
+        "GO:0070161",
+        "GO:0007268",
+        "GO:0042383"
+      ]
+    },
+    "LGALS3": {
+      "theme_count": 5,
+      "themes": [
+        "nucleic acid binding",
+        "nucleoplasm",
+        "extracellular matrix",
+        "nucleic acid metabolic process",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0003676",
+        "GO:0005654",
+        "GO:0051241",
+        "GO:0031012",
+        "GO:0090304"
+      ]
+    },
+    "ARRB1": {
+      "theme_count": 5,
+      "themes": [
+        "nucleoplasm",
+        "regulation of small GTPase mediated signal transduction",
+        "nucleic acid metabolic process",
+        "chemical homeostasis",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0048878",
+        "GO:0051056",
+        "GO:0051241",
+        "GO:0005654",
+        "GO:0090304"
+      ]
+    },
+    "ACSBG1": {
+      "theme_count": 5,
+      "themes": [
+        "acyl-CoA biosynthetic process",
+        "fatty acid-CoA ligase activity",
+        "fatty acid biosynthetic process",
+        "fatty acid derivative biosynthetic process",
+        "very long-chain fatty acid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0071616",
+        "GO:0120515",
+        "GO:0000038",
+        "GO:1901570",
+        "GO:0006633"
+      ]
+    },
+    "ADGRV1": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "cell communication",
+        "leading edge membrane"
+      ],
+      "go_terms": [
+        "GO:0010644",
+        "GO:0031256",
+        "GO:0043005",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0098590"
+      ]
+    },
+    "CADM1": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "anchoring junction"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0070161",
+        "GO:0043005",
+        "GO:0098590"
+      ]
+    },
+    "GPM6A": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0043005",
+        "GO:0098590",
+        "GO:0034329"
+      ]
+    },
+    "AQP4": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "sarcolemma",
+        "astrocyte end-foot",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:0042383",
+        "GO:0048878",
+        "GO:0097450",
+        "GO:0098590"
+      ]
+    },
+    "GRM3": {
+      "theme_count": 4,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse",
+        "cell communication"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0043005",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0098590"
+      ]
+    },
+    "DTNA": {
+      "theme_count": 4,
+      "themes": [
+        "neuron projection",
+        "synapse",
+        "sarcolemma",
+        "cell communication"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0010644",
+        "GO:0043005",
+        "GO:0007154",
+        "GO:0007268",
+        "GO:0042383"
+      ]
+    },
+    "LAMA1": {
+      "theme_count": 4,
+      "themes": [
+        "synapse",
+        "anchoring junction",
+        "extracellular matrix",
+        "regulation of small GTPase mediated signal transduction"
+      ],
+      "go_terms": [
+        "GO:0031012",
+        "GO:0045202",
+        "GO:0070161",
+        "GO:0051056"
+      ]
+    },
+    "HIF3A": {
+      "theme_count": 4,
+      "themes": [
+        "nucleic acid binding",
+        "nucleoplasm",
+        "nucleic acid metabolic process",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:0003676",
+        "GO:0048878",
+        "GO:0090304",
+        "GO:0005654"
+      ]
+    },
+    "GLI3": {
+      "theme_count": 4,
+      "themes": [
+        "nucleic acid binding",
+        "nucleoplasm",
+        "nucleic acid metabolic process",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0051241",
+        "GO:0003676",
+        "GO:0090304",
+        "GO:0005654"
+      ]
+    },
+    "ACSL6": {
+      "theme_count": 4,
+      "themes": [
+        "acyl-CoA biosynthetic process",
+        "fatty acid-CoA ligase activity",
+        "fatty acid derivative biosynthetic process",
+        "very long-chain fatty acid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0071616",
+        "GO:1901570",
+        "GO:0120515",
+        "GO:0000038"
+      ]
+    },
+    "ELOVL2": {
+      "theme_count": 4,
+      "themes": [
+        "acyl-CoA biosynthetic process",
+        "fatty acid biosynthetic process",
+        "fatty acid derivative biosynthetic process",
+        "very long-chain fatty acid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0071616",
+        "GO:1901570",
+        "GO:0006633",
+        "GO:0000038"
+      ]
+    },
+    "SORCS2": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "neuron projection",
+        "synapse"
+      ],
+      "go_terms": [
+        "GO:0045202",
+        "GO:0043005",
+        "GO:0098590"
+      ]
+    },
+    "RAB34": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "nucleoplasm",
+        "leading edge membrane"
+      ],
+      "go_terms": [
+        "GO:0031256",
+        "GO:0098590",
+        "GO:0005654"
+      ]
+    },
+    "FRMPD2": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "anchoring junction",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0070161",
+        "GO:0098590",
+        "GO:0034329"
+      ]
+    },
+    "ARHGEF4": {
+      "theme_count": 3,
+      "themes": [
+        "plasma membrane region",
+        "leading edge membrane",
+        "regulation of small GTPase mediated signal transduction"
+      ],
+      "go_terms": [
+        "GO:0031256",
+        "GO:0098590",
+        "GO:0051056"
+      ]
+    },
+    "MICALL2": {
+      "theme_count": 3,
+      "themes": [
+        "neuron projection",
+        "anchoring junction",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0070161",
+        "GO:0043005",
+        "GO:0034329"
+      ]
+    },
+    "ALDH1A1": {
+      "theme_count": 3,
+      "themes": [
+        "neuron projection",
+        "synapse",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0051241",
+        "GO:0045202",
+        "GO:0043005"
+      ]
+    },
+    "LGI1": {
+      "theme_count": 3,
+      "themes": [
+        "neuron projection",
+        "synapse",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0001558",
+        "GO:0045202",
+        "GO:0043005"
+      ]
+    },
+    "GJB6": {
+      "theme_count": 3,
+      "themes": [
+        "anchoring junction",
+        "cell communication",
+        "cell junction assembly"
+      ],
+      "go_terms": [
+        "GO:0010644",
+        "GO:0034329",
+        "GO:0007154",
+        "GO:0070161",
+        "GO:0007268"
+      ]
+    },
+    "RORB": {
+      "theme_count": 3,
+      "themes": [
+        "nucleic acid binding",
+        "nucleoplasm",
+        "nucleic acid metabolic process"
+      ],
+      "go_terms": [
+        "GO:0003676",
+        "GO:0090304",
+        "GO:0005654"
+      ]
+    },
+    "LHX2": {
+      "theme_count": 3,
+      "themes": [
+        "nucleic acid binding",
+        "nucleic acid metabolic process",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0051241",
+        "GO:0003676",
+        "GO:0090304"
+      ]
+    },
+    "AGT": {
+      "theme_count": 3,
+      "themes": [
+        "cell communication",
+        "extracellular matrix",
+        "regulation of cell growth"
+      ],
+      "go_terms": [
+        "GO:0010644",
+        "GO:0007154",
+        "GO:0031012",
+        "GO:0001558",
+        "GO:0007268"
+      ]
+    },
+    "ANGPTL4": {
+      "theme_count": 3,
+      "themes": [
+        "extracellular matrix",
+        "chemical homeostasis",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0051241",
+        "GO:0031012",
+        "GO:0048878"
+      ]
+    },
+    "ACSS1": {
+      "theme_count": 3,
+      "themes": [
+        "acyl-CoA biosynthetic process",
+        "fatty acid-CoA ligase activity",
+        "fatty acid biosynthetic process"
+      ],
+      "go_terms": [
+        "GO:0071616",
+        "GO:0120515",
+        "GO:0006633"
+      ]
+    },
+    "ACACB": {
+      "theme_count": 3,
+      "themes": [
+        "acyl-CoA biosynthetic process",
+        "fatty acid biosynthetic process",
+        "chemical homeostasis"
+      ],
+      "go_terms": [
+        "GO:0071616",
+        "GO:0048878",
+        "GO:0006633"
+      ]
+    },
+    "ABCD2": {
+      "theme_count": 3,
+      "themes": [
+        "fatty acid biosynthetic process",
+        "very long-chain fatty acid metabolic process",
+        "negative regulation of multicellular organismal process"
+      ],
+      "go_terms": [
+        "GO:0051241",
+        "GO:0006633",
+        "GO:0000038"
+      ]
+    }
+  },
+  "metadata": {
+    "input_genes_count": 200,
+    "genes_with_annotations": 163,
+    "total_enriched_terms": 90,
+    "enrichment_leaves_count": 32,
+    "themes_count": 29,
+    "themes_with_children": 3,
+    "hub_genes_count": 48,
+    "fdr_threshold": 0.05,
+    "species": "human",
+    "min_ic": 3.0,
+    "min_leaves": 2,
+    "timestamp": "2026-04-13T15:47:49.691377+00:00"
+  }
+}

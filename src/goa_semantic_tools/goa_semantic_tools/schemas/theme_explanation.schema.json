@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/Cellular-Semantics/goa_semantic_tools/schemas/theme_explanation.schema.json",
+  "title": "ThemeExplanation",
+  "description": "LLM-generated structured explanation for a single GO enrichment theme. All text fields must contain plain text only — no markdown syntax. Quote gene symbols in backticks (e.g. `BRCA1`) in narrative and insight text.",
+  "type": "object",
+  "properties": {
+    "narrative": {
+      "type": "string",
+      "minLength": 80,
+      "description": "2-3 sentence biological narrative explaining what this theme means and why these genes cluster together. Plain text only — no markdown formatting. Quote gene symbols in backticks. Tag EVERY sentence with exactly one of: [DATA] for statements derived directly from the enrichment numbers, [GO-HIERARCHY] for statements about how GO terms relate to each other, [INFERENCE] for mechanistic or biological interpretations that go beyond the raw numbers, or [EXTERNAL] for claims that require knowledge external to the enrichment data (e.g. known biology from the literature). Use only genes and GO terms from this theme's input data. Do NOT merely restate GO term names — explain the biological mechanism. BAD: 'ABC is involved in regulating receptor signaling pathways.' GOOD: '`ABC` antagonises ligand-mediated TGF-beta signaling, limiting downstream Smad2/3 phosphorylation PMID:1269767.'"
+    },
+    "key_insights": {
+      "type": "array",
+      "description": "2-4 key biological insights about this theme. Each insight must reference a specific GO term from this theme's input data.",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "insight": {
+            "type": "string",
+            "minLength": 20,
+            "description": "One specific biological insight. Plain text only — no markdown formatting. Quote gene symbols in backticks. Be concrete — reference gene names or processes from the input data."
+          },
+          "go_id": {
+            "type": "string",
+            "description": "The GO term ID most relevant to this insight. MUST be one of the GO IDs present in this theme's input data (anchor or specific terms)."
+          }
+        },
+        "required": ["insight", "go_id"],
+        "additionalProperties": false
+      }
+    },
+    "key_genes": {
+      "type": "array",
+      "description": "2-5 key genes for this theme. You MUST select only from the candidate_key_genes list provided in the input for this theme — do not introduce genes from external knowledge.",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "gene": {
+            "type": "string",
+            "description": "Gene symbol. MUST appear in the candidate_key_genes list for this theme."
+          },
+          "go_id": {
+            "type": "string",
+            "description": "The specific GO term in this theme that most directly involves this gene. MUST be from this theme's input data."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 200,
+            "description": "One sentence explaining this gene's MECHANISTIC role in the context of this theme. Plain text only — no markdown formatting. Quote gene symbols in backticks. Do NOT merely restate the GO annotation — explain HOW the gene acts. BAD: 'ABC is involved in cell migration.' GOOD: '`ABC` suppresses cell migration via PI3K/AKT-mediated focal adhesion disassembly PMID:19188590.' If a Gene Evidence Narrative is available for this gene, incorporate its mechanistic insight."
+          },
+          "claim_type": {
+            "type": "string",
+            "enum": ["EXTERNAL", "INFERENCE"],
+            "description": "EXTERNAL if the sentence cites a PMID from the provided literature; INFERENCE if no PMID is cited and the claim draws on latent biological knowledge."
+          }
+        },
+        "required": ["gene", "go_id", "description", "claim_type"],
+        "additionalProperties": false
+      }
+    },
+    "statistical_context": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 300,
+      "description": "One sentence summarising the statistical evidence for this theme: include the anchor term FDR, fold enrichment, and gene count. Plain text only — no markdown formatting. Use the numbers directly from the input — do not round or approximate."
+    }
+  },
+  "required": ["narrative", "key_insights", "key_genes", "statistical_context"],
+  "additionalProperties": false
+}

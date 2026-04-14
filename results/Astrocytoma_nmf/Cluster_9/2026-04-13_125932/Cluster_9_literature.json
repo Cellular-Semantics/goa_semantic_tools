@@ -1,0 +1,2636 @@
+{
+  "enrichment_source": "results/Astrocytoma_nmf/Cluster_9/2026-04-13_125932/Cluster_9_enrichment.json",
+  "gaf_pmids": {
+    "0": [
+      {
+        "pmid": "26875626",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0017146"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0017146"
+          ],
+          "GRIN2A": [
+            "GO:0017146"
+          ],
+          "GRIN2B": [
+            "GO:0017146"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2A": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2B": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ]
+        }
+      },
+      {
+        "pmid": "17526495",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0017146"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0017146"
+          ],
+          "GRIN2A": [
+            "GO:0017146"
+          ],
+          "GRIN2B": [
+            "GO:0017146"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2A": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2B": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ]
+        }
+      },
+      {
+        "pmid": "10480938",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0017146"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0017146"
+          ],
+          "GRIN2A": [
+            "GO:0017146"
+          ],
+          "GRIN2B": [
+            "GO:0017146"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2A": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2B": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ]
+        }
+      },
+      {
+        "pmid": "26919761",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0017146"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0017146"
+          ],
+          "GRIN2B": [
+            "GO:0017146"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2B": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ]
+        }
+      },
+      {
+        "pmid": "17047094",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0017146"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0017146"
+          ],
+          "GRIN2B": [
+            "GO:0017146"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ],
+          "GRIN2B": [
+            "NMDA selective glutamate receptor complex [GO:0017146]"
+          ]
+        }
+      }
+    ],
+    "1": [
+      {
+        "pmid": "21926414",
+        "genes_covered": [
+          "IL1RAPL2",
+          "PTPRD"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "IL1RAPL2": [
+            "GO:0098978"
+          ],
+          "PTPRD": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "IL1RAPL2": [
+            "glutamatergic synapse [GO:0098978]"
+          ],
+          "PTPRD": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "34706237",
+        "genes_covered": [
+          "GRIK4"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "GRIK4": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "GRIK4": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "29114105",
+        "genes_covered": [
+          "NRG3"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "NRG3": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "NRG3": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      },
+      {
+        "pmid": "16221846",
+        "genes_covered": [
+          "NRG1"
+        ],
+        "go_terms": [
+          "GO:0098978"
+        ],
+        "gene_go_map": {
+          "NRG1": [
+            "GO:0098978"
+          ]
+        },
+        "gene_go_named": {
+          "NRG1": [
+            "glutamatergic synapse [GO:0098978]"
+          ]
+        }
+      }
+    ],
+    "2": [
+      {
+        "pmid": "34929720",
+        "genes_covered": [
+          "NALCN",
+          "UNC79"
+        ],
+        "go_terms": [
+          "GO:0098908"
+        ],
+        "gene_go_map": {
+          "NALCN": [
+            "GO:0098908"
+          ],
+          "UNC79": [
+            "GO:0098908"
+          ]
+        },
+        "gene_go_named": {
+          "NALCN": [
+            "regulation of neuronal action potential [GO:0098908]"
+          ],
+          "UNC79": [
+            "regulation of neuronal action potential [GO:0098908]"
+          ]
+        }
+      },
+      {
+        "pmid": "15003177",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:2000463"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:2000463"
+          ],
+          "GRIN2B": [
+            "GO:2000463"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ],
+          "GRIN2B": [
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ]
+        }
+      },
+      {
+        "pmid": "36959261",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:2000463"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:2000463"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ]
+        }
+      },
+      {
+        "pmid": "35301303",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0042391"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0042391"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "regulation of membrane potential [GO:0042391]"
+          ]
+        }
+      },
+      {
+        "pmid": "29844171",
+        "genes_covered": [
+          "SCN2A"
+        ],
+        "go_terms": [
+          "GO:0019228"
+        ],
+        "gene_go_map": {
+          "SCN2A": [
+            "GO:0019228"
+          ]
+        },
+        "gene_go_named": {
+          "SCN2A": [
+            "neuronal action potential [GO:0019228]"
+          ]
+        }
+      }
+    ],
+    "3": [
+      {
+        "pmid": "30021165",
+        "genes_covered": [
+          "PPFIA2"
+        ],
+        "go_terms": [
+          "GO:0061001"
+        ],
+        "gene_go_map": {
+          "PPFIA2": [
+            "GO:0061001"
+          ]
+        },
+        "gene_go_named": {
+          "PPFIA2": [
+            "regulation of dendritic spine morphogenesis [GO:0061001]"
+          ]
+        }
+      },
+      {
+        "pmid": "25489750",
+        "genes_covered": [
+          "GABRG2"
+        ],
+        "go_terms": [
+          "GO:1904862"
+        ],
+        "gene_go_map": {
+          "GABRG2": [
+            "GO:1904862"
+          ]
+        },
+        "gene_go_named": {
+          "GABRG2": [
+            "inhibitory synapse assembly [GO:1904862]"
+          ]
+        }
+      },
+      {
+        "pmid": "23909897",
+        "genes_covered": [
+          "GABRG2"
+        ],
+        "go_terms": [
+          "GO:1904862"
+        ],
+        "gene_go_map": {
+          "GABRG2": [
+            "GO:1904862"
+          ]
+        },
+        "gene_go_named": {
+          "GABRG2": [
+            "inhibitory synapse assembly [GO:1904862]"
+          ]
+        }
+      },
+      {
+        "pmid": "22699620",
+        "genes_covered": [
+          "SHANK2"
+        ],
+        "go_terms": [
+          "GO:0007416"
+        ],
+        "gene_go_map": {
+          "SHANK2": [
+            "GO:0007416"
+          ]
+        },
+        "gene_go_named": {
+          "SHANK2": [
+            "synapse assembly [GO:0007416]"
+          ]
+        }
+      },
+      {
+        "pmid": "21926414",
+        "genes_covered": [
+          "PTPRD"
+        ],
+        "go_terms": [
+          "GO:0099054"
+        ],
+        "gene_go_map": {
+          "PTPRD": [
+            "GO:0099054"
+          ]
+        },
+        "gene_go_named": {
+          "PTPRD": [
+            "presynapse assembly [GO:0099054]"
+          ]
+        }
+      }
+    ],
+    "4": [
+      {
+        "pmid": "19706678",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0030424"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0030424"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "axon [GO:0030424]"
+          ]
+        }
+      },
+      {
+        "pmid": "16652168",
+        "genes_covered": [
+          "SCN2A"
+        ],
+        "go_terms": [
+          "GO:0030424"
+        ],
+        "gene_go_map": {
+          "SCN2A": [
+            "GO:0030424"
+          ]
+        },
+        "gene_go_named": {
+          "SCN2A": [
+            "axon [GO:0030424]"
+          ]
+        }
+      }
+    ],
+    "5": [],
+    "6": [
+      {
+        "pmid": "29950725",
+        "genes_covered": [
+          "GABRA2",
+          "GABRB1",
+          "GABRG2"
+        ],
+        "go_terms": [
+          "GO:0051932"
+        ],
+        "gene_go_map": {
+          "GABRA2": [
+            "GO:0051932"
+          ],
+          "GABRB1": [
+            "GO:0051932"
+          ],
+          "GABRG2": [
+            "GO:0051932"
+          ]
+        },
+        "gene_go_named": {
+          "GABRA2": [
+            "synaptic transmission, GABAergic [GO:0051932]"
+          ],
+          "GABRB1": [
+            "synaptic transmission, GABAergic [GO:0051932]"
+          ],
+          "GABRG2": [
+            "synaptic transmission, GABAergic [GO:0051932]"
+          ]
+        }
+      },
+      {
+        "pmid": "17526495",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0098976"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0098976"
+          ],
+          "GRIN2A": [
+            "GO:0098976"
+          ],
+          "GRIN2B": [
+            "GO:0098976"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "excitatory chemical synaptic transmission [GO:0098976]"
+          ],
+          "GRIN2A": [
+            "excitatory chemical synaptic transmission [GO:0098976]"
+          ],
+          "GRIN2B": [
+            "excitatory chemical synaptic transmission [GO:0098976]"
+          ]
+        }
+      },
+      {
+        "pmid": "15003177",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0051968",
+          "GO:0048168",
+          "GO:2000463"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0048168",
+            "GO:0051968",
+            "GO:2000463"
+          ],
+          "GRIN2A": [
+            "GO:0048168"
+          ],
+          "GRIN2B": [
+            "GO:0048168",
+            "GO:0051968",
+            "GO:2000463"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "regulation of neuronal synaptic plasticity [GO:0048168]",
+            "positive regulation of synaptic transmission, glutamatergic [GO:0051968]",
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ],
+          "GRIN2A": [
+            "regulation of neuronal synaptic plasticity [GO:0048168]"
+          ],
+          "GRIN2B": [
+            "regulation of neuronal synaptic plasticity [GO:0048168]",
+            "positive regulation of synaptic transmission, glutamatergic [GO:0051968]",
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ]
+        }
+      },
+      {
+        "pmid": "33234346",
+        "genes_covered": [
+          "GABRB1",
+          "GABRG2"
+        ],
+        "go_terms": [
+          "GO:0032229"
+        ],
+        "gene_go_map": {
+          "GABRB1": [
+            "GO:0032229"
+          ],
+          "GABRG2": [
+            "GO:0032229"
+          ]
+        },
+        "gene_go_named": {
+          "GABRB1": [
+            "negative regulation of synaptic transmission, GABAergic [GO:0032229]"
+          ],
+          "GABRG2": [
+            "negative regulation of synaptic transmission, GABAergic [GO:0032229]"
+          ]
+        }
+      },
+      {
+        "pmid": "36959261",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:2000463"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:2000463"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "positive regulation of excitatory postsynaptic potential [GO:2000463]"
+          ]
+        }
+      }
+    ],
+    "7": [
+      {
+        "pmid": "30021165",
+        "genes_covered": [
+          "PPFIA2"
+        ],
+        "go_terms": [
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "PPFIA2": [
+            "GO:0043197"
+          ]
+        },
+        "gene_go_named": {
+          "PPFIA2": [
+            "dendritic spine [GO:0043197]"
+          ]
+        }
+      },
+      {
+        "pmid": "26671989",
+        "genes_covered": [
+          "PLPPR4"
+        ],
+        "go_terms": [
+          "GO:0098839"
+        ],
+        "gene_go_map": {
+          "PLPPR4": [
+            "GO:0098839"
+          ]
+        },
+        "gene_go_named": {
+          "PLPPR4": [
+            "postsynaptic density membrane [GO:0098839]"
+          ]
+        }
+      },
+      {
+        "pmid": "21119615",
+        "genes_covered": [
+          "DGKI"
+        ],
+        "go_terms": [
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "DGKI": [
+            "GO:0043197"
+          ]
+        },
+        "gene_go_named": {
+          "DGKI": [
+            "dendritic spine [GO:0043197]"
+          ]
+        }
+      },
+      {
+        "pmid": "19118189",
+        "genes_covered": [
+          "FRMPD4"
+        ],
+        "go_terms": [
+          "GO:0043197"
+        ],
+        "gene_go_map": {
+          "FRMPD4": [
+            "GO:0043197"
+          ]
+        },
+        "gene_go_named": {
+          "FRMPD4": [
+            "dendritic spine [GO:0043197]"
+          ]
+        }
+      }
+    ],
+    "8": [
+      {
+        "pmid": "38538865",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0004972"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0004972"
+          ],
+          "GRIN2A": [
+            "GO:0004972"
+          ],
+          "GRIN2B": [
+            "GO:0004972"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2A": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2B": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ]
+        }
+      },
+      {
+        "pmid": "26919761",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0004972"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0004972"
+          ],
+          "GRIN2A": [
+            "GO:0004972"
+          ],
+          "GRIN2B": [
+            "GO:0004972"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2A": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2B": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ]
+        }
+      },
+      {
+        "pmid": "26875626",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0022849",
+          "GO:0004972"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0004972"
+          ],
+          "GRIN2A": [
+            "GO:0004972",
+            "GO:0022849"
+          ],
+          "GRIN2B": [
+            "GO:0022849"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2A": [
+            "NMDA glutamate receptor activity [GO:0004972]",
+            "glutamate-gated calcium ion channel activity [GO:0022849]"
+          ],
+          "GRIN2B": [
+            "glutamate-gated calcium ion channel activity [GO:0022849]"
+          ]
+        }
+      },
+      {
+        "pmid": "17526495",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0004972"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0004972"
+          ],
+          "GRIN2A": [
+            "GO:0004972"
+          ],
+          "GRIN2B": [
+            "GO:0004972"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2A": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ],
+          "GRIN2B": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ]
+        }
+      },
+      {
+        "pmid": "28126851",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A"
+        ],
+        "go_terms": [
+          "GO:0022849",
+          "GO:0004972"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0004972",
+            "GO:0022849"
+          ],
+          "GRIN2A": [
+            "GO:0004972"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "NMDA glutamate receptor activity [GO:0004972]",
+            "glutamate-gated calcium ion channel activity [GO:0022849]"
+          ],
+          "GRIN2A": [
+            "NMDA glutamate receptor activity [GO:0004972]"
+          ]
+        }
+      }
+    ],
+    "9": [
+      {
+        "pmid": "17526495",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2A",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0007420"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0007420"
+          ],
+          "GRIN2A": [
+            "GO:0007420"
+          ],
+          "GRIN2B": [
+            "GO:0007420"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "brain development [GO:0007420]"
+          ],
+          "GRIN2A": [
+            "brain development [GO:0007420]"
+          ],
+          "GRIN2B": [
+            "brain development [GO:0007420]"
+          ]
+        }
+      },
+      {
+        "pmid": "12051741",
+        "genes_covered": [
+          "DSCAML1"
+        ],
+        "go_terms": [
+          "GO:0007420"
+        ],
+        "gene_go_map": {
+          "DSCAML1": [
+            "GO:0007420"
+          ]
+        },
+        "gene_go_named": {
+          "DSCAML1": [
+            "brain development [GO:0007420]"
+          ]
+        }
+      },
+      {
+        "pmid": "10624965",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0007420"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0007420"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "brain development [GO:0007420]"
+          ]
+        }
+      },
+      {
+        "pmid": "10197527",
+        "genes_covered": [
+          "ROBO2"
+        ],
+        "go_terms": [
+          "GO:0007420"
+        ],
+        "gene_go_map": {
+          "ROBO2": [
+            "GO:0007420"
+          ]
+        },
+        "gene_go_named": {
+          "ROBO2": [
+            "brain development [GO:0007420]"
+          ]
+        }
+      }
+    ],
+    "10": [
+      {
+        "pmid": "20434989",
+        "genes_covered": [
+          "GRIA1"
+        ],
+        "go_terms": [
+          "GO:0032591"
+        ],
+        "gene_go_map": {
+          "GRIA1": [
+            "GO:0032591"
+          ]
+        },
+        "gene_go_named": {
+          "GRIA1": [
+            "dendritic spine membrane [GO:0032591]"
+          ]
+        }
+      },
+      {
+        "pmid": "19706678",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0030673"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0030673"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "axolemma [GO:0030673]"
+          ]
+        }
+      }
+    ],
+    "11": [],
+    "12": [
+      {
+        "pmid": "27940359",
+        "genes_covered": [
+          "NEGR1"
+        ],
+        "go_terms": [
+          "GO:0044325"
+        ],
+        "gene_go_map": {
+          "NEGR1": [
+            "GO:0044325"
+          ]
+        },
+        "gene_go_named": {
+          "NEGR1": [
+            "transmembrane transporter binding [GO:0044325]"
+          ]
+        }
+      },
+      {
+        "pmid": "27198182",
+        "genes_covered": [
+          "DPP10"
+        ],
+        "go_terms": [
+          "GO:0044325"
+        ],
+        "gene_go_map": {
+          "DPP10": [
+            "GO:0044325"
+          ]
+        },
+        "gene_go_named": {
+          "DPP10": [
+            "transmembrane transporter binding [GO:0044325]"
+          ]
+        }
+      },
+      {
+        "pmid": "21817159",
+        "genes_covered": [
+          "FGF13"
+        ],
+        "go_terms": [
+          "GO:0044325"
+        ],
+        "gene_go_map": {
+          "FGF13": [
+            "GO:0044325"
+          ]
+        },
+        "gene_go_named": {
+          "FGF13": [
+            "transmembrane transporter binding [GO:0044325]"
+          ]
+        }
+      },
+      {
+        "pmid": "21463633",
+        "genes_covered": [
+          "NEDD4L"
+        ],
+        "go_terms": [
+          "GO:0044325"
+        ],
+        "gene_go_map": {
+          "NEDD4L": [
+            "GO:0044325"
+          ]
+        },
+        "gene_go_named": {
+          "NEDD4L": [
+            "transmembrane transporter binding [GO:0044325]"
+          ]
+        }
+      },
+      {
+        "pmid": "20042427",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0044325"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0044325"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "transmembrane transporter binding [GO:0044325]"
+          ]
+        }
+      }
+    ],
+    "13": [
+      {
+        "pmid": "34321660",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:1904062"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:1904062"
+          ],
+          "GRIN2B": [
+            "GO:1904062"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+          ],
+          "GRIN2B": [
+            "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+          ]
+        }
+      },
+      {
+        "pmid": "36696443",
+        "genes_covered": [
+          "FGF13"
+        ],
+        "go_terms": [
+          "GO:1905152"
+        ],
+        "gene_go_map": {
+          "FGF13": [
+            "GO:1905152"
+          ]
+        },
+        "gene_go_named": {
+          "FGF13": [
+            "positive regulation of voltage-gated sodium channel activity [GO:1905152]"
+          ]
+        }
+      },
+      {
+        "pmid": "36309015",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:1904062"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:1904062"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "regulation of monoatomic cation transmembrane transport [GO:1904062]"
+          ]
+        }
+      },
+      {
+        "pmid": "21463633",
+        "genes_covered": [
+          "NEDD4L"
+        ],
+        "go_terms": [
+          "GO:1901380"
+        ],
+        "gene_go_map": {
+          "NEDD4L": [
+            "GO:1901380"
+          ]
+        },
+        "gene_go_named": {
+          "NEDD4L": [
+            "negative regulation of potassium ion transmembrane transport [GO:1901380]"
+          ]
+        }
+      },
+      {
+        "pmid": "21051419",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0010765"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0010765"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "positive regulation of sodium ion transport [GO:0010765]"
+          ]
+        }
+      }
+    ],
+    "14": [
+      {
+        "pmid": "25973365",
+        "genes_covered": [
+          "SYT1"
+        ],
+        "go_terms": [
+          "GO:0042734"
+        ],
+        "gene_go_map": {
+          "SYT1": [
+            "GO:0042734"
+          ]
+        },
+        "gene_go_named": {
+          "SYT1": [
+            "presynaptic membrane [GO:0042734]"
+          ]
+        }
+      },
+      {
+        "pmid": "11438518",
+        "genes_covered": [
+          "RIMS1"
+        ],
+        "go_terms": [
+          "GO:0042734"
+        ],
+        "gene_go_map": {
+          "RIMS1": [
+            "GO:0042734"
+          ]
+        },
+        "gene_go_named": {
+          "RIMS1": [
+            "presynaptic membrane [GO:0042734]"
+          ]
+        }
+      },
+      {
+        "pmid": "8391122",
+        "genes_covered": [
+          "GABRA2"
+        ],
+        "go_terms": [
+          "GO:0030672"
+        ],
+        "gene_go_map": {
+          "GABRA2": [
+            "GO:0030672"
+          ]
+        },
+        "gene_go_named": {
+          "GABRA2": [
+            "synaptic vesicle membrane [GO:0030672]"
+          ]
+        }
+      }
+    ],
+    "15": [
+      {
+        "pmid": "17526495",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0009986"
+          ],
+          "GRIN2B": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "cell surface [GO:0009986]"
+          ],
+          "GRIN2B": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "12504588",
+        "genes_covered": [
+          "ROBO1",
+          "ROBO2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ROBO1": [
+            "GO:0009986"
+          ],
+          "ROBO2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ROBO1": [
+            "cell surface [GO:0009986]"
+          ],
+          "ROBO2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "21223964",
+        "genes_covered": [
+          "ANK3"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "ANK3": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "ANK3": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "19706678",
+        "genes_covered": [
+          "CNTNAP2"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "CNTNAP2": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "CNTNAP2": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      },
+      {
+        "pmid": "19581412",
+        "genes_covered": [
+          "IGSF3"
+        ],
+        "go_terms": [
+          "GO:0009986"
+        ],
+        "gene_go_map": {
+          "IGSF3": [
+            "GO:0009986"
+          ]
+        },
+        "gene_go_named": {
+          "IGSF3": [
+            "cell surface [GO:0009986]"
+          ]
+        }
+      }
+    ],
+    "16": [
+      {
+        "pmid": "16525039",
+        "genes_covered": [
+          "KCNQ3"
+        ],
+        "go_terms": [
+          "GO:0033268"
+        ],
+        "gene_go_map": {
+          "KCNQ3": [
+            "GO:0033268"
+          ]
+        },
+        "gene_go_named": {
+          "KCNQ3": [
+            "node of Ranvier [GO:0033268]"
+          ]
+        }
+      }
+    ],
+    "17": [
+      {
+        "pmid": "34321660",
+        "genes_covered": [
+          "GRIN1",
+          "GRIN2B"
+        ],
+        "go_terms": [
+          "GO:0035235"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0035235"
+          ],
+          "GRIN2B": [
+            "GO:0035235"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ],
+          "GRIN2B": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ]
+        }
+      },
+      {
+        "pmid": "36959261",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:0035235"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0035235"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ]
+        }
+      },
+      {
+        "pmid": "36309015",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:0035235"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0035235"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ]
+        }
+      },
+      {
+        "pmid": "30872532",
+        "genes_covered": [
+          "GRIA1"
+        ],
+        "go_terms": [
+          "GO:0035235"
+        ],
+        "gene_go_map": {
+          "GRIA1": [
+            "GO:0035235"
+          ]
+        },
+        "gene_go_named": {
+          "GRIA1": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ]
+        }
+      },
+      {
+        "pmid": "28228639",
+        "genes_covered": [
+          "GRIN1"
+        ],
+        "go_terms": [
+          "GO:0035235"
+        ],
+        "gene_go_map": {
+          "GRIN1": [
+            "GO:0035235"
+          ]
+        },
+        "gene_go_named": {
+          "GRIN1": [
+            "ionotropic glutamate receptor signaling pathway [GO:0035235]"
+          ]
+        }
+      }
+    ],
+    "18": [
+      {
+        "pmid": "30872532",
+        "genes_covered": [
+          "GRIA1"
+        ],
+        "go_terms": [
+          "GO:0098685"
+        ],
+        "gene_go_map": {
+          "GRIA1": [
+            "GO:0098685"
+          ]
+        },
+        "gene_go_named": {
+          "GRIA1": [
+            "Schaffer collateral - CA1 synapse [GO:0098685]"
+          ]
+        }
+      }
+    ],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "23": [
+      {
+        "pmid": "27356871",
+        "genes_covered": [
+          "ANK3"
+        ],
+        "go_terms": [
+          "GO:0043194"
+        ],
+        "gene_go_map": {
+          "ANK3": [
+            "GO:0043194"
+          ]
+        },
+        "gene_go_named": {
+          "ANK3": [
+            "axon initial segment [GO:0043194]"
+          ]
+        }
+      },
+      {
+        "pmid": "16525039",
+        "genes_covered": [
+          "KCNQ3"
+        ],
+        "go_terms": [
+          "GO:0043194"
+        ],
+        "gene_go_map": {
+          "KCNQ3": [
+            "GO:0043194"
+          ]
+        },
+        "gene_go_named": {
+          "KCNQ3": [
+            "axon initial segment [GO:0043194]"
+          ]
+        }
+      }
+    ],
+    "24": [
+      {
+        "pmid": "9168980",
+        "genes_covered": [
+          "SEMA3C"
+        ],
+        "go_terms": [
+          "GO:0006955"
+        ],
+        "gene_go_map": {
+          "SEMA3C": [
+            "GO:0006955"
+          ]
+        },
+        "gene_go_named": {
+          "SEMA3C": [
+            "immune response [GO:0006955]"
+          ]
+        }
+      }
+    ],
+    "25": [
+      {
+        "pmid": "28822966",
+        "genes_covered": [
+          "NRG1"
+        ],
+        "go_terms": [
+          "GO:0038138"
+        ],
+        "gene_go_map": {
+          "NRG1": [
+            "GO:0038138"
+          ]
+        },
+        "gene_go_named": {
+          "NRG1": [
+            "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+          ]
+        }
+      },
+      {
+        "pmid": "12466964",
+        "genes_covered": [
+          "ERBB4"
+        ],
+        "go_terms": [
+          "GO:0038138"
+        ],
+        "gene_go_map": {
+          "ERBB4": [
+            "GO:0038138"
+          ]
+        },
+        "gene_go_named": {
+          "ERBB4": [
+            "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+          ]
+        }
+      },
+      {
+        "pmid": "9275162",
+        "genes_covered": [
+          "ERBB4"
+        ],
+        "go_terms": [
+          "GO:0038138"
+        ],
+        "gene_go_map": {
+          "ERBB4": [
+            "GO:0038138"
+          ]
+        },
+        "gene_go_named": {
+          "ERBB4": [
+            "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+          ]
+        }
+      },
+      {
+        "pmid": "8702723",
+        "genes_covered": [
+          "NRG1"
+        ],
+        "go_terms": [
+          "GO:0038138"
+        ],
+        "gene_go_map": {
+          "NRG1": [
+            "GO:0038138"
+          ]
+        },
+        "gene_go_named": {
+          "NRG1": [
+            "ERBB4-ERBB4 signaling pathway [GO:0038138]"
+          ]
+        }
+      }
+    ],
+    "26": [],
+    "27": [
+      {
+        "pmid": "19720736",
+        "genes_covered": [
+          "CELF4"
+        ],
+        "go_terms": [
+          "GO:0000380"
+        ],
+        "gene_go_map": {
+          "CELF4": [
+            "GO:0000380"
+          ]
+        },
+        "gene_go_named": {
+          "CELF4": [
+            "alternative mRNA splicing, via spliceosome [GO:0000380]"
+          ]
+        }
+      }
+    ],
+    "28": [],
+    "29": [
+      {
+        "pmid": "36696443",
+        "genes_covered": [
+          "FGF13"
+        ],
+        "go_terms": [
+          "GO:0017080"
+        ],
+        "gene_go_map": {
+          "FGF13": [
+            "GO:0017080"
+          ]
+        },
+        "gene_go_named": {
+          "FGF13": [
+            "sodium channel regulator activity [GO:0017080]"
+          ]
+        }
+      },
+      {
+        "pmid": "21817159",
+        "genes_covered": [
+          "FGF13"
+        ],
+        "go_terms": [
+          "GO:0017080"
+        ],
+        "gene_go_map": {
+          "FGF13": [
+            "GO:0017080"
+          ]
+        },
+        "gene_go_named": {
+          "FGF13": [
+            "sodium channel regulator activity [GO:0017080]"
+          ]
+        }
+      },
+      {
+        "pmid": "21051419",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0017080"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0017080"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "sodium channel regulator activity [GO:0017080]"
+          ]
+        }
+      },
+      {
+        "pmid": "20226894",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0017080"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0017080"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "sodium channel regulator activity [GO:0017080]"
+          ]
+        }
+      },
+      {
+        "pmid": "20042427",
+        "genes_covered": [
+          "SCN3B"
+        ],
+        "go_terms": [
+          "GO:0017080"
+        ],
+        "gene_go_map": {
+          "SCN3B": [
+            "GO:0017080"
+          ]
+        },
+        "gene_go_named": {
+          "SCN3B": [
+            "sodium channel regulator activity [GO:0017080]"
+          ]
+        }
+      }
+    ]
+  },
+  "gaf_abstracts": {
+    "0": [
+      {
+        "pmid": "26875626",
+        "title": "Positive Allosteric Modulators of GluN2A-Containing NMDARs with Distinct Modes of Action and Impacts on Circuit Function.",
+        "abstract": "To enhance physiological function of NMDA receptors (NMDARs), we identified positive allosteric modulators (PAMs) of NMDARs with selectivity for GluN2A subunit-containing receptors. X-ray crystallography revealed a binding site at the GluN1-GluN2A dimer interface of the extracellular ligand-binding domains (LBDs). Despite the similarity between the LBDs of NMDARs and AMPA receptors (AMPARs), GluN2A PAMs with good selectivity against AMPARs were identified. Potentiation was observed with recombinant triheteromeric GluN1/GluN2A/GluN2B NMDARs and with synaptically activated NMDARs in brain slices from wild-type (WT), but not GluN2A knockout (KO), mice. Individual GluN2A PAMs exhibited variable degrees of glutamate (Glu) dependence, impact on NMDAR Glu EC50, and slowing of channel deactivation. These distinct PAMs also exhibited differential impacts during synaptic plasticity induction. The identification of a new NMDAR modulatory site and characterization of GluN2A-selective PAMs provide powerful molecular tools to dissect NMDAR function and demonstrate the feasibility of a therapeutically desirable type of NMDAR enhancement.",
+        "authors": "Hackos, Lupardus, Grand et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "17526495",
+        "title": "Fyn-mediated phosphorylation of NR2B Tyr-1336 controls calpain-mediated NR2B cleavage in neurons and heterologous systems.",
+        "abstract": "Cleavage of the intracellular carboxyl terminus of the N-methyl-d-aspartate (NMDA) receptor 2 subunit (NR2) by calpain regulates NMDA receptor function and localization. Here, we show that Fyn-mediated phosphorylation of NR2B controls calpain-mediated NR2B cleavage. In cultured neurons, calpain-mediated NR2B cleavage is significantly attenuated by blocking NR2B phosphorylation of Tyr-1336, but not Tyr-1472, via inhibition of Src family kinase activity or decreasing Fyn levels by small interfering RNA. In HEK cells, mutation of Tyr-1336 eliminates the potentiating effect of Fyn on calpain-mediated NR2B cleavage. The potentiation of NR2B cleavage by Fyn is limited to cell surface receptors and is associated with calpain translocation to plasma membranes during NMDA receptor activation. Finally, reducing full-length NR2B by calpain does not decrease extrasynaptic NMDA receptor function, and truncated NR1/2B receptors similar to those generated by calpain have electrophysiological properties matching those of wild-type receptors. Thus, the Fyn-controlled regulation of NMDA receptor cleavage by calpain may play critical roles in controlling NMDA receptor properties during synaptic plasticity and excitotoxicity.",
+        "authors": "Wu, Hsu, Gleichman et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "10480938",
+        "title": "Biochemical evidence for the co-association of three N-methyl-D-aspartate (NMDA) R2 subunits in recombinant NMDA receptors.",
+        "abstract": "Functional characterization of wild-type and mutant cloned N-methyl-D-aspartate (NMDA) receptors has been used to deduce their subunit stoichiometry and quaternary structure. However, the results reported from different groups have been at variance and are thus inconclusive. This study has employed a biochemical approach to determine the number of NMDA R2 (NR2) subunits/receptor together with the NMDA R1 (NR1)/NR2 subunit ratio of both cloned and native NMDA receptors. Thus, human embryonic kidney 293 cells were transfected with the NR1-1a and NR2A NMDA receptor subunits in combination with both FLAG- and c-Myc epitope-tagged NR2B subunits. The expressed receptors were detergent-extracted and subjected to double immunoaffinity purification using anti-NR2A and anti-FLAG antibody immunoaffinity columns in series. Immunoblotting of the double immunopurified NR2A/NR2B(FLAG)-containing material demonstrated the presence of anti-NR1, anti-NR2A, anti-FLAG, and, more important, anti-c-Myc antibody immunoreactivities. The presence of anti-c-Myc antibody immunoreactivity in the double immunoaffinity-purified material showed the co-assembly of three NR2 subunits, i.e. NR2A/NR2B(FLAG)/NR2B(c-Myc), within the same NMDA receptor complex. Control experiments excluded the possibility that the co-immunopurification of the three NR2 subunits was an artifact of the solubilization procedure. These results, taken together with those previously described that showed two NR1 subunits/oligomer, suggest that the NMDA receptor is at least pentameric.",
+        "authors": "Hawkins, Chazot, Stephenson",
+        "year": "1999"
+      },
+      {
+        "pmid": "26919761",
+        "title": "Discovery of GluN2A-Selective NMDA Receptor Positive Allosteric Modulators (PAMs): Tuning Deactivation Kinetics via Structure-Based Design.",
+        "abstract": "The N-methyl-D-aspartate receptor (NMDAR) is a Na(+) and Ca(2+) permeable ionotropic glutamate receptor that is activated by the coagonists glycine and glutamate. NMDARs are critical to synaptic signaling and plasticity, and their dysfunction has been implicated in a number of neurological disorders, including schizophrenia, depression, and Alzheimer's disease. Herein we describe the discovery of potent GluN2A-selective NMDAR positive allosteric modulators (PAMs) starting from a high-throughput screening hit. Using structure-based design, we sought to increase potency at the GluN2A subtype, while improving selectivity against related \u03b1-amino-3-hydroxy-5-methyl-4-isoxazolepropionic acid receptors (AMPARs). The structure-activity relationship of channel deactivation kinetics was studied using a combination of electrophysiology and protein crystallography. Effective incorporation of these strategies resulted in the discovery of GNE-0723 (46), a highly potent and brain penetrant GluN2A-selective NMDAR PAM suitable for in vivo characterization.",
+        "authors": "Volgraf, Sellers, Jiang et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "17047094",
+        "title": "Subunit-specific roles of glycine-binding domains in activation of NR1/NR3 N-methyl-D-aspartate receptors.",
+        "abstract": "N-Methyl-D-aspartate receptors (NMDARs) composed of NR1 and NR3 subunits differ from other NMDAR subtypes in that they require glycine alone for activation. However, little else is known about the activation mechanism of these receptors. Using NMDAR glycine-site agonists/antagonists in conjunction with functional mutagenesis of the NR1 and NR3 ligand-binding cores, we demonstrate quite surprisingly that agonist binding to NR3 alone is sufficient to activate a significant component of NR1/NR3 receptor currents. Thus, the apo conformation of NR1 in NR1/NR3 receptors is permissive for receptor activation. Agonist-bound NR1 may also contribute to peak NR1/NR3 receptor currents but specifically enables significant NR1/NR3 receptor current decay under the conditions studied here, pre-sumably via a slow component of desensitization. Ligand studies of NR1/NR3 receptors also suggest differential agonist selectivity between NR3 and NR1, as some high-affinity NR1 agonists only minimally activate NR1/NR3 receptors, whereas other NR1 agonists are as potent as glycine. Furthermore, liganded NR3 subunits seem necessary for effective engagement of NR1 in NR1/NR3 receptor activation, suggesting significant interactivity between the two subunits. NR3 subunits thus induce plasticity in NR1 with respect to subunit assembly and ligand binding/channel coupling that is unique among ligand-gated ion channel subunits.",
+        "authors": "Awobuluyi, Yang, Ye et al.",
+        "year": "2007"
+      }
+    ],
+    "1": [
+      {
+        "pmid": "21926414",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2.",
+        "abstract": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "authors": "Valnegri, Montrasio, Brambilla et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "34706237",
+        "title": "Structural and compositional diversity in the kainate receptor family.",
+        "abstract": "The kainate receptors (KARs) are members of the ionotropic glutamate receptor family and assemble into tetramers from a pool of five subunit types (GluK1-5). Each subunit confers distinct functional properties to a receptor, but the compositional and stoichiometric diversity of KAR tetramers is not well understood. To address this, we first solve the structure of the GluK1 homomer, which enables a systematic assessment of structural compatibility among KAR subunits. Next, we analyze single-cell RNA sequencing data, which reveal extreme diversity in the combinations of two or more KAR subunits co-expressed within the same cell. We then investigate the composition of individual receptor complexes using single-molecule fluorescence techniques and find that di-heteromers assembled from GluK1, GluK2, or GluK3 can form with all possible stoichiometries, while GluK1/K5, GluK2/K5, and GluK3/K5 can form 3:1 or 2:2 complexes. Finally, using three-color single-molecule imaging, we discover that KARs can form tri- and tetra-heteromers.",
+        "authors": "Selvakumar, Lee, Khanra et al.",
+        "year": "2021"
+      },
+      {
+        "pmid": "29114105",
+        "title": "Neuregulin 3 Signaling Mediates Nicotine-Dependent Synaptic Plasticity in the Orbitofrontal Cortex and Cognition.",
+        "abstract": "Neuregulin 3 (NRG3) and ErbB4 have been linked to nicotine addiction; however, the neuronal mechanisms and behavioral consequences of NRG3-ErbB4 sensitivity to nicotine remain elusive. Recent literature suggests that relapse to smoking is due to a lack of impulsive control, which is thought to be due to altered functioning within the orbitofrontal cortex (OFC). Therefore, we examined circuitry changes within this structure following nicotine application. We report that nicotine controls synaptic plasticity in the OFC through NRG3/ErbB4-dependent regulation of GABAergic inhibition. We observed that both nicotine and NRG3 facilitated the conversion of long-term potentiation into long-term depression at cortical layer 3/5 synapses. Induction of long-term depression by nicotine relied on nicotinic receptor activation and key regulators of NRG3 signaling: (1) release of intracellular calcium, (2) activation of the BACE1 beta-secretase, and (3) ErbB4 receptor activation. Nicotine-induced synaptic plasticity was also associated with accumulation of intracellular GABA and was completely blocked by GABA<sub>A</sub>/GABA<sub>B</sub> antagonists. To test whether these mechanisms underlie OFC-dependent behavior, we evaluated the effects of nicotine in the go/no-go task. Nicotine-impaired stimulus discrimination in this task was rescued by pharmacologic disruption of the NRG3 receptor, ErbB4. Altogether, our data indicate that nicotine-induced synaptic plasticity in the OFC and cognitive changes depend on NRG3-ErbB4 signaling. We propose that nicotine activation of this pathway may contribute to nicotine addiction, particularly in individuals with genetic variation in NRG3.",
+        "authors": "Zhou, Fisher, Cole et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "16221846",
+        "title": "Neuregulin-1 reverses long-term potentiation at CA1 hippocampal synapses.",
+        "abstract": "Neuregulin-1 (NRG-1) has been identified genetically as a schizophrenia susceptibility gene, but its function in the adult brain is unknown. Here, we show that NRG-1beta does not affect basal synaptic transmission but reverses long-term potentiation (LTP) at hippocampal Schaffer collateral-->CA1 synapses in an activity- and time-dependent manner. Depotentiation by NRG-1beta is blocked by two structurally distinct and selective ErbB receptor tyrosine kinase inhibitors. Moreover, ErbB receptor inhibition increases LTP at potentiated synapses and blocks LTP reversal by theta-pulse stimuli. NRG-1beta selectively reduces AMPA, not NMDA, receptor EPSCs and has no effect on paired-pulse facilitation ratios. Live imaging of hippocampal neurons transfected with receptors fused to superecliptic green fluorescent protein, as well as quantitative analysis of native receptors, show that NRG-1beta stimulates the internalization of surface glutamate receptor 1-containing AMPA receptors. This novel regulation of LTP by NRG-1 has important implications for the modulation of synaptic homeostasis and schizophrenia.",
+        "authors": "Kwon, Longart, Vullhorst et al.",
+        "year": "2005"
+      }
+    ],
+    "2": [
+      {
+        "pmid": "34929720",
+        "title": "Structural architecture of the human NALCN channelosome.",
+        "abstract": "Depolarizing sodium (Na<sup>+</sup>) leak currents carried by the NALCN channel regulate the resting membrane potential of many neurons to modulate respiration, circadian rhythm, locomotion and pain sensitivity<sup>1-8</sup>. NALCN requires FAM155A, UNC79 and UNC80 to function, but the role of these auxiliary subunits is not understood<sup>3,7,9-12</sup>. NALCN, UNC79 and UNC80 are essential in rodents<sup>2,9,13</sup>, and mutations in human NALCN and UNC80 cause severe developmental and neurological disease<sup>14,15</sup>. Here we determined the structure of the NALCN channelosome, an approximately 1-MDa complex, as fundamental aspects about the composition, assembly and gating of this channelosome remain obscure. UNC79 and UNC80 are massive HEAT-repeat proteins that form an intertwined anti-parallel superhelical assembly, which docks intracellularly onto the NALCN-FAM155A pore-forming subcomplex. Calmodulin copurifies bound to the carboxy-terminal domain of NALCN, identifying this region as a putative modulatory hub. Single-channel analyses uncovered a low open probability for the wild-type complex, highlighting the tightly closed S6 gate in the structure, and providing a basis to interpret the altered gating properties of disease-causing variants. Key constraints between the UNC79-UNC80 subcomplex and the NALCN DI-DII and DII-DIII linkers were identified, leading to a model of channelosome gating. Our results provide a structural blueprint to understand the physiology of the NALCN channelosome and a template for drug discovery to modulate the resting membrane potential.",
+        "authors": "Kschonsak, Chua, Weidling et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "15003177",
+        "title": "Inducible and reversible NR1 knockout reveals crucial role of the NMDA receptor in preserving remote memories in the brain.",
+        "abstract": "Long-term storage of information is a hallmark feature of the brain, yet routine turnover of synaptic receptors appears to be intrinsically paradoxical to this capability. To investigate how the brain preserves its delicate synaptic efficacies, we generated inducible and reversible knockout mice in which the NMDA receptor can be temporarily switched off in the forebrain specifically during the storage stage. Retention of 9-month contextual and cued fear memories is severely disrupted by prolonged, but not transient, loss of the NMDA receptor that occurs 6 months after initial training and at least 2 months prior to memory retrieval. Normal learning and memory function in subsequent tasks following the 9-month retention tests suggest that the observed retention deficits did not result from recall or performance impairment. Thus, our study reveals a hitherto unrecognized role of the NMDA receptor in dynamically maintaining the long-term synaptic stability of memory storage circuits in the brain.",
+        "authors": "Cui, Wang, Tan et al.",
+        "year": "2004"
+      },
+      {
+        "pmid": "36959261",
+        "title": "Distinct structure and gating mechanism in diverse NMDA receptors with GluN2C and GluN2D subunits.",
+        "abstract": "N-methyl-D-aspartate (NMDA) receptors are heterotetramers comprising two GluN1 and two alternate GluN2 (N2A-N2D) subunits. Here we report full-length cryo-EM structures of the human N1-N2D di-heterotetramer (di-receptor), rat N1-N2C di-receptor and N1-N2A-N2C tri-heterotetramer (tri-receptor) at a best resolution of 3.0\u2009\u00c5. The bilobate N-terminal domain (NTD) in N2D intrinsically adopts a closed conformation, leading to a compact NTD tetramer in the N1-N2D receptor. Additionally, crosslinking the ligand-binding domain (LBD) of two N1 protomers significantly elevated the channel open probability (Po) in N1-N2D di-receptors. Surprisingly, the N1-N2C di-receptor adopted both symmetric (minor) and asymmetric (major) conformations, the latter further locked by an allosteric potentiator, PYD-106, binding to a pocket between the NTD and LBD in only one N2C protomer. Finally, the N2A and N2C subunits in the N1-N2A-N2C tri-receptor display a conformation close to one protomer in the N1-N2A and N1-N2C di-receptors, respectively. These findings provide a comprehensive structural understanding of diverse function in major NMDA receptor subtypes.",
+        "authors": "Zhang, Zhang, Wang et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "35301303",
+        "title": "Structure-guided unlocking of Na<sub>X</sub> reveals a non-selective tetrodotoxin-sensitive cation channel.",
+        "abstract": "Unlike classical voltage-gated sodium (Na<sub>V</sub>) channels, Na<sub>X</sub> has been characterized as a voltage-insensitive, tetrodotoxin-resistant, sodium (Na<sup>+</sup>)-activated channel involved in regulating Na<sup>+</sup> homeostasis. However, Na<sub>X</sub> remains refractory to functional characterization in traditional heterologous systems. Here, to gain insight into its atypical physiology, we determine structures of the human Na<sub>X</sub> channel in complex with the auxiliary \u03b23-subunit. Na<sub>X</sub> reveals structural alterations within the selectivity filter, voltage sensor-like domains, and pore module. We do not identify an extracellular Na<sup>+</sup>-sensor or any evidence for a Na<sup>+</sup>-based activation mechanism in Na<sub>X</sub>. Instead, the S6-gate remains closed, membrane lipids fill the central cavity, and the domain III-IV linker restricts S6-dilation. We use protein engineering to identify three pore-wetting mutations targeting the hydrophobic S6-gate that unlock a robust voltage-insensitive leak conductance. This constitutively active Na<sub>X</sub>-QTT channel construct is non-selective among monovalent cations, inhibited by extracellular calcium, and sensitive to classical Na<sub>V</sub> channel blockers, including tetrodotoxin. Our findings highlight a functional diversity across the Na<sub>V</sub> channel scaffold, reshape our understanding of Na<sub>X</sub> physiology, and provide a template to demystify recalcitrant ion channels.",
+        "authors": "Noland, Chua, Kschonsak et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "29844171",
+        "title": "Dynamic action potential clamp predicts functional separation in mild familial and severe de novo forms of <i>SCN2A</i> epilepsy.",
+        "abstract": "De novo variants in <i>SCN2A</i> developmental and epileptic encephalopathy (DEE) show distinctive genotype-phenotype correlations. The two most recurrent <i>SCN2A</i> variants in DEE, R1882Q and R853Q, are associated with different ages and seizure types at onset. R1882Q presents on day 1 of life with focal seizures, while infantile spasms is the dominant seizure type seen in R853Q cases, presenting at a median age of 8 months. Voltage clamp, which characterizes the functional properties of ion channels, predicted gain-of-function for R1882Q and loss-of-function for R853Q. Dynamic action potential clamp, that we implement here as a method for modeling neurophysiological consequences of a given epilepsy variant, predicted that the R1882Q variant would cause a dramatic increase in firing, whereas the R853Q variant would cause a marked reduction in action potential firing. Dynamic clamp was also able to functionally separate the L1563V variant, seen in benign familial neonatal-infantile seizures from R1882Q, seen in DEE, suggesting a diagnostic potential for this type of analysis. Overall, the study shows a strong correlation between clinical phenotype, <i>SCN2A</i> genotype, and functional modeling. Dynamic clamp is well positioned to impact our understanding of pathomechanisms and for development of disease mechanism-targeted therapies in genetic epilepsy.",
+        "authors": "Berecki, Howell, Deerasooriya et al.",
+        "year": "2018"
+      }
+    ],
+    "3": [
+      {
+        "pmid": "30021165",
+        "title": "Regulation of KIF1A-Driven Dense Core Vesicle Transport: Ca<sup>2+</sup>/CaM Controls DCV Binding and Liprin-\u03b1/TANC2 Recruits DCVs to Postsynaptic Sites.",
+        "abstract": "Tight regulation of neuronal transport allows for cargo binding and release at specific cellular locations. The mechanisms by which motor proteins are loaded on vesicles and how cargoes are captured at appropriate sites remain unclear. To better understand how KIF1A-driven dense core vesicle (DCV) transport is regulated, we identified the KIF1A interactome and focused on three binding partners, the calcium binding protein calmodulin (CaM) and two synaptic scaffolding proteins: liprin-\u03b1 and TANC2. We showed that calcium, acting via CaM, enhances KIF1A binding to DCVs and increases vesicle motility. In contrast, liprin-\u03b1 and TANC2 are not part of the KIF1A-cargo complex but capture DCVs at dendritic spines. Furthermore, we found that specific TANC2 mutations-reported in patients with different neuropsychiatric disorders-abolish the interaction with KIF1A. We propose a model in which Ca<sup>2+</sup>/CaM regulates cargo binding and liprin-\u03b1 and TANC2 recruit KIF1A-transported vesicles.",
+        "authors": "Stucchi, Pluci\u0144ska, Hummel et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "25489750",
+        "title": "Inhibitory synapse formation in a co-culture model incorporating GABAergic medium spiny neurons and HEK293 cells stably expressing GABAA receptors.",
+        "abstract": "Inhibitory neurons act in the central nervous system to regulate the dynamics and spatio-temporal co-ordination of neuronal networks. GABA (\u03b3-aminobutyric acid) is the predominant inhibitory neurotransmitter in the brain. It is released from the presynaptic terminals of inhibitory neurons within highly specialized intercellular junctions known as synapses, where it binds to GABAA receptors (GABAARs) present at the plasma membrane of the synapse-receiving, postsynaptic neurons. Activation of these GABA-gated ion channels leads to influx of chloride resulting in postsynaptic potential changes that decrease the probability that these neurons will generate action potentials. During development, diverse types of inhibitory neurons with distinct morphological, electrophysiological and neurochemical characteristics have the ability to recognize their target neurons and form synapses which incorporate specific GABAARs subtypes. This principle of selective innervation of neuronal targets raises the question as to how the appropriate synaptic partners identify each other. To elucidate the underlying molecular mechanisms, a novel in vitro co-culture model system was established, in which medium spiny GABAergic neurons, a highly homogenous population of neurons isolated from the embryonic striatum, were cultured with stably transfected HEK293 cell lines that express different GABAAR subtypes. Synapses form rapidly, efficiently and selectively in this system, and are easily accessible for quantification. Our results indicate that various GABAAR subtypes differ in their ability to promote synapse formation, suggesting that this reduced in vitro model system can be used to reproduce, at least in part, the in vivo conditions required for the recognition of the appropriate synaptic partners and formation of specific synapses. Here the protocols for culturing the medium spiny neurons and generating HEK293 cells lines expressing GABAARs are first described, followed by detailed instructions on how to combine these two cell types in co-culture and analyze the formation of synaptic contacts.",
+        "authors": "Brown, Fuchs, Nicholson et al.",
+        "year": "2014"
+      },
+      {
+        "pmid": "23909897",
+        "title": "GABA(A) receptors can initiate the formation of functional inhibitory GABAergic synapses.",
+        "abstract": "The mechanisms that underlie the selection of an inhibitory GABAergic axon's postsynaptic targets and the formation of the first contacts are currently unknown. To determine whether expression of GABAA receptors (GABAA Rs) themselves--the essential functional postsynaptic components of GABAergic synapses--can be sufficient to initiate formation of synaptic contacts, a novel co-culture system was devised. In this system, the presynaptic GABAergic axons originated from embryonic rat basal ganglia medium spiny neurones, whereas their most prevalent postsynaptic targets, i.e., \u03b11/\u03b22/\u03b32-GABAA Rs, were expressed constitutively in a stably transfected human embryonic kidney 293 (HEK293) cell line. The first synapse-like contacts in these co-cultures were detected by colocalization of presynaptic and postsynaptic markers within 2 h. The number of contacts reached a plateau at 24 h. These contacts were stable, as assessed by live cell imaging; they were active, as determined by uptake of a fluorescently labelled synaptotagmin vesicle-luminal domain-specific antibody; and they supported spontaneous and action potential-driven postsynaptic GABAergic currents. Ultrastructural analysis confirmed the presence of characteristics typical of active synapses. Synapse formation was not observed with control or N-methyl-d-aspartate receptor-expressing HEK293 cells. A prominent increase in synapse formation and strength was observed when neuroligin-2 was co-expressed with GABAA Rs, suggesting a cooperative relationship between these proteins. Thus, in addition to fulfilling an essential functional role, postsynaptic GABAA Rs can promote the adhesion of inhibitory axons and the development of functional synapses.",
+        "authors": "Fuchs, Abitbol, Burden et al.",
+        "year": "2013"
+      },
+      {
+        "pmid": "22699620",
+        "title": "Autistic-like social behaviour in Shank2-mutant mice improved by restoring NMDA receptor function.",
+        "abstract": "Autism spectrum disorder (ASD) is a group of conditions characterized by impaired social interaction and communication, and restricted and repetitive behaviours. ASD is a highly heritable disorder involving various genetic determinants. Shank2 (also known as ProSAP1) is a multi-domain scaffolding protein and signalling adaptor enriched at excitatory neuronal synapses, and mutations in the human SHANK2 gene have recently been associated with ASD and intellectual disability. Although ASD-associated genes are being increasingly identified and studied using various approaches, including mouse genetics, further efforts are required to delineate important causal mechanisms with the potential for therapeutic application. Here we show that Shank2-mutant (Shank2(-/-)) mice carrying a mutation identical to the ASD-associated microdeletion in the human SHANK2 gene exhibit ASD-like behaviours including reduced social interaction, reduced social communication by ultrasonic vocalizations, and repetitive jumping. These mice show a marked decrease in NMDA (N-methyl-D-aspartate) glutamate receptor (NMDAR) function. Direct stimulation of NMDARs with D-cycloserine, a partial agonist of NMDARs, normalizes NMDAR function and improves social interaction in Shank2(-/-) mice. Furthermore, treatment of Shank2(-/-) mice with a positive allosteric modulator of metabotropic glutamate receptor 5 (mGluR5), which enhances NMDAR function via mGluR5 activation, also normalizes NMDAR function and markedly enhances social interaction. These results suggest that reduced NMDAR function may contribute to the development of ASD-like phenotypes in Shank2(-/-) mice, and mGluR modulation of NMDARs offers a potential strategy to treat ASD.",
+        "authors": "Won, Lee, Gee et al.",
+        "year": "2012"
+      },
+      {
+        "pmid": "21926414",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2.",
+        "abstract": "Mutations of the Interleukin-1-receptor accessory protein like 1 (IL1RAPL1) gene are associated with cognitive impairment ranging from non-syndromic X-linked mental retardation to autism. IL1RAPL1 belongs to a novel family of IL1/Toll receptors, which is localized at excitatory synapses and interacts with PSD-95. We previously showed that IL1RAPL1 regulates the synaptic localization of PSD-95 by controlling c-Jun N-terminal kinase activity and PSD-95 phosphorylation. Here, we show that the IgG-like extracellular domains of IL1RAPL1 induce excitatory pre-synapse formation by interacting with protein tyrosine phosphatase delta (PTP\u03b4). We also found that IL1RAPL1 TIR domains interact with RhoGAP2, which is localized at the excitatory post-synaptic density. More interestingly, the IL1RAPL1/PTP\u03b4 complex recruits RhoGAP2 at excitatory synapses to induce dendritic spine formation. We also found that the IL1RAPL1 paralog, IL1RAPL2, interacts with PTP\u03b4 and induces excitatory synapse and dendritic spine formation. The interaction of the IL1RAPL1 family of proteins with PTP\u03b4 and RhoGAP2 reveals a pathophysiological mechanism of cognitive impairment associated with a novel type of trans-synaptic signaling that regulates excitatory synapse and dendritic spine formation.",
+        "authors": "Valnegri, Montrasio, Brambilla et al.",
+        "year": "2011"
+      }
+    ],
+    "4": [
+      {
+        "pmid": "19706678",
+        "title": "Axonal targeting of Caspr2 in hippocampal neurons via selective somatodendritic endocytosis.",
+        "abstract": "Contactin-associated protein 2 (Caspr2) is a neuronal membrane protein that is mutated in autism and related disorders. Although it is highly enriched at juxtaparanodes of Ranvier where it is essential for Shaker-type K(+) channel clustering, little is known about its function and regulation. In the present study, we examined the polarized expression of Caspr2 in hippocampal neurons using extracellular hemagglutinin (HA)-tagged Caspr2 constructs. We found that Caspr2 was targeted to the axonal surface, but colocalized with early endosomes in the somatodendritic compartment. The inhibition of endocytosis using a Dynamin-1 mutant or treatment with Dynasore prevented Caspr2 internalization from the dendrites and cell body. We identified a short sequence included into the 4.1B-binding domain that is required for the endocytosis of Caspr2. This sequence contains a protein kinase C (PKC) substrate motif on Thr1292, and point mutation of this residue or treatment with a PKC inhibitor prevented the somatodendritic internalization of Caspr2. Thus, the PKC-dependent trafficking of Caspr2 underlies its polarized expression in hippocampal neurons.",
+        "authors": "Bel, Oguievetskaia, Pitaval et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "16652168",
+        "title": "Early events in node of Ranvier formation during myelination and remyelination in the PNS.",
+        "abstract": "Action potential conduction velocity increases dramatically during early development as axons become myelinated. Integral to this process is the clustering of voltage-gated Na(+) (Nav) channels at regularly spaced gaps in the myelin sheath called nodes of Ranvier. We show here that some aspects of peripheral node of Ranvier formation are distinct from node formation in the CNS. For example, at CNS nodes, Nav1.2 channels are detected first, but are then replaced by Nav1.6. Similarly, during remyelination in the CNS, Nav1.2 channels are detected at newly forming nodes. By contrast, the earliest Nav-channel clusters detected during developmental myelination in the PNS have Nav1.6. Further, during PNS remyelination, Nav1.6 is detected at new nodes. Finally, we show that accumulation of the cell adhesion molecule neurofascin always precedes Nav channel clustering in the PNS. In most cases axonal neurofascin (NF-186) accumulates first, but occasionally paranodal neurofascin is detected first. We suggest there is heterogeneity in the events leading to Nav channel clustering, indicating that multiple mechanisms might contribute to node of Ranvier formation in the PNS.",
+        "authors": "Schafer, Custer, Shrager et al.",
+        "year": "2006"
+      }
+    ],
+    "5": [],
+    "6": [
+      {
+        "pmid": "29950725",
+        "title": "Structure of a human synaptic GABA<sub>A</sub> receptor.",
+        "abstract": "Fast inhibitory neurotransmission in the brain is principally mediated by the neurotransmitter GABA (\u03b3-aminobutyric acid) and its synaptic target, the type A GABA receptor (GABA<sub>A</sub> receptor). Dysfunction of this receptor results in neurological disorders and mental illnesses including epilepsy, anxiety and insomnia. The GABA<sub>A</sub> receptor is also a prolific target for therapeutic, illicit and recreational drugs, including benzodiazepines, barbiturates, anaesthetics and ethanol. Here we present high-resolution cryo-electron microscopy structures of the human \u03b11\u03b22\u03b32 GABA<sub>A</sub> receptor, the predominant isoform in the adult brain, in complex with GABA and the benzodiazepine site antagonist flumazenil, the first-line clinical treatment for benzodiazepine overdose. The receptor architecture reveals unique heteromeric interactions for this important class of inhibitory neurotransmitter receptor. This work provides a template for understanding receptor modulation by GABA and benzodiazepines, and will assist rational approaches to therapeutic targeting of this receptor for neurological disorders and mental illness.",
+        "authors": "Zhu, Noviello, Teng et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "17526495",
+        "title": "Fyn-mediated phosphorylation of NR2B Tyr-1336 controls calpain-mediated NR2B cleavage in neurons and heterologous systems.",
+        "abstract": "Cleavage of the intracellular carboxyl terminus of the N-methyl-d-aspartate (NMDA) receptor 2 subunit (NR2) by calpain regulates NMDA receptor function and localization. Here, we show that Fyn-mediated phosphorylation of NR2B controls calpain-mediated NR2B cleavage. In cultured neurons, calpain-mediated NR2B cleavage is significantly attenuated by blocking NR2B phosphorylation of Tyr-1336, but not Tyr-1472, via inhibition of Src family kinase activity or decreasing Fyn levels by small interfering RNA. In HEK cells, mutation of Tyr-1336 eliminates the potentiating effect of Fyn on calpain-mediated NR2B cleavage. The potentiation of NR2B cleavage by Fyn is limited to cell surface receptors and is associated with calpain translocation to plasma membranes during NMDA receptor activation. Finally, reducing full-length NR2B by calpain does not decrease extrasynaptic NMDA receptor function, and truncated NR1/2B receptors similar to those generated by calpain have electrophysiological properties matching those of wild-type receptors. Thus, the Fyn-controlled regulation of NMDA receptor cleavage by calpain may play critical roles in controlling NMDA receptor properties during synaptic plasticity and excitotoxicity.",
+        "authors": "Wu, Hsu, Gleichman et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "15003177",
+        "title": "Inducible and reversible NR1 knockout reveals crucial role of the NMDA receptor in preserving remote memories in the brain.",
+        "abstract": "Long-term storage of information is a hallmark feature of the brain, yet routine turnover of synaptic receptors appears to be intrinsically paradoxical to this capability. To investigate how the brain preserves its delicate synaptic efficacies, we generated inducible and reversible knockout mice in which the NMDA receptor can be temporarily switched off in the forebrain specifically during the storage stage. Retention of 9-month contextual and cued fear memories is severely disrupted by prolonged, but not transient, loss of the NMDA receptor that occurs 6 months after initial training and at least 2 months prior to memory retrieval. Normal learning and memory function in subsequent tasks following the 9-month retention tests suggest that the observed retention deficits did not result from recall or performance impairment. Thus, our study reveals a hitherto unrecognized role of the NMDA receptor in dynamically maintaining the long-term synaptic stability of memory storage circuits in the brain.",
+        "authors": "Cui, Wang, Tan et al.",
+        "year": "2004"
+      },
+      {
+        "pmid": "33234346",
+        "title": "Regulation of GABA&lt;sub&gt;A&lt;/sub&gt;Rs by Transmembrane Accessory Proteins.",
+        "abstract": "The vast majority of fast inhibitory transmission in the brain is mediated by GABA acting on GABA<sub>A</sub> receptors (GABA<sub>A</sub>Rs), which provides inhibitory balance to excitatory drive and controls neuronal output. GABA<sub>A</sub>Rs are also effectively targeted by clinically important drugs for treatment in a number of neurological disorders. It has long been hypothesized that function and pharmacology of GABA<sub>A</sub>Rs are determined by the channel pore-forming subunits. However, recent studies have provided new dimensions in studying GABA<sub>A</sub>Rs due to several transmembrane proteins that interact with GABA<sub>A</sub>Rs and modulate their trafficking and function. In this review, we summarize recent findings on these novel GABA<sub>A</sub>R transmembrane regulators and highlight a potential avenue to develop new GABA<sub>A</sub>R psychopharmacology by targeting these receptor-associated membrane proteins.",
+        "authors": "Han, Shepard, Lu",
+        "year": "2021"
+      },
+      {
+        "pmid": "36959261",
+        "title": "Distinct structure and gating mechanism in diverse NMDA receptors with GluN2C and GluN2D subunits.",
+        "abstract": "N-methyl-D-aspartate (NMDA) receptors are heterotetramers comprising two GluN1 and two alternate GluN2 (N2A-N2D) subunits. Here we report full-length cryo-EM structures of the human N1-N2D di-heterotetramer (di-receptor), rat N1-N2C di-receptor and N1-N2A-N2C tri-heterotetramer (tri-receptor) at a best resolution of 3.0\u2009\u00c5. The bilobate N-terminal domain (NTD) in N2D intrinsically adopts a closed conformation, leading to a compact NTD tetramer in the N1-N2D receptor. Additionally, crosslinking the ligand-binding domain (LBD) of two N1 protomers significantly elevated the channel open probability (Po) in N1-N2D di-receptors. Surprisingly, the N1-N2C di-receptor adopted both symmetric (minor) and asymmetric (major) conformations, the latter further locked by an allosteric potentiator, PYD-106, binding to a pocket between the NTD and LBD in only one N2C protomer. Finally, the N2A and N2C subunits in the N1-N2A-N2C tri-receptor display a conformation close to one protomer in the N1-N2A and N1-N2C di-receptors, respectively. These findings provide a comprehensive structural understanding of diverse function in major NMDA receptor subtypes.",
+        "authors": "Zhang, Zhang, Wang et al.",
+        "year": "2023"
+      }
+    ],
+    "7": [
+      {
+        "pmid": "30021165",
+        "title": "Regulation of KIF1A-Driven Dense Core Vesicle Transport: Ca<sup>2+</sup>/CaM Controls DCV Binding and Liprin-\u03b1/TANC2 Recruits DCVs to Postsynaptic Sites.",
+        "abstract": "Tight regulation of neuronal transport allows for cargo binding and release at specific cellular locations. The mechanisms by which motor proteins are loaded on vesicles and how cargoes are captured at appropriate sites remain unclear. To better understand how KIF1A-driven dense core vesicle (DCV) transport is regulated, we identified the KIF1A interactome and focused on three binding partners, the calcium binding protein calmodulin (CaM) and two synaptic scaffolding proteins: liprin-\u03b1 and TANC2. We showed that calcium, acting via CaM, enhances KIF1A binding to DCVs and increases vesicle motility. In contrast, liprin-\u03b1 and TANC2 are not part of the KIF1A-cargo complex but capture DCVs at dendritic spines. Furthermore, we found that specific TANC2 mutations-reported in patients with different neuropsychiatric disorders-abolish the interaction with KIF1A. We propose a model in which Ca<sup>2+</sup>/CaM regulates cargo binding and liprin-\u03b1 and TANC2 recruit KIF1A-transported vesicles.",
+        "authors": "Stucchi, Pluci\u0144ska, Hummel et al.",
+        "year": "2018"
+      },
+      {
+        "pmid": "26671989",
+        "title": "Molecular cause and functional impact of altered synaptic lipid signaling due to a prg-1 gene SNP.",
+        "abstract": "Loss of plasticity-related gene 1 (PRG-1), which regulates synaptic phospholipid signaling, leads to hyperexcitability via increased glutamate release altering excitation/inhibition (E/I) balance in cortical networks. A recently reported SNP in prg-1 (R345T/mutPRG-1) affects ~5\u00a0million European and US citizens in a monoallelic variant. Our studies show that this mutation leads to a loss-of-PRG-1 function at the synapse due to its inability to control lysophosphatidic acid (LPA) levels via a cellular uptake mechanism which appears to depend on proper glycosylation altered by this\u00a0SNP. PRG-1(+/-) mice, which are animal correlates of human PRG-1(+/mut) carriers, showed an altered cortical network function and stress-related behavioral changes indicating altered resilience against psychiatric disorders. These could be reversed by modulation of phospholipid signaling via pharmacological inhibition of the LPA-synthesizing molecule autotaxin. In line, EEG recordings in a human population-based cohort revealed an E/I balance shift in monoallelic mutPRG-1 carriers and an impaired sensory gating, which is regarded as an endophenotype of stress-related mental disorders. Intervention into bioactive lipid signaling is thus a promising strategy to interfere with glutamate-dependent symptoms in psychiatric diseases.",
+        "authors": "Vogt, Yang, Mobascher et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "21119615",
+        "title": "DGK\u03b9 regulates presynaptic release during mGluR-dependent LTD.",
+        "abstract": "Diacylglycerol (DAG) is an important lipid second messenger. DAG signalling is terminated by conversion of DAG to phosphatidic acid (PA) by diacylglycerol kinases (DGKs). The neuronal synapse is a major site of DAG production and action; however, how DGKs are targeted to subcellular sites of DAG generation is largely unknown. We report here that postsynaptic density (PSD)-95 family proteins interact with and promote synaptic localization of DGK\u03b9. In addition, we establish that DGK\u03b9 acts presynaptically, a function that contrasts with the known postsynaptic function of DGK\u03b6, a close relative of DGK\u03b9. Deficiency of DGK\u03b9 in mice does not affect dendritic spines, but leads to a small increase in presynaptic release probability. In addition, DGK\u03b9-/- synapses show a reduction in metabotropic glutamate receptor-dependent long-term depression (mGluR-LTD) at neonatal (\u223c2 weeks) stages that involve suppression of a decrease in presynaptic release probability. Inhibition of protein kinase C normalizes presynaptic release probability and mGluR-LTD at DGK\u03b9-/- synapses. These results suggest that DGK\u03b9 requires PSD-95 family proteins for synaptic localization and regulates presynaptic DAG signalling and neurotransmitter release during mGluR-LTD.",
+        "authors": "Yang, Seo, Nair et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "19118189",
+        "title": "Preso, a novel PSD-95-interacting FERM and PDZ domain protein that regulates dendritic spine morphogenesis.",
+        "abstract": "PSD-95 is an abundant postsynaptic density (PSD) protein involved in the formation and regulation of excitatory synapses and dendritic spines, but the underlying mechanisms are not comprehensively understood. Here we report a novel PSD-95-interacting protein Preso that regulates spine morphogenesis. Preso is mainly expressed in the brain and contains WW (domain with two conserved Trp residues), PDZ (PSD-95/Dlg/ZO-1), FERM (4.1, ezrin, radixin, and moesin), and C-terminal PDZ-binding domains. These domains associate with actin filaments, the Rac1/Cdc42 guanine nucleotide exchange factor betaPix, phosphatidylinositol-4,5-bisphosphate, and the postsynaptic scaffolding protein PSD-95, respectively. Preso overexpression increases the density of dendritic spines in a manner requiring WW, PDZ, FERM, and PDZ-binding domains. Conversely, knockdown or dominant-negative inhibition of Preso decreases spine density, excitatory synaptic transmission, and the spine level of filamentous actin. These results suggest that Preso positively regulates spine density through its interaction with the synaptic plasma membrane, actin filaments, PSD-95, and the betaPix-based Rac1 signaling pathway.",
+        "authors": "Lee, Choi, Shin et al.",
+        "year": "2008"
+      }
+    ],
+    "8": [
+      {
+        "pmid": "38538865",
+        "title": "De novo GRIN variants in M3 helix associated with neurological disorders control channel gating of NMDA receptor.",
+        "abstract": "N-methyl-D-aspartate receptors (NMDARs) are members of the glutamate receptor family and participate in excitatory postsynaptic transmission throughout the central nervous system. Genetic variants in GRIN genes encoding NMDAR subunits are associated with a spectrum of neurological disorders. The M3 transmembrane helices of the NMDAR couple directly to the agonist-binding domains and form a helical bundle crossing in the closed receptors that occludes the pore. The M3 functions as a transduction element whose conformational change couples ligand binding to opening of an ion conducting pore. In this study, we report the functional consequences of 48 de novo missense variants in GRIN1, GRIN2A, and GRIN2B that alter residues in the M3 transmembrane helix. These de novo variants were identified in children with neurological and neuropsychiatric disorders including epilepsy, developmental delay, intellectual disability, hypotonia and attention deficit hyperactivity disorder. All 48\u00a0variants in M3 for which comprehensive testing was completed produce a gain-of-function (28/48) compared to loss-of-function (9/48); 11 variants had an indeterminant phenotype. This supports the idea that a key structural feature of the M3 gate exists to stabilize the closed state so that agonist binding can drive channel opening. Given that most M3 variants enhance channel gating, we assessed the potency of FDA-approved NMDAR channel blockers on these variant receptors. These data provide new insight into the structure-function relationship of the NMDAR gate, and suggest that variants within the M3 transmembrane helix produce a gain-of-function.",
+        "authors": "Xu, Song, Perszyk et al.",
+        "year": "2024"
+      },
+      {
+        "pmid": "26919761",
+        "title": "Discovery of GluN2A-Selective NMDA Receptor Positive Allosteric Modulators (PAMs): Tuning Deactivation Kinetics via Structure-Based Design.",
+        "abstract": "The N-methyl-D-aspartate receptor (NMDAR) is a Na(+) and Ca(2+) permeable ionotropic glutamate receptor that is activated by the coagonists glycine and glutamate. NMDARs are critical to synaptic signaling and plasticity, and their dysfunction has been implicated in a number of neurological disorders, including schizophrenia, depression, and Alzheimer's disease. Herein we describe the discovery of potent GluN2A-selective NMDAR positive allosteric modulators (PAMs) starting from a high-throughput screening hit. Using structure-based design, we sought to increase potency at the GluN2A subtype, while improving selectivity against related \u03b1-amino-3-hydroxy-5-methyl-4-isoxazolepropionic acid receptors (AMPARs). The structure-activity relationship of channel deactivation kinetics was studied using a combination of electrophysiology and protein crystallography. Effective incorporation of these strategies resulted in the discovery of GNE-0723 (46), a highly potent and brain penetrant GluN2A-selective NMDAR PAM suitable for in vivo characterization.",
+        "authors": "Volgraf, Sellers, Jiang et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "26875626",
+        "title": "Positive Allosteric Modulators of GluN2A-Containing NMDARs with Distinct Modes of Action and Impacts on Circuit Function.",
+        "abstract": "To enhance physiological function of NMDA receptors (NMDARs), we identified positive allosteric modulators (PAMs) of NMDARs with selectivity for GluN2A subunit-containing receptors. X-ray crystallography revealed a binding site at the GluN1-GluN2A dimer interface of the extracellular ligand-binding domains (LBDs). Despite the similarity between the LBDs of NMDARs and AMPA receptors (AMPARs), GluN2A PAMs with good selectivity against AMPARs were identified. Potentiation was observed with recombinant triheteromeric GluN1/GluN2A/GluN2B NMDARs and with synaptically activated NMDARs in brain slices from wild-type (WT), but not GluN2A knockout (KO), mice. Individual GluN2A PAMs exhibited variable degrees of glutamate (Glu) dependence, impact on NMDAR Glu EC50, and slowing of channel deactivation. These distinct PAMs also exhibited differential impacts during synaptic plasticity induction. The identification of a new NMDAR modulatory site and characterization of GluN2A-selective PAMs provide powerful molecular tools to dissect NMDAR function and demonstrate the feasibility of a therapeutically desirable type of NMDAR enhancement.",
+        "authors": "Hackos, Lupardus, Grand et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "17526495",
+        "title": "Fyn-mediated phosphorylation of NR2B Tyr-1336 controls calpain-mediated NR2B cleavage in neurons and heterologous systems.",
+        "abstract": "Cleavage of the intracellular carboxyl terminus of the N-methyl-d-aspartate (NMDA) receptor 2 subunit (NR2) by calpain regulates NMDA receptor function and localization. Here, we show that Fyn-mediated phosphorylation of NR2B controls calpain-mediated NR2B cleavage. In cultured neurons, calpain-mediated NR2B cleavage is significantly attenuated by blocking NR2B phosphorylation of Tyr-1336, but not Tyr-1472, via inhibition of Src family kinase activity or decreasing Fyn levels by small interfering RNA. In HEK cells, mutation of Tyr-1336 eliminates the potentiating effect of Fyn on calpain-mediated NR2B cleavage. The potentiation of NR2B cleavage by Fyn is limited to cell surface receptors and is associated with calpain translocation to plasma membranes during NMDA receptor activation. Finally, reducing full-length NR2B by calpain does not decrease extrasynaptic NMDA receptor function, and truncated NR1/2B receptors similar to those generated by calpain have electrophysiological properties matching those of wild-type receptors. Thus, the Fyn-controlled regulation of NMDA receptor cleavage by calpain may play critical roles in controlling NMDA receptor properties during synaptic plasticity and excitotoxicity.",
+        "authors": "Wu, Hsu, Gleichman et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "28126851",
+        "title": "Functional Evaluation of a De Novo <i>GRIN2A</i> Mutation Identified in a Patient with Profound Global Developmental Delay and Refractory Epilepsy.",
+        "abstract": "The N-methyl-d-aspartate receptor (NMDAR), a ligand-gated ionotropic glutamate receptor, plays important roles in normal brain development and a wide range of neurologic disorders, including epilepsy. Here, we evaluate for the first time the functional properties of a de novo <i>GRIN2A</i> missense mutation (p.M817V) in the pre-M4 linker in a child with profound global developmental delay and refractory epilepsy. Electrophysiologic recordings revealed that the mutant GluN2A(M817V)-containing receptors showed enhanced agonist potency, reduced sensitivity to endogenous negative inhibitors (Mg<sup>2+</sup>, proton, and zinc), prolonged synaptic-like response time course, increased single-channel mean open time, and increased channel open probability. These results suggest that the gain-of-function M817V mutation causes overactivation of NMDAR and drives neuronal hyperexcitability, which may contribute to the patient's observed epileptic phenotype. Molecular modeling of the closed channel conformation reveals that this mutation weakens the interaction between GluN2 transmembrane helix M4 and two GluN1 transmembrane helices, and increases atomic fluctuation or movement of the pre-M1 region of GluN1 subunit, suggesting a mechanism by which channel function is enhanced. The functional changes of this mutation on agonist potency occur when the mutation is introduced into all other GluN2 subunits, suggesting a conserved role of this residue in control of NMDAR function through interactions of membrane spanning GluN2 and GluN1 helices. A number of NMDAR-targeted drugs including U.S. Food and Drug Association-approved NMDAR channel blockers were evaluated for their ability to inhibit receptors containing GluN2A(M817V) as a first step to exploring the potential for rescue pharmacology and personalized medicine.",
+        "authors": "Chen, Tankovic, Burger et al.",
+        "year": "2017"
+      }
+    ],
+    "9": [
+      {
+        "pmid": "17526495",
+        "title": "Fyn-mediated phosphorylation of NR2B Tyr-1336 controls calpain-mediated NR2B cleavage in neurons and heterologous systems.",
+        "abstract": "Cleavage of the intracellular carboxyl terminus of the N-methyl-d-aspartate (NMDA) receptor 2 subunit (NR2) by calpain regulates NMDA receptor function and localization. Here, we show that Fyn-mediated phosphorylation of NR2B controls calpain-mediated NR2B cleavage. In cultured neurons, calpain-mediated NR2B cleavage is significantly attenuated by blocking NR2B phosphorylation of Tyr-1336, but not Tyr-1472, via inhibition of Src family kinase activity or decreasing Fyn levels by small interfering RNA. In HEK cells, mutation of Tyr-1336 eliminates the potentiating effect of Fyn on calpain-mediated NR2B cleavage. The potentiation of NR2B cleavage by Fyn is limited to cell surface receptors and is associated with calpain translocation to plasma membranes during NMDA receptor activation. Finally, reducing full-length NR2B by calpain does not decrease extrasynaptic NMDA receptor function, and truncated NR1/2B receptors similar to those generated by calpain have electrophysiological properties matching those of wild-type receptors. Thus, the Fyn-controlled regulation of NMDA receptor cleavage by calpain may play critical roles in controlling NMDA receptor properties during synaptic plasticity and excitotoxicity.",
+        "authors": "Wu, Hsu, Gleichman et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "12051741",
+        "title": "Mammalian DSCAMs: roles in the development of the spinal cord, cortex, and cerebellum?",
+        "abstract": "Central nervous system (CNS) development involves neural patterning, neuronal and axonal migrations, and synapse formation. DSCAM, a chromosome 21 axon guidance molecule, is expressed by CNS neurons during development and throughout adult life. We now report that DSCAM and its chromosome 11 paralog DSCAML1 exhibit inverse ventral-dorsal expression patterns in the developing spinal cord and distinct, partly inverse, expression patterns in the developing cortex, beginning in the Cajal-Retzius cells. In the adult cortex, DSCAM predominates in layer 3/5 pyramidal cells and DSCAML1 predominates in layer 2 granule cells. In the cerebellum, DSCAM is stronger in the Purkinje cells and DSCAML1 in the granule cells. Finally, we find that the predicted DSCAML1 protein contains 60 additional N-terminal amino acids which may contribute to its distinct expression pattern and putative function. We propose that the DSCAMs comprise novel elements of the pathways mediating dorsal-ventral patterning and cell-fate specification in the developing CNS.",
+        "authors": "Barlow, Micales, Chen et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "10624965",
+        "title": "Caspr2, a new member of the neurexin superfamily, is localized at the juxtaparanodes of myelinated axons and associates with K+ channels.",
+        "abstract": "Rapid conduction in myelinated axons depends on the generation of specialized subcellular domains to which different sets of ion channels are localized. Here, we describe the identification of Caspr2, a mammalian homolog of Drosophila Neurexin IV (Nrx-IV), and show that this neurexin-like protein and the closely related molecule Caspr/Paranodin demarcate distinct subdomains in myelinated axons. While contactin-associated protein (Caspr) is present at the paranodal junctions, Caspr2 is precisely colocalized with Shaker-like K+ channels in the juxtaparanodal region. We further show that Caspr2 specifically associates with Kv1.1, Kv1.2, and their Kvbeta2 subunit. This association involves the C-terminal sequence of Caspr2, which contains a putative PDZ binding site. These results suggest a role for Caspr family members in the local differentiation of the axon into distinct functional subdomains.",
+        "authors": "Poliak, Gollan, Martinez et al.",
+        "year": "1999"
+      },
+      {
+        "pmid": "10197527",
+        "title": "Slit2-Mediated chemorepulsion and collapse of developing forebrain axons.",
+        "abstract": "Diffusible chemorepellents play a major role in guiding developing axons toward their correct targets by preventing them from entering or steering them away from certain regions. Genetic studies in Drosophila revealed a novel repulsive guidance system that prevents inappropriate axons from crossing the CNS midline; this repulsive system is mediated by the Roundabout (Robo) receptor and its secreted ligand Slit. In rodents, Robo and Slit are expressed in the spinal cord and Slit can repel spinal motor axons in vitro. Here, we extend these findings into higher brain centers by showing that Robo1 and Robo2, as well as Slit1 and Slit2, are often expressed in complementary patterns in the developing forebrain. Furthermore, we show that human Slit2 can repel olfactory and hippocampal axons and collapse their growth cones.",
+        "authors": "Nguyen Ba-Charvet, Brose, Marillat et al.",
+        "year": "1999"
+      }
+    ],
+    "10": [
+      {
+        "pmid": "20434989",
+        "title": "Syntaxin-4 defines a domain for activity-dependent exocytosis in dendritic spines.",
+        "abstract": "Changes in postsynaptic membrane composition underlie many forms of learning-related synaptic plasticity in the brain. At excitatory glutamatergic synapses, fusion of intracellular vesicles at or near the postsynaptic plasma membrane is critical for dendritic spine morphology, retrograde synaptic signaling, and long-term synaptic plasticity. Whereas the molecular machinery for exocytosis in presynaptic terminals has been defined in detail, little is known about the location, kinetics, regulation, or molecules involved in postsynaptic exocytosis. Here, we show that an exocytic domain adjacent to the postsynaptic density (PSD) enables fusion of large, AMPA receptor-containing recycling compartments during elevated synaptic activity. Exocytosis occurs at microdomains enriched in the plasma membrane t-SNARE syntaxin 4 (Stx4), and disruption of Stx4 impairs both spine exocytosis and long-term potentiation (LTP) at hippocampal synapses. Thus, Stx4 defines an exocytic zone that directs membrane fusion for postsynaptic plasticity, revealing a novel specialization for local membrane traffic in dendritic spines.",
+        "authors": "Kennedy, Davison, Robinson et al.",
+        "year": "2010"
+      },
+      {
+        "pmid": "19706678",
+        "title": "Axonal targeting of Caspr2 in hippocampal neurons via selective somatodendritic endocytosis.",
+        "abstract": "Contactin-associated protein 2 (Caspr2) is a neuronal membrane protein that is mutated in autism and related disorders. Although it is highly enriched at juxtaparanodes of Ranvier where it is essential for Shaker-type K(+) channel clustering, little is known about its function and regulation. In the present study, we examined the polarized expression of Caspr2 in hippocampal neurons using extracellular hemagglutinin (HA)-tagged Caspr2 constructs. We found that Caspr2 was targeted to the axonal surface, but colocalized with early endosomes in the somatodendritic compartment. The inhibition of endocytosis using a Dynamin-1 mutant or treatment with Dynasore prevented Caspr2 internalization from the dendrites and cell body. We identified a short sequence included into the 4.1B-binding domain that is required for the endocytosis of Caspr2. This sequence contains a protein kinase C (PKC) substrate motif on Thr1292, and point mutation of this residue or treatment with a PKC inhibitor prevented the somatodendritic internalization of Caspr2. Thus, the PKC-dependent trafficking of Caspr2 underlies its polarized expression in hippocampal neurons.",
+        "authors": "Bel, Oguievetskaia, Pitaval et al.",
+        "year": "2009"
+      }
+    ],
+    "11": [],
+    "12": [
+      {
+        "pmid": "27940359",
+        "title": "The new obesity-associated protein, neuronal growth regulator 1 (NEGR1), is implicated in Niemann-Pick disease Type C (NPC2)-mediated cholesterol trafficking.",
+        "abstract": "Neuronal growth regulator 1 (NEGR1) is a newly identified raft-associated protein, which has recently been spotlighted as a new locus related to human obesity. Niemann-Pick disease Type C2 (NPC2) protein functions as a key player in the intracellular cholesterol trafficking, and its defect is linked to a fatal human neurodegenerative disease, NPC. In this study, we identified that NEGR1 interacts with NPC2 and increases its protein stability. Ectopically expressed NEGR1 proteins relieved an abnormal cholesterol accumulation in endosomal compartments. Importantly, NEGR1-defective mouse embryonic fibroblast cells exhibit increased cholesterol levels and triglyceride contents. These findings provide the first insight into the role of NEGR1 in intracellular cholesterol homeostasis, possibly explaining the missing link between NEGR1 with human obesity.",
+        "authors": "Kim, Chun, Che et al.",
+        "year": "2017"
+      },
+      {
+        "pmid": "27198182",
+        "title": "Fly DPP10 acts as a channel ancillary subunit and possesses peptidase activity.",
+        "abstract": "Mammalian DPP6 (DPPX) and DPP10 (DPPY) belong to a family of dipeptidyl peptidases, but lack enzyme activity. Instead, these proteins form complexes with voltage-gated K(+) channels in Kv4 family to control their gating and other properties. Here, we find that the fly DPP10 ortholog acts as an ancillary subunit of Kv4 channels and digests peptides. Similarly to mammalian DPP10, the fly ortholog tightly binds to rat Kv4.3 protein. The association causes negative shifts in voltage dependence of channel activation and steady state inactivation. It also results in faster inactivation and recovery from inactivation. In addition to its channel regulatory role, fly DPP10 exhibits significant dipeptidyl peptidase activity with Gly-Pro-MCA (glycyl-L-proline 4-methylcoumaryl-7-amide) as a substrate. Heterologously expressed Flag-tagged fly DPP10 and human DPP4 show similar Km values towards this substrate. However, fly DPP10 exhibits approximately a 6-times-lower relative kcat value normalized with anti-Flag immunoreactivity than human DPP4. These results demonstrate that fly DPP10 is a dual functional protein, controlling Kv4 channel gating and removing bioactive peptides.",
+        "authors": "Shiina, Muto, Zhang et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "21817159",
+        "title": "Fibroblast growth factor homologous factor 13 regulates Na+ channels and conduction velocity in murine hearts.",
+        "abstract": "<h4>Rationale</h4>Fibroblast growth factor homologous factors (FHFs), a subfamily of fibroblast growth factors (FGFs) that are incapable of functioning as growth factors, are intracellular modulators of Na(+) channels and have been linked to neurodegenerative diseases. Although certain FHFs have been found in embryonic heart, they have not been reported in adult heart, and they have not been shown to regulate endogenous cardiac Na(+) channels or to participate in cardiac pathophysiology.<h4>Objective</h4>We tested whether FHFs regulate Na(+) channels in murine heart.<h4>Methods and results</h4>We demonstrated that isoforms of FGF13 are the predominant FHFs in adult mouse ventricular myocytes. FGF13 binds directly to, and colocalizes with, the Na(V)1.5 Na(+) channel in the sarcolemma of adult mouse ventricular myocytes. Knockdown of FGF13 in adult mouse ventricular myocytes revealed a loss of function of Na(V)1.5-reduced Na(+) current density, decreased Na(+) channel availability, and slowed Na(V)1.5-reduced Na(+) current recovery from inactivation. Cell surface biotinylation experiments showed \u224845% reduction in Na(V)1.5 protein at the sarcolemma after FGF13 knockdown, whereas no changes in whole-cell Na(V)1.5 protein or in mRNA level were observed. Optical imaging in neonatal rat ventricular myocyte monolayers demonstrated slowed conduction velocity and a reduced maximum capture rate after FGF13 knockdown.<h4>Conclusion</h4>These findings show that FHFs are potent regulators of Na(+) channels in adult ventricular myocytes and suggest that loss-of-function mutations in FHFs may underlie a similar set of cardiac arrhythmias and cardiomyopathies that result from Na(V)1.5 loss-of-function mutations.",
+        "authors": "Wang, Hennessey, Kirkton et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21463633",
+        "title": "Nedd4-2-dependent ubiquitylation and regulation of the cardiac potassium channel hERG1.",
+        "abstract": "The voltage-gated cardiac potassium channel hERG1 (human ether-\u00e0-gogo-related gene 1) plays a key role in the repolarization phase of the cardiac action potential (AP). Mutations in its gene, KCNH2, can lead to defects in the biosynthesis and maturation of the channel, resulting in congenital long QT syndrome (LQTS). To identify the molecular mechanisms regulating the density of hERG1 channels at the plasma membrane, we investigated channel ubiquitylation by ubiquitin ligase Nedd4-2, a post-translational regulatory mechanism previously linked to other ion channels. We found that whole-cell hERG1 currents recorded in HEK293 cells were decreased upon neural precursor cell expressed developmentally down-regulated 4-2 (Nedd4-2) co-expression. The amount of hERG1 channels in total HEK293 lysates and at the cell surface, as assessed by Western blot and biotinylation assays, respectively, were concomitantly decreased. Nedd4-2 and hERG1 interact via a PY motif located in the C-terminus of hERG1. Finally, we determined that Nedd4-2 mediates ubiquitylation of hERG1 and that deletion of this motif affects Nedd4-2-dependent regulation. These results suggest that ubiquitylation of the hERG1 protein by Nedd4-2, and its subsequent down-regulation, could represent an important mechanism for modulation of the duration of the human cardiac action potential.",
+        "authors": "Albesa, Grilo, Gavillet et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "20042427",
+        "title": "Loss-of-function mutation of the SCN3B-encoded sodium channel {beta}3 subunit associated with a case of idiopathic ventricular fibrillation.",
+        "abstract": "<h4>Aims</h4>Loss-of-function mutations in the SCN5A-encoded sodium channel SCN5A or Nav1.5 have been identified in idiopathic ventricular fibrillation (IVF) in the absence of Brugada syndrome phenotype. Nav1.5 is regulated by four sodium channel auxiliary beta subunits. Here, we report a case with IVF and a novel mutation in the SCN3B-encoded sodium channel beta subunit Navbeta3 that causes a loss of function of Nav1.5 channels in vitro.<h4>Methods and results</h4>Comprehensive open reading frame mutational analysis of KCNQ1, KCNH2, SCN5A, KCNE1, KCNE2, GPD1L, four sodium channel beta subunit genes (SCN1-4B), and targeted scan of RYR2 was performed. A novel missense mutation, Navbeta3-V54G, was identified in a 20-year-old male following witnessed collapse and defibrillation from VF. The ECG exhibited epsilon waves, and imaging studies demonstrated a structurally normal heart. The mutated residue was highly conserved across species, localized to the Navbeta3 extracellular domain, and absent in 800 reference alleles. We found that HEK-293 cells had endogenous Navbeta3, but COS cells did not. Co-expression of Nav1.5 with Navbeta3-V54G (with or without co-expression of the Navbeta1 subunit) in both HEK-293 cells and COS cells revealed a significant decrease in peak sodium current and a positive shift of inactivation compared with WT. Co-immunoprecipitation experiments showed association of Navbeta3 with Nav1.5, and immunocytochemistry demonstrated a dramatic decrease in trafficking to the plasma membrane when co-expressed with mutant Navbeta3-V54G.<h4>Conclusion</h4>This study provides molecular and cellular evidence implicating mutations in Navbeta3 as a cause of IVF.",
+        "authors": "Valdivia, Medeiros-Domingo, Ye et al.",
+        "year": "2010"
+      }
+    ],
+    "13": [
+      {
+        "pmid": "34321660",
+        "title": "Structural basis of ketamine action on human NMDA receptors.",
+        "abstract": "Ketamine is a non-competitive channel blocker of N-methyl-D-aspartate (NMDA) receptors<sup>1</sup>. A single sub-anaesthetic dose of ketamine produces rapid (within hours) and long-lasting antidepressant effects in patients who are resistant to other antidepressants<sup>2,3</sup>. Ketamine is a racemic mixture of S- and R-ketamine enantiomers, with S-ketamine isomer being the more active antidepressant<sup>4</sup>. Here we describe the cryo-electron microscope structures of human GluN1-GluN2A and GluN1-GluN2B NMDA receptors in complex with S-ketamine, glycine and glutamate. Both electron density maps uncovered the binding pocket for S-ketamine in the central vestibule between the channel gate and selectivity filter. Molecular dynamics simulation showed that S-ketamine moves between two distinct locations within the binding pocket. Two amino acids-leucine 642 on GluN2A (homologous to leucine 643 on GluN2B) and asparagine 616 on GluN1-were identified as key residues that form hydrophobic and hydrogen-bond interactions with ketamine, and mutations at these residues reduced the potency of ketamine in blocking NMDA receptor channel activity. These findings show structurally how ketamine binds to and acts on human NMDA receptors, and pave the way for the future development of ketamine-based antidepressants.",
+        "authors": "Zhang, Ye, Zhang et al.",
+        "year": "2021"
+      },
+      {
+        "pmid": "36696443",
+        "title": "Cryo-EM structure of human voltage-gated sodium channel Na<sub>v</sub>1.6.",
+        "abstract": "Voltage-gated sodium channel Na<sub>v</sub>1.6 plays a crucial role in neuronal firing in the central nervous system (CNS). Aberrant function of Na<sub>v</sub>1.6 may lead to epilepsy and other neurological disorders. Specific inhibitors of Na<sub>v</sub>1.6 thus have therapeutic potentials. Here we present the cryo-EM structure of human Na<sub>v</sub>1.6 in the presence of auxiliary subunits \u03b21 and fibroblast growth factor homologous factor 2B (FHF2B) at an overall resolution of 3.1 \u00c5. The overall structure represents an inactivated state with closed pore domain (PD) and all \"up\" voltage-sensing domains. A conserved carbohydrate-aromatic interaction involving Trp302 and Asn326, together with the \u03b21 subunit, stabilizes the extracellular loop in repeat I. Apart from regular lipids that are resolved in the EM map, an unprecedented Y-shaped density that belongs to an unidentified molecule binds to the PD, revealing a potential site for developing Na<sub>v</sub>1.6-specific blockers. Structural mapping of disease-related Na<sub>v</sub>1.6 mutations provides insights into their pathogenic mechanism.",
+        "authors": "Fan, Huang, Jin et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "36309015",
+        "title": "Structural insights into assembly and function of GluN1-2C, GluN1-2A-2C, and GluN1-2D NMDARs.",
+        "abstract": "Neurotransmission mediated by diverse subtypes of N-methyl-D-aspartate receptors (NMDARs) is fundamental for basic brain functions and development as well as neuropsychiatric diseases and disorders. NMDARs are glycine- and glutamate-gated ion channels that exist as heterotetramers composed of obligatory GluN1 and GluN2(A-D) and/or GluN3(A-B). The GluN2C and GluN2D subunits form ion channels with distinct properties and spatio-temporal expression patterns. Here, we provide the structures of the agonist-bound human GluN1-2C NMDAR in the presence and absence of the GluN2C-selective positive allosteric potentiator (PAM), PYD-106, the agonist-bound GluN1-2A-2C tri-heteromeric NMDAR, and agonist-bound GluN1-2D NMDARs by single-particle electron cryomicroscopy. Our analysis shows unique inter-subunit\u00a0and domain arrangements of the GluN2C NMDARs, which contribute to functional regulation and formation of the PAM binding pocket and is distinct from GluN2D NMDARs. Our findings here provide the fundamental blueprint to study GluN2C- and GluN2D-containing NMDARs, which are uniquely involved in neuropsychiatric disorders.",
+        "authors": "Chou, Kang, Simorowski et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "21463633",
+        "title": "Nedd4-2-dependent ubiquitylation and regulation of the cardiac potassium channel hERG1.",
+        "abstract": "The voltage-gated cardiac potassium channel hERG1 (human ether-\u00e0-gogo-related gene 1) plays a key role in the repolarization phase of the cardiac action potential (AP). Mutations in its gene, KCNH2, can lead to defects in the biosynthesis and maturation of the channel, resulting in congenital long QT syndrome (LQTS). To identify the molecular mechanisms regulating the density of hERG1 channels at the plasma membrane, we investigated channel ubiquitylation by ubiquitin ligase Nedd4-2, a post-translational regulatory mechanism previously linked to other ion channels. We found that whole-cell hERG1 currents recorded in HEK293 cells were decreased upon neural precursor cell expressed developmentally down-regulated 4-2 (Nedd4-2) co-expression. The amount of hERG1 channels in total HEK293 lysates and at the cell surface, as assessed by Western blot and biotinylation assays, respectively, were concomitantly decreased. Nedd4-2 and hERG1 interact via a PY motif located in the C-terminus of hERG1. Finally, we determined that Nedd4-2 mediates ubiquitylation of hERG1 and that deletion of this motif affects Nedd4-2-dependent regulation. These results suggest that ubiquitylation of the hERG1 protein by Nedd4-2, and its subsequent down-regulation, could represent an important mechanism for modulation of the duration of the human cardiac action potential.",
+        "authors": "Albesa, Grilo, Gavillet et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21051419",
+        "title": "Mutations in sodium channel \u03b2-subunit SCN3B are associated with early-onset lone atrial fibrillation.",
+        "abstract": "<h4>Aims</h4>Atrial fibrillation (AF) is the most frequent arrhythmia. Screening of SCN5A-the gene encoding the \u03b1-subunit of the cardiac sodium channel-has indicated that disturbances of the sodium current may play a central role in the mechanism of lone AF. We tested the hypothesis that lone AF in young patients is associated with genetic mutations in SCN3B and SCN4B, the genes encoding the two \u03b2-subunits of the cardiac sodium channel.<h4>Methods and results</h4>In 192 unrelated lone AF patients, the entire coding sequence and splice junctions of SCN3B and SCN4B were bidirectionally sequenced. Three non-synonymous mutations were found in SCN3B (R6K, L10P, and M161T). Two mutations were novel (R6K and M161T). None of the mutations were present in the control group (n = 432 alleles), nor have any been previously reported in conjunction with AF. All SCN3B mutations affected residues that are evolutionarily conserved across species. Electrophysiological studies on the SCN3B mutation were carried out and all three SCN3B mutations caused a functionally reduced sodium channel current. One synonymous variant was found in SCN4B.<h4>Conclusion</h4>In 192 young lone AF patients, we found three patients with suspected disease-causing non-synonymous mutations in SCN3B, indicating that mutations in this gene contribute to the mechanism of lone AF. The three mutations in SCN3B were investigated electrophysiologically and all led to loss of function in the sodium current, supporting the hypothesis that decreased sodium current enhances AF susceptibility.",
+        "authors": "Olesen, Jespersen, Nielsen et al.",
+        "year": "2011"
+      }
+    ],
+    "14": [
+      {
+        "pmid": "25973365",
+        "title": "The synaptotagmin juxtamembrane domain is involved in neuroexocytosis.",
+        "abstract": "Synaptotagmin is a synaptic vesicle membrane protein which changes conformation upon Ca(2+) binding and triggers the fast neuroexocytosis that takes place at synapses. We have synthesized a series of peptides corresponding to the sequence of the cytosolic juxtamembrane domain of synaptotagmin, which is highly conserved among different isoforms and animal species, with or without either a hexyl hydrophobic chain or the hexyl group plus a fluorescein moiety. We show that these peptides inhibit neurotransmitter release, that they localize on the presynaptic membrane of the motor axon terminal at the neuromuscular junction and that they bind monophosphoinositides in a Ca(2+)-independent manner. Based on these findings, we propose that the juxtamembrane cytosolic domain of synaptotagmin binds the cytosolic layer of the presynaptic membrane at rest. This binding brings synaptic vesicles and plasma membrane in a very close apposition, favouring the formation of hemifusion intermediates that enable rapid vesicle fusion.",
+        "authors": "Caccin, Scorzeto, Damiano et al.",
+        "year": "2015"
+      },
+      {
+        "pmid": "11438518",
+        "title": "Direct interaction of the Rab3 effector RIM with Ca2+ channels, SNAP-25, and synaptotagmin.",
+        "abstract": "To define the role of the Rab3-interacting molecule RIM in exocytosis we searched for additional binding partners of the protein. We found that the two C(2) domains of RIM display properties analogous to those of the C(2)B domain of synaptotagmin-I. Thus, RIM-C(2)A and RIM-C(2)B bind in a Ca(2+)-independent manner to alpha1B, the pore-forming subunit of N-type Ca(2+) channels (EC(50) = approximately 20 nm). They also weakly interact with the alpha1C but not the alpha1D subunit of L-type Ca(2+) channels. In addition, the C(2) domains of RIM associate with SNAP-25 and synaptotagmin-I. The binding affinities for these two proteins are 203 and 24 nm, respectively, for RIM-C(2)A and 224 and 16 nm for RIM-C(2)B. The interactions of the C(2) domains of RIM with SNAP-25 and synaptotagmin-I are modulated by Ca(2+). Thus, in the presence of Ca(2+) (EC(50) = approximately 75 microm) the interaction with synaptotagmin-I is increased, whereas SNAP-25 binding is reduced. Synaptotagmin-I binding is abolished by mutations in two positively charged amino acids in the C(2) domains of RIM and by the addition of inositol polyphosphates. We propose that the Rab3 effector RIM is a scaffold protein that participates through its multiple binding partners in the docking and fusion of secretory vesicles at the release sites.",
+        "authors": "Coppola, Magnin-Luthi, Perret-Menoud et al.",
+        "year": "2001"
+      },
+      {
+        "pmid": "8391122",
+        "title": "Cloning of cDNA sequences encoding human alpha 2 and alpha 3 gamma-aminobutyric acidA receptor subunits and characterization of the benzodiazepine pharmacology of recombinant alpha 1-, alpha 2-, alpha 3-, and alpha 5-containing human gamma-aminobutyric acidA receptors.",
+        "abstract": "cDNAs encoding human alpha 2 and alpha 3 gamma-aminobutyric acidA receptor subunits have been cloned. Their deduced amino acid sequences show much sequence identity with the published bovine sequences (98.2% and 97.0% for alpha 2 and alpha 3, respectively). Human alpha 1 beta 1 gamma 2, alpha 2 beta 1 gamma 2, alpha 3 beta 1 gamma 2, and alpha 5 beta 1 gamma 2 subunit combinations were expressed in transiently transfected cells and their pharmacologies were characterized using a series of benzodiazepine (BZ) binding site ligands. Human alpha 1-containing receptors exhibited a BZ1-type pharmacology, and alpha 2-, alpha 3-, and alpha 5-containing receptors exhibited a broadly BZ2-type pharmacology. The partial inverse agonist Ro15-4513 showed an approximately 10-15-fold higher affinity for alpha 5-containing than for alpha 1-, alpha 2-, or alpha 3-containing receptors and is thus the first compound shown to have a significantly higher affinity for another receptor subtype than for alpha 1 beta 1 gamma 2.",
+        "authors": "Hadingham, Wingrove, Le Bourdelles et al.",
+        "year": "1993"
+      }
+    ],
+    "15": [
+      {
+        "pmid": "17526495",
+        "title": "Fyn-mediated phosphorylation of NR2B Tyr-1336 controls calpain-mediated NR2B cleavage in neurons and heterologous systems.",
+        "abstract": "Cleavage of the intracellular carboxyl terminus of the N-methyl-d-aspartate (NMDA) receptor 2 subunit (NR2) by calpain regulates NMDA receptor function and localization. Here, we show that Fyn-mediated phosphorylation of NR2B controls calpain-mediated NR2B cleavage. In cultured neurons, calpain-mediated NR2B cleavage is significantly attenuated by blocking NR2B phosphorylation of Tyr-1336, but not Tyr-1472, via inhibition of Src family kinase activity or decreasing Fyn levels by small interfering RNA. In HEK cells, mutation of Tyr-1336 eliminates the potentiating effect of Fyn on calpain-mediated NR2B cleavage. The potentiation of NR2B cleavage by Fyn is limited to cell surface receptors and is associated with calpain translocation to plasma membranes during NMDA receptor activation. Finally, reducing full-length NR2B by calpain does not decrease extrasynaptic NMDA receptor function, and truncated NR1/2B receptors similar to those generated by calpain have electrophysiological properties matching those of wild-type receptors. Thus, the Fyn-controlled regulation of NMDA receptor cleavage by calpain may play critical roles in controlling NMDA receptor properties during synaptic plasticity and excitotoxicity.",
+        "authors": "Wu, Hsu, Gleichman et al.",
+        "year": "2007"
+      },
+      {
+        "pmid": "12504588",
+        "title": "Robo1 and Robo2 are homophilic binding molecules that promote axonal growth.",
+        "abstract": "In the present study we show that following transfection in 3T3 cells, human Robo1 and Robo2 stimulate neurite outgrowth from Robo-positive neurons (retinal neurons and olfactory neurons), but have no effect on Robo-negative neurons (cerebellar granule cells). The neurite outgrowth response was inhibited by an antibody raised against the first Ig domain of Robo1/2 or by soluble Robo-Fc chimera. Furthermore, we show that the extracellular domains of Robo1 and Robo2 are homophilic adhesion molecules that can also interact with each other. These data suggest a wider range of functions for the Robo family in the development of the nervous system and provide novel insights into the molecular basis for the phenotypes observed in Robo mutants in Drosophila, C. elegans, and zebrafish.",
+        "authors": "Hivert, Liu, Chuang et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "21223964",
+        "title": "Novel interactions of ankyrins-G at the costameres: the muscle-specific Obscurin/Titin-Binding-related Domain (OTBD) binds plectin and filamin C.",
+        "abstract": "Ankyrins, the adapters of the spectrin skeleton, are involved in local accumulation and stabilization of integral proteins to the appropriate membrane domains. In striated muscle, tissue-dependent alternative splicing generates unique Ank3 gene products (ankyrins-G); they share the Obscurin/Titin-Binding-related Domain (OTBD), a muscle-specific insert of the C-terminal domain which is highly conserved among ankyrin genes, and binds obscurin and titin to Ank1 gene products. We previously proposed that OTBD sequences constitute a novel domain of protein-protein interactions which confers ankyrins with specific cellular functions in muscle. Here we searched for muscle proteins binding to ankyrin-G OTBD by yeast two hybrid assay, and we found plectin and filamin C, two organizing elements of the cytoskeleton with essential roles in myogenesis, muscle cell cytoarchitecture, and muscle disease. The three proteins coimmunoprecipitate from skeletal muscle extracts and colocalize at costameres in adult muscle fibers. During in vitro myogenesis, muscle ankyrins-G are first expressed in postmitotic myocytes undergoing fusion to myotubes. In western blots of subcellular fractions from C2C12 cells, the majority of muscle ankyrins-G appear associated with membrane compartments. Occasional but not extensive co-localization at nascent costameres suggested that ankyrin-G interactions with plectin and filamin C are not involved in costamere assembly; they would rather reinforce stability and/or modulate molecular interactions in sarcolemma microdomains by establishing novel links between muscle-specific ankyrins-G and the two costameric dystrophin-associated glycoprotein and integrin-based protein complexes. These results report the first protein-protein interactions involving the ankyrin-G OTBD domain and support the hypothesis that OTBD sequences confer ankyrins with a gain of function in vertebrates, bringing further consolidation and resilience of the linkage between sarcomeres and sarcolemma.",
+        "authors": "Maiweilidan, Klauza, Kordeli",
+        "year": "2011"
+      },
+      {
+        "pmid": "19706678",
+        "title": "Axonal targeting of Caspr2 in hippocampal neurons via selective somatodendritic endocytosis.",
+        "abstract": "Contactin-associated protein 2 (Caspr2) is a neuronal membrane protein that is mutated in autism and related disorders. Although it is highly enriched at juxtaparanodes of Ranvier where it is essential for Shaker-type K(+) channel clustering, little is known about its function and regulation. In the present study, we examined the polarized expression of Caspr2 in hippocampal neurons using extracellular hemagglutinin (HA)-tagged Caspr2 constructs. We found that Caspr2 was targeted to the axonal surface, but colocalized with early endosomes in the somatodendritic compartment. The inhibition of endocytosis using a Dynamin-1 mutant or treatment with Dynasore prevented Caspr2 internalization from the dendrites and cell body. We identified a short sequence included into the 4.1B-binding domain that is required for the endocytosis of Caspr2. This sequence contains a protein kinase C (PKC) substrate motif on Thr1292, and point mutation of this residue or treatment with a PKC inhibitor prevented the somatodendritic internalization of Caspr2. Thus, the PKC-dependent trafficking of Caspr2 underlies its polarized expression in hippocampal neurons.",
+        "authors": "Bel, Oguievetskaia, Pitaval et al.",
+        "year": "2009"
+      },
+      {
+        "pmid": "19581412",
+        "title": "Quantitative proteomics identifies a Dab2/integrin module regulating cell migration.",
+        "abstract": "Clathrin-associated endocytic adapters recruit cargoes to coated pits as a first step in endocytosis. We developed an unbiased quantitative proteomics approach to identify and quantify glycoprotein cargoes for an endocytic adapter, Dab2. Surface levels of integrins beta1, alpha1, alpha2, and alpha3 but not alpha5 or alphav chains were specifically increased on Dab2-deficient HeLa cells. Dab2 colocalizes with integrin beta1 in coated pits that are dispersed over the cell surface, suggesting that it regulates bulk endocytosis of inactive integrins. Depletion of Dab2 inhibits cell migration and polarized movement of integrin beta1 and vinculin to the leading edge. By manipulating intracellular and surface integrin beta1 levels, we show that migration speed correlates with the intracellular integrin pool but not the surface level. Together, these results suggest that Dab2 internalizes integrins freely diffusing on the cell surface and that Dab2 regulates migration, perhaps by maintaining an internal pool of integrins that can be recycled to create new adhesions at the leading edge.",
+        "authors": "Teckchandani, Toida, Goodchild et al.",
+        "year": "2009"
+      }
+    ],
+    "16": [
+      {
+        "pmid": "16525039",
+        "title": "A common ankyrin-G-based mechanism retains KCNQ and NaV channels at electrically active domains of the axon.",
+        "abstract": "KCNQ (KV7) potassium channels underlie subthreshold M-currents that stabilize the neuronal resting potential and prevent repetitive firing of action potentials. Here, antibodies against four different KCNQ2 and KCNQ3 polypeptide epitopes show these subunits concentrated at the axonal initial segment (AIS) and node of Ranvier. AIS concentration of KCNQ2 and KCNQ3, like that of voltage-gated sodium (NaV) channels, is abolished in ankyrin-G knock-out mice. A short motif, common to KCNQ2 and KCNQ3, mediates both in vivo ankyrin-G interaction and retention of the subunits at the AIS. This KCNQ2/KCNQ3 motif is nearly identical to the sequence on NaV alpha subunits that serves these functions. All identified NaV and KCNQ genes of worms, insects, and molluscs lack the ankyrin-G binding motif. In contrast, vertebrate orthologs of NaV alpha subunits, KCNQ2, and KCNQ3 (including from bony fish, birds, and mammals) all possess the motif. Thus, concerted ankyrin-G interaction with KCNQ and NaV channels appears to have arisen through convergent molecular evolution, after the division between invertebrate and vertebrate lineages, but before the appearance of the last common jawed vertebrate ancestor. This includes the historical period when myelin also evolved.",
+        "authors": "Pan, Kao, Horvath et al.",
+        "year": "2006"
+      }
+    ],
+    "17": [
+      {
+        "pmid": "34321660",
+        "title": "Structural basis of ketamine action on human NMDA receptors.",
+        "abstract": "Ketamine is a non-competitive channel blocker of N-methyl-D-aspartate (NMDA) receptors<sup>1</sup>. A single sub-anaesthetic dose of ketamine produces rapid (within hours) and long-lasting antidepressant effects in patients who are resistant to other antidepressants<sup>2,3</sup>. Ketamine is a racemic mixture of S- and R-ketamine enantiomers, with S-ketamine isomer being the more active antidepressant<sup>4</sup>. Here we describe the cryo-electron microscope structures of human GluN1-GluN2A and GluN1-GluN2B NMDA receptors in complex with S-ketamine, glycine and glutamate. Both electron density maps uncovered the binding pocket for S-ketamine in the central vestibule between the channel gate and selectivity filter. Molecular dynamics simulation showed that S-ketamine moves between two distinct locations within the binding pocket. Two amino acids-leucine 642 on GluN2A (homologous to leucine 643 on GluN2B) and asparagine 616 on GluN1-were identified as key residues that form hydrophobic and hydrogen-bond interactions with ketamine, and mutations at these residues reduced the potency of ketamine in blocking NMDA receptor channel activity. These findings show structurally how ketamine binds to and acts on human NMDA receptors, and pave the way for the future development of ketamine-based antidepressants.",
+        "authors": "Zhang, Ye, Zhang et al.",
+        "year": "2021"
+      },
+      {
+        "pmid": "36959261",
+        "title": "Distinct structure and gating mechanism in diverse NMDA receptors with GluN2C and GluN2D subunits.",
+        "abstract": "N-methyl-D-aspartate (NMDA) receptors are heterotetramers comprising two GluN1 and two alternate GluN2 (N2A-N2D) subunits. Here we report full-length cryo-EM structures of the human N1-N2D di-heterotetramer (di-receptor), rat N1-N2C di-receptor and N1-N2A-N2C tri-heterotetramer (tri-receptor) at a best resolution of 3.0\u2009\u00c5. The bilobate N-terminal domain (NTD) in N2D intrinsically adopts a closed conformation, leading to a compact NTD tetramer in the N1-N2D receptor. Additionally, crosslinking the ligand-binding domain (LBD) of two N1 protomers significantly elevated the channel open probability (Po) in N1-N2D di-receptors. Surprisingly, the N1-N2C di-receptor adopted both symmetric (minor) and asymmetric (major) conformations, the latter further locked by an allosteric potentiator, PYD-106, binding to a pocket between the NTD and LBD in only one N2C protomer. Finally, the N2A and N2C subunits in the N1-N2A-N2C tri-receptor display a conformation close to one protomer in the N1-N2A and N1-N2C di-receptors, respectively. These findings provide a comprehensive structural understanding of diverse function in major NMDA receptor subtypes.",
+        "authors": "Zhang, Zhang, Wang et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "36309015",
+        "title": "Structural insights into assembly and function of GluN1-2C, GluN1-2A-2C, and GluN1-2D NMDARs.",
+        "abstract": "Neurotransmission mediated by diverse subtypes of N-methyl-D-aspartate receptors (NMDARs) is fundamental for basic brain functions and development as well as neuropsychiatric diseases and disorders. NMDARs are glycine- and glutamate-gated ion channels that exist as heterotetramers composed of obligatory GluN1 and GluN2(A-D) and/or GluN3(A-B). The GluN2C and GluN2D subunits form ion channels with distinct properties and spatio-temporal expression patterns. Here, we provide the structures of the agonist-bound human GluN1-2C NMDAR in the presence and absence of the GluN2C-selective positive allosteric potentiator (PAM), PYD-106, the agonist-bound GluN1-2A-2C tri-heteromeric NMDAR, and agonist-bound GluN1-2D NMDARs by single-particle electron cryomicroscopy. Our analysis shows unique inter-subunit\u00a0and domain arrangements of the GluN2C NMDARs, which contribute to functional regulation and formation of the PAM binding pocket and is distinct from GluN2D NMDARs. Our findings here provide the fundamental blueprint to study GluN2C- and GluN2D-containing NMDARs, which are uniquely involved in neuropsychiatric disorders.",
+        "authors": "Chou, Kang, Simorowski et al.",
+        "year": "2022"
+      },
+      {
+        "pmid": "30872532",
+        "title": "Architecture of the heteromeric GluA1/2 AMPA receptor in complex with the auxiliary subunit TARP \u03b38.",
+        "abstract": "AMPA-type glutamate receptors (AMPARs) mediate excitatory neurotransmission and are central regulators of synaptic plasticity, a molecular mechanism underlying learning and memory. Although AMPARs act predominantly as heteromers, structural studies have focused on homomeric assemblies. Here, we present a cryo-electron microscopy structure of the heteromeric GluA1/2 receptor associated with two transmembrane AMPAR regulatory protein (TARP) \u03b38 auxiliary subunits, the principal AMPAR complex at hippocampal synapses. Within the receptor, the core subunits arrange to give the GluA2 subunit dominant control of gating. This structure reveals the geometry of the Q/R site that controls calcium flux, suggests association of TARP-stabilized lipids, and demonstrates that the extracellular loop of \u03b38 modulates gating by selectively interacting with the GluA2 ligand-binding domain. Collectively, this structure provides a blueprint for deciphering the signal transduction mechanisms of synaptic AMPARs.",
+        "authors": "Herguedas, Watson, Ho et al.",
+        "year": "2019"
+      },
+      {
+        "pmid": "28228639",
+        "title": "GRIN1 mutation associated with intellectual disability alters NMDA receptor trafficking and function.",
+        "abstract": "N-methyl-d-aspartate receptors (NMDARs) play important roles in brain development and neurological disease. We report two individuals with similar dominant de novo GRIN1 mutations (c.1858 G>A and c.1858 G>C; both p.G620R). Both individuals presented at birth with developmental delay and hypotonia associated with behavioral abnormalities and stereotypical movements. Recombinant NMDARs containing the mutant GluN1-G620R together with either GluN2A or GluN2B were evaluated for changes in their trafficking to the plasma membrane and their electrophysiological properties. GluN1-G620R/GluN2A complexes showed a mild reduction in trafficking, a ~2-fold decrease in glutamate and glycine potency, a strong decrease in sensitivity to Mg<sup>2+</sup> block, and a significant reduction of current responses to a maximal effective concentration of agonists. GluN1-G620R/GluN2B complexes showed significantly reduced delivery of protein to the cell surface associated with similarly altered electrophysiology. These results indicate these individuals may have suffered neurodevelopmental deficits as a result of the decreased presence of GluN1-G620R/GluN2B complexes on the neuronal surface during embryonic brain development and reduced current responses of GluN1-G620R-containing NMDARs after birth. These cases emphasize the importance of comprehensive functional characterization of de novo mutations and illustrates how a combination of several distinct features of NMDAR expression, trafficking and function can be present and influence phenotype.",
+        "authors": "Chen, Shieh, Swanger et al.",
+        "year": "2017"
+      }
+    ],
+    "18": [
+      {
+        "pmid": "30872532",
+        "title": "Architecture of the heteromeric GluA1/2 AMPA receptor in complex with the auxiliary subunit TARP \u03b38.",
+        "abstract": "AMPA-type glutamate receptors (AMPARs) mediate excitatory neurotransmission and are central regulators of synaptic plasticity, a molecular mechanism underlying learning and memory. Although AMPARs act predominantly as heteromers, structural studies have focused on homomeric assemblies. Here, we present a cryo-electron microscopy structure of the heteromeric GluA1/2 receptor associated with two transmembrane AMPAR regulatory protein (TARP) \u03b38 auxiliary subunits, the principal AMPAR complex at hippocampal synapses. Within the receptor, the core subunits arrange to give the GluA2 subunit dominant control of gating. This structure reveals the geometry of the Q/R site that controls calcium flux, suggests association of TARP-stabilized lipids, and demonstrates that the extracellular loop of \u03b38 modulates gating by selectively interacting with the GluA2 ligand-binding domain. Collectively, this structure provides a blueprint for deciphering the signal transduction mechanisms of synaptic AMPARs.",
+        "authors": "Herguedas, Watson, Ho et al.",
+        "year": "2019"
+      }
+    ],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "23": [
+      {
+        "pmid": "27356871",
+        "title": "Acetylated tau destabilizes the cytoskeleton in the axon initial segment and is mislocalized to the somatodendritic compartment.",
+        "abstract": "<h4>Background</h4>Neurons are highly polarized cells in which asymmetric axonal-dendritic distribution of proteins is crucial for neuronal function. Loss of polarized distribution of the axonal protein tau is an early sign of Alzheimer's disease (AD) and other neurodegenerative disorders. The cytoskeletal network in the axon initial segment (AIS) forms a barrier between the axon and the somatodentritic compartment, contributing to axonal retention of tau. Although perturbation of the AIS cytoskeleton has been implicated in neurological disorders, the molecular triggers and functional consequence of AIS perturbation are incompletely understood.<h4>Results</h4>Here we report that tau acetylation and consequent destabilization of the AIS cytoskeleton promote the somatodendritic mislocalization of tau. AIS cytoskeletal proteins, including ankyrin G and \u03b2IV-spectrin, were downregulated in AD brains and negatively correlated with an increase in tau acetylated at K274 and K281. AIS proteins were also diminished in transgenic mice expressing tauK274/281Q, a tau mutant that mimics K274 and K281 acetylation. In primary neuronal cultures, the tauK274/281Q mutant caused hyperdynamic microtubules (MTs) in the AIS, shown by live-imaging of MT mobility and fluorescence recovery after photobleaching. Using photoconvertible tau constructs, we found that axonal tauK274/281Q was missorted into the somatodendritic compartment. Stabilizing MTs with epothilone D to restore the cytoskeletal barrier in the AIS prevented tau mislocalization in primary neuronal cultures.<h4>Conclusions</h4>Together, these findings demonstrate that tau acetylation contributes to the pathogenesis of neurodegenerative disease by compromising the cytoskeletal sorting machinery in the AIS.",
+        "authors": "Sohn, Tracy, Son et al.",
+        "year": "2016"
+      },
+      {
+        "pmid": "16525039",
+        "title": "A common ankyrin-G-based mechanism retains KCNQ and NaV channels at electrically active domains of the axon.",
+        "abstract": "KCNQ (KV7) potassium channels underlie subthreshold M-currents that stabilize the neuronal resting potential and prevent repetitive firing of action potentials. Here, antibodies against four different KCNQ2 and KCNQ3 polypeptide epitopes show these subunits concentrated at the axonal initial segment (AIS) and node of Ranvier. AIS concentration of KCNQ2 and KCNQ3, like that of voltage-gated sodium (NaV) channels, is abolished in ankyrin-G knock-out mice. A short motif, common to KCNQ2 and KCNQ3, mediates both in vivo ankyrin-G interaction and retention of the subunits at the AIS. This KCNQ2/KCNQ3 motif is nearly identical to the sequence on NaV alpha subunits that serves these functions. All identified NaV and KCNQ genes of worms, insects, and molluscs lack the ankyrin-G binding motif. In contrast, vertebrate orthologs of NaV alpha subunits, KCNQ2, and KCNQ3 (including from bony fish, birds, and mammals) all possess the motif. Thus, concerted ankyrin-G interaction with KCNQ and NaV channels appears to have arisen through convergent molecular evolution, after the division between invertebrate and vertebrate lineages, but before the appearance of the last common jawed vertebrate ancestor. This includes the historical period when myelin also evolved.",
+        "authors": "Pan, Kao, Horvath et al.",
+        "year": "2006"
+      }
+    ],
+    "24": [
+      {
+        "pmid": "9168980",
+        "title": "Identification of human semaphorin E gene expression in rheumatoid synovial cells by mRNA differential display.",
+        "abstract": "Rheumatoid arthritis (RA) is characterised by chronic inflammation of synovial tissue with aggressive proliferation of synovial cells causing destruction of cartilage and bone. Immunopathological mechanisms, infectious causes and genetic factors have been discussed, but the etiology of the disease has not been understood until now. Especially, the mechanisms driving tumourlike growth and invasive behaviour of fibroblastoid synovial cells have not been identified yet. Our aim is to find cellular factors which are mediators for such pathways. One possibility to approach this, is searching for disease-relevant genes. We applied the mRNA-differential display technique to compare mRNA expression patterns of normal and rheumatic synovial fibroblasts. We identified an upregulation of the human semaphorin E gene in rheumatoid synovial fibroblastoid cells. Interestingly semaphorin E is a member of a protein-family described to play an immunosuppressive role via inhibition cytokines. A relevance of this finding towards the pathogenesis of RA is discussed.",
+        "authors": "Mangasser-Stephan, Dooley, Welter et al.",
+        "year": "1997"
+      }
+    ],
+    "25": [
+      {
+        "pmid": "28822966",
+        "title": "Inhibitory actions of the NRG-1/ErbB4 pathway in macrophages during tissue fibrosis in the heart, skin, and lung.",
+        "abstract": "The neuregulin-1 (NRG-1)/receptor tyrosine-protein kinase erbB (ErbB) system is an endothelium-controlled paracrine system modulating cardiac performance and adaptation. Recent studies have indicated that NRG-1 has antifibrotic effects in the left ventricle, which were explained by direct actions on cardiac fibroblasts. However, the NRG-1/ErbB system also regulates the function of macrophages. In this study, we hypothesized that the antifibrotic effect of NRG-1 in the heart is at least partially mediated through inhibitory effects on macrophages. We also hypothesized that the antifibrotic effect of NRG-1 may be active in other organs, such as the skin and lung. First, in a mouse model of angiotensin II (ANG II)-induced myocardial hypertrophy and fibrosis, NRG-1 treatment (20 \u00b5g\u00b7kg<sup>-1</sup>\u00b7day<sup>-1</sup> ip) significantly attenuated myocardial hypertrophy and fibrosis and improved passive ventricular stiffness (4 wk). Interestingly, 1 wk after exposure to ANG II, NRG-1 already attenuated myocardial macrophage infiltration and cytokine expression. Furthermore, mice with myeloid-specific deletion of the <i>ErbB4</i> gene (<i>ErbB4<sup>F/F</sup>LysM-Cre</i><sup>+/-</sup>) showed an intensified myocardial fibrotic response to ANG II. Consistently, NRG-1 activated the ErbB4 receptor in isolated macrophages, inhibited phosphatidylinositide 3-kinase/Akt and STAT3 signaling pathways, and reduced the release of inflammatory cytokines. Further experiments showed that the antifibrotic and anti-inflammatory effects of NRG-1 were reproducible in mouse models of bleomycin-induced dermal and pulmonary fibrosis. Overall, this study demonstrates that the antifibrotic effect of NRG-1 in the heart is linked to anti-inflammatory activity NRG-1/ErbB4 signaling in macrophages. Second, this study shows that NRG-1 has antifibrotic and anti-inflammatory effects in organs other than the heart, such as the skin and lung.<b>NEW & NOTEWORTHY</b> Our study contributes to the understanding of the antifibrotic effect of neuregulin-1 during myocardial remodeling. Here, we show that the antifibrotic effect of neuregulin-1 is at least partially mediated through anti-inflammatory activity, linked to receptor tyrosine-protein kinase erbB-4 activation in macrophages. Furthermore, we show that this effect is also present outside the heart.",
+        "authors": "Vermeulen, Hervent, Dugaucquier et al.",
+        "year": "2017"
+      },
+      {
+        "pmid": "12466964",
+        "title": "Neuregulin isoforms exhibit distinct patterns of ErbB family receptor activation.",
+        "abstract": "During the last decade, several novel members of the Epidermal Growth Factor family of peptide growth factors have been identified. Most prominent among these are the Neuregulins or Heregulins. To date, four different Neuregulin genes have been identified (Neuregulin1-4) and several different splicing isoforms have been identified for at least two of these genes (Neuregulin1 and Neuregulin2). While Neuregulin1 isoforms have been extensively studied, comparatively little is known about Neuregulin3, Neuregulin4, or the Neuregulin2 isoforms. Indeed, there has been no systematic comparison of the activities of these molecules. Here we demonstrate that Neuregulin2alpha and Neuregulin2beta stimulate ErbB3 tyrosine phosphorylation and coupling to biological responses. In contrast, Neuregulin3 and Neuregulin4 fail to activate ErbB3 signaling. Furthermore, Neuregulin2beta, but not Neuregulin2alpha, stimulates ErbB4 tyrosine phosphorylation and coupling to biological responses. Finally, both Neuregulin3 and Neuregulin4 stimulate modest amounts of ErbB4 tyrosine phosphorylation. However, whereas Neuregulin3 stimulates a modest amount of ErbB4 coupling to biological responses, Neuregulin4 fails to stimulate ErbB4 coupling to biological responses. This suggests that there are qualitative as well as quantitative differences in ErbB family receptor activation by Neuregulin isoforms.",
+        "authors": "Hobbs, Coffing, Le et al.",
+        "year": "2002"
+      },
+      {
+        "pmid": "9275162",
+        "title": "Neuregulin-3 (NRG3): a novel neural tissue-enriched protein that binds and activates ErbB4.",
+        "abstract": "We describe the identification of Neuregulin-3 (NRG3), a novel protein that is structurally related to the neuregulins (NRG1). The NRG1/neuregulins are a diverse family of proteins that arise by alternative splicing from a single gene. These proteins play an important role in controlling the growth and differentiation of glial, epithelial, and muscle cells. The biological effects of NRG1 are mediated by receptor tyrosine kinases ErbB2, ErbB3, and ErbB4. However, genetic studies have suggested that the activity of ErbB4 may also be regulated in the central nervous system by a ligand distinct from NRG1. NRG3 is predicted to contain an extracellular domain with an epidermal growth factor (EGF) motif, a transmembrane domain, and a large cytoplasmic domain. We show that the EGF-like domain of NRG3 binds to the extracellular domain of ErbB4 in vitro. Moreover, NRG3 binds to ErbB4 expressed on cells and stimulates tyrosine phosphorylation of this receptor. The expression of NRG3 is highly restricted to the developing and adult nervous system. These data suggest that NRG3 is a novel, neural-enriched ligand for ErbB4.",
+        "authors": "Zhang, Sliwkowski, Mark et al.",
+        "year": "1997"
+      },
+      {
+        "pmid": "8702723",
+        "title": "The epidermal growth factor receptor couples transforming growth factor-alpha, heparin-binding epidermal growth factor-like factor, and amphiregulin to Neu, ErbB-3, and ErbB-4.",
+        "abstract": "The epidermal growth factor (EGF) family hormones amphiregulin (AR), transforming growth factor-alpha (TGF-alpha), and heparin-binding EGF-like growth factor (HB-EGF) are thought to play significant roles in the genesis or progression of a number of human malignancies. However, the ability of these ligands to activate all four erbB family receptors has not been evaluated. Therefore, we have assessed the stimulation of erbB family receptor tyrosine phosphorylation by these hormones in a panel of mouse Ba/F3 cell lines expressing the four erbB family receptors, singly and in pairwise combinations. We also measured the stimulation of interleukin-3-independent survival or proliferation in this panel of Ba/F3 cell lines to compare the patterns of erbB family receptor coupling to physiologic responses induced by these peptides. EGF, TGF-alpha, AR, and HB-EGF all stimulated qualitatively similar patterns of erbB family receptor tyrosine phosphorylation and coupling to physiologic responses. Therefore, EGF, TGF-alpha, AR, and HB-EGF are functionally identical in this model system and behave differently from the EGF family hormones betacellulin and neuregulins.",
+        "authors": "Riese, Kim, Elenius et al.",
+        "year": "1996"
+      }
+    ],
+    "26": [],
+    "27": [
+      {
+        "pmid": "19720736",
+        "title": "MBNL and CELF proteins regulate alternative splicing of the skeletal muscle chloride channel CLCN1.",
+        "abstract": "The expression and function of the skeletal muscle chloride channel CLCN1/ClC-1 is regulated by alternative splicing. Inclusion of the CLCN1 exon 7A is aberrantly elevated in myotonic dystrophy (DM), a genetic disorder caused by the expansion of a CTG or CCTG repeat. Increased exon 7A inclusion leads to a reduction in CLCN1 function, which can be causative of myotonia. Two RNA-binding protein families--muscleblind-like (MBNL) and CUG-BP and ETR-3-like factor (CELF) proteins--are thought to mediate the splicing misregulation in DM. Here, we have identified multiple factors that regulate the alternative splicing of a mouse Clcn1 minigene. The inclusion of exon 7A was repressed by MBNL proteins while promoted by an expanded CUG repeat or CELF4, but not by CUG-BP. Mutation analyses suggested that exon 7A and its flanking region mediate the effect of MBNL1, whereas another distinct region in intron 6 mediates that of CELF4. An exonic splicing enhancer essential for the inclusion of exon 7A was identified at the 5' end of this exon, which might be inhibited by MBNL1. Collectively, these results provide a mechanistic model for the regulation of Clcn1 splicing, and reveal novel regulatory properties of MBNL and CELF proteins.",
+        "authors": "Kino, Washizu, Oma et al.",
+        "year": "2009"
+      }
+    ],
+    "28": [],
+    "29": [
+      {
+        "pmid": "36696443",
+        "title": "Cryo-EM structure of human voltage-gated sodium channel Na<sub>v</sub>1.6.",
+        "abstract": "Voltage-gated sodium channel Na<sub>v</sub>1.6 plays a crucial role in neuronal firing in the central nervous system (CNS). Aberrant function of Na<sub>v</sub>1.6 may lead to epilepsy and other neurological disorders. Specific inhibitors of Na<sub>v</sub>1.6 thus have therapeutic potentials. Here we present the cryo-EM structure of human Na<sub>v</sub>1.6 in the presence of auxiliary subunits \u03b21 and fibroblast growth factor homologous factor 2B (FHF2B) at an overall resolution of 3.1 \u00c5. The overall structure represents an inactivated state with closed pore domain (PD) and all \"up\" voltage-sensing domains. A conserved carbohydrate-aromatic interaction involving Trp302 and Asn326, together with the \u03b21 subunit, stabilizes the extracellular loop in repeat I. Apart from regular lipids that are resolved in the EM map, an unprecedented Y-shaped density that belongs to an unidentified molecule binds to the PD, revealing a potential site for developing Na<sub>v</sub>1.6-specific blockers. Structural mapping of disease-related Na<sub>v</sub>1.6 mutations provides insights into their pathogenic mechanism.",
+        "authors": "Fan, Huang, Jin et al.",
+        "year": "2023"
+      },
+      {
+        "pmid": "21817159",
+        "title": "Fibroblast growth factor homologous factor 13 regulates Na+ channels and conduction velocity in murine hearts.",
+        "abstract": "<h4>Rationale</h4>Fibroblast growth factor homologous factors (FHFs), a subfamily of fibroblast growth factors (FGFs) that are incapable of functioning as growth factors, are intracellular modulators of Na(+) channels and have been linked to neurodegenerative diseases. Although certain FHFs have been found in embryonic heart, they have not been reported in adult heart, and they have not been shown to regulate endogenous cardiac Na(+) channels or to participate in cardiac pathophysiology.<h4>Objective</h4>We tested whether FHFs regulate Na(+) channels in murine heart.<h4>Methods and results</h4>We demonstrated that isoforms of FGF13 are the predominant FHFs in adult mouse ventricular myocytes. FGF13 binds directly to, and colocalizes with, the Na(V)1.5 Na(+) channel in the sarcolemma of adult mouse ventricular myocytes. Knockdown of FGF13 in adult mouse ventricular myocytes revealed a loss of function of Na(V)1.5-reduced Na(+) current density, decreased Na(+) channel availability, and slowed Na(V)1.5-reduced Na(+) current recovery from inactivation. Cell surface biotinylation experiments showed \u224845% reduction in Na(V)1.5 protein at the sarcolemma after FGF13 knockdown, whereas no changes in whole-cell Na(V)1.5 protein or in mRNA level were observed. Optical imaging in neonatal rat ventricular myocyte monolayers demonstrated slowed conduction velocity and a reduced maximum capture rate after FGF13 knockdown.<h4>Conclusion</h4>These findings show that FHFs are potent regulators of Na(+) channels in adult ventricular myocytes and suggest that loss-of-function mutations in FHFs may underlie a similar set of cardiac arrhythmias and cardiomyopathies that result from Na(V)1.5 loss-of-function mutations.",
+        "authors": "Wang, Hennessey, Kirkton et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "21051419",
+        "title": "Mutations in sodium channel \u03b2-subunit SCN3B are associated with early-onset lone atrial fibrillation.",
+        "abstract": "<h4>Aims</h4>Atrial fibrillation (AF) is the most frequent arrhythmia. Screening of SCN5A-the gene encoding the \u03b1-subunit of the cardiac sodium channel-has indicated that disturbances of the sodium current may play a central role in the mechanism of lone AF. We tested the hypothesis that lone AF in young patients is associated with genetic mutations in SCN3B and SCN4B, the genes encoding the two \u03b2-subunits of the cardiac sodium channel.<h4>Methods and results</h4>In 192 unrelated lone AF patients, the entire coding sequence and splice junctions of SCN3B and SCN4B were bidirectionally sequenced. Three non-synonymous mutations were found in SCN3B (R6K, L10P, and M161T). Two mutations were novel (R6K and M161T). None of the mutations were present in the control group (n = 432 alleles), nor have any been previously reported in conjunction with AF. All SCN3B mutations affected residues that are evolutionarily conserved across species. Electrophysiological studies on the SCN3B mutation were carried out and all three SCN3B mutations caused a functionally reduced sodium channel current. One synonymous variant was found in SCN4B.<h4>Conclusion</h4>In 192 young lone AF patients, we found three patients with suspected disease-causing non-synonymous mutations in SCN3B, indicating that mutations in this gene contribute to the mechanism of lone AF. The three mutations in SCN3B were investigated electrophysiologically and all led to loss of function in the sodium current, supporting the hypothesis that decreased sodium current enhances AF susceptibility.",
+        "authors": "Olesen, Jespersen, Nielsen et al.",
+        "year": "2011"
+      },
+      {
+        "pmid": "20226894",
+        "title": "Sudden infant death syndrome-associated mutations in the sodium channel beta subunits.",
+        "abstract": "<h4>Background</h4>Approximately 10% of sudden infant death syndrome (SIDS) cases may stem from potentially lethal cardiac channelopathies, with approximately half of channelopathic SIDS involving the Na(V)1.5 cardiac sodium channel. Recently, Na(V) beta subunits have been implicated in various cardiac arrhythmias. Thus, the 4 genes encoding Na(V) beta subunits represent plausible candidate genes for SIDS.<h4>Objective</h4>This study sought to determine the spectrum, prevalence, and functional consequences of sodium channel beta-subunit mutations in a SIDS cohort.<h4>Methods</h4>In this institutional review board-approved study, mutational analysis of the 4 beta-subunit genes, SCN1B to 4B, was performed using polymerase chain reaction, denaturing high-performance liquid chromatography, and direct DNA sequencing of DNA derived from 292 SIDS cases. Engineered mutations were coexpressed with SCN5A in HEK 293 cells and were whole-cell patch clamped. One of the putative SIDS-associated mutations was similarly studied in adenovirally transduced adult rat ventricular myocytes.<h4>Results</h4>Three rare (absent in 200 to 800 reference alleles) missense mutations (beta3-V36M, beta3-V54G, and beta4-S206L) were identified in 3 of 292 SIDS cases. Compared with SCN5A+beta3-WT, beta3-V36M significantly decreased peak I(Na) and increased late I(Na), whereas beta3-V54G resulted in a marked loss of function. beta4-S206L accentuated late I(Na) and positively shifted the midpoint of inactivation compared with SCN5A+beta4-WT. In native cardiomyocytes, beta4-S206L accentuated late I(Na) and increased the ventricular action potential duration compared with beta4-WT.<h4>Conclusion</h4>This study provides the first molecular and functional evidence to implicate the Na(V) beta subunits in SIDS pathogenesis. Altered Na(V)1.5 sodium channel function due to beta-subunit mutations may account for the molecular pathogenic mechanism underlying approximately 1% of SIDS cases.",
+        "authors": "Tan, Pundi, Van Norstrand et al.",
+        "year": "2010"
+      },
+      {
+        "pmid": "20042427",
+        "title": "Loss-of-function mutation of the SCN3B-encoded sodium channel {beta}3 subunit associated with a case of idiopathic ventricular fibrillation.",
+        "abstract": "<h4>Aims</h4>Loss-of-function mutations in the SCN5A-encoded sodium channel SCN5A or Nav1.5 have been identified in idiopathic ventricular fibrillation (IVF) in the absence of Brugada syndrome phenotype. Nav1.5 is regulated by four sodium channel auxiliary beta subunits. Here, we report a case with IVF and a novel mutation in the SCN3B-encoded sodium channel beta subunit Navbeta3 that causes a loss of function of Nav1.5 channels in vitro.<h4>Methods and results</h4>Comprehensive open reading frame mutational analysis of KCNQ1, KCNH2, SCN5A, KCNE1, KCNE2, GPD1L, four sodium channel beta subunit genes (SCN1-4B), and targeted scan of RYR2 was performed. A novel missense mutation, Navbeta3-V54G, was identified in a 20-year-old male following witnessed collapse and defibrillation from VF. The ECG exhibited epsilon waves, and imaging studies demonstrated a structurally normal heart. The mutated residue was highly conserved across species, localized to the Navbeta3 extracellular domain, and absent in 800 reference alleles. We found that HEK-293 cells had endogenous Navbeta3, but COS cells did not. Co-expression of Nav1.5 with Navbeta3-V54G (with or without co-expression of the Navbeta1 subunit) in both HEK-293 cells and COS cells revealed a significant decrease in peak sodium current and a positive shift of inactivation compared with WT. Co-immunoprecipitation experiments showed association of Navbeta3 with Nav1.5, and immunocytochemistry demonstrated a dramatic decrease in trafficking to the plasma membrane when co-expressed with mutant Navbeta3-V54G.<h4>Conclusion</h4>This study provides molecular and cellular evidence implicating mutations in Navbeta3 as a cause of IVF.",
+        "authors": "Valdivia, Medeiros-Domingo, Ye et al.",
+        "year": "2010"
+      }
+    ]
+  },
+  "hub_gene_abstracts": {},
+  "snippet_evidence": {
+    "5": [],
+    "11": [],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "26": [],
+    "28": [],
+    "0": [
+      {
+        "paperId": "31576498",
+        "pmid": "",
+        "title": "Biochemical Evidence for the Co-association of ThreeN-Methyl-d-aspartate (NMDA) R2 Subunits in Recombinant NMDA Receptors*",
+        "authors": "L. M. Hawkins, P. Chazot, F. Stephenson",
+        "snippet_text": "This study reports the isolation of recombinant NMDA receptors in which three NR2 subunits are co-assembled within the same NMDA receptor complex. Furthermore, the NR1/NR2 subunit ratio was determined for both native and recombinant receptors; this ratio suggested a greater number of NR2 compared with NR1 subunits per receptor. Thus, in context with previous studies that support the conclusion that at least two copies of the NR1 subunit co-assemble within the NMDA receptor complex (15)(16)(17), these results suggest that the NMDA receptor is at least pentameric in structure. This is, however, at variance with the NR2 subunit copy number reported from electrophysiological studies. In one study, wild-type and mutant NR2B subunits were coexpressed with wild-type NR1 in Xenopus oocytes. Agonist activation of the resultant receptors identified three discrete receptor populations that corresponded to wild-type, mutant, and composite wild-type/mutant receptors. Analysis of the relative proportions of the three receptor populations formed by varying the ratio of the mutant to the wild-type NR2B subunit clones transfected was indicative of two NR2 subunits/NMDA receptor complex (17). Using an alternative mutant NR2B, NR2B(N589Q), Premkumar and Auerbach ( 16) also concluded that there are two copies of the NR2 subunit/NMDA receptor complex. However, Be \u00b4he \u00b4et al. (15) commented that their results from similar studies could not be explained by the presence of just two NR2 subunits. Similar methods were used to determine the number of NR1 subunits/receptor. The results again were inconclusive, with either two (15,17) or three (16) NR1 subunits/NMDA receptor complex. Attempts to resolve subunit copy numbers by the analysis of channel properties is limited by the elucidation of clearly defined phenotypes for all subunit combinations formed, which may explain the different results in the literature. In this study, biochemical methods were used to identify the subunit composition of recombinant NMDA receptors; and thus, the constraints of functional analysis are negated.",
+        "score": 0.26022752880692424
+      }
+    ],
+    "1": [
+      {
+        "paperId": "324555",
+        "pmid": "",
+        "title": "The X-linked intellectual disability protein IL1RAPL1 regulates excitatory synapse formation by binding PTP\u03b4 and RhoGAP2",
+        "authors": "Pamela Valnegri, C. Montrasio, D. Brambilla et al.",
+        "snippet_text": "), but not GluR1 (relative to control, 3.3 + 0.27 versus 2.8 + 0.31) or GluR2 (relative to control, 2.7 + 0.27 versus 2.2 + 0.45) (Fig. 5A and B).\n\nThese data demonstrate that RhoGAP2 is a novel synaptic RhoGAP that interacts with IL1RAPL1 and might contribute to excitatory synapse formation.",
+        "score": 0.31678229488991594
+      },
+      {
+        "paperId": "7093386",
+        "pmid": "",
+        "title": "Neuregulin-1 Reverses Long-Term Potentiation at CA1 Hippocampal Synapses",
+        "authors": "O. Kwon, M. Longart, D. Vullhorst et al.",
+        "snippet_text": "Neuregulin-1 (NRG-1) has been identified genetically as a schizophrenia susceptibility gene, but its function in the adult brain is unknown. Here, we show that NRG-1\u03b2 does not affect basal synaptic transmission but reverses long-term potentiation (LTP) at hippocampal Schaffer collateral\u2192CA1 synapses in an activity- and time-dependent manner. Depotentiation by NRG-1\u03b2 is blocked by two structurally distinct and selective ErbB receptor tyrosine kinase inhibitors. Moreover, ErbB receptor inhibition increases LTP at potentiated synapses and blocks LTP reversal by theta-pulse stimuli. NRG-1\u03b2 selectively reduces AMPA, not NMDA, receptor EPSCs and has no effect on paired-pulse facilitation ratios. Live imaging of hippocampal neurons transfected with receptors fused to superecliptic green fluorescent protein, as well as quantitative analysis of native receptors, show that NRG-1\u03b2 stimulates the internalization of surface glutamate receptor 1-containing AMPA receptors. This novel regulation of LTP by NRG-1 has important implications for the modulation of synaptic homeostasis and schizophrenia.",
+        "score": 0.2797152646612247
+      }
+    ],
+    "2": [],
+    "3": [
+      {
+        "paperId": "14889930",
+        "pmid": "",
+        "title": "Inhibitory Synapse Formation in a Co-culture Model Incorporating GABAergic Medium Spiny Neurons and HEK293 Cells Stably Expressing GABAA Receptors",
+        "authors": "Laura E. Brown, C. Fuchs, Martin W. Nicholson et al.",
+        "snippet_text": "the plasma membrane are dependent on the presence of \u03b2-subunits 15,16 . However, selective incorporation of different GABA A R subtypes into distinct types of synapses correlates well with the presence of specific \u03b1 subunits (\u03b11, \u03b12, \u03b13 or \u03b15) 7,17,18 . Importantly, deletion of \u03b11 or \u03b12 subunit in mice causes ultrastructural changes at inhibitory synapses 19 . This suggests that GABA A Rs themselves may play a direct role in regulating synapse formation.\n\nEvidence indicates that GABAergic synapse development is a precisely co-ordinated sequence of events, in which both the neuronal targets contacted by different types of inhibitory axons and the receptors that are clustered at each class of inhibitory synapse are selective and functionally attuned 17,[20][21][22] . This fundamental principle of specificity at GABAergic synapses raises the question as to how the pre-and postsynaptic partners recognize each other during the initiation of synaptic contacts.\n\nIn vitro co-culture assays have been applied successfully to study some of the mechanisms of synapse formation and to test the role of individual synaptic cleft-spanning proteins in this process. One of the common trans-synaptic interacting protein combinations that function bi-directionally to mediate synapse formation and maturation, are the Neurexins (Nrxns) and Neuroligins (NLs). Nrxns are presynaptic proteins that exhibit alternative splicing within their laminin-neurexin-sex hormone-binding protein domains, giving rise to many different isoforms 23 . While the Nrxns also interact with other proteins, NLs are thought to be their ubiquitous postsynaptic partners 24 . Together these proteins contribute to holding the presynaptic and postsynaptic membranes in close and rigid apposition 25 . The two most abundant isoforms are NL-1 and NL-2 which are present at excitatory and inhibitory synapses, respectively 26 . One of the earliest co-culture model systems, designed to investigate trans-synaptic protein interactions, employed different types of non-neuronal cells, most commonly",
+        "score": 0.26935366398481736
+      },
+      {
+        "paperId": "5002047",
+        "pmid": "",
+        "title": "GABAA receptors can initiate the formation of functional inhibitory GABAergic synapses",
+        "authors": "C. Fuchs, Karine Abitbol, J. Burden et al.",
+        "snippet_text": "Neurexin-2b, either overexpressed in the postsynaptic cell or applied to the culture as free protein, decreased GABA currents via direct interaction with a1-GABA A Rs, in a neuroligin-independent manner. It is possible that, in the absence of NL2, neurexin-2b interacts with GABA A Rs in a way that promotes adhesion but suppresses receptor activity, and that this suppression is relieved or reduced when NL2 is also present. During synapse formation, an interaction between the appropriate presynaptic neurexin and postsynaptic GABA A R might be sufficient to establish a synaptic connection. This connection would then become stronger as NL2 became colocalized with the receptors, and the interaction between receptor and neurexin was thereby modified. In vivo, NL2 would then recruit further postsynaptic density proteins (Poulopoulos et al., 2009), and perhaps this, together with the increased synaptic activity, would further strengthen and stabilize the connection (Hartman et al., 2006;Varoqueaux et al., 2006;Chubykin et al., 2007). As a very reduced system was used for this study, it is not possible to propose that complex developments at the postsynaptic density could have initiated an increase in the stability or density of the innervation here. The most likely explanation for this is therefore that the enhanced synaptic activity, resulting from the larger quantal amplitudes in HEK293-GABA A R-NL2 cells, contributes to the increase in the density of innervation. Although the proposed modulatory role of neurexins and NL2 in synapse formation initiated by GABA A Rs awaits further investigation, the co-culture system described here may be particularly advantageous in these experiments, as it provides tight control of expression and precise molecular manipulation of component players, both individually and in combination. \n\nIn conclusion, using a multidisciplinary approach, we have demonstrated that functional synapses can form in the absence of neuronal trans-synaptic adhesion molecules, if GABA A Rs are present.",
+        "score": 0.2084741009667517
+      }
+    ],
+    "4": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "12": [],
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": [],
+    "17": [],
+    "18": [],
+    "23": [],
+    "24": [],
+    "25": [
+      {
+        "paperId": "20270106",
+        "pmid": "",
+        "title": "The Epidermal Growth Factor Receptor Couples Transforming Growth Factor-\u03b1, Heparin-binding Epidermal Growth Factor-like Factor, and Amphiregulin to Neu, ErbB-3, and ErbB-4*",
+        "authors": "D. Riese, Edward D. Kim, K. Elenius et al.",
+        "snippet_text": "The Epidermal Growth Factor Receptor Couples Transforming Growth Factor-\u03b1, Heparin-binding Epidermal Growth Factor-like Factor, and Amphiregulin to Neu, ErbB-3, and ErbB-4*",
+        "score": 0.31503165799208427
+      }
+    ],
+    "27": [],
+    "29": []
+  },
+  "hub_gene_snippets": {},
+  "co_annotation_snippets": {
+    "6": {
+      "GRIN1": [],
+      "GRIN2B": []
+    },
+    "8": {
+      "GRIN2A": [],
+      "GRIN1": []
+    }
+  },
+  "cross_theme_snippets": {
+    "GRIN1": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "Our data illustrate that the interaction of MAGUK proteins and SFK regulates the cleavage of NR2 subunits by calpain in living cells and that when calpain-mediated cleavage of NR2B is examined in situ, only Fyn alters this process. \n\nFyn significantly contributes to tyrosine phosphorylation of NMDA receptors, and Fyn mutant mice show defects in NMDA receptor-dependent LTP (43). However, NMDA receptor activation itself has not been shown to stimulate Fyn activity. In the present study, phosphorylation of NR2B Tyr-1336 increased with NMDA receptor stimulation in cultured hippocampal neurons or HEK cells expressing NR2B-containing NMDA receptors. These effects were blocked with MK801 and suggest that NMDA receptors could directly activate Fyn. However, NMDA receptor stimulation did not enhance phosphorylation of NR2B Tyr-1472, suggesting that NMDA receptor stimulation may instead direct the activity of Fyn to a different site on the NMDA receptor. Selective Fyn-mediated phosphorylation of Tyr-1336 is also seen in neurons treated with ethanol, in which it is controlled by dissociation of RACK1 from NR2B (33). Nevertheless, the present results indicate that the NR2B/Fyn/calpain interactions may act as part of a Fyn kinase cascade, which in turn regulates NMDA receptor features through promoting calpain-mediated cleavage of NR2B subunits. Further experiments are required to investigate the mechanisms by which NMDA receptor activation is coupled to Fyn-mediated phosphorylation of NR2B Tyr-1336 and calpainmediated cleavage of NR2B in neuronal pathophysiology. \n\nIn summary, the present study provides a model for understanding the control and selectivity of neuronal calpain for selected proteins in synaptic and extrasynaptic membranes.",
+        "score": 0.2910408335228108
+      },
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "We expressed NMDA receptor subunits with PSD-95 or with SAP-102 (synapse-associated protein 102), a MAGUK protein similar to PSD-95 that binds to NR2 subunits but does not alter cleavage of NR2B by calpain (24). In agreement with others (23), recombinant NR2B could be phosphorylated by FynY531F at Tyr-1336 when NR2B was cotransfected with PSD-95 (Fig. 4A, last lane). Phospho-Tyr-1336 was also detected in cells transfected with NR1/2A/2B/FynY531F and SAP-102 (Fig. 4A, middle lane). Replacing PSD-95 or SAP-102 with an empty vector control led to no detectable phosphorylation of NR2B-Tyr-1336 (Fig. 4A, first lane), suggesting that PSD-95 or SAP-102 is needed for Fyn-mediated phosphorylation of NR2B-Tyr-1336 (Fig. 4A). We next studied whether Fyn-mediated phosphorylation of NR2B at Tyr-1336 altered calpain-mediated cleavage of NR2B in this system. Following 100 M glutamate and 100 M glycine application, full-length NR2B immunoreactivity decreased by 29% in cells transfected with NR1/2A/2B/SAP-102/vector compared with those cells without agonist stimulation (control, 100 \u03ee 5%; Glu, 71 \u03ee 1%; p \u03ed 0.0042 versus control; n \u03ed 6 each) (Fig. 4, B and C), whereas fulllength NR2B immunoreactivity in cells expressing NR1/2A/2B/SAP-102/FynY531F decreased by 62% (control, 100 \u03ee 3%; Glu, 38 \u03ee 2%; p \u03ed 0.0001 versus control; n \u03ed 6 each) (Fig. 4, B and C).",
+        "score": 0.28246718952177247
+      }
+    ],
+    "GRIN2B": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "The N-methyl-D-aspartate (NMDA) 2 receptor is a calciumpermeable ionotropic glutamate receptor requiring glutamate, glycine, and membrane depolarization for activation. These receptors play crucial roles in brain development, excitatory neurotransmission, and synaptic plasticity but also may contribute to the pathogenesis of neurological disorders, including ischemia, epilepsy, and Huntington's disease (1)(2)(3)(4). NMDA receptors are made from heteromeric assemblies of different subunits called NR1 and NR2 (NR2A to -D) (5)(6)(7)(8). The NR2B subunit is essential for both neonatal and mature NMDA receptors and is highly expressed in the entire embryonic brain and the adult forebrain (9). In the hippocampus, the major neonatal receptor is believed to contain two NR1 and two NR2B subunits, whereas the major receptor in more mature synapses probably contains two NR1 subunits, an NR2A subunit, and an NR2B subunit. Analysis of NR2B-null mice has suggested the physiological importance of NR2B, since the absence of NR2Bcontaining NMDA receptors in NR2B \u03ea/\u03ea mice leads to perinatal death, whereas mice lacking NR2A, NR2C, and NR2D subtypes are viable (10 -12). \n\nNR2B subunits have long C-terminal tails that link NR2B to intracellular pathways. Like NR2B-deficient mice, mice expressing NR2B subunits with truncated C-terminal domains die shortly after birth (13), showing the physiological importance of the intracellular region of NR2B. Therefore, processes that modify the C-terminal region of NR2B may alter the physiological events mediated by NR2B-containing receptors. Calpain and tyrosine kinases regulate NMDA receptors through the C-terminal domain.",
+        "score": 0.3685763966626367
+      },
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "We expressed NMDA receptor subunits with PSD-95 or with SAP-102 (synapse-associated protein 102), a MAGUK protein similar to PSD-95 that binds to NR2 subunits but does not alter cleavage of NR2B by calpain (24). In agreement with others (23), recombinant NR2B could be phosphorylated by FynY531F at Tyr-1336 when NR2B was cotransfected with PSD-95 (Fig. 4A, last lane). Phospho-Tyr-1336 was also detected in cells transfected with NR1/2A/2B/FynY531F and SAP-102 (Fig. 4A, middle lane). Replacing PSD-95 or SAP-102 with an empty vector control led to no detectable phosphorylation of NR2B-Tyr-1336 (Fig. 4A, first lane), suggesting that PSD-95 or SAP-102 is needed for Fyn-mediated phosphorylation of NR2B-Tyr-1336 (Fig. 4A). We next studied whether Fyn-mediated phosphorylation of NR2B at Tyr-1336 altered calpain-mediated cleavage of NR2B in this system. Following 100 M glutamate and 100 M glycine application, full-length NR2B immunoreactivity decreased by 29% in cells transfected with NR1/2A/2B/SAP-102/vector compared with those cells without agonist stimulation (control, 100 \u03ee 5%; Glu, 71 \u03ee 1%; p \u03ed 0.0042 versus control; n \u03ed 6 each) (Fig. 4, B and C), whereas fulllength NR2B immunoreactivity in cells expressing NR1/2A/2B/SAP-102/FynY531F decreased by 62% (control, 100 \u03ee 3%; Glu, 38 \u03ee 2%; p \u03ed 0.0001 versus control; n \u03ed 6 each) (Fig. 4, B and C).",
+        "score": 0.340807846142792
+      }
+    ],
+    "GRIN2A": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "Our data illustrate that the interaction of MAGUK proteins and SFK regulates the cleavage of NR2 subunits by calpain in living cells and that when calpain-mediated cleavage of NR2B is examined in situ, only Fyn alters this process. \n\nFyn significantly contributes to tyrosine phosphorylation of NMDA receptors, and Fyn mutant mice show defects in NMDA receptor-dependent LTP (43). However, NMDA receptor activation itself has not been shown to stimulate Fyn activity. In the present study, phosphorylation of NR2B Tyr-1336 increased with NMDA receptor stimulation in cultured hippocampal neurons or HEK cells expressing NR2B-containing NMDA receptors. These effects were blocked with MK801 and suggest that NMDA receptors could directly activate Fyn. However, NMDA receptor stimulation did not enhance phosphorylation of NR2B Tyr-1472, suggesting that NMDA receptor stimulation may instead direct the activity of Fyn to a different site on the NMDA receptor. Selective Fyn-mediated phosphorylation of Tyr-1336 is also seen in neurons treated with ethanol, in which it is controlled by dissociation of RACK1 from NR2B (33). Nevertheless, the present results indicate that the NR2B/Fyn/calpain interactions may act as part of a Fyn kinase cascade, which in turn regulates NMDA receptor features through promoting calpain-mediated cleavage of NR2B subunits. Further experiments are required to investigate the mechanisms by which NMDA receptor activation is coupled to Fyn-mediated phosphorylation of NR2B Tyr-1336 and calpainmediated cleavage of NR2B in neuronal pathophysiology. \n\nIn summary, the present study provides a model for understanding the control and selectivity of neuronal calpain for selected proteins in synaptic and extrasynaptic membranes.",
+        "score": 0.29984009973440284
+      },
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "The N-methyl-D-aspartate (NMDA) 2 receptor is a calciumpermeable ionotropic glutamate receptor requiring glutamate, glycine, and membrane depolarization for activation. These receptors play crucial roles in brain development, excitatory neurotransmission, and synaptic plasticity but also may contribute to the pathogenesis of neurological disorders, including ischemia, epilepsy, and Huntington's disease (1)(2)(3)(4). NMDA receptors are made from heteromeric assemblies of different subunits called NR1 and NR2 (NR2A to -D) (5)(6)(7)(8). The NR2B subunit is essential for both neonatal and mature NMDA receptors and is highly expressed in the entire embryonic brain and the adult forebrain (9). In the hippocampus, the major neonatal receptor is believed to contain two NR1 and two NR2B subunits, whereas the major receptor in more mature synapses probably contains two NR1 subunits, an NR2A subunit, and an NR2B subunit. Analysis of NR2B-null mice has suggested the physiological importance of NR2B, since the absence of NR2Bcontaining NMDA receptors in NR2B \u03ea/\u03ea mice leads to perinatal death, whereas mice lacking NR2A, NR2C, and NR2D subtypes are viable (10 -12). \n\nNR2B subunits have long C-terminal tails that link NR2B to intracellular pathways. Like NR2B-deficient mice, mice expressing NR2B subunits with truncated C-terminal domains die shortly after birth (13), showing the physiological importance of the intracellular region of NR2B. Therefore, processes that modify the C-terminal region of NR2B may alter the physiological events mediated by NR2B-containing receptors. Calpain and tyrosine kinases regulate NMDA receptors through the C-terminal domain.",
+        "score": 0.2853005396852057
+      }
+    ],
+    "FGF13": [
+      {
+        "paperId": "256229845",
+        "pmid": "",
+        "title": "Cryo-EM structure of human voltage-gated sodium channel Nav1.6",
+        "authors": "Xiao Fan, Jian Huang, Xueqin Jin et al.",
+        "snippet_text": "Cryo-EM structure of human voltage-gated sodium channel Nav1.6",
+        "score": 0.24156778710184915
+      },
+      {
+        "paperId": "256229845",
+        "pmid": "",
+        "title": "Cryo-EM structure of human voltage-gated sodium channel Nav1.6",
+        "authors": "Xiao Fan, Jian Huang, Xueqin Jin et al.",
+        "snippet_text": "Significance Epilepsy is a chronic neurological disorder that affects approximately 50 million people of all ages worldwide. Nav1.6, a voltage-gated sodium channel that mainly functions in the central nervous system, plays a key role in neuronal firing. Mutations in Nav1.6 are associated with developmental and epileptic encephalopathy and other diseases. Here we report the cryo-EM structure of human Nav1.6 co-expressed with \u03b21 and FHF2B. An intact extracellular loop above the pore domain and a longer glycan chain in the first repeat are resolved, revealing a conserved interaction between Trp302 and the glycan on Asn326. An unprecedented density that belongs to a yet to be identified molecule provides clue to the development of antiepileptic drugs specifically targeting Nav1.6.",
+        "score": 0.21524385473925248
+      }
+    ],
+    "SCN3B": [],
+    "PTPRD": [],
+    "PPFIA2": [],
+    "CNTNAP2": [],
+    "NEDD4L": [],
+    "KCNQ3": []
+  },
+  "cross_theme_gaf_snippets": {
+    "GRIN1": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "Our data illustrate that the interaction of MAGUK proteins and SFK regulates the cleavage of NR2 subunits by calpain in living cells and that when calpain-mediated cleavage of NR2B is examined in situ, only Fyn alters this process. \n\nFyn significantly contributes to tyrosine phosphorylation of NMDA receptors, and Fyn mutant mice show defects in NMDA receptor-dependent LTP (43). However, NMDA receptor activation itself has not been shown to stimulate Fyn activity. In the present study, phosphorylation of NR2B Tyr-1336 increased with NMDA receptor stimulation in cultured hippocampal neurons or HEK cells expressing NR2B-containing NMDA receptors. These effects were blocked with MK801 and suggest that NMDA receptors could directly activate Fyn. However, NMDA receptor stimulation did not enhance phosphorylation of NR2B Tyr-1472, suggesting that NMDA receptor stimulation may instead direct the activity of Fyn to a different site on the NMDA receptor. Selective Fyn-mediated phosphorylation of Tyr-1336 is also seen in neurons treated with ethanol, in which it is controlled by dissociation of RACK1 from NR2B (33). Nevertheless, the present results indicate that the NR2B/Fyn/calpain interactions may act as part of a Fyn kinase cascade, which in turn regulates NMDA receptor features through promoting calpain-mediated cleavage of NR2B subunits. Further experiments are required to investigate the mechanisms by which NMDA receptor activation is coupled to Fyn-mediated phosphorylation of NR2B Tyr-1336 and calpainmediated cleavage of NR2B in neuronal pathophysiology. \n\nIn summary, the present study provides a model for understanding the control and selectivity of neuronal calpain for selected proteins in synaptic and extrasynaptic membranes.",
+        "score": 0.2910408335228108
+      }
+    ],
+    "GRIN2B": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "The N-methyl-D-aspartate (NMDA) 2 receptor is a calciumpermeable ionotropic glutamate receptor requiring glutamate, glycine, and membrane depolarization for activation. These receptors play crucial roles in brain development, excitatory neurotransmission, and synaptic plasticity but also may contribute to the pathogenesis of neurological disorders, including ischemia, epilepsy, and Huntington's disease (1)(2)(3)(4). NMDA receptors are made from heteromeric assemblies of different subunits called NR1 and NR2 (NR2A to -D) (5)(6)(7)(8). The NR2B subunit is essential for both neonatal and mature NMDA receptors and is highly expressed in the entire embryonic brain and the adult forebrain (9). In the hippocampus, the major neonatal receptor is believed to contain two NR1 and two NR2B subunits, whereas the major receptor in more mature synapses probably contains two NR1 subunits, an NR2A subunit, and an NR2B subunit. Analysis of NR2B-null mice has suggested the physiological importance of NR2B, since the absence of NR2Bcontaining NMDA receptors in NR2B \u03ea/\u03ea mice leads to perinatal death, whereas mice lacking NR2A, NR2C, and NR2D subtypes are viable (10 -12). \n\nNR2B subunits have long C-terminal tails that link NR2B to intracellular pathways. Like NR2B-deficient mice, mice expressing NR2B subunits with truncated C-terminal domains die shortly after birth (13), showing the physiological importance of the intracellular region of NR2B. Therefore, processes that modify the C-terminal region of NR2B may alter the physiological events mediated by NR2B-containing receptors. Calpain and tyrosine kinases regulate NMDA receptors through the C-terminal domain.",
+        "score": 0.3685763966626367
+      }
+    ],
+    "GRIN2A": [
+      {
+        "paperId": "40602877",
+        "pmid": "",
+        "title": "Fyn-mediated Phosphorylation of NR2B Tyr-1336 Controls Calpain-mediated NR2B Cleavage in Neurons and Heterologous Systems*",
+        "authors": "Hai\u2010yan Wu, F. Hsu, A. Gleichman et al.",
+        "snippet_text": "Our data illustrate that the interaction of MAGUK proteins and SFK regulates the cleavage of NR2 subunits by calpain in living cells and that when calpain-mediated cleavage of NR2B is examined in situ, only Fyn alters this process. \n\nFyn significantly contributes to tyrosine phosphorylation of NMDA receptors, and Fyn mutant mice show defects in NMDA receptor-dependent LTP (43). However, NMDA receptor activation itself has not been shown to stimulate Fyn activity. In the present study, phosphorylation of NR2B Tyr-1336 increased with NMDA receptor stimulation in cultured hippocampal neurons or HEK cells expressing NR2B-containing NMDA receptors. These effects were blocked with MK801 and suggest that NMDA receptors could directly activate Fyn. However, NMDA receptor stimulation did not enhance phosphorylation of NR2B Tyr-1472, suggesting that NMDA receptor stimulation may instead direct the activity of Fyn to a different site on the NMDA receptor. Selective Fyn-mediated phosphorylation of Tyr-1336 is also seen in neurons treated with ethanol, in which it is controlled by dissociation of RACK1 from NR2B (33). Nevertheless, the present results indicate that the NR2B/Fyn/calpain interactions may act as part of a Fyn kinase cascade, which in turn regulates NMDA receptor features through promoting calpain-mediated cleavage of NR2B subunits. Further experiments are required to investigate the mechanisms by which NMDA receptor activation is coupled to Fyn-mediated phosphorylation of NR2B Tyr-1336 and calpainmediated cleavage of NR2B in neuronal pathophysiology. \n\nIn summary, the present study provides a model for understanding the control and selectivity of neuronal calpain for selected proteins in synaptic and extrasynaptic membranes.",
+        "score": 0.29984009973440284
+      }
+    ],
+    "FGF13": [
+      {
+        "paperId": "256229845",
+        "pmid": "",
+        "title": "Cryo-EM structure of human voltage-gated sodium channel Nav1.6",
+        "authors": "Xiao Fan, Jian Huang, Xueqin Jin et al.",
+        "snippet_text": "Cryo-EM structure of human voltage-gated sodium channel Nav1.6",
+        "score": 0.24156778710184915
+      }
+    ],
+    "SCN3B": [],
+    "PTPRD": [],
+    "PPFIA2": [],
+    "CNTNAP2": [],
+    "NEDD4L": [],
+    "KCNQ3": []
+  }
+}
