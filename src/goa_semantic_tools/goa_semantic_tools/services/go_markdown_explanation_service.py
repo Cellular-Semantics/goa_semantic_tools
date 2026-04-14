@@ -750,6 +750,19 @@ def generate_markdown_explanation(
             # Re-check claim_types after stripping
             correct_claim_types(explanation, pmid_whitelist)
 
+    # Narrative gene hallucination check: extract backtick-quoted genes and validate
+    narrative_findings = validate_narrative_genes(explanation, enrichment_output)
+    if narrative_findings:
+        print(f"\n  Narrative gene hallucination check:")
+        for nf in narrative_findings:
+            print(f"    ⚠ {nf['location']}: `{nf['gene']}` not in valid gene set")
+            print(f"      Sentence: {nf['sentence'][:120]}...")
+        n_stripped = strip_hallucinated_gene_sentences(explanation, narrative_findings)
+        if n_stripped:
+            print(f"    Stripped {n_stripped} sentence(s) containing hallucinated genes")
+    else:
+        print("  ✓ No hallucinated genes found in narrative text")
+
     # Build per-theme set of flagged theme indices (those with content mismatches)
     flagged_themes: set[int] = set()
     for w in validation_warnings:
@@ -1612,6 +1625,217 @@ def validate_explanation_json(
                 warnings.append(f"Theme {idx}: insight GO ID '{go_id}' not found in theme GO IDs")
 
     return warnings
+
+
+def validate_narrative_genes(
+    explanation: dict[str, Any],
+    enrichment_output: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Find hallucinated gene symbols in narrative free-text fields.
+
+    Scans backtick-quoted tokens in ``narrative``,
+    ``key_insights[].insight``, and ``key_genes[].description`` for each
+    theme, plus ``hub_genes[].narrative``.  Any token that looks like a gene
+    symbol (all-caps, may contain digits/hyphens) but is not in the valid
+    set for that theme is reported.
+
+    Returns:
+        List of dicts, each with keys:
+        - location: e.g. "theme.0.narrative", "hub_gene.BRCA1.narrative"
+        - gene: the hallucinated gene symbol
+        - sentence: the full sentence containing the hallucination
+        - valid_genes: the valid gene set for context (only for themes)
+    """
+    enrichment_themes = enrichment_output.get("themes", [])
+    all_input_genes: set[str] = set()
+    for t in enrichment_themes:
+        all_input_genes.update(t.get("anchor_term", {}).get("genes", []))
+        for s in t.get("specific_terms", []):
+            all_input_genes.update(s.get("genes", []))
+
+    # Also include hub genes as valid in hub_gene narratives
+    hub_gene_names = set(enrichment_output.get("hub_genes", {}).keys())
+
+    findings: list[dict[str, Any]] = []
+
+    # --- Per-theme fields ---
+    for exp_theme in explanation.get("themes", []):
+        idx = exp_theme.get("theme_index", -1)
+        if not isinstance(idx, int) or idx < 0 or idx >= len(enrichment_themes):
+            continue
+
+        et = enrichment_themes[idx]
+        valid_genes: set[str] = set(et.get("anchor_term", {}).get("genes", []))
+        for s in et.get("specific_terms", []):
+            valid_genes.update(s.get("genes", []))
+
+        # Check narrative
+        _check_text_for_hallucinated_genes(
+            exp_theme.get("narrative", ""),
+            valid_genes,
+            f"theme.{idx}.narrative",
+            findings,
+        )
+        # Check key_insights
+        for j, ki in enumerate(exp_theme.get("key_insights", [])):
+            _check_text_for_hallucinated_genes(
+                ki.get("insight", ""),
+                valid_genes,
+                f"theme.{idx}.key_insights.{j}",
+                findings,
+            )
+        # Check key_genes descriptions
+        for j, kg in enumerate(exp_theme.get("key_genes", [])):
+            _check_text_for_hallucinated_genes(
+                kg.get("description", ""),
+                valid_genes,
+                f"theme.{idx}.key_genes.{j}.description",
+                findings,
+            )
+
+    # --- Hub gene narratives ---
+    for hg in explanation.get("hub_genes", []):
+        gene = hg.get("gene", "")
+        _check_text_for_hallucinated_genes(
+            hg.get("narrative", ""),
+            all_input_genes | hub_gene_names,
+            f"hub_gene.{gene}.narrative",
+            findings,
+        )
+
+    return findings
+
+
+def _check_text_for_hallucinated_genes(
+    text: str,
+    valid_genes: set[str],
+    location: str,
+    findings: list[dict[str, Any]],
+) -> None:
+    """Extract backtick-quoted gene symbols from *text* and flag invalid ones."""
+    backtick_tokens = re.findall(r"`([^`]+)`", text)
+    for token in backtick_tokens:
+        # Heuristic: gene symbols are typically uppercase, may contain digits/hyphens
+        if not re.match(r"^[A-Z][A-Z0-9\-]+$", token):
+            continue
+        if token not in valid_genes:
+            # Find the sentence containing this gene
+            sentence = _find_sentence(text, token)
+            findings.append({
+                "location": location,
+                "gene": token,
+                "sentence": sentence,
+            })
+
+
+def _find_sentence(text: str, token: str) -> str:
+    """Return the sentence in *text* that contains *token*."""
+    # Split on sentence-ending punctuation followed by space or end
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    for s in sentences:
+        if token in s:
+            return s.strip()
+    return text.strip()
+
+
+def strip_hallucinated_gene_sentences(
+    explanation: dict[str, Any],
+    findings: list[dict[str, Any]],
+) -> int:
+    """Remove sentences containing hallucinated genes from narrative fields.
+
+    Modifies *explanation* in-place.  Returns the number of sentences stripped.
+    """
+    if not findings:
+        return 0
+
+    # Group findings by location
+    by_location: dict[str, set[str]] = {}
+    for f in findings:
+        by_location.setdefault(f["location"], set()).add(f["gene"])
+
+    stripped_count = 0
+
+    for location, bad_genes in by_location.items():
+        parts = location.split(".")
+        # Navigate to the text field
+        text = _get_nested_text(explanation, parts)
+        if text is None:
+            continue
+
+        # Split into sentences
+        sentences = re.split(r"(?<=[.!?])\s+", text)
+        clean_sentences = []
+        for s in sentences:
+            # Check if any hallucinated gene is backtick-quoted in this sentence
+            has_bad = any(f"`{g}`" in s for g in bad_genes)
+            if has_bad:
+                stripped_count += 1
+            else:
+                clean_sentences.append(s)
+
+        new_text = " ".join(clean_sentences)
+        _set_nested_text(explanation, parts, new_text)
+
+    return stripped_count
+
+
+def _get_nested_text(explanation: dict[str, Any], parts: list[str]) -> str | None:
+    """Navigate the explanation dict by dotted path parts and return the text."""
+    try:
+        if parts[0] == "theme":
+            idx = int(parts[1])
+            theme = next(
+                (t for t in explanation.get("themes", []) if t.get("theme_index") == idx),
+                None,
+            )
+            if theme is None:
+                return None
+            if parts[2] == "narrative":
+                return theme.get("narrative")
+            elif parts[2] == "key_insights":
+                j = int(parts[3])
+                return theme.get("key_insights", [{}])[j].get("insight")
+            elif parts[2] == "key_genes":
+                j = int(parts[3])
+                return theme.get("key_genes", [{}])[j].get("description")
+        elif parts[0] == "hub_gene":
+            gene = parts[1]
+            for hg in explanation.get("hub_genes", []):
+                if hg.get("gene") == gene:
+                    return hg.get("narrative")
+    except (IndexError, KeyError, ValueError):
+        pass
+    return None
+
+
+def _set_nested_text(explanation: dict[str, Any], parts: list[str], text: str) -> None:
+    """Set text at the dotted path in the explanation dict."""
+    try:
+        if parts[0] == "theme":
+            idx = int(parts[1])
+            theme = next(
+                (t for t in explanation.get("themes", []) if t.get("theme_index") == idx),
+                None,
+            )
+            if theme is None:
+                return
+            if parts[2] == "narrative":
+                theme["narrative"] = text
+            elif parts[2] == "key_insights":
+                j = int(parts[3])
+                theme["key_insights"][j]["insight"] = text
+            elif parts[2] == "key_genes":
+                j = int(parts[3])
+                theme["key_genes"][j]["description"] = text
+        elif parts[0] == "hub_gene":
+            gene = parts[1]
+            for hg in explanation.get("hub_genes", []):
+                if hg.get("gene") == gene:
+                    hg["narrative"] = text
+                    return
+    except (IndexError, KeyError, ValueError):
+        pass
 
 
 def write_themes_csv(enrichment_output: dict[str, Any], csv_path: Path) -> None:

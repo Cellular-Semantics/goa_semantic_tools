@@ -28,8 +28,10 @@ from goa_semantic_tools.services.go_markdown_explanation_service import (
     generate_markdown_explanation,
     rank_genes_for_theme,
     render_explanation_to_markdown,
+    strip_hallucinated_gene_sentences,
     strip_hallucinated_pmids,
     validate_explanation_json,
+    validate_narrative_genes,
     validate_pmids_in_explanation,
 )
 
@@ -2175,3 +2177,138 @@ class TestCorrectionLoopIntegration:
         # 2 calls: initial + 1 correction
         assert call_count["n"] == 2
         assert "PMID:99999999" not in md
+
+
+@pytest.mark.unit
+class TestNarrativeGeneValidation:
+    """Tests for validate_narrative_genes and strip_hallucinated_gene_sentences."""
+
+    def _make_enrichment(self, genes=None):
+        """Minimal enrichment output with one theme."""
+        if genes is None:
+            genes = ["BRCA1", "TP53", "PTEN"]
+        return {
+            "themes": [{
+                "anchor_term": {
+                    "go_id": "GO:0006915",
+                    "name": "apoptotic process",
+                    "genes": genes,
+                    "fdr": 0.001,
+                },
+                "specific_terms": [],
+            }],
+            "hub_genes": {"BRCA1": {"theme_count": 3, "themes": ["apoptosis"]}},
+        }
+
+    def _make_explanation(self, narrative="", hub_narrative="", key_insight="", key_gene_desc=""):
+        return {
+            "themes": [{
+                "theme_index": 0,
+                "narrative": narrative,
+                "key_insights": [{"insight": key_insight, "go_id": "GO:0006915"}] if key_insight else [],
+                "key_genes": [{"gene": "BRCA1", "go_id": "GO:0006915", "description": key_gene_desc, "claim_type": "INFERENCE"}] if key_gene_desc else [],
+                "statistical_context": "FDR 0.001.",
+            }],
+            "hub_genes": [{"gene": "BRCA1", "narrative": hub_narrative, "claim_type": "INFERENCE"}] if hub_narrative else [],
+            "overall_summary": ["Summary."],
+        }
+
+    def test_valid_genes_no_findings(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="`BRCA1` promotes apoptosis. `TP53` activates DNA damage response."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 0
+
+    def test_hallucinated_gene_detected(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="`BRCA1` promotes apoptosis. `EGFR` drives proliferation."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+        assert findings[0]["gene"] == "EGFR"
+        assert findings[0]["location"] == "theme.0.narrative"
+
+    def test_non_gene_backtick_tokens_ignored(self):
+        """Tokens that don't look like gene symbols should not be flagged."""
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="`BRCA1` is important. The `cAMP` pathway is active. Use `grep` to search."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 0  # cAMP and grep don't match gene pattern
+
+    def test_hallucinated_gene_in_key_insight(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            key_insight="`FOXO3` activates apoptosis via BIM transcription."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+        assert findings[0]["gene"] == "FOXO3"
+        assert "key_insights" in findings[0]["location"]
+
+    def test_hallucinated_gene_in_key_gene_description(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            key_gene_desc="`BRCA1` cooperates with `ATM` to repair DNA."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+        assert findings[0]["gene"] == "ATM"
+
+    def test_hallucinated_gene_in_hub_narrative(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            hub_narrative="`BRCA1` coordinates with `CDK2` across themes."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+        assert findings[0]["gene"] == "CDK2"
+        assert "hub_gene" in findings[0]["location"]
+
+    def test_strip_removes_sentence_with_hallucinated_gene(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="`BRCA1` promotes apoptosis. `EGFR` drives proliferation. `TP53` is a tumour suppressor."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+
+        n_stripped = strip_hallucinated_gene_sentences(explanation, findings)
+        assert n_stripped == 1
+        narrative = explanation["themes"][0]["narrative"]
+        assert "`EGFR`" not in narrative
+        assert "`BRCA1`" in narrative
+        assert "`TP53`" in narrative
+
+    def test_strip_multiple_hallucinated_genes_in_one_sentence(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="`BRCA1` is key. `EGFR` and `MYC` cooperate to drive growth. `PTEN` suppresses."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 2  # EGFR and MYC
+
+        n_stripped = strip_hallucinated_gene_sentences(explanation, findings)
+        assert n_stripped == 1  # One sentence containing both
+        narrative = explanation["themes"][0]["narrative"]
+        assert "`EGFR`" not in narrative
+        assert "`MYC`" not in narrative
+        assert "`BRCA1`" in narrative
+        assert "`PTEN`" in narrative
+
+    def test_strip_no_findings_returns_zero(self):
+        explanation = self._make_explanation(narrative="Clean text.")
+        assert strip_hallucinated_gene_sentences(explanation, []) == 0
+
+    def test_finding_includes_sentence(self):
+        enrichment = self._make_enrichment()
+        explanation = self._make_explanation(
+            narrative="First sentence. `EGFR` activates downstream signaling. Last sentence."
+        )
+        findings = validate_narrative_genes(explanation, enrichment)
+        assert len(findings) == 1
+        assert "activates downstream" in findings[0]["sentence"]
