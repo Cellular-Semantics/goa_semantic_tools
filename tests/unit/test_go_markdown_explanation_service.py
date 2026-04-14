@@ -2165,12 +2165,13 @@ class TestCorrectionLoopIntegration:
                 else:
                     return FakeResult(good_explanation)
 
-        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent):
-            with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
-                md = generate_markdown_explanation(
-                    enrichment, model="gpt-4o",
-                    max_correction_retries=2,
-                )
+        with patch("goa_semantic_tools.services.go_markdown_explanation_service.LiteLLMAgent", FakeAgent), \
+             patch("goa_semantic_tools.services.go_markdown_explanation_service._is_openai_model", return_value=False), \
+             patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=False):
+            md = generate_markdown_explanation(
+                enrichment, model="gpt-4o",
+                max_correction_retries=2,
+            )
         # 2 calls: initial + 1 correction
         assert call_count["n"] == 2
         assert "PMID:99999999" not in md
