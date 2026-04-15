@@ -156,6 +156,34 @@ Process multiple gene lists from a project CSV in a single invocation:
 
 **502 unit tests**
 
+### 1g. Anti-Hallucination & Per-Theme Synthesis — PRIORITY
+
+**Problem**: ~12% of themes fall back to data-only stubs because `validate_explanation_json()` detects hallucinated genes/GO IDs and nukes the entire theme. The LLM never gets a chance to fix errors. Observed across Astrocytoma NMF batch (29/238 themes affected).
+
+**Root cause**: The schema sends `gene` as `{"type": "string"}` — OpenAI structured outputs enforce syntax but can't constrain to valid values without `enum`. All themes are generated in a single LLM call, so per-theme enum constraints aren't possible.
+
+**Solution: Per-theme synthesis with dynamic enum schemas**
+
+Refactor Phase 2 from 1 large call → N per-theme calls + 1 summary call:
+
+1. **Per-theme call**: dynamically build schema with `gene: enum[valid_genes]` and `go_id: enum[valid_go_ids]` per theme. OpenAI enforces at token level → zero gene/GO hallucination by construction.
+2. **Summary call**: hub genes + overall_summary, with global gene enum.
+3. **Parallelisable**: per-theme calls are independent; can batch or parallelise.
+
+**Backtick gene convention for free-text validation** (implement alongside):
+
+- Schema/prompt instructs LLM to quote gene symbols with backticks in narrative text (e.g. `` `BRCA1` ``)
+- Post-generation: regex-extract backtick-quoted genes from narrative, validate against theme gene set
+- Deterministic fix: strip whole sentences containing hallucinated genes
+- Fallback for cases where enum can't help (free-text narrative mentions)
+
+**Depletion filter** — DONE (branch `enrichment_quality_fixes`):
+
+- GOATOOLS depletion results (fold_enrichment < 1.0) and single-gene terms now filtered at enrichment step
+- Requires: FDR < threshold AND study_rate > pop_rate AND ≥2 genes
+
+**`--namespace` CLI flag**: already exists and is wired through (`--namespace BP MF CC`). Was not used in initial batch run.
+
 ### 2. Exploratory Sub-Threshold Term Discovery
 
 Surface GO annotation structure beneath FDR significance thresholds. For each enriched theme anchor, enumerate child GO terms with gene overlap that didn't reach significance. Rank by overlap proportion, show top 5 per parent. Flagged with `[EXPLORATORY]` provenance tag. Opt-in via `--exploratory` CLI flag.

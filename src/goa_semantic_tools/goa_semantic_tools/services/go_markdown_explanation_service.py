@@ -4,6 +4,7 @@ GO Markdown Explanation Service
 LLM-based markdown report generation for GO enrichment results (Phase 2, markdown format).
 Generates provenance-labeled explanations with [DATA], [INFERENCE], [EXTERNAL], [GO-HIERARCHY] tags.
 """
+import copy
 import csv
 import json
 import os
@@ -13,6 +14,7 @@ from typing import Any
 
 import yaml
 from cellsem_llm_client.agents.agent_connection import LiteLLMAgent
+from cellsem_llm_client.schema.adapters import OpenAISchemaAdapter
 from cellsem_llm_client.schema.manager import SchemaManager
 
 # =============================================================================
@@ -24,6 +26,9 @@ from cellsem_llm_client.schema.manager import SchemaManager
 _schema_manager = SchemaManager()
 _EXPLANATION_SCHEMA_PATH = (
     Path(__file__).parent.parent / "schemas" / "enrichment_explanation.schema.json"
+)
+_THEME_SCHEMA_PATH = (
+    Path(__file__).parent.parent / "schemas" / "theme_explanation.schema.json"
 )
 EnrichmentExplanation = _schema_manager.get_pydantic_model(
     json.loads(_EXPLANATION_SCHEMA_PATH.read_text())
@@ -40,6 +45,441 @@ _DEFAULT_MAX_TOKENS = 16000
 def _get_default_max_tokens(model: str) -> int:
     """Return a sensible max_tokens default for the given model name."""
     return _MODEL_MAX_TOKENS.get(model, _DEFAULT_MAX_TOKENS)
+
+
+def _is_openai_model(model: str) -> bool:
+    """Return True if *model* uses the OpenAI structured-output path."""
+    return "gpt" in model.lower() or model.startswith("openai/")
+
+
+# ---------------------------------------------------------------------------
+# Per-theme synthesis helpers
+# ---------------------------------------------------------------------------
+
+def _collect_valid_sets(theme: dict[str, Any]) -> tuple[list[str], list[str]]:
+    """Return (sorted_valid_genes, sorted_valid_go_ids) for a theme."""
+    anchor = theme.get("anchor_term", {})
+    genes: set[str] = set(anchor.get("genes", []))
+    go_ids: set[str] = {anchor.get("go_id", "")}
+    for s in theme.get("specific_terms", []):
+        genes.update(s.get("genes", []))
+        gid = s.get("go_id", "")
+        if gid:
+            go_ids.add(gid)
+    go_ids.discard("")
+    return sorted(genes), sorted(go_ids)
+
+
+def _inject_enums(
+    schema: dict[str, Any],
+    valid_genes: list[str],
+    valid_go_ids: list[str],
+) -> dict[str, Any]:
+    """Inject gene/GO ID enum constraints into a theme explanation schema dict.
+
+    Modifies the dict in-place and returns it for convenience.  The ``pattern``
+    key is removed from go_id fields because it is redundant with ``enum`` and
+    incompatible with OpenAI strict mode when both are present.
+    """
+    kg_props = schema["properties"]["key_genes"]["items"]["properties"]
+    kg_props["gene"]["enum"] = valid_genes
+    kg_props["go_id"]["enum"] = valid_go_ids
+    kg_props["go_id"].pop("pattern", None)
+
+    ki_props = schema["properties"]["key_insights"]["items"]["properties"]
+    ki_props["go_id"]["enum"] = valid_go_ids
+    ki_props["go_id"].pop("pattern", None)
+
+    return schema
+
+
+def _ensure_additional_properties_false(schema: dict[str, Any]) -> None:
+    """Recursively set ``additionalProperties: false`` on all objects.
+
+    OpenAI strict mode requires this on every object in the schema.
+    """
+    if not isinstance(schema, dict):
+        return
+    if schema.get("type") == "object" and "additionalProperties" not in schema:
+        schema["additionalProperties"] = False
+    for value in schema.values():
+        if isinstance(value, dict):
+            _ensure_additional_properties_false(value)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    _ensure_additional_properties_false(item)
+
+
+def _build_theme_schema(theme: dict[str, Any]) -> dict[str, Any]:
+    """Load the base theme schema and inject enum constraints for *theme*."""
+    schema = json.loads(_THEME_SCHEMA_PATH.read_text())
+    valid_genes, valid_go_ids = _collect_valid_sets(theme)
+    _inject_enums(schema, valid_genes, valid_go_ids)
+    _ensure_additional_properties_false(schema)
+    return schema
+
+
+def _call_per_theme(
+    adapter: OpenAISchemaAdapter,
+    model: str,
+    system_prompt: str,
+    theme_context: str,
+    theme_schema: dict[str, Any],
+    max_tokens: int = 2000,
+) -> dict[str, Any] | None:
+    """Make a single per-theme LLM call and return the parsed JSON, or None on failure."""
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": f"Explain this enrichment theme:\n\n{theme_context}"},
+    ]
+    try:
+        raw = adapter.apply_schema(
+            messages=messages,
+            schema_dict=theme_schema,
+            model=model,
+            max_tokens=max_tokens,
+        )
+        content = raw.choices[0].message.content
+        result = json.loads(content)
+        # Extract token usage
+        usage = raw.usage
+        tokens_in = usage.prompt_tokens if usage else 0
+        tokens_out = usage.completion_tokens if usage else 0
+        result["_usage"] = {"input_tokens": tokens_in, "output_tokens": tokens_out}
+        return result
+    except Exception as e:
+        print(f"    ✗ LLM call failed: {e}")
+        return None
+
+
+def _format_single_theme_context(
+    theme_index: int,
+    theme: dict[str, Any],
+    hub_genes: dict[str, Any],
+    snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
+    gene_narratives: dict[str, Any] | None = None,
+    paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+) -> str:
+    """Format a single theme's enrichment data + evidence for the LLM prompt.
+
+    This mirrors the per-theme block inside ``_format_enrichment_for_llm`` but
+    returns just the context for one theme (no study overview or hub genes).
+    """
+    i = theme_index
+    anchor = theme.get("anchor_term", {})
+    specific_terms = theme.get("specific_terms", [])
+    confidence = theme.get("anchor_confidence", "")
+
+    lines: list[str] = []
+    lines.append(f"## Theme: {anchor.get('name', 'Unknown')} ({anchor.get('go_id', '')})")
+    lines.append(f"- Namespace: {anchor.get('namespace', '')}")
+    lines.append(f"- FDR: {anchor.get('fdr', 0):.2e}")
+    lines.append(f"- Fold enrichment: {anchor.get('fold_enrichment', 0):.1f}x")
+    lines.append(f"- Confidence: {confidence}")
+    lines.append(f"- Genes ({len(anchor.get('genes', []))}): {', '.join(sorted(anchor.get('genes', [])))}")
+    lines.append("")
+
+    if specific_terms:
+        lines.append(f"### Specific Terms ({len(specific_terms)} nested)")
+        for s in specific_terms[:5]:
+            lines.append(
+                f"  - {s.get('name', '')} ({s.get('go_id', '')}): "
+                f"FDR={s.get('fdr', 0):.2e}, "
+                f"{len(s.get('genes', []))} genes: "
+                f"{', '.join(sorted(s.get('genes', []))[:8])}"
+            )
+        if len(specific_terms) > 5:
+            lines.append(f"  - ... and {len(specific_terms) - 5} more")
+        lines.append("")
+
+    ranked = rank_genes_for_theme(theme, hub_genes)
+    if ranked:
+        lines.append("### Candidate Key Genes (ranked by theme-specificity, select 2-5):")
+        for rank_num, entry in enumerate(ranked, 1):
+            specific_label = (
+                f"in {entry['in_specific_terms']} specific term(s)"
+                if entry["in_specific_terms"] > 0
+                else "anchor-only"
+            )
+            lines.append(
+                f"  {rank_num}. {entry['gene']}  "
+                f"[{specific_label}, appears in {entry['n_themes']} theme(s), score: {entry['score']:.2f}]"
+            )
+        lines.append("")
+
+    # ASTA snippet evidence
+    has_snippets = bool(snippet_evidence and i in snippet_evidence and snippet_evidence[i])
+    if has_snippets:
+        lines.append("### Available Evidence Snippets (full-text passages, prefer these for citations):")
+        lines.append("Cite the PMID inline: '[EXTERNAL] FOXO3 suppresses migration PMID:19188590.'")
+        for snippet in snippet_evidence[i]:  # type: ignore[index]
+            pmid = snippet.get("pmid", "")
+            title = snippet.get("title", "")
+            snippet_text = snippet.get("snippet_text", "")
+            pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+            lines.append(f"[{pmid_label}] {title}")
+            if snippet_text:
+                preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                lines.append(f"Evidence: {preview}")
+            lines.append("")
+
+    # Co-annotation evidence
+    has_co_annot = bool(co_annotation_snippets and i in co_annotation_snippets and co_annotation_snippets[i])
+    if has_co_annot:
+        lines.append("### Co-Annotation Evidence:")
+        for gene, gene_snippets in co_annotation_snippets[i].items():  # type: ignore[index]
+            if not gene_snippets:
+                continue
+            lines.append(f"**{gene}** (multi-process co-annotation)")
+            for snippet in gene_snippets:
+                pmid = snippet.get("pmid", "")
+                title = snippet.get("title", "")
+                snippet_text = snippet.get("snippet_text", "")
+                pmid_label = f"PMID:{pmid}" if pmid else snippet.get("paperId", "")
+                lines.append(f"[{pmid_label}] {title}")
+                if snippet_text:
+                    preview = snippet_text[:600] + "..." if len(snippet_text) > 600 else snippet_text
+                    lines.append(f"Evidence: {preview}")
+                lines.append("")
+
+    # Gene narratives from Phase 1c
+    theme_gene_narrs = (gene_narratives or {}).get("theme_genes", {}).get(i, {})
+    co_annot_narrs = (gene_narratives or {}).get("co_annotations", {}).get(i, {})
+    all_theme_narrs = {**theme_gene_narrs, **co_annot_narrs}
+    if all_theme_narrs:
+        lines.append("### Gene Evidence Narratives:")
+        for gene_name, narr in all_theme_narrs.items():
+            lines.append(f"- **{gene_name}**: {narr}")
+        lines.append("")
+
+    # GAF citations
+    if gaf_pmids and i in gaf_pmids and gaf_pmids[i]:
+        lines.append("### Available GAF Citations (curated gene→GO annotations):")
+        gaf_entry_by_pmid: dict[str, dict[str, Any]] = {
+            e.get("pmid", ""): e for e in gaf_pmids[i]
+        }
+        has_abstracts = bool(gaf_abstracts and i in gaf_abstracts and gaf_abstracts[i])
+        if has_abstracts:
+            for paper in gaf_abstracts[i]:  # type: ignore[index]
+                pmid = paper.get("pmid", "")
+                title = paper.get("title", "")
+                abstract = paper.get("abstract", "")
+                lines.append(f"[PMID:{pmid}] {title}")
+                lines.append(_format_gene_go_annotations(gaf_entry_by_pmid.get(pmid, {})))
+                if abstract:
+                    preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
+                    lines.append(f"Abstract: {preview}")
+                lines.append("")
+        else:
+            for entry in gaf_pmids[i]:
+                pmid = entry.get("pmid", "")
+                lines.append(f"- PMID:{pmid}")
+                lines.append(f"  {_format_gene_go_annotations(entry)}")
+        lines.append("")
+
+    # Deprecated paper_abstracts fallback
+    elif paper_abstracts and i in paper_abstracts and paper_abstracts[i]:
+        lines.append("### Available Literature:")
+        for paper in paper_abstracts[i]:
+            pmid = paper.get("pmid", "")
+            title = paper.get("title", "No title")
+            abstract = paper.get("abstract", "")
+            lines.append(f"[PMID:{pmid}] {title}")
+            if abstract:
+                preview = abstract[:400] + "..." if len(abstract) > 400 else abstract
+                lines.append(f"Abstract: {preview}")
+            lines.append("")
+
+    return "\n".join(lines)
+
+
+def _run_per_theme_synthesis(
+    enrichment_output: dict[str, Any],
+    model: str,
+    api_key: str | None,
+    temperature: float,
+    max_tokens: int,
+    prompt_config: dict[str, Any],
+    snippet_evidence: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_pmids: dict[int, list[dict[str, Any]]] | None = None,
+    gaf_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+    co_annotation_snippets: dict[int, dict[str, list[dict[str, Any]]]] | None = None,
+    gene_narratives: dict[str, Any] | None = None,
+    paper_abstracts: dict[int, list[dict[str, Any]]] | None = None,
+) -> dict[str, Any]:
+    """Run per-theme LLM synthesis with enum-constrained schemas.
+
+    Each theme gets its own LLM call with a dynamically built JSON schema
+    that enum-constrains gene and GO ID fields.  Results are assembled into
+    the same ``explanation`` dict shape that the single-call path produces.
+
+    Returns:
+        An explanation dict compatible with ``render_explanation_to_markdown``.
+    """
+    themes = enrichment_output.get("themes", [])[:30]
+    hub_genes = enrichment_output.get("hub_genes", {})
+    system_prompt = prompt_config["system_prompt"]
+    adapter = OpenAISchemaAdapter()
+
+    # Per-theme max_tokens: each theme needs far fewer tokens than the full call
+    per_theme_max = min(2000, max_tokens)
+
+    theme_explanations: list[dict[str, Any]] = []
+    total_in = 0
+    total_out = 0
+
+    for i, theme in enumerate(themes):
+        anchor = theme.get("anchor_term", {})
+        print(f"  [{i + 1}/{len(themes)}] {anchor.get('name', '?')} ...", end=" ", flush=True)
+
+        theme_schema = _build_theme_schema(theme)
+        theme_context = _format_single_theme_context(
+            theme_index=i,
+            theme=theme,
+            hub_genes=hub_genes,
+            snippet_evidence=snippet_evidence,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=gaf_abstracts,
+            co_annotation_snippets=co_annotation_snippets,
+            gene_narratives=gene_narratives,
+            paper_abstracts=paper_abstracts,
+        )
+
+        result = _call_per_theme(
+            adapter=adapter,
+            model=model,
+            system_prompt=system_prompt,
+            theme_context=theme_context,
+            theme_schema=theme_schema,
+            max_tokens=per_theme_max,
+        )
+
+        if result is not None:
+            usage = result.pop("_usage", {})
+            total_in += usage.get("input_tokens", 0)
+            total_out += usage.get("output_tokens", 0)
+            result["theme_index"] = i
+            theme_explanations.append(result)
+            print("✓")
+        else:
+            print("✗ (will use data-only stub)")
+
+    print(f"\n  Per-theme synthesis: {len(theme_explanations)}/{len(themes)} themes explained")
+    print(f"  Total tokens: {total_in:,} in / {total_out:,} out")
+
+    # --- Summary call: hub_genes + overall_summary ---
+    print("\n  Generating hub genes and overall summary...")
+    summary_explanation = _run_summary_call(
+        enrichment_output=enrichment_output,
+        theme_explanations=theme_explanations,
+        model=model,
+        api_key=api_key,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        prompt_config=prompt_config,
+        gene_narratives=gene_narratives,
+    )
+
+    # Assemble into the standard explanation dict
+    explanation: dict[str, Any] = {
+        "themes": theme_explanations,
+        "hub_genes": summary_explanation.get("hub_genes", []),
+        "overall_summary": summary_explanation.get("overall_summary", []),
+    }
+    return explanation
+
+
+def _run_summary_call(
+    enrichment_output: dict[str, Any],
+    theme_explanations: list[dict[str, Any]],
+    model: str,
+    api_key: str | None,
+    temperature: float,
+    max_tokens: int,
+    prompt_config: dict[str, Any],
+    gene_narratives: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Generate hub_genes + overall_summary via a single LLM call.
+
+    Uses the existing EnrichmentExplanation schema (full) but provides a
+    context that focuses on hub genes and theme summaries rather than
+    per-theme detail (that's already done).
+    """
+    hub_genes = enrichment_output.get("hub_genes", {})
+    themes = enrichment_output.get("themes", [])[:30]
+    metadata = enrichment_output.get("metadata", {})
+
+    lines: list[str] = []
+    lines.append("# Task: Generate hub gene explanations and overall summary")
+    lines.append("")
+    lines.append("The per-theme explanations have already been generated.")
+    lines.append("Your job is to produce ONLY the hub_genes and overall_summary sections.")
+    lines.append("For the themes array, return an empty array [].")
+    lines.append("")
+    lines.append(f"# Study: {metadata.get('species', 'unknown')} — "
+                 f"{metadata.get('input_genes_count', '?')} input genes, "
+                 f"{len(themes)} themes")
+    lines.append("")
+
+    # Theme summaries (so the LLM can write a coherent overall narrative)
+    lines.append("# Theme Summaries")
+    for exp in theme_explanations:
+        idx = exp.get("theme_index", -1)
+        if 0 <= idx < len(themes):
+            anchor = themes[idx].get("anchor_term", {})
+            lines.append(f"- Theme {idx + 1}: {anchor.get('name', '?')} "
+                         f"({anchor.get('go_id', '')}) — "
+                         f"{len(anchor.get('genes', []))} genes, "
+                         f"FDR {anchor.get('fdr', 0):.2e}")
+    lines.append("")
+
+    # Hub genes detail
+    if hub_genes:
+        lines.append("# Hub Genes (appearing in 3+ themes)")
+        hub_sorted = sorted(
+            hub_genes.items(), key=lambda x: x[1].get("theme_count", 0), reverse=True
+        )[:20]
+        for gene, data in hub_sorted:
+            theme_count = data.get("theme_count", 0)
+            theme_names = data.get("themes", [])[:5]
+            lines.append(f"## {gene} ({theme_count} themes): {', '.join(theme_names)}")
+            hub_narratives = (gene_narratives or {}).get("hub_genes", {})
+            if gene in hub_narratives:
+                lines.append(f"  Mechanistic narrative: {hub_narratives[gene]}")
+        lines.append("")
+
+    context = "\n".join(lines)
+    system_prompt = prompt_config["system_prompt"]
+    user_prompt = prompt_config["user_prompt"].format(enrichment_data=context)
+
+    agent = LiteLLMAgent(
+        model=model,
+        api_key=api_key or _get_api_key_for_model(model),
+        max_tokens=max_tokens,
+    )
+
+    try:
+        result = agent.query_unified(
+            message=user_prompt,
+            system_message=system_prompt,
+            schema=EnrichmentExplanation,
+            track_usage=True,
+        )
+        if result.model is not None:
+            summary = result.model.model_dump()
+            if result.usage:
+                print(f"  Summary call: {result.usage.input_tokens:,} in / "
+                      f"{result.usage.output_tokens:,} out")
+            return summary
+    except Exception as e:
+        print(f"  ⚠ Summary call failed: {e}")
+
+    # Fallback: empty summary
+    return {"hub_genes": [], "overall_summary": ["Analysis complete. See individual themes above."]}
 
 
 def generate_markdown_explanation(
@@ -150,56 +590,75 @@ def generate_markdown_explanation(
     print(f"  Max tokens: {max_tokens}")
     print(f"  Output format: Structured JSON → programmatic markdown render")
 
-    # Format enrichment data for LLM (includes ranked gene candidates per theme)
-    print("\n[2/4] Formatting enrichment data for LLM...")
-    enrichment_context = _format_enrichment_for_llm(
-        enrichment_output,
-        paper_abstracts=paper_abstracts,
-        gaf_pmids=gaf_pmids,
-        gaf_abstracts=gaf_abstracts,
-        hub_gene_abstracts=hub_gene_abstracts,
-        snippet_evidence=snippet_evidence,
-        hub_gene_snippets=hub_gene_snippets,
-        co_annotation_snippets=co_annotation_snippets,
-        cross_theme_snippets=cross_theme_snippets,
-        gene_narratives=gene_narratives,
-    )
-    user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
-
     print(f"  Themes to explain: {len(themes)}")
     print(f"  Enrichment leaves: {len(enrichment_leaves)}")
     print(f"  Hub genes: {len(enrichment_output.get('hub_genes', {}))}")
-    print(f"  Context size: {len(enrichment_context)} characters")
 
-    # Call LLM WITH schema enforcement (pass Pydantic model directly — avoids
-    # cellsem_llm_client's basic JSON-schema-to-Pydantic converter which can't
-    # handle nested arrays of objects and produces missing 'type' keys)
-    print("\n[3/4] Calling LLM for structured explanation generation...")
-    agent = LiteLLMAgent(model=model, api_key=api_key, max_tokens=max_tokens)
+    # -------------------------------------------------------------------
+    # Branch: per-theme synthesis (OpenAI) vs single-call (other providers)
+    # -------------------------------------------------------------------
+    use_per_theme = _is_openai_model(model)
 
-    try:
-        result = agent.query_unified(
-            message=user_prompt,
-            system_message=system_prompt,
-            schema=EnrichmentExplanation,
-            track_usage=True,
+    if use_per_theme:
+        print(f"\n[2/4] Per-theme synthesis with enum-constrained schemas...")
+        explanation = _run_per_theme_synthesis(
+            enrichment_output=enrichment_output,
+            model=model,
+            api_key=api_key,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            prompt_config=prompt_config,
+            snippet_evidence=snippet_evidence,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=gaf_abstracts,
+            co_annotation_snippets=co_annotation_snippets,
+            gene_narratives=gene_narratives,
+            paper_abstracts=paper_abstracts,
         )
+    else:
+        # Legacy single-call path (non-OpenAI models)
+        print("\n[2/4] Formatting enrichment data for LLM...")
+        enrichment_context = _format_enrichment_for_llm(
+            enrichment_output,
+            paper_abstracts=paper_abstracts,
+            gaf_pmids=gaf_pmids,
+            gaf_abstracts=gaf_abstracts,
+            hub_gene_abstracts=hub_gene_abstracts,
+            snippet_evidence=snippet_evidence,
+            hub_gene_snippets=hub_gene_snippets,
+            co_annotation_snippets=co_annotation_snippets,
+            cross_theme_snippets=cross_theme_snippets,
+            gene_narratives=gene_narratives,
+        )
+        user_prompt = user_prompt_template.format(enrichment_data=enrichment_context)
+        print(f"  Context size: {len(enrichment_context)} characters")
 
-        print(f"  LLM call successful")
-        if result.usage:
-            print(f"  Input tokens: {result.usage.input_tokens:,}")
-            print(f"  Output tokens: {result.usage.output_tokens:,}")
-            if result.usage.estimated_cost_usd:
-                print(f"  Estimated cost: ${result.usage.estimated_cost_usd:.4f} USD")
+        print("\n[3/4] Calling LLM for structured explanation generation...")
+        agent = LiteLLMAgent(model=model, api_key=api_key, max_tokens=max_tokens)
 
-    except Exception as e:
-        print(f"  ❌ LLM call failed: {e}")
-        raise
+        try:
+            result = agent.query_unified(
+                message=user_prompt,
+                system_message=system_prompt,
+                schema=EnrichmentExplanation,
+                track_usage=True,
+            )
 
-    if result.model is None:
-        raise RuntimeError("LLM response validation failed — no model instance returned")
+            print(f"  LLM call successful")
+            if result.usage:
+                print(f"  Input tokens: {result.usage.input_tokens:,}")
+                print(f"  Output tokens: {result.usage.output_tokens:,}")
+                if result.usage.estimated_cost_usd:
+                    print(f"  Estimated cost: ${result.usage.estimated_cost_usd:.4f} USD")
 
-    explanation = result.model.model_dump()
+        except Exception as e:
+            print(f"  ❌ LLM call failed: {e}")
+            raise
+
+        if result.model is None:
+            raise RuntimeError("LLM response validation failed — no model instance returned")
+
+        explanation = result.model.model_dump()
 
     # Validate post-generation (warn on violations, do not crash)
     print("\n[4/4] Validating and rendering...")
@@ -237,7 +696,11 @@ def generate_markdown_explanation(
         print(f"  ⚠ {w}")
     validation_warnings.extend(pmid_warnings)
 
-    # LLM correction loop (bounded)
+    # LLM correction loop (bounded) — needs an agent for correction calls
+    if api_key is None:
+        api_key = _get_api_key_for_model(model)
+    correction_agent = LiteLLMAgent(model=model, api_key=api_key, max_tokens=max_tokens)
+
     retries = 0
     total_correction_cost = 0.0
     while hallucinated_by_loc and retries < max_correction_retries:
@@ -249,7 +712,7 @@ def generate_markdown_explanation(
             sys_p, usr_p = _build_correction_prompt(
                 explanation, pmid_warnings, pmid_whitelist
             )
-            correction_result = agent.query_unified(
+            correction_result = correction_agent.query_unified(
                 message=usr_p,
                 system_message=sys_p,
                 schema=EnrichmentExplanation,
@@ -286,6 +749,19 @@ def generate_markdown_explanation(
             print(f"  ⚠ Stripped {stripped} unresolvable hallucinated PMID(s) from output")
             # Re-check claim_types after stripping
             correct_claim_types(explanation, pmid_whitelist)
+
+    # Narrative gene hallucination check: extract backtick-quoted genes and validate
+    narrative_findings = validate_narrative_genes(explanation, enrichment_output)
+    if narrative_findings:
+        print(f"\n  Narrative gene hallucination check:")
+        for nf in narrative_findings:
+            print(f"    ⚠ {nf['location']}: `{nf['gene']}` not in valid gene set")
+            print(f"      Sentence: {nf['sentence'][:120]}...")
+        n_stripped = strip_hallucinated_gene_sentences(explanation, narrative_findings)
+        if n_stripped:
+            print(f"    Stripped {n_stripped} sentence(s) containing hallucinated genes")
+    else:
+        print("  ✓ No hallucinated genes found in narrative text")
 
     # Build per-theme set of flagged theme indices (those with content mismatches)
     flagged_themes: set[int] = set()
@@ -1149,6 +1625,217 @@ def validate_explanation_json(
                 warnings.append(f"Theme {idx}: insight GO ID '{go_id}' not found in theme GO IDs")
 
     return warnings
+
+
+def validate_narrative_genes(
+    explanation: dict[str, Any],
+    enrichment_output: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Find hallucinated gene symbols in narrative free-text fields.
+
+    Scans backtick-quoted tokens in ``narrative``,
+    ``key_insights[].insight``, and ``key_genes[].description`` for each
+    theme, plus ``hub_genes[].narrative``.  Any token that looks like a gene
+    symbol (all-caps, may contain digits/hyphens) but is not in the valid
+    set for that theme is reported.
+
+    Returns:
+        List of dicts, each with keys:
+        - location: e.g. "theme.0.narrative", "hub_gene.BRCA1.narrative"
+        - gene: the hallucinated gene symbol
+        - sentence: the full sentence containing the hallucination
+        - valid_genes: the valid gene set for context (only for themes)
+    """
+    enrichment_themes = enrichment_output.get("themes", [])
+    all_input_genes: set[str] = set()
+    for t in enrichment_themes:
+        all_input_genes.update(t.get("anchor_term", {}).get("genes", []))
+        for s in t.get("specific_terms", []):
+            all_input_genes.update(s.get("genes", []))
+
+    # Also include hub genes as valid in hub_gene narratives
+    hub_gene_names = set(enrichment_output.get("hub_genes", {}).keys())
+
+    findings: list[dict[str, Any]] = []
+
+    # --- Per-theme fields ---
+    for exp_theme in explanation.get("themes", []):
+        idx = exp_theme.get("theme_index", -1)
+        if not isinstance(idx, int) or idx < 0 or idx >= len(enrichment_themes):
+            continue
+
+        et = enrichment_themes[idx]
+        valid_genes: set[str] = set(et.get("anchor_term", {}).get("genes", []))
+        for s in et.get("specific_terms", []):
+            valid_genes.update(s.get("genes", []))
+
+        # Check narrative
+        _check_text_for_hallucinated_genes(
+            exp_theme.get("narrative", ""),
+            valid_genes,
+            f"theme.{idx}.narrative",
+            findings,
+        )
+        # Check key_insights
+        for j, ki in enumerate(exp_theme.get("key_insights", [])):
+            _check_text_for_hallucinated_genes(
+                ki.get("insight", ""),
+                valid_genes,
+                f"theme.{idx}.key_insights.{j}",
+                findings,
+            )
+        # Check key_genes descriptions
+        for j, kg in enumerate(exp_theme.get("key_genes", [])):
+            _check_text_for_hallucinated_genes(
+                kg.get("description", ""),
+                valid_genes,
+                f"theme.{idx}.key_genes.{j}.description",
+                findings,
+            )
+
+    # --- Hub gene narratives ---
+    for hg in explanation.get("hub_genes", []):
+        gene = hg.get("gene", "")
+        _check_text_for_hallucinated_genes(
+            hg.get("narrative", ""),
+            all_input_genes | hub_gene_names,
+            f"hub_gene.{gene}.narrative",
+            findings,
+        )
+
+    return findings
+
+
+def _check_text_for_hallucinated_genes(
+    text: str,
+    valid_genes: set[str],
+    location: str,
+    findings: list[dict[str, Any]],
+) -> None:
+    """Extract backtick-quoted gene symbols from *text* and flag invalid ones."""
+    backtick_tokens = re.findall(r"`([^`]+)`", text)
+    for token in backtick_tokens:
+        # Heuristic: gene symbols are typically uppercase, may contain digits/hyphens
+        if not re.match(r"^[A-Z][A-Z0-9\-]+$", token):
+            continue
+        if token not in valid_genes:
+            # Find the sentence containing this gene
+            sentence = _find_sentence(text, token)
+            findings.append({
+                "location": location,
+                "gene": token,
+                "sentence": sentence,
+            })
+
+
+def _find_sentence(text: str, token: str) -> str:
+    """Return the sentence in *text* that contains *token*."""
+    # Split on sentence-ending punctuation followed by space or end
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    for s in sentences:
+        if token in s:
+            return s.strip()
+    return text.strip()
+
+
+def strip_hallucinated_gene_sentences(
+    explanation: dict[str, Any],
+    findings: list[dict[str, Any]],
+) -> int:
+    """Remove sentences containing hallucinated genes from narrative fields.
+
+    Modifies *explanation* in-place.  Returns the number of sentences stripped.
+    """
+    if not findings:
+        return 0
+
+    # Group findings by location
+    by_location: dict[str, set[str]] = {}
+    for f in findings:
+        by_location.setdefault(f["location"], set()).add(f["gene"])
+
+    stripped_count = 0
+
+    for location, bad_genes in by_location.items():
+        parts = location.split(".")
+        # Navigate to the text field
+        text = _get_nested_text(explanation, parts)
+        if text is None:
+            continue
+
+        # Split into sentences
+        sentences = re.split(r"(?<=[.!?])\s+", text)
+        clean_sentences = []
+        for s in sentences:
+            # Check if any hallucinated gene is backtick-quoted in this sentence
+            has_bad = any(f"`{g}`" in s for g in bad_genes)
+            if has_bad:
+                stripped_count += 1
+            else:
+                clean_sentences.append(s)
+
+        new_text = " ".join(clean_sentences)
+        _set_nested_text(explanation, parts, new_text)
+
+    return stripped_count
+
+
+def _get_nested_text(explanation: dict[str, Any], parts: list[str]) -> str | None:
+    """Navigate the explanation dict by dotted path parts and return the text."""
+    try:
+        if parts[0] == "theme":
+            idx = int(parts[1])
+            theme = next(
+                (t for t in explanation.get("themes", []) if t.get("theme_index") == idx),
+                None,
+            )
+            if theme is None:
+                return None
+            if parts[2] == "narrative":
+                return theme.get("narrative")
+            elif parts[2] == "key_insights":
+                j = int(parts[3])
+                return theme.get("key_insights", [{}])[j].get("insight")
+            elif parts[2] == "key_genes":
+                j = int(parts[3])
+                return theme.get("key_genes", [{}])[j].get("description")
+        elif parts[0] == "hub_gene":
+            gene = parts[1]
+            for hg in explanation.get("hub_genes", []):
+                if hg.get("gene") == gene:
+                    return hg.get("narrative")
+    except (IndexError, KeyError, ValueError):
+        pass
+    return None
+
+
+def _set_nested_text(explanation: dict[str, Any], parts: list[str], text: str) -> None:
+    """Set text at the dotted path in the explanation dict."""
+    try:
+        if parts[0] == "theme":
+            idx = int(parts[1])
+            theme = next(
+                (t for t in explanation.get("themes", []) if t.get("theme_index") == idx),
+                None,
+            )
+            if theme is None:
+                return
+            if parts[2] == "narrative":
+                theme["narrative"] = text
+            elif parts[2] == "key_insights":
+                j = int(parts[3])
+                theme["key_insights"][j]["insight"] = text
+            elif parts[2] == "key_genes":
+                j = int(parts[3])
+                theme["key_genes"][j]["description"] = text
+        elif parts[0] == "hub_gene":
+            gene = parts[1]
+            for hg in explanation.get("hub_genes", []):
+                if hg.get("gene") == gene:
+                    hg["narrative"] = text
+                    return
+    except (IndexError, KeyError, ValueError):
+        pass
 
 
 def write_themes_csv(enrichment_output: dict[str, Any], csv_path: Path) -> None:

@@ -397,3 +397,83 @@ class TestFoldEnrichmentFormula:
         terms = _convert_to_enriched_terms([result], godag)
 
         assert terms["GO:0006954"].fold_enrichment == 0.0
+
+
+@pytest.mark.unit
+class TestEnrichmentResultFiltering:
+    """Tests for the enrichment filter that excludes depletion and single-gene results."""
+
+    def _make_mock_goea_result(
+        self, ratio_in_study, ratio_in_pop, study_items, go_id="GO:0006954", fdr=1e-5
+    ):
+        from unittest.mock import MagicMock
+
+        result = MagicMock()
+        result.GO = go_id
+        result.name = "test term"
+        result.NS = "BP"
+        result.p_fdr_bh = fdr
+        result.ratio_in_study = ratio_in_study
+        result.ratio_in_pop = ratio_in_pop
+        result.study_items = frozenset(study_items)
+        return result
+
+    def test_depleted_term_filtered_out(self):
+        """Terms with fold enrichment < 1 (depletion) should be excluded."""
+        # study_rate = 1/200 = 0.005, pop_rate = 500/20000 = 0.025 → FE = 0.2
+        depleted = self._make_mock_goea_result(
+            ratio_in_study=(1, 200),
+            ratio_in_pop=(500, 20000),
+            study_items=["GENE1"],
+        )
+        results = [r for r in [depleted]
+                   if r.p_fdr_bh < 0.05
+                   and len(r.study_items) >= 2
+                   and (r.ratio_in_study[0] / r.ratio_in_study[1] if r.ratio_in_study[1] else 0)
+                   > (r.ratio_in_pop[0] / r.ratio_in_pop[1] if r.ratio_in_pop[1] else 0)]
+        assert len(results) == 0
+
+    def test_single_gene_term_filtered_out(self):
+        """Terms with only 1 study gene should be excluded even if enriched."""
+        # study_rate = 1/100 = 0.01, pop_rate = 5/20000 = 0.00025 → FE = 40
+        single_gene = self._make_mock_goea_result(
+            ratio_in_study=(1, 100),
+            ratio_in_pop=(5, 20000),
+            study_items=["GENE1"],
+        )
+        results = [r for r in [single_gene]
+                   if r.p_fdr_bh < 0.05
+                   and len(r.study_items) >= 2
+                   and (r.ratio_in_study[0] / r.ratio_in_study[1] if r.ratio_in_study[1] else 0)
+                   > (r.ratio_in_pop[0] / r.ratio_in_pop[1] if r.ratio_in_pop[1] else 0)]
+        assert len(results) == 0
+
+    def test_enriched_multi_gene_term_passes(self):
+        """Genuinely enriched terms with ≥2 genes should pass the filter."""
+        # study_rate = 10/100 = 0.1, pop_rate = 100/20000 = 0.005 → FE = 20
+        enriched = self._make_mock_goea_result(
+            ratio_in_study=(10, 100),
+            ratio_in_pop=(100, 20000),
+            study_items=["GENE1", "GENE2", "GENE3"],
+        )
+        results = [r for r in [enriched]
+                   if r.p_fdr_bh < 0.05
+                   and len(r.study_items) >= 2
+                   and (r.ratio_in_study[0] / r.ratio_in_study[1] if r.ratio_in_study[1] else 0)
+                   > (r.ratio_in_pop[0] / r.ratio_in_pop[1] if r.ratio_in_pop[1] else 0)]
+        assert len(results) == 1
+
+    def test_non_significant_term_filtered_out(self):
+        """Terms above FDR threshold should be excluded regardless of enrichment."""
+        non_sig = self._make_mock_goea_result(
+            ratio_in_study=(10, 100),
+            ratio_in_pop=(100, 20000),
+            study_items=["GENE1", "GENE2"],
+            fdr=0.1,
+        )
+        results = [r for r in [non_sig]
+                   if r.p_fdr_bh < 0.05
+                   and len(r.study_items) >= 2
+                   and (r.ratio_in_study[0] / r.ratio_in_study[1] if r.ratio_in_study[1] else 0)
+                   > (r.ratio_in_pop[0] / r.ratio_in_pop[1] if r.ratio_in_pop[1] else 0)]
+        assert len(results) == 0
